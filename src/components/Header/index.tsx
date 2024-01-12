@@ -78,11 +78,13 @@ export const Header: FC<Props> = ({ locales }) => {
           className="navigation-wrapper _flex _justify-between _items-center _cursor-pointer"
           onClick={() => setLocalesModal(true)}
         >
-          <Link href={'/'} className="_py-2 _pr-1 _pl-4">
+          <Link href={'/'} className="_px-4 _py-2 _flex _gap-1">
             {/* @ts-ignore */}
             <div className="nav-link">{t(mainLocales[locale])}</div>
+            <div className="_flex _items-center">
+              <Polygon />
+            </div>
           </Link>
-          <Polygon />
           {localesModal ? (
             <div className="navigation-sub-menu-wrapper">
               {Object.values(mainLocales).map((option) => (

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 
 import { Switcher } from '@/components/common/Switcher';
@@ -128,6 +128,15 @@ export const Cleaning = (props: any) => {
   const [room, setRoom] = useState(() => rooms[tab][0]);
   const myElementRef = useRef<HTMLDivElement>(null);
 
+  const Img = useMemo(() => {
+    if (room === 'Balcony' && tab === 'Regular') {
+      return null;
+    }
+
+    // @ts-ignore
+    return <Image src={roomsImages[room]?.[tab]?.[lng]} alt="" />;
+  }, [room, tab]);
+
   useEffect(() => {
     if (tab === 'Regular' && room === 'Balcony') {
       setRoom('Bedroom');
@@ -141,12 +150,7 @@ export const Cleaning = (props: any) => {
         <Switcher tab={tab} tabs={tabs} t={t} onClick={(el: string) => setTab(el)} />
       </div>
       <div className={"room-img-wrapper" + " " + room.toLowerCase()} ref={myElementRef}>
-        {tab === 'Regular' && room === 'Balcony' ? null : (
-          <>
-            {/* @ts-ignore */}
-            <Image src={roomsImages[room]?.[tab]?.[lng]} alt="" priority />
-          </>
-        )}
+        {Img}
       </div>
       <div className="_flex _justify-around">
         {/* @ts-ignore */}

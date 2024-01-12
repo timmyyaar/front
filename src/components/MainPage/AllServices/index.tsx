@@ -10,6 +10,7 @@ import Brush from './icons/brush.svg';
 import BurningTime from './icons/burning-time.svg';
 import Confetti from './icons/confetti.svg';
 import Clean from './icons/clean.svg';
+import Cleaning from './icons/cleaning.svg';
 import DiscountEmail from './icons/discount-email.svg';
 import Ecology from './icons/ecology.svg'
 import Kitchen from './icons/kitchen.svg';
@@ -30,7 +31,7 @@ export const AllServices = (props: any) => {
   const ref = useClickOutside(() => setActive(''));
 
   const services = [
-    { title: 'Regular', icon: Clean },
+    { title: 'Regular', icon: Cleaning },
     { title: 'Dry cleaning', icon: Sofa },
     { title: 'Deep', icon: Clean },
     { title: 'Window cleaning', icon: Window },

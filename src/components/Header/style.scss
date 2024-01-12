@@ -28,6 +28,12 @@ header {
     color: #2B8AFC;
     border-radius: 100px;
     border: 1px solid #C1DBFF;
+
+    svg {
+      path {
+        fill: #2B8AFC;
+      }
+    }
   }
 
   .navigation-wrapper-active a {

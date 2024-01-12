@@ -19,7 +19,7 @@ export const MainOffer = (props: any) => {
 
   return (
     <div className="main-offer-wrapper">
-      <Image src={mainPng} alt="" sizes='' fill style={{objectFit:"cover"}} priority />
+      <Image src={mainPng} alt="" sizes='' fill style={{objectFit: 'cover', objectPosition: 'left bottom'}} priority />
       <div className="vector-wrapper">
         <Image src={vector} alt="" />
         <div className="offer-wrapper">

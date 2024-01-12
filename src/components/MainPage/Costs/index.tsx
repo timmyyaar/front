@@ -79,19 +79,19 @@ export const Costs = (props: any) => {
   const costs = [
     {
       title: '1-bedroom',
-      text: t(getText('1-bedroom')),
+      text: getText('1-bedroom'),
       coast: getCoast('1-bedroom'),
       oldCoast: getOldCoast('1-bedroom'),
     },
     {
       title: '2-bedroom',
-      text: t(getText('2-bedroom')),
+      text: getText('2-bedroom'),
       coast: getCoast('2-bedroom'),
       oldCoast: getOldCoast('2-bedroom'),
     },
     {
       title: '3-bedroom',
-      text: t(getText('3-bedroom')),
+      text: getText('3-bedroom'),
       coast: getCoast('3-bedroom'),
       oldCoast: getOldCoast('3-bedroom'),
     },
@@ -147,9 +147,11 @@ export const Costs = (props: any) => {
         <div className="costs-wrapper _flex _justify-around">
           {costs.map((el) => (
             <div className="costs-item _flex _flex-col" key={el.title}>
-              <div className="title">{el.title}</div>
+              <div className="title">
+                {t(el.title)}
+              </div>
               <div className="text _whitespace-pre-line">
-                <Writer text={el.text} />
+                <Writer text={t(el.text)} />
               </div>
               <div className="_flex _justify-center">
                 <div className="coast">{el.coast}</div>

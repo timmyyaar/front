@@ -36,30 +36,30 @@ export const DiscountItem: FC<IProps> = (props) => {
           <div>{t('Save')}</div>
           <div className="sale-wrapper">{save}</div>
         </div>
-        <div className="services-wrapper _flex _mx-auto">
-          <div className="_flex _flex-col">
+        <div className="services-wrapper _flex">
+          <div className="_flex-1 _flex _flex-col">
             <div className="_flex _justify-center">
               {/* @ts-ignore */}
               <Image src={serviceIcons[services[0]]} alt='' />
             </div>
-            <div className="_whitespace-nowrap">
+            <div className="_text-center _whitespace-nowrap">
               {t(services[0])}
             </div>
           </div>
           <div>
             <Image src={plusSvg} alt=''/>
           </div>
-          <div className="_flex _flex-col">
+          <div className="_flex-1 _flex _flex-col">
             <div className="_flex _justify-center">
               {/* @ts-ignore */}
               <Image src={serviceIcons[services[1]]} alt='' />
             </div>
-            <div className="_whitespace-nowrap">
+            <div className="_text-center _whitespace-nowrap">
               {t(services[1])}
             </div>
           </div>
         </div>
-        <div className="_flex _justify-center">
+        <div className="how-to-work _flex _justify-center">
           <div className="_flex _gap-2" onClick={() => onActive(services[0] + services[1])}>
             <div>{t('How it works')}</div>
             <div className="_py-1 _cursor-pointer">

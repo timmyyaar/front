@@ -18,10 +18,10 @@ export const ServiceItem: React.FC<Props> = ({ title, icon, t, onClick }) => (
     <div className="_flex _justify-center">
       <Image src={icon} alt='' />
     </div>
-    <div className="_flex _justify-center">
-      <div className="_flex _gap-2">
+    <div className="how-to-work _flex _justify-center">
+      <div className="_flex _gap-2" onClick={onClick}>
         <div>{t('How it works')}</div>
-        <div className="_py-1 _cursor-pointer" onClick={onClick}>
+        <div className="_py-1 _cursor-pointer">
           <Image src={howItWorksSvg} alt='' />
         </div>
       </div>

@@ -11,4 +11,12 @@
     font-weight: 600;
     line-height: 22px;
   }
+
+  .how-to-work {
+    cursor: pointer;
+
+    &:hover {
+      color: #2B8AFC;
+    }
+  }
 }
