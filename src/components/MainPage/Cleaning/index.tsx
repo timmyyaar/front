@@ -54,13 +54,13 @@ const roomsImages = {
       en: BedroomEngReg,
       pl: BedroomPolReg,
       ru: BedroomRusReg,
-      ua: BedroomUkrReg,
+      uk: BedroomUkrReg,
     },
     Deep: {
       en: BedroomEngDeep,
       pl: BedroomPolDeep,
       ru: BedroomRusDeep,
-      ua: BedroomUkrDeep,
+      uk: BedroomUkrDeep,
     }
   },
   Kitchen: {
@@ -68,13 +68,13 @@ const roomsImages = {
       en: KitchenEngReg,
       pl: KitchenPolReg,
       ru: KitchenRusReg,
-      ua: KitchenUkrReg,
+      uk: KitchenUkrReg,
     },
     Deep: {
       en: KitchenEngDeep,
       pl: KitchenPolDeep,
       ru: KitchenRusDeep,
-      ua: KitchenUkrDeep,
+      uk: KitchenUkrDeep,
     }
   },
   Corridor: {
@@ -82,13 +82,13 @@ const roomsImages = {
       en: CorridorEngReg,
       pl: CorridorPolReg,
       ru: CorridorRusReg,
-      ua: CorridorUkrReg,
+      uk: CorridorUkrReg,
     },
     Deep: {
       en: CorridorEngDeep,
       pl: CorridorPolDeep,
       ru: CorridorRusDeep,
-      ua: CorridorUkrDeep,
+      uk: CorridorUkrDeep,
     }
   },
   Bathroom: {
@@ -96,13 +96,13 @@ const roomsImages = {
       en: BathEngReg,
       pl: BathPolReg,
       ru: BathRusReg,
-      ua: BathUkrReg,
+      uk: BathUkrReg,
     },
     Deep: {
       en: BathEngDeep,
       pl: BathPolDeep,
       ru: BathRusDeep,
-      ua: BathUkrDeep,
+      uk: BathUkrDeep,
     }
   },
   Balcony: {
@@ -110,7 +110,7 @@ const roomsImages = {
       en: BalconyEngDeep,
       pl: BalconyPolDeep,
       ru: BalconyRusDeep,
-      ua: BalconyUkrDeep,
+      uk: BalconyUkrDeep,
     }
   },
 };
@@ -126,16 +126,18 @@ export const Cleaning = (props: any) => {
   const [tab, setTab] = useState(() => tabs[0]);
   // @ts-ignore
   const [room, setRoom] = useState(() => rooms[tab][0]);
-  const myElementRef = useRef<HTMLDivElement>(null);
+  // @ts-ignore
+  const [roomImage, setRoomImage] = useState(() => roomsImages.Bedroom.Regular[lng]);
 
-  const Img = useMemo(() => {
+  useEffect(() => {
     if (room === 'Balcony' && tab === 'Regular') {
-      return null;
+      // @ts-ignore
+      setRoomImage(roomsImages.Bedroom.Regular[lng]);
+    }  else {
+      // @ts-ignore
+      setRoomImage(roomsImages[room]?.[tab]?.[lng]);
     }
-
-    // @ts-ignore
-    return <Image src={roomsImages[room]?.[tab]?.[lng]} alt="" />;
-  }, [room, tab]);
+  }, [room, tab, lng]);
 
   useEffect(() => {
     if (tab === 'Regular' && room === 'Balcony') {
@@ -149,8 +151,8 @@ export const Cleaning = (props: any) => {
       <div className="switcher-wrapper">
         <Switcher tab={tab} tabs={tabs} t={t} onClick={(el: string) => setTab(el)} />
       </div>
-      <div className={"room-img-wrapper" + " " + room.toLowerCase()} ref={myElementRef}>
-        {Img}
+      <div className={"room-img-wrapper" + " " + room.toLowerCase()}>
+        <Image src={roomImage} alt="" priority />
       </div>
       <div className="_flex _justify-around">
         {/* @ts-ignore */}

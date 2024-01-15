@@ -85,7 +85,11 @@ export const FAQ = (props: any) => {
                 <div className="item-title _flex _items-center">
                   <b><Writer text={t(item.title)} /></b>
                 </div>
-                <div style={{ width: 44 }} className="_flex _justify-center _items-center _cursor-pointer" onClick={() => toggleActiveQuest(item.title)}>
+                <div
+                  style={{ width: 44 }}
+                  className={`icon-arrow-faq-wrapper ${activeQuest === item.title ? 'flipped' : ''}`}
+                  onClick={() => toggleActiveQuest(item.title)}
+                >
                   <Image src={arrowDownSvg} alt="" />
                 </div>
               </div>
@@ -109,7 +113,11 @@ export const FAQ = (props: any) => {
                 <div className="item-title _flex _items-center">
                   <b><Writer text={t(item.title)} /></b>
                 </div>
-                <div style={{ width: 44 }} className="_flex _justify-center _items-center _cursor-pointer" onClick={() => toggleActiveQuest(item.title)}>
+                <div
+                  style={{ width: 44 }}
+                  className={`icon-arrow-faq-wrapper ${activeQuest === item.title ? 'icon-arrow-faq-flipped' : ''}`}
+                  onClick={() => toggleActiveQuest(item.title)}
+                >
                   <Image src={arrowDownSvg} alt="" />
                 </div>
               </div>

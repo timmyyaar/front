@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import { Switcher } from '@/components/common/Switcher';
 import { Footer } from '@/components/Footer';
+import { useLocales } from '@/hooks/useLocales';
 
 import { Counter } from './Counter';
 import { DateAndTime } from './DateAndTime';
@@ -12,16 +13,18 @@ import { UserData } from './UserData';
 import './style.scss';
 
 export const OrderPage = (props: any) => {
+  const { locales } = props;
+  const { t, lng } = useLocales(locales);
   const tabs = ['Apartment', 'Private house'];
   const [tab, setTab] = useState('Apartment');
 
   return (
     <div className="order-page">
       <div className="title _flex _justify-center">
-        Regular cleaning
+        {t('Regular cleaning')}
       </div>
       <div className="switcher-wrapper _flex _justify-center">
-        <Switcher tab={tab} tabs={tabs} onClick={(el: string) => setTab(el)} />
+        <Switcher tab={tab} tabs={tabs} onClick={(el: string) => setTab(el)} t={t} />
       </div>
       <div className="content-wrapper _flex _justify-center _gap-10">
         <div className="_w-1/2 _flex _flex-col _gap-20">
@@ -36,7 +39,7 @@ export const OrderPage = (props: any) => {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer t={t} />
     </div>
   );
 };

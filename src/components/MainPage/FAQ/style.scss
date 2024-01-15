@@ -22,6 +22,19 @@
       font-weight: 500;
       line-height: 22px;
     }
+
+    .icon-arrow-faq-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.5s;
+    }
+
+    .icon-arrow-faq-flipped {
+      transform: rotateX(180deg);
+    }
   }
 
   .item-faq-content {

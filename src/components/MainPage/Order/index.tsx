@@ -16,7 +16,7 @@ export const Order = (props: any) => {
           <Calendar />
         </div>
         <div className="_flex _justify-center">
-          <div className="button-wrapper">
+          <div className="button-wrapper _cursor-pointer">
             {t('Order')}
           </div>
         </div>

@@ -28,7 +28,7 @@ export const Slider: FC<Props> = (props) => {
 
 	return (
 		<div className="slider-wrapper">
-			<div className="arrow-button-left _cursor-pointer" onClick={prevSlide}>
+			<div className="arrow-button arrow-button-left" onClick={prevSlide}>
 				<LeftArrow />
 			</div>
 			<div className="slider-component">
@@ -51,7 +51,7 @@ export const Slider: FC<Props> = (props) => {
 					})}
 				</div>
 			</div>
-			<div className="arrow-button-right _cursor-pointer" onClick={nextSlide}>
+			<div className="arrow-button arrow-button-right" onClick={nextSlide}>
 				<RightArrow />
 			</div>
 		</div>

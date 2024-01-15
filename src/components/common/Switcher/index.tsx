@@ -13,11 +13,14 @@ export const Switcher: FC<Props> = ({ tabs, tab, onClick, t = (str: string) => s
   <div className="costs-switcher _flex _justify-around">
     {tabs.map((el: string) => (
       <div className="costs-switcher-title _cursor-pointer" onClick={() => onClick(el)} key={el}>
-        <div className={el === tab ? 'active' : ''}>
+        <span className={el === tab ? 'active' : ''}>
           <b>{t(el)}</b>
-        </div>
+        </span>
       </div>
     ))}
-    <div className="active-block" style={{ left: tabs.indexOf(tab) === 0 ? '-1px' : tabs.indexOf(tab) * 133 + 'px' }}/>
+    <div
+      className="active-block"
+      style={{ left: tabs.indexOf(tab) === 0 ? '-1px' : tabs.indexOf(tab) * 133 + 'px' }}
+    />
   </div>
 );

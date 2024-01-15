@@ -1,6 +1,16 @@
 .slider-wrapper {
   position: relative;
 
+  .arrow-button {
+    cursor: pointer;
+
+    &:hover {
+      path {
+        fill: #2B8AFC;
+      }
+    }
+  }
+
   .arrow-button-left {
     position: absolute;
     top: calc(50% - 20px);
