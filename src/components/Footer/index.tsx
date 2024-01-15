@@ -57,15 +57,15 @@ export const Footer = (props: any) => {
             </svg>
             Mail: tytimeinbox@gmail.com
           </div>
-          <div className="icon">
+          <a className="icon" href="https://m.me/227130810472971" target="blanc">
             <MessengerIcon />
-          </div>
-          <div className="icon">
+          </a>
+          <a className="icon" href="https://wa.me/48730003997" target="blanc">
             <WhatsappIcon />
-          </div>
-          <div className="icon">
+          </a>
+          <a className="icon" href="https://t.me/takeyoourtime" target="blanc">
             <TelegramIcon />
-          </div>
+          </a>
         </div>
       </div>
       <div className="_flex _justify-center">

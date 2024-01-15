@@ -102,15 +102,15 @@ export const Header: FC<Props> = ({ locales }) => {
         <div className="sub-menu-wrapper _ml-auto _flex _gap-6">
           <div className="_flex _flex-col _justify-center">+48 730 003 997</div>
           <div className="_flex _gap-3">
-            <div className="icon _flex _flex-col _justify-center">
+            <a className="icon _flex _flex-col _justify-center" href="https://t.me/takeyoourtime" target="blanc">
               <TelegramIcon />
-            </div>
-            <div className="icon _flex _flex-col _justify-center">
+            </a>
+            <a className="icon _flex _flex-col _justify-center" href="https://wa.me/48730003997" target="blanc">
               <WhatsappIcon />
-            </div>
-            <div className="icon _flex _flex-col _justify-center">
+            </a>
+            <a className="icon _flex _flex-col _justify-center" href="https://m.me/227130810472971" target="blanc">
               <MessengerIcon />
-            </div>
+            </a>
           </div>
         </div>
       </nav>

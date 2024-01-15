@@ -14,6 +14,15 @@ import './style.scss';
 export const PriceByPhoto = (props: any) => {
   const { t } = props;
 
+  const push = (social: string) => {
+    let url = '';
+    if (social === 'telegram') url = 'https://t.me/@takeyoourtime';
+    if (social === 'whatsapp') url = 'https://wa.me/48730003997';
+    if (social === 'messenger') url = 'https://m.me/227130810472971';
+
+    window.open(social, '_blank');
+  };
+
   return (
     <div className="price-by-photo-component _flex _justify-center">
       <div className="white-bg">
@@ -31,18 +40,18 @@ export const PriceByPhoto = (props: any) => {
           </div>
         </div>
         <div className="_flex _justify-center _gap-6">
-          <div className="social-button _flex _justify-center _gap-2 _cursor-pointer">
+          <a className="social-button" href="https://t.me/takeyoourtime" target="blanc">
             <TelegramIcon />
             <div>Telegram</div>
-          </div>
-          <div className="social-button _flex _justify-center _gap-2 _cursor-pointer">
+          </a>
+          <a className="social-button" href="https://wa.me/48730003997" target="blanc">
             <WhatsappIcon />
             <div>Whatsapp</div>
-          </div>
-          <div className="social-button _flex _justify-center _gap-2 _cursor-pointer">
+          </a>
+          <a className="social-button" href="https://m.me/227130810472971" target="blanc">
             <MessengerIcon />
             <div>Messenger</div>
-          </div>
+          </a>
         </div>
       </div>
     </div>
