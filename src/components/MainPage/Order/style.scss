@@ -2,10 +2,13 @@
   padding: 0 104px;
 
   .white-layout {
+    position: relative;
     padding: 40px 0;
     width: 100%;
     border-radius: 24px;
     background: #ECF0FF;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 
     .title {
       margin-bottom: 32px;
@@ -27,10 +30,61 @@
       font-size: 16px;
       font-weight: 500;
       line-height: 21px;
+      cursor: pointer;
+    }
+
+    .man-icon-wrapper {
+      position: absolute;
+      left: -100%;
+      top: 17%;
+      transition: left 2s ease;
+    }
+
+    .man-icon-wrapper-animated {
+      left: 15px;
+      animation: manAnimationToLeft 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+
+    .woman-icon-wrapper {
+      position: absolute;
+      right: -100%;
+      top: 29%;
+      transition: right 2s ease;
+    }
+
+    .woman-icon-wrapper-animated {
+      right: 15px;
+      animation: womanAnimationToRight 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     }
 
     .button-wrapper:hover {
       background: #0073FC;
     }
   }
+}
+
+@media screen and (max-width: 900px) {
+  .order-wrapper {
+    .white-layout {
+      .man-icon-wrapper {
+        display: none;
+      }
+
+      .woman-icon-wrapper {
+        display: none;
+      }
+    }
+  }
+}
+
+@keyframes manAnimationToLeft {
+  0% { left: -30%; }
+  90% { left: 16px; }
+  100% { left: 15px; }
+}
+
+@keyframes womanAnimationToRight {
+  0% { right: -30%; }
+  90% { right: 16px; }
+  100% { right: 15px; }
 }

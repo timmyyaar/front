@@ -59,7 +59,7 @@ export const Header: FC<Props> = ({ locales }) => {
 
   return (
     <header>
-      <nav className="container _flex">
+      <nav className="_flex">
         <div className="logo-wrapper">
           <Link className="navbar-brand" href={'/'}>
             <div>
