@@ -1,0 +1,55 @@
+.slider-scroll-wrapper {
+  position: relative;
+
+  .arrow-button {
+    cursor: pointer;
+
+    &:hover {
+      path {
+        fill: #2B8AFC;
+      }
+    }
+  }
+
+  .arrow-button-left {
+    position: absolute;
+    top: calc(50% - 20px);
+    left: -49px;
+    transform: translateY(-50%);
+  }
+
+  .arrow-button-right {
+    position: absolute;
+    top: calc(50% - 20px);
+    right: -49px;
+    transform: translateY(-50%);
+  }
+
+  .slider-component {
+    overflow-y: scroll;
+    box-sizing: content-box;
+  }
+
+  .slider-component {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar { 
+      display: none;
+    }
+  }
+
+  .animated-scroll {
+    animation: smoothScrollAnimation 1s ease-in-out;
+  }
+}
+
+@keyframes smoothScrollAnimation {
+  from {
+    scroll-behavior: smooth;
+    scroll-left: 0;
+  }
+  to {
+    scroll-left: 100%;
+  }
+}

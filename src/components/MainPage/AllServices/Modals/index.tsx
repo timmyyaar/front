@@ -22,16 +22,18 @@ export const Modals = ({ title, onClose, t }: { title: string, onClose: () => vo
 
   const renderBlock = (lines: number) => (
     <div className="wrapper-modal-reg">
-      <div className="wrapper-modal-reg-title _text-center">
+      <div className="wrapper-modal-reg-title">
         <Writer text={t(title + '_block_title')} />
       </div>
-      {[...new Array(lines)].map((_, i) => (
-        <div className="wrapper-modal-reg-list">
-          <div className="wrapper-modal-reg-list-item">
-            <Writer text={t(title + '_block_text_' + i)} />
+      <div className="wrapper-modal-reg-list">
+        {[...new Array(lines)].map((_, i) => (
+          <div className="wrapper-modal-reg-item">
+            <div className="wrapper-modal-reg-item-text">
+              <Writer text={t(title + '_block_text_' + i)} />
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   )
 
@@ -42,13 +44,15 @@ export const Modals = ({ title, onClose, t }: { title: string, onClose: () => vo
           <div className="wrapper-modal-reg-title">
             <Writer text={t(title + '_title_' + i)} />
           </div>
-          {[...new Array(lines)].map((_, j) => (
-            <div className="wrapper-modal-reg-list">
-              <div className="wrapper-modal-reg-list-item">
-                <Writer text={t(title + '_text_' + i + '_' + j)} />
+          <div className="wrapper-modal-reg-list">
+            {[...new Array(lines)].map((_, j) => (
+              <div className="wrapper-modal-reg-item">
+                <div className="wrapper-modal-reg-item-text">
+                  <Writer text={t(title + '_text_' + i + '_' + j)} />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       ))}
     </div>

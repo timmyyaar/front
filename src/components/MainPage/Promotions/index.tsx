@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 
 import { Overlay } from '@/components/common/Overlay';
-import { Slider } from '@/components/common/Slider';
+import { Slider } from '@/components/common/SliderScroll';
 import { Writer } from '@/components/common/Writer';
 import { useClickOutside } from '@/hooks/useClickOutSide';
 import closeSvg from '@/components/common/icons/closeButton.svg';
