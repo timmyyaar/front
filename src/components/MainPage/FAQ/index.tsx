@@ -47,11 +47,7 @@ export const FAQ = (props: any) => {
       text5: 'Similarly, you can adjust the details of your booking and the chosen date through these same channels.',
       text6: 'During the cleaning, you can also request additional services or remove some of the options, which will be reflected in your final bill',
     },
-    {
-      title: 'Things which are not included in cleaning services',
-      text: 'Cleaning of high or hard-to-reach areas (e.g., ceiling fans or light fixtures) Exterior areas (e.g., patios, decks, and yards)',
-      text2: 'Mold or mildew removal, especially for severe cases Wall washing or scrubbing We don\'t move items and furniture'
-    },
+    { title: 'Things which are not included in cleaning services', text: 'text1', text2: 'text2', text3: 'text3', text4: 'text4' },
     {
       title: 'Can I order few services at the same time?',
       text: 'Yes, you can order any type of cleaning, ozonation and dry cleaning at the same time as well. It will not affect the duration of the cleaning.'
