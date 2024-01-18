@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import Image from 'next/image';
 
 import { Writer } from '@/components/common/Writer';
@@ -68,6 +68,33 @@ export const FAQ = (props: any) => {
     setActiveQuest(c => c === title ? '' : title);
   };
 
+  const getFaqItem = (item: any) => (
+    <div className={`_w-full item-faq-wrapper`} key={JSON.stringify(item)}>
+      <div className="_flex _justify-between">
+        <div className="item-title _flex _items-center">
+          <b><Writer text={t(item.title)} /></b>
+        </div>
+        <div
+          style={{ width: 44 }}
+          className={`icon-arrow-faq-wrapper ${activeQuest === item.title ? 'flipped' : ''}`}
+          onClick={() => toggleActiveQuest(item.title)}
+        >
+          <Image src={arrowDownSvg} alt="" />
+        </div>
+      </div>
+      {activeQuest === item.title && (
+        <div className="item-faq-content">
+          <Writer text={t(item.text)} />
+          {[...new Array(6)].map((_, j) => item['text' + j] && (
+            <div key={'faq-text-' + item.i + j}>
+              <Writer text={t(item['text' + j])} />
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <div className="faq-component">
       <div className="title">
@@ -76,58 +103,16 @@ export const FAQ = (props: any) => {
       <div className="_w-full _flex _space-between _gap-5">
         <div className="_w-6/12 _flex _flex-col _gap-6">
           {faqQuestions.map((item, i) => i%2 ? (
-            <div className={`_w-full item-faq-wrapper`} key={JSON.stringify(item)}>
-              <div className="_flex _justify-between">
-                <div className="item-title _flex _items-center">
-                  <b><Writer text={t(item.title)} /></b>
-                </div>
-                <div
-                  style={{ width: 44 }}
-                  className={`icon-arrow-faq-wrapper ${activeQuest === item.title ? 'flipped' : ''}`}
-                  onClick={() => toggleActiveQuest(item.title)}
-                >
-                  <Image src={arrowDownSvg} alt="" />
-                </div>
-              </div>
-              {activeQuest === item.title && (
-                <div className="item-faq-content">
-                  <Writer text={t(item.text)} />
-                  {item.text2 && <Writer text={t(item.text2)} />}
-                  {item.text3 && <Writer text={t(item.text3)} />}
-                  {item.text4 && <Writer text={t(item.text4)} />}
-                  {item.text5 && <Writer text={t(item.text5)} />}
-                  {item.text6 && <Writer text={t(item.text6)} />}
-                </div>
-              )}
-            </div>
+            <Fragment key={'faq' + i + 'left'}>
+              {getFaqItem({ ...item, i })}
+            </Fragment>
           ): null)}
         </div>
         <div className="_w-6/12 _flex _flex-col _gap-6">
           {faqQuestions.map((item, i) => !(i%2) ? (
-            <div className="_w-full item-faq-wrapper" key={JSON.stringify(item)}>
-              <div className="_flex _justify-between">
-                <div className="item-title _flex _items-center">
-                  <b><Writer text={t(item.title)} /></b>
-                </div>
-                <div
-                  style={{ width: 44 }}
-                  className={`icon-arrow-faq-wrapper ${activeQuest === item.title ? 'icon-arrow-faq-flipped' : ''}`}
-                  onClick={() => toggleActiveQuest(item.title)}
-                >
-                  <Image src={arrowDownSvg} alt="" />
-                </div>
-              </div>
-              {activeQuest === item.title && (
-                <div className="item-faq-content">
-                  <Writer text={t(item.text)} />
-                  {item.text2 && <Writer text={t(item.text2)} />}
-                  {item.text3 && <Writer text={t(item.text3)} />}
-                  {item.text4 && <Writer text={t(item.text4)} />}
-                  {item.text5 && <Writer text={t(item.text5)} />}
-                  {item.text6 && <Writer text={t(item.text6)} />}
-                </div>
-              )}
-            </div>
+            <Fragment key={'faq' + i + 'right'}>
+              {getFaqItem({ ...item, i })}
+            </Fragment>
           ): null)}
         </div>
       </div>

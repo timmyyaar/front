@@ -3,11 +3,13 @@ import Image from 'next/image';
 
 import howItWorksSvg from '@/components/common/icons/howItWorks.svg';
 
+import brushSvg from './icons/brush.svg';
 import cleaningSvg from './icons/cleaning.svg';
 import ecologySvg from './icons/ecology.svg';
 import ozoneSvg from './icons/ozone.svg';
 import plusSvg from './icons/plus.svg';
 import rectangleSvg from './icons/rectangle.svg';
+import weMoveSvg from './icons/we-move-to-new-house.svg';
 import './style.scss';
 
 interface IProps {
@@ -27,6 +29,8 @@ export const DiscountItem: FC<IProps> = (props) => {
     Ozonation: ozoneSvg,
     'Dry cleaning': rectangleSvg,
     'Eco cleaning': ecologySvg,
+    'Move in/out': weMoveSvg,
+    Construction: brushSvg,
   }
 
   return (
@@ -46,7 +50,7 @@ export const DiscountItem: FC<IProps> = (props) => {
               {t(services[0])}
             </div>
           </div>
-          <div>
+          <div className="_flex _items-center">
             <Image src={plusSvg} alt=''/>
           </div>
           <div className="_flex-1 _flex _flex-col">

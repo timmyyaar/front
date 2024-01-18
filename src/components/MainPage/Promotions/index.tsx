@@ -30,6 +30,10 @@ export const Promotions = (props: any) => {
     { save: '-15%', services: ['Cleaning', 'Dry cleaning'] },
     { save: '-15%', services: ['Eco cleaning', 'Dry cleaning'] },
     { save: '-15%', services: ['Eco cleaning', 'Ozonation'] },
+    { save: '-15%', services: ['Move in/out', 'Ozonation'] },
+    { save: '-15%', services: ['Move in/out', 'Dry cleaning'] },
+    { save: '-15%', services: ['Construction', 'Ozonation'] },
+    { save: '-20%', services: ['Dry cleaning', 'Ozonation'] },
   ];
 
   const ref = useClickOutside(() => setActive(false));
@@ -74,7 +78,7 @@ export const Promotions = (props: any) => {
       </div>
       <div className="discounts-wrapper">
         <Slider
-          elements={[...discounts, ...discounts].map((el, i) => ({
+          elements={discounts.map((el, i) => ({
             id: el.services.join('n' + i),
             content: (): JSX.Element => (
               <DiscountItem discount={{ ...el, key: el.services.join('n' + i) }} t={t} onActive={setActivePopup} />
