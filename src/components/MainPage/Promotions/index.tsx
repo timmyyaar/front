@@ -51,10 +51,10 @@ export const Promotions = (props: any) => {
             <Image src={closeSvg} alt='' />
           </div>
           <div className="overlay-wrapper-component-title">
-            {popupTitle + '_title'}
+            {t(popupTitle + '_title')}
           </div>
           <div className="overlay-wrapper-component-text">
-            {popupTitle + '_text'}
+            {t(popupTitle + '_text')}
           </div>
         </div>
       </Overlay>
