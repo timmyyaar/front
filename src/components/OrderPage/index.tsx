@@ -1,44 +1,65 @@
 "use client";
 import React, { useState } from 'react';
 
-import { Switcher } from '@/components/common/Switcher';
 import { Footer } from '@/components/Footer';
 import { useLocales } from '@/hooks/useLocales';
+import { MainImage } from '@/components/common/MainImage';
+import { LeftArrow } from '@/components/common/Slider/icons/LeftArrow';
 
-import { Counter } from './Counter';
+import { AddedMainService } from './AddedMainService';
+import { CheckBoxesBlock } from './CheckBoxesBlock';
+import { CounterComponent } from './Counter';
 import { DateAndTime } from './DateAndTime';
 import { OrderForm } from './OrderForm';
+import { ServicesList } from './ServicesList';
+import { SubServicesList } from './SubServicesList';
 import { Summary } from './Summary';
 import { UserData } from './UserData';
 import './style.scss';
 
 export const OrderPage = (props: any) => {
   const { locales } = props;
-  const { t, lng } = useLocales(locales);
-  const tabs = ['Apartment', 'Private house'];
-  const [tab, setTab] = useState('Apartment');
+  const { t } = useLocales(locales);
+  const services = ['General cleaning', 'Healthcare', 'Special cleaning'];
+  const [selectedCategory, setCategory] = useState<typeof services[number] | ''>('General cleaning');
+  const [selectedService, setService] = useState<string>('');
+  const [counterValue, setCounterValue] = useState([]);
 
   return (
     <div className="order-page">
-      <div className="title _flex _justify-center">
-        {t('Regular cleaning')}
-      </div>
-      <div className="switcher-wrapper _flex _justify-center">
-        <Switcher tab={tab} tabs={tabs} onClick={(el: string) => setTab(el)} t={t} />
-      </div>
-      <div className="content-wrapper _flex _justify-center _gap-10">
-        <div className="_w-1/2 _flex _flex-col _gap-20">
-          <Counter text="qweqwe" />
+      {!selectedCategory ? (
+        <MainImage services={services} setService={setCategory} t={t} />
+      ) : (
+        <div>
+          <div className="header-wrapper _flex _items-center">
+            <div className="_cursor-pointer _flex _items-center" onClick={() => setCategory('')}>
+              <div className="arrow-button">
+                <LeftArrow />
+              </div>
+              {t('General cleaning')}
+            </div>
+          </div>
+          <div className="content-wrapper">
+            <div className="left-col">
+              <ServicesList mainCategory={selectedCategory} t={t} setService={setService} />
+              <CounterComponent mainService={selectedService} setCounterValue={setCounterValue} t={t} />
+              <SubServicesList mainService={selectedService} t={t} />
+              <AddedMainService />
+              <CheckBoxesBlock />
+            </div>
+            <div className="right-col">
+              <Summary
+                title={selectedCategory}
+                counter={counterValue}
+                t={t}
+              />
+            </div>
+          </div>
           <OrderForm />
           <DateAndTime />
           <UserData />
         </div>
-        <div className="_w-1/2">
-          <div className="_fixed">
-            <Summary />
-          </div>
-        </div>
-      </div>
+      )}
       <Footer t={t} />
     </div>
   );

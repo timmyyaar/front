@@ -148,7 +148,7 @@ export const Cleaning = (props: any) => {
   return (
     <div className="cleaning-component _flex _flex-col _items-center">
       <div className="main-title">{t('What cleaning consists of')}</div>
-      <div className="switcher-wrapper">
+      <div className="switcher-wrapper" style={{ width: '277px' }}>
         <Switcher tab={tab} tabs={tabs} t={t} onClick={(el: string) => setTab(el)} />
       </div>
       <div className={"room-img-wrapper" + " " + room.toLowerCase()}>

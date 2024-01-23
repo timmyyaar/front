@@ -20,7 +20,7 @@ export const Switcher: FC<Props> = ({ tabs, tab, onClick, t = (str: string) => s
     ))}
     <div
       className="active-block"
-      style={{ left: tabs.indexOf(tab) === 0 ? '-1px' : tabs.indexOf(tab) * 133 + 'px' }}
+      style={{ left: tabs.indexOf(tab) === 0 ? '-1px' : '50.5%' }}
     />
   </div>
 );

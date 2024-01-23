@@ -4,6 +4,7 @@ import React, { FC, useState } from 'react';
 import { Footer } from '@/components/Footer';
 import { useLocales } from '@/hooks/useLocales';
 import { ILocales } from '@/locales';
+import { MainImage } from '@/components/common/MainImage';
 
 import { AdditionalServices } from './AdditionalServices';
 import { Advantages } from './Advantages';
@@ -11,7 +12,6 @@ import { AllServices } from './AllServices';
 import { Cleaning } from './Cleaning';
 import { Costs } from './Costs';
 import { FAQ } from './FAQ';
-import { MainOffer } from './MainOffer';
 import { Order } from './Order';
 import { PriceByPhoto } from './PriceByPhoto';
 import { Promotions } from './Promotions';
@@ -28,7 +28,7 @@ export const MainPage: FC<Props> = (props) => {
   return (
     <div className="main-page">
       <div className="main-content _flex _flex-col">
-        <MainOffer t={t} />
+        <MainImage common t={t} />
         <Advantages t={t} />
         <AllServices t={t} />
         <Cleaning t={t} lng={lng} />

@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { DiscountCoupon } from './icons/DiscountCoupon';
 import { IconCrosse } from './icons/IconCrosse';
-import { ShieldCheck } from './icons/ShieldCheck';
 import './style.scss';
 
 const services = [
@@ -13,24 +12,25 @@ const services = [
   { id: 5, title: 'Apartment' },
 ]
 
-export const Summary = () => {
+export const Summary = (props: any) => {
+  const { title, counter, t } = props;
   return (
     <div className="summary-wrapper _flex _flex-col">
-      <div className="summary-title">Cleaning 1-roomed apartment</div>
-      <div className="sec-summary-title-wrapper">
-        <div className="summary-title">Cleaning 1-roomed apartment</div>
+      <div className="summary-title">
+        {t(title + '_summary_title')}
       </div>
-      <div className="error-wrapper">
-        Minimum order for office 160 zł
-      </div>
-      <div className="sub-title-wrapper">
-        Windows:<span className="span-sub-title">3 hours</span>
-      </div>
-      <div className="sub-title-wrapper">
-        Area:<span className="span-sub-title">0 m2</span>
-      </div>
-      <div className="sub-title-wrapper">
-        Estimated Duration of service:<span className="span-sub-title">3 hours</span>
+      <div className="summary-counter">
+        {console.log(counter)}
+        {/* @ts-ignore */}
+        {counter.map((el, i) => el.type === 'counter' ? (
+          <div key={el.title + el.value + i}>
+            {t(el.title)}<b>{el.value}</b>{el.param ? <>m<sup>2</sup></> : ''}
+          </div>
+        ) : (
+          <div key={el.title + el.value + i}>
+            {t(el.value)}
+          </div>
+        ))}
       </div>
       <div className="services-in-summary">
         {services.map((el) => (
@@ -42,9 +42,8 @@ export const Summary = () => {
           </div>
         ))}
       </div>
-      <div className="checked-wrapper _flex _gap-3">
-        <ShieldCheck />
-        <div>{'Our company uses only high quality \n equipment and techniques for cleaning'}</div>
+      <div>
+        {t('Estimated Duration of service:')}
       </div>
       <div className="input-promo-code _cursor-pointer">
         <div className="input-wrapper _flex">

@@ -1,33 +1,36 @@
-.counter-component {
-  position: relative;
-  width: 100%;
-  height: 80px;
-  border-radius: 100px;
-  background: #ECF0FF;
-  overflow: hidden;
+.counter-component-wrapper {
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
 
-  .counter-title {
-    position: absolute;
-    top: 50%; right: 0; left: 0;
-    transform: translateY(-50%);
-    text-align: center;
+  .title-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
     color: #232323;
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 22px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 130%;
+    letter-spacing: -0.38px;
+
+    .cost-wrapper {
+      padding: 12px 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 40px;
+      background: #F9C630;
+    }
   }
 
-  .counter-icons {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .icon-minus {
-    left: 16px;
-  }
-
-  .icon-plus {
-    right: 16px;
+  .sub-title-wrapper {
+    margin-top: 12px;
+    color: #5C5C5C;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 150%;
   }
 }
