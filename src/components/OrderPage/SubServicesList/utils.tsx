@@ -65,7 +65,15 @@ export const getSubServiceListByMainService = (mainService: string): ISubService
     case 'Eco cleaning':
     case 'Move in/out':
 
-      return [];
+      return allServices.filter((el) => {
+        if (el.title === 'Clean the cloak room') return false;
+        if (el.title === 'Clean the mirror') return false;
+        if (el.title === 'Clean the room') return false;
+        if (el.title === 'Clean the corridor') return false;
+        if (el.title === 'Clean the bathroom') return false;
+
+        return true;
+      });
 
     case 'Custom cleaning':
       return allServices;

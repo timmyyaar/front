@@ -1,0 +1,47 @@
+.added-main-service-component {
+  .switch-component {
+    display: flex;
+    padding: 0px 111px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 12px;
+    background: #ECF0FF;
+    cursor: pointer;
+
+    .image-wrapper {
+      width: 105px;
+      height: 105px;
+    }
+
+    .title {
+      color: #232323;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 110%;
+    }
+
+    .title-active {
+      color: #2B8AFC;
+    }
+
+    .icon {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .flipped-icon {
+      transform: rotateX(180deg);
+    }
+
+    &:hover {
+      .title {
+        color: #2B8AFC;
+      }
+
+      // .icon {
+      //   path {
+      //     fill: #2B8AFC;
+      //   }
+      // }
+    }
+  }
+}

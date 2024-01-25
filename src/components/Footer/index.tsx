@@ -5,6 +5,7 @@ import { WhatsappIcon } from '@/components/common/icons/components/Whatsapp';
 import { TelegramIcon } from '@/components/common/icons/components/Telegram';
 
 import { FooterLogo } from './icons/FooterLogo';
+import pp from './files/Polityka_prywatności_Take_Your_Time_z_wykorzystaniem_plików_cookie.pdf';
 import './style.scss';
 
 export const Footer = (props: any) => {
@@ -19,14 +20,6 @@ export const Footer = (props: any) => {
       </div>
       <div className="title _flex _justify-center">
         <div>{t('Take Your Time')}</div>
-      </div>
-      <div className="_flex _justify-center">
-        <div className="links-wrapper _flex _justify-between">
-          <div>{t('Services footer')}</div>
-          <div>{t('FAQ footer')}</div>
-          <div>{t('Subscription footer')}</div>
-          <div>{t('Gift Cards footer')}</div>
-        </div>
       </div>
       <div className="_flex _justify-center">
         <div className="contacts-wrapper _flex _justify-between _gap-3">
@@ -65,6 +58,23 @@ export const Footer = (props: any) => {
           </a>
           <a className="icon" href="https://t.me/takeyoourtime" target="blanc">
             <TelegramIcon />
+          </a>
+        </div>
+      </div>
+      <div className="_flex _justify-center">
+        <div className="links-wrapper _flex _justify-between">
+          <div>{t('FAQ footer')}</div>
+          <div>{t('Subscription footer')}</div>
+          <div>{t('Gift Cards footer')}</div>
+        </div>
+      </div>
+      <div className="_flex _justify-center">
+        <div className="_flex _justify-between" style={{ width: 340, marginBottom: '20px' }}>
+          <a href="/privacy_and_policy.pdf" target="_blank">
+            {t('Privacy and policy')}
+          </a>
+          <a href="/terms_and_conditions.pdf" target="_blank">
+            {t('Terms and conditions')}
           </a>
         </div>
       </div>

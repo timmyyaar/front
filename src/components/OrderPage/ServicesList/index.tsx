@@ -85,7 +85,7 @@ export const ServicesList: FC<IProps> = (props) => {
             <div className="item-title">
               {t(el.title)}
             </div>
-            <div className="_flex _justify-center">
+            <div className="_flex _justify-center" style={{ userSelect: 'none' }}>
               <Image src={el.icon} alt='' />
             </div>
             <div className="how-to-work _flex _justify-center">

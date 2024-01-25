@@ -24,6 +24,7 @@ export const OrderPage = (props: any) => {
   const [selectedCategory, setCategory] = useState<typeof services[number] | ''>('General cleaning');
   const [selectedService, setService] = useState<string>('');
   const [counterValue, setCounterValue] = useState([]);
+  const [selectedSubService, setSubService] = useState([]);
 
   return (
     <div className="order-page">
@@ -43,14 +44,16 @@ export const OrderPage = (props: any) => {
             <div className="left-col">
               <ServicesList mainCategory={selectedCategory} t={t} setService={setService} />
               <CounterComponent mainService={selectedService} setCounterValue={setCounterValue} t={t} />
-              <SubServicesList mainService={selectedService} t={t} />
-              <AddedMainService />
-              <CheckBoxesBlock />
+              <SubServicesList mainService={selectedService} subServices={selectedSubService} setSubService={setSubService} t={t} />
+              <AddedMainService mainService={selectedService} t={t}/>
+              <CheckBoxesBlock mainService={selectedService} t={t} />
             </div>
             <div className="right-col">
               <Summary
                 title={selectedCategory}
                 counter={counterValue}
+                subService={selectedSubService}
+                setSubService={setSubService}
                 t={t}
               />
             </div>
