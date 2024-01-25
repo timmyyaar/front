@@ -5,7 +5,6 @@ import { WhatsappIcon } from '@/components/common/icons/components/Whatsapp';
 import { TelegramIcon } from '@/components/common/icons/components/Telegram';
 
 import { FooterLogo } from './icons/FooterLogo';
-import pp from './files/Polityka_prywatności_Take_Your_Time_z_wykorzystaniem_plików_cookie.pdf';
 import './style.scss';
 
 export const Footer = (props: any) => {
