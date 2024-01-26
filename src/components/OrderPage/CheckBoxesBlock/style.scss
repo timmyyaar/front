@@ -1,0 +1,47 @@
+.check-boxes-block-component {
+  display: flex;
+  flex-flow: column;
+  gap: 80px;
+
+  .inputs-checkbox-wrapper {
+    margin-top: 20px;
+
+    .input-wrapper {
+      width: 100%;
+      margin-top: 16px;
+
+      input {
+        padding: 13px 0px 13px 13px;
+        width: 100%;
+        margin-top: 16px;
+        background: #ECF0FF;
+        border-radius: 60px;
+        outline: none;
+
+        color: #5C5C5C;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+      }
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    .add-more-btn-key-checkbox {
+      margin-top: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      text-align: center;
+      cursor: pointer;
+
+      color: #5C5C5C;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 150%;
+    }
+  }
+}

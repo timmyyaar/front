@@ -38,7 +38,20 @@ export const AddedMainService: FC<IProps> = (props) => {
           </div>
         )}
       </div>
-      {addServiceList ? 1 : 0}
+      {addServiceList ? (
+        <div className="add-service-list-wrapper">
+          {addService === 'ADD OZONATION SERVICE' ? (
+            <div>
+              <div className="title-wrapper">
+                <div className="title">{'123'}</div>
+                <div className="cost-wrapper">{'123'}</div>
+              </div>
+            </div>
+          ) : (
+            <div>2</div>
+          )}
+        </div>
+      ) : null}
     </div>
   ) : null;
 };

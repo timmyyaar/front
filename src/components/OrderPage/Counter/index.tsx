@@ -52,63 +52,55 @@ export const CounterComponent: FC<IProps> = (props) => {
     setSelectValue(counterConfig.find(el => el.type === 'switcher')?.values[0] ?? '');
     // @ts-ignore
     setCounterValue(counterConfig.length
-      ? counterConfig.map(el => el.type === 'counter' ? ({
-        type: el.type,
-        title: mainService.replace(/ /g, '_').toLowerCase() + '_count_total',
-        value: el.count,
-        param: el.value === 'm2',
-      }) : ({
-        value: el.count,
-      }))
+      ? counterConfig.map(el =>
+          el.type === 'counter' ? ({
+            type: el.type,
+            title: mainService.replace(/ /g, '_').toLowerCase() + '_count_total',
+            value: el.count,
+            param: el.value === 'm2',
+          }) : ({
+            value: el.count,
+          })
+        )
       : []
     );
   }, [mainService]);
 
   return counter.length ? (
     <div className="counter-component-wrapper">
-      {counter.map((el, i) => (
+      {counter.map((el: any, i) => (
         <Fragment key={JSON.stringify(el)}>
-          {/* @ts-ignore */}
           {el.title ? (
             <div>
               <div className="title-wrapper">
-                {/* @ts-ignore */}
                 {el.title ? <div className="title">{el.title}</div> : null}
-                {/* @ts-ignore */}
-                {el.cost ? <div className="cost-wrapper">{el.cost}</div> : null}
-                {/* @ts-ignore */}
+                {el.cost ? (
+                  <div className="cost-wrapper">
+                    {el.cost.indexOf('m2') !== -1 ? <>{el.cost.replace('m2', '')}<>m<sup>2</sup></></> : el.cost}
+                  </div>
+                ): null}
               </div>
-              {/* @ts-ignore */}
               {el.subtitle ? (
                 <div className="sub-title-wrapper">
-                  {/* @ts-ignore */}
                   {el.subtitle}
                 </div>
               ) : null}
             </div>
           ) : null}
-          {/* @ts-ignore */}
           {el.type === 'counter' ? (
             <>
               <Counter
-                // @ts-ignore
                 value={el.count}
-                // @ts-ignore
                 minValue={el?.minCount ?? 0}
-                // @ts-ignore
                 title={el.value!}
-                // @ts-ignore
                 onMinus={() => onChangeCounter(el.count! - 1, i)}
-                // @ts-ignore
                 onPlus={() => onChangeCounter(el.count! + 1, i)}
                 t={t}
               />
             </>
           ) : null}
-          {/* @ts-ignore */}
           {el.type === 'switcher' ? (
             <div className="switcher-wrapper">
-              {/* @ts-ignore */}
               <Switcher tab={selectValue} tabs={select} t={t} onClick={onChangeSwitch} />
             </div>
           ) : null}

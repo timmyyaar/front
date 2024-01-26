@@ -46,7 +46,7 @@ export const OrderPage = (props: any) => {
               <CounterComponent mainService={selectedService} setCounterValue={setCounterValue} t={t} />
               <SubServicesList mainService={selectedService} subServices={selectedSubService} setSubService={setSubService} t={t} />
               <AddedMainService mainService={selectedService} t={t}/>
-              <CheckBoxesBlock mainService={selectedService} t={t} />
+              <CheckBoxesBlock mainService={selectedService} subServices={selectedSubService} setSubService={setSubService} t={t} />
             </div>
             <div className="right-col">
               <Summary

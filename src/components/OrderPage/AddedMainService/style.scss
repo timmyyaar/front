@@ -11,6 +11,7 @@
     .image-wrapper {
       width: 105px;
       height: 105px;
+      user-select: none;
     }
 
     .title {
@@ -36,12 +37,10 @@
       .title {
         color: #2B8AFC;
       }
+    }
 
-      // .icon {
-      //   path {
-      //     fill: #2B8AFC;
-      //   }
-      // }
+    .add-service-list-wrapper {
+      margin-top: 32px;
     }
   }
 }
