@@ -14,13 +14,20 @@ import SlowCooker from '@/components/MainPage/AdditionalServices/icons/slow-cook
 import wateringPlantsSvg from '@/components/MainPage/AdditionalServices/icons/watering-plants.svg';
 import windowSvg from '@/components/MainPage/AdditionalServices/icons/window.svg';
 
+import babyStrollerSvg from './icons/baby-stroller.svg';
 import bathroomSvg from './icons/bathroom.svg';
 import corredSvg from './icons/corred.svg';
+import bedSvg from './icons/bed.svg';
+import chairSvg from './icons/chair.svg';
 import readingRoomSvg from './icons/reading-room.svg';
 import iconsSvg from './icons/Icons.svg';
 import balconySvg from './icons/balcony.svg';
+import mattressSvg from './icons/mattress.svg';
+import mattressDblSvg from './icons/mattressDbl.svg';
 import mirrorSvg from './icons/mirror.svg';
+import officeChairSvg from './icons/office-chair.svg';
 import hangerSvg from './icons/hanger.svg';
+import sofaSvg from './icons/sofa.svg';
 
 const allServices: ISubService[] = [
   { title: 'Clean the oven', icons: ovenSvg, price: '45 zl', oldPrice: '123zl' },
@@ -45,6 +52,16 @@ const allServices: ISubService[] = [
   { title: 'Extra tasks', icons: hoursglassSvg, price: '45 zl/hour', oldPrice: '' },
   { title: 'Clean slow-cooker', icons: SlowCooker, price: '12 zl', oldPrice: '' },
   { title: 'Clean coffee-machine', icons: coffeeMachineSvg, price: '12 zl', oldPrice: '' },
+
+  { title: 'Single mattress', icons: mattressSvg, price: '90 zl', oldPrice: '' },
+  { title: 'Single mattress from both sides', icons: mattressSvg, price: '175 zl', oldPrice: '' },
+  { title: 'Double mattress', icons: mattressDblSvg, price: '175 zl', oldPrice: '' },
+  { title: 'Double mattress from both sides', icons: mattressDblSvg, price: '350 zl', oldPrice: '' },
+  { title: 'Upholstered to bed', icons: bedSvg, price: '150 zl', oldPrice: '' },
+  { title: 'Armchair', icons: sofaSvg, price: '150 zl', oldPrice: '' },
+  { title: 'Chair', icons: chairSvg, price: '25 zl', oldPrice: '' },
+  { title: 'Office chair', icons: officeChairSvg, price: '25 zl', oldPrice: '' },
+  { title: 'Cleaning baby stroller', icons: babyStrollerSvg, price: '75 zl', oldPrice: '' },
 ]
 
 export interface ISubService {
@@ -66,13 +83,32 @@ export const getSubServiceListByMainService = (mainService: string): ISubService
     case 'Move in/out':
 
       return allServices.filter((el) => {
-        if (el.title === 'Clean the cloak room') return false;
-        if (el.title === 'Clean the mirror') return false;
-        if (el.title === 'Clean the room') return false;
-        if (el.title === 'Clean the corridor') return false;
-        if (el.title === 'Clean the bathroom') return false;
+        const excludedTitles = [
+          'Clean the cloak room',
+          'Clean the mirror',
+          'Clean the room',
+          'Clean the corridor',
+          'Clean the bathroom'
+        ];
 
-        return true;
+        return !excludedTitles.includes(el.title);
+      });
+
+    case 'Dry cleaning':
+      return allServices.filter((el) => {
+        const excludedTitles = [
+          'Single mattress',
+          'Single mattress from both sides',
+          'Double mattress',
+          'Double mattress from both sides',
+          'Upholstered to bed',
+          'Armchair',
+          'Chair',
+          'Office chair',
+          'Cleaning baby stroller'
+        ];
+
+        return excludedTitles.includes(el.title);
       });
 
     case 'Custom cleaning':

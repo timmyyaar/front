@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { CheckBox } from './components/Checkbox';
 
 import { getCheckBoxByMainService } from './utils';
+import airSvg from './icons/air-purifier.svg';
 import addSvg from './icons/ant-design_plus-circle-filled.svg';
 import keySvg from './icons/car-keys.svg';
 import vacuumCleanerSvg from './icons/vacuum-cleaner.svg';
@@ -18,6 +19,7 @@ interface IProps {
 
 export const CheckBoxesBlock: FC<IProps> = (props) => {
   const { mainService, subServices, setSubService, t } = props;
+  const [dryCleaner, setDryCleaner] = useState(false);
   const [vacuumCleaner, setVacuumCleaner] = useState(false);
   const [keys, setKeys] = useState(false);
   const [oneMoreAddress, setOneMoreAddress] = useState(false);
@@ -65,6 +67,14 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
   }, [secondAddress]);
 
   useEffect(() => {
+    if (dryCleaner) {
+      setSubService((sS: any) => [...sS, { title: 'Dry_cleaner_sub_service' }]);
+    } else {
+      setSubService((sS: any) => sS.filter((el: any) => el.title !== 'Dry_cleaner_sub_service'));
+    }
+  }, [dryCleaner]);
+
+  useEffect(() => {
     if (vacuumCleaner) {
       setSubService((sS: any) => [...sS, { title: 'Vacuum_cleaner_sub_service' }]);
     } else {
@@ -73,20 +83,37 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
   }, [vacuumCleaner]);
 
   useEffect(() => {
-    const keysSubService = subServices.filter(el => el.title === 'Keys_sub_service');
+    const dryCleanerSubService = subServices.filter(el => el.title === 'Dry_cleaner_sub_service');
     const vacuumCleanerSubService = subServices.filter(el => el.title === 'Vacuum_cleaner_sub_service');
+    const keysSubService = subServices.filter(el => el.title === 'Keys_sub_service');
 
-    if (!keysSubService.length) {
-      setKeys(false);
+    if (!dryCleanerSubService.length) {
+      setDryCleaner(false);
     }
 
     if (!vacuumCleanerSubService.length) {
       setVacuumCleaner(false);
     }
+
+    if (!keysSubService.length) {
+      setKeys(false);
+    }
   }, [subServices]);
 
   return checkBoxes ? (
     <div className="check-boxes-block-component">
+      {checkBoxes.includes('dry') ? (
+        <CheckBox
+          icon={airSvg}
+          title={'title-dry-cleaner-checkbox'}
+          subTitle={'sub-text-dry-cleaner-checkbox'}
+          price={'50 zl'}
+          oldPrice={'60 zl'}
+          setCheck={setDryCleaner}
+          checked={dryCleaner}
+          t={t}
+        />
+      ) : null}
       {checkBoxes.includes('vacuum cleaner') ? (
         <CheckBox
           icon={vacuumCleanerSvg}

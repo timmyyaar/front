@@ -16,14 +16,21 @@ interface IProps {
 export const Summary: FC<IProps> = (props: any) => {
   const { title, counter, subService, setSubService, t } = props;
 
-  const onRemoveSubService = (service: ISubService) => {
+  const onRemoveSubService = (title: string) => {
     setSubService((oldSubServices: any) => {
-      const newServices = [...oldSubServices];
-      const index = newServices.findIndex((el: any) => el.title === service.title);
-      newServices.splice(index, 1);
-      return newServices;
+      return oldSubServices.filter((el: ISubService) => el.title !== title);
     });
   }
+
+  const getSubServices = (data: ISubService[]) => {
+    const result: string[] = [];
+
+    data.forEach((el: any) => {
+      if (!result.includes(el.title)) result.push(el.title);
+    });
+
+    return result;
+  };
 
   return (
     <div className="summary-wrapper _flex _flex-col">
@@ -41,18 +48,23 @@ export const Summary: FC<IProps> = (props: any) => {
           </div>
         ))}
       </div>
-      <div className="services-in-summary">
-        {subService.map((el: ISubService, i: number) => (
-          <div className="service-item _flex _items-center" key={JSON.stringify(el) + i}>
-            <div>{el.title}</div>
-            <div className="icon-wrapper _cursor-pointer" onClick={() => onRemoveSubService(el)}>
-              <IconCrosse />
-            </div>
+      {getSubServices(subService).length ? (
+        <div className="services-in-summary">
+          <div className="title-sub-service-title">
+            {t('Add services')}
           </div>
-        ))}
-      </div>
-      <div>
-        {t('Estimated Duration of service:')}
+          {getSubServices(subService).map((title: string, i: number) => (
+            <div className="service-item _flex _items-center" key={title + i}>
+              <div>{`${t(title)} (${subService.filter((el: ISubService) => el.title === title).length})`}</div>
+              <div className="icon-wrapper _cursor-pointer" onClick={() => onRemoveSubService(title)}>
+                <IconCrosse />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : null}
+      <div className="estimated-wrapper">
+        {`${t('Estimated Duration of service:')} `}<b>{0}</b>
       </div>
       <div className="input-promo-code _cursor-pointer">
         <div className="input-wrapper _flex">
@@ -61,17 +73,17 @@ export const Summary: FC<IProps> = (props: any) => {
           </div>
           <input className="input" type="text" />
           <div className="button-wrapper">
-            Apply
+            {t('Apply')}
           </div>
         </div>
       </div>
       <div className="to-pay-wrapper _flex _items-baseline">
         <div className="title">To pay:</div>
-        <div className="current-price">128zl</div>
-        <div className="old-price">160zl</div>
+        <div className="current-price">128 zl</div>
+        <div className="old-price">160 zl</div>
       </div>
       <div className="order-wrapper _cursor-pointer">
-        Order
+        {t('Order')}
       </div>
     </div>
   );

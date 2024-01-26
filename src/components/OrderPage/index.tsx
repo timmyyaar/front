@@ -49,8 +49,9 @@ export const OrderPage = (props: any) => {
               <CheckBoxesBlock mainService={selectedService} subServices={selectedSubService} setSubService={setSubService} t={t} />
             </div>
             <div className="right-col">
+              {selectedCategory}
               <Summary
-                title={selectedCategory}
+                title={selectedService}
                 counter={counterValue}
                 subService={selectedSubService}
                 setSubService={setSubService}

@@ -1,6 +1,7 @@
 .added-main-service-component {
   .switch-component {
     display: flex;
+    gap: 20px;
     padding: 0px 111px;
     justify-content: space-between;
     align-items: center;
@@ -9,12 +10,15 @@
     cursor: pointer;
 
     .image-wrapper {
+      display: flex;
+      align-items: center;
       width: 105px;
       height: 105px;
       user-select: none;
     }
 
     .title {
+      text-align: center;
       color: #232323;
       font-size: 20px;
       font-weight: 600;
