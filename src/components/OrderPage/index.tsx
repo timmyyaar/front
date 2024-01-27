@@ -6,7 +6,7 @@ import { useLocales } from '@/hooks/useLocales';
 import { MainImage } from '@/components/common/MainImage';
 import { LeftArrow } from '@/components/common/Slider/icons/LeftArrow';
 
-import { AddedMainService } from './AddedMainService';
+import { AddedMainService, getAdditionalServices } from './AddedMainService';
 import { CheckBoxesBlock } from './CheckBoxesBlock';
 import { CounterComponent } from './Counter';
 import { DateAndTime } from './DateAndTime';
@@ -45,11 +45,23 @@ export const OrderPage = (props: any) => {
               <ServicesList mainCategory={selectedCategory} t={t} setService={setService} />
               <CounterComponent mainService={selectedService} setCounterValue={setCounterValue} t={t} />
               <SubServicesList mainService={selectedService} subServices={selectedSubService} setSubService={setSubService} t={t} />
-              <AddedMainService mainService={selectedService} t={t}/>
+              <AddedMainService mainService={selectedService} t={t}>
+                {getAdditionalServices(selectedService).length ? (
+                  <>
+                    {getAdditionalServices(selectedService) === 'ADD OZONATION SERVICE' ? (
+                      <CounterComponent mainService={'Ozonation'} setCounterValue={() => {}} t={t} />
+                    ) : (
+                      <div className="_flex _flex-col _gap-6">
+                        <CounterComponent mainService={'Dry cleaning'} setCounterValue={() => {}} t={t} />
+                        <SubServicesList mainService={'Dry cleaning'} subServices={[]} setSubService={() => {}} t={t} />
+                      </div>
+                    )}
+                  </>
+                ) : null}
+              </AddedMainService>
               <CheckBoxesBlock mainService={selectedService} subServices={selectedSubService} setSubService={setSubService} t={t} />
             </div>
             <div className="right-col">
-              {selectedCategory}
               <Summary
                 title={selectedService}
                 counter={counterValue}
@@ -59,7 +71,6 @@ export const OrderPage = (props: any) => {
               />
             </div>
           </div>
-          <OrderForm />
           <DateAndTime />
           <UserData />
         </div>

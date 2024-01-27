@@ -42,9 +42,11 @@
         color: #2B8AFC;
       }
     }
+  }
 
-    .add-service-list-wrapper {
-      margin-top: 32px;
-    }
+  .add-service-list-wrapper {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
   }
 }

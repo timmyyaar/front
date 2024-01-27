@@ -8,10 +8,13 @@ import './style.scss';
 interface IProps {
   mainService: string;
   t: any;
+  children: any;
 }
 
+export { getAdditionalServices };
+
 export const AddedMainService: FC<IProps> = (props) => {
-  const { mainService, t } = props;
+  const { mainService, t, children } = props;
   const [addServiceList, setAddServiceList] = React.useState(false);
   const addService = getAdditionalServices(mainService);
 
@@ -40,16 +43,7 @@ export const AddedMainService: FC<IProps> = (props) => {
       </div>
       {addServiceList ? (
         <div className="add-service-list-wrapper">
-          {addService === 'ADD OZONATION SERVICE' ? (
-            <div>
-              <div className="title-wrapper">
-                <div className="title">{'123'}</div>
-                <div className="cost-wrapper">{'123'}</div>
-              </div>
-            </div>
-          ) : (
-            <div>2</div>
-          )}
+          {children}
         </div>
       ) : null}
     </div>
