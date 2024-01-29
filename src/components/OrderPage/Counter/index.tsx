@@ -52,10 +52,10 @@ export const CounterComponent: FC<IProps> = (props) => {
     setSelectValue(counterConfig.find(el => el.type === 'switcher')?.values[0] ?? '');
     // @ts-ignore
     setCounterValue(counterConfig.length
-      ? counterConfig.map(el =>
+      ? counterConfig.map((el, i) =>
           el.type === 'counter' ? ({
             type: el.type,
-            title: mainService.replace(/ /g, '_').toLowerCase() + '_count_total',
+            title: mainService.replace(/ /g, '_').toLowerCase() + `_${i}_count_total`,
             value: el.count,
             param: el.value === 'm2',
           }) : ({
@@ -73,7 +73,7 @@ export const CounterComponent: FC<IProps> = (props) => {
           {el.title ? (
             <div>
               <div className="title-wrapper">
-                {el.title ? <div className="title">{el.title}</div> : null}
+                {el.title ? <div className="title">{t(el.title)}</div> : null}
                 {el.cost ? (
                   <div className="cost-wrapper">
                     {el.cost.indexOf('m2') !== -1 ? <>{el.cost.replace('m2', '')}<>m<sup>2</sup></></> : el.cost}
@@ -82,7 +82,7 @@ export const CounterComponent: FC<IProps> = (props) => {
               </div>
               {el.subtitle ? (
                 <div className="sub-title-wrapper">
-                  {el.subtitle}
+                  {t(el.subtitle)}
                 </div>
               ) : null}
             </div>
