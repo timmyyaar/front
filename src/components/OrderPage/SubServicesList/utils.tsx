@@ -88,7 +88,17 @@ export const getSubServiceListByMainService = (mainService: string): ISubService
           'Clean the mirror',
           'Clean the room',
           'Clean the corridor',
-          'Clean the bathroom'
+          'Clean the bathroom',
+
+          'Single mattress',
+          'Single mattress from both sides',
+          'Double mattress',
+          'Double mattress from both sides',
+          'Upholstered to bed',
+          'Armchair',
+          'Chair',
+          'Office chair',
+          'Cleaning baby stroller'
         ];
 
         return !excludedTitles.includes(el.title);
