@@ -126,8 +126,8 @@ export const Modals = ({ title, onClose, t }: { title: string, onClose: () => vo
                       <Image src={windowImg[i]} alt=""/>
                     </div>
                     <div className="title">
-                      {[...new Array(3)].map((_, i) => (
-                        <Writer text={t(title + '_text_' + i)} key={title + '_' + i} />
+                      {[...new Array(3)].map((_, j) => (
+                        <Writer text={t(title + '_text_' + i + '_' + j)} key={title + '_' + j} />
                       ))}
                     </div>
                   </div>
@@ -153,7 +153,7 @@ export const Modals = ({ title, onClose, t }: { title: string, onClose: () => vo
               {renderText(2)}
             </div>
             <div style={{ marginBottom: '24px' }}>
-              {renderGrid([6, 8])}
+              {renderGrid([5, 8])}
             </div>
             {renderBlock(4)}
           </>
@@ -216,14 +216,21 @@ export const Modals = ({ title, onClose, t }: { title: string, onClose: () => vo
                   'Adjustment of the equipment for work',
                   'Ventilation'
                 ].map((el, i) => (
-                  <div className='step-card'>
+                  <div className='step-card ozonation-step' style={{ width: '18%', height: '250px' }}>
                     <div className='number-wrapper'>
                       <div className='number'>
                         {i+1}
                       </div>
                     </div>
                     <div className='name'>
-                      {t(el + '_airbnb_title')}
+                      <Writer text={t(el + '_airbnb_title')} />
+                    </div>
+                    <div className='hover-block'>
+                      <div className='hover-block-text'>
+                        {[...new Array(4)].map((_, i) => (
+                          <Writer text={t(title + '_text_hover_line_' + i)} key={title + '_hover_' + i} />
+                        ))}
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -259,7 +266,7 @@ export const Modals = ({ title, onClose, t }: { title: string, onClose: () => vo
             </div>
             {[...new Array(2)].map((_, i) => (
               <div className="_text-center" key={'Custom-last-line-' + i*100}>
-                <Writer text={t(title + '_text_custom-last-line-1')} />
+                <Writer text={t(title + '_text_custom-last-line-' + i)} />
               </div>
             ))}
           </>
@@ -290,21 +297,21 @@ export const Modals = ({ title, onClose, t }: { title: string, onClose: () => vo
                 ))}
                 {[...new Array(2)].map((_, i) => i%2 ? (
                   <b key={'Deep-kitchen-second-bold-line-' + i*10}>
-                    <Writer text={t(title + '_text_bold' + i)} />
+                    <Writer text={t(title + '_second_text_bold' + i)} />
                   </b>
                 ): (
-                  <Writer text={t(title + '_text_' + i)} key={'Deep-kitchen-second-line-' + i*10}/>
+                  <Writer text={t(title + '_second_text_' + i)} key={'Deep-kitchen-second-line-' + i*10}/>
                 ))}
               </div>
               <div className="wrapper-modal-reg">
                 <div className="wrapper-modal-reg-title">
                   <Writer text={t(title + '_block_title')} />
                 </div>
-                <div className="wrapper-modal-reg-list _flex _flex-row _justify-between">
+                <div className="wrapper-modal-reg-list-row _justify-between">
                   {[...new Array(4)].map((_, i) => (
                     <div key={'Deep-kitchen_list_block' + i * 100}>
                       {[...new Array(4)].map((_, j) => (
-                        <div className="wrapper-modal-reg-item">
+                        <div className="wrapper-modal-reg-item" key={'Deep-kitchen_list_block' + j * 100}>
                           <div className="wrapper-modal-reg-item-text">
                             <Writer text={t(title + '_text_list_' + i + "_" + j)} />
                           </div>
@@ -336,7 +343,7 @@ export const Modals = ({ title, onClose, t }: { title: string, onClose: () => vo
             <div className="wrapper-title" style={{ marginBottom: '32px' }}>
               <Writer text={t(title + '_second_title')} />
             </div>
-            <div className="_flex _flex-row _justify-between">
+            <div className="_flex _flex-row _justify-between" style={{ gap: '21px' }}>
               {['Prepare', 'Cleaning', 'Sanitize', 'Finish'].map((el, i) => (
                 <div className='step-card'>
                   <div className='number-wrapper'>
