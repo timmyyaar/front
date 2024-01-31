@@ -68,7 +68,7 @@ export const Footer = (props: any) => {
         </div>
       </div>
       <div className="_flex _justify-center">
-        <div className="_flex _justify-between" style={{ width: 340, marginBottom: '20px' }}>
+        <div className="_flex _justify-between" style={{ width: 300, marginBottom: '20px' }}>
           <a href="/privacy_and_policy.pdf" target="_blank">
             {t('Privacy and policy')}
           </a>

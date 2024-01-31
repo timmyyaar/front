@@ -3,15 +3,15 @@ import Image from 'next/image';
 
 import { Writer } from '@/components/common/Writer';
 import BookmarkTabs from './icons/BookmarkTabs.svg';
-import Coin from './icons/Coin.svg';
 import Hand from './icons/Hand.svg';
 import MoneyBag from './icons/MoneyBag.svg';
+import Time from './icons/Time.svg';
 import './style.scss';
 
 export const Advantages = (props: any) => {
   const { t } = props;
   const advantages = [
-    { icon: Coin, title: 'Fixed price', text: 'The price for cleaning is determined by the count of rooms, not the overall size of the apartment' },
+    { icon: Time, title: 'Fixed price', text: 'The price for cleaning is determined by the count of rooms, not the overall size of the apartment' },
     { icon: MoneyBag, title: 'Card or cash', text: 'You can pay conveniently with cash and bank card' },
     { icon: Hand, title: 'Eco-Friendly Products', text: 'We believe in being earth friendly, that\'s why we can refer cleaners who can use organic and green cleaning solutions for your home' },
     { icon: BookmarkTabs, title: 'Our services are insured', text: 'Payment is required only after the cleaning has been completed' },

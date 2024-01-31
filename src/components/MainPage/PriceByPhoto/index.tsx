@@ -30,7 +30,7 @@ export const PriceByPhoto = (props: any) => {
           <div className="title _flex _justify-center">
             <Writer text={t('Get the price from the photo with 99% accuracy')} />
           </div>
-          <div className="text _flex _justify-center">
+          <div className="text _flex _justify-center _text-center">
             <Writer text={t('Send a photo of the room and comments in any convenient messenger, and we will make an accurate calculation for you')} />
           </div>
           <div className="img-wrapper _flex _justify-center">

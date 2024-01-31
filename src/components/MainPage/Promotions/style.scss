@@ -44,6 +44,13 @@
       position: absolute;
       top: 24px;
       right: 24px;
+
+      &:hover {
+        svg > g > g > path,
+        svg > g > path {
+          fill: #0073FC;
+        }
+      }
     }
 
     .overlay-wrapper-component-title {

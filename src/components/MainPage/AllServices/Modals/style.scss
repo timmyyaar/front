@@ -15,6 +15,13 @@
     top: 24px;
     right: 24px;
     cursor: pointer;
+
+    &:hover {
+      svg > g > g > path,
+      svg > g > path {
+        fill: #0073FC;
+      }
+    }
   }
 
   .wrapper-modal-reg {

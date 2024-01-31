@@ -14,7 +14,6 @@ export const Benefits = () => {
 
   return (
     <div className="benefits-component _flex _flex-col _items-center _gap-6">
-      <div className="benefits-sub-title">Benefits</div>
       <div className="benefits-list _grid _grid-cols-4 _gap-3">
         {benefits.map((el) => (
           <div className="benefit-wrapper _flex _flex-col _items-center _gap-4" key={el.text}>
