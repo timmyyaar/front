@@ -5,22 +5,22 @@ import { Slider } from '@/components/common/Slider';
 import { ServiceItem } from '@/components/common/ServiceItem';
 import { useClickOutside } from '@/hooks/useClickOutSide';
 
-import Airbnb from './icons/airbnb.svg';
-import Brush from './icons/brush.svg';
-import BurningTime from './icons/burning-time.svg';
-import Confetti from './icons/confetti.svg';
-import Clean from './icons/clean.svg';
-import Cleaning from './icons/cleaning.svg';
-import DiscountEmail from './icons/discount-email.svg';
-import Ecology from './icons/ecology.svg'
-import Kitchen from './icons/kitchen.svg';
-import List from './icons/list.svg';
-import Mask from './icons/mask.svg';
-import Office from './icons/office.svg';
-import OzoneLayer from './icons/ozone-layer.svg';
-import Sofa from './icons/sofa.svg';
-import WeMoveToNewHouse from './icons/we-move-to-new-house.svg';
-import Window from './icons/window.svg';
+import AfterParty from '@/components/common/icons/services/after-party.svg';
+import Airbnb from '@/components/common/icons/services/airbnb.svg';
+import CustomCleaning from '@/components/common/icons/services/custom-cleaning.svg';
+import DeepKitchen from '@/components/common/icons/services/deep-kitchen.svg';
+import Deep from '@/components/common/icons/services/deep.svg';
+import DryCleaning from '@/components/common/icons/services/dry-cleaning.svg';
+import EcoCleaning from '@/components/common/icons/services/eco-cleaning.svg';
+import InaLastMinute from '@/components/common/icons/services/in-a-last-minute.svg';
+import MoveInOut from '@/components/common/icons/services/move-in-out.svg';
+import Office from '@/components/common/icons/services/office.svg';
+import Ozonation from '@/components/common/icons/services/ozonation.svg';
+import PostConstruction from '@/components/common/icons/services/post-construction.svg';
+import Regular from '@/components/common/icons/services/regular.svg';
+import Subscription from '@/components/common/icons/services/subscription.svg';
+import WhileSickness from '@/components/common/icons/services/while-sickness.svg';
+import WindowCleaning from '@/components/common/icons/services/window-cleaning.svg';
 
 import { Modals } from './Modals';
 import './style.scss';
@@ -31,21 +31,21 @@ export const AllServices = (props: any) => {
   const ref = useClickOutside(() => setActive(''));
 
   const services = [
-    { title: 'Regular', icon: Cleaning },
-    { title: 'Dry cleaning', icon: Sofa },
-    { title: 'Deep', icon: Clean },
-    { title: 'Window cleaning', icon: Window },
-    { title: 'Eco cleaning', icon: Ecology },
-    { title: 'Post-construction', icon: Brush },
-    { title: 'Move in/out', icon: WeMoveToNewHouse },
-    { title: 'Ozonation', icon: OzoneLayer },
-    { title: 'Subscription', icon: DiscountEmail },
-    { title: 'In a last minute', icon: BurningTime },
-    { title: 'Custom cleaning', icon: List },
-    { title: 'After party', icon: Confetti },
+    { title: 'Regular', icon: Regular },
+    { title: 'Dry cleaning', icon: DryCleaning },
+    { title: 'Deep', icon: Deep },
+    { title: 'Window cleaning', icon: WindowCleaning },
+    { title: 'Eco cleaning', icon: EcoCleaning },
+    { title: 'Post-construction', icon: PostConstruction },
+    { title: 'Move in/out', icon: MoveInOut },
+    { title: 'Ozonation', icon: Ozonation },
+    { title: 'Subscription', icon: Subscription },
+    { title: 'In a last minute', icon: InaLastMinute },
+    { title: 'Custom cleaning', icon: CustomCleaning },
+    { title: 'After party', icon: AfterParty },
     { title: 'Office', icon: Office },
-    { title: 'While sickness', icon: Mask },
-    { title: 'Deep kitchen', icon: Kitchen },
+    { title: 'While sickness', icon: WhileSickness },
+    { title: 'Deep kitchen', icon: DeepKitchen },
     { title: 'Airbnb', icon: Airbnb },
   ];
 
