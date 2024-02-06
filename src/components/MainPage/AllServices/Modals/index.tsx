@@ -21,7 +21,9 @@ export const Modals = ({ title, onClose, t }: { title: string, onClose: () => vo
       </div>
       <div className="wrapper-text">
         {[...new Array(number)].map((_, i) => (
-          <Writer text={t(title + '_text_' + i)} />
+          <React.Fragment key={`wrapper-text-${i}`}>
+            <Writer text={t(title + '_text_' + i)} />
+          </React.Fragment>
         ))}
       </div>
     </div>
@@ -49,13 +51,13 @@ export const Modals = ({ title, onClose, t }: { title: string, onClose: () => vo
   const renderGrid = (gridLists: number[]) => (
     <div className="_grid _grid-cols-2 _gap-6">
       {gridLists.map((lines, i) => (
-        <div className="wrapper-modal-reg">
+        <div className="wrapper-modal-reg" key={`wrapper-grid-${i}`}>
           <div className="wrapper-modal-reg-title">
             <Writer text={t(title + '_title_' + i)} />
           </div>
           <div className="wrapper-modal-reg-list">
             {[...new Array(lines)].map((_, j) => (
-              <div className="wrapper-modal-reg-item">
+              <div className="wrapper-modal-reg-item" key={`wrapper-grid-${i}-${j}`}>
                 <div className="wrapper-modal-reg-item-text">
                   <Writer text={t(title + '_text_' + i + '_' + j)} />
                 </div>

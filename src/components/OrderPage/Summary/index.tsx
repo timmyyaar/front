@@ -10,16 +10,30 @@ interface IProps {
   counter: { title: string; value: string; type?: string; param?: string }[];
   subService: ISubService[];
   setSubService: (service: any) => void;
+  secTitle: string;
+  secCounter: { title: string; value: string; type?: string; param?: string }[];
+  secSubService: ISubService[];
+  setSecSubService: (service: any) => void;
   t: any;
 }
 
 export const Summary: FC<IProps> = (props: any) => {
-  const { title, counter, subService, setSubService, t } = props;
+  const {
+    title, counter, subService, setSubService,
+    secTitle, secCounter, secSubService, setSecSubService,
+    t,
+  } = props;
 
-  const onRemoveSubService = (title: string) => {
-    setSubService((oldSubServices: any) => {
-      return oldSubServices.filter((el: ISubService) => el.title !== title);
-    });
+  const onRemoveSubService = (title: string, sec: boolean) => {
+    if (!sec) {
+      setSubService((oldSubServices: any) => {
+        return oldSubServices.filter((el: ISubService) => el.title !== title);
+      });
+    } else {
+      setSecSubService((oldSubServices: any) => {
+        return oldSubServices.filter((el: ISubService) => el.title !== title);
+      });
+    }
   }
 
   const getSubServices = (data: ISubService[]) => {
@@ -32,15 +46,16 @@ export const Summary: FC<IProps> = (props: any) => {
     return result;
   };
 
-  return (
-    <div className="summary-wrapper _flex _flex-col">
+  const renderSummeryService = ({ serviceTitle, counterValue, subServiceList, sec = false }: any) => (
+    <>
       <div className="summary-title">
-        {t(title + '_summary_title')}
+        {t(serviceTitle + '_summary_title')}
       </div>
       <div className="summary-counter">
-        {counter.map((el: any, i: number) => el.type === 'counter' ? (
+        {counterValue.map((el: any, i: number, arr: any[]) => el.type === 'counter' ? (
           <div key={el.title + el.value + i}>
-            {t(el.title)}<b>{el.value}</b>{el.param ? <>m<sup>2</sup></> : ''}
+            {t(el.title)}<b>{el.value}{el.param ? <>{t('m')}<sup>2</sup></> : ''}</b>
+            <b>{i + 1 === arr.length ? '' : ';'}</b>
           </div>
         ) : (
           <div key={el.title + el.value + i}>
@@ -48,20 +63,37 @@ export const Summary: FC<IProps> = (props: any) => {
           </div>
         ))}
       </div>
-      {getSubServices(subService).length ? (
+      {getSubServices(subServiceList).length ? (
         <div className="services-in-summary">
           <div className="title-sub-service-title">
             {t('Add services')}
           </div>
-          {getSubServices(subService).map((title: string, i: number) => (
+          {getSubServices(subServiceList).map((title: string, i: number) => (
             <div className="service-item _flex _items-center" key={title + i}>
-              <div>{`${t(title)} (${subService.filter((el: ISubService) => el.title === title).length})`}</div>
-              <div className="icon-wrapper _cursor-pointer" onClick={() => onRemoveSubService(title)}>
+              <div>{`${t(title)} (${subServiceList.filter((el: ISubService) => el.title === title).length})`}</div>
+              <div className="icon-wrapper _cursor-pointer" onClick={() => onRemoveSubService(title, sec)}>
                 <IconCrosse />
               </div>
             </div>
           ))}
         </div>
+      ) : null}
+    </>
+  )
+
+  return (
+    <div className="summary-wrapper _flex _flex-col">
+      {renderSummeryService({ serviceTitle: title, counterValue: counter, subServiceList: subService })}
+      {secTitle !== '' ? (
+        <>
+          <div className='summary-wrapper-separator'/>
+          {renderSummeryService({
+            serviceTitle: secTitle,
+            counterValue: secCounter,
+            subServiceList: secSubService,
+            sec: true
+          })}
+        </>
       ) : null}
       <div className="estimated-wrapper">
         {`${t('Estimated Duration of service:')} `}<b>{0}</b>

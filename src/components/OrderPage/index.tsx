@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Footer } from '@/components/Footer';
 import { useLocales } from '@/hooks/useLocales';
@@ -22,9 +22,19 @@ export const OrderPage = (props: any) => {
   const { t } = useLocales(locales);
   const services = ['General cleaning', 'Healthcare', 'Special cleaning'];
   const [selectedCategory, setCategory] = useState<typeof services[number] | ''>('General cleaning');
+  // main service
   const [selectedService, setService] = useState<string>('');
   const [counterValue, setCounterValue] = useState([]);
   const [selectedSubService, setSubService] = useState([]);
+  // second service
+  const [selectedSecondService, setSecondService] = useState<string>('');
+  const [secondCounterValue, setSecondCounterValue] = useState([]);
+  const [secondSelectedSubService, setSecondSubService] = useState([]);
+
+  useEffect(() => {
+    setSubService([]);
+    setSecondSubService([]);
+  }, [selectedService]);
 
   return (
     <div className="order-page">
@@ -45,21 +55,35 @@ export const OrderPage = (props: any) => {
               <ServicesList mainCategory={selectedCategory} t={t} setService={setService} />
               <CounterComponent mainService={selectedService} setCounterValue={setCounterValue} t={t} />
               <SubServicesList mainService={selectedService} subServices={selectedSubService} setSubService={setSubService} t={t} />
-              <AddedMainService mainService={selectedService} t={t}>
+              <AddedMainService
+                mainService={selectedService}
+                setSecondService={setSecondService}
+                t={t}
+              >
                 {getAdditionalServices(selectedService).length ? (
                   <>
                     {getAdditionalServices(selectedService) === 'ADD OZONATION SERVICE' ? (
-                      <CounterComponent mainService={'Ozonation'} setCounterValue={() => {}} t={t} />
+                      <CounterComponent mainService={'Ozonation'} setCounterValue={setSecondCounterValue} t={t} />
                     ) : (
                       <div className="_flex _flex-col _gap-6">
-                        <CounterComponent mainService={'Dry cleaning'} setCounterValue={() => {}} t={t} />
-                        <SubServicesList mainService={'Dry cleaning'} subServices={[]} setSubService={() => {}} t={t} />
+                        <CounterComponent mainService={'Dry cleaning'} setCounterValue={setSecondCounterValue} t={t} />
+                        <SubServicesList
+                          mainService={'Dry cleaning'}
+                          subServices={secondSelectedSubService}
+                          setSubService={setSecondSubService}
+                          t={t}
+                        />
                       </div>
                     )}
                   </>
                 ) : null}
               </AddedMainService>
-              <CheckBoxesBlock mainService={selectedService} subServices={selectedSubService} setSubService={setSubService} t={t} />
+              <CheckBoxesBlock
+                mainService={selectedService}
+                subServices={selectedSubService}
+                setSubService={setSubService}
+                t={t}
+              />
             </div>
             <div className="right-col">
               <Summary
@@ -67,6 +91,10 @@ export const OrderPage = (props: any) => {
                 counter={counterValue}
                 subService={selectedSubService}
                 setSubService={setSubService}
+                secTitle={selectedSecondService}
+                secCounter={secondCounterValue}
+                secSubService={secondSelectedSubService}
+                setSecSubService={setSecondSubService}
                 t={t}
               />
             </div>
