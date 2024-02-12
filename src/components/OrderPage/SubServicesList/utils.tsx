@@ -30,38 +30,38 @@ import hangerSvg from './icons/hanger.svg';
 import sofaSvg from './icons/sofa.svg';
 
 const allServices: ISubService[] = [
-  { title: 'Clean the oven', icons: ovenSvg, price: '45 zl', oldPrice: '123zl' },
-  { title: 'Clean the hood', icons: cookerHoodSvg, price: '45 zl', oldPrice: '' },
-  { title: 'Clean the fridge', icons: fridgeSvg, price: '45 zl', oldPrice: '' },
-  { title: 'Clean animal\'s tray', icons: petToiletTraySvg, price: '12 zl', oldPrice: '' },
-  { title: 'Wash the microwave', icons: microwaveSvg, price: '12 zl', oldPrice: '' },
-  { title: 'Clean kitchen \n cabinets', icons: kitchenSvg, price: '60 zl', oldPrice: '' },
-  { title: 'Wash the window', icons: windowSvg, price: '30 zl',oldPrice: '' },
-  { title: 'Space organizer', icons: cleanClothesSvg, price: '55 zl',oldPrice: '' },
-  { title: 'Ironing',icons: ironSvg, price: '50 zl/hour',oldPrice: '' },
-  { title: 'Wardrobe cleaning', icons: closetSvg, price: '45 zl',oldPrice: '' },
-  { title: 'Clean the cloak room', icons: hangerSvg, price: '35 zl', oldPrice: '' },
-  { title: 'Clean the mirror', icons: mirrorSvg, price: '12 zl', oldPrice: '' },
-  { title: 'Balcony', icons: balconySvg, price: '25 zl', oldPrice: '' },
-  { title: 'Water plants', icons: wateringPlantsSvg, price: '25 zl', oldPrice: '' },
-  { title: 'Laundry', icons: laundrySvg, price: '20 zl', oldPrice: '' },
-  { title: 'Cleaning bath or shower cubicle', icons: iconsSvg, price: '45 zl', oldPrice: '' },
-  { title: 'Clean the room', icons: readingRoomSvg, price: '50 zl', oldPrice: '' },
-  { title: 'Clean the corridor', icons: corredSvg, price: '20 zl', oldPrice: '' },
-  { title: 'Clean the bathroom', icons: bathroomSvg, price: '60 zl', oldPrice: '' },
-  { title: 'Extra tasks', icons: hoursglassSvg, price: '45 zl/hour', oldPrice: '' },
-  { title: 'Clean slow-cooker', icons: SlowCooker, price: '12 zl', oldPrice: '' },
-  { title: 'Clean coffee-machine', icons: coffeeMachineSvg, price: '12 zl', oldPrice: '' },
+  { title: 'Clean the oven', icons: ovenSvg, price: '45 zl', oldPrice: '123zl', time: 45, },
+  { title: 'Clean the hood', icons: cookerHoodSvg, price: '45 zl', oldPrice: '', time: 45, },
+  { title: 'Clean the fridge', icons: fridgeSvg, price: '45 zl', oldPrice: '', time: 60, },
+  { title: 'Clean animal\'s tray', icons: petToiletTraySvg, price: '12 zl', oldPrice: '', time: 0, },
+  { title: 'Wash the microwave', icons: microwaveSvg, price: '12 zl', oldPrice: '', time: 20, },
+  { title: 'Clean kitchen \n cabinets', icons: kitchenSvg, price: '60 zl', oldPrice: '', time: 60, },
+  { title: 'Wash the window', icons: windowSvg, price: '30 zl',oldPrice: '', time: 30, },
+  { title: 'Space organizer', icons: cleanClothesSvg, price: '55 zl',oldPrice: '', time: 60, },
+  { title: 'Ironing',icons: ironSvg, price: '50 zl/hour',oldPrice: '', time: 60, },
+  { title: 'Wardrobe cleaning', icons: closetSvg, price: '45 zl',oldPrice: '', time: 30, },
+  { title: 'Clean the cloak room', icons: hangerSvg, price: '35 zl', oldPrice: '', time: 0, },
+  { title: 'Clean the mirror', icons: mirrorSvg, price: '12 zl', oldPrice: '', time: 15, },
+  { title: 'Balcony', icons: balconySvg, price: '25 zl', oldPrice: '', time: 1, },
+  { title: 'Water plants', icons: wateringPlantsSvg, price: '25 zl', oldPrice: '', time: 20, },
+  { title: 'Laundry', icons: laundrySvg, price: '20 zl', oldPrice: '', time: 15, },
+  { title: 'Cleaning bath or shower cubicle', icons: iconsSvg, price: '45 zl', oldPrice: '', time: 30, },
+  { title: 'Clean the room', icons: readingRoomSvg, price: '50 zl', oldPrice: '', time: 0, },
+  { title: 'Clean the corridor', icons: corredSvg, price: '20 zl', oldPrice: '', time: 30, },
+  { title: 'Clean the bathroom', icons: bathroomSvg, price: '60 zl', oldPrice: '', time: 0, },
+  { title: 'Extra tasks', icons: hoursglassSvg, price: '45 zl/hour', oldPrice: '', time: 60, },
+  { title: 'Clean slow-cooker', icons: SlowCooker, price: '12 zl', oldPrice: '', time: 15, },
+  { title: 'Clean coffee-machine', icons: coffeeMachineSvg, price: '12 zl', oldPrice: '', time: 15, },
 
-  { title: 'Single mattress', icons: mattressSvg, price: '90 zl', oldPrice: '' },
-  { title: 'Single mattress from both sides', icons: mattressSvg, price: '175 zl', oldPrice: '' },
-  { title: 'Double mattress', icons: mattressDblSvg, price: '175 zl', oldPrice: '' },
-  { title: 'Double mattress from both sides', icons: mattressDblSvg, price: '350 zl', oldPrice: '' },
-  { title: 'Upholstered to bed', icons: bedSvg, price: '150 zl', oldPrice: '' },
-  { title: 'Armchair', icons: sofaSvg, price: '150 zl', oldPrice: '' },
-  { title: 'Chair', icons: chairSvg, price: '25 zl', oldPrice: '' },
-  { title: 'Office chair', icons: officeChairSvg, price: '25 zl', oldPrice: '' },
-  { title: 'Cleaning baby stroller', icons: babyStrollerSvg, price: '75 zl', oldPrice: '' },
+  { title: 'Single mattress', icons: mattressSvg, price: '90 zl', oldPrice: '', time: 0, },
+  { title: 'Single mattress from both sides', icons: mattressSvg, price: '175 zl', oldPrice: '', time: 0, },
+  { title: 'Double mattress', icons: mattressDblSvg, price: '175 zl', oldPrice: '', time: 0, },
+  { title: 'Double mattress from both sides', icons: mattressDblSvg, price: '350 zl', oldPrice: '', time: 0, },
+  { title: 'Upholstered to bed', icons: bedSvg, price: '150 zl', oldPrice: '', time: 60, },
+  { title: 'Armchair', icons: sofaSvg, price: '150 zl', oldPrice: '', time: 30, },
+  { title: 'Chair', icons: chairSvg, price: '25 zl', oldPrice: '', time: 20, },
+  { title: 'Office chair', icons: officeChairSvg, price: '25 zl', oldPrice: '', time: 20, },
+  { title: 'Cleaning baby stroller', icons: babyStrollerSvg, price: '75 zl', oldPrice: '', time: 30, },
 ]
 
 export interface ISubService {
@@ -69,6 +69,7 @@ export interface ISubService {
   icons: string;
   price: string;
   oldPrice: string;
+  time: number;
 }
 
 export const getSubServiceListByMainService = (mainService: string): ISubService[] | [] => {

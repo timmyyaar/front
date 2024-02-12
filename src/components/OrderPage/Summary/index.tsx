@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { ISubService } from '../SubServicesList/utils';
 import { DiscountCoupon } from './icons/DiscountCoupon';
 import { IconCrosse } from './icons/IconCrosse';
+import { getEstimateFromCounterByService } from './utils';
 import './style.scss';
 
 interface IProps {
@@ -44,6 +45,16 @@ export const Summary: FC<IProps> = (props: any) => {
     });
 
     return result;
+  };
+
+  const getEstimate = () => {
+    console.log(title, counter);
+    const countEstimate = getEstimateFromCounterByService(title, counter);
+    const subServiceEstimate = subService.reduce((acc: number, el: ISubService) => acc += el?.time, 0);
+    let total = countEstimate + subServiceEstimate;
+    if (total > 360) total = total / 2;
+
+    return `${Math.floor(total / 60)}h, ${total % 60}m`;
   };
 
   const renderSummeryService = ({ serviceTitle, counterValue, subServiceList, sec = false }: any) => (
@@ -96,7 +107,7 @@ export const Summary: FC<IProps> = (props: any) => {
         </>
       ) : null}
       <div className="estimated-wrapper">
-        {`${t('Estimated Duration of service:')} `}<b>{0}</b>
+        {`${t('Estimated Duration of service:')} `}<b>{getEstimate()}</b>
       </div>
       <div className="input-promo-code _cursor-pointer">
         <div className="input-wrapper _flex">
