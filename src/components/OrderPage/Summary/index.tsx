@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import { ISubService } from '../SubServicesList/utils';
-import { DiscountCoupon } from './icons/DiscountCoupon';
 import { IconCrosse } from './icons/IconCrosse';
+import { PromoInput } from './PromoCodeInput';
 import { getEstimateFromCounterByService } from './utils';
 import './style.scss';
 
@@ -24,6 +24,7 @@ export const Summary: FC<IProps> = (props: any) => {
     secTitle, secCounter, secSubService, setSecSubService,
     t,
   } = props;
+  const [sale, setSale] = useState(0);
 
   const onRemoveSubService = (title: string, sec: boolean) => {
     if (!sec) {
@@ -56,6 +57,13 @@ export const Summary: FC<IProps> = (props: any) => {
 
     return `${Math.floor(total / 60)}h, ${total % 60}m`;
   };
+
+  const getNewPrice = (originalPrice: number, discountPercentage: number) => {
+    const discountAmount = (originalPrice * discountPercentage) / 100;
+    const discountedPrice = originalPrice - discountAmount;
+
+    return discountedPrice.toFixed(2);
+  }
 
   const renderSummeryService = ({ serviceTitle, counterValue, subServiceList, sec = false }: any) => (
     <>
@@ -109,21 +117,17 @@ export const Summary: FC<IProps> = (props: any) => {
       <div className="estimated-wrapper">
         {`${t('Estimated Duration of service:')} `}<b>{getEstimate()}</b>
       </div>
-      <div className="input-promo-code _cursor-pointer">
-        <div className="input-wrapper _flex">
-          <div className="icon-wrapper">
-            <DiscountCoupon />
-          </div>
-          <input className="input" type="text" />
-          <div className="button-wrapper">
-            {t('Apply')}
-          </div>
-        </div>
-      </div>
+      <PromoInput setSale={setSale} t={t} />
       <div className="to-pay-wrapper _flex _items-baseline">
         <div className="title">To pay:</div>
-        <div className="current-price">128 zl</div>
-        <div className="old-price">160 zl</div>
+        {sale ? (
+          <>
+            <div className="current-price">{getNewPrice(160, sale)}{t('zl')}</div>
+            <div className="old-price">160 zl</div>
+          </>
+        ) : (
+          <div className="current-price">160 zl</div>
+        )}
       </div>
       <div className="order-wrapper _cursor-pointer">
         {t('Order')}
