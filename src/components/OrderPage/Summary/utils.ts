@@ -18,11 +18,12 @@ export const getEstimateFromCounterByService = (mainService: string, counter: an
     case 'Move in/out':
     case 'Airbnb':
     case 'While sickness':
+      console.log(counter);
       return counter.reduce((acc: number, el: any) => {
-        if (el.title === 'regular_0_count_total') {
-          return acc += el.value * 40;
+        if (el.title === 'regular_0_count_total' && el.value !== 1) {
+          return acc += (el.value - 1) * 40;
         } else if (el.title === 'regular_1_count_total' && el.value !== 1) {
-          return acc += el.value * 45;
+          return acc += (el.value - 1) * 45;
         } else if (el.value === 'Kitchen') {
           return acc += 30;
         }
