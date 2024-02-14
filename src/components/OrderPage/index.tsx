@@ -9,19 +9,16 @@ import { LeftArrow } from '@/components/common/Slider/icons/LeftArrow';
 import { AddedMainService, getAdditionalServices } from './AddedMainService';
 import { CheckBoxesBlock } from './CheckBoxesBlock';
 import { CounterComponent } from './Counter';
-import { DateAndTime } from './Summary/UserData/components/DateAndTime';
-import { OrderForm } from './OrderForm';
 import { ServicesList } from './ServicesList';
 import { SubServicesList } from './SubServicesList';
 import { Summary } from './Summary';
-import { UserData } from './Summary/UserData';
 import './style.scss';
 
 export const OrderPage = (props: any) => {
   const { locales } = props;
   const { t } = useLocales(locales);
   const services = ['General cleaning', 'Healthcare', 'Special cleaning'];
-  const [selectedCategory, setCategory] = useState<typeof services[number] | ''>('General cleaning');
+  const [selectedCategory, setCategory] = useState<typeof services[number] | ''>('');
   // main service
   const [selectedService, setService] = useState<string>('');
   const [counterValue, setCounterValue] = useState([]);
