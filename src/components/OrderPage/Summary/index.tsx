@@ -26,6 +26,7 @@ export const Summary: FC<IProps> = (props: any) => {
     t,
   } = props;
   const [sale, setSale] = useState(0);
+  const [order, setOrder] = useState(false);
 
   const onRemoveSubService = (title: string, sec: boolean) => {
     if (!sec) {
@@ -132,10 +133,12 @@ export const Summary: FC<IProps> = (props: any) => {
           )}
         </div>
       </div>
-      <div className="order-wrapper _cursor-pointer">
+      <div className="order-wrapper _cursor-pointer" onClick={() => setOrder(true)}>
         {t('Order')}
       </div>
-      <UserData t={t}/>
+      {order ? (
+        <UserData t={t}/>
+      ) : null}
     </div>
   );
 };
