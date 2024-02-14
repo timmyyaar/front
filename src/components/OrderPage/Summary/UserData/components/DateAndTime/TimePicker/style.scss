@@ -1,0 +1,33 @@
+.button-date-picker-wrapper {
+  width: 100px;
+
+  .button-date-picker {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    background: #F9F9F9;
+    box-shadow: 0px 24px 48px 0px rgba(164, 164, 164, 0.15);
+  }
+}
+
+.time-cell {
+  margin-bottom: 12px;
+  height: 40px;
+  color: #232323;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 21px;
+  cursor: pointer;
+
+  &:hover {
+    color: #F9F9F9;
+    background: #2B8AFC;
+    border-radius: 8px;
+  }
+}
+
+.time-selected {
+  color: #F9F9F9;
+  background: #2B8AFC;
+  border-radius: 8px;
+}

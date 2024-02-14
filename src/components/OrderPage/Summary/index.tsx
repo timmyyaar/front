@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react';
 import { ISubService } from '../SubServicesList/utils';
 import { IconCrosse } from './icons/IconCrosse';
 import { PromoInput } from './PromoCodeInput';
+import { UserData } from './UserData';
 import { getEstimateFromCounterByService } from './utils';
 import './style.scss';
 
@@ -101,37 +102,40 @@ export const Summary: FC<IProps> = (props: any) => {
   )
 
   return (
-    <div className="summary-wrapper _flex _flex-col">
-      {renderSummeryService({ serviceTitle: title, counterValue: counter, subServiceList: subService })}
-      {secTitle !== '' ? (
-        <>
-          <div className='summary-wrapper-separator'/>
-          {renderSummeryService({
-            serviceTitle: secTitle,
-            counterValue: secCounter,
-            subServiceList: secSubService,
-            sec: true
-          })}
-        </>
-      ) : null}
-      <div className="estimated-wrapper">
-        {`${t('Estimated Duration of service:')} `}<b>{getEstimate()}</b>
-      </div>
-      <PromoInput setSale={setSale} t={t} />
-      <div className="to-pay-wrapper _flex _items-baseline">
-        <div className="title">To pay:</div>
-        {sale ? (
+    <div className="summary-layout">
+      <div className="summary-wrapper _flex _flex-col">
+        {renderSummeryService({ serviceTitle: title, counterValue: counter, subServiceList: subService })}
+        {secTitle !== '' ? (
           <>
-            <div className="current-price">{getNewPrice(160, sale)}{t('zl')}</div>
-            <div className="old-price">160 zl</div>
+            <div className='summary-wrapper-separator'/>
+            {renderSummeryService({
+              serviceTitle: secTitle,
+              counterValue: secCounter,
+              subServiceList: secSubService,
+              sec: true
+            })}
           </>
-        ) : (
-          <div className="current-price">160 zl</div>
-        )}
+        ) : null}
+        <div className="estimated-wrapper">
+          {`${t('Estimated Duration of service:')} `}<b>{getEstimate()}</b>
+        </div>
+        <PromoInput setSale={setSale} t={t} />
+        <div className="to-pay-wrapper _flex _items-baseline">
+          <div className="title">{t('To pay:')}</div>
+          {sale ? (
+            <>
+              <div className="current-price">{getNewPrice(160, sale)}{t('zl')}</div>
+              <div className="old-price">160 zl</div>
+            </>
+          ) : (
+            <div className="current-price">160 zl</div>
+          )}
+        </div>
       </div>
       <div className="order-wrapper _cursor-pointer">
         {t('Order')}
       </div>
+      <UserData t={t}/>
     </div>
   );
 };

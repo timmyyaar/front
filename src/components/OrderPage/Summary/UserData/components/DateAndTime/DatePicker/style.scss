@@ -1,11 +1,6 @@
 .date-picker-component {
-  padding: 45px 36px 33px 64px ;
-  border-radius: 24px;
-  background: #ECF0FF;
-
   .button-date-picker-wrapper {
     width: 100px;
-    margin-right: 36px;
 
     .button-date-picker {
       width: 30px;
@@ -34,5 +29,18 @@
     font-size: 16px;
     font-weight: 600;
     line-height: 21px;
+    cursor: pointer;
+
+    &:hover {
+      color: #F9F9F9;
+      background: #2B8AFC;
+      border-radius: 8px;
+    }
+  }
+
+  .selected-day {
+    color: #F9F9F9;
+    background: #2B8AFC;
+    border-radius: 8px;
   }
 }

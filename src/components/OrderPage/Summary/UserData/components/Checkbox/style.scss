@@ -1,0 +1,29 @@
+.check-boxes-component {
+  .check-box-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+
+    .checked-icon-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: #F9F9F9;
+
+      .checked-icon {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .content-wrapper-checkbox {
+      display: flex;
+      align-items: center;
+      user-select: none;
+    }
+  }
+}

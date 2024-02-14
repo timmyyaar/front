@@ -2,7 +2,6 @@ import React from 'react'
 
 export const PaymentForm = () => (
   <div>
-    <div className="title-user-from">Select payment methods</div>
     <div className="_flex _justify-center">
       <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
         <path d="M40.4 51.45L38 52.58L37.89 52.6C37.8003 51.6053 37.4954 50.6421 36.9963 49.777C36.4973 48.9119 35.8161 48.1656 35 47.59V44L40.4 46.55C40.8754 46.7593 41.2795 47.1024 41.5633 47.5374C41.8471 47.9724 41.9982 48.4806 41.9982 49C41.9982 49.5194 41.8471 50.0276 41.5633 50.4626C41.2795 50.8976 40.8754 51.2407 40.4 51.45Z" fill="#ED995A"/>

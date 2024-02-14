@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import Image from 'next/image';
 
-import { ArrowLeft } from './icons/ArrowLeft';
-import { ArrowRight } from './icons/ArrowRight';
+import { ArrowLeft } from '../../icons/ArrowLeft';
+import { ArrowRight } from '../../icons/ArrowRight';
 
 import './style.scss';
 
-export const DatePicker = () => {
+export const DatePicker = ({ data, setData }: any) => {
 	const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-	const daysOfWeek = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
 	const [currentMonth, setCurrentMonth] = useState(new Date());
 
 	const getDaysInMonth = (date: any) => {
@@ -45,8 +43,13 @@ export const DatePicker = () => {
 		}
 
 		for (let day = 1; day <= daysInMonth; day++) {
+			let currentDay = `${day}/${currentMonth.toLocaleString('en-US', { month: '2-digit' })}/${currentMonth.getFullYear()}`
 			calendar.push(
-				<div className="day-cell _flex _items-center _justify-center _cursor-pointer" key={day}>
+				<div
+					className={`day-cell ${currentDay === data ? 'selected-day' : ''} _flex _items-center _justify-center _cursor-pointer`}
+					onClick={() => setData(currentDay)}
+					key={day}
+				>
 					{day}
 				</div>
 			);
@@ -56,10 +59,10 @@ export const DatePicker = () => {
 	};
 
 	return (
-		<div className="date-picker-component _p-4">
+		<div className="date-picker-component _p-2">
 			<div className="_flex _items-center _justify-between _mb-5">
 				<div className="_text-xl _font-bold">
-					{months[currentMonth.getMonth()]} {currentMonth.getFullYear()}
+					{months[currentMonth.getMonth()]}, {currentMonth.getFullYear()}
 				</div>
 				<div className="button-date-picker-wrapper _flex _justify-between">
 					<button className="button-date-picker _flex _items-center _justify-center" onClick={prevMonth}>
@@ -71,11 +74,6 @@ export const DatePicker = () => {
 				</div>
 			</div>
 			<div className="_grid _grid-cols-7">
-				{daysOfWeek.map((day) => (
-					<div className="week-day-cell _flex _items-center _justify-center" key={day}>
-						<div>{day}</div>
-					</div>
-				))}
 				{generateCalendar()}
 			</div>
 		</div>

@@ -9,12 +9,12 @@ import { LeftArrow } from '@/components/common/Slider/icons/LeftArrow';
 import { AddedMainService, getAdditionalServices } from './AddedMainService';
 import { CheckBoxesBlock } from './CheckBoxesBlock';
 import { CounterComponent } from './Counter';
-import { DateAndTime } from './DateAndTime';
+import { DateAndTime } from './Summary/UserData/components/DateAndTime';
 import { OrderForm } from './OrderForm';
 import { ServicesList } from './ServicesList';
 import { SubServicesList } from './SubServicesList';
 import { Summary } from './Summary';
-import { UserData } from './UserData';
+import { UserData } from './Summary/UserData';
 import './style.scss';
 
 export const OrderPage = (props: any) => {
@@ -99,8 +99,6 @@ export const OrderPage = (props: any) => {
               />
             </div>
           </div>
-          <DateAndTime />
-          <UserData />
         </div>
       )}
       <Footer t={t} />
