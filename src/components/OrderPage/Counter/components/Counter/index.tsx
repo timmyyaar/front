@@ -6,14 +6,20 @@ interface IProps {
   value: number;
   minValue: number;
   title: string;
+  onChange: (n: number) => void;
   onMinus: () => void;
   onPlus: () => void;
   t: any;
 }
 
 export const Counter: FC<IProps> = (props) => {
-  const { value, title = '', minValue, onMinus, onPlus, t } = props;
+  const { value, title = '', minValue, onChange, onMinus, onPlus, t } = props;
   const limit = value === minValue || value === 1;
+
+  // @ts-ignore
+  const enterNumbers = (e) => {
+    onChange(e.target.value);
+  }
 
   return (
     <div className="counter-component">
@@ -24,7 +30,10 @@ export const Counter: FC<IProps> = (props) => {
         </svg>
       </div>
       <div className="counter-title">
-        {`${value} `}
+        <input
+          type="text" style={{ textAlign: 'end', backgroundColor: '#ECF0FF', outline: 'none', width: '10%', marginRight: '2px' }}
+          value={value} onChange={enterNumbers}
+        />
         {title.indexOf('m2') !== -1 ? <>{title.replace('m2', '')}<>m<sup>2</sup></></> : title}
       </div>
       <div className="counter-icons icon-plus" onClick={onPlus}>

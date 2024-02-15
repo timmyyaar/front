@@ -93,6 +93,7 @@ export const CounterComponent: FC<IProps> = (props) => {
                 value={el.count}
                 minValue={el?.minCount ?? 0}
                 title={el.value!}
+                onChange={(number) => onChangeCounter(number, i)}
                 onMinus={() => onChangeCounter(el.count! - 1, i)}
                 onPlus={() => onChangeCounter(el.count! + 1, i)}
                 t={t}
