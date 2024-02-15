@@ -1,5 +1,6 @@
 .main-page {
   .main-content {
+    // padding-top: 60px;
     gap: 40px;
 
     .career-title {
@@ -8,6 +9,10 @@
       font-size: 40px;
       font-weight: 600;
       line-height: 130%;
+    }
+
+    .career-text {
+      text-align: center;
     }
   }
 }

@@ -44,9 +44,7 @@ export const InputForm = ({ t }: any) => {
         </div>
       </div>
       <div className="_mb-6 _flex _flex-col _gap-3">
-        <div className="button-wrapper" onClick={onSend}>
-          send
-        </div>
+        <div className="button-wrapper" onClick={onSend}>{t('send')}</div>
       </div>
     </div>
   );

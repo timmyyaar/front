@@ -19,11 +19,11 @@ export const CareerPage: FC<Props> = (props) => {
 
   return (
     <div className="main-page">
-      <div className="main-content _flex _flex-col">
+      <div className="main-content _flex _flex-col" style={{ marginTop: '60px' }}>
         <div className="career-title">Do you want to join T⅄T team?</div>
         <Benefits t={t} />
         <div className="career-title">How to join?</div>
-        <Instruction t={t} />
+        <Instruction title={'career'} numberCards={3} t={t} />
         <div className="career-title">Filling form</div>
         <InputForm t={t} />
         <div className="_flex _flex-col">
