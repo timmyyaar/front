@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import './style.scss';
 
-export const InputForm = () => {
+export const InputForm = ({ t }: any) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
@@ -29,18 +29,18 @@ export const InputForm = () => {
     <div className="input-form-component">
       <div className="_mb-6 _flex _flex-col _gap-3">
         <div className="input-wrapper">
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Surname and Name" />
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder={t("Surname and Name")} />
         </div>
         <div className="_flex _gap-5">
           <div className="input-wrapper">
-            <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Contact number" />
+            <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={t("Contact number")} />
           </div>
           <div className="input-wrapper">
-            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="E-mail" />
+            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t("E-mail")} />
           </div>
         </div>
         <div className="input-wrapper text-about-input">
-          <textarea value={about} onChange={(e) => setAbout(e.target.value)} placeholder="Add more details" />
+          <textarea value={about} onChange={(e) => setAbout(e.target.value)} placeholder={t("Add more details")} />
         </div>
       </div>
       <div className="_mb-6 _flex _flex-col _gap-3">

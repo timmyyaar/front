@@ -26,5 +26,22 @@
       font-weight: 500;
       line-height: 128%;
     }
+
+    .hover-block {
+      display: none;
+    }
+
+    &:hover {
+      background: #DEE4FF;
+
+      .un-hover-block {
+        display: none;
+      }
+
+      .hover-block {
+        display: block;
+        text-align: center;
+      }
+    }
   }
 }

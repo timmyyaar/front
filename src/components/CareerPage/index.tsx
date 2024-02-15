@@ -21,11 +21,11 @@ export const CareerPage: FC<Props> = (props) => {
     <div className="main-page">
       <div className="main-content _flex _flex-col">
         <div className="career-title">Do you want to join T⅄T team?</div>
-        <Benefits />
+        <Benefits t={t} />
         <div className="career-title">How to join?</div>
-        <Instruction />
+        <Instruction t={t} />
         <div className="career-title">Filling form</div>
-        <InputForm />
+        <InputForm t={t} />
         <div className="_flex _flex-col">
           <Footer t={t} />
         </div>

@@ -33,11 +33,9 @@ export const Header: FC<Props> = ({ locales }) => {
   const pathname = usePathname();
 
   const navigation = [
-    { title: 'Service header' },
-    { title: 'FAQ header' },
     { title: 'Subscription header' },
     { href: '/career', title: 'Career header' },
-    { title: 'Gift header' },
+    { href: '/gift', title: 'Gift header' },
   ];
 
   const onSelectLocale = (e: any, language: string) => {
