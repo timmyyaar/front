@@ -171,9 +171,9 @@ export const UserData = ({ t }: any) => {
         <QuestionIcon />
         <div className="sub-text">How it works?</div>
       </div> */}
-      {/* <div>
-        <PaymentForm />
-      </div> */}
+      <div style={{ marginTop: '24px' }}>
+        <PaymentForm t={t} />
+      </div>
       <div style={{ marginTop: '24px' }}>
         <CheckBox title={'Public agreement and Privacy Policy'} checked={publicAgreement} setCheck={setPublicAgreement} t={t} />
       </div>
