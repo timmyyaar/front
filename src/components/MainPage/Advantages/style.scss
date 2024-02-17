@@ -15,3 +15,32 @@
     line-height: 24px;
   }
 }
+
+.advantages-component-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 950px) {
+  .advantages-component-mobile {
+    display: block;
+    margin-bottom: 60px;
+
+    .advantage-title {
+      margin: 8px 0;
+      color: #13277E;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 22px;
+    }
+
+    .advantage-text {
+      color: #232323;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: -0.41px;
+    }
+  }
+}

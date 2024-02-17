@@ -69,3 +69,43 @@
     }
   }
 }
+
+.main-offer-wrapper-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 950px) {
+  .main-offer-wrapper-mobile {
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  
+    .main-button {
+      margin: 30% 80px 8px 80px;
+      padding: 24px 0;
+      text-align: center;
+      border-radius: 40px;
+      background: #2B8AFC;
+      color: #F9F9F9;
+    }
+    
+    .main-button:hover {
+      background-color: #0073FC;
+    }
+    
+    .sub-button {
+      margin: 0 80px;
+      padding: 24px 0;
+      text-align: center;
+      border-radius: 40px;
+      background: #F9F9F9;
+      color: #13277E;
+    }
+    
+    .sub-button:hover {
+      background-color: #0073FC;
+      color: #F9F9F9;
+    }
+  }
+}

@@ -58,15 +58,18 @@ export const Header: FC<Props> = ({ locales }) => {
   return (
     <header>
       <nav className="_flex">
-        <div className="logo-wrapper">
+        <div className="logo-wrapper _flex">
           <Link className="navbar-brand" href={'/'}>
             <div>
               <LogoIcon />
             </div>
           </Link>
+          <div className="sub-menu-wrapper _flex _flex-col _justify-center _pl-4">
+            Krakow
+          </div>
         </div>
         {navigation.map(navItem => (
-          <div className={`navigation-wrapper ${pathname === navItem.href ? 'navigation-wrapper-active' : ''} _flex _flex-col _justify-center`} key={navItem.title}>
+          <div className={`navigation-wrapper mobile-none ${pathname === navItem.href ? 'navigation-wrapper-active' : ''} _flex _flex-col _justify-center`} key={navItem.title}>
             <Link href={navItem.href || '/'} className="_px-4 _py-2">
               <div className="nav-link">{t(navItem.title)}</div>
             </Link>
@@ -97,8 +100,8 @@ export const Header: FC<Props> = ({ locales }) => {
             </div>
           ) : null}
         </div>
-        <div className="sub-menu-wrapper _ml-auto _flex _gap-6">
-          <div className="_flex _flex-col _justify-center">+48 730 003 997</div>
+        <div className="sub-menu-wrapper  mobile-none _ml-auto _flex _gap-6">
+          <div className="phone _flex _flex-col _justify-center">+48 730 003 997</div>
           <div className="_flex _gap-3">
             <a className="icon _flex _flex-col _justify-center" href="https://t.me/takeyoourtime" target="blanc">
               <TelegramIcon />

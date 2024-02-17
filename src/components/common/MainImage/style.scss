@@ -3,3 +3,14 @@
   height: calc(100vh - 85px);
   overflow: hidden;
 }
+
+.main-image-wrapper-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 950px) {
+  .main-image-wrapper-mobile {
+    display: block;
+    position: relative;
+  }
+}

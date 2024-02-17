@@ -84,3 +84,15 @@ header {
     }
   }
 }
+
+@media screen and (max-width: 1040px) {
+  .phone {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .navigation-wrapper {
+    margin-left: auto;
+  }
+}

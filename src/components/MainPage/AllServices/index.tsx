@@ -63,24 +63,45 @@ export const AllServices = (props: any) => {
   };
 
   return (
-    <div className="all-service-component">
-      <Overlay active={!!active}>
-        <div ref={ref}>
-          <Modals title={active} onClose={() => setActive('')} t={t} />
+    <>
+      <div className="all-service-component mobile-none">
+        <Overlay active={!!active}>
+          <div ref={ref}>
+            <Modals title={active} onClose={() => setActive('')} t={t} />
+          </div>
+        </Overlay>
+        <div className="main-title">{t('All service')}</div>
+        <Slider
+          elements={getServicesGroup().map(((el) => ({
+            id: el.id,
+            content: (): JSX.Element => (
+              <div className="_px-2.5 _flex _flex-col _w-full _gap-6">
+                <ServiceItem title={t(el.coll[0].title)} icon={el.coll[0].icon} t={t} onClick={() => setActive(el.coll[0].title)} />
+                <ServiceItem title={t(el.coll[1].title)} icon={el.coll[1].icon} t={t} onClick={() => setActive(el.coll[1].title)} />
+              </div>
+            )
+          })))}
+        />
+      </div>
+      <div className="all-service-component-mobile">
+        <Overlay active={!!active}>
+          <div ref={ref}>
+            <Modals title={active} onClose={() => setActive('')} t={t} />
+          </div>
+        </Overlay>
+        <div className="main-title">
+          <b>{t('All service')}</b>
         </div>
-      </Overlay>
-      <div className="main-title">{t('All service')}</div>
-      <Slider
-        elements={getServicesGroup().map(((el) => ({
-          id: el.id,
-          content: (): JSX.Element => (
-            <div className="_px-2.5 _flex _flex-col _w-full _gap-6">
-              <ServiceItem title={t(el.coll[0].title)} icon={el.coll[0].icon} t={t} onClick={() => setActive(el.coll[0].title)} />
-              <ServiceItem title={t(el.coll[1].title)} icon={el.coll[1].icon} t={t} onClick={() => setActive(el.coll[1].title)} />
-            </div>
-          )
-        })))}
-      />
-    </div>
+        <div className="_grid _grid-cols-2 _gap-6">
+          {services.map(el => (
+            <ServiceItem
+              title={t(el.title)}
+              icon={el.icon}
+              t={t}
+              onClick={() => setActive(el.title)} />
+          ))}
+        </div>
+      </div>
+    </>
   );
 };
