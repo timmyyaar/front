@@ -1,7 +1,7 @@
 // How much it costs
 export const Coasts = {
   'One-time': {
-    '1-bedroom': 160,
+    '1-bedroom': 199,
     '2-bedroom': 190,
     '3-bedroom': 220,
   },
