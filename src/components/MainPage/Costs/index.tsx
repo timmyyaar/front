@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+import { Coasts } from '@/constants';
 import { Writer } from '@/components/common/Writer';
 import { Switcher } from '@/components/common/Switcher';
 import { Discount } from './icons/Discount';
@@ -43,36 +44,18 @@ export const Costs = (props: any) => {
 
   const getCoast = (title: string) => {
     if (tab === 'One-time') {
-      if (title === '1-bedroom') return '160 zl';
-      if (title === '2-bedroom') return '190 zl';
-      if (title === '3-bedroom') return '220 zl';
+      // @ts-ignore
+      return Coasts['One-time'][title];
     } else {
-      if (salesCost === 'Once a week') {
-        if (title === '1-bedroom') return '128 zl';
-        if (title === '2-bedroom') return '152 zl';
-        if (title === '3-bedroom') return '176 zl';
-      }
-
-      if (salesCost === 'Twice a month') {
-        if (title === '1-bedroom') return '136 zl';
-        if (title === '2-bedroom') return '161.5 zl';
-        if (title === '3-bedroom') return '187 zl';
-      }
-
-      if (salesCost === 'Once a month') {
-        if (title === '1-bedroom') return '144 zl';
-        if (title === '2-bedroom') return '171 zl';
-        if (title === '3-bedroom') return '198 zl';
-      }
+      // @ts-ignore
+      return Coasts[salesCost][title];
     }
-    return '';
   };
 
   const getOldCoast = (title: string) => {
     if (tab === 'One-time') return '';
-    if (title === '1-bedroom') return '160 zl';
-    if (title === '2-bedroom') return '190 zl';
-    if (title === '3-bedroom') return '220 zl';
+    // @ts-ignore
+    return Coasts['One-time'][title];
     return '';
   };
 
@@ -156,13 +139,14 @@ export const Costs = (props: any) => {
                 <Writer text={t(el.text)} />
               </div>
               <div className="_flex _justify-center">
-                <div className="coast">{el.coast}</div>
-                <div className="old-coast _flex _flex-col _justify-center">{el.oldCoast}</div>
+                <div className="coast">
+                  {el.coast}{t('zl')}
+                </div>
+                <div className="old-coast _flex _flex-col _justify-center">
+                  {el.oldCoast}{t('zl')}
+                </div>
               </div>
-              <div
-                className="button _cursor-pointer"
-                onClick={() => router.push('/order')}
-              >
+              <div className="button _cursor-pointer" onClick={() => router.push('/order')}>
                 {t('Order')}
               </div>
             </div>

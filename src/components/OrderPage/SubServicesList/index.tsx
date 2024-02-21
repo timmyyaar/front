@@ -92,10 +92,11 @@ export const SubServicesList: FC<IProps> = (props) => {
               </div>
             )}
             <div className="price-wrapper">
-              {t(el.price)}
+              {t(el.price)}{t('zl')}
+              {(el.title === 'Ironing' || el.title === 'Extra tasks') ? t('/hour') : null}
               {el.oldPrice && (
                 <div className="old-price">
-                  {t(el.oldPrice)}
+                  {t(el.oldPrice)}{t('zl')}
                 </div>
               )}
             </div>

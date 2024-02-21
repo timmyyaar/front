@@ -47,7 +47,7 @@ export const Advantages = (props: any) => {
               <div className="advantage-text">
                 {[...new Array(3)].map((_, j) => (
                   <div key={el.title + j}>
-                    <Writer text={el.title + '_' + j} />
+                    <Writer text={t(el.title + '_' + j)} />
                   </div>
                 ))}
               </div>
