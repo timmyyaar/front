@@ -96,7 +96,7 @@ export const CounterCoasts = {
     old: '',
   },
   'Clean the bathroom': {
-    price: 60,
+    price: 80,
     old: '',
   },
   'Extra tasks': {
@@ -104,7 +104,7 @@ export const CounterCoasts = {
     old: '',
   },
   'Clean slow-cooker': {
-    price: 12,
+    price: 15,
     old: '',
   },
   'Clean coffee-machine': {
