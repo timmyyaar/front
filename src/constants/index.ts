@@ -2,13 +2,13 @@
 export const Coasts = {
   'One-time': {
     '1-bedroom': 199,
-    '2-bedroom': 190,
-    '3-bedroom': 220,
+    '2-bedroom': 239,
+    '3-bedroom': 279,
   },
   'Once a week': {
-    '1-bedroom': 128,
-    '2-bedroom': 152,
-    '3-bedroom': 176,
+    '1-bedroom': 159.2,
+    '2-bedroom': 191.2,
+    '3-bedroom': 223.2,
   },
   'Twice a month': {
     '1-bedroom': 136,
