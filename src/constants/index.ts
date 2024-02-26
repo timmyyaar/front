@@ -1,24 +1,24 @@
 // How much it costs
 export const Coasts = {
   'One-time': {
-    '1-bedroom': 160,
-    '2-bedroom': 190,
-    '3-bedroom': 220,
+    '1-bedroom': 199,
+    '2-bedroom': 239,
+    '3-bedroom': 279,
   },
   'Once a week': {
-    '1-bedroom': 128,
-    '2-bedroom': 152,
-    '3-bedroom': 176,
+    '1-bedroom': 159.2,
+    '2-bedroom': 191.2,
+    '3-bedroom': 223.2,
   },
   'Twice a month': {
-    '1-bedroom': 136,
-    '2-bedroom': 161.5,
-    '3-bedroom': 187,
+    '1-bedroom': 169.15,
+    '2-bedroom': 203.15,
+    '3-bedroom': 237.15,
   },
   'Once a month': {
-    '1-bedroom': 144,
-    '2-bedroom': 171,
-    '3-bedroom': 198,
+    '1-bedroom': 179.1,
+    '2-bedroom': 215.1,
+    '3-bedroom': 251.1,
   }
 };
 
@@ -36,11 +36,11 @@ export const CounterCoasts = {
     old: '',
   },
   'Clean animal\'s tray': {
-    price: 12,
+    price: 15,
     old: '',
   },
   'Wash the microwave': {
-    price: 12,
+    price: 15,
     old: '',
   },
   'Clean kitchen cabinets': {
@@ -56,7 +56,7 @@ export const CounterCoasts = {
     old: '',
   },
   'Ironing': {
-    price: 50,
+    price: 55,
     old: '',
   },
   'Wardrobe cleaning': {
@@ -64,15 +64,15 @@ export const CounterCoasts = {
     old: '',
   },
   'Clean the cloak room': {
-    price: 35,
+    price: 30,
     old: '',
   },
   'Clean the mirror': {
-    price: 12,
+    price: 15,
     old: '',
   },
   'Balcony': {
-    price: 25,
+    price: 2.5,
     old: '',
   },
   'Water plants': {
@@ -84,7 +84,7 @@ export const CounterCoasts = {
     old: '',
   },
   'Cleaning bath or shower cubicle': {
-    price: 45,
+    price: 40,
     old: '',
   },
   'Clean the room': {
@@ -96,19 +96,19 @@ export const CounterCoasts = {
     old: '',
   },
   'Clean the bathroom': {
-    price: 60,
+    price: 80,
     old: '',
   },
   'Extra tasks': {
-    price: 45,
+    price: 55,
     old: '',
   },
   'Clean slow-cooker': {
-    price: 12,
+    price: 15,
     old: '',
   },
   'Clean coffee-machine': {
-    price: 12,
+    price: 15,
     old: '',
   },
   'Single mattress': {
@@ -116,15 +116,15 @@ export const CounterCoasts = {
     old: '',
   },
   'Single mattress from both sides': {
-    price: 175,
+    price: 170,
     old: '',
   },
   'Double mattress': {
-    price: 175,
+    price: 170,
     old: '',
   },
   'Double mattress from both sides': {
-    price: 350,
+    price: 330,
     old: '',
   },
   'Upholstered to bed': {
@@ -132,7 +132,7 @@ export const CounterCoasts = {
     old: '',
   },
   'Armchair': {
-    price: 150,
+    price: 60,
     old: '',
   },
   'Chair': {
