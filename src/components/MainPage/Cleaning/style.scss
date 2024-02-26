@@ -44,4 +44,40 @@
     background: #2B8AFC;
     border-radius: 64px;
   }
+
+  .rooms-info-mobile {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .cleaning-component {
+    padding: 0 5%;
+    height: auto;
+    margin-bottom: 60px;
+
+    .switcher-wrapper {
+      margin-bottom: 24px;
+    }
+
+    .rooms-info-mobile {
+      display: block;
+      padding: 20px;
+      width: 100%;
+      background: #ECF0FF;
+      border-radius: 24px;
+
+      .rooms-info-mobile-wrapper {
+        margin-bottom: 14px;
+
+        .rooms-info-mobile-title {
+          margin-bottom: 12px;
+          color: #232323;
+          text-align: center;
+          font-size: 16px;
+          line-height: 128%;
+        }
+      }
+    }
+  }
 }

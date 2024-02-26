@@ -93,12 +93,15 @@ export const AllServices = (props: any) => {
           <b>{t('All service')}</b>
         </div>
         <div className="_grid _grid-cols-2 _gap-6">
-          {services.map(el => (
-            <ServiceItem
-              title={t(el.title)}
-              icon={el.icon}
-              t={t}
-              onClick={() => setActive(el.title)} />
+          {services.map((el, i) => (
+            <div key={JSON.stringify(el) + i}>
+              <ServiceItem
+                title={t(el.title)}
+                icon={el.icon}
+                t={t}
+                onClick={() => setActive(el.title)}
+              />
+            </div>
           ))}
         </div>
       </div>

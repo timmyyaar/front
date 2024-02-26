@@ -109,3 +109,17 @@
     }
   }
 }
+
+@media screen and (max-width: 400px) {
+  .main-offer-wrapper-mobile {
+    .main-button {
+      margin: 25% 80px 8px 80px;
+      padding: 16px 0;
+    }
+
+    .sub-button {
+      margin: 0 80px;
+      padding: 16px 0;
+    }
+  }
+}

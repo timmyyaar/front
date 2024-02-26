@@ -70,20 +70,34 @@ export const AdditionalServices = (props: any) => {
 
   return (
     <div className="additional-services">
-      <div className="title _mb-8">
-        {t('Additional services')}
+      <div className="mobile-none">
+        <div className="title _mb-8">
+          {t('Additional services')}
+        </div>
+        <Slider
+          elements={getServicesGroup().map((el => ({
+            id: el.id,
+            content: (): JSX.Element => (
+              <div className="_px-2.5 _flex _flex-col _w-full _gap-6">
+                {getItem(el.coll[0])}
+                {getItem(el.coll[1])}
+              </div>
+            )
+          })))}
+        />
       </div>
-      <Slider
-        elements={getServicesGroup().map((el => ({
-          id: el.id,
-          content: (): JSX.Element => (
-            <div className="_px-2.5 _flex _flex-col _w-full _gap-6">
-              {getItem(el.coll[0])}
-              {getItem(el.coll[1])}
+      <div className="additional-service-list-mobile">
+        <div className="title-mobile">
+          <b>{t('Additional services')}</b>
+        </div>
+        <div className="_grid _grid-cols-2 _gap-6">
+          {services.map((el, i) => (
+            <div key={JSON.stringify(el) + i}>
+              {getItem(el)}
             </div>
-          )
-        })))}
-      />
+          ))}
+        </div>
+      </div>
     </div>
   )
 };

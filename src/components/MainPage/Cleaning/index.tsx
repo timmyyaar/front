@@ -151,18 +151,30 @@ export const Cleaning = (props: any) => {
       <div className="switcher-wrapper" style={{ width: '277px' }}>
         <Switcher tab={tab} tabs={tabs} t={t} onClick={(el: string) => setTab(el)} />
       </div>
-      <div className={"room-img-wrapper" + " " + room.toLowerCase()}>
-        <Image src={roomImage} alt="" priority />
+      <div className="mobile-none">
+        <div className={"room-img-wrapper" + " " + room.toLowerCase()}>
+          <Image src={roomImage} alt="" priority />
+        </div>
+        <div className="_flex _justify-around">
+          {/* @ts-ignore */}
+          {rooms[tab].map((el: any) => (
+            <div
+              className={`room-item ${el === room && 'active'}`}
+              onClick={() => setRoom(el as string)}
+              key={el}
+            >
+              {t(el)}
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="_flex _justify-around">
-        {/* @ts-ignore */}
-        {rooms[tab].map((el: any) => (
-          <div
-            className={`room-item ${el === room && 'active'}`}
-            onClick={() => setRoom(el as string)}
-            key={el}
-          >
-            {t(el)}
+      <div className="rooms-info-mobile">
+         {/* @ts-ignore */}
+        {rooms[tab].map((el: any, i: number) => (
+          <div className="rooms-info-mobile-wrapper" key={JSON.stringify(el) + i}>
+            <div className="rooms-info-mobile-title">
+              <b>{t(el)}</b>
+            </div>
           </div>
         ))}
       </div>

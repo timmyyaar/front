@@ -22,4 +22,27 @@
       line-height: 22px;
     }
   }
+
+  .additional-service-list-mobile {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .additional-services {
+    margin: 0 5% 60px 5%;
+
+    .title-mobile {
+      margin-bottom: 12px;
+      color: #232323;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 22px;
+    }
+
+    .additional-service-list-mobile {
+      display: block;
+    }
+  }
 }

@@ -96,3 +96,9 @@ header {
     margin-left: auto;
   }
 }
+
+@media screen and (max-width: 500px) {
+  header {
+    padding: 8px 50px;
+  }
+}
