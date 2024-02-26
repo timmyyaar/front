@@ -44,49 +44,73 @@ export const Promotions = (props: any) => {
   }
 
   return (
-    <div className="promotions-component _flex _flex-col">
-      <Overlay active={active}>
-        <div className="overlay-wrapper-component" ref={ref}>
-          <div className="icon-wrapper _cursor-pointer" onClick={() => setActive(false)}>
-            <CloseSvg />
+    <>
+      <div className="promotions-component _flex _flex-col mobile-none">
+        <Overlay active={active}>
+          <div className="overlay-wrapper-component" ref={ref}>
+            <div className="icon-wrapper _cursor-pointer" onClick={() => setActive(false)}>
+              <CloseSvg />
+            </div>
+            <div className="overlay-wrapper-component-title">
+              <Writer text={t(popupTitle + '_title')} />
+            </div>
+            <div className="overlay-wrapper-component-text">
+              <Writer text={t(popupTitle + '_text')} />
+            </div>
           </div>
-          <div className="overlay-wrapper-component-title">
-            <Writer text={t(popupTitle + '_title')} />
-          </div>
-          <div className="overlay-wrapper-component-text">
-            <Writer text={t(popupTitle + '_text')} />
-          </div>
+        </Overlay>
+        <div className="title">{t('Promotions and discounts')}</div>
+        <div className="promotions-block _flex _justify-around">
+          {promotions.map((el, i) => (
+            <div className="promotion-card" key={el.text + i}>
+              <div className="_flex _justify-center">
+                <Image src={el.img} alt='' />
+              </div>
+              <div className="text">
+                <b><Writer text={t(el.text)} /></b>
+                {el.text2 && <Writer text={t(el.text2)} />}
+                <b>{el.text3 && <Writer text={t(el.text3)} />}</b>
+                {el.text4 && <Writer text={t(el.text4)} />}
+                <b>{el.text5 && <Writer text={t(el.text5)} />}</b>
+                {el.text6 && <Writer text={t(el.text6)} />}
+              </div>
+            </div>
+          ))}
         </div>
-      </Overlay>
-      <div className="title">{t('Promotions and discounts')}</div>
-      <div className="promotions-block _flex _justify-around">
-        {promotions.map((el, i) => (
-          <div className="promotion-card" key={el.text + i}>
-            <div className="_flex _justify-center">
-              <Image src={el.img} alt='' />
-            </div>
-            <div className="text">
-              <b><Writer text={t(el.text)} /></b>
-              {el.text2 && <Writer text={t(el.text2)} />}
-              <b>{el.text3 && <Writer text={t(el.text3)} />}</b>
-              {el.text4 && <Writer text={t(el.text4)} />}
-              <b>{el.text5 && <Writer text={t(el.text5)} />}</b>
-              {el.text6 && <Writer text={t(el.text6)} />}
-            </div>
-          </div>
-        ))}
+        <div className="discounts-wrapper">
+          <Slider
+            elements={discounts.map((el, i) => ({
+              id: el.services.join('n' + i),
+              content: (): JSX.Element => (
+                <DiscountItem discount={{ ...el, key: el.services.join('n' + i) }} t={t} onActive={setActivePopup} />
+              )
+            }))}
+            status={false}
+          />
+        </div>
       </div>
-      <div className="discounts-wrapper">
-        <Slider
-          elements={discounts.map((el, i) => ({
-            id: el.services.join('n' + i),
-            content: (): JSX.Element => (
-              <DiscountItem discount={{ ...el, key: el.services.join('n' + i) }} t={t} onActive={setActivePopup} />
-            )
-          }))}
-          status={false}
-        />
+      <div className="promotions-component-mobile">
+        <div className="promotions-title-wrapper">
+          {t('promotions_title_mobile')}
+        </div>
+        <div className="content-mobile-wrapper">
+          {promotions.map((el, i) => (
+            <div className="promotion-card" key={el.text + i}>
+              <div className="_flex _justify-center">
+                <Image src={el.img} alt='' />
+              </div>
+              <div className="text">
+                <b><Writer text={t(el.text)} /></b>
+                {el.text2 && <Writer text={t(el.text2 + '_mobile')} />}
+                <b>{el.text3 && <Writer text={t(el.text3 + '_mobile')} />}</b>
+                {el.text4 && <Writer text={t(el.text4 + '_mobile')} />}
+                <b>{el.text5 && <Writer text={t(el.text5 + '_mobile')} />}</b>
+                {el.text6 && <Writer text={t(el.text6 + '_mobile')} />}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   )
 };

@@ -25,7 +25,7 @@ export const PriceByPhoto = (props: any) => {
 
   return (
     <div className="price-by-photo-component _flex _justify-center">
-      <div className="white-bg">
+      <div className="white-bg mobile-none">
         <div className="_flex _flex-col">
           <div className="title _flex _justify-center">
             <Writer text={t('Get the price from the photo with 99% accuracy')} />
@@ -40,6 +40,36 @@ export const PriceByPhoto = (props: any) => {
           </div>
         </div>
         <div className="_flex _justify-center _gap-6">
+          <a className="social-button" href="https://t.me/takeyoourtime" target="blanc">
+            <TelegramIcon />
+            <div>Telegram</div>
+          </a>
+          <a className="social-button" href="https://wa.me/48730003997" target="blanc">
+            <WhatsappIcon />
+            <div>Whatsapp</div>
+          </a>
+          <a className="social-button" href="https://m.me/227130810472971" target="blanc">
+            <MessengerIcon />
+            <div>Messenger</div>
+          </a>
+        </div>
+      </div>
+      <div className="white-bg-mobile">
+        <div className="title-mobile-wrapper">
+          <Writer text={t('price_by_photo_title_mobile')} />
+        </div>
+        <div className="text-mobile-wrapper">
+          <Writer text={t('price_by_photo_text_mobile')} />
+        </div>
+        <div className="img-wrapper-mobile _flex _justify-center">
+          <Image src={bubblesSvg} alt='' />
+          <Image src={chatPng} alt='' />
+          <Image src={iPhoneSvg} alt='' />
+        </div>
+        <div className="btn-mobile-wrapper _grid _grid-cols-2 _gap-6">
+          <a className="social-button" href="https://t.me/takeyoourtime" target="blanc">
+            <TelegramIcon />
+          </a>
           <a className="social-button" href="https://t.me/takeyoourtime" target="blanc">
             <TelegramIcon />
             <div>Telegram</div>

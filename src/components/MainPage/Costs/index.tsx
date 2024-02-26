@@ -81,8 +81,11 @@ export const Costs = (props: any) => {
 
   return (
     <div className="costs-component _flex _flex-col _items-center">
-      <div className="main-title">
+      <div className="main-title mobile-none">
         <b>{t('How much it costs')}</b>
+      </div>
+      <div className="main-title-mobile mobile-only">
+        <b>{t('How_much_it_costs_mobile')}</b>
       </div>
       <div style={{ width: '277px' }}>
         <Switcher tab={tab} tabs={tabs} t={t} onClick={(el: string) => setTab(el)} />

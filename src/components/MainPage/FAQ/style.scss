@@ -44,3 +44,20 @@
     line-height: 150%;
   }
 }
+
+@media screen and (max-width: 950px) {
+  .faq-component-mobile {
+    .title {
+      margin-bottom: 16px;
+      color: #13277E;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 22px;
+    }
+
+    .faq-item-mobile {
+      height: 80px;
+    }
+  }
+}

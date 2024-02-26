@@ -25,7 +25,15 @@ code {
 }
 
 @media screen and (max-width: 950px) {
+  body {
+    overflow-x: hidden;
+  }
+
   .mobile-none {
     display: none;
+  }
+
+  .mobile-only {
+    display: block;
   }
 }

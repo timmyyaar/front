@@ -96,26 +96,42 @@ export const FAQ = (props: any) => {
   );
 
   return (
-    <div className="faq-component">
-      <div className="title">
-        {t('FAQ')}
+    <>
+      <div className="faq-component mobile-none">
+        <div className="title">
+          {t('FAQ')}
+        </div>
+        <div className="_w-full _flex _space-between _gap-5">
+          <div className="_w-6/12 _flex _flex-col _gap-6">
+            {faqQuestions.map((item, i) => i%2 ? (
+              <Fragment key={'faq' + i + 'left'}>
+                {getFaqItem({ ...item, i })}
+              </Fragment>
+            ): null)}
+          </div>
+          <div className="_w-6/12 _flex _flex-col _gap-6">
+            {faqQuestions.map((item, i) => !(i%2) ? (
+              <Fragment key={'faq' + i + 'right'}>
+                {getFaqItem({ ...item, i })}
+              </Fragment>
+            ): null)}
+          </div>
+        </div>
       </div>
-      <div className="_w-full _flex _space-between _gap-5">
+      <div className="faq-component-mobile mobile-only">
+        <div className="title">
+          {t('FAQ')}
+        </div>
         <div className="_w-6/12 _flex _flex-col _gap-6">
-          {faqQuestions.map((item, i) => i%2 ? (
+          {faqQuestions.map((item, i) => (
             <Fragment key={'faq' + i + 'left'}>
-              {getFaqItem({ ...item, i })}
+              <div className='faq-item-mobile'>
+                {getFaqItem({ ...item, i })}
+              </div>
             </Fragment>
-          ): null)}
-        </div>
-        <div className="_w-6/12 _flex _flex-col _gap-6">
-          {faqQuestions.map((item, i) => !(i%2) ? (
-            <Fragment key={'faq' + i + 'right'}>
-              {getFaqItem({ ...item, i })}
-            </Fragment>
-          ): null)}
+          ))}
         </div>
       </div>
-    </div>
+    </>
   )
 };
