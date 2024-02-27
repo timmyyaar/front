@@ -3,6 +3,7 @@ import React from 'react';
 import { MessengerIcon } from '@/components/common/icons/components/Messenger';
 import { WhatsappIcon } from '@/components/common/icons/components/Whatsapp';
 import { TelegramIcon } from '@/components/common/icons/components/Telegram';
+import { InstIcon } from '@/components/common/icons/components/Inst';
 
 import { FooterLogo } from './icons/FooterLogo';
 import './style.scss';
@@ -20,6 +21,20 @@ export const Footer = (props: any) => {
       <div className="title _flex _justify-center">
         <div>{t('Take Your Time')}</div>
       </div>
+      <div className="contacts-wrapper _flex _justify-center _gap-3">
+        <a className="icon" href="https://t.me/takeyoourtime" target="blanc">
+          <TelegramIcon />
+        </a>
+        <a className="icon" href="https://wa.me/48730003997" target="blanc">
+          <WhatsappIcon />
+        </a>
+        <a className="icon" href="https://m.me/227130810472971" target="blanc">
+          <MessengerIcon />
+        </a>
+        <a className="icon" href="https://www.instagram.com/takeyourtime_krakow/" target="blanc">
+          <InstIcon />
+        </a>
+      </div>
       <div className="_flex _justify-center">
         <div className="contacts-wrapper _flex _justify-between _gap-3">
           <div className="_flex _gap-1">
@@ -35,6 +50,10 @@ export const Footer = (props: any) => {
             </svg>
             +48 730 003 997
           </div>
+        </div>
+      </div>
+      <div className="_flex _justify-center">
+        <div className="contacts-wrapper _flex _justify-between _gap-3">
           <div className="_flex _gap-1">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
               <g clipPath="url(#clip0_7152_2579)">
@@ -49,22 +68,6 @@ export const Footer = (props: any) => {
             </svg>
             Mail: tytimeinbox@gmail.com
           </div>
-          <a className="icon" href="https://m.me/227130810472971" target="blanc">
-            <MessengerIcon />
-          </a>
-          <a className="icon" href="https://wa.me/48730003997" target="blanc">
-            <WhatsappIcon />
-          </a>
-          <a className="icon" href="https://t.me/takeyoourtime" target="blanc">
-            <TelegramIcon />
-          </a>
-        </div>
-      </div>
-      <div className="_flex _justify-center">
-        <div className="links-wrapper _flex _justify-between">
-          <div>{t('FAQ footer')}</div>
-          <div>{t('Subscription footer')}</div>
-          <div>{t('Gift Cards footer')}</div>
         </div>
       </div>
       <div className="_flex _justify-center">
@@ -76,9 +79,6 @@ export const Footer = (props: any) => {
             {t('Terms and conditions')}
           </a>
         </div>
-      </div>
-      <div className="_flex _justify-center">
-        {t('All rights reserved')}
       </div>
     </footer>
   )

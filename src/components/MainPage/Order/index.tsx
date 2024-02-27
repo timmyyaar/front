@@ -13,8 +13,11 @@ export const Order = (props: any) => {
   return (
     <div className="order-wrapper _flex _justify-center">
       <div className="white-layout">
-        <div className="title _flex _justify-center">
+        <div className="title-order-wrapper mobile-none _flex _justify-center">
           {t('Order cleaning today')}
+        </div>
+        <div className="title-order-wrapper-mobile mobile-only _flex _justify-center">
+          {t('Order cleaning today_mobile')}
         </div>
         <div className="_flex _justify-center">
           <Calendar />

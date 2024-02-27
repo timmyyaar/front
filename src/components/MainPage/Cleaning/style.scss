@@ -60,6 +60,14 @@
     line-height: 22px;
   }
 
+  .active-rooms-info-mobile-title > b {
+    color: #2B8AFC;
+  }
+
+  .rooms-info-mobile-text {
+    margin-top: 14px;
+  }
+
   .cleaning-component {
     padding: 0 5%;
     height: auto;
@@ -71,7 +79,7 @@
 
     .rooms-info-mobile {
       display: block;
-      padding: 20px;
+      padding: 20px 20px 6px 20px;
       width: 100%;
       background: #ECF0FF;
       border-radius: 24px;

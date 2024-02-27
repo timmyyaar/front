@@ -115,6 +115,29 @@ const roomsImages = {
   },
 };
 
+const roomsLines = {
+  Bedroom: {
+    Regular: 9,
+    Deep: 8,
+  },
+  Kitchen: {
+    Regular: 8,
+    Deep: 8,
+  },
+  Corridor: {
+    Regular: 8,
+    Deep: 8,
+  },
+  Bathroom: {
+    Regular: 7,
+    Deep: 8,
+  },
+  Balcony: {
+    Regular: 8,
+    Deep: 8,
+  },
+};
+
 export const Cleaning = (props: any) => {
   const { t, lng } = props;
   const tabs = ['Regular', 'Deep'];
@@ -129,6 +152,8 @@ export const Cleaning = (props: any) => {
   // @ts-ignore
   const [roomImage, setRoomImage] = useState(() => roomsImages.Bedroom.Regular[lng]);
 
+  const [openRooms, setOpenedRooms] = useState([]);
+
   useEffect(() => {
     if (room === 'Balcony' && tab === 'Regular') {
       // @ts-ignore
@@ -140,6 +165,7 @@ export const Cleaning = (props: any) => {
   }, [room, tab, lng]);
 
   useEffect(() => {
+    setOpenedRooms([]);
     if (tab === 'Regular' && room === 'Balcony') {
       setRoom('Bedroom');
     }
@@ -177,8 +203,18 @@ export const Cleaning = (props: any) => {
          {/* @ts-ignore */}
         {rooms[tab].map((el: any, i: number) => (
           <div className="rooms-info-mobile-wrapper" key={JSON.stringify(el) + i}>
-            <div className="rooms-info-mobile-title">
+            {/* @ts-ignore */}
+            <div className={`rooms-info-mobile-title ${openRooms.includes(el) ? ' active-rooms-info-mobile-title' : ''}`} onClick={() => setOpenedRooms((arr) => [...arr, el])}>
               <b>{t(el)}</b>
+              {/* @ts-ignore */}
+              {openRooms.includes(el) && (
+                <div className="rooms-info-mobile-text">
+                  {/* @ts-ignore */}
+                  {[... new Array(roomsLines[el][tab])].map(el => (
+                    <div>{'text-rooms-info-mobile-' + el}</div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         ))}

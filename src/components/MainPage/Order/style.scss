@@ -10,7 +10,7 @@
     overflow: hidden;
     transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 
-    .title {
+    .title-order-wrapper {
       margin-bottom: 32px;
       color: #13277E;
       text-align: center;
@@ -73,6 +73,21 @@
       .woman-icon-wrapper {
         display: none;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .order-wrapper {
+    padding: 0 5%;
+    margin-bottom: 60px;
+
+    .title-order-wrapper-mobile {
+      color: #13277E;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 22px;
     }
   }
 }

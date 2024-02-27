@@ -118,11 +118,11 @@ export const FAQ = (props: any) => {
           </div>
         </div>
       </div>
-      <div className="faq-component-mobile mobile-only">
+      <div className="faq-component faq-component-mobile mobile-only">
         <div className="title">
           {t('FAQ')}
         </div>
-        <div className="_w-6/12 _flex _flex-col _gap-6">
+        <div className="_flex _flex-col _gap-6">
           {faqQuestions.map((item, i) => (
             <Fragment key={'faq' + i + 'left'}>
               <div className='faq-item-mobile'>

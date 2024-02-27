@@ -69,6 +69,7 @@ export const PriceByPhoto = (props: any) => {
         <div className="btn-mobile-wrapper _grid _grid-cols-2 _gap-6">
           <a className="social-button" href="https://t.me/takeyoourtime" target="blanc">
             <TelegramIcon />
+            <div>Telegram</div>
           </a>
           <a className="social-button" href="https://t.me/takeyoourtime" target="blanc">
             <TelegramIcon />

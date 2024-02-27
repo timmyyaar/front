@@ -8,6 +8,7 @@ import { useLocales } from '@/hooks/useLocales';
 import { MessengerIcon } from '@/components/common/icons/components/Messenger';
 import { TelegramIcon } from '@/components/common/icons/components/Telegram';
 import { WhatsappIcon } from '@/components/common/icons/components/Whatsapp';
+import { InstIcon } from '@/components/common/icons/components/Inst';
 import { LocaleContext } from '@/components/Providers';
 import { ILocales } from '@/locales';
 
@@ -111,6 +112,9 @@ export const Header: FC<Props> = ({ locales }) => {
             </a>
             <a className="icon _flex _flex-col _justify-center" href="https://m.me/227130810472971" target="blanc">
               <MessengerIcon />
+            </a>
+            <a className="icon _flex _flex-col _justify-center" href="https://www.instagram.com/takeyourtime_krakow/" target="blanc">
+              <InstIcon />
             </a>
           </div>
         </div>
