@@ -22,6 +22,7 @@ import wateringPlantsSvg from './icons/watering-plants.svg';
 import windowSvg from './icons/window.svg';
 
 import './style.scss';
+import { Writer } from '@/components/common/Writer';
 
 export const AdditionalServices = (props: any) => {
   const { t } = props;
@@ -63,7 +64,7 @@ export const AdditionalServices = (props: any) => {
         <Image src={icons} alt='' />
       </div>
       <div className="item-title _whitespace-nowrap">
-        {t(title)}
+        <Writer text={t(title)} />
       </div>
     </div>
   )
@@ -93,7 +94,7 @@ export const AdditionalServices = (props: any) => {
         <div className="_grid _grid-cols-2 _gap-6">
           {services.map((el, i) => (
             <div key={JSON.stringify(el) + i}>
-              {getItem(el)}
+              {getItem({ ...el, title: el.title + '_mobile'})}
             </div>
           ))}
         </div>

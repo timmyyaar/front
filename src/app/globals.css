@@ -24,6 +24,10 @@ code {
   cursor: pointer;
 }
 
+.mobile-only {
+  display: none;
+}
+
 @media screen and (max-width: 950px) {
   body {
     overflow-x: hidden;
