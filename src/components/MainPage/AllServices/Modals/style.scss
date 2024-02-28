@@ -201,3 +201,54 @@
     }
   }
 }
+
+@media screen and (max-width: 950px) {
+  .modal-wrapper-component {
+    width: 100%;
+    padding: 60px 20px;
+
+    .wrapper-text {
+      margin-bottom: 40px !important;
+    }
+
+    .icon-wrapper-modal {
+      top: 16px;
+      right: 16px;
+    }
+
+    .wrapper-modal-reg {
+      padding: 40px 42px;
+    }
+
+    ._grid._grid-cols-2._gap-6 {
+      display: flex;
+      flex-flow: column;
+    }
+  }
+
+  ._grid._grid-cols-3._gap-2 {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .hover-cards-mobile {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+    .step-card.ozonation-step {
+      width: 50% !important;
+    }
+  }
+
+  .wrapper-modal-reg-list-row._justify-between {
+    flex-flow: column;
+    gap: 16px !important;
+  }
+
+  .airbnb-mobile {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+}

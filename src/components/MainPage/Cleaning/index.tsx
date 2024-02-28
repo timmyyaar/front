@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 
 import { Switcher } from '@/components/common/Switcher';
+import { Writer } from '@/components/common/Writer';
 
 // Bath room images
 import BathEngDeep from './images/BathEngDeep.png';
@@ -117,24 +118,24 @@ const roomsImages = {
 
 const roomsLines = {
   Bedroom: {
-    Regular: 9,
-    Deep: 8,
+    Regular: 7,
+    Deep: 9,
   },
   Kitchen: {
-    Regular: 8,
+    Regular: 5,
     Deep: 8,
   },
   Corridor: {
-    Regular: 8,
+    Regular: 6,
     Deep: 8,
   },
   Bathroom: {
-    Regular: 7,
-    Deep: 8,
+    Regular: 6,
+    Deep: 7,
   },
   Balcony: {
-    Regular: 8,
-    Deep: 8,
+    Regular: 0,
+    Deep: 3,
   },
 };
 
@@ -208,10 +209,14 @@ export const Cleaning = (props: any) => {
               <b>{t(el)}</b>
               {/* @ts-ignore */}
               {openRooms.includes(el) && (
-                <div className="rooms-info-mobile-text">
+                <div className="rooms-info-mobile-text-list">
                   {/* @ts-ignore */}
-                  {[... new Array(roomsLines[el][tab])].map(el => (
-                    <div>{'text-rooms-info-mobile-' + el}</div>
+                  {[... new Array(roomsLines[el][tab])].map((el, i) => (
+                    <div className="rooms-info-mobile-text-item" key={'text-mobile-room' + (i + 1)}>
+                      <div className="rooms-info-mobile-text-item-text">
+                        <Writer text={'text-rooms-info-mobile- \\n ' + (i + 1)} />
+                      </div>
+                    </div>
                   ))}
                 </div>
               )}

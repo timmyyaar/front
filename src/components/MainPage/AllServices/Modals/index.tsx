@@ -210,7 +210,7 @@ export const Modals = ({ title, onClose, t }: { title: string, onClose: () => vo
               <div className="wrapper-title" style={{ marginBottom: '32px' }}>
                 <Writer text={t(title + '_third_title')} />
               </div>
-              <div className="_flex _flex-row _justify-between" style={{ marginBottom: '32px', gap: '21px' }}>
+              <div className="_flex _flex-row _justify-between hover-cards-mobile" style={{ marginBottom: '32px', gap: '21px' }}>
                 {[
                   'Wet cleaning and sealing of rooms',
                   'Isolation of pets and indoor plants',
@@ -345,7 +345,7 @@ export const Modals = ({ title, onClose, t }: { title: string, onClose: () => vo
             <div className="wrapper-title" style={{ marginBottom: '32px' }}>
               <Writer text={t(title + '_second_title')} />
             </div>
-            <div className="_flex _flex-row _justify-between" style={{ gap: '21px' }}>
+            <div className="_flex _flex-row _justify-between airbnb-mobile" style={{ gap: '21px' }}>
               {['Prepare', 'Cleaning', 'Sanitize', 'Finish'].map((el, i) => (
                 <div className='step-card'>
                   <div className='number-wrapper'>

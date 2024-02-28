@@ -95,6 +95,31 @@
           line-height: 128%;
         }
       }
+
+      .rooms-info-mobile-text-list {
+        margin-top: 14px;
+
+        .rooms-info-mobile-text-item {
+          display: flex;
+          justify-content: center;
+
+          .rooms-info-mobile-text-item-text {
+            color: #232323;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 150%;
+          }
+
+          &::before {
+            margin-top: 2px;
+            content: '\2022';
+            display: inline-block;
+            color: #333;
+            font-size: 16px;
+            margin-right: 11px;
+          }
+        }
+      }
     }
   }
 }
