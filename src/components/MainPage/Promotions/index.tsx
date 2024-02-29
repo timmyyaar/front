@@ -91,7 +91,7 @@ export const Promotions = (props: any) => {
       </div>
       <div className="promotions-component-mobile">
         <div className="promotions-title-wrapper">
-          {t('promotions_title_mobile')}
+          {t('promotions_title_mobile1')}
         </div>
         <div className="content-mobile-wrapper">
           {promotions.map((el, i) => (
@@ -100,7 +100,7 @@ export const Promotions = (props: any) => {
                 <Image src={el.img} alt='' />
               </div>
               <div className="text">
-                <b><Writer text={t(el.text)} /></b>
+                <b><Writer text={t(el.text + '_mobile')} /></b>
                 {el.text2 && <Writer text={t(el.text2 + '_mobile')} />}
                 <b>{el.text3 && <Writer text={t(el.text3 + '_mobile')} />}</b>
                 {el.text4 && <Writer text={t(el.text4 + '_mobile')} />}
