@@ -214,7 +214,7 @@ export const Cleaning = (props: any) => {
                   {[... new Array(roomsLines[el][tab])].map((el, i) => (
                     <div className="rooms-info-mobile-text-item" key={'text-mobile-room' + (i + 1)}>
                       <div className="rooms-info-mobile-text-item-text">
-                        <Writer text={'text-rooms-info-mobile- \\n ' + (i + 1)} />
+                        <Writer text={'text-rooms-info-mobile-' + (i + 1)} />
                       </div>
                     </div>
                   ))}
