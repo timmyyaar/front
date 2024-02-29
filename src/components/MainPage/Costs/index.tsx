@@ -157,6 +157,49 @@ export const Costs = (props: any) => {
           </div>
         </div>
       </div>
+      <div className="sub-mobile-wrapper mobile-only">
+        {tab === 'Subscription' ? (
+          <div className="sub-mobile-sales-wrapper">
+            {sales.map((el, i) => (
+              <div
+                className={`sub-mobile-sales-item ${el.title === salesCost ? ' sub-mobile-sales-item-active ' : ' '}`}
+                onClick={() => setSalesCost(el.title)}
+                key={el.title + '-mobile-sales-' + i}
+              >
+                <div className="sub-mobile-sales-sale">{el.sale}</div>
+                <div className="sub-mobile-sales-title">
+                  <b>{t(el.title)}</b>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : null}
+        <div className="grid-sales-mobile">
+          {costs.map((el, j) => (
+            <div className="sales-mobile-item" key={el.title + '_mobile_' + j}>
+              <div className="sales-mobile-title">
+                <b>{t(el.title)}</b>
+              </div>
+              <div className="sales-mobile-price-wrapper">
+                <div className="sales-mobile-current-price">
+                  {el.coast}{t('zl')}
+                </div>
+                <div className="sales-mobile-old-price">
+                  {el.oldCoast}{t('zl')}
+                </div>
+              </div>
+              <div className="sales-mobile-item-order-btn" onClick={() => router.push('/order')}>
+                {t('Order')}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="sub-text-below-mobile">
+          <div>{t('sub-text-below-mobile_line-1')}</div>
+          <div>{t('sub-text-below-mobile_line-2')}</div>
+          <div>{t('sub-text-below-mobile_line-3')}</div>
+        </div>
+      </div>
     </div>
   )
 };

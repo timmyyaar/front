@@ -126,11 +126,11 @@ const roomsLines = {
     Deep: 8,
   },
   Corridor: {
-    Regular: 6,
-    Deep: 8,
+    Regular: 5,
+    Deep: 7,
   },
   Bathroom: {
-    Regular: 6,
+    Regular: 5,
     Deep: 7,
   },
   Balcony: {
