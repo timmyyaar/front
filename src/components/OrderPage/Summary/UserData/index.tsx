@@ -21,7 +21,6 @@ export const UserData = ({ t }: any) => {
   const [house, setHouse] = useState('');
   const [apartment, setApartment] = useState('');
   const [postcode, setPostCode] = useState('');
-  const [floor, setFloor] = useState('');
   const [entrance, setEntrance] = useState('');
   const [doorPhone, setDoorPhone] = useState('');
   const [more, setMore] = useState('');
@@ -31,9 +30,9 @@ export const UserData = ({ t }: any) => {
   const [personalData, setPersonalData] = useState(false);
 
   useEffect(() => {
-    if (!addressLayout && (street || house || apartment || postcode || floor || entrance || doorPhone || more)) {
+    if (!addressLayout && (street || house || apartment || postcode || entrance || doorPhone || more)) {
       setAddress(
-        (`${street} ${house} ${apartment} ${postcode} ${floor} ${entrance} ${doorPhone} ${more}`)
+        (`${street} ${house} ${apartment} ${postcode} ${entrance} ${doorPhone} ${more}`)
       );
     }
   }, [addressLayout]);
@@ -115,10 +114,13 @@ export const UserData = ({ t }: any) => {
                     />
                   </div>
                   <div className="input-wrapper address-layout">
-                    <input
-                      type="text" placeholder="Floor"
-                      value={floor} onChange={(e) => setFloor(e.target.value)}
-                    />
+                    {/* <input type="text" placeholder="Floor" /> */}
+                    <div className='city-wrapper'>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M17 9V7C17 4.2 14.8 2 12 2C9.2 2 7 4.2 7 7V9C5.3 9 4 10.3 4 12V19C4 20.7 5.3 22 7 22H17C18.7 22 20 20.7 20 19V12C20 10.3 18.7 9 17 9ZM9 7C9 5.3 10.3 4 12 4C13.7 4 15 5.3 15 7V9H9V7Z" fill="#848484"/>
+                      </svg>
+                      <div className="city-name-wrapper">Krakow</div>
+                    </div>
                   </div>
                 </div>
                 <div className="_flex _gap-5">
@@ -130,7 +132,7 @@ export const UserData = ({ t }: any) => {
                   </div>
                   <div className="input-wrapper address-layout">
                     <input
-                      type="text" placeholder="Doorphone code (optional)"
+                      type="text" placeholder="Doorphone code"
                       value={doorPhone} onChange={(e) => setDoorPhone(e.target.value)}
                     />
                   </div>

@@ -51,8 +51,8 @@ export const Summary: FC<IProps> = (props: any) => {
   };
 
   const getEstimate = () => {
-    console.log(title, counter);
     const countEstimate = getEstimateFromCounterByService(title, counter);
+    console.log(subService);
     const subServiceEstimate = subService.reduce((acc: number, el: ISubService) => acc += el?.time, 0);
     let total = countEstimate + subServiceEstimate;
     if (total > 360) total = total / 2;

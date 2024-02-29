@@ -49,7 +49,7 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
       if (keysSubService.length) {
         setSubService((sS: any) => sS.map((el: any) => (el.num === 1 && el.title === 'Keys_sub_service') ? { ...el, address: firstAddress } : el));
       } else {
-        setSubService((sS: any) => [...sS, { num: 1, title: 'Keys_sub_service', address: firstAddress }]);
+        setSubService((sS: any) => [...sS, { num: 1, title: 'Keys_sub_service', address: firstAddress, time: 30 }]);
       }
     }
   }, [firstAddress]);
@@ -61,7 +61,7 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
       if (keysSubService.length) {
         setSubService((sS: any) => sS.map((el: any) => (el.num === 2 && el.title === 'Keys_sub_service') ? { ...el, address: secondAddress } : el));
       } else {
-        setSubService((sS: any) => [...sS, { num: 2, title: 'Keys_sub_service', address: secondAddress }]);
+        setSubService((sS: any) => [...sS, { num: 2, title: 'Keys_sub_service', address: secondAddress, time: 30 }]);
       }
     }
   }, [secondAddress]);
@@ -76,7 +76,7 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
 
   useEffect(() => {
     if (vacuumCleaner) {
-      setSubService((sS: any) => [...sS, { title: 'Vacuum_cleaner_sub_service' }]);
+      setSubService((sS: any) => [...sS, { title: 'Vacuum_cleaner_sub_service', time: 0 }]);
     } else {
       setSubService((sS: any) => sS.filter((el: any) => el.title !== 'Vacuum_cleaner_sub_service'));
     }
