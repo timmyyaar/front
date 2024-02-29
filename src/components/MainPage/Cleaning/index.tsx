@@ -211,10 +211,10 @@ export const Cleaning = (props: any) => {
               {openRooms.includes(el) && (
                 <div className="rooms-info-mobile-text-list">
                   {/* @ts-ignore */}
-                  {[... new Array(roomsLines[el][tab])].map((el, i) => (
+                  {[... new Array(roomsLines[el][tab])].map((_, i) => (
                     <div className="rooms-info-mobile-text-item" key={'text-mobile-room' + (i + 1)}>
                       <div className="rooms-info-mobile-text-item-text">
-                        <Writer text={'text-rooms-info-mobile-' + el + '_' + tab + '_' + (i + 1)} />
+                        <Writer text={t('text-rooms-info-mobile-' + el + '_' + tab + '_' + (i + 1))} />
                       </div>
                     </div>
                   ))}
