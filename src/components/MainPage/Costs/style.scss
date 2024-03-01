@@ -135,6 +135,8 @@
   }
 
   .sub-mobile-wrapper {
+    width: 100%;
+
     .sub-mobile-sales-wrapper {
       margin-top: 20px;
       display: flex;
@@ -164,6 +166,7 @@
           font-weight: 500;
           line-height: 130%;
           letter-spacing: 0.07px;
+          white-space: nowrap;
         }
       }
 
@@ -184,9 +187,8 @@
 
     .grid-sales-mobile {
       margin-top: 20px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(2, 1fr);
+      display: flex;
+      flex-flow: column;
       gap: 20px;
 
       .sales-mobile-item {
@@ -221,11 +223,12 @@
           font-size: 16px;
           font-weight: 400;
           line-height: 130%;
-          text-decoration-line: strikethrough;
+          text-decoration-line: line-through;
         }
       }
 
       .sales-mobile-item-order-btn {
+        margin: 28px auto 0 auto;
         width: 130px;
         padding: 14px 0;
         border-radius: 40px;
