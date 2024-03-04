@@ -12,17 +12,17 @@ interface IProps {
   counter: { title: string; value: string; type?: string; param?: string }[];
   subService: ISubService[];
   setSubService: (service: any) => void;
-  secTitle: string;
-  secCounter: { title: string; value: string; type?: string; param?: string }[];
-  secSubService: ISubService[];
-  setSecSubService: (service: any) => void;
+  secTitle?: string;
+  secCounter?: { title: string; value: string; type?: string; param?: string }[];
+  secSubService?: ISubService[];
+  setSecSubService?: (service: any) => void;
   t: any;
 }
 
 export const Summary: FC<IProps> = (props: any) => {
   const {
     title, counter, subService, setSubService,
-    secTitle, secCounter, secSubService, setSecSubService,
+    secTitle = '', secCounter = {}, secSubService = [], setSecSubService = () => {},
     t,
   } = props;
   const [sale, setSale] = useState(0);

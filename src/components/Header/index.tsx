@@ -34,7 +34,7 @@ export const Header: FC<Props> = ({ locales }) => {
   const pathname = usePathname();
 
   const navigation = [
-    { title: 'Subscription header' },
+    { href: '/subscription', title: 'Subscription header' },
     { href: '/career', title: 'Career header' },
     { href: '/gift', title: 'Gift header' },
   ];
