@@ -71,6 +71,7 @@ export const SubscriptionPage = (props: any) => {
             counter={counterValue}
             subService={selectedSubService}
             setSubService={setSubService}
+            subSale={sale.sale}
             t={t}
           />
         </div>

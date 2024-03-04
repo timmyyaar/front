@@ -16,6 +16,7 @@ interface IProps {
   secCounter?: { title: string; value: string; type?: string; param?: string }[];
   secSubService?: ISubService[];
   setSecSubService?: (service: any) => void;
+  subSale?: string;
   t: any;
 }
 
@@ -23,10 +24,12 @@ export const Summary: FC<IProps> = (props: any) => {
   const {
     title, counter, subService, setSubService,
     secTitle = '', secCounter = {}, secSubService = [], setSecSubService = () => {},
+    subSale = '',
     t,
   } = props;
   const [sale, setSale] = useState(0);
   const [order, setOrder] = useState(false);
+  console.log(subSale);
 
   const onRemoveSubService = (title: string, sec: boolean) => {
     if (!sec) {
@@ -38,6 +41,21 @@ export const Summary: FC<IProps> = (props: any) => {
         return oldSubServices.filter((el: ISubService) => el.title !== title);
       });
     }
+  }
+
+  const makeSaleFromSub = (number: number, percentageString: string) => {
+    const match = percentageString.match(/^(-?\d*\.?\d+)\s*%$/);
+  
+    if (match) {
+      const percentage = parseFloat(match[1]);
+
+      if (!isNaN(percentage)) {
+        const result = number + (number * percentage / 100);
+        return result;
+      }
+    }
+
+    return number;
   }
 
   const getSubServices = (data: ISubService[]) => {
@@ -120,16 +138,27 @@ export const Summary: FC<IProps> = (props: any) => {
         <div className="estimated-wrapper">
           {`${t('Estimated Duration of service:')} `}<b>{getEstimate()}</b>
         </div>
-        <PromoInput setSale={setSale} t={t} />
+        {!subSale ? (<PromoInput setSale={setSale} t={t} />): null}
         <div className="to-pay-wrapper _flex _items-baseline">
           <div className="title">{t('To pay:')}</div>
-          {sale ? (
+          {!subSale ? (
+            sale ? (
+              <>
+                <div className="current-price">
+                  {getNewPrice(160, sale)}{t('zl')}
+                </div>
+                <div className="old-price">160 zl</div>
+              </>
+            ) : (
+              <div className="current-price">160 zl</div>
+            )
+          ) : (
             <>
-              <div className="current-price">{getNewPrice(160, sale)}{t('zl')}</div>
+              <div className="current-price">
+                {makeSaleFromSub(160, subSale)}{t('zl')}
+              </div>
               <div className="old-price">160 zl</div>
             </>
-          ) : (
-            <div className="current-price">160 zl</div>
           )}
         </div>
       </div>

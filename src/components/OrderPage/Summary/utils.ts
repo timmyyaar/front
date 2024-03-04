@@ -1,10 +1,11 @@
 export const getEstimateFromCounterByService = (mainService: string, counter: any) => {
   switch (mainService) {
-    case 'Custom  cleaning':
+    case 'Subscription':
+    case 'Custom cleaning':
       return counter.reduce((acc: number, el: any) => {
-        if (el.title === 'regular_0_count_total') {
+        if (el.title === 'custom_cleaning_0_count_total') {
           return acc += el.value * 40;
-        } else if (el.title === 'regular_1_count_total') {
+        } else if (el.title === 'custom_cleaning_1_count_total') {
           return acc += el.value * 45;
         } else if (el.value === 'Kitchen') {
           return acc += 60;
