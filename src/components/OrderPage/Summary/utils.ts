@@ -65,7 +65,6 @@ export const getEstimateFromCounterByService = (mainService: string, counter: an
 
     case 'Post-construction':
       return counter.reduce((acc: number, el: any) => {
-        console.log(el);
         if (el.title === 'post-construction_0_count_total') {
           if (el.value < 10) {
             return acc + 10;
@@ -97,6 +96,50 @@ export const getEstimateFromCounterByService = (mainService: string, counter: an
         } else if (el.title === 'dry_cleaning_1_count_total') {
           return acc + el.value * 30;
         }
+
+        return acc;
+      }, 0);
+
+    default:
+      return 0;
+  }
+}
+
+export const getPriceFromCounterByService = (mainService: string, counter: any) => {
+  switch (mainService) {
+    case 'Subscription':
+    case 'Custom cleaning':
+    case 'Regular':
+    case 'Eco cleaning':
+    case 'Move in/out':
+    case 'Airbnb':
+    case 'After party':
+      return 0;
+
+    case 'Office':
+      return counter.reduce((acc: number, el: any, i: number) => {
+        acc += el.value * 2.5;
+        return acc;
+      }, 0);
+
+    case 'Ozonation':
+      return counter.reduce((acc: number, el: any, i: number) => {
+        if (i === 0) acc += el.value * 5;
+        if (i === 1) acc += el.value * 40;
+
+        return acc;
+      }, 0);
+
+    case 'Post-construction':
+      return counter.reduce((acc: number, el: any, i: number) => {
+        acc += el.value * 7;
+        return acc;
+      }, 0);
+
+    case 'Window cleaning':
+      return counter.reduce((acc: number, el: any, i: number) => {
+        if (i === 0) acc += el.value * 25;
+        if (i === 1) acc += el.value * 3;
 
         return acc;
       }, 0);

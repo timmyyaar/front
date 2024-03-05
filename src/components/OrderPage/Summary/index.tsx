@@ -4,7 +4,10 @@ import { ISubService } from '../SubServicesList/utils';
 import { IconCrosse } from './icons/IconCrosse';
 import { PromoInput } from './PromoCodeInput';
 import { UserData } from './UserData';
-import { getEstimateFromCounterByService } from './utils';
+import {
+  getEstimateFromCounterByService,
+  getPriceFromCounterByService,
+} from './utils';
 import './style.scss';
 
 interface IProps {
@@ -29,7 +32,6 @@ export const Summary: FC<IProps> = (props: any) => {
   } = props;
   const [sale, setSale] = useState(0);
   const [order, setOrder] = useState(false);
-  console.log(subSale);
 
   const onRemoveSubService = (title: string, sec: boolean) => {
     if (!sec) {
@@ -70,12 +72,27 @@ export const Summary: FC<IProps> = (props: any) => {
 
   const getEstimate = () => {
     const countEstimate = getEstimateFromCounterByService(title, counter);
-    console.log(subService);
+    const secCountEstimate = getEstimateFromCounterByService(secTitle, secCounter);
     const subServiceEstimate = subService.reduce((acc: number, el: ISubService) => acc += el?.time, 0);
-    let total = countEstimate + subServiceEstimate;
-    if (total > 360) total = total / 2;
+    const secSubServiceEstimate = secSubService.reduce((acc: number, el: ISubService) => acc += el?.time, 0);
+
+    let total =
+      countEstimate + secCountEstimate +
+      subServiceEstimate + secSubServiceEstimate;
+
+    if (total > 360) {
+      total = total / 2;
+    }
 
     return `${Math.floor(total / 60)}h, ${total % 60}m`;
+  };
+
+  const getPrice = () => {
+    const countEstimate = getPriceFromCounterByService(title, counter);
+    const secCountEstimate = getPriceFromCounterByService(secTitle, secCounter);
+    const subServiceEstimate = subService.reduce((acc: number, el: ISubService) => acc += el?.price, 0);
+    const secSubServiceEstimate = secSubService.reduce((acc: number, el: ISubService) => acc += el?.price, 0);
+    return countEstimate + secCountEstimate + subServiceEstimate + secSubServiceEstimate;
   };
 
   const getNewPrice = (originalPrice: number, discountPercentage: number) => {
@@ -145,19 +162,19 @@ export const Summary: FC<IProps> = (props: any) => {
             sale ? (
               <>
                 <div className="current-price">
-                  {getNewPrice(160, sale)}{t('zl')}
+                  {getNewPrice(getPrice(), sale)}{t('zl')}
                 </div>
-                <div className="old-price">160 zl</div>
+                <div className="old-price">{getPrice()}{t('zl')}</div>
               </>
             ) : (
-              <div className="current-price">160 zl</div>
+              <div className="current-price">{getPrice()}{t('zl')}</div>
             )
           ) : (
             <>
               <div className="current-price">
-                {makeSaleFromSub(160, subSale)}{t('zl')}
+                {makeSaleFromSub(getPrice(), subSale)}{t('zl')}
               </div>
-              <div className="old-price">160 zl</div>
+              <div className="old-price">{getPrice()}{t('zl')}</div>
             </>
           )}
         </div>
