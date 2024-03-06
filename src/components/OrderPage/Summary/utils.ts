@@ -109,12 +109,47 @@ export const getPriceFromCounterByService = (mainService: string, counter: any) 
   switch (mainService) {
     case 'Subscription':
     case 'Custom cleaning':
-    case 'Regular':
-    case 'Eco cleaning':
+      return counter.reduce((acc: number, el: any, i: number) => {
+        if (i === 0) acc += el.value * 60;
+        if (i === 1) acc += el.value * 80;
+        if (i === 2) {
+          if (el.value === 'Kitchen') {
+            acc += 80;
+          } else {
+            acc += 50;
+          }
+        }
+
+        return acc;
+      }, 0);
+
+    case 'After party':
+    case 'In a last minute':
+      return counter.reduce((acc: number, el: any, i: number) => {
+        if (i === 0 && el.value > 1) acc += ((el.value - 1) * 60);
+        if (i === 1 && el.value > 1) acc += ((el.value - 1) * 80);
+        if (i === 2) {
+          if (el.value === 'Kitchen') {
+            acc += 80;
+          } else {
+            acc += 50;
+          }
+        }
+
+        return acc;
+      }, 320);
+
     case 'Move in/out':
     case 'Airbnb':
-    case 'After party':
-      return 0;
+    case 'Regular':
+    case 'Eco cleaning':
+      return counter.reduce((acc: number, el: any, i: number) => {
+        if (i === 0 && el.value > 1) acc += ((el.value - 1) * 40);
+        if (i === 1 && el.value > 1) acc += ((el.value - 1) * 45);
+        if (i === 2 && el.value === 'Kitchen') acc += 30;
+
+        return acc;
+      }, 199);
 
     case 'Office':
       return counter.reduce((acc: number, el: any, i: number) => {
