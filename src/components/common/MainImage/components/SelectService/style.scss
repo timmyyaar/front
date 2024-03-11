@@ -29,3 +29,42 @@
     }
   }
 }
+
+@media screen and (max-width: 950px) {
+  .main-image-wrapper-mobile {
+    margin-top: 60px;
+
+    img {
+      display: none;
+    }
+  }
+
+  .select-service-wrapper {
+    display: flex;
+    justify-content: center;
+
+    position: static;
+    top: auto;
+    left: auto;
+    transform: none;
+
+    ._flex._justify-center._gap-6 {
+      display: flex;
+      flex-flow: column;
+
+      .service-wrapper {
+        padding: 0;
+        width: 350px;
+        height: 150px;
+        justify-content: center;
+        gap: 8px;
+
+        ._flex._justify-center {
+          img {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}

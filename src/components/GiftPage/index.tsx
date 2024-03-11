@@ -23,8 +23,8 @@ export const GiftPage: FC<Props> = (props) => {
   const { t } = useLocales(locales);
 
   return (
-    <div className="main-page">
-      <div className="main-content _flex _flex-col" style={{ marginTop: '60px' }}>
+    <div className="gift-page">
+      <div className="gift-content _flex _flex-col" style={{ marginTop: '60px' }}>
         <div>
           <div className="career-title">{t('Gifts card')}</div>
           <div className="career-text">{t('Gifts card text')}</div>

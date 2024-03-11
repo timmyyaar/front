@@ -12,8 +12,8 @@
 
   .icon-wrapper-modal {
     position: absolute;
-    top: 24px;
-    right: 24px;
+    top: 14px;
+    right: 14px;
     cursor: pointer;
 
     &:hover {
@@ -98,6 +98,7 @@
     padding: 45px 22px 45px 21px;
     border-radius: 12px;
     background: #ECF0FF;
+    justify-content: center;
 
     .number-wrapper {
       display: flex;

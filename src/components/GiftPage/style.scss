@@ -1,7 +1,12 @@
-.main-page {
-  .main-content {
-    // padding-top: 60px;
+.gift-page {
+  .gift-content {
     gap: 40px;
+
+    ._grid._grid-cols-2._gap-6 {
+      img {
+        border-radius: 24px;
+      }
+    }
 
     .career-title {
       color: var(--Text-Title, #13277E);

@@ -46,3 +46,18 @@
     }
   }
 }
+
+@media screen and (max-width: 950px) {
+  .content-wrapper {
+    display: flex;
+    flex-flow: column;
+
+    .left-col {
+      width: 100% !important;
+    }
+
+    .right-col {
+      width: 100% !important;
+    }
+  }
+}

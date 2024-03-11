@@ -78,9 +78,18 @@ export const Header: FC<Props> = ({ locales }) => {
         ))}
         <div
           className="navigation-wrapper _flex _justify-between _items-center _cursor-pointer"
-          onClick={() => setLocalesModal(true)}
+          onClick={(e) => {
+            e.preventDefault();
+            setLocalesModal(true);
+          }}
         >
-          <Link href={'/'} className="_px-4 _py-2 _flex _gap-1">
+          <Link
+            href={'/'}
+            className="_px-4 _py-2 _flex _gap-1"
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+          >
             {/* @ts-ignore */}
             <div className="nav-link">{t(mainLocales[locale])}</div>
             <div className="_flex _items-center">

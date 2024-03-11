@@ -12,6 +12,7 @@ import window4 from './images/4.png';
 import window5 from './images/5.png';
 
 import './style.scss';
+import { join } from 'path';
 
 export const Modals = ({ title, onClose, t }: { title: string, onClose: () => void, t: any }) => {
   const renderText = (number: number = 1) => (
@@ -99,7 +100,11 @@ export const Modals = ({ title, onClose, t }: { title: string, onClose: () => vo
   );
 
   return (
-    <div className="modal-wrapper-component">
+    <div className="modal-wrapper-component"
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
+    >
       <div className="icon-wrapper-modal" onClick={onClose}>
         <CloseSvg />
       </div>
@@ -155,7 +160,7 @@ export const Modals = ({ title, onClose, t }: { title: string, onClose: () => vo
               {renderText(2)}
             </div>
             <div style={{ marginBottom: '24px' }}>
-              {renderGrid([5, 8])}
+              {renderGrid([5, 7])}
             </div>
             {renderBlock(4)}
           </>
@@ -192,20 +197,24 @@ export const Modals = ({ title, onClose, t }: { title: string, onClose: () => vo
             </div>
             <div style={{ marginBottom: '80px' }}>
               {[...new Array(5)].map((_, i) => (
-                <Writer text={t(title + 'text_line_' + i)} key={title + '_' + i} />
+                <div className="_text-center" key={title + '_' + i}>
+                  <Writer text={t(title + 'text_line_' + i)} />
+                </div>
               ))}
               <div className="_text-center">
                 <Writer text={t(title + 'last_line')} />
               </div>
             </div>
-            <div className="wrapper-title-text">
+            <div className="wrapper-title-text _text-center">
               <div className="wrapper-title">
                 <Writer text={t(title + '_second_title')} />
               </div>
             </div>
             <div style={{ marginBottom: '80px' }}>
               {[...new Array(2)].map((_, i) => (
-                <Writer text={t(title + 'text_line_second' + i)} key={title + '_' + i} />
+                <div className="_text-center" key={title + '_' + i}>
+                  <Writer text={t(title + 'text_line_second' + i)} />
+                </div>
               ))}
               <div className="wrapper-title" style={{ marginBottom: '32px' }}>
                 <Writer text={t(title + '_third_title')} />
@@ -229,8 +238,8 @@ export const Modals = ({ title, onClose, t }: { title: string, onClose: () => vo
                     </div>
                     <div className='hover-block'>
                       <div className='hover-block-text'>
-                        {[...new Array(4)].map((_, i) => (
-                          <Writer text={t(title + '_text_hover_line_' + i)} key={title + '_hover_' + i} />
+                        {[...new Array(4)].map((_, j) => (
+                          <Writer text={t(title + '_text_hover_line_' + i + '_' + j)} key={title + '_hover_' + j} />
                         ))}
                       </div>
                     </div>

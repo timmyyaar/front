@@ -8,13 +8,14 @@
   }
 
   .benefits-list {
-    padding: 0 20%;
-
     .benefit-wrapper {
       padding: 18px 0;
       border-radius: 16px;
       color: #232323;
       background: #ECF0FF;
+      width: 200px;
+      height: 200px;
+      justify-content: center;
 
       .benefit-text {
         text-align: center;

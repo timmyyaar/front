@@ -23,12 +23,12 @@ export const Benefits = ({ t }: any) => {
 
     { title: 'supplies-block', lines: 3, svg: cleaningProductsSvg },
     { title: 'payment-block', lines: 3, svg: moneyBagSvg },
-    { title: 'program-block', lines: 2, svg: likeSvg },
+    { title: 'program-block', lines: 3, svg: likeSvg },
     { title: 'orders-block', lines: 3, svg: benefitSvg },
 
     { title: 'discount-block', lines: 2, svg: discountSvg },
-    { title: 'team-buildings-block', lines: 1, svg: clipPathGroupSvg },
-    { title: 'paid-commute-block ', lines: 1, svg: tramSvg },
+    { title: 'team-buildings-block', lines: 2, svg: clipPathGroupSvg },
+    { title: 'paid-commute-block ', lines: 2, svg: tramSvg },
     { title: 'courses-block', lines: 2, svg: dollarSvg },
   ];
 

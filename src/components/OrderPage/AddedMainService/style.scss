@@ -50,3 +50,11 @@
     justify-content: center;
   }
 }
+
+@media screen and (max-width: 950px) {
+  .added-main-service-component {
+    .switch-component {
+      padding: 0px 12px;
+    }
+  }
+}

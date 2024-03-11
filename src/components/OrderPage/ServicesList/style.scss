@@ -41,3 +41,13 @@
     }
   }
 }
+
+@media screen and (max-width: 950px) {
+  .services-list-component {
+    ._grid._grid-cols-3 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+    }
+  }
+}
