@@ -41,6 +41,7 @@ export const PromoInput: FC<IProps> = (props) => {
           className={`input promo-code-input ${status === '#F9F9F9' ? '' : 'promo-status'}`}
           style={{ background: status, color: status === '#F9F9F9' ? '#848484' : '#FFF' }}
           value={code} onChange={(e) => setCode(e.target.value)}
+          
         />
         <div className="button-wrapper" onClick={checkCode}>
           {t('Apply')}

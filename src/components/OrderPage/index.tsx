@@ -33,6 +33,16 @@ export const OrderPage = (props: any) => {
     setSecondSubService([]);
   }, [selectedService]);
 
+  useEffect(() => {
+    setService('');
+    setSubService([]);
+    setSecondSubService([]);
+
+    setSecondService('');
+    setSecondCounterValue([]);
+    setSecondSubService([]);
+  }, [selectedCategory]);
+
   return (
     <div className="order-page">
       {!selectedCategory ? (
@@ -44,7 +54,7 @@ export const OrderPage = (props: any) => {
               <div className="arrow-button">
                 <LeftArrow />
               </div>
-              {t('General cleaning')}
+              {t(selectedCategory)}
             </div>
           </div>
           <div className="content-wrapper">

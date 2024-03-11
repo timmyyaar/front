@@ -145,7 +145,7 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
                   type="text"
                   value={firstAddress}
                   onChange={(e) => setFirstAddress(e.target.value)}
-                  placeholder="Address"
+                  placeholder={t("Address")}
                 />
               </div>
               {oneMoreAddress ? (
@@ -154,7 +154,7 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
                     type="text"
                     value={secondAddress}
                     onChange={(e) => setSecondAddress(e.target.value)}
-                    placeholder="Address"
+                    placeholder={t("Address")}
                   />
                 </div>
               ) : (

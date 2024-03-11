@@ -4,6 +4,7 @@ import { MessengerIcon } from '@/components/common/icons/components/Messenger';
 import { WhatsappIcon } from '@/components/common/icons/components/Whatsapp';
 import { TelegramIcon } from '@/components/common/icons/components/Telegram';
 import { InstIcon } from '@/components/common/icons/components/Inst';
+import { Writer } from '@/components/common/Writer';
 
 import { FooterLogo } from './icons/FooterLogo';
 import './style.scss';
@@ -71,12 +72,12 @@ export const Footer = (props: any) => {
         </div>
       </div>
       <div className="_flex _justify-center">
-        <div className="_flex _justify-between" style={{ width: 300, marginBottom: '20px' }}>
+        <div className="_flex _justify-between _text-center" style={{ width: 300, marginBottom: '20px' }}>
           <a href="/Polityka_prywatności.pdf" target="_blank">
-            {t('Privacy and policy')}
+            <Writer text={t('Privacy and policy')} />
           </a>
           <a href="/Warunki_i_postanowienia.pdf" target="_blank">
-            {t('Terms and conditions')}
+            <Writer text={t('Terms and conditions')} />
           </a>
         </div>
       </div>

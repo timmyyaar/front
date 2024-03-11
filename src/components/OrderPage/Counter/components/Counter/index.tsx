@@ -14,7 +14,7 @@ interface IProps {
 
 export const Counter: FC<IProps> = (props) => {
   const { value, title = '', minValue, onChange, onMinus, onPlus, t } = props;
-  const limit = value === minValue || value === 1;
+  const limit = value === minValue;
 
   // @ts-ignore
   const enterNumbers = (e) => {
@@ -34,7 +34,10 @@ export const Counter: FC<IProps> = (props) => {
           type="text" style={{ textAlign: 'end', backgroundColor: '#ECF0FF', outline: 'none', width: '10%', marginRight: '2px' }}
           value={value} onChange={enterNumbers}
         />
-        {title.indexOf('m2') !== -1 ? <>{title.replace('m2', '')}<>m<sup>2</sup></></> : title}
+        {title.indexOf('m2') !== -1
+          ? <>{title.replace('m2', '')}<>m<sup>2</sup></></>
+          : t(title)
+        }
       </div>
       <div className="counter-icons icon-plus" onClick={onPlus}>
         <svg xmlns="http://www.w3.org/2000/svg" width="81" height="80" viewBox="0 0 81 80" fill="none">

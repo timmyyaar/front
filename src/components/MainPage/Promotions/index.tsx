@@ -77,7 +77,7 @@ export const Promotions = (props: any) => {
             </div>
           ))}
         </div>
-        <div className="discounts-wrapper">
+        <div className="discounts-wrapper" style={{ display: 'none' }}>
           <Slider
             elements={discounts.map((el, i) => ({
               id: el.services.join('n' + i),

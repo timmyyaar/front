@@ -19,7 +19,7 @@ export const CounterComponent: FC<IProps> = (props) => {
   const [selectValue, setSelectValue] = useState('');
 
   const onChangeCounter = (count: number, i: number) => {
-    if (count > 0) {
+    if (count > -1) {
       // @ts-ignore
       setCounterValue((counts) => counts.map((el , j) => i === j ? { ...el, value: count } : el));
       setCounter((oldCounters) => {

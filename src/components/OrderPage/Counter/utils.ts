@@ -45,28 +45,30 @@ export const getCounterByMainService = (mainService: string) => {
       return [{
         type: 'counter',
         title: 'window_cleaning_title_counter',
-        cost: '25 zl',
+        cost: '30 zl',
         value: 'windows',
-        count: 0,
+        count: 5,
+        minCount: 5,
       }, {
         type: 'counter',
         title: 'window_cleaning_title_counter_2',
-        cost: '3 zl/m2',
-        value: 'windows',
-        count: 5,
+        cost: '2.5 zl/m2',
+        value: 'm2',
+        count: 0,
+        minCount: 0,
       }];
 
     case 'Post-construction':
       return [{
         type: 'counter',
-        title: 'window_cleaning_title_counter',
-        cost: '25 zl',
+        title: 'post_construction_title_counter',
+        cost: '50 zl',
         value: 'windows',
-        count: 5,
+        count: 0,
       }, {
         type: 'counter',
-        title: 'window_cleaning_title_counter_2',
-        cost: '3 zl/m2',
+        title: 'post_construction_title_counter_2',
+        cost: '6 zl/m2',
         value: 'm2',
         count: 0,
       }];

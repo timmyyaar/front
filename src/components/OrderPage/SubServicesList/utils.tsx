@@ -36,7 +36,7 @@ const allServices: ISubService[] = [
   { title: 'Clean the fridge', icons: fridgeSvg, price: CounterCoasts['Clean the fridge'].price, oldPrice: CounterCoasts['Clean the fridge'].old, time: 60, },
   { title: 'Clean animal\'s tray', icons: petToiletTraySvg, price: CounterCoasts['Clean animal\'s tray'].price, oldPrice: CounterCoasts['Clean animal\'s tray'].old, time: 0, },
   { title: 'Wash the microwave', icons: microwaveSvg, price: CounterCoasts['Wash the microwave'].price, oldPrice: CounterCoasts['Wash the microwave'].old, time: 20, },
-  { title: 'Clean kitchen \n cabinets', icons: kitchenSvg, price: CounterCoasts['Clean kitchen cabinets'].price, oldPrice: CounterCoasts['Clean kitchen cabinets'].old, time: 60, },
+  { title: 'Clean kitchen cabinets', icons: kitchenSvg, price: CounterCoasts['Clean kitchen cabinets'].price, oldPrice: CounterCoasts['Clean kitchen cabinets'].old, time: 60, },
   { title: 'Wash the window', icons: windowSvg, price: CounterCoasts['Wash the window'].price, oldPrice: CounterCoasts['Wash the window'].old, time: 30, },
   { title: 'Space organizer', icons: cleanClothesSvg, price: CounterCoasts['Space organizer'].price, oldPrice: CounterCoasts['Space organizer'].old, time: 60, },
   { title: 'Ironing',icons: ironSvg, price: CounterCoasts.Ironing.price, oldPrice: CounterCoasts.Ironing.old, time: 60, },
