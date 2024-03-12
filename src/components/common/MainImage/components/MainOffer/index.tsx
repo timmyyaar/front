@@ -6,8 +6,8 @@ import { CheckSvg } from './icons/check-fill';
 import vector from './icons/vector.svg';
 import './style.scss';
 
-export const MainOffer: FC<{ t: any}> = (props) => {
-  const { t } = props;
+export const MainOffer: FC<any> = (props) => {
+  const { t, handleScroll } = props;
   const router = useRouter();
   const advantages = [
     { title: 'Clear', text: 'space' },
@@ -44,7 +44,10 @@ export const MainOffer: FC<{ t: any}> = (props) => {
             <div className="main-button _cursor-pointer" onClick={() => router.push('/order')}>
               {t('Order online now')}
             </div>
-            <div className="sub-button _cursor-pointer">
+            <div
+              className="sub-button _cursor-pointer"
+              onClick={() => handleScroll('costs-block')}
+            >
               {t('Pricing')}
             </div>
           </div>
@@ -54,7 +57,10 @@ export const MainOffer: FC<{ t: any}> = (props) => {
         <div className="main-button _cursor-pointer" onClick={() => router.push('/order')}>
           {t('Order')}
         </div>
-        <div className="sub-button _cursor-pointer">
+        <div
+          className="sub-button _cursor-pointer"
+          onClick={() => handleScroll('costs-block')}
+        >
           {t('Pricing')}
         </div>
       </div>

@@ -9,22 +9,36 @@ import './style.scss';
 export const MainImage = (props: any) => {
   const { t, services, setService, common } = props;
 
+  const handleScroll = (targetId: string) => {
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
     <>
       <div className="main-image-wrapper mobile-none">
         <Image src={mainPng} alt="" sizes='' fill style={{objectFit: 'cover', objectPosition: 'left bottom'}} priority />
         {common ? (
-          <MainOffer t={t} />
+          <MainOffer t={t} handleScroll={handleScroll} />
         ) : (
           <SelectService t={t} services={services} setService={setService} />
         )}
       </div>
       <div className="main-image-wrapper-mobile">
-        <Image src={mainPng} alt="" priority />
+        <Image src={mainPng} alt="" sizes='' fill style={{ objectFit: 'cover' }} priority />
         {common ? (
-          <MainOffer t={t} />
+          <MainOffer t={t} handleScroll={handleScroll} />
         ) : (
-          <SelectService t={t} services={services} setService={setService} />
+          <SelectService
+            services={services}
+            setService={setService}
+            t={t}
+          />
         )}
       </div>
     </>
