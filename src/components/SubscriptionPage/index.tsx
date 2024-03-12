@@ -59,7 +59,7 @@ export const SubscriptionPage = (props: any) => {
             t={t}
           />
           <CheckBoxesBlock
-            mainService={'Custom cleaning'}
+            mainService={'Subscription'}
             subServices={selectedSubService}
             setSubService={setSubService}
             t={t}

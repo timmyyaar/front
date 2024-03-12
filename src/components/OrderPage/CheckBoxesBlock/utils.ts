@@ -1,6 +1,7 @@
 export const getCheckBoxByMainService = (mainService: string) => {
   switch (mainService) {
     case 'Custom cleaning':
+    case 'Subscription':
     case 'After party':
     case 'In a last minute':
     case 'Airbnb':

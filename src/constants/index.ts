@@ -76,7 +76,7 @@ export const CounterCoasts = {
     old: '',
   },
   'Water plants': {
-    price: 25,
+    price: 2.5,
     old: '',
   },
   'Laundry': {

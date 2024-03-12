@@ -16,7 +16,7 @@ import './style.scss';
 
 export const OrderPage = (props: any) => {
   const { locales } = props;
-  const { t } = useLocales(locales);
+  const i18n = useLocales(locales);
   const services = ['General cleaning', 'Healthcare', 'Special cleaning'];
   const [selectedCategory, setCategory] = useState<typeof services[number] | ''>('');
   // main service
@@ -46,7 +46,7 @@ export const OrderPage = (props: any) => {
   return (
     <div className="order-page">
       {!selectedCategory ? (
-        <MainImage services={services} setService={setCategory} t={t} />
+        <MainImage services={services} setService={setCategory} t={i18n.t} />
       ) : (
         <div>
           <div className="header-wrapper _flex _items-center">
@@ -54,31 +54,31 @@ export const OrderPage = (props: any) => {
               <div className="arrow-button">
                 <LeftArrow />
               </div>
-              {t(selectedCategory)}
+              {i18n.t(selectedCategory)}
             </div>
           </div>
           <div className="content-wrapper">
             <div className="left-col">
-              <ServicesList mainCategory={selectedCategory} t={t} setService={setService} />
-              <CounterComponent mainService={selectedService} setCounterValue={setCounterValue} t={t} />
-              <SubServicesList mainService={selectedService} subServices={selectedSubService} setSubService={setSubService} t={t} />
+              <ServicesList mainCategory={selectedCategory} t={i18n.t} setService={setService} />
+              <CounterComponent mainService={selectedService} setCounterValue={setCounterValue} t={i18n.t} />
+              <SubServicesList mainService={selectedService} subServices={selectedSubService} setSubService={setSubService} t={i18n.t} />
               <AddedMainService
                 mainService={selectedService}
                 setSecondService={setSecondService}
-                t={t}
+                t={i18n.t}
               >
                 {getAdditionalServices(selectedService).length ? (
                   <>
                     {getAdditionalServices(selectedService) === 'ADD OZONATION SERVICE' ? (
-                      <CounterComponent mainService={'Ozonation'} setCounterValue={setSecondCounterValue} t={t} />
+                      <CounterComponent mainService={'Ozonation'} setCounterValue={setSecondCounterValue} t={i18n.t} />
                     ) : (
                       <div className="_flex _flex-col _gap-6">
-                        <CounterComponent mainService={'Dry cleaning'} setCounterValue={setSecondCounterValue} t={t} />
+                        <CounterComponent mainService={'Dry cleaning'} setCounterValue={setSecondCounterValue} t={i18n.t} />
                         <SubServicesList
                           mainService={'Dry cleaning'}
                           subServices={secondSelectedSubService}
                           setSubService={setSecondSubService}
-                          t={t}
+                          t={i18n.t}
                         />
                       </div>
                     )}
@@ -89,7 +89,7 @@ export const OrderPage = (props: any) => {
                 mainService={selectedService}
                 subServices={selectedSubService}
                 setSubService={setSubService}
-                t={t}
+                t={i18n.t}
               />
             </div>
             <div className="right-col">
@@ -102,13 +102,13 @@ export const OrderPage = (props: any) => {
                 secCounter={secondCounterValue}
                 secSubService={secondSelectedSubService}
                 setSecSubService={setSecondSubService}
-                t={t}
+                t={i18n.t}
               />
             </div>
           </div>
         </div>
       )}
-      <Footer t={t} />
+      <Footer t={i18n.t} />
     </div>
   );
 };
