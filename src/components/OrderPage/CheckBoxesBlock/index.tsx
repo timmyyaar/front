@@ -68,7 +68,7 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
 
   useEffect(() => {
     if (dryCleaner) {
-      setSubService((sS: any) => [...sS, { title: 'Dry_cleaner_sub_service', time: 60 }]);
+      setSubService((sS: any) => [...sS, { title: 'Dry_cleaner_sub_service', time: 60, price: 50 }]);
     } else {
       setSubService((sS: any) => sS.filter((el: any) => el.title !== 'Dry_cleaner_sub_service'));
     }
@@ -108,7 +108,7 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
           title={'title-dry-cleaner-checkbox'}
           subTitle={'sub-text-dry-cleaner-checkbox'}
           price={'50 zl'}
-          oldPrice={'60 zl'}
+          // oldPrice={'60 zl'}
           setCheck={setDryCleaner}
           checked={dryCleaner}
           t={t}

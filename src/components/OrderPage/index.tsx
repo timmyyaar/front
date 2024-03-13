@@ -43,6 +43,16 @@ export const OrderPage = (props: any) => {
     setSecondSubService([]);
   }, [selectedCategory]);
 
+  useEffect(() => {
+    setService('');
+    setSubService([]);
+    setSecondSubService([]);
+
+    setSecondService('');
+    setSecondCounterValue([]);
+    setSecondSubService([]);
+  }, [selectedCategory]);
+
   return (
     <div className="order-page">
       {!selectedCategory ? (

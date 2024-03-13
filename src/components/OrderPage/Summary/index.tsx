@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect, useRef } from 'react';
 
 import { ISubService } from '../SubServicesList/utils';
 import { IconCrosse } from './icons/IconCrosse';
@@ -23,6 +23,33 @@ interface IProps {
   t: any;
 }
 
+function ScrollDetector() {
+  const [scrolledToElement, setScrolledToElement] = useState(false);
+  const targetElementRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (targetElementRef.current) {
+        // @ts-ignore
+        const targetElementPosition = targetElementRef.current.getBoundingClientRect().top;
+        if (targetElementPosition <= window.innerHeight) {
+          setScrolledToElement(true);
+        } else {
+          setScrolledToElement(false);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [targetElementRef]);
+
+  return [scrolledToElement, targetElementRef];
+}
+
 export const Summary: FC<IProps> = (props: any) => {
   const {
     title, counter, subService, setSubService,
@@ -30,8 +57,10 @@ export const Summary: FC<IProps> = (props: any) => {
     subSale = '',
     t,
   } = props;
+  console.log(title);
   const [sale, setSale] = useState(0);
   const [order, setOrder] = useState(false);
+  const [scrolledToElement, targetElementRef] = ScrollDetector();
 
   const onRemoveSubService = (title: string, sec: boolean) => {
     if (!sec) {
@@ -80,7 +109,7 @@ export const Summary: FC<IProps> = (props: any) => {
       countEstimate + secCountEstimate +
       subServiceEstimate + secSubServiceEstimate;
 
-    if (total > 360) {
+    if (total > 480) {
       total = total / 2;
     }
 
@@ -92,7 +121,6 @@ export const Summary: FC<IProps> = (props: any) => {
     const secCountEstimate = getPriceFromCounterByService(secTitle, secCounter);
     const subServiceEstimate = subService.reduce((acc: number, el: ISubService) => acc += el?.price, 0);
     const secSubServiceEstimate = secSubService.reduce((acc: number, el: ISubService) => acc += el?.price, 0);
-    console.log(0, secTitle, secCounter);
 
     return countEstimate + secCountEstimate + subServiceEstimate + secSubServiceEstimate;
   };
@@ -140,6 +168,7 @@ export const Summary: FC<IProps> = (props: any) => {
   )
 
   return (
+    <>
     <div className="summary-layout">
       <div className="summary-wrapper _flex _flex-col">
         {renderSummeryService({ serviceTitle: title, counterValue: counter, subServiceList: subService })}
@@ -158,7 +187,8 @@ export const Summary: FC<IProps> = (props: any) => {
           {`${t('Estimated Duration of service:')} `}<b>{getEstimate()}</b>
         </div>
         {!subSale ? (<PromoInput setSale={setSale} t={t} />): null}
-        <div className="to-pay-wrapper _flex _items-baseline">
+        {/* @ts-ignore */}
+        <div className="to-pay-wrapper _flex _items-baseline" ref={targetElementRef}>
           <div className="title">{t('To pay:')}</div>
           {!subSale ? (
             sale ? (
@@ -188,5 +218,31 @@ export const Summary: FC<IProps> = (props: any) => {
         <UserData t={t}/>
       ) : null}
     </div>
+    {!scrolledToElement ? (
+      <div
+        className="order-wrapper-absolute _cursor-pointer mobile-only"
+      >
+        {getPrice() === 0 ? t('Order') : !subSale ? (
+          sale ? (
+            <>
+              <div className="current-price">
+                {getNewPrice(getPrice(), sale)}{t('zl')}
+              </div>
+              <div className="old-price">{getPrice()}{t('zl')}</div>
+            </>
+          ) : (
+            <div className="current-price">{getPrice()}{t('zl')}</div>
+          )
+        ) : (
+          <>
+            <div className="current-price">
+              {makeSaleFromSub(getPrice(), subSale)}{t('zl')}
+            </div>
+            <div className="old-price">{getPrice()}{t('zl')}</div>
+          </>
+        )}
+      </div>
+    ) : null}
+    </>
   );
 };

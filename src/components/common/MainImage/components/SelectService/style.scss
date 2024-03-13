@@ -38,9 +38,9 @@
   .select-service-wrapper {
     display: flex;
     justify-content: center;
+    position: absolute;
 
-    position: static;
-    top: auto;
+    top: 25px;
     left: auto;
     transform: none;
 
