@@ -145,9 +145,11 @@ export const Costs = (props: any) => {
                   <div className="coast">
                     {el.coast}{t('zl')}
                   </div>
-                  <div className="old-coast _flex _flex-col _justify-center">
-                    {el.oldCoast}{t('zl')}
-                  </div>
+                  {el.oldCoast ? (
+                    <div className="old-coast _flex _flex-col _justify-center">
+                      {el.oldCoast}{t('zl')}
+                    </div>
+                  ) : null}
                 </div>
                 <div className="button _cursor-pointer" onClick={() => router.push('/order')}>
                   {t('Order')}
@@ -184,9 +186,11 @@ export const Costs = (props: any) => {
                 <div className="sales-mobile-current-price">
                   {el.coast}{t('zl')}
                 </div>
-                <div className="sales-mobile-old-price">
-                  {el.oldCoast}{t('zl')}
-                </div>
+                {el.oldCoast ? (
+                  <div className="old-coast _flex _flex-col _justify-center">
+                    {el.oldCoast}{t('zl')}
+                  </div>
+                ) : null}
               </div>
               <div className="sales-mobile-item-order-btn" onClick={() => router.push('/order')}>
                 {t('Order')}

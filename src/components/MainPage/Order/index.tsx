@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 import Man from './icons/Man.svg';
@@ -9,6 +10,7 @@ import './style.scss';
 export const Order = (props: any) => {
   const { t } = props;
   const [hover, setHover] = useState(false);
+  const router = useRouter();
 
   return (
     <div className="order-wrapper _flex _justify-center">
@@ -29,7 +31,12 @@ export const Order = (props: any) => {
           <Image src={Women} alt='' />
         </div>
         <div className="_flex _justify-center">
-          <div className="button-wrapper" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+          <div
+            className="button-wrapper"
+            onClick={() => router.push('/order')}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+          >
             {t('Order')}
           </div>
         </div>

@@ -76,7 +76,7 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
 
   useEffect(() => {
     if (vacuumCleaner) {
-      setSubService((sS: any) => [...sS, { title: 'Vacuum_cleaner_sub_service', time: 0 }]);
+      setSubService((sS: any) => [...sS, { title: 'Vacuum_cleaner_sub_service', time: 0, price: 20 }]);
     } else {
       setSubService((sS: any) => sS.filter((el: any) => el.title !== 'Vacuum_cleaner_sub_service'));
     }

@@ -3,6 +3,9 @@
   flex-flow: column;
   gap: 24px;
 
+  position: sticky;
+  top: 8px;
+
   .order-wrapper {
     height: 56px;
     padding-top: 18px;

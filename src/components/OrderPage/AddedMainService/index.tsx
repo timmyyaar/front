@@ -22,7 +22,13 @@ export const AddedMainService: FC<IProps> = (props) => {
 
   const onClickSecondService = () => {
     setAddServiceList((sL) => !sL);
-    setSecondService(isOzonation ? 'Ozonation' : 'Dry cleaning');
+    setSecondService((s: any) => {
+      if (s) {
+        return '';
+      } else {
+        return isOzonation ? 'Ozonation' : 'Dry cleaning';
+      }
+    });
   };
 
   return addService ? (

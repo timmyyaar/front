@@ -23,7 +23,6 @@ export const Counter: FC<IProps> = (props) => {
   }
 
   const countTitle = () => {
-    console.log(Cookies.get('locale'));
     if (Cookies.get('locale') === 'ru') {
       if (title === 'bedroom') {
         if (value === 1) return 'комната';

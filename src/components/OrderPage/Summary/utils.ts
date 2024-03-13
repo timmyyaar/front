@@ -167,7 +167,23 @@ export const getPriceFromCounterByService = (mainService: string, counter: any) 
 
     case 'Post-construction':
       return counter.reduce((acc: number, el: any, i: number) => {
-        acc += el.value * 7;
+        if (i === 0) {
+          acc += el.value * 50;
+        } else if (i === 1) {
+          acc += el.value * 6;
+        }
+
+        return acc;
+      }, 0);
+
+    case 'Dry cleaning':
+      return counter.reduce((acc: number, el: any, i: number) => {
+        if (i === 0) {
+          acc += el.value * 0;
+        } else if (i === 1) {
+          acc += el.value * 0;
+        }
+
         return acc;
       }, 0);
 

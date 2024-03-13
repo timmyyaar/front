@@ -92,6 +92,8 @@ export const Summary: FC<IProps> = (props: any) => {
     const secCountEstimate = getPriceFromCounterByService(secTitle, secCounter);
     const subServiceEstimate = subService.reduce((acc: number, el: ISubService) => acc += el?.price, 0);
     const secSubServiceEstimate = secSubService.reduce((acc: number, el: ISubService) => acc += el?.price, 0);
+    console.log(0, secTitle, secCounter);
+
     return countEstimate + secCountEstimate + subServiceEstimate + secSubServiceEstimate;
   };
 
