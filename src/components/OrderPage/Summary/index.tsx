@@ -57,10 +57,14 @@ export const Summary: FC<IProps> = (props: any) => {
     subSale = '',
     t,
   } = props;
-  console.log(title);
   const [sale, setSale] = useState(0);
+  const [promo, setPromo] = useState('');
   const [order, setOrder] = useState(false);
   const [scrolledToElement, targetElementRef] = ScrollDetector();
+  const [totalAddress, setTotalAddress] = useState('');
+  const [totalDate, setTotalDate] = useState('');
+  const [onlinePayment, setOnlinePayment] = useState(false);
+  const [request, setRequest] = useState(false);
 
   const onRemoveSubService = (title: string, sec: boolean) => {
     if (!sec) {
@@ -142,6 +146,50 @@ export const Summary: FC<IProps> = (props: any) => {
     }
   };
 
+  const sendData =  async () => {
+    const main = {
+      price: subSale ? getNewPrice(getPrice(), sale) : getPrice(),
+      promo,
+      address: totalAddress,
+      date: totalDate,
+      requestPreviousCleaner: request,
+      onlinePayment: onlinePayment,
+    };
+    const mainService = {
+      title,
+      counter: counter.map((el: any) => el.title ? t(el.title) + '(' + el.value + ')' : t(el.value)).join(' '),
+      subService: getSubServices(subService).map((title: string) => 
+        `${t(title + '_summery')} (${subService.filter((el: ISubService) => el.title === title).length})`
+      ).join(' '),
+    };
+    const secService = secTitle ? {
+      secTitle,
+      secCounter: secCounter.map((el: any) => el.title ? t(el.title) + '(' + el.value + ')' : t(el.value)).join(' '),
+      secSubService: getSubServices(secSubService).map((title: string) => 
+        `${t(title + '_summery')} (${secSubService.filter((el: ISubService) => el.title === title).length})`
+      ).join(' '),
+    } : {};
+
+    console.log({
+      ...main,
+      ...mainService,
+      ...secService,
+    });
+
+    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/api/order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      cache: 'no-store',
+      body: JSON.stringify({ ...main, ...mainService, ...secService, }),
+    });
+    const data = await response.json();
+    console.log('DONE');
+
+    if (data) {
+      console.log(data);
+    }
+  }
+
   const renderSummeryService = ({ serviceTitle, counterValue, subServiceList, sec = false }: any) => (
     <>
       <div className="summary-title">
@@ -196,7 +244,7 @@ export const Summary: FC<IProps> = (props: any) => {
         <div className="estimated-wrapper">
           {`${t('Estimated Duration of service:')} `}<b>{getEstimate()}</b>
         </div>
-        {!subSale ? (<PromoInput setSale={setSale} t={t} />): null}
+        {!subSale ? (<PromoInput setSale={setSale} setPromo={setPromo} t={t} />): null}
         {/* @ts-ignore */}
         <div className="to-pay-wrapper _flex _items-baseline" ref={targetElementRef}>
           <div className="title">{t('To pay:')}</div>
@@ -221,16 +269,26 @@ export const Summary: FC<IProps> = (props: any) => {
           )}
         </div>
       </div>
-      <div
-        id="order-btn"
-        className="order-wrapper _cursor-pointer"
-        onClick={() => setOrder(true)}
-      >
-        {t('Order')}
+      <div id="order-btn">
+        {!order ? (
+          <div className="order-wrapper _cursor-pointer" onClick={() => setOrder(true)}>
+            {t('Order')}
+          </div>
+        ) : (
+          <>
+            <UserData
+              setTotalAddress={setTotalAddress}
+              setTotalDate={setTotalDate}
+              setOnlinePayment={setOnlinePayment}
+              setRequest={setRequest}
+              t={t}
+            />
+            <div className="order-wrapper _cursor-pointer" style={{ marginTop: '24px' }} onClick={sendData}>
+              {t('Order')}
+            </div>
+          </>
+        )}
       </div>
-      {order ? (
-        <UserData t={t}/>
-      ) : null}
     </div>
     {!scrolledToElement ? (
       <div

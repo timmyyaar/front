@@ -4,11 +4,12 @@ import { DiscountCoupon } from '../icons/DiscountCoupon';
 
 interface IProps {
   setSale: any
+  setPromo: any
   t: any
 }
 
 export const PromoInput: FC<IProps> = (props) => {
-  const { setSale, t } = props;
+  const { setSale, setPromo, t } = props;
   const [code, setCode] = useState('');
   const [status, setStatus] = useState('#F9F9F9');
 
@@ -24,6 +25,7 @@ export const PromoInput: FC<IProps> = (props) => {
         if (data?.promo?.sale) {
           setStatus('#82D46D');
           setSale(+data.promo.sale);
+          setPromo(code);
         } else if (data?.message === 'Promo not found') {
           setStatus('#FF8C8C');
         }

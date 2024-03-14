@@ -7,7 +7,10 @@ import { CheckBox } from './components/Checkbox';
 import { DateAndTime } from './components/DateAndTime';
 import './style.scss';
 
-export const UserData = ({ t }: any) => {
+// setOnlinePayment={setOnlinePayment}
+// setRequest={setRequest}
+
+export const UserData = ({ setTotalAddress, setTotalDate, setOnlinePayment, setRequest, t }: any) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [email, setEmail] = useState('');
@@ -36,6 +39,15 @@ export const UserData = ({ t }: any) => {
       );
     }
   }, [addressLayout]);
+
+  useEffect(() => {
+    setTotalAddress(address);
+    setTotalDate(dataAndTime);
+  }, [address, dataAndTime]);
+
+  useEffect(() => {
+    setRequest(previous);
+  }, [previous]);
 
   return (
     <div className="user-data-from">
@@ -149,7 +161,7 @@ export const UserData = ({ t }: any) => {
                 style={{ marginTop: '24px' }}
                 onClick={() => setAddressLayout(false)}
               >
-                Continue
+                {t('Continue')}
               </div>
             </div>
           )}
@@ -174,7 +186,7 @@ export const UserData = ({ t }: any) => {
         <div className="sub-text">How it works?</div>
       </div> */}
       <div style={{ marginTop: '24px' }}>
-        <PaymentForm t={t} />
+        <PaymentForm setOnlinePayment={setOnlinePayment} t={t} />
       </div>
       <div style={{ marginTop: '24px' }}>
         <CheckBox title={'Public agreement and Privacy Policy'} checked={publicAgreement} setCheck={setPublicAgreement} t={t} />

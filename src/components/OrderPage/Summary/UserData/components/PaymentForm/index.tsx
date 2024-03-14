@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
 
 import { Switcher } from '@/components/common/Switcher';
@@ -6,9 +6,13 @@ import { Switcher } from '@/components/common/Switcher';
 import back from './bank-card.svg';
 import cash from './cash.svg';
 
-export const PaymentForm = ({ t }: any) => {
+export const PaymentForm = ({ setOnlinePayment, t }: any) => {
   const tabs = ['Cash', 'Online'];
   const [tab, setTab] = useState(() => tabs[0]);
+
+  useEffect(() => {
+    setOnlinePayment(tab === 'Online');
+  }, [tab]);
 
   return (
     <div>
@@ -23,7 +27,6 @@ export const PaymentForm = ({ t }: any) => {
         ]}
         tab={tab} tabs={tabs} onClick={(el: string) => setTab(el)} t={t}
       />
-      
     </div>
   )
 };
