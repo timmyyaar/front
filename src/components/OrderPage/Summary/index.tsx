@@ -132,6 +132,16 @@ export const Summary: FC<IProps> = (props: any) => {
     return discountedPrice.toFixed(2);
   }
 
+  const handleScroll = () => {
+    const targetElement = document.getElementById('order-btn');
+
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
+  };
+
   const renderSummeryService = ({ serviceTitle, counterValue, subServiceList, sec = false }: any) => (
     <>
       <div className="summary-title">
@@ -211,7 +221,11 @@ export const Summary: FC<IProps> = (props: any) => {
           )}
         </div>
       </div>
-      <div className="order-wrapper _cursor-pointer" onClick={() => setOrder(true)}>
+      <div
+        id="order-btn"
+        className="order-wrapper _cursor-pointer"
+        onClick={() => setOrder(true)}
+      >
         {t('Order')}
       </div>
       {order ? (
@@ -221,6 +235,7 @@ export const Summary: FC<IProps> = (props: any) => {
     {!scrolledToElement ? (
       <div
         className="order-wrapper-absolute _cursor-pointer mobile-only"
+        onClick={handleScroll}
       >
         {getPrice() === 0 ? t('Order') : !subSale ? (
           sale ? (

@@ -48,9 +48,14 @@
 }
 
 @media screen and (max-width: 950px) {
+  .header-wrapper {
+    padding: 0 5% !important;
+  }
+
   .content-wrapper {
-    display: flex;
+    display: flex !important;
     flex-flow: column;
+    padding: 0 5% !important;
 
     .left-col {
       width: 100% !important;
