@@ -154,6 +154,7 @@ export const Summary: FC<IProps> = (props: any) => {
       date: totalDate,
       requestPreviousCleaner: request,
       onlinePayment: onlinePayment,
+      estimate: getEstimate(),
     };
     const mainService = {
       title,
