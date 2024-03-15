@@ -7,10 +7,10 @@ import clipPathGroupSvg from './icons/clip-path-group.svg';
 import discountSvg from './icons/discount.svg';
 import dollarSvg from './icons/dollar.svg';
 import likeSvg from './icons/like.svg';
-import mainPageSvg from './icons/main-page.svg';
 import moneyBagSvg from './icons/money-bag.svg';
-import peopleSvg from './icons/people.svg';
+import saluteSvg from './icons/salute.svg';
 import timerSvg from './icons/timer.svg';
+import teamSvg from './icons/team.svg';
 import tramSvg from './icons/tram.svg';
 import './style.scss';
 
@@ -18,8 +18,8 @@ export const Benefits = ({ t }: any) => {
   const benefits = [
     { title: 'money-block', lines: 3, svg: moneyBagSvg },
     { title: 'time-block', lines: 3, svg: timerSvg },
-    { title: 'opportunity-block', lines: 3, svg: mainPageSvg },
-    { title: 'team-block', lines: 3, svg: peopleSvg },
+    { title: 'opportunity-block', lines: 3, svg: saluteSvg },
+    { title: 'team-block', lines: 3, svg: teamSvg },
 
     { title: 'supplies-block', lines: 3, svg: cleaningProductsSvg },
     { title: 'payment-block', lines: 3, svg: moneyBagSvg },

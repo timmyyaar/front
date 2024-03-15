@@ -3,7 +3,6 @@ export const getEstimateFromCounterByService = (mainService: string, counter: an
     case 'Deep kitchen':
       return 360;
 
-    case 'Subscription':
     case 'Custom cleaning':
       return counter.reduce((acc: number, el: any) => {
         if (el.title === 'custom_cleaning_0_count_total') {
@@ -40,6 +39,7 @@ export const getEstimateFromCounterByService = (mainService: string, counter: an
     case 'Eco cleaning':
     case 'Move in/out':
     case 'Airbnb':
+    case 'Subscription':
     case 'While sickness':
       return counter.reduce((acc: number, el: any, i: number) => {
         if (i === 0 && el.value !== 1) {
@@ -132,7 +132,6 @@ export const getPriceFromCounterByService = (mainService: string, counter: any) 
     case 'Deep kitchen':
       return 355;
 
-    case 'Subscription':
     case 'Custom cleaning':
       return counter.reduce((acc: number, el: any, i: number) => {
         if (i === 0 && el.value >= 1) acc += (el.value - 1) * 60;
@@ -176,6 +175,7 @@ export const getPriceFromCounterByService = (mainService: string, counter: any) 
     case 'Airbnb':
     case 'Regular':
     case 'Eco cleaning':
+    case 'Subscription':
       return counter.reduce((acc: number, el: any, i: number) => {
         if (i === 0 && el.value > 1) acc += ((el.value - 1) * 40);
         if (i === 1 && el.value > 1) acc += ((el.value - 1) * 45);
