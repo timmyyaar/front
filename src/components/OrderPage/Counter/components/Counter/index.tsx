@@ -101,6 +101,7 @@ export const Counter: FC<IProps> = (props) => {
           type="text" style={{ textAlign: 'end', backgroundColor: '#ECF0FF', outline: 'none', width: '10%', marginRight: '2px' }}
           value={value} onChange={enterNumbers}
         />
+        {' '}
         {title.indexOf('m2') !== -1
           ? <>{title.replace('m2', '')}<>m<sup>2</sup></></>
           : countTitle()

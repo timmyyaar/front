@@ -65,6 +65,12 @@ export const Summary: FC<IProps> = (props: any) => {
   const [totalDate, setTotalDate] = useState('');
   const [onlinePayment, setOnlinePayment] = useState(false);
   const [request, setRequest] = useState(false);
+  const [personalData, setPersonalData] = useState(false);
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+  const [email, setEmail] = useState('');
+
+  const requiredFields = name && number && email && totalDate && totalAddress && personalData;
 
   const onRemoveSubService = (title: string, sec: boolean) => {
     if (!sec) {
@@ -177,18 +183,18 @@ export const Summary: FC<IProps> = (props: any) => {
       ...secService,
     });
 
-    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/api/order', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      cache: 'no-store',
-      body: JSON.stringify({ ...main, ...mainService, ...secService, }),
-    });
-    const data = await response.json();
-    console.log('DONE');
+    // const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/api/order', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   cache: 'no-store',
+    //   body: JSON.stringify({ ...main, ...mainService, ...secService, }),
+    // });
+    // const data = await response.json();
+    // console.log('DONE');
 
-    if (data) {
-      console.log(data);
-    }
+    // if (data) {
+    //   console.log(data);
+    // }
   }
 
   const renderSummeryService = ({ serviceTitle, counterValue, subServiceList, sec = false }: any) => (
@@ -278,13 +284,24 @@ export const Summary: FC<IProps> = (props: any) => {
         ) : (
           <>
             <UserData
+              setTotalName={setName}
+              setTotalNumber={setNumber}
+              setTotalEmail={setEmail}
               setTotalAddress={setTotalAddress}
               setTotalDate={setTotalDate}
               setOnlinePayment={setOnlinePayment}
+              setTotalPersonalData={setPersonalData}
               setRequest={setRequest}
               t={t}
             />
-            <div className="order-wrapper _cursor-pointer" style={{ marginTop: '24px' }} onClick={sendData}>
+            <div
+              className={`order-wrapper _cursor-pointer ${!requiredFields ? 'order-wrapper-disabled' : ''}`}
+              style={{ marginTop: '24px' }}
+              onClick={() => {
+                if (!requiredFields) return void 0;
+                sendData();
+              }}
+            >
               {t('Order')}
             </div>
           </>

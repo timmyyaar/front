@@ -49,8 +49,10 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
       if (keysSubService.length) {
         setSubService((sS: any) => sS.map((el: any) => (el.num === 1 && el.title === 'Keys_sub_service') ? { ...el, address: firstAddress } : el));
       } else {
-        setSubService((sS: any) => [...sS, { num: 1, title: 'Keys_sub_service', address: firstAddress, time: 30, price: 40 }]);
+        setSubService((sS: any) => [...sS, { num: 1, title: 'Keys_sub_service', address: firstAddress, time: 30, price: 50 }]);
       }
+    } else {
+      setSubService((sS: any) => sS.filter((el: any) => el.title !== 'Keys_sub_service'));
     }
   }, [firstAddress]);
 
@@ -61,8 +63,10 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
       if (keysSubService.length) {
         setSubService((sS: any) => sS.map((el: any) => (el.num === 2 && el.title === 'Keys_sub_service') ? { ...el, address: secondAddress } : el));
       } else {
-        setSubService((sS: any) => [...sS, { num: 2, title: 'Keys_sub_service', address: secondAddress, time: 30, price: 40 }]);
+        setSubService((sS: any) => [...sS, { num: 2, title: 'Keys_sub_service', address: secondAddress, time: 30, price: 50 }]);
       }
+    } else {
+      setSubService((sS: any) => sS.filter((el: any) => el.title !== 'Keys_sub_service'));
     }
   }, [secondAddress]);
 
@@ -76,7 +80,7 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
 
   useEffect(() => {
     if (vacuumCleaner) {
-      setSubService((sS: any) => [...sS, { title: 'Vacuum_cleaner_sub_service', time: 0, price: 20 }]);
+      setSubService((sS: any) => [...sS, { title: 'Vacuum_cleaner_sub_service', time: 0, price: 30 }]);
     } else {
       setSubService((sS: any) => sS.filter((el: any) => el.title !== 'Vacuum_cleaner_sub_service'));
     }

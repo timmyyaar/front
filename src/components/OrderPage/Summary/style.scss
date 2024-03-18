@@ -16,7 +16,15 @@
     font-size: 16px;
     font-weight: 500;
     line-height: 21px;
+
+    &:hover {
+      background: #0073FC;
+    }
   }
+}
+
+.order-wrapper-disabled {
+  background: #7EB8FF !important;
 }
 
 .summary-wrapper {

@@ -7,10 +7,7 @@ import { CheckBox } from './components/Checkbox';
 import { DateAndTime } from './components/DateAndTime';
 import './style.scss';
 
-// setOnlinePayment={setOnlinePayment}
-// setRequest={setRequest}
-
-export const UserData = ({ setTotalAddress, setTotalDate, setOnlinePayment, setRequest, t }: any) => {
+export const UserData = ({ setTotalName, setTotalNumber, setTotalEmail, setTotalPersonalData, setTotalAddress, setTotalDate, setOnlinePayment, setRequest, t }: any) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [email, setEmail] = useState('');
@@ -32,6 +29,8 @@ export const UserData = ({ setTotalAddress, setTotalDate, setOnlinePayment, setR
   const [publicAgreement, setPublicAgreement] = useState(false);
   const [personalData, setPersonalData] = useState(false);
 
+  const requiredFields = street && house && apartment;
+
   useEffect(() => {
     if (!addressLayout && (street || house || apartment || postcode || entrance || doorPhone || more)) {
       setAddress(
@@ -41,33 +40,40 @@ export const UserData = ({ setTotalAddress, setTotalDate, setOnlinePayment, setR
   }, [addressLayout]);
 
   useEffect(() => {
+    setTotalName(name);
+    setTotalNumber(number);
+    setTotalEmail(email);
+  }, [name, number, email]);
+
+  useEffect(() => {
     setTotalAddress(address);
     setTotalDate(dataAndTime);
   }, [address, dataAndTime]);
 
   useEffect(() => {
     setRequest(previous);
-  }, [previous]);
+    setTotalPersonalData(publicAgreement);
+  }, [previous, publicAgreement]);
 
   return (
     <div className="user-data-from">
       <div className="_mb-6 _flex _flex-col _gap-3">
         <div className="input-wrapper">
           <input
-            type="text" placeholder="Surname and Name"
+            type="text" placeholder={t("Surname and Name")}
             value={name} onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="_flex _gap-5">
           <div className="input-wrapper">
             <input
-              type="text" placeholder="Contact number"
+              type="text" placeholder={t("Contact number")}
               value={number} onChange={(e) => setNumber(e.target.value)}
             />
           </div>
           <div className="input-wrapper">
             <input
-              type="text" placeholder="E-mail"
+              type="text" placeholder={t("E-mail")}
               value={email} onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -82,8 +88,17 @@ export const UserData = ({ setTotalAddress, setTotalDate, setOnlinePayment, setR
             </div>
           ) : (
             <div className="select-block-open select-block-open-data-time">
-              <DateAndTime setDataAndTime={setDataAndTime} />
-              <div className="order-wrapper" onClick={() => setDataLayout(false)}>Continue</div>
+              <DateAndTime dataAndTime={dataAndTime} setDataAndTime={setDataAndTime} />
+              <div
+                className={`order-wrapper ${!dataAndTime.split(' ')[0] || !dataAndTime.split(' ')[1] ? ' order-wrapper-disabled' : ''}`}
+                onClick={() => {
+                  const time = dataAndTime.split(' ');
+                  if (!time[0] || !time[1]) return void 0;
+                  setDataLayout(false);
+                }}
+              >
+                {t('Continue')}
+              </div>
             </div>
           )}
         </div>
@@ -100,20 +115,20 @@ export const UserData = ({ setTotalAddress, setTotalDate, setOnlinePayment, setR
               <div className="_mb-6 _flex _flex-col _gap-3">
                 <div className="input-wrapper address-layout">
                   <input
-                    type="text" placeholder="Street"
+                    type="text" placeholder={t("Street")}
                     value={street} onChange={(e) => setStreet(e.target.value)}
                   />
                 </div>
                 <div className="_flex _gap-5">
                   <div className="input-wrapper address-layout">
                     <input
-                      type="text" placeholder="House number"
+                      type="text" placeholder={t("House number")}
                       value={house} onChange={(e) => setHouse(e.target.value)}
                     />
                   </div>
                   <div className="input-wrapper address-layout">
                     <input
-                      type="text" placeholder="Apartment"
+                      type="text" placeholder={t("Apartment")}
                       value={apartment} onChange={(e) => setApartment(e.target.value)}
                     />
                   </div>
@@ -121,7 +136,7 @@ export const UserData = ({ setTotalAddress, setTotalDate, setOnlinePayment, setR
                 <div className="_flex _gap-5">
                   <div className="input-wrapper address-layout">
                     <input
-                      type="text" placeholder="Postcode"
+                      type="text" placeholder={t("Postcode")}
                       value={postcode} onChange={(e) => setPostCode(e.target.value)}
                     />
                   </div>
@@ -138,13 +153,13 @@ export const UserData = ({ setTotalAddress, setTotalDate, setOnlinePayment, setR
                 <div className="_flex _gap-5">
                   <div className="input-wrapper address-layout">
                     <input
-                      type="text" placeholder="Entrance number"
+                      type="text" placeholder={t("Entrance number")}
                       value={entrance} onChange={(e) => setEntrance(e.target.value)}
                     />
                   </div>
                   <div className="input-wrapper address-layout">
                     <input
-                      type="text" placeholder="Doorphone code"
+                      type="text" placeholder={t("Doorphone code")}
                       value={doorPhone} onChange={(e) => setDoorPhone(e.target.value)}
                     />
                   </div>
@@ -152,14 +167,17 @@ export const UserData = ({ setTotalAddress, setTotalDate, setOnlinePayment, setR
               </div>
               <div className="input-wrapper address-layout">
                 <textarea
-                  placeholder="Add more details (optional)"
+                  placeholder={t("Add more details (optional)")}
                   value={more} onChange={(e) => setMore(e.target.value)}
                 />
               </div>
               <div
-                className="order-wrapper"
+                className={`order-wrapper ${!requiredFields ? 'order-wrapper-disabled' : ''}`}
                 style={{ marginTop: '24px' }}
-                onClick={() => setAddressLayout(false)}
+                onClick={() => {
+                  if (!requiredFields) return void 0;
+                  setAddressLayout(false);
+                }}
               >
                 {t('Continue')}
               </div>

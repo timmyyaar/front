@@ -4,7 +4,7 @@ import { DatePicker } from './DatePicker';
 import { TimePicker } from './TimePicker';
 import './style.scss';
 
-export const DateAndTime = ({ setDataAndTime }: any) => {
+export const DateAndTime = ({ dataAndTime, setDataAndTime }: any) => {
   const [data, setData] = useState('');
   const [time, setTime] = useState('');
 
@@ -16,6 +16,12 @@ export const DateAndTime = ({ setDataAndTime }: any) => {
       return '';
     });
   }, [time, data]);
+
+  useEffect(() => {
+    const time = dataAndTime.split(' ');
+    if (time[0]) setData(time[0]);
+    if (time[1]) setTime(time[1]);
+  }, [dataAndTime]);
 
   return (
     <div className="date-and-time-component">

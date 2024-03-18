@@ -170,7 +170,9 @@ export const Costs = (props: any) => {
               >
                 <div className="sub-mobile-sales-sale">{el.sale}</div>
                 <div className="sub-mobile-sales-title">
-                  <b>{t(el.title)}</b>
+                  <b>
+                    <Writer text={t(el.title)} />
+                  </b>
                 </div>
               </div>
             ))}

@@ -145,7 +145,7 @@ export const getPriceFromCounterByService = (mainService: string, counter: any) 
         }
 
         return acc;
-      }, 190);
+      }, 199);
 
     case 'Deep':
       return counter.reduce((acc: number, el: any, i: number) => {
@@ -170,6 +170,14 @@ export const getPriceFromCounterByService = (mainService: string, counter: any) 
 
         return acc;
       }, 320);
+
+    case 'While sickness':
+      return counter.reduce((acc: number, el: any, i: number) => {
+        if (i === 0 && el.value > 1) acc += (el.value - 1) * 40;
+        if (i === 1 && el.value > 1) acc += (el.value - 1) * 60;
+
+        return acc;
+      }, 155);
 
     case 'Move in/out':
     case 'Airbnb':
