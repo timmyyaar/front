@@ -88,7 +88,7 @@ export const UserData = ({ setTotalName, setTotalNumber, setTotalEmail, setTotal
             </div>
           ) : (
             <div className="select-block-open select-block-open-data-time">
-              <DateAndTime dataAndTime={dataAndTime} setDataAndTime={setDataAndTime} />
+              <DateAndTime dataAndTime={dataAndTime} setDataAndTime={setDataAndTime} t={t} />
               <div
                 className={`order-wrapper ${!dataAndTime.split(' ')[0] || !dataAndTime.split(' ')[1] ? ' order-wrapper-disabled' : ''}`}
                 onClick={() => {

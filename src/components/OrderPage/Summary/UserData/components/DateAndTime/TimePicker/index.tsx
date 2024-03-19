@@ -12,7 +12,7 @@ const pages = {
 	3: [18, 23],
 };
 
-export const TimePicker = ({ time, setTime }: any) => {
+export const TimePicker = ({ time, setTime, t }: any) => {
 	const [timePage, setTimePage] = useState(1);
 
 	const generateTimeOptions = () => {
@@ -55,7 +55,7 @@ export const TimePicker = ({ time, setTime }: any) => {
 		<div className="_p-2">
 			<div className="_flex _items-center _justify-between _mb-5">
 				<div className="_text-xl _font-bold">
-					Time
+					{t('Time')}
 				</div>
 				<div className="button-date-picker-wrapper _flex _justify-between">
 					<button className="button-date-picker _flex _items-center _justify-center" onClick={prevPage}>

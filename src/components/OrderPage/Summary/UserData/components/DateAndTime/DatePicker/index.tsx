@@ -5,7 +5,7 @@ import { ArrowRight } from '../../icons/ArrowRight';
 
 import './style.scss';
 
-export const DatePicker = ({ data, setData }: any) => {
+export const DatePicker = ({ data, setData, t }: any) => {
 	const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
 	const [currentMonth, setCurrentMonth] = useState(new Date());
 
@@ -62,7 +62,7 @@ export const DatePicker = ({ data, setData }: any) => {
 		<div className="date-picker-component _p-2">
 			<div className="_flex _items-center _justify-between _mb-5">
 				<div className="_text-xl _font-bold">
-					{months[currentMonth.getMonth()]}, {currentMonth.getFullYear()}
+					{t(months[currentMonth.getMonth()])}, {currentMonth.getFullYear()}
 				</div>
 				<div className="button-date-picker-wrapper _flex _justify-between">
 					<button className="button-date-picker _flex _items-center _justify-center" onClick={prevMonth}>
