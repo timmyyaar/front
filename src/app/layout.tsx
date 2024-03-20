@@ -21,6 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <meta name="p:domain_verify" content="a212016f6fcbc5b5b2e70698845b2e51"/>
+      </head>
       <body className={inter.className}>
         {children}
       </body>
