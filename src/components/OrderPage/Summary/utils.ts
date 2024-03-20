@@ -136,13 +136,7 @@ export const getPriceFromCounterByService = (mainService: string, counter: any) 
       return counter.reduce((acc: number, el: any, i: number) => {
         if (i === 0 && el.value >= 1) acc += (el.value - 1) * 60;
         if (i === 1 && el.value >= 1) acc += (el.value - 1) * 80;
-        if (i === 2) {
-          if (el.value === 'Kitchen') {
-            acc += 80;
-          } else {
-            acc += 50;
-          }
-        }
+        if (i === 2 && el.value === 'Kitchen') acc += 30;
 
         return acc;
       }, 199);
@@ -221,8 +215,8 @@ export const getPriceFromCounterByService = (mainService: string, counter: any) 
       return counter.reduce((acc: number, el: any, i: number) => {
         if (i === 0) {
           acc += el.value * 10;
-        } else if (i === 1) {
-          acc += el.value * 30;
+        } else if (i === 1 && el.value > 0) {
+          acc += el.value === 1 ? 150 : (el.value - 1) * 20 + 150;
         }
 
         return acc;

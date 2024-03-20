@@ -61,16 +61,20 @@ export const Summary: FC<IProps> = (props: any) => {
   const [promo, setPromo] = useState('');
   const [order, setOrder] = useState(false);
   const [scrolledToElement, targetElementRef] = ScrollDetector();
-  const [totalAddress, setTotalAddress] = useState('');
-  const [totalDate, setTotalDate] = useState('');
-  const [onlinePayment, setOnlinePayment] = useState(false);
-  const [request, setRequest] = useState(false);
-  const [personalData, setPersonalData] = useState(false);
+
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [email, setEmail] = useState('');
+  const [totalAddress, setTotalAddress] = useState('');
+  const [totalDate, setTotalDate] = useState('');
 
-  const requiredFields = name && number && email && totalDate && totalAddress && personalData;
+  const [onlinePayment, setOnlinePayment] = useState(false);
+
+  const [previousCleaner, setPreviousCleaner] = useState(false);
+  const [privacyAndPolicy, setPrivacyAndPolicy] = useState(false);
+  const [personalData, setPersonalData] = useState(false);
+
+  const requiredFields = name && number && email && totalAddress && totalDate && privacyAndPolicy && personalData;
 
   const onRemoveSubService = (title: string, sec: boolean) => {
     if (!sec) {
@@ -154,14 +158,19 @@ export const Summary: FC<IProps> = (props: any) => {
 
   const sendData =  async () => {
     const main = {
-      price: subSale ? getNewPrice(getPrice(), sale) : getPrice(),
-      promo,
+      name,
+      number,
+      email,
       address: totalAddress,
       date: totalDate,
-      requestPreviousCleaner: request,
       onlinePayment: onlinePayment,
+      requestPreviousCleaner: previousCleaner,
+      personalData: personalData,
+      price: subSale ? getNewPrice(getPrice(), sale) : getPrice(),
+      promo,
       estimate: getEstimate(),
     };
+
     const mainService = {
       title,
       counter: counter.map((el: any) => el.title ? t(el.title) + '(' + el.value + ')' : t(el.value)).join(' '),
@@ -169,6 +178,7 @@ export const Summary: FC<IProps> = (props: any) => {
         `${t(title + '_summery')} (${subService.filter((el: ISubService) => el.title === title).length})`
       ).join(' '),
     };
+
     const secService = secTitle ? {
       secTitle,
       secCounter: secCounter.map((el: any) => el.title ? t(el.title) + '(' + el.value + ')' : t(el.value)).join(' '),
@@ -183,18 +193,18 @@ export const Summary: FC<IProps> = (props: any) => {
       ...secService,
     });
 
-    // const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/api/order', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   cache: 'no-store',
-    //   body: JSON.stringify({ ...main, ...mainService, ...secService, }),
-    // });
-    // const data = await response.json();
-    // console.log('DONE');
+    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/api/order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      cache: 'no-store',
+      body: JSON.stringify({ ...main, ...mainService, ...secService, }),
+    });
+    const data = await response.json();
+    console.log('DONE');
 
-    // if (data) {
-    //   console.log(data);
-    // }
+    if (data) {
+      console.log(data);
+    }
   }
 
   const renderSummeryService = ({ serviceTitle, counterValue, subServiceList, sec = false }: any) => (
@@ -284,14 +294,15 @@ export const Summary: FC<IProps> = (props: any) => {
         ) : (
           <>
             <UserData
-              setTotalName={setName}
-              setTotalNumber={setNumber}
-              setTotalEmail={setEmail}
+              name={name} setName={setName}
+              number={number} setNumber={setNumber}
+              email={email} setEmail={setEmail}
               setTotalAddress={setTotalAddress}
               setTotalDate={setTotalDate}
               setOnlinePayment={setOnlinePayment}
-              setTotalPersonalData={setPersonalData}
-              setRequest={setRequest}
+              previousCleaner={previousCleaner} setPreviousCleaner={setPreviousCleaner}
+              privacyAndPolicy={privacyAndPolicy} setPrivacyAndPolicy={setPrivacyAndPolicy}
+              personalData={personalData} setPersonalData={setPersonalData}
               t={t}
             />
             <div
