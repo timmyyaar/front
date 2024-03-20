@@ -1,16 +1,21 @@
 import "./style.scss";
 import { useEffect, useState } from "react";
-import ReviewItem from "@/components/MainPage/Reviews/ReviewItem";
+import ReviewItem from "./ReviewItem";
 import SliderInfinite from "@/components/common/Slider/SliderInfinite";
 import Swiper from "@/components/common/Swiper";
-import { fetchReviews, Review } from "@/components/MainPage/Reviews/action";
+import { Review } from "@/components/MainPage/Reviews/types";
+import { fetchReviews } from "./action";
 
 const GOOGLE_REVIEW_REDIRECT_LINK = "https://g.page/r/CW4tBwhrljwjEBI/review";
 
 const WHAT_CLIENTS_SAY_KEY = "what_clients_say";
 const LEAVE_YOUR_REVIEW_KEY = "leave_your_review";
 
-const Reviews = ({ t }) => {
+interface Props {
+  t: (text: string) => string;
+}
+
+const Reviews = ({ t }: Props) => {
   const [reviews, setReviews] = useState<Review[]>([]);
 
   const getReviews = async () => {

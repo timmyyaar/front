@@ -1,13 +1,21 @@
 import Image from "next/image";
 import starIcon from "@/components/MainPage/Reviews/icons/star.svg";
 import { useRef } from "react";
+import { Review } from "@/components/MainPage/Reviews/types";
 
-function isEllipsisActive(element) {
-  return element.offsetHeight < element.scrollHeight;
+interface Props {
+  t: (text: string) => string;
+  review: Review;
 }
 
-function ReviewItem({ review, t }) {
-  const reviewItem = useRef<HTMLDivElement>();
+function isEllipsisActive(element: HTMLSpanElement | null) {
+  const { offsetHeight, scrollHeight } = element as HTMLSpanElement;
+
+  return offsetHeight < scrollHeight;
+}
+
+function ReviewItem({ review, t }: Props) {
+  const reviewItem = useRef<HTMLSpanElement | null>(null);
 
   const isEllipsis = reviewItem?.current
     ? isEllipsisActive(reviewItem.current)

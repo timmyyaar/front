@@ -1,11 +1,4 @@
-export type Review = {
-  id: number;
-  rating: number;
-  name: string;
-  text: string;
-  email: string;
-  visible: boolean;
-};
+import { Review } from "@/components/MainPage/Reviews/types";
 
 export async function fetchReviews(): Promise<Review[]> {
   const response = await fetch(
