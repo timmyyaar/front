@@ -7,11 +7,18 @@ import { CheckBox } from './components/Checkbox';
 import { DateAndTime } from './components/DateAndTime';
 import './style.scss';
 
-export const UserData = ({ setTotalName, setTotalNumber, setTotalEmail, setTotalPersonalData, setTotalAddress, setTotalDate, setOnlinePayment, setRequest, t }: any) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-  const [email, setEmail] = useState('');
-
+export const UserData = ({
+  name, setName,
+  number, setNumber,
+  email, setEmail,
+  setTotalAddress,
+  setTotalDate,
+  setOnlinePayment,
+  previousCleaner, setPreviousCleaner,
+  privacyAndPolicy, setPrivacyAndPolicy,
+  personalData, setPersonalData,
+  t
+}: any) => {
   const [dataLayout, setDataLayout] = useState(false);
   const [dataAndTime, setDataAndTime] = useState('');
   const [addressLayout, setAddressLayout] = useState(false);
@@ -25,10 +32,6 @@ export const UserData = ({ setTotalName, setTotalNumber, setTotalEmail, setTotal
   const [doorPhone, setDoorPhone] = useState('');
   const [more, setMore] = useState('');
 
-  const [previous, setPrevious] = useState(false);
-  const [publicAgreement, setPublicAgreement] = useState(false);
-  const [personalData, setPersonalData] = useState(false);
-
   const requiredFields = street && house && apartment;
 
   useEffect(() => {
@@ -40,20 +43,9 @@ export const UserData = ({ setTotalName, setTotalNumber, setTotalEmail, setTotal
   }, [addressLayout]);
 
   useEffect(() => {
-    setTotalName(name);
-    setTotalNumber(number);
-    setTotalEmail(email);
-  }, [name, number, email]);
-
-  useEffect(() => {
     setTotalAddress(address);
     setTotalDate(dataAndTime);
   }, [address, dataAndTime]);
-
-  useEffect(() => {
-    setRequest(previous);
-    setTotalPersonalData(publicAgreement);
-  }, [previous, publicAgreement]);
 
   return (
     <div className="user-data-from">
@@ -186,31 +178,31 @@ export const UserData = ({ setTotalName, setTotalNumber, setTotalEmail, setTotal
         </div>
       </div>
       <div style={{ marginTop: '24px' }}>
-        <CheckBox title={'Request previous cleaner'} checked={previous} setCheck={setPrevious} t={t} />
+        <CheckBox
+          title={'Request previous cleaner'}
+          checked={previousCleaner}
+          setCheck={setPreviousCleaner}
+          t={t}
+        />
       </div>
-      {/* <div className="input-referral-code _cursor-pointer">
-        <div className="input-wrapper _flex">
-          <div className="icon-wrapper">
-            <ReferralIcon />
-          </div>
-          <input className="input" type="text" />
-          <div className="button-wrapper">
-            Apply
-          </div>
-        </div>
-      </div>
-      <div className="_flex _justify-center">
-        <QuestionIcon />
-        <div className="sub-text">How it works?</div>
-      </div> */}
       <div style={{ marginTop: '24px' }}>
         <PaymentForm setOnlinePayment={setOnlinePayment} t={t} />
       </div>
       <div style={{ marginTop: '24px' }}>
-        <CheckBox title={'Public agreement and Privacy Policy'} checked={publicAgreement} setCheck={setPublicAgreement} t={t} />
+        <CheckBox
+          title={'Public agreement and Privacy Policy'}
+          checked={privacyAndPolicy}
+          setCheck={setPrivacyAndPolicy}
+          t={t}
+        />
       </div>
       <div style={{ marginTop: '24px' }}>
-        <CheckBox title={'Personal data'} checked={personalData} setCheck={setPersonalData} t={t} />
+        <CheckBox
+          title={'Personal data'}
+          checked={personalData}
+          setCheck={setPersonalData}
+          t={t}
+        />
       </div>
     </div>
   );

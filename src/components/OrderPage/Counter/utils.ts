@@ -82,7 +82,7 @@ export const getCounterByMainService = (mainService: string) => {
         count: 0,
       }, {
         type: 'counter',
-        value: '-seater sofa',
+        value: 'seater sofa',
         count: 0,
       }];
 

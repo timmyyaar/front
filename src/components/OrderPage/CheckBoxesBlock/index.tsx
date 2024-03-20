@@ -123,7 +123,7 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
           icon={vacuumCleanerSvg}
           title={'title-vacuum-cleaner-checkbox'}
           subTitle={'sub-text-vacuum-cleaner-checkbox'}
-          price={'20 zl'}
+          price={'30 zl'}
           oldPrice={mainService === 'Subscription' ? '30 zl' : ''}
           setCheck={setVacuumCleaner}
           checked={vacuumCleaner}
@@ -136,7 +136,7 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
             icon={keySvg}
             title={'title-keys-checkbox'}
             subTitle={'sub-text-keys-checkbox'}
-            price={'20 zl'}
+            price={'50 zl'}
             oldPrice={mainService === 'Subscription' ? '30 zl' : ''}
             setCheck={setKeys}
             checked={keys}
