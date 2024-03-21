@@ -6,12 +6,7 @@ import { RightArrow } from "../icons/RightArrow";
 import "../style.scss";
 
 interface Props {
-  elements: {
-    id: number | string;
-    content: () => JSX.Element;
-  }[];
-  step?: number;
-  status?: boolean;
+  elements: JSX.Element[];
 }
 
 const SliderSwitch: FC<Props> = (props) => {
@@ -35,13 +30,13 @@ const SliderSwitch: FC<Props> = (props) => {
       <div className="slider-component">
         <div className="_flex">
           <div className="_flex-shrink-0 _w-1/3 _flex _items-center _justify-center _opacity-60">
-            {elements[previousItemIndex].content()}
+            {elements[previousItemIndex]}
           </div>
           <div className="_flex-shrink-0 _w-1/3 _flex _items-center _justify-center">
-            {elements[highlightedItemIndex].content()}
+            {elements[highlightedItemIndex]}
           </div>
           <div className="_flex-shrink-0 _w-1/3 _flex _items-center _justify-center _opacity-60">
-            {elements[nextItemIndex].content()}
+            {elements[nextItemIndex]}
           </div>
         </div>
       </div>

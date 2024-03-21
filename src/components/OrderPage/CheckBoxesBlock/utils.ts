@@ -10,17 +10,17 @@ export const getCheckBoxByMainService = (mainService: string) => {
     case 'Eco cleaning':
     case 'Regular':
     case 'Deep':
-      return ['vacuum cleaner', 'keys'];
+      return ['vacuum cleaner', 'own supplies'];
 
     case 'Office':
       return ['vacuum cleaner'];
 
     case 'Dry cleaning':
-      return ['dry', 'keys'];
+      return ['dry', 'own supplies'];
 
     case 'Post-construction':
     case 'Ozonation':
-      return ['keys'];
+      return ['own supplies'];
 
     default:
       return []
