@@ -1,5 +1,8 @@
 import React, { FC, useState, useEffect, useRef } from 'react';
 
+import { ModalRequest } from '@/components/common/ModalRequest';
+import { Overlay } from '@/components/common/Overlay';
+import { useClickOutside } from '@/hooks/useClickOutSide';
 import { ISubService } from '../SubServicesList/utils';
 import { IconCrosse } from './icons/IconCrosse';
 import { PromoInput } from './PromoCodeInput';
@@ -73,6 +76,9 @@ export const Summary: FC<IProps> = (props: any) => {
   const [previousCleaner, setPreviousCleaner] = useState(false);
   const [privacyAndPolicy, setPrivacyAndPolicy] = useState(false);
   const [personalData, setPersonalData] = useState(false);
+
+  const [modal, setModal] = useState(false);
+  const ref = useClickOutside(() => setModal(false));
 
   const requiredFields = name && number && email && totalAddress && totalDate && privacyAndPolicy && personalData;
 
@@ -204,6 +210,7 @@ export const Summary: FC<IProps> = (props: any) => {
 
     if (data) {
       console.log(data);
+      setModal(true);
     }
   }
 
@@ -245,6 +252,15 @@ export const Summary: FC<IProps> = (props: any) => {
   return (
     <>
     <div className="summary-layout">
+      <Overlay active={modal}>
+        <div ref={ref}>
+          <ModalRequest
+            text={t('order_page_modal_title')}
+            title={t('order_page_modal_text')}
+            onClose={() => setModal(false)}
+          />
+        </div>
+      </Overlay>
       <div className="summary-wrapper _flex _flex-col">
         {renderSummeryService({ serviceTitle: title, counterValue: counter, subServiceList: subService })}
         {secTitle !== '' ? (
