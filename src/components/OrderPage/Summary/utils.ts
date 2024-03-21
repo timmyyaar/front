@@ -86,15 +86,16 @@ export const getEstimateFromCounterByService = (mainService: string, counter: an
       }, 180);
 
     case 'Post-construction':
-      return counter.reduce((acc: number, el: any) => {
-        if (el.title === 'post-construction_0_count_total') {
-          if (el.value < 10) {
-            return acc + 10;
+      console.log(counter);
+      return counter.reduce((acc: number, el: any, i: number) => {
+        if (i === 0) {
+          return acc += el.value * 30;
+        } else if (i === 1) {
+          if (el.value <= 10) {
+            return 60;
           } else {
-            return acc + Math.floor(el.value / 10);
+            return acc + (Math.floor(el.value / 10) * 60);
           }
-        } else if (el.title === 'post-construction_1_count_total') {
-          return acc += el.value * 60;
         }
 
         return acc;
