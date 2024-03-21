@@ -1,6 +1,9 @@
 "use client";
 import React, { useState } from 'react';
 
+import { ModalRequest } from '@/components/common/ModalRequest';
+import { Overlay } from '@/components/common/Overlay';
+import { useClickOutside } from '@/hooks/useClickOutSide';
 import './style.scss';
 
 export const InputForm = ({ t }: any) => {
@@ -8,6 +11,11 @@ export const InputForm = ({ t }: any) => {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [about, setAbout] = useState('');
+
+  const [modal, setModal] = useState(false);
+  const ref = useClickOutside(() => setModal(false));
+
+  const requiredFields = name && phone && email;
 
   const onSend = async () => {
     const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/api/careers', {
@@ -19,6 +27,10 @@ export const InputForm = ({ t }: any) => {
 
     const data = await response.json();
 
+    if (data.id) {
+      setModal(true);
+    }
+
     setName('');
     setPhone('');
     setEmail('');
@@ -27,6 +39,15 @@ export const InputForm = ({ t }: any) => {
 
   return (
     <div className="input-form-component">
+      <Overlay active={modal}>
+        <div ref={ref}>
+          <ModalRequest
+            text={t('career_page_modal_title')}
+            title={t('career_page_modal_text')}
+            onClose={() => setModal(false)}
+          />
+        </div>
+      </Overlay>
       <div className="_mb-6 _flex _flex-col _gap-3">
         <div className="input-wrapper">
           <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder={t("Surname and Name")} />
@@ -44,7 +65,12 @@ export const InputForm = ({ t }: any) => {
         </div>
       </div>
       <div className="_mb-6 _flex _flex-col _gap-3">
-        <div className="button-wrapper" onClick={onSend}>
+        <div
+          className={`button-wrapper ${!requiredFields ? 'order-wrapper-disabled' : ''}`}
+          onClick={() => {
+            if (requiredFields) onSend();
+          }}
+        >
           {t('send')}
         </div>
       </div>
