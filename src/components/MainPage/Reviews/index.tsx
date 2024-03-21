@@ -1,5 +1,5 @@
 import "./style.scss";
-import { useEffect, useState } from "react";
+import { createRef, useEffect, useMemo, useRef, useState } from "react";
 import ReviewItem from "./ReviewItem";
 import SliderInfinite from "@/components/common/Slider/SliderInfinite";
 import Swiper from "@/components/common/Swiper";
@@ -28,7 +28,10 @@ const Reviews = ({ t }: Props) => {
     getReviews();
   }, []);
 
-  const visibleReviews = reviews.filter(({ visible }) => visible);
+  const visibleReviews = useMemo(
+    () => reviews.filter(({ visible }) => visible),
+    [reviews]
+  );
 
   return reviews.length ? (
     <section className="reviews-wrapper">
@@ -37,18 +40,16 @@ const Reviews = ({ t }: Props) => {
       </section>
       <section className="slider-wrapper mobile-none">
         <SliderInfinite
-          elements={visibleReviews.map((review) => ({
-            id: review.id,
-            content: (): JSX.Element => <ReviewItem review={review} t={t} />,
-          }))}
+          elements={visibleReviews.map((review) => (
+            <ReviewItem key={review.id} review={review} t={t} />
+          ))}
         />
       </section>
       <section className="mobile-only">
         <Swiper
-          elements={visibleReviews.map((review) => ({
-            id: review.id,
-            content: (): JSX.Element => <ReviewItem review={review} t={t} />,
-          }))}
+          elements={visibleReviews.map((review) => (
+            <ReviewItem key={review.id} review={review} t={t} />
+          ))}
         />
       </section>
       <section className="_flex _justify-center">

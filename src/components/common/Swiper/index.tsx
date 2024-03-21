@@ -7,10 +7,7 @@ import "./style.scss";
 import "swiper/css";
 
 interface Props {
-  elements: {
-    id: number | string;
-    content: () => JSX.Element;
-  }[];
+  elements: JSX.Element[];
 }
 
 const MobileSwiper: FC<Props> = (props) => {
@@ -24,8 +21,8 @@ const MobileSwiper: FC<Props> = (props) => {
         spaceBetween={20}
         loop
       >
-        {elements.map((element) => (
-          <SwiperSlide key={element.id}>{element.content()}</SwiperSlide>
+        {elements.map((element, index) => (
+          <SwiperSlide key={index}>{element}</SwiperSlide>
         ))}
       </Swiper>
       <div className="_mt-3 _flex _justify-center _gap-2">
