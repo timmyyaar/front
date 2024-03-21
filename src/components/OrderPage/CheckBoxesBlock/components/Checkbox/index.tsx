@@ -13,13 +13,18 @@ const CheckBox: FC<any> = ({
   checked,
   setCheck,
   t,
+  isCentral,
 }) => {
   const isNegativePrice = price.substring(0, 1) === "-";
 
   return (
-    <div className="check-box-component">
+    <div
+      className={`check-box-component ${
+        isCentral ? "_flex _justify-center" : ""
+      }`}
+    >
       <div
-        className="check-box-wrapper"
+        className={`check-box-wrapper ${isCentral ? "w-max" : ""}`}
         onClick={() => setCheck((ch: boolean) => !ch)}
       >
         <div className="icon-wrapper _flex _items-center">
@@ -43,7 +48,7 @@ const CheckBox: FC<any> = ({
         <div
           className={`price-wrapper ${
             isNegativePrice ? "price-negative" : "price-positive"
-          }`}
+          } ${!isCentral ? "_ml-auto" : ""}`}
         >
           <div>{t(price)}</div>
           {oldPrice ? (
