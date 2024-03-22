@@ -184,12 +184,13 @@ export const Summary: FC<IProps> = (props: any) => {
       0
     );
 
-    return (
+    const finalPrice =
       countEstimate +
       secCountEstimate +
       subServiceEstimate +
-      secSubServiceEstimate
-    );
+      secSubServiceEstimate;
+
+    return parseFloat(finalPrice.toFixed(1));
   };
 
   const estimate = getEstimate();
