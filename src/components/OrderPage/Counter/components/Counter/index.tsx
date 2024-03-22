@@ -146,7 +146,7 @@ export const Counter: FC<IProps> = (props) => {
           height="80"
           viewBox="0 0 81 80"
           fill="none"
-          className="iconьф"
+          className="icon"
         >
           <rect x="0.5" width="80" height="80" rx="40" fill="#ECF0FF" />
           <path
