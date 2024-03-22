@@ -39,7 +39,7 @@ export const PromoInput: FC<IProps> = (props) => {
           <DiscountCoupon />
         </div>
         <input
-          type="text" placeholder='Promo code'
+          type="text" placeholder={t('Promo code')}
           className={`input promo-code-input ${status === '#F9F9F9' ? '' : 'promo-status'}`}
           style={{ background: status, color: status === '#F9F9F9' ? '#848484' : '#FFF' }}
           value={code} onChange={(e) => setCode(e.target.value)}

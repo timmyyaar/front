@@ -211,11 +211,8 @@ export const Costs = (props: any) => {
                   </div>
                 ) : null}
               </div>
-              <div
-                className="sales-mobile-item-order-btn"
-                onClick={() => router.push("/order")}
-              >
-                {t("Order")}
+              <div className="sales-mobile-item-order-btn" onClick={() => router.push('/subscription')}>
+                {t('Order')}
               </div>
             </div>
           ))}
