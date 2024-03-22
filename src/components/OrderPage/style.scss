@@ -3,9 +3,9 @@
     padding: 0 94px;
     height: 60px;
     margin-bottom: 40px;
-    border-bottom: 1px solid #DEE5FF;
+    border-bottom: 1px solid #dee5ff;
 
-    color: #2B8AFC;
+    color: #2b8afc;
     font-size: 24px;
     font-weight: 600;
     line-height: 130%;
@@ -23,7 +23,7 @@
 
       &:hover {
         path {
-          fill: #2B8AFC;
+          fill: #2b8afc;
         }
       }
     }
@@ -34,11 +34,19 @@
     display: flex;
     gap: 42px;
 
+    @media screen and (max-width: 950px) {
+      gap: 60px;
+    }
+
     .left-col {
       width: 65%;
       display: flex;
       flex-flow: column;
       gap: 80px;
+
+      @media screen and (max-width: 950px) {
+        gap: 60px;
+      }
     }
 
     .right-col {

@@ -1,17 +1,17 @@
-import React, { FC, useState, useEffect, useRef } from 'react';
+import React, { FC, useState, useEffect, useRef } from "react";
 
-import { ModalRequest } from '@/components/common/ModalRequest';
-import { Overlay } from '@/components/common/Overlay';
-import { useClickOutside } from '@/hooks/useClickOutSide';
-import { ISubService } from '../SubServicesList/utils';
-import { IconCrosse } from './icons/IconCrosse';
-import { PromoInput } from './PromoCodeInput';
-import { UserData } from './UserData';
+import { ModalRequest } from "@/components/common/ModalRequest";
+import { Overlay } from "@/components/common/Overlay";
+import { useClickOutside } from "@/hooks/useClickOutSide";
+import { ISubService } from "../SubServicesList/utils";
+import { IconCrosse } from "./icons/IconCrosse";
+import { PromoInput } from "./PromoCodeInput";
+import { UserData } from "./UserData";
 import {
   getEstimateFromCounterByService,
   getPriceFromCounterByService,
-} from './utils';
-import './style.scss';
+} from "./utils";
+import "./style.scss";
 
 interface IProps {
   title: string;
@@ -19,22 +19,28 @@ interface IProps {
   subService: ISubService[];
   setSubService: (service: any) => void;
   secTitle?: string;
-  secCounter?: { title: string; value: string; type?: string; param?: string }[];
+  secCounter?: {
+    title: string;
+    value: string;
+    type?: string;
+    param?: string;
+  }[];
   secSubService?: ISubService[];
   setSecSubService?: (service: any) => void;
   subSale?: string;
   t: any;
+  isPrivateHouse?: boolean;
 }
 
 function ScrollDetector() {
   const [scrolledToElement, setScrolledToElement] = useState(false);
-  const targetElementRef = useRef(null);
+  const targetElementRef = useRef<any>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       if (targetElementRef.current) {
-        // @ts-ignore
-        const targetElementPosition = targetElementRef.current.getBoundingClientRect().top;
+        const targetElementPosition =
+          targetElementRef.current.getBoundingClientRect().top;
         if (targetElementPosition <= window.innerHeight) {
           setScrolledToElement(true);
         } else {
@@ -43,10 +49,10 @@ function ScrollDetector() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [targetElementRef]);
 
@@ -55,21 +61,28 @@ function ScrollDetector() {
 
 export const Summary: FC<IProps> = (props: any) => {
   const {
-    title, counter, subService, setSubService,
-    secTitle = '', secCounter = {}, secSubService = [], setSecSubService = () => {},
-    subSale = '',
+    title,
+    counter,
+    subService,
+    setSubService,
+    secTitle = "",
+    secCounter = {},
+    secSubService = [],
+    setSecSubService = () => {},
+    subSale = "",
     t,
+    isPrivateHouse,
   } = props;
   const [sale, setSale] = useState(0);
-  const [promo, setPromo] = useState('');
+  const [promo, setPromo] = useState("");
   const [order, setOrder] = useState(false);
   const [scrolledToElement, targetElementRef] = ScrollDetector();
 
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-  const [email, setEmail] = useState('');
-  const [totalAddress, setTotalAddress] = useState('');
-  const [totalDate, setTotalDate] = useState('');
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [totalAddress, setTotalAddress] = useState("");
+  const [totalDate, setTotalDate] = useState("");
 
   const [onlinePayment, setOnlinePayment] = useState(false);
 
@@ -80,7 +93,14 @@ export const Summary: FC<IProps> = (props: any) => {
   const [modal, setModal] = useState(false);
   const ref = useClickOutside(() => setModal(false));
 
-  const requiredFields = name && number && email && totalAddress && totalDate && privacyAndPolicy && personalData;
+  const requiredFields =
+    name &&
+    number &&
+    email &&
+    totalAddress &&
+    totalDate &&
+    privacyAndPolicy &&
+    personalData;
 
   const onRemoveSubService = (title: string, sec: boolean) => {
     if (!sec) {
@@ -92,22 +112,22 @@ export const Summary: FC<IProps> = (props: any) => {
         return oldSubServices.filter((el: ISubService) => el.title !== title);
       });
     }
-  }
+  };
 
   const makeSaleFromSub = (number: number, percentageString: string) => {
     const match = percentageString.match(/^(-?\d*\.?\d+)\s*%$/);
-  
+
     if (match) {
       const percentage = parseFloat(match[1]);
 
       if (!isNaN(percentage)) {
-        const result = number + (number * percentage / 100);
+        const result = number + (number * percentage) / 100;
         return result;
       }
     }
 
     return number;
-  }
+  };
 
   const getSubServices = (data: ISubService[]) => {
     const result: string[] = [];
@@ -121,48 +141,77 @@ export const Summary: FC<IProps> = (props: any) => {
 
   const getEstimate = () => {
     const countEstimate = getEstimateFromCounterByService(title, counter);
-    const secCountEstimate = getEstimateFromCounterByService(secTitle, secCounter);
-    const subServiceEstimate = subService.reduce((acc: number, el: ISubService) => acc += el?.time, 0);
-    const secSubServiceEstimate = secSubService.reduce((acc: number, el: ISubService) => acc += el?.time, 0);
+    const secCountEstimate = getEstimateFromCounterByService(
+      secTitle,
+      secCounter
+    );
+    const subServiceEstimate = subService.reduce(
+      (acc: number, el: ISubService) => (acc += el?.time || 0),
+      0
+    );
+    const secSubServiceEstimate = secSubService.reduce(
+      (acc: number, el: ISubService) => (acc += el?.time || 0),
+      0
+    );
 
-    let total =
-      countEstimate + secCountEstimate +
-      subServiceEstimate + secSubServiceEstimate;
+    const subTotal =
+      countEstimate +
+      secCountEstimate +
+      subServiceEstimate +
+      secSubServiceEstimate +
+      (isPrivateHouse ? 60 : 0);
 
-    if (total > 480) {
-      total = total / 2;
-    }
+    const cleanersCount = Math.ceil(subTotal / 480);
+    const total = subTotal > 480 ? subTotal / cleanersCount : subTotal;
 
-    return `${Math.floor(total / 60)}h, ${total % 60}m`;
+    return {
+      time: `${Math.floor(total / 60)}h, ${Math.round(total % 60)}m`,
+      cleanersCount: Math.ceil(subTotal / 480),
+    };
   };
 
   const getPrice = () => {
-    const countEstimate = getPriceFromCounterByService(title, counter);
+    const countEstimate =
+      getPriceFromCounterByService(title, counter) * (isPrivateHouse ? 1.3 : 1);
     const secCountEstimate = getPriceFromCounterByService(secTitle, secCounter);
-    const subServiceEstimate = subService.reduce((acc: number, el: ISubService) => acc += el?.price, 0);
-    const secSubServiceEstimate = secSubService.reduce((acc: number, el: ISubService) => acc += el?.price, 0);
+    const subServiceEstimate = subService.reduce(
+      (acc: number, el: ISubService) => (acc += el?.price || 0),
+      0
+    );
+    const secSubServiceEstimate = secSubService.reduce(
+      (acc: number, el: ISubService) => (acc += el?.price || 0),
+      0
+    );
 
-    return countEstimate + secCountEstimate + subServiceEstimate + secSubServiceEstimate;
+    return (
+      countEstimate +
+      secCountEstimate +
+      subServiceEstimate +
+      secSubServiceEstimate
+    );
   };
+
+  const estimate = getEstimate();
+  const price = getPrice();
 
   const getNewPrice = (originalPrice: number, discountPercentage: number) => {
     const discountAmount = (originalPrice * discountPercentage) / 100;
     const discountedPrice = originalPrice - discountAmount;
 
     return discountedPrice.toFixed(2);
-  }
+  };
 
   const handleScroll = () => {
-    const targetElement = document.getElementById('order-btn');
+    const targetElement = document.getElementById("order-btn");
 
     if (targetElement) {
       targetElement.scrollIntoView({
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   };
 
-  const sendData =  async () => {
+  const sendData = async () => {
     const main = {
       name,
       number,
@@ -172,74 +221,113 @@ export const Summary: FC<IProps> = (props: any) => {
       onlinePayment: onlinePayment,
       requestPreviousCleaner: previousCleaner,
       personalData: personalData,
-      price: subSale ? getNewPrice(getPrice(), sale) : getPrice(),
+      price: subSale ? getNewPrice(price, sale) : price,
       promo,
-      estimate: getEstimate(),
+      estimate: estimate.time,
     };
 
     const mainService = {
       title,
-      counter: counter.map((el: any) => el.title ? t(el.title) + '(' + el.value + ')' : t(el.value)).join(' '),
-      subService: getSubServices(subService).map((title: string) => 
-        `${t(title + '_summery')} (${subService.filter((el: ISubService) => el.title === title).length})`
-      ).join(' '),
+      counter: counter
+        .map((el: any) =>
+          el.title ? t(el.title) + "(" + el.value + ")" : t(el.value)
+        )
+        .join(" "),
+      subService: getSubServices(subService)
+        .map(
+          (title: string) =>
+            `${t(title + "_summery")} (${
+              subService.filter((el: ISubService) => el.title === title).length
+            })`
+        )
+        .join(" "),
     };
 
-    const secService = secTitle ? {
-      secTitle,
-      secCounter: secCounter.map((el: any) => el.title ? t(el.title) + '(' + el.value + ')' : t(el.value)).join(' '),
-      secSubService: getSubServices(secSubService).map((title: string) => 
-        `${t(title + '_summery')} (${secSubService.filter((el: ISubService) => el.title === title).length})`
-      ).join(' '),
-    } : {};
+    const secService = secTitle
+      ? {
+          secTitle,
+          secCounter: secCounter
+            .map((el: any) =>
+              el.title ? t(el.title) + "(" + el.value + ")" : t(el.value)
+            )
+            .join(" "),
+          secSubService: getSubServices(secSubService)
+            .map(
+              (title: string) =>
+                `${t(title + "_summery")} (${
+                  secSubService.filter((el: ISubService) => el.title === title)
+                    .length
+                })`
+            )
+            .join(" "),
+        }
+      : {};
 
-    console.log({
-      ...main,
-      ...mainService,
-      ...secService,
-    });
-
-    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/api/order', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      cache: 'no-store',
-      body: JSON.stringify({ ...main, ...mainService, ...secService, }),
-    });
+    const response = await fetch(
+      process.env.NEXT_PUBLIC_API_URL + "/api/order",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        cache: "no-store",
+        body: JSON.stringify({ ...main, ...mainService, ...secService }),
+      }
+    );
     const data = await response.json();
-    console.log('DONE');
 
     if (data) {
-      console.log(data);
       setModal(true);
     }
-  }
+  };
 
-  const renderSummeryService = ({ serviceTitle, counterValue, subServiceList, sec = false }: any) => (
+  const renderSummeryService = ({
+    serviceTitle,
+    counterValue,
+    subServiceList,
+    sec = false,
+  }: any) => (
     <>
-      <div className="summary-title">
-        {t(serviceTitle + '_summary_title')}
-      </div>
-      <div className="summary-counter">
-        {counterValue.map((el: any, i: number, arr: any[]) => el.type === 'counter' ? (
-          <div key={el.title + el.value + i}>
-            {t(el.title)}<b>{el.value}{el.param ? <>{t('m')}<sup>2</sup></> : ''}</b>
-            <b>{i + 1 === arr.length ? '' : ';'}</b>
-          </div>
-        ) : (
-          <div key={el.title + el.value + i}>
-            {t(el.value)}
-          </div>
-        ))}
+      <div className="summary-title">{t(serviceTitle + "_summary_title")}</div>
+      {counterValue?.length > 0 && (
+        <div className="summary-counter">
+          {counterValue.map((el: any, i: number, arr: any[]) =>
+            el.type === "counter" ? (
+              <div key={el.title + el.value + i}>
+                {t(el.title)}
+                <b>
+                  {el.value}
+                  {el.param ? (
+                    <>
+                      {t("m")}
+                      <sup>2</sup>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                </b>
+                <b>{i + 1 === arr.length ? "" : ";"}</b>
+              </div>
+            ) : (
+              <div key={el.title + el.value + i}>{t(el.value)}</div>
+            )
+          )}
+        </div>
+      )}
+      <div className="_mt-2">
+        {t("Cleaners")}: <b>{estimate.cleanersCount}</b>
       </div>
       {getSubServices(subServiceList).length ? (
         <div className="services-in-summary">
-          <div className="title-sub-service-title">
-            {t('Add services')}
-          </div>
+          <div className="title-sub-service-title">{t("Add services")}</div>
           {getSubServices(subServiceList).map((title: string, i: number) => (
             <div className="service-item _flex _items-center" key={title + i}>
-              <div>{`${t(title + '_summery')} (${subServiceList.filter((el: ISubService) => el.title === title).length})`}</div>
-              <div className="icon-wrapper _cursor-pointer" onClick={() => onRemoveSubService(title, sec)}>
+              <div>{`${t(title + "_summery")} (${
+                subServiceList.filter((el: ISubService) => el.title === title)
+                  .length
+              })`}</div>
+              <div
+                className="icon-wrapper _cursor-pointer"
+                onClick={() => onRemoveSubService(title, sec)}
+              >
                 <IconCrosse />
               </div>
             </div>
@@ -247,120 +335,164 @@ export const Summary: FC<IProps> = (props: any) => {
         </div>
       ) : null}
     </>
-  )
+  );
 
   return (
     <>
-    <div className="summary-layout">
-      <Overlay active={modal}>
-        <div ref={ref}>
-          <ModalRequest
-            text={t('order_page_modal_title')}
-            title={t('order_page_modal_text')}
-            onClose={() => setModal(false)}
-          />
-        </div>
-      </Overlay>
-      <div className="summary-wrapper _flex _flex-col">
-        {renderSummeryService({ serviceTitle: title, counterValue: counter, subServiceList: subService })}
-        {secTitle !== '' ? (
-          <>
-            <div className='summary-wrapper-separator'/>
-            {renderSummeryService({
-              serviceTitle: secTitle,
-              counterValue: secCounter,
-              subServiceList: secSubService,
-              sec: true
-            })}
-          </>
-        ) : null}
-        <div className="estimated-wrapper">
-          {`${t('Estimated Duration of service:')} `}<b>{getEstimate()}</b>
-        </div>
-        {!subSale ? (<PromoInput setSale={setSale} setPromo={setPromo} t={t} />): null}
-        {/* @ts-ignore */}
-        <div className="to-pay-wrapper _flex _items-baseline" ref={targetElementRef}>
-          <div className="title">{t('To pay:')}</div>
+      <div className="summary-layout">
+        <Overlay active={modal}>
+          <div ref={ref}>
+            <ModalRequest
+              text={t("order_page_modal_title")}
+              title={t("order_page_modal_text")}
+              onClose={() => setModal(false)}
+            />
+          </div>
+        </Overlay>
+        <div className="summary-wrapper _flex _flex-col">
+          {renderSummeryService({
+            serviceTitle: title,
+            counterValue: counter,
+            subServiceList: subService,
+          })}
+          {secTitle !== "" ? (
+            <>
+              <div className="summary-wrapper-separator" />
+              {renderSummeryService({
+                serviceTitle: secTitle,
+                counterValue: secCounter,
+                subServiceList: secSubService,
+                sec: true,
+              })}
+            </>
+          ) : null}
+          <div className="_mt-2">
+            {`${t("Estimated Duration of service:")} `}
+            <b>{estimate.time}</b>
+          </div>
           {!subSale ? (
-            sale ? (
+            <PromoInput setSale={setSale} setPromo={setPromo} t={t} />
+          ) : null}
+          <div
+            className="to-pay-wrapper _flex _items-baseline"
+            ref={targetElementRef as any}
+          >
+            <div className="title">{t("To pay:")}</div>
+            {!subSale ? (
+              sale ? (
+                <>
+                  <div className="current-price">
+                    {getNewPrice(price, sale)}
+                    {t("zl")}
+                  </div>
+                  <div className="old-price">
+                    {price}
+                    {t("zl")}
+                  </div>
+                </>
+              ) : (
+                <div className="current-price">
+                  {price}
+                  {t("zl")}
+                </div>
+              )
+            ) : (
               <>
                 <div className="current-price">
-                  {getNewPrice(getPrice(), sale)}{t('zl')}
+                  {makeSaleFromSub(price, subSale)}
+                  {t("zl")}
                 </div>
-                <div className="old-price">{getPrice()}{t('zl')}</div>
+                <div className="old-price">
+                  {price}
+                  {t("zl")}
+                </div>
               </>
-            ) : (
-              <div className="current-price">{getPrice()}{t('zl')}</div>
-            )
+            )}
+          </div>
+        </div>
+        <div id="order-btn">
+          {!order ? (
+            <div
+              className="order-wrapper _cursor-pointer"
+              onClick={() => setOrder(true)}
+            >
+              {t("Order")}
+            </div>
           ) : (
             <>
-              <div className="current-price">
-                {makeSaleFromSub(getPrice(), subSale)}{t('zl')}
+              <UserData
+                name={name}
+                setName={setName}
+                number={number}
+                setNumber={setNumber}
+                email={email}
+                setEmail={setEmail}
+                setTotalAddress={setTotalAddress}
+                setTotalDate={setTotalDate}
+                setOnlinePayment={setOnlinePayment}
+                previousCleaner={previousCleaner}
+                setPreviousCleaner={setPreviousCleaner}
+                privacyAndPolicy={privacyAndPolicy}
+                setPrivacyAndPolicy={setPrivacyAndPolicy}
+                personalData={personalData}
+                setPersonalData={setPersonalData}
+                t={t}
+              />
+              <div
+                className={`order-wrapper _cursor-pointer ${
+                  !requiredFields ? "order-wrapper-disabled" : ""
+                }`}
+                style={{ marginTop: "24px" }}
+                onClick={() => {
+                  if (!requiredFields) return void 0;
+                  sendData();
+                }}
+              >
+                {t("Order")}
               </div>
-              <div className="old-price">{getPrice()}{t('zl')}</div>
             </>
           )}
         </div>
       </div>
-      <div id="order-btn">
-        {!order ? (
-          <div className="order-wrapper _cursor-pointer" onClick={() => setOrder(true)}>
-            {t('Order')}
-          </div>
-        ) : (
-          <>
-            <UserData
-              name={name} setName={setName}
-              number={number} setNumber={setNumber}
-              email={email} setEmail={setEmail}
-              setTotalAddress={setTotalAddress}
-              setTotalDate={setTotalDate}
-              setOnlinePayment={setOnlinePayment}
-              previousCleaner={previousCleaner} setPreviousCleaner={setPreviousCleaner}
-              privacyAndPolicy={privacyAndPolicy} setPrivacyAndPolicy={setPrivacyAndPolicy}
-              personalData={personalData} setPersonalData={setPersonalData}
-              t={t}
-            />
-            <div
-              className={`order-wrapper _cursor-pointer ${!requiredFields ? 'order-wrapper-disabled' : ''}`}
-              style={{ marginTop: '24px' }}
-              onClick={() => {
-                if (!requiredFields) return void 0;
-                sendData();
-              }}
-            >
-              {t('Order')}
-            </div>
-          </>
-        )}
-      </div>
-    </div>
-    {!scrolledToElement ? (
-      <div
-        className="order-wrapper-absolute _cursor-pointer mobile-only"
-        onClick={handleScroll}
-      >
-        {getPrice() === 0 ? t('Order') : !subSale ? (
-          sale ? (
+      {!scrolledToElement ? (
+        <div
+          className="order-wrapper-absolute _cursor-pointer mobile-only"
+          onClick={handleScroll}
+        >
+          {price === 0 ? (
+            t("Order")
+          ) : !subSale ? (
+            sale ? (
+              <>
+                <div className="current-price">
+                  {getNewPrice(price, sale)}
+                  {t("zl")}
+                </div>
+                <div className="old-price">
+                  {price}
+                  {t("zl")}
+                </div>
+              </>
+            ) : (
+              <div className="current-price">
+                {price}
+                {t("zl")}
+              </div>
+            )
+          ) : (
             <>
               <div className="current-price">
-                {getNewPrice(getPrice(), sale)}{t('zl')}
+                {makeSaleFromSub(price, subSale)}
+                {t("zl")}
               </div>
-              <div className="old-price">{getPrice()}{t('zl')}</div>
+              <div className="old-price">
+                {price}
+                {t("zl")}
+              </div>
             </>
-          ) : (
-            <div className="current-price">{getPrice()}{t('zl')}</div>
-          )
-        ) : (
-          <>
-            <div className="current-price">
-              {makeSaleFromSub(getPrice(), subSale)}{t('zl')}
-            </div>
-            <div className="old-price">{getPrice()}{t('zl')}</div>
-          </>
-        )}
-      </div>
-    ) : null}
+          )}
+        </div>
+      ) : null}
     </>
   );
 };

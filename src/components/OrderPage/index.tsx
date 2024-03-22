@@ -1,56 +1,56 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { Footer } from '@/components/Footer';
-import { useLocales } from '@/hooks/useLocales';
-import { MainImage } from '@/components/common/MainImage';
-import { LeftArrow } from '@/components/common/Slider/icons/LeftArrow';
+import { Footer } from "@/components/Footer";
+import { useLocales } from "@/hooks/useLocales";
+import { MainImage } from "@/components/common/MainImage";
+import { LeftArrow } from "@/components/common/Slider/icons/LeftArrow";
 
-import { AddedMainService, getAdditionalServices } from './AddedMainService';
-import { CheckBoxesBlock } from './CheckBoxesBlock';
-import { CounterComponent } from './Counter';
-import { ServicesList } from './ServicesList';
-import { SubServicesList } from './SubServicesList';
-import { Summary } from './Summary';
-import './style.scss';
+import { AddedMainService, getAdditionalServices } from "./AddedMainService";
+import { CheckBoxesBlock } from "./CheckBoxesBlock";
+import { CounterComponent } from "./Counter";
+import { ServicesList } from "./ServicesList";
+import { SubServicesList } from "./SubServicesList";
+import { Summary } from "./Summary";
+import { PRIVATE_HOUSE_SERVICES } from "./constants";
+
+import "./style.scss";
 
 export const OrderPage = (props: any) => {
   const { locales } = props;
   const i18n = useLocales(locales);
-  const services = ['General cleaning', 'Healthcare', 'Special cleaning'];
-  const [selectedCategory, setCategory] = useState<typeof services[number] | ''>('');
+  const services = ["General cleaning", "Healthcare", "Special cleaning"];
+  const [selectedCategory, setCategory] = useState<
+    (typeof services)[number] | ""
+  >("");
   // main service
-  const [selectedService, setService] = useState<string>('');
+  const [selectedService, setService] = useState<string>("");
   const [counterValue, setCounterValue] = useState([]);
   const [selectedSubService, setSubService] = useState([]);
   // second service
-  const [selectedSecondService, setSecondService] = useState<string>('');
+  const [selectedSecondService, setSecondService] = useState<string>("");
   const [secondCounterValue, setSecondCounterValue] = useState([]);
   const [secondSelectedSubService, setSecondSubService] = useState([]);
+  const [isPrivateHouse, setIsPrivateHouse] = useState(false);
 
   useEffect(() => {
+    if (!PRIVATE_HOUSE_SERVICES.includes(selectedService)) {
+      setIsPrivateHouse(false);
+    }
+
     setSubService([]);
     setSecondSubService([]);
   }, [selectedService]);
 
   useEffect(() => {
-    setService('');
+    setService("");
     setSubService([]);
     setSecondSubService([]);
 
-    setSecondService('');
+    setSecondService("");
     setSecondCounterValue([]);
     setSecondSubService([]);
-  }, [selectedCategory]);
-
-  useEffect(() => {
-    setService('');
-    setSubService([]);
-    setSecondSubService([]);
-
-    setSecondService('');
-    setSecondCounterValue([]);
-    setSecondSubService([]);
+    setIsPrivateHouse(false);
   }, [selectedCategory]);
 
   return (
@@ -60,7 +60,10 @@ export const OrderPage = (props: any) => {
       ) : (
         <div>
           <div className="header-wrapper _flex _items-center">
-            <div className="_cursor-pointer _flex _items-center" onClick={() => setCategory('')}>
+            <div
+              className="_cursor-pointer _flex _items-center"
+              onClick={() => setCategory("")}
+            >
               <div className="arrow-button">
                 <LeftArrow />
               </div>
@@ -69,9 +72,24 @@ export const OrderPage = (props: any) => {
           </div>
           <div className="content-wrapper">
             <div className="left-col">
-              <ServicesList mainCategory={selectedCategory} t={i18n.t} setService={setService} />
-              <CounterComponent mainService={selectedService} setCounterValue={setCounterValue} t={i18n.t} />
-              <SubServicesList mainService={selectedService} subServices={selectedSubService} setSubService={setSubService} t={i18n.t} />
+              <ServicesList
+                mainCategory={selectedCategory}
+                t={i18n.t}
+                setService={setService}
+              />
+              <CounterComponent
+                mainService={selectedService}
+                setCounterValue={setCounterValue}
+                t={i18n.t}
+                isPrivateHouse={isPrivateHouse}
+                setIsPrivateHouse={setIsPrivateHouse}
+              />
+              <SubServicesList
+                mainService={selectedService}
+                subServices={selectedSubService}
+                setSubService={setSubService}
+                t={i18n.t}
+              />
               <AddedMainService
                 mainService={selectedService}
                 setSecondService={setSecondService}
@@ -79,13 +97,22 @@ export const OrderPage = (props: any) => {
               >
                 {getAdditionalServices(selectedService).length ? (
                   <>
-                    {getAdditionalServices(selectedService) === 'ADD OZONATION SERVICE' ? (
-                      <CounterComponent mainService={'Ozonation'} setCounterValue={setSecondCounterValue} t={i18n.t} />
+                    {getAdditionalServices(selectedService) ===
+                    "ADD OZONATION SERVICE" ? (
+                      <CounterComponent
+                        mainService={"Ozonation"}
+                        setCounterValue={setSecondCounterValue}
+                        t={i18n.t}
+                      />
                     ) : (
                       <div className="_flex _flex-col _gap-6">
-                        <CounterComponent mainService={'Dry cleaning'} setCounterValue={setSecondCounterValue} t={i18n.t} />
+                        <CounterComponent
+                          mainService={"Dry cleaning"}
+                          setCounterValue={setSecondCounterValue}
+                          t={i18n.t}
+                        />
                         <SubServicesList
-                          mainService={'Dry cleaning'}
+                          mainService={"Dry cleaning"}
                           subServices={secondSelectedSubService}
                           setSubService={setSecondSubService}
                           t={i18n.t}
@@ -113,6 +140,7 @@ export const OrderPage = (props: any) => {
                 secSubService={secondSelectedSubService}
                 setSecSubService={setSecondSubService}
                 t={i18n.t}
+                isPrivateHouse={isPrivateHouse}
               />
             </div>
           </div>

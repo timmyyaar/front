@@ -10,27 +10,27 @@
     height: 56px;
     padding-top: 18px;
     border-radius: 40px;
-    background: #2B8AFC;
-    color: #F9F9F9;
+    background: #2b8afc;
+    color: #f9f9f9;
     text-align: center;
     font-size: 16px;
     font-weight: 500;
     line-height: 21px;
 
     &:hover {
-      background: #0073FC;
+      background: #0073fc;
     }
   }
 }
 
 .order-wrapper-disabled {
-  background: #7EB8FF !important;
+  background: #7eb8ff !important;
 }
 
 .summary-wrapper {
   padding: 40px;
   border-radius: 24px;
-  background: #ECF0FF;
+  background: #ecf0ff;
 
   .summary-title {
     color: #232323;
@@ -42,7 +42,7 @@
   .summary-counter {
     display: flex;
     gap: 12px;
-    overflow: scroll;
+    overflow: hidden;
     margin-top: 8px;
 
     color: #232323;
@@ -54,7 +54,7 @@
 
   .sec-summary-title-wrapper {
     margin-top: 8px;
-    border-top: 1px dashed #13277E;
+    border-top: 1px dashed #13277e;
     padding-top: 8px;
     margin-bottom: 8px;
   }
@@ -75,7 +75,7 @@
       width: max-content;
       padding: 0 6px 0 12px;
       border-radius: 45px;
-      border: 1px solid #C8C8C8;
+      border: 1px solid #c8c8c8;
 
       .icon-wrapper {
         margin-left: 4px;
@@ -84,13 +84,9 @@
   }
 
   .summary-wrapper-separator {
-    border-top: 1px dashed #C8C8C8;
+    border-top: 1px dashed #c8c8c8;
     margin-top: 3px;
     margin-bottom: 9px;
-  }
-
-  .estimated-wrapper {
-    margin-top: 12px;
   }
 
   .input-promo-code {
@@ -99,14 +95,14 @@
     .input-wrapper {
       height: 56px;
       border-radius: 44px;
-      background: #F9F9F9;
+      background: #f9f9f9;
 
       .icon-wrapper {
         margin: auto 12px auto 20px;
       }
 
       .input {
-        background: #F9F9F9;
+        background: #f9f9f9;
         outline: none;
         width: 100%;
       }
@@ -115,8 +111,8 @@
         margin-left: auto;
         padding: 18px 28px;
         border-radius: 40px;
-        background: #2B8AFC;
-        color: #F9F9F9;
+        background: #2b8afc;
+        color: #f9f9f9;
         text-align: center;
         font-size: 16px;
         font-weight: 500;
@@ -124,7 +120,7 @@
       }
 
       .button-wrapper:hover {
-        background: #0073FC;
+        background: #0073fc;
       }
     }
   }
@@ -161,7 +157,7 @@
 
 .promo-status {
   &::placeholder {
-    color: #FFF;
+    color: #fff;
   }
 }
 
@@ -176,8 +172,8 @@
   height: 56px;
   padding-top: 18px;
   border-radius: 40px;
-  background: #2B8AFC;
-  color: #F9F9F9;
+  background: #2b8afc;
+  color: #f9f9f9;
   text-align: center;
   font-size: 16px;
   font-weight: 500;

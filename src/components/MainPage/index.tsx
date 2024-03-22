@@ -1,21 +1,22 @@
 "use client";
-import React, { FC, useState } from 'react';
+import React, { FC, useState } from "react";
 
-import { Footer } from '@/components/Footer';
-import { useLocales } from '@/hooks/useLocales';
-import { ILocales } from '@/locales';
-import { MainImage } from '@/components/common/MainImage';
+import { Footer } from "@/components/Footer";
+import { useLocales } from "@/hooks/useLocales";
+import { ILocales } from "@/locales";
+import { MainImage } from "@/components/common/MainImage";
 
-import { AdditionalServices } from './AdditionalServices';
-import { Advantages } from './Advantages';
-import { AllServices } from './AllServices';
-import { Cleaning } from './Cleaning';
-import { Costs } from './Costs';
-import { FAQ } from './FAQ';
-import { Order } from './Order';
-import { PriceByPhoto } from './PriceByPhoto';
-import { Promotions } from './Promotions';
-import './style.scss';
+import { AdditionalServices } from "./AdditionalServices";
+import { Advantages } from "./Advantages";
+import { AllServices } from "./AllServices";
+import { Cleaning } from "./Cleaning";
+import { Costs } from "./Costs";
+import { FAQ } from "./FAQ";
+import { Order } from "./Order";
+import { PriceByPhoto } from "./PriceByPhoto";
+import { Promotions } from "./Promotions";
+import Reviews from "@/components/MainPage/Reviews";
+import "./style.scss";
 
 interface Props {
   locales: ILocales[];
@@ -37,6 +38,7 @@ export const MainPage: FC<Props> = (props) => {
         <PriceByPhoto t={t} />
         <Promotions t={t} />
         <FAQ t={t} />
+        <Reviews t={t} />
         <div className="_flex _flex-col">
           <Order t={t} />
           <Footer t={t} />

@@ -1,150 +1,153 @@
 // How much it costs
 export const Coasts = {
-  'One-time': {
-    '1-bedroom': 199,
-    '2-bedroom': 239,
-    '3-bedroom': 279,
+  "One-time": {
+    "1-bedroom": 199,
+    "2-bedroom": 239,
+    "3-bedroom": 279,
   },
-  'Once a week': {
-    '1-bedroom': 159.2,
-    '2-bedroom': 191.2,
-    '3-bedroom': 223.2,
+  "Once a week": {
+    "1-bedroom": 159.2,
+    "2-bedroom": 191.2,
+    "3-bedroom": 223.2,
   },
-  'Twice a month': {
-    '1-bedroom': 169.15,
-    '2-bedroom': 203.15,
-    '3-bedroom': 237.15,
+  "Twice a month": {
+    "1-bedroom": 169.15,
+    "2-bedroom": 203.15,
+    "3-bedroom": 237.15,
   },
-  'Once a month': {
-    '1-bedroom': 179.1,
-    '2-bedroom': 215.1,
-    '3-bedroom': 251.1,
-  }
+  "Once a month": {
+    "1-bedroom": 179.1,
+    "2-bedroom": 215.1,
+    "3-bedroom": 251.1,
+  },
 };
 
 export const CounterCoasts = {
-  'Clean the oven': {
+  "Clean the oven": {
     price: 45,
-    old: '',
+    old: "",
   },
-  'Clean the hood': {
+  "Clean the hood": {
     price: 45,
-    old: '',
+    old: "",
   },
-  'Clean the fridge': {
+  "Clean the fridge": {
     price: 45,
-    old: '',
+    old: "",
   },
-  'Clean animal\'s tray': {
+  "Clean animal's tray": {
     price: 15,
-    old: '',
+    old: "",
   },
-  'Wash the microwave': {
+  "Wash the microwave": {
     price: 15,
-    old: '',
+    old: "",
   },
-  'Clean kitchen cabinets': {
+  "Clean kitchen cabinets": {
     price: 60,
-    old: '',
+    old: "",
   },
-  'Wash the window': {
+  "Wash the window": {
     price: 30,
-    old: '',
+    old: "",
   },
-  'Space organizer': {
+  "Space organizer": {
     price: 55,
-    old: '',
+    old: "",
   },
-  'Ironing': {
+  Ironing: {
     price: 55,
-    old: '',
+    old: "",
   },
-  'Wardrobe cleaning': {
+  "Wardrobe cleaning": {
     price: 45,
-    old: '',
+    old: "",
   },
-  'Clean the cloak room': {
+  "Clean the cloak room": {
     price: 30,
-    old: '',
+    old: "",
   },
-  'Clean the mirror': {
+  "Clean the mirror": {
     price: 15,
-    old: '',
+    old: "",
   },
-  'Balcony': {
+  Balcony: {
     price: 2.5,
-    old: '',
+    old: "",
   },
-  'Water plants': {
+  "Water plants": {
     price: 2.5,
-    old: '',
+    old: "",
   },
-  'Laundry': {
+  Laundry: {
     price: 20,
-    old: '',
+    old: "",
   },
-  'Cleaning bath or shower cubicle': {
+  "Cleaning bath or shower cubicle": {
     price: 40,
-    old: '',
+    old: "",
   },
-  'Clean the room': {
+  "Clean the room": {
     price: 50,
-    old: '',
+    old: "",
   },
-  'Clean the corridor': {
+  "Clean the corridor": {
     price: 20,
-    old: '',
+    old: "",
   },
-  'Clean the bathroom': {
+  "Clean the bathroom": {
     price: 80,
-    old: '',
+    old: "",
   },
-  'Extra tasks': {
+  "Extra tasks": {
     price: 55,
-    old: '',
+    old: "",
   },
-  'Clean slow-cooker': {
+  "Clean slow-cooker": {
     price: 15,
-    old: '',
+    old: "",
   },
-  'Clean coffee-machine': {
+  "Clean coffee-machine": {
     price: 15,
-    old: '',
+    old: "",
   },
-  'Single mattress': {
+  "Single mattress": {
     price: 90,
-    old: '',
+    old: "",
   },
-  'Single mattress from both sides': {
+  "Single mattress from both sides": {
     price: 170,
-    old: '',
+    old: "",
   },
-  'Double mattress': {
+  "Double mattress": {
     price: 170,
-    old: '',
+    old: "",
   },
-  'Double mattress from both sides': {
+  "Double mattress from both sides": {
     price: 330,
-    old: '',
+    old: "",
   },
-  'Upholstered to bed': {
+  "Upholstered to bed": {
     price: 150,
-    old: '',
+    old: "",
   },
-  'Armchair': {
+  Armchair: {
     price: 60,
-    old: '',
+    old: "",
   },
-  'Chair': {
+  Chair: {
     price: 25,
-    old: '',
+    old: "",
   },
-  'Office chair': {
+  "Office chair": {
     price: 25,
-    old: '',
+    old: "",
   },
-  'Cleaning baby stroller': {
+  "Cleaning baby stroller": {
     price: 75,
-    old: '',
+    old: "",
   },
-}
+};
+
+export const EMAIL_REGEX =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
