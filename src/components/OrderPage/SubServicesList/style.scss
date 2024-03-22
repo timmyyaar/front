@@ -9,6 +9,11 @@
     font-style: normal;
     font-weight: 600;
     line-height: 130%;
+
+    @media screen and (max-width: 950px) {
+      font-size: 18px;
+      line-height: 22px;
+    }
   }
 
   ._grid._grid-cols-4 {
@@ -21,17 +26,17 @@
       align-items: center;
       padding: 21px 0 20px 0;
       border-radius: 16px;
-      border: 4px solid #ECF0FF;
-      background: #ECF0FF;
+      border: 4px solid #ecf0ff;
+      background: #ecf0ff;
 
       &:hover {
-        border: 4px solid #DEE5FF;
-        background: #DEE5FF;
+        border: 4px solid #dee5ff;
+        background: #dee5ff;
       }
 
       .sub-services-title {
         margin-bottom: 20px;
-        color: #1E1E1E;
+        color: #1e1e1e;
         text-align: center;
         font-size: 16px;
         font-weight: 600;
@@ -70,7 +75,7 @@
         align-items: center;
         border-radius: 72px;
         padding: 8px 16px;
-        background: #F9C630;
+        background: #f9c630;
         color: #232323;
         font-size: 20px;
         font-weight: 600;
@@ -88,10 +93,10 @@
     }
 
     .sub-services-item-active {
-      border: 4px solid #2B8AFC;
+      border: 4px solid #2b8afc;
 
       &:hover {
-        border: 4px solid #2B8AFC;
+        border: 4px solid #2b8afc;
       }
     }
   }

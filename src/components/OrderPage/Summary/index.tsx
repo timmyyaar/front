@@ -122,11 +122,12 @@ export const Summary: FC<IProps> = (props: any) => {
 
       if (!isNaN(percentage)) {
         const result = number + (number * percentage) / 100;
-        return result;
+
+        return parseFloat(result.toFixed(1));
       }
     }
 
-    return number;
+    return parseFloat(number.toFixed(1));
   };
 
   const getSubServices = (data: ISubService[]) => {
