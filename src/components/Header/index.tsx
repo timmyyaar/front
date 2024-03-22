@@ -44,7 +44,7 @@ export const Header: FC<Props> = ({ locales }) => {
     const newLocale = Object.keys(mainLocales).find(key => {
       // @ts-ignore
       return mainLocales[key] === language;
-    }) || 'en';
+    }) || 'pl';
 
     Cookies.set('locale', newLocale);
     setNewLocal(newLocale);
@@ -52,7 +52,7 @@ export const Header: FC<Props> = ({ locales }) => {
   }
 
   useEffect(() => {
-    const locale = Cookies.get('locale') || 'en';
+    const locale = Cookies.get('locale') || 'pl';
     setNewLocal(locale);
   }, []);
 
