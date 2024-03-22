@@ -20,7 +20,8 @@ export const UserData = ({
   t
 }: any) => {
   const [dataLayout, setDataLayout] = useState(false);
-  const [dataAndTime, setDataAndTime] = useState('');
+  const [data, setData] = useState('');
+  const [time, setTime] = useState('');
   const [addressLayout, setAddressLayout] = useState(false);
   const [address, setAddress] = useState('');
 
@@ -44,8 +45,8 @@ export const UserData = ({
 
   useEffect(() => {
     setTotalAddress(address);
-    setTotalDate(dataAndTime);
-  }, [address, dataAndTime]);
+    setTotalDate(`${data} ${time}`);
+  }, [address, data, time]);
 
   return (
     <div className="user-data-from">
@@ -72,20 +73,19 @@ export const UserData = ({
         </div>
         <div className="_flex _gap-5">
           {!dataLayout ? (
-            <div className={`select-block ${dataAndTime ? 'selected-block' : ''}`} style={{ cursor: 'pointer' }} onClick={() => setDataLayout(true)}>
-              {dataAndTime === '' ? t('Data and time') : dataAndTime}
+            <div className={`select-block ${data && time ? 'selected-block' : ''}`} style={{ cursor: 'pointer' }} onClick={() => setDataLayout(true)}>
+              {!(data && time) ? t('Data and time') : `${data} ${time}`}
               <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 48 49" fill="none">
                 <path d="M24.0009 14.9027C25.4009 14.9027 26.8009 15.4427 27.8609 16.5027L40.9009 29.5427C41.4809 30.1227 41.4809 31.0827 40.9009 31.6627C40.3209 32.2427 39.3609 32.2427 38.7809 31.6627L25.7409 18.6227C24.7809 17.6627 23.2209 17.6627 22.2609 18.6227L9.22094 31.6627C8.64095 32.2427 7.68094 32.2427 7.10094 31.6627C6.52094 31.0827 6.52094 30.1227 7.10094 29.5427L20.1409 16.5027C21.2009 15.4427 22.6009 14.9027 24.0009 14.9027Z" fill="#13277E"/>
               </svg>
             </div>
           ) : (
             <div className="select-block-open select-block-open-data-time">
-              <DateAndTime dataAndTime={dataAndTime} setDataAndTime={setDataAndTime} t={t} />
+              <DateAndTime data={data} setData={setData} time={time} setTime={setTime} t={t} />
               <div
-                className={`order-wrapper ${!dataAndTime.split(' ')[0] || !dataAndTime.split(' ')[1] ? ' order-wrapper-disabled' : ''}`}
+                className={`order-wrapper ${!(data && time) ? ' order-wrapper-disabled' : ''}`}
                 onClick={() => {
-                  const time = dataAndTime.split(' ');
-                  if (!time[0] || !time[1]) return void 0;
+                  if (!(data && time)) return void 0;
                   setDataLayout(false);
                 }}
               >

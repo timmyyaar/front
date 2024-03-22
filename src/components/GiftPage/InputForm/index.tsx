@@ -21,7 +21,7 @@ export const InputForm = ({ t }: any) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       cache: 'no-store',
-      body: JSON.stringify({ fEmail, fPhone, comment }),
+      body: JSON.stringify({ email: fEmail, phone: fPhone, comment }),
     });
 
     const data = await response.json();

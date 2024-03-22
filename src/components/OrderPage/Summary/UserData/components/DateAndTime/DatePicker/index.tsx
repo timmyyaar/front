@@ -31,6 +31,21 @@ export const DatePicker = ({ data, setData, t }: any) => {
 		setCurrentMonth(nextMonthDate);
 	};
 
+	const checkDisableDay = (date: string) => {
+		const today = new Date();
+		const currentMonth = today.getMonth() + 1;
+		const formattedMonth = (currentMonth < 10) ? `0${currentMonth}` : currentMonth;
+		const currentDate = `${today.getDate()}/${formattedMonth}/${today.getFullYear()}`;
+		const parts1 = currentDate.split('/');
+		const parts2 = date.split('/');
+		const d1 = new Date(`${parts1[2]}-${parts1[1]}-${parts1[0]}`);
+		const d2 = new Date(`${parts2[2]}-${parts2[1]}-${parts2[0]}`);
+		d1.setHours(0, 0, 0, 0);
+		d2.setHours(0, 0, 0, 0);
+
+		return d1 >= d2;
+	};
+
 	const generateCalendar = () => {
 		const daysInMonth = getDaysInMonth(currentMonth);
 		const firstDayOfMonth = getFirstDayOfMonth(currentMonth);
@@ -38,7 +53,7 @@ export const DatePicker = ({ data, setData, t }: any) => {
 
 		for (let i = 0; i < firstDayOfMonth; i++) {
 			calendar.push(
-				<div className="day-cell" key={`empty-${i}`}>{' '}</div>
+				<div className="day-cell disable-day" key={`empty-${i}`}>{' '}</div>
 			);
 		}
 
@@ -46,8 +61,13 @@ export const DatePicker = ({ data, setData, t }: any) => {
 			let currentDay = `${day}/${currentMonth.toLocaleString('en-US', { month: '2-digit' })}/${currentMonth.getFullYear()}`
 			calendar.push(
 				<div
-					className={`day-cell ${currentDay === data ? 'selected-day' : ''} _flex _items-center _justify-center _cursor-pointer`}
-					onClick={() => setData(currentDay)}
+					className={`
+						day-cell ${currentDay === data ? 'selected-day' : ''} ${checkDisableDay(currentDay) ? 'disable-day' : ''}
+						_flex _items-center _justify-center _cursor-pointer
+					`}
+					onClick={() => {
+						if (!checkDisableDay(currentDay)) setData(currentDay);
+					}}
 					key={day}
 				>
 					{day}

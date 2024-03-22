@@ -43,4 +43,15 @@
     background: #2B8AFC;
     border-radius: 8px;
   }
+
+  .disable-day {
+    color: #9E9E9E;
+
+    &:hover {
+      color: #9E9E9E;
+      background: #ECF0FF;
+      border-radius: 8px;
+      cursor: default;
+    }
+  }
 }

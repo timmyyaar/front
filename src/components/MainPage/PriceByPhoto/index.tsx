@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { MessengerIcon } from '@/components/common/icons/components/Messenger';
 import { TelegramIcon } from '@/components/common/icons/components/Telegram';
 import { WhatsappIcon } from '@/components/common/icons/components/Whatsapp';
+import { InstIcon } from '@/components/common/icons/components/Inst';
 import { Writer } from '@/components/common/Writer';
 
 import bubblesSvg from './icons/bubbles.svg';
@@ -71,9 +72,9 @@ export const PriceByPhoto = (props: any) => {
             <TelegramIcon />
             <div>Telegram</div>
           </a>
-          <a className="social-button" href="https://t.me/takeyoourtime" target="blanc">
-            <TelegramIcon />
-            <div>Telegram</div>
+          <a className="social-button" href="https://www.instagram.com/takeyourtime_krakow/" target="blanc">
+            <InstIcon />
+            <div>Instagram</div>
           </a>
           <a className="social-button" href="https://wa.me/48730003997" target="blanc">
             <WhatsappIcon />
