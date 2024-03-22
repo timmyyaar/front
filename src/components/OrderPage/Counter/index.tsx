@@ -88,7 +88,7 @@ export const CounterComponent: FC<IProps> = (props) => {
   return counter.length ? (
     <div className="counter-component-wrapper">
       {counter.map((el: any, i: number) => (
-        <Fragment key={JSON.stringify(el)}>
+        <Fragment key={i}>
           {el.title ? (
             <div>
               <div className="title-wrapper">
@@ -120,8 +120,8 @@ export const CounterComponent: FC<IProps> = (props) => {
                 minValue={el?.minCount ?? 0}
                 title={el.value!}
                 onChange={(number) => onChangeCounter(number, i)}
-                onMinus={() => onChangeCounter(el.count! - 1, i)}
-                onPlus={() => onChangeCounter(el.count! + 1, i)}
+                onMinus={() => onChangeCounter(+el.count! - 1, i)}
+                onPlus={() => onChangeCounter(+el.count! + 1, i)}
                 t={t}
               />
             </>

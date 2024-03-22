@@ -1,9 +1,5 @@
-import React, { FC } from "react";
+import React, { ChangeEvent, FC } from "react";
 import Cookies from "js-cookie";
-import Image from "next/image";
-
-import minusSvg from "./icons/minus.svg";
-import plusSvg from "./icons/plus.svg";
 
 import "./style.scss";
 
@@ -21,9 +17,10 @@ export const Counter: FC<IProps> = (props) => {
   const { value, title = "", minValue, onChange, onMinus, onPlus, t } = props;
   const limit = value === minValue;
 
-  // @ts-ignore
-  const enterNumbers = (e) => {
-    onChange(e.target.value);
+  const enterNumbers = ({
+    target: { value: updatedValue },
+  }: ChangeEvent<HTMLInputElement>) => {
+    onChange(+updatedValue || 0);
   };
 
   const countTitle = () => {
@@ -92,6 +89,8 @@ export const Counter: FC<IProps> = (props) => {
     return title;
   };
 
+  const valueLength = value.toString().length;
+
   return (
     <div className="counter-component">
       <div
@@ -122,7 +121,7 @@ export const Counter: FC<IProps> = (props) => {
             textAlign: "end",
             backgroundColor: "#ECF0FF",
             outline: "none",
-            width: "10%",
+            width: `${valueLength}ch`,
             marginRight: "2px",
           }}
           value={value}
