@@ -191,7 +191,7 @@ export const Cleaning = (props: any) => {
           onClick={(el: string) => setTab(el)}
         />
       </div>
-      <div className="mobile-none">
+      <div className="mobile-none _w-full">
         <div className={"room-img-wrapper" + " " + room.toLowerCase()}>
           <Image src={roomImage} alt="" priority />
         </div>
