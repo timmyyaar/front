@@ -1,3 +1,5 @@
+import { getOzonationMultiplier } from "@/utils";
+
 export const getEstimateFromCounterByService = (
   mainService: string,
   counter: any
@@ -89,7 +91,6 @@ export const getEstimateFromCounterByService = (
       }, 180);
 
     case "Post-construction":
-      console.log(counter);
       return counter.reduce((acc: number, el: any, i: number) => {
         if (i === 0) {
           return (acc += el.value * 30);
@@ -187,7 +188,7 @@ export const getPriceFromCounterByService = (
     case "Subscription":
       return counter.reduce((acc: number, el: any, i: number) => {
         if (i === 0 && el.value > 1) acc += (el.value - 1) * 40;
-        if (i === 1 && el.value > 1) acc += (el.value - 1) * 45;
+        if (i === 1 && el.value > 1) acc += (el.value - 1) * 50;
         if (i === 2 && el.value === "Kitchen") acc += 30;
 
         return acc;
@@ -200,9 +201,9 @@ export const getPriceFromCounterByService = (
       }, 0);
 
     case "Ozonation":
-      return counter.reduce((acc: number, el: any, i: number) => {
-        if (i === 0) acc += el.value * 7;
-        if (i === 1) acc += el.value * 40;
+      return counter.reduce((acc: number, { value }: any, i: number) => {
+        if (i === 0) acc += value * getOzonationMultiplier(value);
+        if (i === 1) acc += value * 40;
 
         return acc;
       }, 0);
@@ -223,7 +224,7 @@ export const getPriceFromCounterByService = (
         if (i === 0) {
           acc += el.value * 10;
         } else if (i === 1 && el.value > 0) {
-          acc += el.value === 1 ? 150 : (el.value - 1) * 20 + 150;
+          acc += el.value === 1 ? 150 : (el.value - 1) * 25 + 150;
         }
 
         return acc;

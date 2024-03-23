@@ -439,6 +439,7 @@ export const Summary: FC<IProps> = (props: any) => {
                 personalData={personalData}
                 setPersonalData={setPersonalData}
                 t={t}
+                isPrivateHouse={isPrivateHouse}
               />
               <div
                 className={`order-wrapper _cursor-pointer ${

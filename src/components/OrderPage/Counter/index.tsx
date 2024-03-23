@@ -13,6 +13,9 @@ import { Counter } from "./components/Counter";
 import { getCounterByMainService, getIsPrivateHouse } from "./utils";
 import "./style.scss";
 import PrivateHouse from "@/components/OrderPage/PrivateHouse";
+import { NUMBER_REGEX } from "@/constants";
+import { getOzonationMultiplier } from "@/utils";
+import Cost from "@/components/OrderPage/Counter/components/Cost";
 
 interface IProps {
   mainService: string;
@@ -93,20 +96,7 @@ export const CounterComponent: FC<IProps> = (props) => {
             <div>
               <div className="title-wrapper">
                 {el.title ? <div className="title">{t(el.title)}</div> : null}
-                {el.cost ? (
-                  <div className="cost-wrapper">
-                    {el.cost.indexOf("m2") !== -1 ? (
-                      <>
-                        {el.cost.replace("m2", "")}
-                        <>
-                          m<sup>2</sup>
-                        </>
-                      </>
-                    ) : (
-                      el.cost
-                    )}
-                  </div>
-                ) : null}
+                {el.cost ? <Cost {...el} /> : null}
               </div>
               {el.subtitle ? (
                 <div className="sub-title-wrapper">{t(el.subtitle)}</div>
@@ -120,8 +110,20 @@ export const CounterComponent: FC<IProps> = (props) => {
                 minValue={el?.minCount ?? 0}
                 title={el.value!}
                 onChange={(number) => onChangeCounter(number, i)}
-                onMinus={() => onChangeCounter(+el.count! - 1, i)}
-                onPlus={() => onChangeCounter(+el.count! + 1, i)}
+                onMinus={() => {
+                  const updatedCount =
+                    +el.count -
+                    (el.value === "seater sofa" && +el.count === 2 ? 2 : 1);
+
+                  onChangeCounter(updatedCount, i);
+                }}
+                onPlus={() => {
+                  const updatedCount =
+                    +el.count +
+                    (el.value === "seater sofa" && +el.count === 0 ? 2 : 1);
+
+                  onChangeCounter(updatedCount, i);
+                }}
                 t={t}
               />
             </>
