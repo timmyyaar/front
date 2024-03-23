@@ -3,7 +3,7 @@
 
   .main-title {
     margin-bottom: 20px;
-    color: #13277E;
+    color: #13277e;
     font-size: 40px;
     font-weight: 600;
     line-height: 52px;
@@ -28,7 +28,7 @@
     margin-top: 32px;
     width: 100%;
     border-radius: 24px;
-    background: #ECF0FF;
+    background: #ecf0ff;
 
     .sales-list {
       margin: 28px 20px 28px 28px;
@@ -50,7 +50,7 @@
           padding: 8px;
           align-items: center;
           border-radius: 72px;
-          background: #F9C630;
+          background: #f9c630;
           color: #232323;
           font-size: 20px;
           font-weight: 600;
@@ -60,10 +60,10 @@
 
       .sale-item.active {
         border-radius: 88px;
-        background: #2B8AFC;
+        background: #2b8afc;
 
         .title {
-          color: #F9F9F9;
+          color: #f9f9f9;
         }
       }
     }
@@ -85,7 +85,7 @@
         .text {
           margin: 16px 0 24px 0;
           padding: 0 20px;
-          color: #5C5C5C;
+          color: #5c5c5c;
           font-size: 16px;
           font-weight: 400;
           line-height: 24px;
@@ -101,7 +101,7 @@
 
         .old-coast {
           margin-left: 8px;
-          color: #5C5C5C;
+          color: #5c5c5c;
           font-size: 16px;
           font-weight: 400;
           line-height: 21px;
@@ -112,15 +112,15 @@
           margin: 24px 14px 0 14px;
           padding: 18px 0;
           border-radius: 40px;
-          background: #2B8AFC;
-          color: #F9F9F9;
+          background: #2b8afc;
+          color: #f9f9f9;
           font-size: 16px;
           font-weight: 500;
           line-height: 20px;
         }
 
         .button:hover {
-          background: #0073FC;
+          background: #0073fc;
         }
       }
     }
@@ -171,15 +171,15 @@
 
       .sub-mobile-sales-item-active {
         border-radius: 6px;
-        background: #2B8AFC;
+        background: #2b8afc;
 
         .sub-mobile-sales-sale {
           border-radius: 72px;
-          background: #F9C630;
+          background: #f9c630;
         }
 
         .sub-mobile-sales-title {
-          color: #F9F9F9;
+          color: #f9f9f9;
         }
       }
     }
@@ -193,7 +193,7 @@
       .sales-mobile-item {
         padding: 16px;
         border-radius: 12px;
-        background: #ECF0FF;
+        background: #ecf0ff;
       }
 
       .sales-mobile-title {
@@ -218,7 +218,7 @@
         }
 
         .sales-mobile-old-price {
-          color: var(--Text-Secondary, #5C5C5C);
+          color: var(--Text-Secondary, #5c5c5c);
           font-size: 16px;
           font-weight: 400;
           line-height: 130%;
@@ -231,19 +231,26 @@
         width: 130px;
         padding: 14px 0;
         border-radius: 40px;
-        background: #2B8AFC;
-        color: #F9F9F9;
+        background: #2b8afc;
+        color: #f9f9f9;
         text-align: center;
         font-size: 16px;
         font-weight: 500;
         line-height: 128%;
         cursor: pointer;
       }
+
+      .mobile-disabled {
+        @media screen and (max-width: 950px) {
+          pointer-events: none;
+          background: #7eb8ff;
+        }
+      }
     }
 
     .sub-text-below-mobile {
       margin-top: 20px;
-      color: #5C5C5C;
+      color: #5c5c5c;
       text-align: center;
       font-size: 14px;
       font-weight: 400;

@@ -24,12 +24,14 @@ export const UserData = ({
   personalData,
   setPersonalData,
   t,
+  isPrivateHouse,
 }: any) => {
   const [dataLayout, setDataLayout] = useState(false);
-  const [data, setData] = useState('');
-  const [time, setTime] = useState('');
+  const [data, setData] = useState("");
+  const [time, setTime] = useState("");
   const [addressLayout, setAddressLayout] = useState(false);
   const [address, setAddress] = useState("");
+  const [fullAddress, setFullAddress] = useState("");
 
   const [street, setStreet] = useState("");
   const [house, setHouse] = useState("");
@@ -39,7 +41,15 @@ export const UserData = ({
   const [doorPhone, setDoorPhone] = useState("");
   const [more, setMore] = useState("");
 
-  const requiredFields = street && house && apartment;
+  const requiredFields = street && house && (isPrivateHouse ? true : apartment);
+
+  useEffect(() => {
+    if (isPrivateHouse) {
+      setApartment("");
+      setDoorPhone("");
+      setEntrance("");
+    }
+  }, [isPrivateHouse]);
 
   useEffect(() => {
     if (
@@ -55,13 +65,22 @@ export const UserData = ({
       setAddress(
         `${street} ${house} ${apartment} ${postcode} ${entrance} ${doorPhone} ${more}`
       );
+      setFullAddress(
+        `Street: ${street}, House: ${house} ${
+          isPrivateHouse ? "(Private house)" : ""
+        }${apartment ? `, Apartment: ${apartment}` : ""}${
+          postcode ? `, Postcode: ${postcode}` : ""
+        }${entrance ? `, Entrance: ${entrance}` : ""}${
+          doorPhone ? `, Door phone: ${doorPhone}` : ""
+        }${more ? `, Additional information: ${more}` : ""}`
+      );
     }
-  }, [addressLayout]);
+  }, [addressLayout, isPrivateHouse]);
 
   useEffect(() => {
-    setTotalAddress(address);
+    setTotalAddress(fullAddress);
     setTotalDate(`${data} ${time}`);
-  }, [address, data, time]);
+  }, [fullAddress, data, time]);
 
   return (
     <div className="user-data-from">
@@ -94,17 +113,38 @@ export const UserData = ({
         </div>
         <div className="_flex _gap-5">
           {!dataLayout ? (
-            <div className={`select-block ${data && time ? 'selected-block' : ''}`} style={{ cursor: 'pointer' }} onClick={() => setDataLayout(true)}>
-              {!(data && time) ? t('Data and time') : `${data} ${time}`}
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 48 49" fill="none">
-                <path d="M24.0009 14.9027C25.4009 14.9027 26.8009 15.4427 27.8609 16.5027L40.9009 29.5427C41.4809 30.1227 41.4809 31.0827 40.9009 31.6627C40.3209 32.2427 39.3609 32.2427 38.7809 31.6627L25.7409 18.6227C24.7809 17.6627 23.2209 17.6627 22.2609 18.6227L9.22094 31.6627C8.64095 32.2427 7.68094 32.2427 7.10094 31.6627C6.52094 31.0827 6.52094 30.1227 7.10094 29.5427L20.1409 16.5027C21.2009 15.4427 22.6009 14.9027 24.0009 14.9027Z" fill="#13277E"/>
+            <div
+              className={`select-block ${data && time ? "selected-block" : ""}`}
+              style={{ cursor: "pointer" }}
+              onClick={() => setDataLayout(true)}
+            >
+              {!(data && time) ? t("Data and time") : `${data} ${time}`}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 48 49"
+                fill="none"
+              >
+                <path
+                  d="M24.0009 14.9027C25.4009 14.9027 26.8009 15.4427 27.8609 16.5027L40.9009 29.5427C41.4809 30.1227 41.4809 31.0827 40.9009 31.6627C40.3209 32.2427 39.3609 32.2427 38.7809 31.6627L25.7409 18.6227C24.7809 17.6627 23.2209 17.6627 22.2609 18.6227L9.22094 31.6627C8.64095 32.2427 7.68094 32.2427 7.10094 31.6627C6.52094 31.0827 6.52094 30.1227 7.10094 29.5427L20.1409 16.5027C21.2009 15.4427 22.6009 14.9027 24.0009 14.9027Z"
+                  fill="#13277E"
+                />
               </svg>
             </div>
           ) : (
             <div className="select-block-open select-block-open-data-time">
-              <DateAndTime data={data} setData={setData} time={time} setTime={setTime} t={t} />
+              <DateAndTime
+                data={data}
+                setData={setData}
+                time={time}
+                setTime={setTime}
+                t={t}
+              />
               <div
-                className={`order-wrapper ${!(data && time) ? ' order-wrapper-disabled' : ''}`}
+                className={`order-wrapper ${
+                  !(data && time) ? " order-wrapper-disabled" : ""
+                }`}
                 onClick={() => {
                   if (!(data && time)) return void 0;
                   setDataLayout(false);
@@ -117,10 +157,23 @@ export const UserData = ({
         </div>
         <div className="_flex _gap-5">
           {!addressLayout ? (
-            <div className="select-block" style={{ cursor: 'pointer' }} onClick={() => setAddressLayout(true)}>
-              {address === '' ? t('Address') : address}
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 48 49" fill="none">
-                <path d="M24.0009 14.9027C25.4009 14.9027 26.8009 15.4427 27.8609 16.5027L40.9009 29.5427C41.4809 30.1227 41.4809 31.0827 40.9009 31.6627C40.3209 32.2427 39.3609 32.2427 38.7809 31.6627L25.7409 18.6227C24.7809 17.6627 23.2209 17.6627 22.2609 18.6227L9.22094 31.6627C8.64095 32.2427 7.68094 32.2427 7.10094 31.6627C6.52094 31.0827 6.52094 30.1227 7.10094 29.5427L20.1409 16.5027C21.2009 15.4427 22.6009 14.9027 24.0009 14.9027Z" fill="#13277E"/>
+            <div
+              className="select-block"
+              style={{ cursor: "pointer" }}
+              onClick={() => setAddressLayout(true)}
+            >
+              {address === "" ? t("Address") : address}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 48 49"
+                fill="none"
+              >
+                <path
+                  d="M24.0009 14.9027C25.4009 14.9027 26.8009 15.4427 27.8609 16.5027L40.9009 29.5427C41.4809 30.1227 41.4809 31.0827 40.9009 31.6627C40.3209 32.2427 39.3609 32.2427 38.7809 31.6627L25.7409 18.6227C24.7809 17.6627 23.2209 17.6627 22.2609 18.6227L9.22094 31.6627C8.64095 32.2427 7.68094 32.2427 7.10094 31.6627C6.52094 31.0827 6.52094 30.1227 7.10094 29.5427L20.1409 16.5027C21.2009 15.4427 22.6009 14.9027 24.0009 14.9027Z"
+                  fill="#13277E"
+                />
               </svg>
             </div>
           ) : (
@@ -143,14 +196,16 @@ export const UserData = ({
                       onChange={(e) => setHouse(e.target.value)}
                     />
                   </div>
-                  <div className="input-wrapper address-layout">
-                    <input
-                      type="text"
-                      placeholder={t("Apartment")}
-                      value={apartment}
-                      onChange={(e) => setApartment(e.target.value)}
-                    />
-                  </div>
+                  {!isPrivateHouse && (
+                    <div className="input-wrapper address-layout">
+                      <input
+                        type="text"
+                        placeholder={t("Apartment")}
+                        value={apartment}
+                        onChange={(e) => setApartment(e.target.value)}
+                      />
+                    </div>
+                  )}
                 </div>
                 <div className="_flex _gap-5">
                   <div className="input-wrapper address-layout">
@@ -180,24 +235,26 @@ export const UserData = ({
                     </div>
                   </div>
                 </div>
-                <div className="_flex _gap-5">
-                  <div className="input-wrapper address-layout">
-                    <input
-                      type="text"
-                      placeholder={t("Entrance number")}
-                      value={entrance}
-                      onChange={(e) => setEntrance(e.target.value)}
-                    />
+                {!isPrivateHouse && (
+                  <div className="_flex _gap-5">
+                    <div className="input-wrapper address-layout">
+                      <input
+                        type="text"
+                        placeholder={t("Entrance number")}
+                        value={entrance}
+                        onChange={(e) => setEntrance(e.target.value)}
+                      />
+                    </div>
+                    <div className="input-wrapper address-layout">
+                      <input
+                        type="text"
+                        placeholder={t("Doorphone code")}
+                        value={doorPhone}
+                        onChange={(e) => setDoorPhone(e.target.value)}
+                      />
+                    </div>
                   </div>
-                  <div className="input-wrapper address-layout">
-                    <input
-                      type="text"
-                      placeholder={t("Doorphone code")}
-                      value={doorPhone}
-                      onChange={(e) => setDoorPhone(e.target.value)}
-                    />
-                  </div>
-                </div>
+                )}
               </div>
               <div className="input-wrapper address-layout">
                 <textarea

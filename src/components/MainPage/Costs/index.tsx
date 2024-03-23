@@ -6,7 +6,7 @@ import { Coasts } from "@/constants";
 import { Writer } from "@/components/common/Writer";
 import { Switcher } from "@/components/common/Switcher";
 import { Discount } from "./icons/Discount";
-import { tabs, sales } from "./constants";
+import { tabs, sales, TABS } from "./constants";
 import "./style.scss";
 
 export const Costs = (props: any) => {
@@ -16,7 +16,7 @@ export const Costs = (props: any) => {
   const router = useRouter();
 
   const getText = (title: string) => {
-    if (tab === "One-time") {
+    if (tab === TABS.ONE_TIME) {
       if (title === "1-bedroom") return "One-time 1-bedroom cleaning";
       if (title === "2-bedroom") return "One-time 2-bedroom cleaning";
       if (title === "3-bedroom") return "One-time 3-bedroom cleaning";
@@ -43,9 +43,9 @@ export const Costs = (props: any) => {
   };
 
   const getCoast = (title: string) => {
-    if (tab === "One-time") {
+    if (tab === TABS.ONE_TIME) {
       // @ts-ignore
-      return Coasts["One-time"][title];
+      return Coasts[TABS.ONE_TIME][title];
     } else {
       // @ts-ignore
       return Coasts[salesCost][title];
@@ -53,9 +53,9 @@ export const Costs = (props: any) => {
   };
 
   const getOldCoast = (title: string) => {
-    if (tab === "One-time") return "";
+    if (tab === TABS.ONE_TIME) return "";
     // @ts-ignore
-    return Coasts["One-time"][title];
+    return Coasts[TABS.ONE_TIME][title];
   };
 
   const costs = [
@@ -100,7 +100,7 @@ export const Costs = (props: any) => {
       </div>
       <div className="mobile-none">
         <div className="costs-sales-wrapper _flex _justify-between">
-          {tab === "Subscription" ? (
+          {tab === TABS.SUBSCRIPTION ? (
             <div className="sales-list _flex _flex-col _justify-center">
               {sales.map((el) => (
                 <div
@@ -161,7 +161,11 @@ export const Costs = (props: any) => {
                 </div>
                 <div
                   className="button _cursor-pointer"
-                  onClick={() => router.push("/order")}
+                  onClick={() => {
+                    router.push(
+                      tab === TABS.SUBSCRIPTION ? "/subscription" : "/order"
+                    );
+                  }}
                 >
                   {t("Order")}
                 </div>
@@ -171,7 +175,7 @@ export const Costs = (props: any) => {
         </div>
       </div>
       <div className="sub-mobile-wrapper mobile-only">
-        {tab === "Subscription" ? (
+        {tab === TABS.SUBSCRIPTION ? (
           <div className="sub-mobile-sales-wrapper">
             {sales.map((el, i) => (
               <div
@@ -211,8 +215,17 @@ export const Costs = (props: any) => {
                   </div>
                 ) : null}
               </div>
-              <div className="sales-mobile-item-order-btn" onClick={() => router.push('/subscription')}>
-                {t('Order')}
+              <div
+                className={`sales-mobile-item-order-btn ${
+                  tab === TABS.SUBSCRIPTION ? "mobile-disabled" : ""
+                }`}
+                onClick={() => {
+                  router.push(
+                    tab === TABS.SUBSCRIPTION ? "/subscription" : "/order"
+                  );
+                }}
+              >
+                {t("Order")}
               </div>
             </div>
           ))}
