@@ -8,7 +8,9 @@
 
   .order-wrapper {
     height: 56px;
-    padding-top: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 40px;
     background: #2b8afc;
     color: #f9f9f9;
@@ -71,11 +73,12 @@
       margin-right: 8px;
       margin-bottom: 8px;
       float: left;
-      height: 36px;
+      height: 100%;
       width: max-content;
       padding: 0 6px 0 12px;
       border-radius: 45px;
       border: 1px solid #c8c8c8;
+      max-width: 100%;
 
       .icon-wrapper {
         margin-left: 4px;
@@ -162,6 +165,9 @@
 }
 
 .order-wrapper-absolute {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   bottom: 24px;
   left: 50%;
@@ -170,7 +176,6 @@
   width: 90%;
 
   height: 56px;
-  padding-top: 18px;
   border-radius: 40px;
   background: #2b8afc;
   color: #f9f9f9;
@@ -178,4 +183,10 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 21px;
+
+  .old-price {
+    font-size: 12px;
+    line-height: 128%;
+    text-decoration: line-through;
+  }
 }

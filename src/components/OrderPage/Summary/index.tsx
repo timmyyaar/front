@@ -1,5 +1,7 @@
 import React, { FC, useState, useEffect, useRef } from "react";
 
+import { useRouter } from "next/navigation";
+
 import { ModalRequest } from "@/components/common/ModalRequest";
 import { Overlay } from "@/components/common/Overlay";
 import { useClickOutside } from "@/hooks/useClickOutSide";
@@ -89,9 +91,18 @@ export const Summary: FC<IProps> = (props: any) => {
   const [previousCleaner, setPreviousCleaner] = useState(false);
   const [privacyAndPolicy, setPrivacyAndPolicy] = useState(false);
   const [personalData, setPersonalData] = useState(false);
+  const [isOrderLoading, setIsOrderLoading] = useState(false);
+
+  const router = useRouter();
 
   const [modal, setModal] = useState(false);
-  const ref = useClickOutside(() => setModal(false));
+
+  const onCloseModal = () => {
+    setModal(false);
+    router.push("/");
+  };
+
+  const ref = useClickOutside(() => onCloseModal());
 
   const requiredFields =
     name &&
@@ -265,19 +276,25 @@ export const Summary: FC<IProps> = (props: any) => {
         }
       : {};
 
-    const response = await fetch(
-      process.env.NEXT_PUBLIC_API_URL + "/api/order",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        cache: "no-store",
-        body: JSON.stringify({ ...main, ...mainService, ...secService }),
-      }
-    );
-    const data = await response.json();
+    setIsOrderLoading(true);
 
-    if (data) {
-      setModal(true);
+    try {
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_API_URL + "/api/order",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          cache: "no-store",
+          body: JSON.stringify({ ...main, ...mainService, ...secService }),
+        }
+      );
+      const data = await response.json();
+
+      if (data) {
+        setModal(true);
+      }
+    } finally {
+      setIsOrderLoading(false);
     }
   };
 
@@ -347,7 +364,7 @@ export const Summary: FC<IProps> = (props: any) => {
             <ModalRequest
               text={t("order_page_modal_title")}
               title={t("order_page_modal_text")}
-              onClose={() => setModal(false)}
+              onClose={onCloseModal}
             />
           </div>
         </Overlay>
@@ -443,8 +460,10 @@ export const Summary: FC<IProps> = (props: any) => {
               />
               <div
                 className={`order-wrapper _cursor-pointer ${
-                  !requiredFields ? "order-wrapper-disabled" : ""
-                }`}
+                  !requiredFields || isOrderLoading
+                    ? "order-wrapper-disabled"
+                    : ""
+                } ${isOrderLoading ? "loading" : ""}`}
                 style={{ marginTop: "24px" }}
                 onClick={() => {
                   if (!requiredFields) return void 0;
@@ -466,8 +485,8 @@ export const Summary: FC<IProps> = (props: any) => {
             t("Order")
           ) : !subSale ? (
             sale ? (
-              <>
-                <div className="current-price">
+              <div className="_flex _items-end">
+                <div className="current-price _mr-2">
                   {getNewPrice(price, sale)}
                   {t("zl")}
                 </div>
@@ -475,7 +494,7 @@ export const Summary: FC<IProps> = (props: any) => {
                   {price}
                   {t("zl")}
                 </div>
-              </>
+              </div>
             ) : (
               <div className="current-price">
                 {price}
@@ -483,8 +502,8 @@ export const Summary: FC<IProps> = (props: any) => {
               </div>
             )
           ) : (
-            <>
-              <div className="current-price">
+            <div className="_flex _items-end">
+              <div className="current-price _mr-2">
                 {makeSaleFromSub(price, subSale)}
                 {t("zl")}
               </div>
@@ -492,7 +511,7 @@ export const Summary: FC<IProps> = (props: any) => {
                 {price}
                 {t("zl")}
               </div>
-            </>
+            </div>
           )}
         </div>
       ) : null}

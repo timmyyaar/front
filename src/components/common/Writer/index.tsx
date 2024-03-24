@@ -9,7 +9,11 @@ export const Writer: FC<Props> = (props) => {
   const { text, alignLeft } = props;
 
   return text.indexOf("\\n") === -1 ? (
-    <div className={`whitespace-normal ${alignLeft ? "_text-left" : ""}`}>
+    <div
+      className={`whitespace-normal _break-word ${
+        alignLeft ? "_text-left" : ""
+      }`}
+    >
       {text}
     </div>
   ) : (
