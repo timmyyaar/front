@@ -99,7 +99,7 @@ export const Summary: FC<IProps> = (props: any) => {
 
   const onCloseModal = () => {
     setModal(false);
-    router.push("/");
+    //router.push("/");
   };
 
   const ref = useClickOutside(() => onCloseModal());
@@ -182,24 +182,32 @@ export const Summary: FC<IProps> = (props: any) => {
     };
   };
 
-  const getPrice = () => {
+  const getMainServicePrice = () => {
     const countEstimate =
       getPriceFromCounterByService(title, counter) * (isPrivateHouse ? 1.3 : 1);
-    const secCountEstimate = getPriceFromCounterByService(secTitle, secCounter);
     const subServiceEstimate = subService.reduce(
       (acc: number, el: ISubService) => (acc += el?.price || 0),
       0
     );
+
+    return countEstimate + subServiceEstimate;
+  };
+
+  const getSecondServicePrice = () => {
+    const secCountEstimate = getPriceFromCounterByService(secTitle, secCounter);
     const secSubServiceEstimate = secSubService.reduce(
       (acc: number, el: ISubService) => (acc += el?.price || 0),
       0
     );
 
-    const finalPrice =
-      countEstimate +
-      secCountEstimate +
-      subServiceEstimate +
-      secSubServiceEstimate;
+    return secCountEstimate + secSubServiceEstimate;
+  };
+
+  const mainServicePrice = getMainServicePrice();
+  const secondServicePrice = getSecondServicePrice();
+
+  const getPrice = () => {
+    const finalPrice = mainServicePrice + secondServicePrice;
 
     return parseFloat(finalPrice.toFixed(1));
   };
@@ -234,6 +242,12 @@ export const Summary: FC<IProps> = (props: any) => {
       onlinePayment: onlinePayment,
       requestPreviousCleaner: previousCleaner,
       personalData: personalData,
+      mainServicePrice: subSale
+        ? getNewPrice(mainServicePrice, sale)
+        : mainServicePrice,
+      secondServicePrice: subSale
+        ? getNewPrice(secondServicePrice, sale)
+        : secondServicePrice,
       price: subSale ? getNewPrice(price, sale) : price,
       promo,
       estimate: estimate.time,
