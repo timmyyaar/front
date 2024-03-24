@@ -66,8 +66,8 @@ export const UserData = ({
         `${street} ${house} ${apartment} ${postcode} ${entrance} ${doorPhone} ${more}`
       );
       setFullAddress(
-        `Street: ${street}, House: ${house} ${
-          isPrivateHouse ? "(Private house)" : ""
+        `Street: ${street}, House: ${house}${
+          isPrivateHouse ? " (Private house)" : ""
         }${apartment ? `, Apartment: ${apartment}` : ""}${
           postcode ? `, Postcode: ${postcode}` : ""
         }${entrance ? `, Entrance: ${entrance}` : ""}${
