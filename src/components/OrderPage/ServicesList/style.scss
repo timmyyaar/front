@@ -11,17 +11,17 @@
     align-items: center;
     gap: 20px;
     border-radius: 16px;
-    border: 4px solid #ECF0FF;
-    background: #ECF0FF;
+    border: 4px solid #ecf0ff;
+    background: #ecf0ff;
     cursor: pointer;
 
     &:hover {
-      background: #DEE5FF;
-      border: 4px solid #DEE5FF;
+      background: #dee5ff;
+      border: 4px solid #dee5ff;
     }
 
     .item-title {
-      color: #1E1E1E;
+      color: #1e1e1e;
       text-align: center;
       font-size: 16px;
       font-weight: 600;
@@ -34,10 +34,10 @@
   }
 
   .active-wrapper {
-    border: 4px solid #2B8AFC;
+    border: 4px solid #2b8afc;
 
     &:hover {
-      border: 4px solid #2B8AFC;
+      border: 4px solid #2b8afc;
     }
   }
 }
@@ -46,7 +46,7 @@
   .services-list-component {
     ._grid._grid-cols-3 {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       grid-template-rows: repeat(2, 1fr);
     }
   }
