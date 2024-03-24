@@ -81,6 +81,11 @@
         font-weight: 600;
         line-height: 110%;
 
+        @media screen and (max-width: 950px) {
+          font-size: 18px;
+          line-height: 22px;
+        }
+
         .old-price {
           margin-left: 10px;
           color: #848484;
@@ -106,7 +111,7 @@
   .sub-services-list-component {
     ._grid._grid-cols-4 {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       grid-template-rows: repeat(2, 1fr);
     }
   }

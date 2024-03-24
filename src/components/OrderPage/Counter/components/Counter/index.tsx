@@ -42,6 +42,18 @@ export const Counter: FC<IProps> = (props) => {
         if (value > 1 && value < 5) return "окна";
         return "окон";
       }
+
+      if (title === "seater sofa") {
+        if (value < 1) {
+          return "диванных мест";
+        }
+
+        if (value < 5) {
+          return "диванных места";
+        }
+
+        return "диванных мест";
+      }
     }
     if (Cookies.get("locale") === "pl") {
       if (title === "bedroom") {
@@ -58,6 +70,10 @@ export const Counter: FC<IProps> = (props) => {
 
       if (title === "windows") {
         return "okien";
+      }
+
+      if (title === "seater sofa") {
+        return "siedziska sofy";
       }
     }
     if (Cookies.get("locale") === "uk") {
@@ -77,6 +93,18 @@ export const Counter: FC<IProps> = (props) => {
         if (value === 1) return "вікно";
         if (value > 1 && value < 5) return "вікна";
         return "вікон";
+      }
+
+      if (title === "seater sofa") {
+        if (value === 0) {
+          return "диванних місць";
+        }
+
+        if (value < 5) {
+          return "диванних місця";
+        }
+
+        return "диванних місць";
       }
     }
 
