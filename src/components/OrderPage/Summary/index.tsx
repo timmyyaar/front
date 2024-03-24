@@ -99,19 +99,10 @@ export const Summary: FC<IProps> = (props: any) => {
 
   const onCloseModal = () => {
     setModal(false);
-    //router.push("/");
+    router.push("/");
   };
 
   const ref = useClickOutside(() => onCloseModal());
-
-  const requiredFields =
-    name &&
-    number &&
-    email &&
-    totalAddress &&
-    totalDate &&
-    privacyAndPolicy &&
-    personalData;
 
   const onRemoveSubService = (title: string, sec: boolean) => {
     if (!sec) {
@@ -270,25 +261,27 @@ export const Summary: FC<IProps> = (props: any) => {
         .join(" "),
     };
 
-    const secService = secTitle
-      ? {
-          secTitle,
-          secCounter: secCounter
-            .map((el: any) =>
-              el.title ? t(el.title) + "(" + el.value + ")" : t(el.value)
-            )
-            .join(" "),
-          secSubService: getSubServices(secSubService)
-            .map(
-              (title: string) =>
-                `${t(title + "_summery")} (${
-                  secSubService.filter((el: ISubService) => el.title === title)
-                    .length
-                })`
-            )
-            .join(" "),
-        }
-      : {};
+    const secService =
+      secondServicePrice > 0 && secTitle
+        ? {
+            secTitle,
+            secCounter: secCounter
+              .map((el: any) =>
+                el.title ? t(el.title) + "(" + el.value + ")" : t(el.value)
+              )
+              .join(" "),
+            secSubService: getSubServices(secSubService)
+              .map(
+                (title: string) =>
+                  `${t(title + "_summery")} (${
+                    secSubService.filter(
+                      (el: ISubService) => el.title === title
+                    ).length
+                  })`
+              )
+              .join(" "),
+          }
+        : {};
 
     setIsOrderLoading(true);
 
@@ -311,6 +304,16 @@ export const Summary: FC<IProps> = (props: any) => {
       setIsOrderLoading(false);
     }
   };
+
+  const requiredFields =
+    name &&
+    number &&
+    email &&
+    totalAddress &&
+    totalDate &&
+    privacyAndPolicy &&
+    personalData &&
+    price > 0;
 
   const renderSummeryService = ({
     serviceTitle,
