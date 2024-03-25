@@ -34,7 +34,7 @@ export const Benefits = ({ t }: any) => {
 
   return (
     <div className="benefits-component _flex _flex-col _items-center _gap-6">
-      <div className="benefits-list _grid _grid-cols-4 _gap-3">
+      <div className="benefits-list _grid _gap-3 _w-full">
         {benefits.map((el, i) => (
           <div className="benefit-wrapper _flex _flex-col _items-center _gap-4" key={el.title + i}>
             <Image src={el.svg} alt='' />

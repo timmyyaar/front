@@ -28,12 +28,17 @@ export const SubscriptionPage = (props: any) => {
         <div className="left-col">
           <div className="subscription_header-block">
             <div className="subscription_header-title">
-              <div className="subscription_title">
-                {t("Subscription_page_title")}
-              </div>
-              <div className="subscription_sub_title">
-                {t("subscription_sub_title")}
-              </div>
+              <>
+                <div className="mobile-none subscription_title">
+                  {t("Subscription_page_title")}
+                </div>
+                <div className="mobile-none subscription_sub_title">
+                  {t("subscription_sub_title")}
+                </div>
+                <div className="mobile-only subscription_mobile_title">
+                  {t("How much it costs")}
+                </div>
+              </>
             </div>
             <div className="subscription_content">
               {sales.map((item) => (
@@ -45,7 +50,7 @@ export const SubscriptionPage = (props: any) => {
                   key={JSON.stringify(item)}
                 >
                   <div className="subscription_item_percent">{item.sale}</div>
-                  <div className="subscription_item_percent-wrapper">
+                  <div className="subscription_item_percent-wrapper _mt-1">
                     {t(item.title)}
                   </div>
                 </div>

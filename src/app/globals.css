@@ -28,6 +28,10 @@ code {
   display: none;
 }
 
+.mobile-only-flex {
+  display: none;
+}
+
 @media screen and (max-width: 950px) {
   body {
     overflow-x: hidden;
@@ -39,6 +43,10 @@ code {
 
   .mobile-only {
     display: block;
+  }
+
+  .mobile-only-flex {
+    display: flex;
   }
 }
 

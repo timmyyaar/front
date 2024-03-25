@@ -1,23 +1,12 @@
 .instruction-component {
-  padding: 0 15%;
+  @media screen and (max-width: 950px) {
+    padding: 0 10vw;
+  }
 
   .step-card {
-    width: 188px;
-    height: 187px;
     border-radius: 16px;
-    background: #ECF0FF;
-
-    .step-number {
-      margin: 0 auto 12px auto;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 38px;
-      background: #2B8AFC;
-      color: #ECF0FF;
-    }
+    background: #ecf0ff;
+    min-height: 185px;
 
     .text-wrapper {
       color: #232323;
@@ -28,26 +17,27 @@
     }
 
     .hover-block {
-      display: none;
+      visibility: hidden;
     }
 
     &:hover {
-      background: #DEE4FF;
+      background: #dee4ff;
 
       .un-hover-block {
-        display: none;
+        visibility: hidden;
       }
 
       .hover-block {
-        display: block;
+        visibility: visible;
         text-align: center;
+        padding: 34px 18px;
       }
     }
   }
 
   .overlay-wrapper-component {
     padding: 40px;
-    background-color: #F9F9F9;
+    background-color: #f9f9f9;
     border-radius: 20px;
     position: relative;
 
@@ -59,13 +49,13 @@
       &:hover {
         svg > g > g > path,
         svg > g > path {
-          fill: #0073FC;
+          fill: #0073fc;
         }
       }
     }
 
     .overlay-wrapper-component-title {
-      color: #13277E;
+      color: #13277e;
       margin-bottom: 24px;
       text-align: center;
       font-size: 40px;
@@ -79,6 +69,23 @@
       font-size: 16px;
       font-weight: 400;
       line-height: 150%;
+    }
+  }
+
+  .step-number {
+    margin: 0 auto 12px auto;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 38px;
+    background: #2b8afc;
+    color: #ecf0ff;
+    font-weight: 600;
+
+    @media screen and (max-width: 950px) {
+      margin: 0;
     }
   }
 }
