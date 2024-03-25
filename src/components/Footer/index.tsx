@@ -16,7 +16,7 @@ export const Footer = (props: any) => {
     <footer className="footer-wrapper">
       <div className="_flex _justify-center">
         <div className="logo-wrapper">
-          <FooterLogo />
+          <FooterLogo className="logo-icon"/>
         </div>
       </div>
       <div className="title _flex _justify-center">

@@ -5,7 +5,7 @@ import { ModalRequest } from "@/components/common/ModalRequest";
 import { Overlay } from "@/components/common/Overlay";
 import { useClickOutside } from "@/hooks/useClickOutSide";
 import "./style.scss";
-import { EMAIL_REGEX } from "@/constants";
+import { EMAIL_REGEX, MOBILE_PHONE_REGEX } from "@/constants";
 
 export const InputForm = ({ t }: any) => {
   const [email, setEmail] = useState("");
@@ -38,8 +38,11 @@ export const InputForm = ({ t }: any) => {
   };
 
   const isEmailValid = EMAIL_REGEX.test(email);
+  const isPhoneValid = MOBILE_PHONE_REGEX.test(phone);
   const isSendGiftButtonDisabled =
-    (!email && !phone) || (email && !isEmailValid);
+    (!email && !phone) ||
+    (email && !isEmailValid) ||
+    (isPhoneValid && !isPhoneValid);
 
   return (
     <div className="input-form-component">
@@ -52,7 +55,7 @@ export const InputForm = ({ t }: any) => {
           />
         </div>
       </Overlay>
-      <div className="_mb-6 _flex _flex-col _gap-4">
+      <div className="_mb-4 _flex _flex-col _gap-4">
         <div className="input-wrapper">
           <input
             type="text"

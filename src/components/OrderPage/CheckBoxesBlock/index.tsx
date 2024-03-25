@@ -106,7 +106,6 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
           title={"title-vacuum-cleaner-checkbox"}
           subTitle={"sub-text-vacuum-cleaner-checkbox"}
           price={"30 zl"}
-          oldPrice={mainService === "Subscription" ? "30 zl" : ""}
           setCheck={setVacuumCleaner}
           checked={vacuumCleaner}
           t={t}

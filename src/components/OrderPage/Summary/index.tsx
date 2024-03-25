@@ -14,6 +14,7 @@ import {
   getPriceFromCounterByService,
 } from "./utils";
 import "./style.scss";
+import { EMAIL_REGEX, MOBILE_PHONE_REGEX } from "@/constants";
 
 interface IProps {
   title: string;
@@ -61,6 +62,16 @@ function ScrollDetector() {
   return [scrolledToElement, targetElementRef];
 }
 
+export interface OrderAddress {
+  street: string;
+  house: string;
+  apartment: string;
+  postcode: string;
+  entrance: string;
+  doorPhone: string;
+  more: string;
+}
+
 export const Summary: FC<IProps> = (props: any) => {
   const {
     title,
@@ -83,7 +94,6 @@ export const Summary: FC<IProps> = (props: any) => {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [email, setEmail] = useState("");
-  const [totalAddress, setTotalAddress] = useState("");
   const [totalDate, setTotalDate] = useState("");
 
   const [onlinePayment, setOnlinePayment] = useState(false);
@@ -92,6 +102,19 @@ export const Summary: FC<IProps> = (props: any) => {
   const [privacyAndPolicy, setPrivacyAndPolicy] = useState(false);
   const [personalData, setPersonalData] = useState(false);
   const [isOrderLoading, setIsOrderLoading] = useState(false);
+
+  const [addressObject, setAddressObject] = useState<OrderAddress>({
+    street: "",
+    house: "",
+    apartment: "",
+    postcode: "",
+    entrance: "",
+    doorPhone: "",
+    more: "",
+  });
+
+  const { street, house, apartment, postcode, entrance, doorPhone, more } =
+    addressObject;
 
   const router = useRouter();
 
@@ -228,7 +251,13 @@ export const Summary: FC<IProps> = (props: any) => {
       name,
       number,
       email,
-      address: totalAddress,
+      address: `Street: ${street}, House: ${house}${
+        isPrivateHouse ? " (Private house)" : ""
+      }${apartment ? `, Apartment: ${apartment}` : ""}${
+        postcode ? `, Postcode: ${postcode}` : ""
+      }${entrance ? `, Entrance: ${entrance}` : ""}${
+        doorPhone ? `, Door phone: ${doorPhone}` : ""
+      }${more ? `, Additional information: ${more}` : ""}`,
       date: totalDate,
       onlinePayment: onlinePayment,
       requestPreviousCleaner: previousCleaner,
@@ -305,14 +334,19 @@ export const Summary: FC<IProps> = (props: any) => {
     }
   };
 
+  const addressRequiredFields =
+    street && house && (isPrivateHouse ? true : apartment);
+
   const requiredFields =
     name &&
     number &&
+    MOBILE_PHONE_REGEX.test(number) &&
     email &&
-    totalAddress &&
+    EMAIL_REGEX.test(email) &&
     totalDate &&
     privacyAndPolicy &&
     personalData &&
+    addressRequiredFields &&
     price > 0;
 
   const renderSummeryService = ({
@@ -463,7 +497,6 @@ export const Summary: FC<IProps> = (props: any) => {
                 setNumber={setNumber}
                 email={email}
                 setEmail={setEmail}
-                setTotalAddress={setTotalAddress}
                 setTotalDate={setTotalDate}
                 setOnlinePayment={setOnlinePayment}
                 previousCleaner={previousCleaner}
@@ -474,6 +507,8 @@ export const Summary: FC<IProps> = (props: any) => {
                 setPersonalData={setPersonalData}
                 t={t}
                 isPrivateHouse={isPrivateHouse}
+                addressObject={addressObject}
+                setAddressObject={setAddressObject}
               />
               <div
                 className={`order-wrapper _cursor-pointer ${
@@ -495,7 +530,7 @@ export const Summary: FC<IProps> = (props: any) => {
       </div>
       {!scrolledToElement ? (
         <div
-          className="order-wrapper-absolute _cursor-pointer mobile-only"
+          className="order-wrapper-absolute _cursor-pointer mobile-only-flex"
           onClick={handleScroll}
         >
           {price === 0 ? (

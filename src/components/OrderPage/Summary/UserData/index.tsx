@@ -6,6 +6,7 @@ import { PaymentForm } from "./components/PaymentForm";
 import { CheckBox } from "./components/Checkbox";
 import { DateAndTime } from "./components/DateAndTime";
 import "./style.scss";
+import { OrderAddress } from "@/components/OrderPage/Summary";
 
 export const UserData = ({
   name,
@@ -14,7 +15,6 @@ export const UserData = ({
   setNumber,
   email,
   setEmail,
-  setTotalAddress,
   setTotalDate,
   setOnlinePayment,
   previousCleaner,
@@ -25,62 +25,43 @@ export const UserData = ({
   setPersonalData,
   t,
   isPrivateHouse,
+  addressObject,
+  setAddressObject,
 }: any) => {
   const [dataLayout, setDataLayout] = useState(false);
   const [data, setData] = useState("");
   const [time, setTime] = useState("");
   const [addressLayout, setAddressLayout] = useState(false);
-  const [address, setAddress] = useState("");
-  const [fullAddress, setFullAddress] = useState("");
 
-  const [street, setStreet] = useState("");
-  const [house, setHouse] = useState("");
-  const [apartment, setApartment] = useState("");
-  const [postcode, setPostCode] = useState("");
-  const [entrance, setEntrance] = useState("");
-  const [doorPhone, setDoorPhone] = useState("");
-  const [more, setMore] = useState("");
+  const { street, house, apartment, postcode, entrance, doorPhone, more } =
+    addressObject;
+
+  const shortAddress = `${street} ${house} ${apartment} ${postcode} ${entrance} ${doorPhone} ${more}`;
+
+  const setAddressField = (fieldName: string, value: string) => {
+    setAddressObject((prev: OrderAddress) => ({ ...prev, [fieldName]: value }));
+  };
 
   const requiredFields = street && house && (isPrivateHouse ? true : apartment);
 
   useEffect(() => {
     if (isPrivateHouse) {
-      setApartment("");
-      setDoorPhone("");
-      setEntrance("");
+      setAddressObject({ apartment: "", doorPhone: "", entrance: "" });
     }
   }, [isPrivateHouse]);
 
-  useEffect(() => {
-    if (
-      !addressLayout &&
-      (street ||
-        house ||
-        apartment ||
-        postcode ||
-        entrance ||
-        doorPhone ||
-        more)
-    ) {
-      setAddress(
-        `${street} ${house} ${apartment} ${postcode} ${entrance} ${doorPhone} ${more}`
-      );
-      setFullAddress(
-        `Street: ${street}, House: ${house}${
-          isPrivateHouse ? " (Private house)" : ""
-        }${apartment ? `, Apartment: ${apartment}` : ""}${
-          postcode ? `, Postcode: ${postcode}` : ""
-        }${entrance ? `, Entrance: ${entrance}` : ""}${
-          doorPhone ? `, Door phone: ${doorPhone}` : ""
-        }${more ? `, Additional information: ${more}` : ""}`
-      );
-    }
-  }, [addressLayout, isPrivateHouse]);
+  const isAddressEmpty =
+    !street &&
+    !house &&
+    !apartment &&
+    !postcode &&
+    !entrance &&
+    !doorPhone &&
+    !more;
 
   useEffect(() => {
-    setTotalAddress(fullAddress);
     setTotalDate(`${data} ${time}`);
-  }, [fullAddress, data, time]);
+  }, [data, time]);
 
   return (
     <div className="user-data-from">
@@ -162,7 +143,7 @@ export const UserData = ({
               style={{ cursor: "pointer" }}
               onClick={() => setAddressLayout(true)}
             >
-              {address === "" ? t("Address") : address}
+              {isAddressEmpty ? t("Address") : shortAddress}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="28"
@@ -184,7 +165,7 @@ export const UserData = ({
                     type="text"
                     placeholder={t("Street")}
                     value={street}
-                    onChange={(e) => setStreet(e.target.value)}
+                    onChange={(e) => setAddressField("street", e.target.value)}
                   />
                 </div>
                 <div className="_flex _gap-5">
@@ -193,7 +174,7 @@ export const UserData = ({
                       type="text"
                       placeholder={t("House number")}
                       value={house}
-                      onChange={(e) => setHouse(e.target.value)}
+                      onChange={(e) => setAddressField("house", e.target.value)}
                     />
                   </div>
                   {!isPrivateHouse && (
@@ -202,7 +183,9 @@ export const UserData = ({
                         type="text"
                         placeholder={t("Apartment")}
                         value={apartment}
-                        onChange={(e) => setApartment(e.target.value)}
+                        onChange={(e) =>
+                          setAddressField("apartment", e.target.value)
+                        }
                       />
                     </div>
                   )}
@@ -213,7 +196,9 @@ export const UserData = ({
                       type="text"
                       placeholder={t("Postcode")}
                       value={postcode}
-                      onChange={(e) => setPostCode(e.target.value)}
+                      onChange={(e) =>
+                        setAddressField("postcode", e.target.value)
+                      }
                     />
                   </div>
                   <div className="input-wrapper address-layout">
@@ -242,7 +227,9 @@ export const UserData = ({
                         type="text"
                         placeholder={t("Entrance number")}
                         value={entrance}
-                        onChange={(e) => setEntrance(e.target.value)}
+                        onChange={(e) =>
+                          setAddressField("entrance", e.target.value)
+                        }
                       />
                     </div>
                     <div className="input-wrapper address-layout">
@@ -250,7 +237,9 @@ export const UserData = ({
                         type="text"
                         placeholder={t("Doorphone code")}
                         value={doorPhone}
-                        onChange={(e) => setDoorPhone(e.target.value)}
+                        onChange={(e) =>
+                          setAddressField("doorPhone", e.target.value)
+                        }
                       />
                     </div>
                   </div>
@@ -260,7 +249,7 @@ export const UserData = ({
                 <textarea
                   placeholder={t("Add more details (optional)")}
                   value={more}
-                  onChange={(e) => setMore(e.target.value)}
+                  onChange={(e) => setAddressField("more", e.target.value)}
                 />
               </div>
               <div
@@ -296,6 +285,7 @@ export const UserData = ({
           checked={privacyAndPolicy}
           setCheck={setPrivacyAndPolicy}
           t={t}
+          link="/Polityka_prywatności.pdf"
         />
       </div>
       <div style={{ marginTop: "24px" }}>
@@ -304,6 +294,7 @@ export const UserData = ({
           checked={personalData}
           setCheck={setPersonalData}
           t={t}
+          link="/Warunki_i_postanowienia.pdf"
         />
       </div>
     </div>

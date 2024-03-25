@@ -1,17 +1,22 @@
 .input-form-component {
   padding: 0 20%;
 
+  @media screen and (max-width: 950px) {
+    padding: 0 1rem;
+  }
+
   .input-wrapper {
     width: 100%;
-  
-    input, textarea {
+
+    input,
+    textarea {
       padding: 13px 0px 13px 13px;
       width: 100%;
-      background: #ECF0FF;
+      background: #ecf0ff;
       border-radius: 12px;
       outline: none;
-  
-      color: #5C5C5C;
+
+      color: #5c5c5c;
       font-size: 16px;
       font-weight: 400;
       line-height: 24px;
@@ -25,8 +30,8 @@
   .button-wrapper {
     padding: 18px 0;
     border-radius: 40px;
-    background: #2B8AFC;
-    color: #F9F9F9;
+    background: #2b8afc;
+    color: #f9f9f9;
     text-align: center;
     font-size: 16px;
     font-weight: 500;
@@ -35,10 +40,10 @@
   }
 
   .button-wrapper:hover {
-    background: #0073FC;
+    background: #0073fc;
   }
 
   .order-wrapper-disabled {
-    background: #7EB8FF !important;
+    background: #7eb8ff !important;
   }
 }
