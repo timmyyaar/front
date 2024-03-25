@@ -145,7 +145,7 @@ export const Header: FC<Props> = ({ locales }) => {
           className="mobile-only-flex _items-center menu-icon"
           onClick={() => setIsMenuOpened(!isMenuOpened)}
         >
-          <MenuIcon className="icon" />
+          <MenuIcon className={`icon ${isMenuOpened ? "active" : ""}`} />
         </div>
       </nav>
       {isMenuOpened && (
