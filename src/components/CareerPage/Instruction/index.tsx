@@ -25,7 +25,9 @@ export const Instruction = ({ title, cardsCount, t }: any) => {
                 <div className="un-hover-block">
                   <div className="step-number">{el.step}</div>
                   <div className="text-wrapper">
-                    <b>{t(el.text)}</b>
+                    <b className="_px-2 _whitespace-break-spaces">
+                      {t(el.text)}
+                    </b>
                   </div>
                 </div>
                 <div className="hover-block _absolute">
