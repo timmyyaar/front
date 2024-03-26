@@ -120,13 +120,13 @@ const PhoneInput = ({
                       code === phoneCountry.code ? "_font-bold" : ""
                     }`}
                   >
-                    {name}
+                    {t(name)}
                   </span>
                 </div>
               ))
             ) : (
               <div className="_py-4 _px-3.5 _flex _items-center _select-none">
-                No countries found...
+                {t("No countries found...")}
               </div>
             )}
           </div>
