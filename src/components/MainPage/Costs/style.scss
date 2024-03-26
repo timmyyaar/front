@@ -239,13 +239,6 @@
         line-height: 128%;
         cursor: pointer;
       }
-
-      .mobile-disabled {
-        @media screen and (max-width: 950px) {
-          pointer-events: none;
-          background: #7eb8ff;
-        }
-      }
     }
 
     .sub-text-below-mobile {

@@ -7,6 +7,7 @@ import { CheckBox } from "./components/Checkbox";
 import { DateAndTime } from "./components/DateAndTime";
 import "./style.scss";
 import { OrderAddress } from "@/components/OrderPage/Summary";
+import PhoneInput from "@/components/common/PhoneInput";
 
 export const UserData = ({
   name,
@@ -27,6 +28,8 @@ export const UserData = ({
   isPrivateHouse,
   addressObject,
   setAddressObject,
+  phoneCountry,
+  setPhoneCountry,
 }: any) => {
   const [dataLayout, setDataLayout] = useState(false);
   const [data, setData] = useState("");
@@ -74,15 +77,14 @@ export const UserData = ({
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <div className="_flex _gap-5">
-          <div className="input-wrapper">
-            <input
-              type="text"
-              placeholder={t("Contact number")}
-              value={number}
-              onChange={(e) => setNumber(e.target.value)}
-            />
-          </div>
+        <div className="_flex _gap-3 _relative">
+          <PhoneInput
+            t={t}
+            number={number}
+            setNumber={setNumber}
+            phoneCountry={phoneCountry}
+            setPhoneCountry={setPhoneCountry}
+          />
           <div className="input-wrapper">
             <input
               type="text"

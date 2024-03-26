@@ -242,3 +242,76 @@ export const getPriceFromCounterByService = (
       return 0;
   }
 };
+
+export const getMinimalPriceByMainService = (mainService: string) => {
+  switch (mainService) {
+    case "Custom cleaning":
+    case "Subscription":
+    case "Airbnb":
+    case "Move in/out":
+    case "Eco cleaning":
+    case "Regular":
+      return 199;
+
+    case "While sickness":
+      return 155;
+
+    case "After party":
+    case "In a last minute":
+      return 370;
+    case "Deep":
+      return 499;
+    case "Deep kitchen":
+      return 355;
+
+    case "Office":
+    case "Ozonation":
+      return 150;
+
+    case "Dry cleaning":
+      return 150;
+
+    case "Post-construction":
+      return 199;
+
+    default:
+      return 199;
+  }
+};
+
+export const getNewPrice = (
+  originalPrice: number,
+  discountPercentage: number
+) => {
+  const discountAmount = (originalPrice * discountPercentage) / 100;
+  const discountedPrice = originalPrice - discountAmount;
+
+  return parseFloat(discountedPrice.toFixed(1));
+};
+
+export const makeSaleFromSub = (number: number, percentageString: string) => {
+  const match = percentageString.match(/^(-?\d*\.?\d+)\s*%$/);
+
+  if (match) {
+    const percentage = parseFloat(match[1]);
+
+    if (!isNaN(percentage)) {
+      const result = number + (number * percentage) / 100;
+
+      return parseFloat(result.toFixed(1));
+    }
+  }
+
+  return parseFloat(number.toFixed(1));
+};
+
+export const getPriceWithSaleOrSubSale = (
+  price: number,
+  sale: number,
+  subSale: string
+) =>
+  sale
+    ? getNewPrice(price, sale)
+    : subSale
+    ? makeSaleFromSub(price, subSale)
+    : price;

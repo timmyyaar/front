@@ -11,10 +11,19 @@ import { PromoInput } from "./PromoCodeInput";
 import { UserData } from "./UserData";
 import {
   getEstimateFromCounterByService,
+  getMinimalPriceByMainService,
+  getNewPrice,
   getPriceFromCounterByService,
+  getPriceWithSaleOrSubSale,
+  makeSaleFromSub,
 } from "./utils";
 import "./style.scss";
-import { EMAIL_REGEX, MOBILE_PHONE_REGEX } from "@/constants";
+import { EMAIL_REGEX, NUMBER_REGEX } from "@/constants";
+import {
+  DEFAULT_COUNTRY,
+  Country,
+} from "@/components/common/PhoneInput/constants";
+import { OWN_SUPPLES_SERVICE_NAME } from "@/components/OrderPage/constants";
 
 interface IProps {
   title: string;
@@ -93,6 +102,7 @@ export const Summary: FC<IProps> = (props: any) => {
 
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
+  const [phoneCountry, setPhoneCountry] = useState<Country>(DEFAULT_COUNTRY!);
   const [email, setEmail] = useState("");
   const [totalDate, setTotalDate] = useState("");
 
@@ -137,22 +147,6 @@ export const Summary: FC<IProps> = (props: any) => {
         return oldSubServices.filter((el: ISubService) => el.title !== title);
       });
     }
-  };
-
-  const makeSaleFromSub = (number: number, percentageString: string) => {
-    const match = percentageString.match(/^(-?\d*\.?\d+)\s*%$/);
-
-    if (match) {
-      const percentage = parseFloat(match[1]);
-
-      if (!isNaN(percentage)) {
-        const result = number + (number * percentage) / 100;
-
-        return parseFloat(result.toFixed(1));
-      }
-    }
-
-    return parseFloat(number.toFixed(1));
   };
 
   const getSubServices = (data: ISubService[]) => {
@@ -219,6 +213,16 @@ export const Summary: FC<IProps> = (props: any) => {
 
   const mainServicePrice = getMainServicePrice();
   const secondServicePrice = getSecondServicePrice();
+  const mainServicePriceWithSale = getPriceWithSaleOrSubSale(
+    mainServicePrice,
+    sale,
+    subSale
+  );
+  const secondServicePriceWithSale = getPriceWithSaleOrSubSale(
+    secondServicePrice,
+    sale,
+    subSale
+  );
 
   const getPrice = () => {
     const finalPrice = mainServicePrice + secondServicePrice;
@@ -228,13 +232,7 @@ export const Summary: FC<IProps> = (props: any) => {
 
   const estimate = getEstimate();
   const price = getPrice();
-
-  const getNewPrice = (originalPrice: number, discountPercentage: number) => {
-    const discountAmount = (originalPrice * discountPercentage) / 100;
-    const discountedPrice = originalPrice - discountAmount;
-
-    return discountedPrice.toFixed(2);
-  };
+  const priceWithSale = getPriceWithSaleOrSubSale(price, sale, subSale);
 
   const handleScroll = () => {
     const targetElement = document.getElementById("order-btn");
@@ -249,7 +247,7 @@ export const Summary: FC<IProps> = (props: any) => {
   const sendData = async () => {
     const main = {
       name,
-      number,
+      number: `+${phoneCountry.phoneCode}${number}`,
       email,
       address: `Street: ${street}, House: ${house}${
         isPrivateHouse ? " (Private house)" : ""
@@ -262,13 +260,12 @@ export const Summary: FC<IProps> = (props: any) => {
       onlinePayment: onlinePayment,
       requestPreviousCleaner: previousCleaner,
       personalData: personalData,
-      mainServicePrice: subSale
-        ? getNewPrice(mainServicePrice, sale)
-        : mainServicePrice,
-      secondServicePrice: subSale
-        ? getNewPrice(secondServicePrice, sale)
-        : secondServicePrice,
-      price: subSale ? getNewPrice(price, sale) : price,
+      mainServicePrice: mainServicePriceWithSale,
+      secondServicePrice: secondServicePriceWithSale,
+      price: priceWithSale,
+      mainServicePriceOriginal: mainServicePrice,
+      secondServicePriceOriginal: secondServicePrice,
+      priceOriginal: price,
       promo,
       estimate: estimate.time,
     };
@@ -337,10 +334,21 @@ export const Summary: FC<IProps> = (props: any) => {
   const addressRequiredFields =
     street && house && (isPrivateHouse ? true : apartment);
 
+  const provideOwnSuppliesSelected = subService.find(
+    ({ title }: { title: string }) => title === OWN_SUPPLES_SERVICE_NAME
+  );
+  const minimalPrice = getMinimalPriceByMainService(title);
+  const minimalPriceWithSales = getPriceWithSaleOrSubSale(
+    minimalPrice + (provideOwnSuppliesSelected?.price || 0),
+    sale,
+    subSale
+  );
+  const isOrderPriceLessThanMinimum = priceWithSale < minimalPriceWithSales;
+
   const requiredFields =
     name &&
     number &&
-    MOBILE_PHONE_REGEX.test(number) &&
+    NUMBER_REGEX.test(number) &&
     email &&
     EMAIL_REGEX.test(email) &&
     totalDate &&
@@ -483,7 +491,9 @@ export const Summary: FC<IProps> = (props: any) => {
         <div id="order-btn">
           {!order ? (
             <div
-              className="order-wrapper _cursor-pointer"
+              className={`order-wrapper _cursor-pointer ${
+                isOrderPriceLessThanMinimum ? "order-wrapper-disabled" : ""
+              }`}
               onClick={() => setOrder(true)}
             >
               {t("Order")}
@@ -509,16 +519,25 @@ export const Summary: FC<IProps> = (props: any) => {
                 isPrivateHouse={isPrivateHouse}
                 addressObject={addressObject}
                 setAddressObject={setAddressObject}
+                phoneCountry={phoneCountry}
+                setPhoneCountry={setPhoneCountry}
               />
               <div
                 className={`order-wrapper _cursor-pointer ${
-                  !requiredFields || isOrderLoading
+                  !requiredFields ||
+                  isOrderLoading ||
+                  isOrderPriceLessThanMinimum
                     ? "order-wrapper-disabled"
                     : ""
                 } ${isOrderLoading ? "loading" : ""}`}
                 style={{ marginTop: "24px" }}
                 onClick={() => {
-                  if (!requiredFields) return void 0;
+                  if (
+                    !requiredFields ||
+                    isOrderLoading ||
+                    isOrderPriceLessThanMinimum
+                  )
+                    return void 0;
                   sendData();
                 }}
               >
@@ -530,7 +549,9 @@ export const Summary: FC<IProps> = (props: any) => {
       </div>
       {!scrolledToElement ? (
         <div
-          className="order-wrapper-absolute _cursor-pointer mobile-only-flex"
+          className={`order-wrapper-absolute _cursor-pointer mobile-only-flex ${
+            isOrderPriceLessThanMinimum ? "order-wrapper-disabled" : ""
+          }`}
           onClick={handleScroll}
         >
           {price === 0 ? (

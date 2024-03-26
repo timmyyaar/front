@@ -1,0 +1,83 @@
+.phone-input-wrapper {
+  display: flex;
+
+  @media screen and (min-width: 950px) {
+    position: relative;
+  }
+
+  @media screen and (max-width: 950px) {
+    &.phone-relative {
+      position: relative;
+    }
+  }
+
+  .phone-input {
+    border-radius: 0 12px 12px 0;
+    padding: 13px 0 13px 6.5px;
+
+    width: 100%;
+    background: #ecf0ff;
+    outline: none;
+
+    color: #5c5c5c;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+
+  .search-input {
+    border-radius: 12px 12px 0 0;
+    padding: 13px 0.875rem;
+  }
+
+  .phone-dropdown {
+    background: #ecf0ff;
+    padding: 13px 6.5px 13px 13px;
+    border-radius: 12px 0 0 12px;
+
+    &:hover {
+      .caret-icon {
+        color: #2b8afc;
+      }
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      right: 0;
+      height: 70%;
+      width: 1px;
+      border-right: 1px solid #d2d2d2;
+    }
+  }
+
+  .country-flag-image {
+    width: 20px;
+    height: 15px;
+  }
+
+  .menu {
+    background: #ecf0ff;
+    max-height: 20rem;
+    overflow: auto;
+    box-shadow: 0 24px 48px 0 rgba(183, 180, 180, 0.23);
+    outline: 1px solid #d2d2d2;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+
+    .country-item {
+      &:hover {
+        opacity: 0.7;
+      }
+
+      &:active {
+        opacity: 1;
+        color: #2b8afc;
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px solid #d2d2d2;
+      }
+    }
+  }
+}

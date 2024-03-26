@@ -5,13 +5,20 @@ import { ModalRequest } from "@/components/common/ModalRequest";
 import { Overlay } from "@/components/common/Overlay";
 import { useClickOutside } from "@/hooks/useClickOutSide";
 import "./style.scss";
-import { EMAIL_REGEX, MOBILE_PHONE_REGEX } from "@/constants";
+import { EMAIL_REGEX, POSITIVE_NUMBER_EMPTY_REGEX } from "@/constants";
+import PhoneInput from "@/components/common/PhoneInput";
+import {
+  Country,
+  DEFAULT_COUNTRY,
+} from "@/components/common/PhoneInput/constants";
 
 export const InputForm = ({ t }: any) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [about, setAbout] = useState("");
+  const [isSendLoading, setIsSendLoading] = useState<boolean>(false);
+  const [phoneCountry, setPhoneCountry] = useState<Country>(DEFAULT_COUNTRY!);
 
   const [modal, setModal] = useState(false);
   const ref = useClickOutside(() => setModal(false));
@@ -20,30 +27,41 @@ export const InputForm = ({ t }: any) => {
     name &&
     phone &&
     email &&
-    MOBILE_PHONE_REGEX.test(phone) &&
+    POSITIVE_NUMBER_EMPTY_REGEX.test(phone) &&
     EMAIL_REGEX.test(email);
 
   const onSend = async () => {
-    const response = await fetch(
-      process.env.NEXT_PUBLIC_API_URL + "/api/careers",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        cache: "no-store",
-        body: JSON.stringify({ name, phone, email, about }),
+    try {
+      setIsSendLoading(true);
+
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_API_URL + "/api/careers",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          cache: "no-store",
+          body: JSON.stringify({
+            name,
+            phone: `+${phoneCountry.phoneCode}${phone}`,
+            email,
+            about,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.id) {
+        setModal(true);
       }
-    );
 
-    const data = await response.json();
-
-    if (data.id) {
-      setModal(true);
+      setName("");
+      setPhone("");
+      setEmail("");
+      setAbout("");
+    } finally {
+      setIsSendLoading(false);
     }
-
-    setName("");
-    setPhone("");
-    setEmail("");
-    setAbout("");
   };
 
   return (
@@ -66,15 +84,14 @@ export const InputForm = ({ t }: any) => {
             placeholder={t("Surname and Name")}
           />
         </div>
-        <div className="_flex _gap-5">
-          <div className="input-wrapper">
-            <input
-              type="text"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder={t("Contact number")}
-            />
-          </div>
+        <div className="_flex _gap-3 _relative">
+          <PhoneInput
+            t={t}
+            number={phone}
+            setNumber={setPhone}
+            phoneCountry={phoneCountry}
+            setPhoneCountry={setPhoneCountry}
+          />
           <div className="input-wrapper">
             <input
               type="text"
@@ -95,8 +112,8 @@ export const InputForm = ({ t }: any) => {
       <div className="_mb-4 _flex _flex-col _gap-3">
         <div
           className={`button-wrapper ${
-            !requiredFields ? "order-wrapper-disabled" : ""
-          }`}
+            !requiredFields || isSendLoading ? "order-wrapper-disabled" : ""
+          } ${isSendLoading ? "loading" : ""}`}
           onClick={() => {
             if (requiredFields) onSend();
           }}
