@@ -46,7 +46,7 @@ const PhoneInput = ({
   const filteredCountries = COUNTRIES.filter(
     ({ name, code }) =>
       !searchValue ||
-      name.toLowerCase().includes(searchValue.toLowerCase()) ||
+      t(name).toLowerCase().includes(searchValue.toLowerCase()) ||
       code.toLowerCase().includes(searchValue.toLowerCase())
   );
 
