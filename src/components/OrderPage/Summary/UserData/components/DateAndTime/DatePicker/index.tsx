@@ -132,7 +132,9 @@ export const DatePicker = ({ data, setData, t }: any) => {
       </div>
       <div className="_py-2 _grid _grid-cols-7">
         {weekDays.map((weekDay) => (
-          <div className="week-day _flex _justify-center">{weekDay}</div>
+          <div key={weekDay} className="week-day _flex _justify-center">
+            {t(weekDay)}
+          </div>
         ))}
       </div>
       <div className="_grid _grid-cols-7">{generateCalendar()}</div>

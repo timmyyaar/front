@@ -103,6 +103,7 @@ const PhoneInput = ({
             {filteredCountries.length > 0 ? (
               filteredCountries.map(({ name, code, phoneCode }) => (
                 <div
+                  key={code}
                   className="_py-4 _px-3.5 _flex _items-center _cursor-pointer country-item"
                   onClick={() => onCountrySelect({ name, code, phoneCode })}
                 >
