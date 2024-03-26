@@ -7,6 +7,7 @@ import airSvg from "./icons/air-purifier.svg";
 import vacuumCleanerSvg from "./icons/vacuum-cleaner.svg";
 import ownSuppliesSvg from "./icons/own-supplies.svg";
 import "./style.scss";
+import { OWN_SUPPLES_SERVICE_NAME } from "@/components/OrderPage/constants";
 
 interface IProps {
   mainService: string;
@@ -53,11 +54,11 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
     if (ownSupplies) {
       setSubService((sS: any) => [
         ...sS,
-        { title: "Own_supplies_sub_service", time: 0, price: -15 },
+        { title: OWN_SUPPLES_SERVICE_NAME, time: 0, price: -15 },
       ]);
     } else {
       setSubService((sS: any) =>
-        sS.filter((el: any) => el.title !== "Own_supplies_sub_service")
+        sS.filter((el: any) => el.title !== OWN_SUPPLES_SERVICE_NAME)
       );
     }
   }, [ownSupplies]);
@@ -70,7 +71,7 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
       (el) => el.title === "Vacuum_cleaner_sub_service"
     );
     const ownSuppliesSubService = subServices.filter(
-      (el) => el.title === "Own_supplies_sub_service"
+      (el) => el.title === OWN_SUPPLES_SERVICE_NAME
     );
 
     if (!dryCleanerSubService.length) {

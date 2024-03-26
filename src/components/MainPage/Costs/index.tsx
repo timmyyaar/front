@@ -216,9 +216,7 @@ export const Costs = (props: any) => {
                 ) : null}
               </div>
               <div
-                className={`sales-mobile-item-order-btn ${
-                  tab === TABS.SUBSCRIPTION ? "mobile-disabled" : ""
-                }`}
+                className="sales-mobile-item-order-btn"
                 onClick={() => {
                   router.push(
                     tab === TABS.SUBSCRIPTION ? "/subscription" : "/order"

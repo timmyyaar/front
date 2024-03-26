@@ -8,3 +8,5 @@ export const PRIVATE_HOUSE_SERVICES = [
   "Regular",
   "Deep",
 ];
+
+export const OWN_SUPPLES_SERVICE_NAME = "Own_supplies_sub_service"
