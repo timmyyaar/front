@@ -57,7 +57,7 @@ export const SubServicesList: FC<IProps> = (props) => {
   return getSubServiceListByMainService(mainService).length ? (
     <div className="sub-services-list-component">
       <div className="title">{t("Choose additional cleaning services")}</div>
-      <div className="_grid _grid-cols-4">
+      <div className="_grid _grid-cols-4 _auto-rows-fr">
         {getSubServiceListByMainService(mainService).map(
           (el: ISubService, i: number) => (
             <div

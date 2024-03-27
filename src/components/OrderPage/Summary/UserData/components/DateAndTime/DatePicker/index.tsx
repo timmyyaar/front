@@ -76,7 +76,7 @@ export const DatePicker = ({ data, setData, t }: any) => {
     const firstDayOfMonth = getFirstDayOfMonth(currentMonth);
     const calendar = [];
 
-    for (let i = 0; i < firstDayOfMonth; i++) {
+    for (let i = 1; i < firstDayOfMonth; i++) {
       calendar.push(
         <div className="day-cell disable-day" key={`empty-${i}`}>
           {" "}
