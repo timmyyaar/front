@@ -85,7 +85,7 @@ const PhoneInput = ({
             value={number}
             onChange={({ target: { value } }) => {
               if (POSITIVE_NUMBER_EMPTY_REGEX.test(value)) {
-                setNumber(value);
+                setNumber(value.trim());
               }
             }}
           />
