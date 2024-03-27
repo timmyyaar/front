@@ -87,6 +87,10 @@ export const CounterCoasts = {
     price: 40,
     old: "",
   },
+  "Wash dishes": {
+    price: 30,
+    old: "",
+  },
   "Clean the room": {
     price: 50,
     old: "",
@@ -154,6 +158,6 @@ export const EMAIL_REGEX =
 
 export const NUMBER_REGEX = /\d+/;
 
-export const POSITIVE_NUMBER_EMPTY_REGEX = /^(\s*|[1-9][0-9]*)+$/
+export const POSITIVE_NUMBER_EMPTY_REGEX = /^(\s*|[1-9][0-9]*)+$/;
 
 export const MOBILE_PHONE_REGEX = /^\+[1-9]{1}[0-9]{3,14}$/;

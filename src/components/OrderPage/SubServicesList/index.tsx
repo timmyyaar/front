@@ -71,7 +71,7 @@ export const SubServicesList: FC<IProps> = (props) => {
               key={JSON.stringify(el) + i}
             >
               <div className="sub-services-title">
-                <Writer text={t(el.title)} />
+                <Writer text={t(el.title)} whiteSpaceNormal />
               </div>
               {/* @ts-ignore */}
               <div className="counter-and-price-wrapper">
