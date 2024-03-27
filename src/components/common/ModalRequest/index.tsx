@@ -1,24 +1,30 @@
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
 
-import { CloseSvg } from '@/components/common/icons/closeButton';
+import { CloseSvg } from "@/components/common/icons/closeButton";
 
-import img from './Frame 1262.png';
-import './style.scss';
+import img from "./Frame 1262.png";
+import "./style.scss";
 
 interface Props {
-  title: string;
-  text: string;
-  onClose: any
+  title?: string;
+  text: JSX.Element;
+  onClose: any;
+  showLogo?: boolean;
 }
 
-export const ModalRequest: React.FC<Props> = ({ title, text, onClose }) => (
+export const ModalRequest: React.FC<Props> = ({
+  title,
+  text,
+  onClose,
+  showLogo = true,
+}) => (
   <div className="modal-request-wrapper">
     <div className="icon-wrapper-modal" onClick={onClose}>
       <CloseSvg />
     </div>
-    <div className='title'>{title}</div>
-    <Image src={img} alt='' />
-    <div className='text'>{text}</div>
+    {title && <div className="title">{title}</div>}
+    {showLogo && <Image src={img} alt="" />}
+    <div className="text">{text}</div>
   </div>
 );

@@ -1,6 +1,9 @@
 import React, { FC, useState, useEffect, useRef } from "react";
 
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+
+import faceWithRollingEyesSvg from "./icons/face-with-rolling-eyes.svg";
 
 import { ModalRequest } from "@/components/common/ModalRequest";
 import { Overlay } from "@/components/common/Overlay";
@@ -96,7 +99,9 @@ export const Summary: FC<IProps> = (props: any) => {
     isPrivateHouse,
   } = props;
   const [sale, setSale] = useState(0);
+  const [promoInputValue, setPromoInputValue] = useState<string>("");
   const [promo, setPromo] = useState("");
+  const [promoStatus, setPromoStatus] = useState<string>("");
   const [order, setOrder] = useState(false);
   const [scrolledToElement, targetElementRef] = ScrollDetector();
 
@@ -129,13 +134,24 @@ export const Summary: FC<IProps> = (props: any) => {
   const router = useRouter();
 
   const [modal, setModal] = useState(false);
+  const [showPromoErrorModal, setShowPromoErrorModal] =
+    useState<boolean>(false);
 
   const onCloseModal = () => {
     setModal(false);
     router.push("/");
   };
 
+  const onClosePromoErrorModal = () => {
+    setShowPromoErrorModal(false);
+    setPromo("");
+    setSale(0);
+    setPromoInputValue("");
+    setPromoStatus("");
+  };
+
   const ref = useClickOutside(() => onCloseModal());
+  const promoModalRef = useClickOutside(() => onClosePromoErrorModal());
 
   const onRemoveSubService = (title: string, sec: boolean) => {
     if (!sec) {
@@ -321,6 +337,13 @@ export const Summary: FC<IProps> = (props: any) => {
           body: JSON.stringify({ ...main, ...mainService, ...secService }),
         }
       );
+
+      if (!response.ok && response.status === 409) {
+        setShowPromoErrorModal(true);
+
+        return;
+      }
+
       const data = await response.json();
 
       if (data) {
@@ -418,14 +441,31 @@ export const Summary: FC<IProps> = (props: any) => {
   return (
     <>
       <div className="summary-layout">
-        <Overlay active={modal}>
-          <div ref={ref}>
-            <ModalRequest
-              text={t("order_page_modal_title")}
-              title={t("order_page_modal_text")}
-              onClose={onCloseModal}
-            />
-          </div>
+        <Overlay active={modal || showPromoErrorModal}>
+          {modal ? (
+            <div ref={ref}>
+              <ModalRequest
+                text={t("order_page_modal_title")}
+                title={t("order_page_modal_text")}
+                onClose={onCloseModal}
+              />
+            </div>
+          ) : (
+            <div ref={promoModalRef}>
+              <ModalRequest
+                text={
+                  <>
+                    <div className="_flex _justify-center _mb-6">
+                      <Image src={faceWithRollingEyesSvg} alt="" />
+                    </div>
+                    {t("promo_error_modal_title")}
+                  </>
+                }
+                onClose={onClosePromoErrorModal}
+                showLogo={false}
+              />
+            </div>
+          )}
         </Overlay>
         <div className="summary-wrapper _flex _flex-col">
           {renderSummeryService({
@@ -449,7 +489,15 @@ export const Summary: FC<IProps> = (props: any) => {
             <b>{estimate.time}</b>
           </div>
           {!subSale ? (
-            <PromoInput setSale={setSale} setPromo={setPromo} t={t} />
+            <PromoInput
+              setSale={setSale}
+              setPromo={setPromo}
+              t={t}
+              promoInputValue={promoInputValue}
+              setPromoInputValue={setPromoInputValue}
+              promoStatus={promoStatus}
+              setPromoStatus={setPromoStatus}
+            />
           ) : null}
           <div
             className="to-pay-wrapper _flex _items-baseline"
