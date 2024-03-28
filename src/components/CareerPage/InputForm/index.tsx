@@ -84,7 +84,7 @@ export const InputForm = ({ t }: any) => {
             placeholder={t("Surname and Name")}
           />
         </div>
-        <div className="_flex _gap-3 _relative">
+        <div className="_relative mobile-only">
           <PhoneInput
             t={t}
             number={phone}
@@ -92,6 +92,17 @@ export const InputForm = ({ t }: any) => {
             phoneCountry={phoneCountry}
             setPhoneCountry={setPhoneCountry}
           />
+        </div>
+        <div className="_flex _gap-3 _relative">
+          <div className="_w-full mobile-none">
+            <PhoneInput
+              t={t}
+              number={phone}
+              setNumber={setPhone}
+              phoneCountry={phoneCountry}
+              setPhoneCountry={setPhoneCountry}
+            />
+          </div>
           <div className="input-wrapper">
             <input
               type="text"

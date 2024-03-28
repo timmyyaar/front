@@ -12,8 +12,36 @@ const pages = {
   3: [18, 23],
 };
 
-export const TimePicker = ({ time, setTime, t }: any) => {
+const FROM_TIME_ENABLED = 7;
+const TO_TIME_ENABLED = 21;
+const IN_ADVANCED_TODAY_HOURS = 5;
+
+const getIsTimeDisabled = (
+  numericHour: number,
+  numericMinutes: number,
+  isTodaySelected: boolean
+) => {
+  const isOutOfWorkingHours =
+    numericHour < FROM_TIME_ENABLED ||
+    numericHour > TO_TIME_ENABLED ||
+    (numericHour === TO_TIME_ENABLED && numericMinutes > 0);
+  const today = new Date();
+  const nowTimeAndAdvance =
+    +`${today.getHours()}.${today.getMinutes()}` + IN_ADVANCED_TODAY_HOURS;
+  const numericTime = +`${numericHour}.${numericMinutes}`;
+
+  const isLessTimeThatNowToday =
+    isTodaySelected && nowTimeAndAdvance >= numericTime;
+
+  return isOutOfWorkingHours || isLessTimeThatNowToday;
+};
+
+export const TimePicker = ({ time, setTime, t, data }: any) => {
+  console.log(data ? data.split("/") : null);
   const [timePage, setTimePage] = useState(1);
+  const selectedDate = data ? data.split("/") : null;
+  const selectedDateDay = data.split("/")[0] ? +selectedDate[0] : null;
+  const isTodaySelected = new Date().getDate() === selectedDateDay;
 
   const generateTimeOptions = () => {
     const timeOptions = [];
@@ -28,12 +56,11 @@ export const TimePicker = ({ time, setTime, t }: any) => {
         const formattedHour = hour < 10 ? `0${hour}` : `${hour}`;
         const formattedMinute = minute === 0 ? "00" : `${minute}`;
         const timeItem = `${formattedHour}:${formattedMinute}`;
-        const numericHour = +timeItem.slice(0, 2);
-        const numericMinutes = +timeItem.slice(3, 5);
-        const isTimeDisabled =
-          numericHour < 7 ||
-          numericHour > 21 ||
-          (numericHour === 21 && numericMinutes > 0);
+        const isTimeDisabled = getIsTimeDisabled(
+          +formattedHour,
+          +formattedMinute,
+          isTodaySelected
+        );
 
         timeOptions.push(
           <div

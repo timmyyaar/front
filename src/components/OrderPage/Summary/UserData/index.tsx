@@ -77,7 +77,7 @@ export const UserData = ({
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <div className="_flex _gap-3 _relative">
+        <div className="_relative mobile-only">
           <PhoneInput
             t={t}
             number={number}
@@ -85,6 +85,17 @@ export const UserData = ({
             phoneCountry={phoneCountry}
             setPhoneCountry={setPhoneCountry}
           />
+        </div>
+        <div className="_flex _gap-3 _relative">
+          <div className="_w-full mobile-none">
+            <PhoneInput
+              t={t}
+              number={number}
+              setNumber={setNumber}
+              phoneCountry={phoneCountry}
+              setPhoneCountry={setPhoneCountry}
+            />
+          </div>
           <div className="input-wrapper">
             <input
               type="text"
