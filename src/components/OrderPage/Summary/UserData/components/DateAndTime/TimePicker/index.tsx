@@ -37,7 +37,6 @@ const getIsTimeDisabled = (
 };
 
 export const TimePicker = ({ time, setTime, t, data }: any) => {
-  console.log(data ? data.split("/") : null);
   const [timePage, setTimePage] = useState(1);
   const selectedDate = data ? data.split("/") : null;
   const selectedDateDay = data.split("/")[0] ? +selectedDate[0] : null;

@@ -13,8 +13,6 @@ import { Counter } from "./components/Counter";
 import { getCounterByMainService, getIsPrivateHouse } from "./utils";
 import "./style.scss";
 import PrivateHouse from "@/components/OrderPage/PrivateHouse";
-import { NUMBER_REGEX } from "@/constants";
-import { getOzonationMultiplier } from "@/utils";
 import Cost from "@/components/OrderPage/Counter/components/Cost";
 
 interface IProps {

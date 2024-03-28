@@ -139,7 +139,6 @@ export const Summary: FC<IProps> = (props: any) => {
 
   const onCloseModal = () => {
     setModal(false);
-    router.push("/");
   };
 
   const onClosePromoErrorModal = () => {
@@ -290,13 +289,13 @@ export const Summary: FC<IProps> = (props: any) => {
       title,
       counter: counter
         .map((el: any) =>
-          el.title ? t(el.title) + "(" + el.value + ")" : t(el.value)
+          el.title ? el.title + "(" + el.value + ")" : el.value
         )
         .join(" "),
       subService: getSubServices(subService)
         .map(
           (title: string) =>
-            `${t(title + "_summery")} (${
+            `${title + "_summery"} (${
               subService.filter((el: ISubService) => el.title === title).length
             })`
         )
@@ -309,13 +308,13 @@ export const Summary: FC<IProps> = (props: any) => {
             secTitle,
             secCounter: secCounter
               .map((el: any) =>
-                el.title ? t(el.title) + "(" + el.value + ")" : t(el.value)
+                el.title ? el.title + "(" + el.value + ")" : el.value
               )
               .join(" "),
             secSubService: getSubServices(secSubService)
               .map(
                 (title: string) =>
-                  `${t(title + "_summery")} (${
+                  `${title + "_summery"} (${
                     secSubService.filter(
                       (el: ISubService) => el.title === title
                     ).length
