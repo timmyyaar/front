@@ -271,7 +271,7 @@ export const Summary: FC<IProps> = (props: any) => {
         postcode ? `, Postcode: ${postcode}` : ""
       }${entrance ? `, Entrance: ${entrance}` : ""}${
         doorPhone ? `, Door phone: ${doorPhone}` : ""
-      }${more ? `, Additional information: ${more}` : ""}`,
+      }`,
       date: totalDate,
       onlinePayment: onlinePayment,
       requestPreviousCleaner: previousCleaner,
@@ -284,6 +284,7 @@ export const Summary: FC<IProps> = (props: any) => {
       priceOriginal: price,
       promo,
       estimate: estimate.time,
+      additionalInformation: more,
     };
 
     const mainService = {
