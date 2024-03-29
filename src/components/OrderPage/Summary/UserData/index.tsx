@@ -8,7 +8,9 @@ import { DateAndTime } from "./components/DateAndTime";
 import "./style.scss";
 import { OrderAddress } from "@/components/OrderPage/Summary";
 import PhoneInput from "@/components/common/PhoneInput";
-import Cities from "@/components/OrderPage/Summary/UserData/components/Cities";
+import Cities, {
+  City,
+} from "@/components/OrderPage/Summary/UserData/components/Cities";
 
 export const UserData = ({
   name,
@@ -52,7 +54,7 @@ export const UserData = ({
 
   const shortAddress = `${street} ${house} ${apartment} ${postcode} ${entrance} ${doorPhone} ${more}`;
 
-  const setAddressField = (fieldName: string, value: string) => {
+  const setAddressField = (fieldName: string, value: string | City) => {
     setAddressObject((prev: OrderAddress) => ({ ...prev, [fieldName]: value }));
   };
 

@@ -4,6 +4,7 @@ import { ArrowLeft } from "../../icons/ArrowLeft";
 import { ArrowRight } from "../../icons/ArrowRight";
 
 import "./style.scss";
+import {Discount} from "@/components/OrderPage/Summary";
 
 const months = [
   "Январь",
@@ -89,7 +90,7 @@ export const DatePicker = ({ data, setData, t, discounts }: any) => {
         month: "2-digit",
       })}/${currentMonth.getFullYear()}`;
 
-      const discount = discounts.find(({ date }) => date === currentDay)?.value;
+      const discount = discounts.find(({ date }: Discount) => date === currentDay)?.value;
       const dayCellClassName = currentDay === data ? "selected-day" : "";
       const dayCellDiscountClassName = discount
         ? discount < 0

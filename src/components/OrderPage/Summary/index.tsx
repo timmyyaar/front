@@ -25,6 +25,7 @@ import {
   Country,
 } from "@/components/common/PhoneInput/constants";
 import { OWN_SUPPLES_SERVICE_NAME } from "@/components/OrderPage/constants";
+import { City } from "@/components/OrderPage/Summary/UserData/components/Cities";
 
 interface IProps {
   title: string;
@@ -80,6 +81,7 @@ export interface OrderAddress {
   entrance: string;
   doorPhone: string;
   more: string;
+  city: City;
 }
 
 export type Discount = {
@@ -271,12 +273,14 @@ export const Summary: FC<IProps> = (props: any) => {
   const mainServicePriceWithSale = getPriceWithSaleOrSubSale(
     mainServicePrice,
     sale,
-    subSale
+    subSale,
+    dayDiscount
   );
   const secondServicePriceWithSale = getPriceWithSaleOrSubSale(
     secondServicePrice,
     sale,
-    subSale
+    subSale,
+    dayDiscount
   );
 
   const getPrice = () => {

@@ -5,7 +5,16 @@ import "./style.scss";
 import { useClickOutside } from "@/hooks/useClickOutSide";
 import { CITIES } from "@/components/OrderPage/constants";
 
-const Cities = ({ city, setCity, t, callback }) => {
+export type City = {name: string, price: number}
+
+interface CitiesProps {
+  city: City
+  setCity: (city: City) => void
+  t: (text: string) => string
+  callback: (bool: boolean) => void
+}
+
+const Cities = ({ city, setCity, t, callback }: CitiesProps) => {
   const [isDropdownOpened, setIsDropdownOpened] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>("");
   const dropdownRef = useClickOutside(() => {
