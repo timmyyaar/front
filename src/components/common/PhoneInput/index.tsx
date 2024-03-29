@@ -99,7 +99,7 @@ const PhoneInput = ({
             value={searchValue}
             onChange={({ target: { value } }) => setSearchValue(value)}
           />
-          <div className="_absolute _top-full _w-full menu _z-10">
+          <div className="_absolute _top-full _w-full menu _z-10 custom-scroll">
             {filteredCountries.length > 0 ? (
               filteredCountries.map(({ name, code, phoneCode }) => (
                 <div

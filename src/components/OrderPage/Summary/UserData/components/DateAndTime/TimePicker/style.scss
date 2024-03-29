@@ -18,11 +18,11 @@
   font-weight: 600;
   line-height: 21px;
   cursor: pointer;
+  border-radius: 54px;
 
   &:hover {
     color: #f9f9f9;
     background: #2b8afc;
-    border-radius: 8px;
   }
 
   &.time-disabled {
@@ -34,5 +34,4 @@
 .time-selected {
   color: #f9f9f9;
   background: #2b8afc;
-  border-radius: 8px;
 }

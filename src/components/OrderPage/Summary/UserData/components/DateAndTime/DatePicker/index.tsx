@@ -22,7 +22,7 @@ const months = [
 
 const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-export const DatePicker = ({ data, setData, t }: any) => {
+export const DatePicker = ({ data, setData, t, discounts }: any) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
   const getDaysInMonth = (date: any) => {
@@ -63,7 +63,7 @@ export const DatePicker = ({ data, setData, t }: any) => {
     const currentDate = `${today.getDate()}/${formattedMonth}/${today.getFullYear()}`;
     const parts1 = currentDate.split("/") as unknown as number[];
     const parts2 = date.split("/");
-    const d1 = new Date(`${parts1[2]}-${parts1[1]}-${parts1[0]-1}`);
+    const d1 = new Date(`${parts1[2]}-${parts1[1]}-${parts1[0] - 1}`);
     const d2 = new Date(`${parts2[2]}-${parts2[1]}-${parts2[0]}`);
     d1.setHours(0, 0, 0, 0);
     d2.setHours(0, 0, 0, 0);
@@ -88,20 +88,40 @@ export const DatePicker = ({ data, setData, t }: any) => {
       let currentDay = `${day}/${currentMonth.toLocaleString("en-US", {
         month: "2-digit",
       })}/${currentMonth.getFullYear()}`;
+
+      const discount = discounts.find(({ date }) => date === currentDay)?.value;
+      const dayCellClassName = currentDay === data ? "selected-day" : "";
+      const dayCellDiscountClassName = discount
+        ? discount < 0
+          ? "discount-negative"
+          : "discount-positive"
+        : "";
+
       calendar.push(
-        <div
-          className={`
-						day-cell ${currentDay === data ? "selected-day" : ""} ${
-            checkDisableDay(currentDay) ? "disable-day" : ""
-          }
+        <div className="_flex _flex-col _items-center _justify-start day-cell-wrapper">
+          <div
+            className={`
+						day-cell ${dayCellClassName} ${dayCellDiscountClassName} ${
+              checkDisableDay(currentDay) ? "disable-day" : ""
+            } ${discount ? "" : "_mb-3"}
 						_flex _items-center _justify-center _cursor-pointer
 					`}
-          onClick={() => {
-            if (!checkDisableDay(currentDay)) setData(currentDay);
-          }}
-          key={day}
-        >
-          {day}
+            onClick={() => {
+              if (!checkDisableDay(currentDay)) setData(currentDay);
+            }}
+            key={day}
+          >
+            {day}
+          </div>
+          {Boolean(discount) && (
+            <div
+              className={`discount-count ${
+                discount < 0 ? "negative" : "positive"
+              }`}
+            >
+              {-discount}%
+            </div>
+          )}
         </div>
       );
     }
@@ -130,7 +150,7 @@ export const DatePicker = ({ data, setData, t }: any) => {
           </button>
         </div>
       </div>
-      <div className="_py-2 _grid _grid-cols-7">
+      <div className="_py-3 _grid _grid-cols-7">
         {weekDays.map((weekDay) => (
           <div key={weekDay} className="week-day _flex _justify-center">
             {t(weekDay)}

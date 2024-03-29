@@ -307,10 +307,26 @@ export const makeSaleFromSub = (number: number, percentageString: string) => {
 export const getPriceWithSaleOrSubSale = (
   price: number,
   sale: number,
-  subSale: string
-) =>
-  sale
-    ? getNewPrice(price, sale)
-    : subSale
-    ? makeSaleFromSub(price, subSale)
-    : price;
+  subSale: string,
+  discount: number
+) => {
+  if (subSale) {
+    return makeSaleFromSub(price, subSale);
+  }
+
+  if (Boolean(sale) && Boolean(discount)) {
+    if (sale > 0 && discount > 0) {
+      const higherDiscount = Math.max(sale, discount);
+
+      return getNewPrice(price, higherDiscount);
+    } else {
+      return getNewPrice(price, sale + discount);
+    }
+  } else if (sale) {
+    return getNewPrice(price, sale);
+  } else if (discount) {
+    return getNewPrice(price, discount);
+  }
+
+  return price;
+};

@@ -124,7 +124,7 @@ export const Modals = ({
 
   return (
     <div
-      className="modal-wrapper-component"
+      className="modal-wrapper-component custom-scroll"
       onClick={(e) => {
         e.stopPropagation();
       }}

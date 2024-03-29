@@ -8,6 +8,7 @@ import { DateAndTime } from "./components/DateAndTime";
 import "./style.scss";
 import { OrderAddress } from "@/components/OrderPage/Summary";
 import PhoneInput from "@/components/common/PhoneInput";
+import Cities from "@/components/OrderPage/Summary/UserData/components/Cities";
 
 export const UserData = ({
   name,
@@ -30,14 +31,24 @@ export const UserData = ({
   setAddressObject,
   phoneCountry,
   setPhoneCountry,
+  discounts,
 }: any) => {
   const [dataLayout, setDataLayout] = useState(false);
   const [data, setData] = useState("");
   const [time, setTime] = useState("");
   const [addressLayout, setAddressLayout] = useState(false);
+  const [overflowUnset, setOverflowUnset] = useState(false);
 
-  const { street, house, apartment, postcode, entrance, doorPhone, more } =
-    addressObject;
+  const {
+    street,
+    house,
+    apartment,
+    postcode,
+    entrance,
+    doorPhone,
+    more,
+    city,
+  } = addressObject;
 
   const shortAddress = `${street} ${house} ${apartment} ${postcode} ${entrance} ${doorPhone} ${more}`;
 
@@ -134,6 +145,7 @@ export const UserData = ({
                 time={time}
                 setTime={setTime}
                 t={t}
+                discounts={discounts}
               />
               <div
                 className={`order-wrapper ${
@@ -171,7 +183,11 @@ export const UserData = ({
               </svg>
             </div>
           ) : (
-            <div className="select-block-open select-block-open-address">
+            <div
+              className={`select-block-open select-block-open-address ${
+                overflowUnset ? "overflow-visible" : ""
+              }`}
+            >
               <div className="_mb-6 _flex _flex-col _gap-3">
                 <div className="input-wrapper address-layout">
                   <input
@@ -203,36 +219,22 @@ export const UserData = ({
                     </div>
                   )}
                 </div>
-                <div className="_flex _gap-5">
-                  <div className="input-wrapper address-layout">
-                    <input
-                      type="text"
-                      placeholder={t("Postcode")}
-                      value={postcode}
-                      onChange={(e) =>
-                        setAddressField("postcode", e.target.value)
-                      }
-                    />
-                  </div>
-                  <div className="input-wrapper address-layout">
-                    {/* <input type="text" placeholder="Floor" /> */}
-                    <div className="city-wrapper">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <path
-                          d="M17 9V7C17 4.2 14.8 2 12 2C9.2 2 7 4.2 7 7V9C5.3 9 4 10.3 4 12V19C4 20.7 5.3 22 7 22H17C18.7 22 20 20.7 20 19V12C20 10.3 18.7 9 17 9ZM9 7C9 5.3 10.3 4 12 4C13.7 4 15 5.3 15 7V9H9V7Z"
-                          fill="#848484"
-                        />
-                      </svg>
-                      <div className="city-name-wrapper">Krakow</div>
-                    </div>
-                  </div>
+                <div className="input-wrapper address-layout">
+                  <input
+                    type="text"
+                    placeholder={t("Postcode")}
+                    value={postcode}
+                    onChange={(e) =>
+                      setAddressField("postcode", e.target.value)
+                    }
+                  />
                 </div>
+                <Cities
+                  t={t}
+                  city={city}
+                  setCity={(newCity) => setAddressField("city", newCity)}
+                  callback={setOverflowUnset}
+                />
                 {!isPrivateHouse && (
                   <div className="_flex _gap-5">
                     <div className="input-wrapper address-layout">

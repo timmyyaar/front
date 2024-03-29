@@ -15,10 +15,8 @@ import { UserData } from "./UserData";
 import {
   getEstimateFromCounterByService,
   getMinimalPriceByMainService,
-  getNewPrice,
   getPriceFromCounterByService,
   getPriceWithSaleOrSubSale,
-  makeSaleFromSub,
 } from "./utils";
 import "./style.scss";
 import { EMAIL_REGEX, NUMBER_REGEX } from "@/constants";
@@ -84,6 +82,12 @@ export interface OrderAddress {
   more: string;
 }
 
+export type Discount = {
+  id: number;
+  date: string;
+  value: number;
+};
+
 export const Summary: FC<IProps> = (props: any) => {
   const {
     title,
@@ -126,16 +130,29 @@ export const Summary: FC<IProps> = (props: any) => {
     entrance: "",
     doorPhone: "",
     more: "",
+    city: { name: "Kraków", price: 0 },
   });
 
-  const { street, house, apartment, postcode, entrance, doorPhone, more } =
-    addressObject;
+  const {
+    street,
+    house,
+    apartment,
+    postcode,
+    entrance,
+    doorPhone,
+    more,
+    city,
+  } = addressObject;
 
   const router = useRouter();
 
   const [modal, setModal] = useState(false);
+  const [discounts, setDiscounts] = useState<Discount[]>([]);
   const [showPromoErrorModal, setShowPromoErrorModal] =
     useState<boolean>(false);
+
+  const dayDiscount =
+    discounts.find(({ date }) => date === totalDate?.split(" ")[0])?.value || 0;
 
   const onCloseModal = () => {
     setModal(false);
@@ -152,6 +169,28 @@ export const Summary: FC<IProps> = (props: any) => {
 
   const ref = useClickOutside(() => onCloseModal());
   const promoModalRef = useClickOutside(() => onClosePromoErrorModal());
+
+  const getDiscounts = async () => {
+    try {
+      const discountsResponse = await fetch(
+        process.env.NEXT_PUBLIC_API_URL + "/api/discounts"
+      );
+
+      if (!discountsResponse.ok) {
+        setDiscounts([]);
+      } else {
+        const parsedDiscounts = (await discountsResponse.json()) as Discount[];
+
+        setDiscounts(parsedDiscounts);
+      }
+    } catch (error) {
+      setDiscounts([]);
+    }
+  };
+
+  useEffect(() => {
+    getDiscounts();
+  }, []);
 
   const onRemoveSubService = (title: string, sec: boolean) => {
     if (!sec) {
@@ -248,7 +287,12 @@ export const Summary: FC<IProps> = (props: any) => {
 
   const estimate = getEstimate();
   const price = getPrice();
-  const priceWithSale = getPriceWithSaleOrSubSale(price, sale, subSale);
+  const priceWithSale = getPriceWithSaleOrSubSale(
+    price,
+    sale,
+    subSale,
+    dayDiscount
+  );
 
   const handleScroll = () => {
     const targetElement = document.getElementById("order-btn");
@@ -285,6 +329,8 @@ export const Summary: FC<IProps> = (props: any) => {
       promo,
       estimate: estimate.time,
       additionalInformation: more,
+      city: city.name,
+      transportationPrice: city.price,
     };
 
     const mainService = {
@@ -365,7 +411,8 @@ export const Summary: FC<IProps> = (props: any) => {
   const minimalPriceWithSales = getPriceWithSaleOrSubSale(
     minimalPrice + (provideOwnSuppliesSelected?.price || 0),
     sale,
-    subSale
+    subSale,
+    dayDiscount
   );
   const isOrderPriceLessThanMinimum = priceWithSale < minimalPriceWithSales;
 
@@ -500,33 +547,25 @@ export const Summary: FC<IProps> = (props: any) => {
               setPromoStatus={setPromoStatus}
             />
           ) : null}
+          {city?.price > 0 && (
+            <div className="_mt-4">
+              <span className="title">
+                {t("summary_transportation_title")}:
+              </span>
+              <span className="price-title">{city.price} zl</span>
+            </div>
+          )}
           <div
-            className="to-pay-wrapper _flex _items-baseline"
+            className={`to-pay-wrapper _flex _items-baseline ${
+              city.price > 0 ? "_mt-2" : "_mt-4"
+            }`}
             ref={targetElementRef as any}
           >
             <div className="title">{t("To pay:")}</div>
-            {!subSale ? (
-              sale ? (
-                <>
-                  <div className="current-price">
-                    {getNewPrice(price, sale)}
-                    {t("zl")}
-                  </div>
-                  <div className="old-price">
-                    {price}
-                    {t("zl")}
-                  </div>
-                </>
-              ) : (
-                <div className="current-price">
-                  {price}
-                  {t("zl")}
-                </div>
-              )
-            ) : (
+            {subSale || Boolean(sale) || Boolean(dayDiscount) ? (
               <>
                 <div className="current-price">
-                  {makeSaleFromSub(price, subSale)}
+                  {getPriceWithSaleOrSubSale(price, sale, subSale, dayDiscount)}
                   {t("zl")}
                 </div>
                 <div className="old-price">
@@ -534,6 +573,11 @@ export const Summary: FC<IProps> = (props: any) => {
                   {t("zl")}
                 </div>
               </>
+            ) : (
+              <div className="current-price">
+                {price}
+                {t("zl")}
+              </div>
             )}
           </div>
         </div>
@@ -570,6 +614,7 @@ export const Summary: FC<IProps> = (props: any) => {
                 setAddressObject={setAddressObject}
                 phoneCountry={phoneCountry}
                 setPhoneCountry={setPhoneCountry}
+                discounts={discounts}
               />
               <div
                 className={`order-wrapper _cursor-pointer ${
@@ -605,34 +650,21 @@ export const Summary: FC<IProps> = (props: any) => {
         >
           {price === 0 ? (
             t("Order")
-          ) : !subSale ? (
-            sale ? (
-              <div className="_flex _items-end">
-                <div className="current-price _mr-2">
-                  {getNewPrice(price, sale)}
-                  {t("zl")}
-                </div>
-                <div className="old-price">
-                  {price}
-                  {t("zl")}
-                </div>
-              </div>
-            ) : (
-              <div className="current-price">
-                {price}
-                {t("zl")}
-              </div>
-            )
-          ) : (
+          ) : subSale || Boolean(sale) || Boolean(dayDiscount) ? (
             <div className="_flex _items-end">
               <div className="current-price _mr-2">
-                {makeSaleFromSub(price, subSale)}
+                {getPriceWithSaleOrSubSale(price, sale, subSale, dayDiscount)}
                 {t("zl")}
               </div>
               <div className="old-price">
                 {price}
                 {t("zl")}
               </div>
+            </div>
+          ) : (
+            <div className="current-price">
+              {price}
+              {t("zl")}
             </div>
           )}
         </div>
