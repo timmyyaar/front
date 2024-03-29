@@ -164,12 +164,14 @@ export const Modals = ({
                       <Image src={windowImg[i]} alt="" />
                     </div>
                     <div className="title">
-                      {[...new Array(3)].map((_, j) => (
-                        <Writer
-                          text={t(title + "_text_" + i + "_" + j)}
-                          key={title + "_" + j}
-                        />
-                      ))}
+                      <Writer
+                        text={t(
+                          title.toLowerCase().replaceAll(" ", "_") +
+                            "_description_" +
+                            (i + 1)
+                        )}
+                        key={title + "_" + i}
+                      />
                     </div>
                   </div>
                 );
