@@ -266,8 +266,7 @@ export const getMinimalPriceByMainService = (mainService: string) => {
 
     case "Office":
     case "Ozonation":
-      return 150;
-
+    case "Window cleaning":
     case "Dry cleaning":
       return 150;
 
