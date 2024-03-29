@@ -244,7 +244,6 @@ export const getPriceFromCounterByService = (
 };
 
 export const getMinimalPriceByMainService = (mainService: string) => {
-  console.log(mainService);
   switch (mainService) {
     case "Custom cleaning":
     case "Subscription":
