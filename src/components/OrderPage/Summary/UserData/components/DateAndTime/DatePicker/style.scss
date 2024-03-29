@@ -27,8 +27,11 @@
     line-height: 24px;
   }
 
+  .day-cell-wrapper {
+    height: 65px;
+  }
+
   .day-cell {
-    margin-bottom: 12px;
     width: 40px;
     height: 40px;
     color: #232323;
@@ -36,18 +39,57 @@
     font-weight: 600;
     line-height: 21px;
     cursor: pointer;
+    border-radius: 50%;
 
     &:hover {
       color: #f9f9f9;
       background: #2b8afc;
-      border-radius: 8px;
+    }
+
+    &.discount-positive {
+      border: 1px solid #29cc7e;
+
+      &:hover {
+        background: #29cc7e;
+      }
+    }
+
+    &.discount-negative {
+      border: 1px solid #f9c630;
+
+      &:hover {
+        background: #f9c630;
+      }
+    }
+  }
+
+  .discount-count {
+    font-size: 14px;
+    line-height: 130%;
+    margin-top: 0.25rem;
+    font-weight: 600;
+
+    &.negative {
+      color: #f9c630;
+    }
+
+    &.positive {
+      color: #29cc7e;
     }
   }
 
   .selected-day {
     color: #f9f9f9;
     background: #2b8afc;
-    border-radius: 8px;
+    border-radius: 50%;
+
+    &.discount-positive {
+      background: #29cc7e;
+    }
+
+    &.discount-negative {
+      background: #f9c630;
+    }
   }
 
   .disable-day {

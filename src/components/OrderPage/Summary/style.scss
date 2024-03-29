@@ -128,24 +128,30 @@
     }
   }
 
-  .to-pay-wrapper {
-    margin-top: 32px;
-    height: 32px;
+  .price-title {
+    color: #232323;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 130%;
+  }
 
-    .title {
-      margin-right: 4px;
-      color: #232323;
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 24px;
-    }
+  .title {
+    margin-right: 7px;
+    color: #232323;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+
+  .to-pay-wrapper {
+    height: 32px;
 
     .current-price {
       margin-right: 6px;
       color: #232323;
       font-size: 24px;
       font-weight: 600;
-      line-height: 32px;
+      line-height: 130%;
     }
 
     .old-price {
