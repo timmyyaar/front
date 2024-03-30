@@ -459,10 +459,20 @@ export const Summary: FC<IProps> = (props: any) => {
           <div className="title-sub-service-title">{t("Add services")}</div>
           {getSubServices(subServiceList).map((title: string, i: number) => (
             <div className="service-item _flex _items-center" key={title + i}>
-              <div>{`${t(title + "_summery")} (${
-                subServiceList.filter((el: ISubService) => el.title === title)
-                  .length
-              })`}</div>
+              <div>
+                {t(title + "_summery")} (
+                {
+                  subServiceList.filter((el: ISubService) => el.title === title)
+                    .length
+                }
+                {title === "Balcony" && (
+                  <>
+                    {t("m")}
+                    <sup>2</sup>
+                  </>
+                )}
+                )
+              </div>
               <div
                 className="icon-wrapper _cursor-pointer"
                 onClick={() => onRemoveSubService(title, sec)}
