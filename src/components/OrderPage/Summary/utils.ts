@@ -361,7 +361,7 @@ export const getHitherEstimate = (
   mainEstimate: string,
   secondEstimate: string
 ) => {
-  const getTimeNumber = (estimate) => Number(estimate.match(/\d+/g).join("."));
+  const getTimeNumber = (estimate: string) => Number(estimate.match(/\d+/g)!.join("."));
   const mainEstimateNumber = getTimeNumber(mainEstimate);
   const secondEstimateNumber = getTimeNumber(secondEstimate);
 
