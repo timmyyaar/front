@@ -1,4 +1,5 @@
 import { getOzonationMultiplier } from "@/utils";
+import { ISubService } from "@/components/OrderPage/SubServicesList/utils";
 
 export const getEstimateFromCounterByService = (
   mainService: string,
@@ -329,4 +330,29 @@ export const getPriceWithSaleOrSubSale = (
   }
 
   return price;
+};
+
+export const getServiceEstimate = (
+  title: string,
+  counter: any,
+  subService: any,
+  isPrivateHouse?: boolean
+) => {
+  const countEstimate = getEstimateFromCounterByService(title, counter);
+  const subServiceEstimate = subService.reduce(
+    (acc: number, el: ISubService) => (acc += el?.time || 0),
+    0
+  );
+  const divider = title === "Dry cleaning" ? 720 : 480;
+
+  const subTotal =
+    countEstimate + subServiceEstimate + (isPrivateHouse ? 60 : 0);
+
+  const cleanersCount = Math.ceil(subTotal / divider);
+  const total = subTotal > divider ? subTotal / cleanersCount : subTotal;
+
+  return {
+    time: `${Math.floor(total / 60)}h, ${Math.round(total % 60)}m`,
+    cleanersCount,
+  };
 };
