@@ -14,6 +14,7 @@ import { PromoInput } from "./PromoCodeInput";
 import { UserData } from "./UserData";
 import {
   getEstimateFromCounterByService,
+  getHitherEstimate,
   getMinimalPriceByMainService,
   getPriceFromCounterByService,
   getPriceWithSaleOrSubSale,
@@ -483,11 +484,12 @@ export const Summary: FC<IProps> = (props: any) => {
           ))}
         </div>
       ) : null}
-      <div className="_mt-2">
-        {`${t("Estimated Duration of service:")} `}
-        <b>{time}</b>
-      </div>
     </>
+  );
+
+  const higherEstimate = getHitherEstimate(
+    mainServiceEstimate.time,
+    secondServiceEstimate.time
   );
 
   return (
@@ -549,8 +551,12 @@ export const Summary: FC<IProps> = (props: any) => {
               setPromoStatus={setPromoStatus}
             />
           ) : null}
+          <div className="_mt-3">
+            {`${t("Estimated Duration of service:")} `}
+            <b>{higherEstimate}</b>
+          </div>
           {city?.price > 0 && (
-            <div className="_mt-4">
+            <div className="_mt-2">
               <span className="title">
                 {t("summary_transportation_title")}:
               </span>
@@ -558,9 +564,7 @@ export const Summary: FC<IProps> = (props: any) => {
             </div>
           )}
           <div
-            className={`to-pay-wrapper _flex _items-baseline ${
-              city.price > 0 ? "_mt-2" : "_mt-4"
-            }`}
+            className="to-pay-wrapper _flex _items-baseline _mt-2"
             ref={targetElementRef as any}
           >
             <div className="title">{t("To pay:")}</div>
