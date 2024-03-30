@@ -17,6 +17,7 @@ import {
   getMinimalPriceByMainService,
   getPriceFromCounterByService,
   getPriceWithSaleOrSubSale,
+  getServiceEstimate,
 } from "./utils";
 import "./style.scss";
 import { EMAIL_REGEX, NUMBER_REGEX } from "@/constants";
@@ -216,37 +217,6 @@ export const Summary: FC<IProps> = (props: any) => {
     return result;
   };
 
-  const getEstimate = () => {
-    const countEstimate = getEstimateFromCounterByService(title, counter);
-    const secCountEstimate = getEstimateFromCounterByService(
-      secTitle,
-      secCounter
-    );
-    const subServiceEstimate = subService.reduce(
-      (acc: number, el: ISubService) => (acc += el?.time || 0),
-      0
-    );
-    const secSubServiceEstimate = secSubService.reduce(
-      (acc: number, el: ISubService) => (acc += el?.time || 0),
-      0
-    );
-
-    const subTotal =
-      countEstimate +
-      secCountEstimate +
-      subServiceEstimate +
-      secSubServiceEstimate +
-      (isPrivateHouse ? 60 : 0);
-
-    const cleanersCount = Math.ceil(subTotal / 480);
-    const total = subTotal > 480 ? subTotal / cleanersCount : subTotal;
-
-    return {
-      time: `${Math.floor(total / 60)}h, ${Math.round(total % 60)}m`,
-      cleanersCount: Math.ceil(subTotal / 480),
-    };
-  };
-
   const getMainServicePrice = () => {
     const countEstimate =
       getPriceFromCounterByService(title, counter) * (isPrivateHouse ? 1.3 : 1);
@@ -289,7 +259,18 @@ export const Summary: FC<IProps> = (props: any) => {
     return parseFloat(finalPrice.toFixed(1));
   };
 
-  const estimate = getEstimate();
+  const mainServiceEstimate = getServiceEstimate(
+    title,
+    counter,
+    subService,
+    isPrivateHouse
+  );
+  const secondServiceEstimate = getServiceEstimate(
+    secTitle,
+    secCounter,
+    secSubService
+  );
+
   const price = getPrice();
   const priceWithSale = getPriceWithSaleOrSubSale(
     price,
@@ -331,7 +312,10 @@ export const Summary: FC<IProps> = (props: any) => {
       secondServicePriceOriginal: secondServicePrice,
       priceOriginal: price,
       promo,
-      estimate: estimate.time,
+      mainServiceEstimate: mainServiceEstimate.time,
+      mainServiceCleanersCount: mainServiceEstimate.cleanersCount,
+      secondServiceEstimate: secondServiceEstimate.time,
+      secondServiceCleanersCount: secondServiceEstimate.cleanersCount,
       additionalInformation: more,
       city: city.name,
       transportationPrice: city.price,
@@ -437,6 +421,8 @@ export const Summary: FC<IProps> = (props: any) => {
     counterValue,
     subServiceList,
     sec = false,
+    time,
+    cleanersCount,
   }: any) => (
     <>
       <div className="summary-title">{t(serviceTitle + "_summary_title")}</div>
@@ -466,7 +452,7 @@ export const Summary: FC<IProps> = (props: any) => {
         </div>
       )}
       <div className="_mt-2">
-        {t("Cleaners")}: <b>{estimate.cleanersCount}</b>
+        {t("Cleaners")}: <b>{cleanersCount}</b>
       </div>
       {getSubServices(subServiceList).length ? (
         <div className="services-in-summary">
@@ -487,6 +473,10 @@ export const Summary: FC<IProps> = (props: any) => {
           ))}
         </div>
       ) : null}
+      <div className="_mt-2">
+        {`${t("Estimated Duration of service:")} `}
+        <b>{time}</b>
+      </div>
     </>
   );
 
@@ -524,6 +514,7 @@ export const Summary: FC<IProps> = (props: any) => {
             serviceTitle: title,
             counterValue: counter,
             subServiceList: subService,
+            ...mainServiceEstimate,
           })}
           {secTitle !== "" ? (
             <>
@@ -533,13 +524,10 @@ export const Summary: FC<IProps> = (props: any) => {
                 counterValue: secCounter,
                 subServiceList: secSubService,
                 sec: true,
+                ...secondServiceEstimate,
               })}
             </>
           ) : null}
-          <div className="_mt-2">
-            {`${t("Estimated Duration of service:")} `}
-            <b>{estimate.time}</b>
-          </div>
           {!subSale ? (
             <PromoInput
               setSale={setSale}
