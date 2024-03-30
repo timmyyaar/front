@@ -356,3 +356,20 @@ export const getServiceEstimate = (
     cleanersCount,
   };
 };
+
+export const getHitherEstimate = (
+  mainEstimate: string,
+  secondEstimate: string
+) => {
+  const getTimeNumber = (estimate: string) => Number(estimate.match(/\d+/g)!.join("."));
+  const mainEstimateNumber = getTimeNumber(mainEstimate);
+  const secondEstimateNumber = getTimeNumber(secondEstimate);
+
+  if (mainEstimateNumber > secondEstimateNumber) {
+    return mainEstimate;
+  } else if (secondEstimateNumber > mainEstimateNumber) {
+    return secondEstimate;
+  }
+
+  return mainEstimate;
+};
