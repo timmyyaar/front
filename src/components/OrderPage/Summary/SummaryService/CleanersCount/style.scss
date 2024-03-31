@@ -1,0 +1,54 @@
+.cleaners-count-wrapper {
+  .cleaners-count-popover {
+    z-index: 10;
+    position: absolute;
+    background: #ecf0ff;
+    border: 1px solid #2b8afc;
+    box-shadow: 0 24px 48px 0 rgba(183, 180, 180, 0.23);
+
+    &.info {
+      max-width: 80%;
+      text-align: center;
+    }
+
+    .cleaners-count {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 110%;
+    }
+
+    .icon {
+      cursor: pointer;
+
+      &.disabled {
+        cursor: default;
+        color: #a6a6a6;
+        pointer-events: none;
+      }
+
+      &:not(.disabled) {
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+
+  .original-cleaners {
+    cursor: pointer;
+
+    &:hover {
+      opacity: 80%;
+    }
+  }
+
+  .cleaners-text {
+    font-size: 16px;
+    line-height: 130%;
+    font-weight: 600;
+
+    &.difference {
+      color: #2b8afc;
+    }
+  }
+}

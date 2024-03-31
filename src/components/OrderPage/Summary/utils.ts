@@ -361,7 +361,8 @@ export const getHitherEstimate = (
   mainEstimate: string,
   secondEstimate: string
 ) => {
-  const getTimeNumber = (estimate: string) => Number(estimate.match(/\d+/g)!.join("."));
+  const getTimeNumber = (estimate: string) =>
+    Number(estimate.match(/\d+/g)?.join(".") || 0);
   const mainEstimateNumber = getTimeNumber(mainEstimate);
   const secondEstimateNumber = getTimeNumber(secondEstimate);
 
@@ -372,4 +373,31 @@ export const getHitherEstimate = (
   }
 
   return mainEstimate;
+};
+
+export const getSubServices = (data: ISubService[]) => {
+  const result: string[] = [];
+
+  data.forEach((el: any) => {
+    if (!result.includes(el.title)) result.push(el.title);
+  });
+
+  return result;
+};
+
+export const getServicePriceBasedOnManualCleaners = (
+  price: number,
+  cleanersCount: number,
+  manualCleanersCount: number
+) => {
+  if (!manualCleanersCount) {
+    return price;
+  }
+
+  const basicPercentForOneCleaner = Math.pow(0.75, cleanersCount);
+  const extraPriceForEachExtraCleaner = price * basicPercentForOneCleaner;
+  const extraPrice = manualCleanersCount * extraPriceForEachExtraCleaner;
+  const extraPriceRounded = Number(parseFloat(extraPrice.toFixed(1)));
+
+  return price + extraPriceRounded;
 };

@@ -13,12 +13,13 @@ import { IconCrosse } from "./icons/IconCrosse";
 import { PromoInput } from "./PromoCodeInput";
 import { UserData } from "./UserData";
 import {
-  getEstimateFromCounterByService,
   getHitherEstimate,
   getMinimalPriceByMainService,
   getPriceFromCounterByService,
   getPriceWithSaleOrSubSale,
   getServiceEstimate,
+  getServicePriceBasedOnManualCleaners,
+  getSubServices,
 } from "./utils";
 import "./style.scss";
 import { EMAIL_REGEX, NUMBER_REGEX } from "@/constants";
@@ -28,6 +29,7 @@ import {
 } from "@/components/common/PhoneInput/constants";
 import { OWN_SUPPLES_SERVICE_NAME } from "@/components/OrderPage/constants";
 import { City } from "@/components/OrderPage/Summary/UserData/components/Cities";
+import SummaryService from "@/components/OrderPage/Summary/SummaryService";
 
 interface IProps {
   title: string;
@@ -154,6 +156,12 @@ export const Summary: FC<IProps> = (props: any) => {
   const [discounts, setDiscounts] = useState<Discount[]>([]);
   const [showPromoErrorModal, setShowPromoErrorModal] =
     useState<boolean>(false);
+  const [mainServiceManualCleanersCount, setMainServiceManualCleanersCount] =
+    useState<number>(0);
+  const [
+    secondServiceManualCleanersCount,
+    setSecondServiceManualCleanersCount,
+  ] = useState<number>(0);
 
   const dayDiscount =
     discounts.find(({ date }) => date === totalDate?.split(" ")[0])?.value || 0;
@@ -208,16 +216,6 @@ export const Summary: FC<IProps> = (props: any) => {
     }
   };
 
-  const getSubServices = (data: ISubService[]) => {
-    const result: string[] = [];
-
-    data.forEach((el: any) => {
-      if (!result.includes(el.title)) result.push(el.title);
-    });
-
-    return result;
-  };
-
   const getMainServicePrice = () => {
     const countEstimate =
       getPriceFromCounterByService(title, counter) * (isPrivateHouse ? 1.3 : 1);
@@ -239,8 +237,28 @@ export const Summary: FC<IProps> = (props: any) => {
     return secCountEstimate + secSubServiceEstimate;
   };
 
-  const mainServicePrice = getMainServicePrice();
-  const secondServicePrice = getSecondServicePrice();
+  const mainServiceEstimate = getServiceEstimate(
+    title,
+    counter,
+    subService,
+    isPrivateHouse
+  );
+  const secondServiceEstimate = getServiceEstimate(
+    secTitle,
+    secCounter,
+    secSubService
+  );
+
+  const mainServicePrice = getServicePriceBasedOnManualCleaners(
+    getMainServicePrice(),
+    mainServiceEstimate.cleanersCount,
+    mainServiceManualCleanersCount
+  );
+  const secondServicePrice = getServicePriceBasedOnManualCleaners(
+    getSecondServicePrice(),
+    secondServiceEstimate.cleanersCount,
+    secondServiceManualCleanersCount
+  );
   const mainServicePriceWithSale = getPriceWithSaleOrSubSale(
     mainServicePrice,
     sale,
@@ -259,18 +277,6 @@ export const Summary: FC<IProps> = (props: any) => {
 
     return parseFloat(finalPrice.toFixed(1));
   };
-
-  const mainServiceEstimate = getServiceEstimate(
-    title,
-    counter,
-    subService,
-    isPrivateHouse
-  );
-  const secondServiceEstimate = getServiceEstimate(
-    secTitle,
-    secCounter,
-    secSubService
-  );
 
   const price = getPrice();
   const priceWithSale = getPriceWithSaleOrSubSale(
@@ -417,76 +423,6 @@ export const Summary: FC<IProps> = (props: any) => {
     addressRequiredFields &&
     price > 0;
 
-  const renderSummeryService = ({
-    serviceTitle,
-    counterValue,
-    subServiceList,
-    sec = false,
-    time,
-    cleanersCount,
-  }: any) => (
-    <>
-      <div className="summary-title">{t(serviceTitle + "_summary_title")}</div>
-      {counterValue?.length > 0 && (
-        <div className="summary-counter">
-          {counterValue.map((el: any, i: number, arr: any[]) =>
-            el.type === "counter" ? (
-              <div key={el.title + el.value + i}>
-                {t(el.title)}
-                <b>
-                  {el.value}
-                  {el.param ? (
-                    <>
-                      {t("m")}
-                      <sup>2</sup>
-                    </>
-                  ) : (
-                    ""
-                  )}
-                </b>
-                <b>{i + 1 === arr.length ? "" : ";"}</b>
-              </div>
-            ) : (
-              <div key={el.title + el.value + i}>{t(el.value)}</div>
-            )
-          )}
-        </div>
-      )}
-      <div className="_mt-2">
-        {t("Cleaners")}: <b>{cleanersCount}</b>
-      </div>
-      {getSubServices(subServiceList).length ? (
-        <div className="services-in-summary">
-          <div className="title-sub-service-title">{t("Add services")}</div>
-          {getSubServices(subServiceList).map((title: string, i: number) => (
-            <div className="service-item _flex _items-center" key={title + i}>
-              <div>
-                {t(title + "_summery")} (
-                {
-                  subServiceList.filter((el: ISubService) => el.title === title)
-                    .length
-                }
-                {title === "Balcony" && (
-                  <>
-                    {t("m")}
-                    <sup>2</sup>
-                  </>
-                )}
-                )
-              </div>
-              <div
-                className="icon-wrapper _cursor-pointer"
-                onClick={() => onRemoveSubService(title, sec)}
-              >
-                <IconCrosse />
-              </div>
-            </div>
-          ))}
-        </div>
-      ) : null}
-    </>
-  );
-
   const higherEstimate = getHitherEstimate(
     mainServiceEstimate.time,
     secondServiceEstimate.time
@@ -522,22 +458,29 @@ export const Summary: FC<IProps> = (props: any) => {
           )}
         </Overlay>
         <div className="summary-wrapper _flex _flex-col">
-          {renderSummeryService({
-            serviceTitle: title,
-            counterValue: counter,
-            subServiceList: subService,
-            ...mainServiceEstimate,
-          })}
+          <SummaryService
+            serviceTitle={title}
+            counterValue={counter}
+            subServiceList={subService}
+            onRemoveSubService={onRemoveSubService}
+            t={t}
+            manualCleanersCount={mainServiceManualCleanersCount}
+            setManualCleanersCount={setMainServiceManualCleanersCount}
+            {...mainServiceEstimate}
+          />
           {secTitle !== "" ? (
             <>
               <div className="summary-wrapper-separator" />
-              {renderSummeryService({
-                serviceTitle: secTitle,
-                counterValue: secCounter,
-                subServiceList: secSubService,
-                sec: true,
-                ...secondServiceEstimate,
-              })}
+              <SummaryService
+                serviceTitle={secTitle}
+                counterValue={secCounter}
+                subServiceList={secSubService}
+                onRemoveSubService={onRemoveSubService}
+                t={t}
+                manualCleanersCount={secondServiceManualCleanersCount}
+                setManualCleanersCount={setSecondServiceManualCleanersCount}
+                {...secondServiceEstimate}
+              />
             </>
           ) : null}
           {!subSale ? (
