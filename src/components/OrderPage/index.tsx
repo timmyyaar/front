@@ -38,6 +38,7 @@ export const OrderPage = (props: any) => {
       setIsPrivateHouse(false);
     }
 
+    setSecondService("");
     setSubService([]);
     setSecondSubService([]);
   }, [selectedService]);

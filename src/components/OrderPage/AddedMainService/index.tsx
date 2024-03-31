@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import Image from "next/image";
 
 import OzonSvg from "./icons/ozone-layer.svg";
@@ -31,6 +31,10 @@ export const AddedMainService: FC<IProps> = (props) => {
       }
     });
   };
+
+  useEffect(() => {
+    setAddServiceList(false);
+  }, [mainService]);
 
   return addService ? (
     <div className="added-main-service-component">
