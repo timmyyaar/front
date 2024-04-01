@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, useRef } from "react";
+import React, { FC, useState, useEffect, useRef, useContext } from "react";
 
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -30,6 +30,7 @@ import {
 import { OWN_SUPPLES_SERVICE_NAME } from "@/components/OrderPage/constants";
 import { City } from "@/components/OrderPage/Summary/UserData/components/Cities";
 import SummaryService from "@/components/OrderPage/Summary/SummaryService";
+import { LocaleContext } from "@/components/Providers";
 
 interface IProps {
   title: string;
@@ -108,6 +109,7 @@ export const Summary: FC<IProps> = (props: any) => {
     t,
     isPrivateHouse,
   } = props;
+  const { locale } = useContext(LocaleContext);
   const [sale, setSale] = useState(0);
   const [promoInputValue, setPromoInputValue] = useState<string>("");
   const [promo, setPromo] = useState("");
@@ -326,6 +328,7 @@ export const Summary: FC<IProps> = (props: any) => {
       additionalInformation: more,
       city: city.name,
       transportationPrice: city.price,
+      language: locale,
     };
 
     const mainService = {

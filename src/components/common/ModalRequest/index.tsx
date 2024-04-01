@@ -8,14 +8,14 @@ import "./style.scss";
 
 interface Props {
   title?: string;
-  text: JSX.Element;
+  text?: JSX.Element;
   onClose: any;
   showLogo?: boolean;
 }
 
 export const ModalRequest: React.FC<Props> = ({
   title,
-  text,
+  text = "",
   onClose,
   showLogo = true,
 }) => (
