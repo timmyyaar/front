@@ -1,0 +1,12 @@
+.feedback-result {
+  background: #ecf0ff;
+
+  font-size: 16px;
+  line-height: 24px;
+
+  .feedback-logo {
+    &:hover {
+      opacity: 80%;
+    }
+  }
+}

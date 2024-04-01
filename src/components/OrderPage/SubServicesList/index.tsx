@@ -54,6 +54,7 @@ export const SubServicesList: FC<IProps> = (props) => {
     setSelectedService(subServices.map((el) => el.title));
   }, [subServices]);
 
+
   return getSubServiceListByMainService(mainService).length ? (
     <div className="sub-services-list-component">
       <div className="title">{t("Choose additional cleaning services")}</div>
