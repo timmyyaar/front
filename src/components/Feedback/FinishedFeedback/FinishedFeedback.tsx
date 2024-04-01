@@ -16,7 +16,7 @@ function FinishedFeedback({ finishedRating, t }: FinishedFeedbackProps) {
   const router = useRouter();
 
   const isBadRating = Object.values(finishedRating).some(
-    (rating) => rating < 3
+    (rating) => rating < 4
   );
 
   return (
