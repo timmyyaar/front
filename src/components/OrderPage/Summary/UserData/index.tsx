@@ -62,7 +62,7 @@ export const UserData = ({
 
   useEffect(() => {
     if (isPrivateHouse) {
-      setAddressObject((prev) => ({
+      setAddressObject((prev: OrderAddress) => ({
         ...prev,
         apartment: "",
         doorPhone: "",
