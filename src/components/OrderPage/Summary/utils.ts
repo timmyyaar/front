@@ -222,10 +222,15 @@ export const getPriceFromCounterByService = (
 
     case "Dry cleaning":
       return counter.reduce((acc: number, el: any, i: number) => {
+        const minimalSofaSeats = 2;
+
         if (i === 0) {
           acc += el.value * 10;
         } else if (i === 1 && el.value > 0) {
-          acc += el.value === 1 ? 150 : (el.value - 1) * 25 + 150;
+          acc +=
+            el.value === minimalSofaSeats
+              ? 155
+              : (el.value - minimalSofaSeats) * 15 + 155;
         }
 
         return acc;
