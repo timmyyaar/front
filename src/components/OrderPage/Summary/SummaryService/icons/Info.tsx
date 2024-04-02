@@ -1,11 +1,16 @@
 interface InfoProps {
   className?: string;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
   onClick: () => void;
 }
 
-function Info({ className, onMouseEnter, onMouseLeave, onClick }: InfoProps) {
+function Info({
+  className,
+  onMouseEnter = () => {},
+  onMouseLeave = () => {},
+  onClick,
+}: InfoProps) {
   return (
     <svg
       className={className}

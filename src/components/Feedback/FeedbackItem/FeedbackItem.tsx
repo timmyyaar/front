@@ -85,7 +85,7 @@ function FeedbackItem({
       )}
       <div className="title _text-center _pb-6">
         {t("feedback_how_was_your_experience")}
-        {orders.length > 1 ? <span className="ml-1">({title})</span> : ""}
+        {orders.length > 1 ? <span className="_ml-1">({t(title)})</span> : ""}
       </div>
       <div
         className={`_flex _justify-center rating-wrapper ${

@@ -49,10 +49,14 @@ function CleanersCount({
           )}
         </span>
         <Info
-          className="_ml-2"
+          className="_ml-2 mobile-none"
           onClick={() => setIsCleanersInfoHovered(true)}
           onMouseEnter={() => setIsCleanersInfoHovered(true)}
           onMouseLeave={() => setIsCleanersInfoHovered(false)}
+        />
+        <Info
+          className="_ml-2 mobile-only"
+          onClick={() => setIsCleanersInfoHovered(true)}
         />
       </span>
       {isCleanersInfoHovered && (
