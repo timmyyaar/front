@@ -7,7 +7,9 @@ export const getDateString = (date: Date) => {
   const twoDigitsMonth = month < 10 ? `0${month}` : month;
   const year = date.getFullYear();
   const hours = date.getHours();
+  const twoDigitsHours = hours < 10 ? `0${hours}` : hours;
   const minutes = date.getMinutes();
+  const twoDigitsMinutes = minutes < 10 ? `0${minutes}` : minutes;
 
-  `${day}/${twoDigitsMonth}/${year} ${hours}:${minutes}`;
+  return `${day}/${twoDigitsMonth}/${year} ${twoDigitsHours}:${twoDigitsMinutes}`;
 };
