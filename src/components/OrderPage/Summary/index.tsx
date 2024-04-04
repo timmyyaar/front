@@ -31,7 +31,7 @@ import { OWN_SUPPLES_SERVICE_NAME } from "@/components/OrderPage/constants";
 import { City } from "@/components/OrderPage/Summary/UserData/components/Cities";
 import SummaryService from "@/components/OrderPage/Summary/SummaryService";
 import { LocaleContext } from "@/components/Providers";
-import {getDateString} from "@/utils";
+import { getDateString } from "@/utils";
 
 interface IProps {
   title: string;
@@ -227,13 +227,16 @@ export const Summary: FC<IProps> = (props: any) => {
       0
     );
 
-    const isCounterValues = counter.reduce((result, item) => {
-      if (typeof item.value === "number") {
-        return result + item.value;
-      }
+    const isCounterValues = counter.reduce(
+      (result: number, item: { value: number | string }) => {
+        if (typeof item.value === "number") {
+          return result + item.value;
+        }
 
-      return result;
-    }, 0);
+        return result;
+      },
+      0
+    );
 
     return isCounterValues
       ? countEstimate + subServiceEstimate
@@ -247,13 +250,16 @@ export const Summary: FC<IProps> = (props: any) => {
       0
     );
 
-    const isCounterValues = secCounter.reduce((result, item) => {
-      if (typeof item.value === "number") {
-        return result + item.value;
-      }
+    const isCounterValues = secCounter.reduce(
+      (result: number, item: { value: number | string }) => {
+        if (typeof item.value === "number") {
+          return result + item.value;
+        }
 
-      return result;
-    }, 0);
+        return result;
+      },
+      0
+    );
 
     return isCounterValues
       ? secCountEstimate + secSubServiceEstimate
@@ -352,7 +358,7 @@ export const Summary: FC<IProps> = (props: any) => {
       city: city.name,
       transportationPrice: city.price,
       language: locale,
-      creationDate: getDateString(new Date())
+      creationDate: getDateString(new Date()),
     };
 
     const mainService = {
