@@ -31,6 +31,7 @@ import { OWN_SUPPLES_SERVICE_NAME } from "@/components/OrderPage/constants";
 import { City } from "@/components/OrderPage/Summary/UserData/components/Cities";
 import SummaryService from "@/components/OrderPage/Summary/SummaryService";
 import { LocaleContext } from "@/components/Providers";
+import {getDateString} from "@/utils";
 
 interface IProps {
   title: string;
@@ -102,7 +103,7 @@ export const Summary: FC<IProps> = (props: any) => {
     subService,
     setSubService,
     secTitle = "",
-    secCounter = {},
+    secCounter = [],
     secSubService = [],
     setSecSubService = () => {},
     subSale = "",
@@ -226,7 +227,17 @@ export const Summary: FC<IProps> = (props: any) => {
       0
     );
 
-    return countEstimate + subServiceEstimate;
+    const isCounterValues = counter.reduce((result, item) => {
+      if (typeof item.value === "number") {
+        return result + item.value;
+      }
+
+      return result;
+    }, 0);
+
+    return isCounterValues
+      ? countEstimate + subServiceEstimate
+      : subServiceEstimate;
   };
 
   const getSecondServicePrice = () => {
@@ -236,19 +247,31 @@ export const Summary: FC<IProps> = (props: any) => {
       0
     );
 
-    return secCountEstimate + secSubServiceEstimate;
+    const isCounterValues = secCounter.reduce((result, item) => {
+      if (typeof item.value === "number") {
+        return result + item.value;
+      }
+
+      return result;
+    }, 0);
+
+    return isCounterValues
+      ? secCountEstimate + secSubServiceEstimate
+      : secSubServiceEstimate;
   };
 
   const mainServiceEstimate = getServiceEstimate(
     title,
     counter,
     subService,
+    mainServiceManualCleanersCount,
     isPrivateHouse
   );
   const secondServiceEstimate = getServiceEstimate(
     secTitle,
     secCounter,
-    secSubService
+    secSubService,
+    secondServiceManualCleanersCount
   );
 
   const mainServicePrice = getServicePriceBasedOnManualCleaners(
@@ -329,6 +352,7 @@ export const Summary: FC<IProps> = (props: any) => {
       city: city.name,
       transportationPrice: city.price,
       language: locale,
+      creationDate: getDateString(new Date())
     };
 
     const mainService = {

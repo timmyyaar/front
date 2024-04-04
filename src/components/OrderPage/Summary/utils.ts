@@ -341,6 +341,7 @@ export const getServiceEstimate = (
   title: string,
   counter: any,
   subService: any,
+  manualCleanersCount: number,
   isPrivateHouse?: boolean
 ) => {
   const countEstimate = getEstimateFromCounterByService(title, counter);
@@ -353,8 +354,11 @@ export const getServiceEstimate = (
   const subTotal =
     countEstimate + subServiceEstimate + (isPrivateHouse ? 60 : 0);
 
-  const cleanersCount = Math.ceil(subTotal / divider);
-  const total = subTotal > divider ? subTotal / cleanersCount : subTotal;
+  const cleanersCount = Math.ceil(subTotal / divider) + manualCleanersCount;
+  const total =
+    subTotal > divider || manualCleanersCount > 0
+      ? subTotal / cleanersCount
+      : subTotal;
 
   return {
     time: `${Math.floor(total / 60)}h, ${Math.round(total % 60)}m`,
