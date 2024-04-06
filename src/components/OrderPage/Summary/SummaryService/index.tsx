@@ -79,7 +79,7 @@ function SummaryService({
                   subServiceList.filter((el: ISubService) => el.title === title)
                     .length
                 }
-                {title === "Balcony" && (
+                {["Carpet dry cleaning", "Balcony"].includes(title) && (
                   <>
                     {t("m")}
                     <sup>2</sup>

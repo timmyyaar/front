@@ -109,6 +109,7 @@
 
     .right-col {
       width: 35%;
+      min-width: 100%;
 
       @media screen and (max-width: 950px) {
         width: 100%;

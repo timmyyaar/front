@@ -54,7 +54,6 @@ export const SubServicesList: FC<IProps> = (props) => {
     setSelectedService(subServices.map((el) => el.title));
   }, [subServices]);
 
-
   return getSubServiceListByMainService(mainService).length ? (
     <div className="sub-services-list-component">
       <div className="title">{t("Choose additional cleaning services")}</div>
@@ -102,7 +101,7 @@ export const SubServicesList: FC<IProps> = (props) => {
                             (service) => service === el.title
                           ).length
                         }
-                        {el.title === "Balcony" ? (
+                        {["Carpet dry cleaning", "Balcony"].includes(el.title) ? (
                           <span className="_ml-1">
                             m<sup>2</sup>
                           </span>
@@ -150,7 +149,7 @@ export const SubServicesList: FC<IProps> = (props) => {
                   {el.title === "Ironing" || el.title === "Extra tasks"
                     ? t("/hour")
                     : null}
-                  {el.title === "Balcony" ? (
+                  {["Carpet dry cleaning", "Balcony"].includes(el.title) ? (
                     <>
                       /m<sup>2</sup>
                     </>

@@ -13,6 +13,7 @@ import fridgeSvg from './icons/fridge.svg';
 import hoursglassSvg from './icons/hoursglass.svg';
 import ironSvg from './icons/iron.svg';
 import kitchenSvg from './icons/kitchen.svg';
+import kitchenCabinets from './icons/kitchen-cabinets.svg'
 import laundrySvg from './icons/laundry.svg';
 import microwaveSvg from './icons/microwave.svg';
 import ovenSvg from './icons/oven.svg';
@@ -31,7 +32,7 @@ export const AdditionalServices = (props: any) => {
     { title: 'Clean the fridge', icons: fridgeSvg },
     { title: 'Clean the hood', icons: cookerHoodSvg },
     { title: 'Clean the microwave', icons: microwaveSvg },
-    { title: 'Clean kitchen cabinets', icons: kitchenSvg },
+    { title: 'Clean kitchen cabinets', icons: kitchenCabinets },
     { title: 'Wash the window', icons: windowSvg },
     { title: 'Wash the dishes', icons: cleanDishesSvg },
     { title: 'Space organizer', icons: cleanClothesSvg },
