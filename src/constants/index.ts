@@ -95,6 +95,10 @@ export const CounterCoasts = {
     price: 50,
     old: "",
   },
+  "Clean the kitchen": {
+    price: 80,
+    old: "",
+  },
   "Clean the corridor": {
     price: 20,
     old: "",
@@ -115,6 +119,12 @@ export const CounterCoasts = {
     price: 15,
     old: "",
   },
+  "Two-seater sofa": { price: 165, old: "" },
+  "Three-seater sofa": { price: 180, old: "" },
+  "Four-seater sofa": { price: 195, old: "" },
+  "Five-seater sofa": { price: 210, old: "" },
+  "Six-seater sofa": { price: 225, old: "" },
+  "Carpet dry cleaning": { price: 10, old: "" },
   "Single mattress": {
     price: 90,
     old: "",

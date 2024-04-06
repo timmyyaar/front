@@ -15,6 +15,7 @@ import { Summary } from "./Summary";
 import { PRIVATE_HOUSE_SERVICES } from "./constants";
 
 import "./style.scss";
+import PrivateHouse from "@/components/OrderPage/PrivateHouse";
 
 export const OrderPage = (props: any) => {
   const { locales } = props;
@@ -85,6 +86,13 @@ export const OrderPage = (props: any) => {
                 isPrivateHouse={isPrivateHouse}
                 setIsPrivateHouse={setIsPrivateHouse}
               />
+              {selectedService === "Custom cleaning" && (
+                <PrivateHouse
+                  t={i18n.t}
+                  isPrivateHouse={isPrivateHouse}
+                  setIsPrivateHouse={setIsPrivateHouse}
+                />
+              )}
               <SubServicesList
                 mainService={selectedService}
                 subServices={selectedSubService}

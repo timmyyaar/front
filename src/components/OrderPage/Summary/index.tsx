@@ -223,7 +223,17 @@ export const Summary: FC<IProps> = (props: any) => {
     const countEstimate =
       getPriceFromCounterByService(title, counter) * (isPrivateHouse ? 1.3 : 1);
     const subServiceEstimate = subService.reduce(
-      (acc: number, el: ISubService) => (acc += el?.price || 0),
+      (acc: number, el: ISubService) =>
+        (acc += el?.price
+          ? [
+              "Clean the room",
+              "Clean the bathroom",
+              "Clean the kitchen",
+              "Clean the corridor",
+            ].includes(el.title) && isPrivateHouse
+            ? el.price * 1.3
+            : el.price
+          : 0),
       0
     );
 
