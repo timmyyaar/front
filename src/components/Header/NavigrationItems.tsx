@@ -1,6 +1,5 @@
-import Link from "next/link";
 import React from "react";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
 interface NavigationItemsProps {
   t: (text: string) => string;
@@ -8,6 +7,8 @@ interface NavigationItemsProps {
 
 const NavigationItems = ({ t }: NavigationItemsProps) => {
   const pathname = usePathname();
+  const router = useRouter();
+  const { lang } = useParams();
 
   const navigation = [
     { href: "/subscription", title: "Subscription header" },
@@ -22,9 +23,14 @@ const NavigationItems = ({ t }: NavigationItemsProps) => {
       } _flex _flex-col _justify-center`}
       key={navItem.title}
     >
-      <Link href={navItem.href || "/"} className="_px-4 _py-2">
+      <div
+        onClick={() => {
+          router.replace(`/${lang}${navItem.href}`);
+        }}
+        className="_px-4 _py-2 link"
+      >
         <div className="nav-link">{t(navItem.title)}</div>
-      </Link>
+      </div>
     </div>
   ));
 };

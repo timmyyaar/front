@@ -173,3 +173,9 @@ export const POSITIVE_NUMBER_EMPTY_REGEX = /^(\s*|[1-9][0-9]*)+$/;
 export const MOBILE_PHONE_REGEX = /^\+[1-9]{1}[0-9]{3,14}$/;
 
 export const LOCALE_LOCAL_STORAGE_KEY = "locale";
+
+export const MAIN_CATEGORIES = {
+  general: "General cleaning",
+  healthcare: "Healthcare",
+  special: "Special cleaning",
+};

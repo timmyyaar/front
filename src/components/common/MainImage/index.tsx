@@ -1,10 +1,10 @@
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
 
-import mainPng from './images/main.png';
-import { MainOffer } from './components/MainOffer';
-import { SelectService } from './components/SelectService';
-import './style.scss';
+import mainPng from "./images/main.png";
+import { MainOffer } from "./components/MainOffer";
+import { SelectService } from "./components/SelectService";
+import "./style.scss";
 
 export const MainImage = (props: any) => {
   const { t, services, setService, common } = props;
@@ -14,7 +14,7 @@ export const MainImage = (props: any) => {
 
     if (targetElement) {
       targetElement.scrollIntoView({
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   };
@@ -22,7 +22,14 @@ export const MainImage = (props: any) => {
   return (
     <>
       <div className="main-image-wrapper mobile-none">
-        <Image src={mainPng} alt="" sizes='' fill style={{objectFit: 'cover', objectPosition: 'left bottom'}} priority />
+        <Image
+          src={mainPng}
+          alt=""
+          sizes=""
+          fill
+          style={{ objectFit: "cover", objectPosition: "left bottom" }}
+          priority
+        />
         {common ? (
           <MainOffer t={t} handleScroll={handleScroll} />
         ) : (
@@ -30,17 +37,20 @@ export const MainImage = (props: any) => {
         )}
       </div>
       <div className="main-image-wrapper-mobile">
-        <Image src={mainPng} alt="" sizes='' fill style={{ objectFit: 'cover' }} priority />
+        <Image
+          src={mainPng}
+          alt=""
+          sizes=""
+          fill
+          style={{ objectFit: "cover" }}
+          priority
+        />
         {common ? (
           <MainOffer t={t} handleScroll={handleScroll} />
         ) : (
-          <SelectService
-            services={services}
-            setService={setService}
-            t={t}
-          />
+          <SelectService services={services} setService={setService} t={t} />
         )}
       </div>
     </>
-  )
+  );
 };

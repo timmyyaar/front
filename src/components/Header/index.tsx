@@ -1,6 +1,7 @@
 "use client";
-import React, { FC, useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter, usePathname, useParams } from "next/navigation";
 import Cookies from "js-cookie";
 
 import { useLocales } from "@/hooks/useLocales";
@@ -11,7 +12,6 @@ import { InstIcon } from "@/components/common/icons/components/Inst";
 import MenuIcon from "@/components/Header/icons/MenuIcon";
 import NavigationItems from "@/components/Header/NavigrationItems";
 import { LocaleContext } from "@/components/Providers";
-import { ILocales } from "@/locales";
 
 import { LogoIcon } from "./icons/Logo";
 import { Polygon } from "./icons/Polygon";
@@ -26,15 +26,16 @@ const mainLocales = {
   uk: "Ukrainian",
 };
 
-interface Props {
-  locales: ILocales[];
-}
-
-export const Header: FC<Props> = ({ locales }) => {
+export const Header = () => {
+  const { locales, locale, setNewLocal } = useContext(LocaleContext);
   const { t } = useLocales(locales);
   const [localesModal, setLocalesModal] = useState(false);
-  const { locale, setNewLocal } = useContext(LocaleContext);
   const headerRef = useRef<HTMLHeadingElement | null>(null);
+  const router = useRouter();
+  const pathname = usePathname();
+  const { lang } = useParams();
+
+  const currentPath = pathname.slice(4);
 
   const [isMenuOpened, setIsMenuOpened] = useState(false);
 
@@ -47,14 +48,14 @@ export const Header: FC<Props> = ({ locales }) => {
       }) || "pl";
 
     Cookies.set("locale", newLocale);
-    setNewLocal(newLocale);
+
+    router.replace(`/${newLocale}${currentPath ? `/${currentPath}` : ""}`);
     setLocalesModal(false);
   };
 
   useEffect(() => {
-    const locale = Cookies.get("locale") || "pl";
-    setNewLocal(locale);
-  }, []);
+    setNewLocal(lang as string);
+  }, [lang]);
 
   const headerHeight = headerRef?.current?.offsetHeight;
 
@@ -62,11 +63,16 @@ export const Header: FC<Props> = ({ locales }) => {
     <header ref={headerRef} className={isMenuOpened ? "header-sticky" : ""}>
       <nav className="_flex">
         <div className="logo-wrapper _flex">
-          <Link className="navbar-brand _flex _items-center" href={"/"}>
+          <div
+            className="navbar-brand _flex _items-center _cursor-pointer"
+            onClick={() => {
+              router.replace(`/${lang}`);
+            }}
+          >
             <div>
               <LogoIcon className="logo-icon" />
             </div>
-          </Link>
+          </div>
           <div className="sub-menu-wrapper _flex _flex-col _justify-center _pl-4">
             Krakow
           </div>
@@ -79,9 +85,8 @@ export const Header: FC<Props> = ({ locales }) => {
             setLocalesModal(true);
           }}
         >
-          <Link
-            href={"/"}
-            className="_px-4 _py-2 _flex _gap-1"
+          <div
+            className="_px-4 _py-2 _flex _gap-1 link"
             onClick={(e) => {
               e.preventDefault();
             }}
@@ -91,7 +96,7 @@ export const Header: FC<Props> = ({ locales }) => {
             <div className="_flex _items-center">
               <Polygon />
             </div>
-          </Link>
+          </div>
           {localesModal ? (
             <div className="navigation-sub-menu-wrapper">
               {Object.values(mainLocales).map((option) => (
