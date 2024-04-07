@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { Footer } from "@/components/Footer";
 import { useLocales } from "@/hooks/useLocales";
@@ -10,9 +10,10 @@ import { CounterComponent } from "../OrderPage/Counter";
 import { SubServicesList } from "../OrderPage/SubServicesList";
 import { Summary } from "../OrderPage/Summary";
 import "./style.scss";
+import { LocaleContext } from "@/components/Providers";
 
-export const SubscriptionPage = (props: any) => {
-  const { locales } = props;
+export const SubscriptionPage = () => {
+  const { locales } = useContext(LocaleContext);
   const { t } = useLocales(locales);
 
   const [sale, setSale] = useState(sales[0]);

@@ -1,9 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 
 import { Footer } from "@/components/Footer";
 import { useLocales } from "@/hooks/useLocales";
-import { MainImage } from "@/components/common/MainImage";
 import { LeftArrow } from "@/components/common/Slider/icons/LeftArrow";
 
 import { AddedMainService, getAdditionalServices } from "./AddedMainService";
@@ -16,14 +16,18 @@ import { PRIVATE_HOUSE_SERVICES } from "./constants";
 
 import "./style.scss";
 import PrivateHouse from "@/components/OrderPage/PrivateHouse";
+import { LocaleContext } from "@/components/Providers";
+import { MAIN_CATEGORIES } from "@/constants";
 
-export const OrderPage = (props: any) => {
-  const { locales } = props;
+export const OrderPage = () => {
+  const { locales } = useContext(LocaleContext);
   const i18n = useLocales(locales);
-  const services = ["General cleaning", "Healthcare", "Special cleaning"];
-  const [selectedCategory, setCategory] = useState<
-    (typeof services)[number] | ""
-  >("");
+  const { lang, type } = useParams();
+  const router = useRouter();
+  const categoryTitle =
+    MAIN_CATEGORIES[
+      type as keyof { general: string; healthcare: string; special: string }
+    ];
   // main service
   const [selectedService, setService] = useState<string>("");
   const [counterValue, setCounterValue] = useState([]);
@@ -53,108 +57,106 @@ export const OrderPage = (props: any) => {
     setSecondCounterValue([]);
     setSecondSubService([]);
     setIsPrivateHouse(false);
-  }, [selectedCategory]);
+  }, [categoryTitle]);
 
   return (
     <div className="order-page">
-      {!selectedCategory ? (
-        <MainImage services={services} setService={setCategory} t={i18n.t} />
-      ) : (
-        <div>
-          <div className="header-wrapper _flex _items-center">
-            <div
-              className="_cursor-pointer _flex _items-center"
-              onClick={() => setCategory("")}
-            >
-              <div className="arrow-button">
-                <LeftArrow />
-              </div>
-              {i18n.t(selectedCategory)}
+      <div>
+        <div className="header-wrapper _flex _items-center">
+          <div
+            className="_cursor-pointer _flex _items-center"
+            onClick={() => {
+              router.replace(`/${lang}/order`);
+            }}
+          >
+            <div className="arrow-button">
+              <LeftArrow />
             </div>
+            {i18n.t(categoryTitle)}
           </div>
-          <div className="content-wrapper">
-            <div className="left-col">
-              <ServicesList
-                mainCategory={selectedCategory}
-                t={i18n.t}
-                setService={setService}
-              />
-              <CounterComponent
-                mainService={selectedService}
-                setCounterValue={setCounterValue}
+        </div>
+        <div className="content-wrapper">
+          <div className="left-col">
+            <ServicesList
+              mainCategory={categoryTitle}
+              t={i18n.t}
+              setService={setService}
+            />
+            <CounterComponent
+              mainService={selectedService}
+              setCounterValue={setCounterValue}
+              t={i18n.t}
+              isPrivateHouse={isPrivateHouse}
+              setIsPrivateHouse={setIsPrivateHouse}
+            />
+            {selectedService === "Custom cleaning" && (
+              <PrivateHouse
                 t={i18n.t}
                 isPrivateHouse={isPrivateHouse}
                 setIsPrivateHouse={setIsPrivateHouse}
               />
-              {selectedService === "Custom cleaning" && (
-                <PrivateHouse
-                  t={i18n.t}
-                  isPrivateHouse={isPrivateHouse}
-                  setIsPrivateHouse={setIsPrivateHouse}
-                />
-              )}
-              <SubServicesList
-                mainService={selectedService}
-                subServices={selectedSubService}
-                setSubService={setSubService}
-                t={i18n.t}
-              />
-              <AddedMainService
-                mainService={selectedService}
-                setSecondService={setSecondService}
-                t={i18n.t}
-              >
-                {getAdditionalServices(selectedService).length ? (
-                  <>
-                    {getAdditionalServices(selectedService) ===
-                    "ADD OZONATION SERVICE" ? (
+            )}
+            <SubServicesList
+              mainService={selectedService}
+              subServices={selectedSubService}
+              setSubService={setSubService}
+              t={i18n.t}
+            />
+            <AddedMainService
+              mainService={selectedService}
+              setSecondService={setSecondService}
+              t={i18n.t}
+            >
+              {getAdditionalServices(selectedService).length ? (
+                <>
+                  {getAdditionalServices(selectedService) ===
+                  "ADD OZONATION SERVICE" ? (
+                    <CounterComponent
+                      mainService={"Ozonation"}
+                      setCounterValue={setSecondCounterValue}
+                      t={i18n.t}
+                    />
+                  ) : (
+                    <div className="_flex _flex-col _gap-6">
                       <CounterComponent
-                        mainService={"Ozonation"}
+                        mainService={"Dry cleaning"}
                         setCounterValue={setSecondCounterValue}
                         t={i18n.t}
                       />
-                    ) : (
-                      <div className="_flex _flex-col _gap-6">
-                        <CounterComponent
-                          mainService={"Dry cleaning"}
-                          setCounterValue={setSecondCounterValue}
-                          t={i18n.t}
-                        />
-                        <SubServicesList
-                          mainService={"Dry cleaning"}
-                          subServices={secondSelectedSubService}
-                          setSubService={setSecondSubService}
-                          t={i18n.t}
-                        />
-                      </div>
-                    )}
-                  </>
-                ) : null}
-              </AddedMainService>
-              <CheckBoxesBlock
-                mainService={selectedService}
-                subServices={selectedSubService}
-                setSubService={setSubService}
-                t={i18n.t}
-              />
-            </div>
-            <div className="right-col">
-              <Summary
-                title={selectedService}
-                counter={counterValue}
-                subService={selectedSubService}
-                setSubService={setSubService}
-                secTitle={selectedSecondService}
-                secCounter={secondCounterValue}
-                secSubService={secondSelectedSubService}
-                setSecSubService={setSecondSubService}
-                t={i18n.t}
-                isPrivateHouse={isPrivateHouse}
-              />
-            </div>
+                      <SubServicesList
+                        mainService={"Dry cleaning"}
+                        subServices={secondSelectedSubService}
+                        setSubService={setSecondSubService}
+                        t={i18n.t}
+                      />
+                    </div>
+                  )}
+                </>
+              ) : null}
+            </AddedMainService>
+            <CheckBoxesBlock
+              mainService={selectedService}
+              subServices={selectedSubService}
+              setSubService={setSubService}
+              t={i18n.t}
+            />
+          </div>
+          <div className="right-col">
+            <Summary
+              title={selectedService}
+              counter={counterValue}
+              subService={selectedSubService}
+              setSubService={setSubService}
+              secTitle={selectedSecondService}
+              secCounter={secondCounterValue}
+              secSubService={secondSelectedSubService}
+              setSecSubService={setSecondSubService}
+              t={i18n.t}
+              isPrivateHouse={isPrivateHouse}
+            />
           </div>
         </div>
-      )}
+      </div>
       <Footer t={i18n.t} />
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect, useRef, useContext } from "react";
 
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 
 import faceWithRollingEyesSvg from "./icons/face-with-rolling-eyes.svg";
@@ -111,6 +111,7 @@ export const Summary: FC<IProps> = (props: any) => {
     isPrivateHouse,
   } = props;
   const { locale } = useContext(LocaleContext);
+  const { lang } = useParams();
   const [sale, setSale] = useState(0);
   const [promoInputValue, setPromoInputValue] = useState<string>("");
   const [promo, setPromo] = useState("");
@@ -171,7 +172,7 @@ export const Summary: FC<IProps> = (props: any) => {
 
   const onCloseModal = () => {
     setModal(false);
-    router.push("/");
+    router.replace(`/${lang}`);
   };
 
   const onClosePromoErrorModal = () => {

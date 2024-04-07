@@ -1,6 +1,5 @@
-import Link from "next/link";
-import React, { Dispatch, SetStateAction } from "react";
-import { usePathname } from "next/navigation";
+import React, { Dispatch, SetStateAction, useContext } from "react";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { TelegramIcon } from "@/components/common/icons/components/Telegram";
 import { WhatsappIcon } from "@/components/common/icons/components/Whatsapp";
 import { MessengerIcon } from "@/components/common/icons/components/Messenger";
@@ -17,7 +16,9 @@ const NavigationItemsMobile = ({
   t,
   setIsMenuOpened,
 }: NavigationItemsMobileProps) => {
+  const { lang } = useParams();
   const pathname = usePathname();
+  const router = useRouter();
 
   const navigation = [
     { href: "/order", title: "Services header" },
@@ -32,21 +33,22 @@ const NavigationItemsMobile = ({
         {navigation.map((navItem) => (
           <div
             className={`navigation-wrapper-mobile mobile-only-flex _font-semibold ${
-              pathname === navItem.href ? "active" : ""
+              pathname.includes(navItem.href) ? "active" : ""
             } _flex _flex-col _justify-center`}
             key={navItem.title}
           >
-            <Link
-              href={navItem.href || "/"}
-              className="_flex _justify-center _py-2"
+            <div
+              className="_flex _justify-center _py-2 link"
               onClick={() => {
-                if (pathname === navItem.href) {
+                if (pathname.includes(navItem.href)) {
                   setIsMenuOpened(false);
+                } else {
+                  router.replace(`/${lang}${navItem.href}`);
                 }
               }}
             >
               <div className="nav-link">{t(navItem.title)}</div>
-            </Link>
+            </div>
           </div>
         ))}
       </div>

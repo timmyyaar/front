@@ -1,7 +1,7 @@
 import "./style.scss";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import happyFeedbackSvg from "../icons/happy-feedback.svg";
 import sadFeedbackSvg from "../icons/sad-feedback.svg";
@@ -14,6 +14,7 @@ interface FinishedFeedbackProps {
 
 function FinishedFeedback({ finishedRating, t }: FinishedFeedbackProps) {
   const router = useRouter();
+  const { lang } = useParams();
 
   const isBadRating = Object.values(finishedRating).some(
     (rating) => rating < 4
@@ -40,7 +41,7 @@ function FinishedFeedback({ finishedRating, t }: FinishedFeedbackProps) {
             </>
           )}
         </span>
-        <div onClick={() => router.push("/")}>
+        <div onClick={() => router.replace(`/${lang}`)}>
           <LogoIcon className="_cursor-pointer feedback-logo" />
         </div>
       </>

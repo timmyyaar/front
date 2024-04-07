@@ -1,9 +1,8 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { useContext } from "react";
 
 import { Footer } from "@/components/Footer";
 import { useLocales } from "@/hooks/useLocales";
-import { ILocales } from "@/locales";
 import { MainImage } from "@/components/common/MainImage";
 
 import { AdditionalServices } from "./AdditionalServices";
@@ -17,13 +16,10 @@ import { PriceByPhoto } from "./PriceByPhoto";
 import { Promotions } from "./Promotions";
 import Reviews from "@/components/MainPage/Reviews";
 import "./style.scss";
+import { LocaleContext } from "@/components/Providers";
 
-interface Props {
-  locales: ILocales[];
-}
-
-export const MainPage: FC<Props> = (props) => {
-  const { locales } = props;
+export const MainPage= () => {
+  const { locales } = useContext(LocaleContext);
   const { t, lng } = useLocales(locales);
 
   return (

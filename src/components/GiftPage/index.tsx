@@ -1,5 +1,5 @@
 "use client";
-import React, { FC } from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 
 import { Footer } from "@/components/Footer";
@@ -13,13 +13,10 @@ import bSvg from "./icons/250.svg";
 import cSvg from "./icons/350.svg";
 import dSvg from "./icons/500.svg";
 import "./style.scss";
+import { LocaleContext } from "@/components/Providers";
 
-interface Props {
-  locales: any;
-}
-
-export const GiftPage: FC<Props> = (props) => {
-  const { locales } = props;
+export const GiftPage = () => {
+  const { locales } = useContext(LocaleContext);
   const { t } = useLocales(locales);
 
   return (

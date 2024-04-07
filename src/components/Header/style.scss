@@ -50,7 +50,7 @@ header {
     }
   }
 
-  .navigation-wrapper:hover a {
+  .navigation-wrapper:hover .link {
     color: #2b8afc;
     border-radius: 100px;
     border: 1px solid #c1dbff;
@@ -62,7 +62,7 @@ header {
     }
   }
 
-  .navigation-wrapper-active a {
+  .navigation-wrapper-active .link {
     color: #2b8afc;
     border-radius: 100px;
     background: #f9f9f9;

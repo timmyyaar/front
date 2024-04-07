@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams, useRouter, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import "./style.scss";
@@ -13,6 +13,7 @@ function Feedback({ locales }: any) {
   const { t } = useLocales(locales);
 
   const router = useRouter();
+  const { lang } = useParams();
   const searchParams = useSearchParams();
   const [orders, setOrders] = useState([]);
   const [finishedRating, setFinishedRating] = useState<{
@@ -51,7 +52,7 @@ function Feedback({ locales }: any) {
 
   useEffect(() => {
     if (!decryptedOrders) {
-      router.push("/");
+      router.replace(`/${lang}`);
     }
 
     try {
@@ -76,7 +77,7 @@ function Feedback({ locales }: any) {
         setError(true);
       }
     } catch {
-      router.push("/");
+      router.replace(`/${lang}`);
     }
   }, [decryptedOrders]);
 
