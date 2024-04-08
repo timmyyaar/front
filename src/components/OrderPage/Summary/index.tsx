@@ -238,18 +238,7 @@ export const Summary: FC<IProps> = (props: any) => {
       0
     );
 
-    const isCounterValues = counter.reduce(
-      (result: number, item: { value: number | string }) => {
-        if (typeof item.value === "number") {
-          return result + item.value;
-        }
-
-        return result;
-      },
-      0
-    );
-
-    return isCounterValues
+    return countEstimate
       ? countEstimate + subServiceEstimate
       : subServiceEstimate;
   };
