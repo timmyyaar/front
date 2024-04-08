@@ -10,12 +10,12 @@ interface IProps {
   mainService: string;
   subServices: ISubService[];
   setSubService: (service: any) => void;
-  priceMultiplier: number;
+  priceMultiplier?: number;
   t: any;
 }
 
 export const SubServicesList: FC<IProps> = (props) => {
-  const { mainService, subServices, setSubService, priceMultiplier, t } = props;
+  const { mainService, subServices, setSubService, priceMultiplier = 1, t } = props;
   const [selectedService, setSelectedService] = useState<string[]>([]);
 
   const addService = (service: ISubService) => {

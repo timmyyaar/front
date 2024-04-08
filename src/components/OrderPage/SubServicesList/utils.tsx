@@ -489,7 +489,7 @@ export interface ISubService {
   icons: string;
   price: number;
   originalPrice: number;
-  oldPrice: string;
+  oldPrice: string | number;
   time: number;
 }
 

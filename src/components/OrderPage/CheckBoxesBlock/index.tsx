@@ -13,6 +13,7 @@ interface IProps {
   mainService: string;
   subServices: any[];
   setSubService: (service: any) => void;
+  priceMultiplier?: number;
   t: any;
 }
 
