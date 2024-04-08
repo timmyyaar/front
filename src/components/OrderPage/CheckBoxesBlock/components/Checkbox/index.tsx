@@ -46,13 +46,13 @@ const CheckBox: FC<any> = ({
           </div>
         </div>
         <div
-          className={`price-wrapper ${
+          className={`price-wrapper _whitespace-nowrap ${
             isNegativePrice ? "price-negative" : "price-positive"
           } ${!isCentral ? "_ml-auto" : ""}`}
         >
           <div>{t(price)}</div>
           {oldPrice ? (
-            <div className="olr-price-wrapper">{t(oldPrice)}</div>
+            <div className="olr-price-wrapper _whitespace-nowrap">{t(oldPrice)}</div>
           ) : null}
         </div>
       </div>

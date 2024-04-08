@@ -10,11 +10,12 @@ interface IProps {
   mainService: string;
   subServices: ISubService[];
   setSubService: (service: any) => void;
+  priceMultiplier?: number;
   t: any;
 }
 
 export const SubServicesList: FC<IProps> = (props) => {
-  const { mainService, subServices, setSubService, t } = props;
+  const { mainService, subServices, setSubService, priceMultiplier = 1, t } = props;
   const [selectedService, setSelectedService] = useState<string[]>([]);
 
   const addService = (service: ISubService) => {
@@ -58,7 +59,7 @@ export const SubServicesList: FC<IProps> = (props) => {
     <div className="sub-services-list-component">
       <div className="title">{t("Choose additional cleaning services")}</div>
       <div className="_grid _grid-cols-4 _auto-rows-fr">
-        {getSubServiceListByMainService(mainService).map(
+        {getSubServiceListByMainService(mainService, priceMultiplier).map(
           (el: ISubService, i: number) => (
             <div
               // @ts-ignore
@@ -101,7 +102,9 @@ export const SubServicesList: FC<IProps> = (props) => {
                             (service) => service === el.title
                           ).length
                         }
-                        {["Carpet dry cleaning", "Balcony"].includes(el.title) ? (
+                        {["Carpet dry cleaning", "Balcony"].includes(
+                          el.title
+                        ) ? (
                           <span className="_ml-1">
                             m<sup>2</sup>
                           </span>

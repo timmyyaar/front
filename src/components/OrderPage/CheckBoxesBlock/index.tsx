@@ -13,11 +13,18 @@ interface IProps {
   mainService: string;
   subServices: any[];
   setSubService: (service: any) => void;
+  priceMultiplier?: number;
   t: any;
 }
 
 export const CheckBoxesBlock: FC<IProps> = (props) => {
-  const { mainService, subServices, setSubService, t } = props;
+  const {
+    mainService,
+    subServices,
+    setSubService,
+    t,
+    priceMultiplier = 1,
+  } = props;
   const [dryCleaner, setDryCleaner] = useState(false);
   const [vacuumCleaner, setVacuumCleaner] = useState(false);
   const [ownSupplies, setOwnSupplies] = useState(false);
@@ -41,7 +48,13 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
     if (vacuumCleaner) {
       setSubService((sS: any) => [
         ...sS,
-        { title: "Vacuum_cleaner_sub_service", time: 0, price: 30 },
+        {
+          title: "Vacuum_cleaner_sub_service",
+          time: 0,
+          originalPrice: 30,
+          price: priceMultiplier * 30,
+          oldPrice: priceMultiplier === 1 ? "" : 30,
+        },
       ]);
     } else {
       setSubService((sS: any) =>
@@ -54,7 +67,12 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
     if (ownSupplies) {
       setSubService((sS: any) => [
         ...sS,
-        { title: OWN_SUPPLES_SERVICE_NAME, time: 0, price: -15 },
+        {
+          title: OWN_SUPPLES_SERVICE_NAME,
+          time: 0,
+          price: -15,
+          originalPrice: -15,
+        },
       ]);
     } else {
       setSubService((sS: any) =>
@@ -106,7 +124,8 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
           icon={vacuumCleanerSvg}
           title={"title-vacuum-cleaner-checkbox"}
           subTitle={"sub-text-vacuum-cleaner-checkbox"}
-          price={"30 zl"}
+          price={`${30 * priceMultiplier} zl`}
+          oldPrice={priceMultiplier === 1 ? "" : "30 zl"}
           setCheck={setVacuumCleaner}
           checked={vacuumCleaner}
           t={t}

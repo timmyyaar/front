@@ -90,17 +90,16 @@
   }
 
   .price-wrapper {
+    padding: 0.5rem 1rem;
+    min-width: max-content;
     display: flex;
     align-items: center;
     gap: 10px;
-    height: 38px;
     border-radius: 72px;
     color: #232323;
     font-size: 20px;
     font-weight: 600;
     line-height: 110%;
-    min-width: 70px;
-    width: 70px;
     text-align: center;
 
     @media screen and (max-width: 950px) {

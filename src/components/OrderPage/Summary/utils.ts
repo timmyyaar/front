@@ -9,25 +9,12 @@ export const getEstimateFromCounterByService = (
     case "Deep kitchen":
       return 360;
 
-    case "Custom cleaning":
-      return counter.reduce((acc: number, el: any) => {
-        if (el.title === "custom_cleaning_0_count_total") {
-          return (acc += el.value * 40);
-        } else if (el.title === "custom_cleaning_1_count_total") {
-          return (acc += el.value * 45);
-        } else if (el.value === "Kitchen") {
-          return (acc += 60);
-        }
-
-        return acc;
-      }, 0);
-
     case "While sickness":
       return counter.reduce((acc: number, el: any, i: number) => {
-        if (i === 0 && el.value > 1) acc += (el.value - 1) * 60;
+        if (i === 0 && el.value > 1) acc += (el.value - 1) * 45;
         if (i === 1 && el.value > 1) acc += (el.value - 1) * 30;
         if (i === 2 && el.value === "Kitchen") {
-          return (acc += 30);
+          return acc + 30;
         }
 
         return acc;
@@ -35,94 +22,70 @@ export const getEstimateFromCounterByService = (
 
     case "Deep":
       return counter.reduce((acc: number, el: any, i: number) => {
-        if (i === 0 && el.value > 1) acc += (el.value - 1) * 60;
-        if (i === 1 && el.value > 1) acc += (el.value - 1) * 90;
+        if (i === 0 && el.value > 1) {
+          return acc + (el.value - 1) * 60;
+        } else if (i === 1 && el.value > 1) {
+          return acc + (el.value - 1) * 90;
+        } else if (el.value === "Kitchen") {
+          return acc + 30;
+        }
 
         return acc;
-      }, 300);
+      }, 360);
 
     case "Regular":
     case "Eco cleaning":
     case "Move in/out":
     case "Airbnb":
+    case "After party":
     case "Subscription":
-    case "While sickness":
       return counter.reduce((acc: number, el: any, i: number) => {
         if (i === 0 && el.value !== 1) {
-          return (acc += (el.value - 1) * 40);
+          return acc + (el.value - 1) * 30;
         } else if (i === 1 && el.value !== 1) {
-          return (acc += (el.value - 1) * 45);
+          return acc + (el.value - 1) * 60;
         } else if (el.value === "Kitchen") {
-          return (acc += 30);
-        }
-
-        return acc;
-      }, 150);
-
-    case "After party":
-      return counter.reduce((acc: number, el: any) => {
-        if (el.title === "after_party_0_count_total") {
-          return (acc += el.value * 60);
-        } else if (el.title === "after_party_1_count_total") {
-          return (acc += el.value * 45);
-        } else if (el.value === "Kitchen") {
-          return (acc += 30);
-        }
-
-        return acc;
-      }, 210);
-
-    case "Office":
-      return counter.reduce((acc: number, el: any) => {
-        if (el.value <= 100) {
-          return (acc += 180);
-        } else {
-          acc += el.value - 100 + 180;
-        }
-        return acc;
-      }, 0);
-
-    case "Ozonation":
-      return counter.reduce((acc: number, el: any) => {
-        if (el.value > 100) {
-          return (acc += Math.floor((el.value - 100) / 100) * 60);
+          return acc + 30;
         }
 
         return acc;
       }, 180);
 
+    case "Office":
+      return counter.reduce((acc: number, el: any) => {
+        if (el.value <= 100) {
+          return acc + 180;
+        } else {
+          return acc + 180 + (el.value - 100);
+        }
+      }, 0);
+
+    case "Ozonation":
+      return counter.reduce((acc: number, el: any) => {
+        if (el.value <= 100) {
+          return acc + 180;
+        } else {
+          return acc + 180 + (el.value - 100);
+        }
+      }, 0);
+
     case "Post-construction":
       return counter.reduce((acc: number, el: any, i: number) => {
         if (i === 0) {
-          return (acc += el.value * 30);
+          return acc + el.value * 60;
         } else if (i === 1) {
-          if (el.value <= 10) {
-            return 60;
-          } else {
-            return acc + Math.floor(el.value / 10) * 60;
-          }
+          return acc + el.value * 10;
         }
 
         return acc;
       }, 0);
 
     case "Window cleaning":
-      return counter.reduce((acc: number, el: any) => {
-        if (el.title === "window_cleaning_0_count_total") {
+      return counter.reduce((acc: number, el: any, i: number) => {
+        if (i === 0) {
           return acc + el.value * 30;
-        } else if (el.title === "window_cleaning_1_count_total") {
-          return acc + el.value * 2;
-        }
-
-        return acc;
-      }, 0);
-
-    case "Dry cleaning":
-      return counter.reduce((acc: number, el: any) => {
-        if (el.title === "dry_cleaning_0_count_total") {
-          return acc + el.value * 10;
-        } else if (el.title === "dry_cleaning_1_count_total") {
-          return acc + el.value * 30;
+        } else if (i === 1) {
+          return acc + el.value;
         }
 
         return acc;
@@ -154,6 +117,7 @@ export const getPriceFromCounterByService = (
       return counter.reduce((acc: number, el: any, i: number) => {
         if (i === 0 && el.value > 1) acc += (el.value - 1) * 60;
         if (i === 1 && el.value > 1) acc += (el.value - 1) * 80;
+        if (i === 2 && el.value === "Kitchen") acc += 30;
 
         return acc;
       }, 499);
@@ -403,7 +367,7 @@ export const getServicePriceBasedOnManualCleaners = (
     return price;
   }
 
-  const basicPercentForOneCleaner = Math.pow(0.75, cleanersCount);
+  const basicPercentForOneCleaner = Math.pow(0.25, cleanersCount);
   const extraPriceForEachExtraCleaner = price * basicPercentForOneCleaner;
   const extraPrice = manualCleanersCount * extraPriceForEachExtraCleaner;
   const extraPriceRounded = Number(parseFloat(extraPrice.toFixed(1)));

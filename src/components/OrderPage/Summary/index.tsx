@@ -225,15 +225,15 @@ export const Summary: FC<IProps> = (props: any) => {
       getPriceFromCounterByService(title, counter) * (isPrivateHouse ? 1.3 : 1);
     const subServiceEstimate = subService.reduce(
       (acc: number, el: ISubService) =>
-        (acc += el?.price
+        (acc += el?.originalPrice
           ? [
               "Clean the room",
               "Clean the bathroom",
               "Clean the kitchen",
               "Clean the corridor",
             ].includes(el.title) && isPrivateHouse
-            ? el.price * 1.3
-            : el.price
+            ? el.originalPrice * 1.3
+            : el.originalPrice
           : 0),
       0
     );
@@ -257,7 +257,7 @@ export const Summary: FC<IProps> = (props: any) => {
   const getSecondServicePrice = () => {
     const secCountEstimate = getPriceFromCounterByService(secTitle, secCounter);
     const secSubServiceEstimate = secSubService.reduce(
-      (acc: number, el: ISubService) => (acc += el?.price || 0),
+      (acc: number, el: ISubService) => (acc += el?.originalPrice || 0),
       0
     );
 
@@ -362,9 +362,11 @@ export const Summary: FC<IProps> = (props: any) => {
       priceOriginal: price,
       promo,
       mainServiceEstimate: mainServiceEstimate.time,
-      mainServiceCleanersCount: mainServiceEstimate.cleanersCount,
+      mainServiceCleanersCount:
+        mainServiceEstimate.cleanersCount + mainServiceManualCleanersCount,
       secondServiceEstimate: secondServiceEstimate.time,
-      secondServiceCleanersCount: secondServiceEstimate.cleanersCount,
+      secondServiceCleanersCount:
+        secondServiceEstimate.cleanersCount + secondServiceManualCleanersCount,
       additionalInformation: more,
       city: city.name,
       transportationPrice: city.price,
