@@ -23,6 +23,10 @@ export const SubscriptionPage = () => {
   const [counterValue, setCounterValue] = useState([]);
   const [selectedSubService, setSubService] = useState([]);
 
+  const match = sale.sale.match(/^(-?\d*\.?\d+)\s*%$/);
+  const salePercents = 100 - -parseFloat(match![0]);
+  const priceMultiplier = salePercents / 100;
+
   return (
     <div className="subscription-page">
       <div className="content-wrapper">
@@ -59,22 +63,24 @@ export const SubscriptionPage = () => {
             </div>
           </div>
           <CounterComponent
-            mainService={"Custom cleaning"}
+            mainService={"Subscription"}
             setCounterValue={setCounterValue}
             t={t}
             isPrivateHouse={isPrivateHouse}
             setIsPrivateHouse={setIsPrivateHouse}
           />
           <SubServicesList
-            mainService={"Custom cleaning"}
+            mainService={"Subscription"}
             subServices={selectedSubService}
             setSubService={setSubService}
+            priceMultiplier={priceMultiplier}
             t={t}
           />
           <CheckBoxesBlock
             mainService={"Subscription"}
             subServices={selectedSubService}
             setSubService={setSubService}
+            priceMultiplier={priceMultiplier}
             t={t}
           />
         </div>

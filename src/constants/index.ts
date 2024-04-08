@@ -23,6 +23,10 @@ export const Coasts = {
 };
 
 export const CounterCoasts = {
+  "Office cleaning": {
+    price: 2.5,
+    old: "",
+  },
   "Clean the oven": {
     price: 45,
     old: "",

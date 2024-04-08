@@ -37,279 +37,449 @@ import fourSeaterSofaSvg from "./icons/four-seater-sofa.svg";
 import fiveSeaterSofaSvg from "./icons/five-seater-sofa.svg";
 import sixSeaterSofaSvg from "./icons/six-seater-sofa.svg";
 import carpetSvg from "./icons/carpet.svg";
+import officeSvg from "./icons/office.svg";
 
-const allServices: ISubService[] = [
+const getRoundedServicePrice = (number: number) =>
+  Number(parseFloat(number.toFixed(1)));
+
+const allServices = (priceMultiplier: number = 1) => [
+  {
+    title: "Office cleaning",
+    icons: officeSvg,
+    originalPrice: CounterCoasts["Office cleaning"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Office cleaning"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Office cleaning"].price,
+    time: 1,
+  },
   {
     title: "Clean the room",
     icons: readingRoomSvg,
-    price: CounterCoasts["Clean the room"].price,
-    oldPrice: CounterCoasts["Clean the room"].old,
+    originalPrice: CounterCoasts["Clean the room"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Clean the room"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Clean the room"].price,
     time: 30,
   },
   {
     title: "Clean the bathroom",
     icons: bathroomSvg,
-    price: CounterCoasts["Clean the bathroom"].price,
-    oldPrice: CounterCoasts["Clean the bathroom"].old,
-    time: 45,
+    originalPrice: CounterCoasts["Clean the bathroom"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Clean the bathroom"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Clean the bathroom"].price,
+    time: 60,
   },
   {
     title: "Clean the kitchen",
     icons: kitchenSvg,
-    price: CounterCoasts["Clean the kitchen"].price,
-    oldPrice: CounterCoasts["Clean the kitchen"].old,
+    originalPrice: CounterCoasts["Clean the kitchen"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Clean the kitchen"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Clean the kitchen"].price,
     time: 60,
   },
   {
     title: "Clean the corridor",
     icons: corredSvg,
-    price: CounterCoasts["Clean the corridor"].price,
-    oldPrice: CounterCoasts["Clean the corridor"].old,
+    originalPrice: CounterCoasts["Clean the corridor"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Clean the corridor"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Clean the corridor"].price,
     time: 30,
   },
   {
     title: "Clean the cloak room",
     icons: hangerSvg,
-    price: CounterCoasts["Clean the cloak room"].price,
-    oldPrice: CounterCoasts["Clean the cloak room"].old,
+    originalPrice: CounterCoasts["Clean the cloak room"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Clean the cloak room"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Clean the cloak room"].price,
     time: 30,
   },
   {
     title: "Wash the window",
     icons: windowSvg,
-    price: CounterCoasts["Wash the window"].price,
-    oldPrice: CounterCoasts["Wash the window"].old,
+    originalPrice: CounterCoasts["Wash the window"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Wash the window"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Wash the window"].price,
     time: 30,
   },
   {
     title: "Balcony",
     icons: balconySvg,
-    price: CounterCoasts.Balcony.price,
-    oldPrice: CounterCoasts.Balcony.old,
+    originalPrice: CounterCoasts.Balcony.price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts.Balcony.price
+    ),
+    oldPrice: priceMultiplier === 1 ? "" : CounterCoasts.Balcony.price,
     time: 1,
   },
   {
     title: "Clean the oven",
     icons: ovenSvg,
-    price: CounterCoasts["Clean the oven"].price,
-    oldPrice: CounterCoasts["Clean the oven"].old,
+    originalPrice: CounterCoasts["Clean the oven"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Clean the oven"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Clean the oven"].price,
     time: 45,
   },
   {
     title: "Clean the fridge",
     icons: fridgeSvg,
-    price: CounterCoasts["Clean the fridge"].price,
-    oldPrice: CounterCoasts["Clean the fridge"].old,
-    time: 60,
+    originalPrice: CounterCoasts["Clean the fridge"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Clean the fridge"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Clean the fridge"].price,
+    time: 45,
   },
   {
     title: "Clean kitchen cabinets",
     icons: kitchenCabinets,
-    price: CounterCoasts["Clean kitchen cabinets"].price,
-    oldPrice: CounterCoasts["Clean kitchen cabinets"].old,
+    originalPrice: CounterCoasts["Clean kitchen cabinets"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Clean kitchen cabinets"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1
+        ? ""
+        : CounterCoasts["Clean kitchen cabinets"].price,
     time: 60,
   },
   {
     title: "Clean the hood",
     icons: cookerHoodSvg,
-    price: CounterCoasts["Clean the hood"].price,
-    oldPrice: CounterCoasts["Clean the oven"].old,
+    originalPrice: CounterCoasts["Clean the hood"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Clean the hood"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Clean the oven"].price,
     time: 45,
   },
   {
     title: "Extra tasks",
     icons: hoursglassSvg,
-    price: CounterCoasts["Extra tasks"].price,
-    oldPrice: CounterCoasts["Extra tasks"].old,
+    originalPrice: CounterCoasts["Extra tasks"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Extra tasks"].price
+    ),
+    oldPrice: priceMultiplier === 1 ? "" : CounterCoasts["Extra tasks"].price,
     time: 60,
   },
   {
     title: "Cleaning bath or shower cubicle",
     icons: iconsSvg,
-    price: CounterCoasts["Cleaning bath or shower cubicle"].price,
-    oldPrice: CounterCoasts["Cleaning bath or shower cubicle"].old,
+    originalPrice: CounterCoasts["Cleaning bath or shower cubicle"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Cleaning bath or shower cubicle"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1
+        ? ""
+        : CounterCoasts["Cleaning bath or shower cubicle"].price,
     time: 30,
   },
   {
     title: "Ironing",
     icons: ironSvg,
-    price: CounterCoasts.Ironing.price,
-    oldPrice: CounterCoasts.Ironing.old,
+    originalPrice: CounterCoasts.Ironing.price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts.Ironing.price
+    ),
+    oldPrice: priceMultiplier === 1 ? "" : CounterCoasts.Ironing.price,
     time: 60,
   },
   {
     title: "Space organizer",
     icons: cleanClothesSvg,
-    price: CounterCoasts["Space organizer"].price,
-    oldPrice: CounterCoasts["Space organizer"].old,
+    originalPrice: CounterCoasts["Space organizer"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Space organizer"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Space organizer"].price,
     time: 60,
   },
   {
     title: "Wardrobe cleaning",
     icons: closetSvg,
-    price: CounterCoasts["Wardrobe cleaning"].price,
-    oldPrice: CounterCoasts["Wardrobe cleaning"].old,
+    originalPrice: CounterCoasts["Wardrobe cleaning"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Wardrobe cleaning"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Wardrobe cleaning"].price,
     time: 30,
   },
   {
     title: "Wash dishes",
     icons: cleanDishesSvg,
-    price: CounterCoasts["Wash dishes"].price,
-    oldPrice: CounterCoasts["Wash dishes"].old,
+    originalPrice: CounterCoasts["Wash dishes"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Wash dishes"].price
+    ),
+    oldPrice: priceMultiplier === 1 ? "" : CounterCoasts["Wash dishes"].price,
     time: 15,
   },
   {
     title: "Water plants",
     icons: wateringPlantsSvg,
-    price: CounterCoasts["Water plants"].price,
-    oldPrice: CounterCoasts["Water plants"].old,
+    originalPrice: CounterCoasts["Water plants"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Water plants"].price
+    ),
+    oldPrice: priceMultiplier === 1 ? "" : CounterCoasts["Water plants"].price,
     time: 20,
   },
   {
     title: "Laundry",
     icons: laundrySvg,
-    price: CounterCoasts.Laundry.price,
-    oldPrice: CounterCoasts.Laundry.old,
+    originalPrice: CounterCoasts.Laundry.price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts.Laundry.price
+    ),
+    oldPrice: priceMultiplier === 1 ? "" : CounterCoasts.Laundry.price,
     time: 15,
   },
   {
     title: "Wash the microwave",
     icons: microwaveSvg,
-    price: CounterCoasts["Wash the microwave"].price,
-    oldPrice: CounterCoasts["Wash the microwave"].old,
+    originalPrice: CounterCoasts["Wash the microwave"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Wash the microwave"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Wash the microwave"].price,
     time: 20,
   },
   {
     title: "Clean animal's tray",
     icons: petToiletTraySvg,
-    price: CounterCoasts["Clean animal's tray"].price,
-    oldPrice: CounterCoasts["Clean animal's tray"].old,
+    originalPrice: CounterCoasts["Clean animal's tray"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Clean animal's tray"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Clean animal's tray"].price,
     time: 15,
   },
   {
     title: "Clean the mirror",
     icons: mirrorSvg,
-    price: CounterCoasts["Clean the mirror"].price,
-    oldPrice: CounterCoasts["Clean the mirror"].old,
+    originalPrice: CounterCoasts["Clean the mirror"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Clean the mirror"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Clean the mirror"].price,
     time: 15,
   },
   {
     title: "Clean slow-cooker",
     icons: SlowCooker,
-    price: CounterCoasts["Clean slow-cooker"].price,
-    oldPrice: CounterCoasts["Clean slow-cooker"].old,
+    originalPrice: CounterCoasts["Clean slow-cooker"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Clean slow-cooker"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Clean slow-cooker"].price,
     time: 15,
   },
   {
     title: "Clean coffee-machine",
     icons: coffeeMachineSvg,
-    price: CounterCoasts["Clean coffee-machine"].price,
-    oldPrice: CounterCoasts["Clean coffee-machine"].old,
+    originalPrice: CounterCoasts["Clean coffee-machine"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Clean coffee-machine"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Clean coffee-machine"].price,
     time: 15,
   },
   {
     title: "Two-seater sofa",
     icons: twoSeaterSofaSvg,
-    price: CounterCoasts["Two-seater sofa"].price,
-    oldPrice: CounterCoasts["Two-seater sofa"].old,
+    originalPrice: CounterCoasts["Two-seater sofa"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Two-seater sofa"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Two-seater sofa"].price,
     time: 60,
   },
   {
     title: "Three-seater sofa",
     icons: threeSeaterSofaSvg,
-    price: CounterCoasts["Three-seater sofa"].price,
-    oldPrice: CounterCoasts["Three-seater sofa"].old,
-    time: 75,
+    originalPrice: CounterCoasts["Three-seater sofa"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Three-seater sofa"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Three-seater sofa"].price,
+    time: 60,
   },
   {
     title: "Four-seater sofa",
     icons: fourSeaterSofaSvg,
-    price: CounterCoasts["Four-seater sofa"].price,
-    oldPrice: CounterCoasts["Four-seater sofa"].old,
-    time: 90,
+    originalPrice: CounterCoasts["Four-seater sofa"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Four-seater sofa"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Four-seater sofa"].price,
+    time: 60,
   },
   {
     title: "Five-seater sofa",
     icons: fiveSeaterSofaSvg,
-    price: CounterCoasts["Five-seater sofa"].price,
-    oldPrice: CounterCoasts["Five-seater sofa"].old,
-    time: 105,
+    originalPrice: CounterCoasts["Five-seater sofa"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Five-seater sofa"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Five-seater sofa"].price,
+    time: 60,
   },
   {
     title: "Six-seater sofa",
     icons: sixSeaterSofaSvg,
-    price: CounterCoasts["Six-seater sofa"].price,
-    oldPrice: CounterCoasts["Six-seater sofa"].old,
-    time: 120,
+    originalPrice: CounterCoasts["Six-seater sofa"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Six-seater sofa"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Six-seater sofa"].price,
+    time: 60,
   },
   {
     title: "Upholstered to bed",
     icons: bedSvg,
-    price: CounterCoasts["Upholstered to bed"].price,
-    oldPrice: CounterCoasts["Upholstered to bed"].old,
+    originalPrice: CounterCoasts["Upholstered to bed"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Upholstered to bed"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Upholstered to bed"].price,
     time: 60,
   },
   {
     title: "Carpet dry cleaning",
     icons: carpetSvg,
-    price: CounterCoasts["Carpet dry cleaning"].price,
-    oldPrice: CounterCoasts["Carpet dry cleaning"].old,
+    originalPrice: CounterCoasts["Carpet dry cleaning"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Carpet dry cleaning"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Carpet dry cleaning"].price,
     time: 10,
   },
   {
     title: "Single mattress",
     icons: mattressSvg,
-    price: CounterCoasts["Single mattress"].price,
-    oldPrice: CounterCoasts["Single mattress"].old,
-    time: 30,
+    originalPrice: CounterCoasts["Single mattress"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Single mattress"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Single mattress"].price,
+    time: 60,
   },
   {
     title: "Single mattress from both sides",
     icons: mattressSvg,
-    price: CounterCoasts["Single mattress from both sides"].price,
-    oldPrice: CounterCoasts["Single mattress from both sides"].old,
+    originalPrice: CounterCoasts["Single mattress from both sides"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Single mattress from both sides"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1
+        ? ""
+        : CounterCoasts["Single mattress from both sides"].price,
     time: 60,
   },
   {
     title: "Double mattress",
     icons: mattressDblSvg,
-    price: CounterCoasts["Double mattress"].price,
-    oldPrice: CounterCoasts["Double mattress"].old,
+    originalPrice: CounterCoasts["Double mattress"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Double mattress"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Double mattress"].price,
     time: 60,
   },
   {
     title: "Double mattress from both sides",
     icons: mattressDblSvg,
-    price: CounterCoasts["Double mattress from both sides"].price,
-    oldPrice: CounterCoasts["Double mattress from both sides"].old,
+    originalPrice: CounterCoasts["Double mattress from both sides"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Double mattress from both sides"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1
+        ? ""
+        : CounterCoasts["Double mattress from both sides"].price,
     time: 90,
   },
   {
     title: "Armchair",
     icons: sofaSvg,
-    price: CounterCoasts.Armchair.price,
-    oldPrice: CounterCoasts.Armchair.old,
+    originalPrice: CounterCoasts.Armchair.price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts.Armchair.price
+    ),
+    oldPrice: priceMultiplier === 1 ? "" : CounterCoasts.Armchair.price,
     time: 30,
   },
   {
     title: "Chair",
     icons: chairSvg,
-    price: CounterCoasts.Chair.price,
-    oldPrice: CounterCoasts.Chair.old,
-    time: 20,
+    originalPrice: CounterCoasts.Chair.price,
+    price: getRoundedServicePrice(priceMultiplier * CounterCoasts.Chair.price),
+    oldPrice: priceMultiplier === 1 ? "" : CounterCoasts.Chair.price,
+    time: 30,
   },
   {
     title: "Office chair",
     icons: officeChairSvg,
-    price: CounterCoasts["Office chair"].price,
-    oldPrice: CounterCoasts["Office chair"].old,
-    time: 20,
+    originalPrice: CounterCoasts["Office chair"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Office chair"].price
+    ),
+    oldPrice: priceMultiplier === 1 ? "" : CounterCoasts["Office chair"].price,
+    time: 30,
   },
   {
     title: "Cleaning baby stroller",
     icons: babyStrollerSvg,
-    price: CounterCoasts["Cleaning baby stroller"].price,
-    oldPrice: CounterCoasts["Cleaning baby stroller"].old,
+    originalPrice: CounterCoasts["Cleaning baby stroller"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Cleaning baby stroller"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1
+        ? ""
+        : CounterCoasts["Cleaning baby stroller"].price,
     time: 30,
   },
 ];
@@ -318,13 +488,15 @@ export interface ISubService {
   title: string;
   icons: string;
   price: number;
+  originalPrice: number;
   oldPrice: string;
   time: number;
 }
 
 export const getSubServiceListByMainService = (
-  mainService: string
-): ISubService[] | [] => {
+  mainService: string,
+  priceMultiplier: number = 1
+) => {
   switch (mainService) {
     case "After party":
     case "In a last minute":
@@ -334,7 +506,7 @@ export const getSubServiceListByMainService = (
     case "Regular":
     case "Eco cleaning":
     case "Move in/out":
-      return allServices.filter((el) => {
+      return allServices(priceMultiplier).filter((el) => {
         const excludedTitles = [
           "Clean the cloak room",
           "Clean the mirror",
@@ -343,6 +515,7 @@ export const getSubServiceListByMainService = (
           "Clean the corridor",
           "Clean the bathroom",
           "Cleaning bath or shower cubicle",
+          "Office cleaning",
 
           "Two-seater sofa",
           "Three-seater sofa",
@@ -365,7 +538,7 @@ export const getSubServiceListByMainService = (
       });
 
     case "Dry cleaning":
-      return allServices.filter((el) => {
+      return allServices(priceMultiplier).filter((el) => {
         const excludedTitles = [
           "Two-seater sofa",
           "Three-seater sofa",
@@ -387,8 +560,22 @@ export const getSubServiceListByMainService = (
         return excludedTitles.includes(el.title);
       });
 
+    case "Subscription":
+      return allServices(priceMultiplier).filter((el) => {
+        const excludedTitles = [
+          "Clean the room",
+          "Clean the kitchen",
+          "Clean the corridor",
+          "Clean the bathroom",
+        ];
+
+        return !excludedTitles.includes(el.title);
+      });
+
     case "Custom cleaning":
-      return allServices;
+      return allServices(priceMultiplier).filter(
+        (el) => el.title !== "Office cleaning"
+      );
 
     default:
       return [];
