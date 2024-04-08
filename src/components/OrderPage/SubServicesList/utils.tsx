@@ -43,17 +43,17 @@ const getRoundedServicePrice = (number: number) =>
   Number(parseFloat(number.toFixed(1)));
 
 const allServices = (priceMultiplier: number = 1) => [
-  {
-    title: "Office cleaning",
-    icons: officeSvg,
-    originalPrice: CounterCoasts["Office cleaning"].price,
-    price: getRoundedServicePrice(
-      priceMultiplier * CounterCoasts["Office cleaning"].price
-    ),
-    oldPrice:
-      priceMultiplier === 1 ? "" : CounterCoasts["Office cleaning"].price,
-    time: 1,
-  },
+  // {
+  //   title: "Office cleaning",
+  //   icons: officeSvg,
+  //   originalPrice: CounterCoasts["Office cleaning"].price,
+  //   price: getRoundedServicePrice(
+  //     priceMultiplier * CounterCoasts["Office cleaning"].price
+  //   ),
+  //   oldPrice:
+  //     priceMultiplier === 1 ? "" : CounterCoasts["Office cleaning"].price,
+  //   time: 1,
+  // },
   {
     title: "Clean the room",
     icons: readingRoomSvg,
