@@ -34,12 +34,20 @@ function CleanersCount({
 
   const isMinusCleanersIconDisabled = manualCleanersCount === 0;
 
+  const isDryCleaningOrOzonation = ["Dry cleaning", "Ozonation"].includes(
+    serviceTitle
+  );
+
   return (
     <div className="_mt-2 cleaners-count-wrapper">
       <span className="_flex _items-center">
         <span
-          onClick={() => setShowManualPopup(true)}
-          className="original-cleaners"
+          onClick={() => {
+            if (!isDryCleaningOrOzonation) {
+              setShowManualPopup(true);
+            }
+          }}
+          className={`${!isDryCleaningOrOzonation ? "original-cleaners" : ""}`}
         >
           {t("Cleaners")}: <b>{cleanersCount}</b>
           {manualCleanersCount > 0 && (
@@ -48,16 +56,20 @@ function CleanersCount({
             </span>
           )}
         </span>
-        <Info
-          className="_ml-2 mobile-none"
-          onClick={() => setIsCleanersInfoHovered(true)}
-          onMouseEnter={() => setIsCleanersInfoHovered(true)}
-          onMouseLeave={() => setIsCleanersInfoHovered(false)}
-        />
-        <Info
-          className="_ml-2 mobile-only"
-          onClick={() => setIsCleanersInfoHovered(true)}
-        />
+        {!isDryCleaningOrOzonation && (
+          <>
+            <Info
+              className="_ml-2 mobile-none"
+              onClick={() => setIsCleanersInfoHovered(true)}
+              onMouseEnter={() => setIsCleanersInfoHovered(true)}
+              onMouseLeave={() => setIsCleanersInfoHovered(false)}
+            />
+            <Info
+              className="_ml-2 mobile-only"
+              onClick={() => setIsCleanersInfoHovered(true)}
+            />
+          </>
+        )}
       </span>
       {isCleanersInfoHovered && (
         <>
