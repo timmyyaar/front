@@ -16,11 +16,13 @@ export const getCounterByMainService = (mainService: string) => {
           type: "counter",
           value: "bedroom",
           count: 1,
+          minCount: 1,
         },
         {
           type: "counter",
           value: "bathroom",
           count: 1,
+          minCount: 1,
         },
         {
           type: "switcher",
