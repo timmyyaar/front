@@ -367,7 +367,7 @@ export const getServicePriceBasedOnManualCleaners = (
     return price;
   }
 
-  const basicPercentForOneCleaner = Math.pow(0.3, cleanersCount);
+  const basicPercentForOneCleaner = Math.pow(0.25, cleanersCount);
   const extraPriceForEachExtraCleaner = price * basicPercentForOneCleaner;
   const extraPrice = manualCleanersCount * extraPriceForEachExtraCleaner;
   const extraPriceRounded = Number(parseFloat(extraPrice.toFixed(1)));
