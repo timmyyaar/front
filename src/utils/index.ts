@@ -1,5 +1,5 @@
 export const getOzonationMultiplier = (value: number) =>
-  value > 120 ? 5 : value > 50 ? 6 : 7;
+  value > 120 ? 4 : value > 50 ? 5 : 6;
 
 export const getDateString = (date: Date) => {
   const day = date.getDate();
