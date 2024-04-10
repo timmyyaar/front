@@ -57,13 +57,13 @@ const roomsImages: {
       en: BedroomEngReg,
       pl: BedroomPolReg,
       ru: BedroomRusReg,
-      uk: BedroomUkrReg,
+      ua: BedroomUkrReg,
     },
     Deep: {
       en: BedroomEngDeep,
       pl: BedroomPolDeep,
       ru: BedroomRusDeep,
-      uk: BedroomUkrDeep,
+      ua: BedroomUkrDeep,
     },
   },
   Kitchen: {
@@ -71,13 +71,13 @@ const roomsImages: {
       en: KitchenEngReg,
       pl: KitchenPolReg,
       ru: KitchenRusReg,
-      uk: KitchenUkrReg,
+      ua: KitchenUkrReg,
     },
     Deep: {
       en: KitchenEngDeep,
       pl: KitchenPolDeep,
       ru: KitchenRusDeep,
-      uk: KitchenUkrDeep,
+      ua: KitchenUkrDeep,
     },
   },
   Corridor: {
@@ -85,13 +85,13 @@ const roomsImages: {
       en: CorridorEngReg,
       pl: CorridorPolReg,
       ru: CorridorRusReg,
-      uk: CorridorUkrReg,
+      ua: CorridorUkrReg,
     },
     Deep: {
       en: CorridorEngDeep,
       pl: CorridorPolDeep,
       ru: CorridorRusDeep,
-      uk: CorridorUkrDeep,
+      ua: CorridorUkrDeep,
     },
   },
   Bathroom: {
@@ -99,13 +99,13 @@ const roomsImages: {
       en: BathEngReg,
       pl: BathPolReg,
       ru: BathRusReg,
-      uk: BathUkrReg,
+      ua: BathUkrReg,
     },
     Deep: {
       en: BathEngDeep,
       pl: BathPolDeep,
       ru: BathRusDeep,
-      uk: BathUkrDeep,
+      ua: BathUkrDeep,
     },
   },
   Balcony: {
@@ -113,7 +113,7 @@ const roomsImages: {
       en: BalconyEngDeep,
       pl: BalconyPolDeep,
       ru: BalconyRusDeep,
-      uk: BalconyUkrDeep,
+      ua: BalconyUkrDeep,
     },
   },
 };

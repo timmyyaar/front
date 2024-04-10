@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-let locales = ["pl", "en", "ru", "uk"];
+const locales = ["pl", "en", "ru", "ua"];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -13,7 +13,10 @@ export function middleware(request: NextRequest) {
   }
 
   const cookieLocale = request.cookies.get("locale");
-  const defaultLocale = cookieLocale?.value || "pl";
+  const defaultLocale =
+    cookieLocale?.value && locales.includes(cookieLocale.value)
+      ? cookieLocale.value
+      : "pl";
 
   request.nextUrl.pathname = `/${defaultLocale}${pathname}`;
 

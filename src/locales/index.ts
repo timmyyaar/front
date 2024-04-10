@@ -20,7 +20,7 @@ export const initI18n = (locales: ILocales[]) => {
     en: { translation: getLocales(locales, 'en') },
     pl: { translation: getLocales(locales, 'pl') },
     ru: { translation: getLocales(locales, 'ru') },
-    uk: { translation: getLocales(locales, 'uk') },
+    ua: { translation: getLocales(locales, 'ua') },
   }
 
   return (lng: string) => {
