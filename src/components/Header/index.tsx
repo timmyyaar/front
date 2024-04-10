@@ -23,7 +23,7 @@ const mainLocales = {
   en: "English",
   ru: "Russian",
   pl: "Polish",
-  uk: "Ukrainian",
+  ua: "Ukrainian",
 };
 
 export const Header = () => {

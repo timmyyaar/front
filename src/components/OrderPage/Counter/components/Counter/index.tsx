@@ -76,7 +76,7 @@ export const Counter: FC<IProps> = (props) => {
         return "siedziska sofy";
       }
     }
-    if (Cookies.get("locale") === "uk") {
+    if (Cookies.get("locale") === "ua") {
       if (title === "bedroom") {
         if (value === 1) return "кімната";
         if (value < 5) return "комнаты";
