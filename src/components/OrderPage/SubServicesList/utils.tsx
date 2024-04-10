@@ -139,7 +139,7 @@ const allServices = (priceMultiplier: number = 1) => [
     ),
     oldPrice:
       priceMultiplier === 1 ? "" : CounterCoasts["Clean the oven"].price,
-    time: 45,
+    time: 60,
   },
   {
     title: "Clean the fridge",
