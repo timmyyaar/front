@@ -157,7 +157,7 @@ export const getPriceFromCounterByService = (
         if (i === 2 && el.value === "Kitchen") acc += 30;
 
         return acc;
-      }, 199);
+      }, 229);
 
     case "Office":
       return counter.reduce((acc: number, el: any, i: number) => {
