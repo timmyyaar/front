@@ -48,6 +48,10 @@ export default async function RootLayout({
             name="p:domain_verify"
             content="a212016f6fcbc5b5b2e70698845b2e51"
           />
+          <meta
+            name="google-site-verification"
+            content="av2s6aQA-JHPfX_BH2FLGLMDMD-ty5fsLmX4evD3R-E"
+          />
         </head>
         <body className={`${inter.className} custom-scroll`}>
           <Header />
