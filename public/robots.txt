@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.takeutime.pl/
+
+# Sitemaps
+Sitemap: https://www.takeutime.pl/sitemap.xml
+Sitemap: https://www.takeutime.pl/server-sitemap.xml
