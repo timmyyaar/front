@@ -13,7 +13,10 @@ export function middleware(request: NextRequest) {
   }
 
   const cookieLocale = request.cookies.get("locale");
-  const defaultLocale = cookieLocale?.value || "pl";
+  const defaultLocale =
+    cookieLocale?.value && locales.includes(cookieLocale.value)
+      ? cookieLocale.value
+      : "pl";
 
   request.nextUrl.pathname = `/${defaultLocale}${pathname}`;
 
