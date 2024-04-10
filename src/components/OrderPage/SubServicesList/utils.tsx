@@ -139,7 +139,7 @@ const allServices = (priceMultiplier: number = 1) => [
     ),
     oldPrice:
       priceMultiplier === 1 ? "" : CounterCoasts["Clean the oven"].price,
-    time: 45,
+    time: 60,
   },
   {
     title: "Clean the fridge",
@@ -163,7 +163,7 @@ const allServices = (priceMultiplier: number = 1) => [
       priceMultiplier === 1
         ? ""
         : CounterCoasts["Clean kitchen cabinets"].price,
-    time: 60,
+    time: 75,
   },
   {
     title: "Clean the hood",
@@ -270,7 +270,7 @@ const allServices = (priceMultiplier: number = 1) => [
     ),
     oldPrice:
       priceMultiplier === 1 ? "" : CounterCoasts["Wash the microwave"].price,
-    time: 20,
+    time: 15,
   },
   {
     title: "Clean animal's tray",
