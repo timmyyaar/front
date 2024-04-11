@@ -149,8 +149,16 @@ export const getPriceFromCounterByService = (
     case "Move in/out":
     case "Airbnb":
     case "Regular":
-    case "Eco cleaning":
     case "Subscription":
+      return counter.reduce((acc: number, el: any, i: number) => {
+        if (i === 0 && el.value > 1) acc += (el.value - 1) * 40;
+        if (i === 1 && el.value > 1) acc += (el.value - 1) * 50;
+        if (i === 2 && el.value === "Kitchen") acc += 30;
+
+        return acc;
+      }, 199);
+
+    case "Eco cleaning":
       return counter.reduce((acc: number, el: any, i: number) => {
         if (i === 0 && el.value > 1) acc += (el.value - 1) * 40;
         if (i === 1 && el.value > 1) acc += (el.value - 1) * 50;
@@ -317,9 +325,10 @@ export const getServiceEstimate = (
 
   const subTotal =
     countEstimate + subServiceEstimate + (isPrivateHouse ? 60 : 0);
-  const cleanersCount = Math.ceil(subTotal / divider)
+  const cleanersCount = Math.ceil(subTotal / divider);
 
-  const cleanersAndManualCleanersCount = Math.ceil(subTotal / divider) + manualCleanersCount;
+  const cleanersAndManualCleanersCount =
+    Math.ceil(subTotal / divider) + manualCleanersCount;
   const total =
     subTotal > divider || manualCleanersCount > 0
       ? subTotal / cleanersAndManualCleanersCount
