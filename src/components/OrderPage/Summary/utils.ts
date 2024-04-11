@@ -317,11 +317,12 @@ export const getServiceEstimate = (
 
   const subTotal =
     countEstimate + subServiceEstimate + (isPrivateHouse ? 60 : 0);
+  const cleanersCount = Math.ceil(subTotal / divider)
 
-  const cleanersCount = Math.ceil(subTotal / divider) + manualCleanersCount;
+  const cleanersAndManualCleanersCount = Math.ceil(subTotal / divider) + manualCleanersCount;
   const total =
     subTotal > divider || manualCleanersCount > 0
-      ? subTotal / cleanersCount
+      ? subTotal / cleanersAndManualCleanersCount
       : subTotal;
 
   return {
