@@ -1,5 +1,5 @@
 import "./style.scss";
-import { createRef, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ReviewItem from "./ReviewItem";
 import SliderInfinite from "@/components/common/Slider/SliderInfinite";
 import Swiper from "@/components/common/Swiper";
