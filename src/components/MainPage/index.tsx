@@ -17,6 +17,7 @@ import { Promotions } from "./Promotions";
 import Reviews from "@/components/MainPage/Reviews";
 import "./style.scss";
 import { LocaleContext } from "@/components/Providers";
+import Blogs from "@/components/MainPage/Blogs";
 
 export const MainPage= () => {
   const { locales } = useContext(LocaleContext);
@@ -33,6 +34,7 @@ export const MainPage= () => {
         <AdditionalServices t={t} />
         <PriceByPhoto t={t} />
         <Promotions t={t} />
+        <Blogs t={t} />
         <FAQ t={t} />
         <Reviews t={t} />
         <div className="_flex _flex-col">
