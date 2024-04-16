@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 type MetadataProps = {
   params: { lang: string };
 };
@@ -14,6 +16,6 @@ export async function generateMetadata({ params }: MetadataProps) {
   };
 }
 
-export default function Layout({ children }) {
+export default function Layout({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }
