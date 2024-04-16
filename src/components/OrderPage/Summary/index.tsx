@@ -329,7 +329,7 @@ export const Summary: FC<IProps> = (props: any) => {
 
   const sendData = async () => {
     const main = {
-      name,
+      name: name.trim(),
       number: `+${phoneCountry.phoneCode}${number}`,
       email,
       address: `Street: ${street}, House: ${house}${
