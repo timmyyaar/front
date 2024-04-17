@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 import "./globals.css";
 import { Providers } from "@/components/Providers";
@@ -57,6 +58,7 @@ export default async function RootLayout({
           <Header />
           {children}
         </body>
+        <GoogleAnalytics gaId="G-14GD221710" />
       </html>
     </Providers>
   );
