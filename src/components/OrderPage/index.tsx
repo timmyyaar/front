@@ -66,7 +66,7 @@ export const OrderPage = () => {
           <div
             className="_cursor-pointer _flex _items-center"
             onClick={() => {
-              router.replace(`/${lang}/order`);
+              router.push(`/${lang}/order`);
             }}
           >
             <div className="arrow-button">

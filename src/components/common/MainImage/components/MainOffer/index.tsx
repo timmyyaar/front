@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 
 import { CheckSvg } from "./icons/check-fill";
@@ -9,7 +9,7 @@ import "./style.scss";
 export const MainOffer: FC<any> = (props) => {
   const { t, handleScroll } = props;
   const router = useRouter();
-  const { lang } = useParams();
+  const pathname = usePathname();
   const advantages = [
     { title: "Clear", text: "space" },
     { title: "Professional", text: "service" },
@@ -42,7 +42,7 @@ export const MainOffer: FC<any> = (props) => {
           <div className="_mt-10 _flex _gap-6">
             <div
               className="main-button _cursor-pointer"
-              onClick={() => router.replace(`/${lang}/order`)}
+              onClick={() => router.push(`${pathname}/order`)}
             >
               {t("Order online now")}
             </div>
@@ -58,7 +58,7 @@ export const MainOffer: FC<any> = (props) => {
       <div className="main-offer-wrapper-mobile">
         <div
           className="main-button _cursor-pointer"
-          onClick={() => router.replace(`/${lang}/order`)}
+          onClick={() => router.push(`/${pathname}/order`)}
         >
           {t("Order")}
         </div>

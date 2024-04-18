@@ -25,7 +25,7 @@ const NavigationItems = ({ t }: NavigationItemsProps) => {
     >
       <div
         onClick={() => {
-          router.replace(`/${lang}${navItem.href}`);
+          router.push(`/${lang}${navItem.href}`);
         }}
         className="_px-4 _py-2 link"
       >

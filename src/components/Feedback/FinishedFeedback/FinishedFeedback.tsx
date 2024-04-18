@@ -41,7 +41,7 @@ function FinishedFeedback({ finishedRating, t }: FinishedFeedbackProps) {
             </>
           )}
         </span>
-        <div onClick={() => router.replace(`/${lang}`)}>
+        <div onClick={() => router.push(`/${lang}`)}>
           <LogoIcon className="_cursor-pointer feedback-logo" />
         </div>
       </>

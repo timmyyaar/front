@@ -35,8 +35,6 @@ export const Header = () => {
   const pathname = usePathname();
   const { lang } = useParams();
 
-  const currentPath = pathname.slice(4);
-
   const [isMenuOpened, setIsMenuOpened] = useState(false);
 
   const onSelectLocale = (e: any, language: string) => {
@@ -49,7 +47,7 @@ export const Header = () => {
 
     Cookies.set("locale", newLocale);
 
-    router.replace(`/${newLocale}${currentPath ? `/${currentPath}` : ""}`);
+    router.push(`${pathname.replace(/\/(en|ru|pl|ua)/, `/${newLocale}`)}`);
     setLocalesModal(false);
   };
 
@@ -66,7 +64,7 @@ export const Header = () => {
           <div
             className="navbar-brand _flex _items-center _cursor-pointer"
             onClick={() => {
-              router.replace(`/${lang}`);
+              router.push(`/${lang}`);
             }}
           >
             <div>

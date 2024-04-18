@@ -178,6 +178,12 @@ export const MOBILE_PHONE_REGEX = /^\+[1-9]{1}[0-9]{3,14}$/;
 
 export const LOCALE_LOCAL_STORAGE_KEY = "locale";
 
+export const MAIN_CATEGORIES_URLS = {
+  GENERAL: 'general',
+  HEALTHCARE: "healthcare",
+  SPECIAL: 'special'
+}
+
 export const MAIN_CATEGORIES = {
   general: "General cleaning",
   healthcare: "Healthcare",
