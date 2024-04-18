@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { Coasts } from "@/constants";
 import { Writer } from "@/components/common/Writer";
@@ -11,10 +11,10 @@ import "./style.scss";
 
 export const Costs = (props: any) => {
   const { t } = props;
-  const { lang } = useParams();
   const [tab, setTab] = useState(() => tabs[0]);
   const [salesCost, setSalesCost] = useState(() => sales[0].title);
   const router = useRouter();
+  const pathname = usePathname();
 
   const getText = (title: string) => {
     if (tab === TABS.ONE_TIME) {
@@ -163,10 +163,10 @@ export const Costs = (props: any) => {
                 <div
                   className="button _cursor-pointer"
                   onClick={() => {
-                    router.replace(
-                      tab === TABS.SUBSCRIPTION
-                        ? `/${lang}/subscription`
-                        : `${lang}/order`
+                    router.push(
+                      `${pathname}/${
+                        tab === TABS.SUBSCRIPTION ? "subscription" : "order"
+                      }`
                     );
                   }}
                 >
@@ -221,10 +221,10 @@ export const Costs = (props: any) => {
               <div
                 className="sales-mobile-item-order-btn"
                 onClick={() => {
-                  router.replace(
-                    tab === TABS.SUBSCRIPTION
-                      ? `/${lang}/subscription`
-                      : `${lang}/order`
+                  router.push(
+                    `${pathname}/${
+                      tab === TABS.SUBSCRIPTION ? "subscription" : "order"
+                    }`
                   );
                 }}
               >

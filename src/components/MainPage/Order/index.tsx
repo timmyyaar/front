@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 
 import Man from "./icons/Man.svg";
@@ -11,7 +11,7 @@ export const Order = (props: any) => {
   const { t } = props;
   const [hover, setHover] = useState(false);
   const router = useRouter();
-  const { lang } = useParams();
+  const pathname = usePathname();
 
   return (
     <div className="order-wrapper _flex _justify-center">
@@ -42,7 +42,7 @@ export const Order = (props: any) => {
         <div className="_flex _justify-center">
           <div
             className="button-wrapper"
-            onClick={() => router.replace(`${lang}/order`)}
+            onClick={() => router.push(`${pathname}/order`)}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
           >

@@ -52,7 +52,7 @@ function Feedback({ locales }: any) {
 
   useEffect(() => {
     if (!decryptedOrders) {
-      router.replace(`/${lang}`);
+      router.push(`/${lang}`);
     }
 
     try {
@@ -77,7 +77,7 @@ function Feedback({ locales }: any) {
         setError(true);
       }
     } catch {
-      router.replace(`/${lang}`);
+      router.push(`/${lang}`);
     }
   }, [decryptedOrders]);
 

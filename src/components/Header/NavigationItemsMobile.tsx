@@ -43,7 +43,7 @@ const NavigationItemsMobile = ({
                 if (pathname.includes(navItem.href)) {
                   setIsMenuOpened(false);
                 } else {
-                  router.replace(`/${lang}${navItem.href}`);
+                  router.push(`/${lang}${navItem.href}`);
                 }
               }}
             >

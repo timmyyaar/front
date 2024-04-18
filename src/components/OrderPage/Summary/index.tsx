@@ -172,7 +172,7 @@ export const Summary: FC<IProps> = (props: any) => {
 
   const onCloseModal = () => {
     setModal(false);
-    router.replace(`/${lang}`);
+    router.push(`/${lang}`);
   };
 
   const onClosePromoErrorModal = () => {

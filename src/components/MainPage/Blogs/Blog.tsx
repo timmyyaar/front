@@ -1,4 +1,4 @@
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { Blog } from "@/types";
 
 interface BlogProps {
@@ -7,11 +7,11 @@ interface BlogProps {
 }
 
 function Blog({ blog, t }: BlogProps) {
-  const { lang } = useParams();
+  const pathname = usePathname();
   const router = useRouter();
 
   const onBlogClick = () => {
-    router.replace(`/${lang}/blogs/${blog.id}`);
+    router.push(`${pathname}/blogs/${blog.id}`);
   };
 
   return (
