@@ -44,9 +44,11 @@ export const PromoInput: FC<IProps> = (props) => {
           setPromoStatus("#82D46D");
           setSale(+data.promo.sale);
           setPromo(promoInputValue);
-        } else if (data?.message === "Promo not found") {
+        } else {
           setPromoStatus("#FF8C8C");
         }
+      } catch (error) {
+        setPromoStatus("#FF8C8C");
       } finally {
         setIsCheckPromoLoading(false);
       }
