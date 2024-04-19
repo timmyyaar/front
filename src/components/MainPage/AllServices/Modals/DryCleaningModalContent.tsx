@@ -1,5 +1,6 @@
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
 import React from "react";
+import { TranslateFunction } from "@/types";
 
 const DRY_CLEANING_BLOCKS = [
   {
@@ -29,7 +30,7 @@ const DRY_CLEANING_BLOCKS = [
   },
 ];
 
-function DryCleaningModalContent({ t }) {
+function DryCleaningModalContent({ t }: { t: TranslateFunction }) {
   return (
     <div className="_grid _grid-cols-2 _gap-6">
       {DRY_CLEANING_BLOCKS.map(({ title, items }, index) => (

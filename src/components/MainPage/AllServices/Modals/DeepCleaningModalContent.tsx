@@ -1,5 +1,6 @@
 import React from "react";
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
+import { TranslateFunction } from "@/types";
 
 const DEEP_CLEANING_BLOCKS = [
   {
@@ -65,7 +66,7 @@ const DEEP_CLEANING_BLOCKS = [
   },
 ];
 
-function DeepCleaningModalContent({ t }) {
+function DeepCleaningModalContent({ t }: { t: TranslateFunction }) {
   return (
     <div className="_grid _grid-cols-2 _gap-6">
       {DEEP_CLEANING_BLOCKS.map(({ title, items }, index) => (

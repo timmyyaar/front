@@ -3,6 +3,7 @@ import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
 import React from "react";
 import reactStringReplace from "react-string-replace";
 import { FIGURE_BRACKETS_REGEX } from "@/constants";
+import { TranslateFunction } from "@/types";
 
 const DEEP_KITCHEN_BLOCKS = [
   {
@@ -36,7 +37,7 @@ const DEEP_KITCHEN_BLOCKS = [
   },
 ];
 
-function DeepKitchenModalContent({ t }) {
+function DeepKitchenModalContent({ t }: { t: TranslateFunction }) {
   return (
     <div>
       <div className="wrapper-title-text _mb-20">

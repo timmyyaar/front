@@ -2,8 +2,9 @@ import { Writer } from "@/components/common/Writer";
 import React from "react";
 import reactStringReplace from "react-string-replace";
 import { FIGURE_BRACKETS_REGEX } from "@/constants";
+import { TranslateFunction } from "@/types";
 
-function AirbnbModalContent({ t }) {
+function AirbnbModalContent({ t }: { t: TranslateFunction }) {
   return (
     <div>
       <div className="wrapper-title-text">

@@ -3,6 +3,7 @@ import reactStringReplace from "react-string-replace";
 import { FIGURE_BRACKETS_REGEX } from "@/constants";
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
 import React from "react";
+import { TranslateFunction } from "@/types";
 
 const POST_CUNSTRUCTION_CLEANING_BLOCKS = [
   {
@@ -37,7 +38,7 @@ const POST_CUNSTRUCTION_CLEANING_BLOCKS = [
   },
 ];
 
-function PortConstructionModalContent({ t }) {
+function PortConstructionModalContent({ t }: { t: TranslateFunction }) {
   return (
     <div>
       <div className="wrapper-title-text _mb-20">

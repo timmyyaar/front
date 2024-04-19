@@ -1,6 +1,7 @@
 import { Writer } from "@/components/common/Writer";
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
 import React from "react";
+import { TranslateFunction } from "@/types";
 
 const IN_A_LAST_MINUTE_BLOCKS = [
   {
@@ -47,7 +48,7 @@ const IN_A_LAST_MINUTE_BLOCKS = [
   },
 ];
 
-function InALastMinuteModalContent({ t }) {
+function InALastMinuteModalContent({ t }: { t: TranslateFunction }) {
   return (
     <div>
       <div className="wrapper-title-text _mb-20">

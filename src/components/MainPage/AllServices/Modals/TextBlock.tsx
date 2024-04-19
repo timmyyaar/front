@@ -1,7 +1,16 @@
 import { Writer } from "@/components/common/Writer";
 import React from "react";
+import { TranslateFunction } from "@/types";
 
-function TextBlock({ t, title, items, center, inline }) {
+interface TextBlockProps {
+  t: TranslateFunction;
+  title: string;
+  items: string[] | string[][];
+  center?: boolean;
+  inline?: boolean;
+}
+
+function TextBlock({ t, title, items, center, inline }: TextBlockProps) {
   return (
     <div className={`wrapper-modal-reg ${center ? "cell-full-width" : ""}`}>
       <div className="wrapper-modal-reg-title">
@@ -9,7 +18,7 @@ function TextBlock({ t, title, items, center, inline }) {
       </div>
       {inline ? (
         <div className="wrapper-modal-reg-list-row _justify-between">
-          {items.map((innerItems) => (
+          {(items as string[][]).map((innerItems: string[]) => (
             <div>
               {innerItems.map((innerItem, index) => (
                 <div
@@ -27,7 +36,7 @@ function TextBlock({ t, title, items, center, inline }) {
       ) : (
         <div className="_flex _justify-center">
           <div className="wrapper-modal-reg-list">
-            {items.map((item, index) => (
+            {(items as string[]).map((item, index) => (
               <div className="wrapper-modal-reg-item" key={`${item}-${index}`}>
                 <div className="wrapper-modal-reg-item-text">
                   <Writer text={t(item)} />

@@ -1,5 +1,6 @@
 import React from "react";
 import { Writer } from "@/components/common/Writer";
+import { TranslateFunction } from "@/types";
 
 const OZONATION_BLOCKS = [
   {
@@ -22,7 +23,7 @@ const OZONATION_BLOCKS = [
   { title: "ventilation", description: "ventilation_description" },
 ];
 
-function OzonationModalContent({ t }) {
+function OzonationModalContent({ t }: { t: TranslateFunction }) {
   return (
     <div>
       <div className="wrapper-title-text _mb-20">

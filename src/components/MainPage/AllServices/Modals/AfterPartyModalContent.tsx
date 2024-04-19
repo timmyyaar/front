@@ -3,6 +3,7 @@ import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
 import React from "react";
 import reactStringReplace from "react-string-replace";
 import { FIGURE_BRACKETS_REGEX } from "@/constants";
+import { TranslateFunction } from "@/types";
 
 const AFTER_PARTY_BLOCKS = [
   {
@@ -49,7 +50,7 @@ const AFTER_PARTY_BLOCKS = [
   },
 ];
 
-function AfterPartyModalContent({ t }) {
+function AfterPartyModalContent({ t }: { t: TranslateFunction }) {
   return (
     <div>
       <div className="wrapper-title-text _mb-20">

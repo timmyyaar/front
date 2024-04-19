@@ -2,8 +2,9 @@ import { Writer } from "@/components/common/Writer";
 import reactStringReplace from "react-string-replace";
 import { FIGURE_BRACKETS_REGEX } from "@/constants";
 import React from "react";
+import { TranslateFunction } from "@/types";
 
-function CustomCleaningModalContent({ t }) {
+function CustomCleaningModalContent({ t }: { t: TranslateFunction }) {
   return (
     <div className="wrapper-title-text">
       <div className="wrapper-title text-gradient">

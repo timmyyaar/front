@@ -3,6 +3,7 @@ import React from "react";
 import reactStringReplace from "react-string-replace";
 import { FIGURE_BRACKETS_REGEX } from "@/constants";
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
+import { TranslateFunction } from "@/types";
 
 const ECO_CLEANING_BLOCKS = [
   {
@@ -49,7 +50,7 @@ const ECO_CLEANING_BLOCKS = [
   },
 ];
 
-function EcoCleaningModalContent({ t }) {
+function EcoCleaningModalContent({ t }: { t: TranslateFunction }) {
   return (
     <div>
       <div className="wrapper-title-text _mb-6">

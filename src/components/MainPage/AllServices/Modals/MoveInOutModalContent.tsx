@@ -3,6 +3,7 @@ import reactStringReplace from "react-string-replace";
 import { FIGURE_BRACKETS_REGEX } from "@/constants";
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
 import React from "react";
+import { TranslateFunction } from "@/types";
 
 const MOVE_IN_OUT_CLEANING_BLOCKS = [
   {
@@ -68,7 +69,7 @@ const MOVE_IN_OUT_CLEANING_BLOCKS = [
   },
 ];
 
-function MoveInOutModalContent({ t }) {
+function MoveInOutModalContent({ t }: { t: TranslateFunction }) {
   return (
     <div>
       <div className="wrapper-title-text _mb-20">

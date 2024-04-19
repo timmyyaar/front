@@ -1,5 +1,6 @@
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
 import React from "react";
+import {TranslateFunction} from "@/types";
 
 const WHILE_SICK_ITEMS = [
   "preventive_disinfection_treatment_to_surfaces",
@@ -10,7 +11,7 @@ const WHILE_SICK_ITEMS = [
   "air_ventilation",
 ];
 
-function WhileSickModalContent({ t }) {
+function WhileSickModalContent({ t }: { t: TranslateFunction }) {
   return (
     <TextBlock
       title="disinfection_treatment_and_cleaning"

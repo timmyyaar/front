@@ -7,8 +7,9 @@ import window4 from "@/components/MainPage/AllServices/Modals/images/4.png";
 import window5 from "@/components/MainPage/AllServices/Modals/images/5.png";
 import Image from "next/image";
 import React from "react";
+import { TranslateFunction } from "@/types";
 
-function WindowModalContent({ t }) {
+function WindowModalContent({ t }: { t: TranslateFunction }) {
   return (
     <div className="wrapper-title-text">
       <div className="wrapper-title text-gradient">
@@ -28,7 +29,7 @@ function WindowModalContent({ t }) {
           return (
             <div className="window-block">
               <div className="img-wrapper">
-                <Image src={windowImg[i]} alt="" />
+                <Image src={windowImg[i as 0 | 1 | 2 | 3 | 4 | 5]} alt="" />
               </div>
               <div className="title">
                 <Writer
