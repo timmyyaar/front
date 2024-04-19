@@ -114,6 +114,7 @@ export const getPriceFromCounterByService = (
       }, 199);
 
     case "Deep":
+    case "Move in/out":
       return counter.reduce((acc: number, el: any, i: number) => {
         if (i === 0 && el.value > 1) acc += (el.value - 1) * 60;
         if (i === 1 && el.value > 1) acc += (el.value - 1) * 80;
@@ -146,7 +147,6 @@ export const getPriceFromCounterByService = (
         return acc;
       }, 155);
 
-    case "Move in/out":
     case "Airbnb":
     case "Regular":
     case "Subscription":
