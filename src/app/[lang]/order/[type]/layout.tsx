@@ -32,11 +32,17 @@ const getDescriptionByType = (type: string) => {
 };
 
 export async function generateMetadata({ params }: MetadataProps) {
-  const { type } = params;
+  const { lang, type } = params;
 
   return {
     title: getTitleByType(type),
     description: getDescriptionByType(type),
+    alternates: {
+      canonical: `https://www.takeutime.pl/${lang}/order/${type}`,
+      languages: {
+        [`${lang}`]: `https://www.takeutime.pl/${lang}/order/${type}`,
+      },
+    },
   };
 }
 
