@@ -7,7 +7,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 20px;
-  background: #FFF;
+  background: #fff;
   overflow: auto;
 
   .icon-wrapper-modal {
@@ -19,15 +19,19 @@
     &:hover {
       svg > g > g > path,
       svg > g > path {
-        fill: #0073FC;
+        fill: #0073fc;
       }
     }
   }
 
   .wrapper-modal-reg {
-    padding: 40px 62px;
+    padding: 40px;
     border-radius: 40px;
-    background: #ECF0FF;
+    background: #ecf0ff;
+
+    &.cell-full-width {
+      grid-column: span 2;
+    }
 
     .wrapper-modal-reg-title {
       margin-bottom: 40px;
@@ -60,7 +64,7 @@
       }
 
       &::before {
-        content: '\2022';
+        content: "\2022";
         display: inline-block;
         color: #333;
         font-size: 16px;
@@ -72,7 +76,7 @@
   .wrapper-title-text {
     .wrapper-title {
       margin-bottom: 24px;
-      color: #13277E;
+      color: #13277e;
       text-align: center;
       font-size: 40px;
       font-style: normal;
@@ -97,8 +101,27 @@
     gap: 16px;
     padding: 45px 22px 45px 21px;
     border-radius: 12px;
-    background: #ECF0FF;
-    justify-content: center;
+    background: #ecf0ff;
+
+    .un-hover-block {
+      visibility: visible;
+    }
+
+    .hover-block {
+      visibility: hidden;
+    }
+
+    &:hover {
+      background: #dee5ff;
+
+      .hover-block {
+        visibility: visible;
+      }
+
+      .un-hover-block {
+        visibility: hidden;
+      }
+    }
 
     .number-wrapper {
       display: flex;
@@ -111,9 +134,9 @@
         justify-content: center;
         align-items: center;
         border-radius: 38px;
-        border: 1px solid #2B8AFC;
-        background: #2B8AFC;
-        color: #FFF;
+        border: 1px solid #2b8afc;
+        background: #2b8afc;
+        color: #fff;
       }
     }
 
@@ -127,43 +150,8 @@
     }
   }
 
-  .ozonation-step {
-    width: 18%;
-    position: relative;
-
-    .hover-block {
-      display: none;
-    }
-
-    .hover-block-text {
-      color: #5C5C5C;
-      text-align: center;
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 150%;
-    }
-
-    &:hover {
-      background: #DEE5FF;
-
-      .hover-block {
-        display: block;
-        position: absolute;
-        left: 0;
-      }
-
-      .number-wrapper {
-        display: none;
-      }
-
-      .name {
-        display: none;
-      }
-    }
-  }
-
   .reminder_text {
-    color: #5C5C5C;
+    color: #5c5c5c;
     text-align: center;
     font-size: 14px;
     font-style: normal;
@@ -179,7 +167,7 @@
     align-items: center;
     gap: 24px;
     border-radius: 12px;
-    background: #ECF0FF;
+    background: #ecf0ff;
 
     .img-wrapper {
       display: flex;
@@ -193,12 +181,6 @@
       font-style: normal;
       font-weight: 400;
       line-height: 150%;
-    }
-  }
-
-  .in-line {
-    div {
-      display: inline;
     }
   }
 }
@@ -216,35 +198,6 @@
       top: 16px;
       right: 16px;
     }
-
-    .wrapper-modal-reg {
-      padding: 40px 42px;
-    }
-
-    ._grid._grid-cols-2._gap-6 {
-      display: flex;
-      flex-flow: column;
-    }
-  }
-
-  ._grid._grid-cols-3._gap-2 {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-  }
-
-  .hover-cards-mobile {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-
-    .step-card.ozonation-step {
-      width: 50% !important;
-    }
-  }
-
-  .wrapper-modal-reg-list-row._justify-between {
-    flex-flow: column;
-    gap: 16px !important;
   }
 
   .airbnb-mobile {

@@ -9,3 +9,5 @@ export type Blog = {
   blog_image_one: string;
   blog_image_two: string;
 };
+
+export type TranslateFunction = (text: string) => string;
