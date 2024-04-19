@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { MAIN_CATEGORIES_URLS } from "@/constants";
 
 type MetadataProps = {
-  params: { type: string };
+  params: { lang: string; type: string };
 };
 
 const getTitleByType = (type: string) => {

@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 type MetadataProps = {
-  params: { lang: string };
+  params: { lang: string; blogId: string };
 };
 
 export async function generateMetadata({ params }: MetadataProps) {
