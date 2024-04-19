@@ -58,7 +58,7 @@ export const MainOffer: FC<any> = (props) => {
       <div className="main-offer-wrapper-mobile">
         <div
           className="main-button _cursor-pointer"
-          onClick={() => router.push(`/${pathname}/order`)}
+          onClick={() => router.push(`${pathname}/order`)}
         >
           {t("Order")}
         </div>

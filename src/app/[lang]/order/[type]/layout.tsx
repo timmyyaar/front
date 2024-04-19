@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { MAIN_CATEGORIES_URLS } from "@/constants";
 
 type MetadataProps = {
-  params: { type: string };
+  params: { lang: string; type: string };
 };
 
 const getTitleByType = (type: string) => {
@@ -32,11 +32,17 @@ const getDescriptionByType = (type: string) => {
 };
 
 export async function generateMetadata({ params }: MetadataProps) {
-  const { type } = params;
+  const { lang, type } = params;
 
   return {
     title: getTitleByType(type),
     description: getDescriptionByType(type),
+    alternates: {
+      canonical: `https://www.takeutime.pl/${lang}/order/${type}`,
+      languages: {
+        [`${lang}`]: `https://www.takeutime.pl/${lang}/order/${type}`,
+      },
+    },
   };
 }
 
