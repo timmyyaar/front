@@ -18,6 +18,7 @@ import { Polygon } from "./icons/Polygon";
 
 import "./style.scss";
 import NavigationItemsMobile from "@/components/Header/NavigationItemsMobile";
+import { sendGAEvent } from "@/google-analytics";
 
 const mainLocales = {
   en: "English",
@@ -47,7 +48,15 @@ export const Header = () => {
 
     Cookies.set("locale", newLocale);
 
+    sendGAEvent({
+      action: "language_change",
+      category: "language",
+      label: "Changed language",
+      value: `Previous language: ${lang}, Selected language: ${newLocale}`,
+    });
+
     router.push(`${pathname.replace(/\/(en|ru|pl|ua)/, `/${newLocale}`)}`);
+
     setLocalesModal(false);
   };
 
@@ -56,6 +65,15 @@ export const Header = () => {
   }, [lang]);
 
   const headerHeight = headerRef?.current?.offsetHeight;
+
+  const trackSocialMediaClick = (socialMedia: string) => {
+    sendGAEvent({
+      action: "social_media_click",
+      category: "social_media",
+      label: "Clicked on social media icon",
+      value: socialMedia,
+    });
+  };
 
   return (
     <header ref={headerRef} className={isMenuOpened ? "header-sticky" : ""}>
@@ -117,28 +135,32 @@ export const Header = () => {
             <a
               className="icon _flex _flex-col _justify-center"
               href="https://t.me/takeyoourtime"
-              target="blanc"
+              target="_blank"
+              onClick={() => trackSocialMediaClick("Telegram")}
             >
               <TelegramIcon />
             </a>
             <a
               className="icon _flex _flex-col _justify-center"
               href="https://wa.me/48730003997"
-              target="blanc"
+              target="_blank"
+              onClick={() => trackSocialMediaClick("WhatsApp")}
             >
               <WhatsappIcon />
             </a>
             <a
               className="icon _flex _flex-col _justify-center"
               href="https://m.me/227130810472971"
-              target="blanc"
+              target="_blank"
+              onClick={() => trackSocialMediaClick("Messanger")}
             >
               <MessengerIcon />
             </a>
             <a
               className="icon _flex _flex-col _justify-center"
               href="https://www.instagram.com/takeyourtime_krakow/"
-              target="blanc"
+              target="_blank"
+              onClick={() => trackSocialMediaClick("Instagram")}
             >
               <InstIcon />
             </a>

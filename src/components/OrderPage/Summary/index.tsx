@@ -32,6 +32,7 @@ import { City } from "@/components/OrderPage/Summary/UserData/components/Cities"
 import SummaryService from "@/components/OrderPage/Summary/SummaryService";
 import { LocaleContext } from "@/components/Providers";
 import { getDateString } from "@/utils";
+import { sendGAEvent } from "@/google-analytics";
 
 interface IProps {
   title: string;
@@ -425,6 +426,15 @@ export const Summary: FC<IProps> = (props: any) => {
 
       if (data) {
         setModal(true);
+
+        sendGAEvent({
+          action: "create_order",
+          category: secTitle ? `${title} + ${secTitle}` : title,
+          label: "Order created",
+          value: Array.isArray(data)
+            ? `${title}: ${data[0].id} id, ${secTitle}: ${data[1].id} id`
+            : `${title}: ${data.id} id`,
+        });
       }
     } finally {
       setIsOrderLoading(false);

@@ -59,16 +59,16 @@ export default async function RootLayout({
           {children}
         </body>
         <Script
-          strategy="lazyOnload"
+          strategy="afterInteractive"
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
         />
-        <Script strategy="lazyOnload">
+        <Script strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
+            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', { send_page_view: false });
           `}
         </Script>
       </html>
