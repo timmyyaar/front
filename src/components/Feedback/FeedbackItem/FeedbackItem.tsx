@@ -11,6 +11,7 @@ import happySvg from "@/components/Feedback/icons/happy.svg";
 import { ModalRequest } from "@/components/common/ModalRequest";
 import { Overlay } from "@/components/common/Overlay";
 import { useClickOutside } from "@/hooks/useClickOutSide";
+import { sendGAEvent } from "@/google-analytics";
 
 const icons = [
   { image: crySvg, rating: 1 },
@@ -63,6 +64,15 @@ function FeedbackItem({
       if (response.ok) {
         setWasSubmitted(true);
         setFinishedRating((prev: any) => ({ ...prev, [id]: selectedRating }));
+
+        sendGAEvent({
+          action: "send_feedback",
+          category: "feedback",
+          label: "Feedback has been sent",
+          value: `Order id: ${id}, Feedback: ${
+            feedback || "-"
+          }, Rating: ${selectedRating}`,
+        });
       } else {
         setIsFeedbackError(true);
       }

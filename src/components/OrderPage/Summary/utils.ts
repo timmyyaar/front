@@ -111,7 +111,7 @@ export const getPriceFromCounterByService = (
         if (i === 2 && el.value === "Kitchen") acc += 30;
 
         return acc;
-      }, 199);
+      }, 0);
 
     case "Deep":
     case "Move in/out":
