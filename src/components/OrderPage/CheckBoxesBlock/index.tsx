@@ -1,4 +1,10 @@
-import React, { FC, useState, useEffect } from "react";
+import React, {
+  FC,
+  useState,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
 import CheckBox from "./components/Checkbox";
 
@@ -6,6 +12,7 @@ import { getCheckBoxByMainService } from "./utils";
 import airSvg from "./icons/air-purifier.svg";
 import vacuumCleanerSvg from "./icons/vacuum-cleaner.svg";
 import ownSuppliesSvg from "./icons/own-supplies.svg";
+import checkListSvg from "./icons/check-list.svg";
 import "./style.scss";
 import { OWN_SUPPLES_SERVICE_NAME } from "@/components/OrderPage/constants";
 
@@ -15,6 +22,8 @@ interface IProps {
   setSubService: (service: any) => void;
   priceMultiplier?: number;
   t: any;
+  ownCheckList: boolean;
+  setOwnCheckList: Dispatch<SetStateAction<boolean>>;
 }
 
 export const CheckBoxesBlock: FC<IProps> = (props) => {
@@ -24,12 +33,18 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
     setSubService,
     t,
     priceMultiplier = 1,
+    ownCheckList,
+    setOwnCheckList,
   } = props;
   const [dryCleaner, setDryCleaner] = useState(false);
   const [vacuumCleaner, setVacuumCleaner] = useState(false);
   const [ownSupplies, setOwnSupplies] = useState(false);
 
   const checkBoxes = getCheckBoxByMainService(mainService);
+
+  useEffect(() => {
+    setOwnCheckList(false);
+  }, [mainService]);
 
   useEffect(() => {
     if (dryCleaner) {
@@ -139,6 +154,15 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
           price={"-15 zl"}
           setCheck={setOwnSupplies}
           checked={ownSupplies}
+          t={t}
+        />
+      ) : null}
+      {checkBoxes.includes("own check list") ? (
+        <CheckBox
+          icon={checkListSvg}
+          title={"we_provide_our_own_check_list"}
+          setCheck={setOwnCheckList}
+          checked={ownCheckList}
           t={t}
         />
       ) : null}

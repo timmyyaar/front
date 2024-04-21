@@ -51,6 +51,7 @@ interface IProps {
   subSale?: string;
   t: any;
   isPrivateHouse?: boolean;
+  ownCheckList?: boolean;
 }
 
 function ScrollDetector() {
@@ -110,6 +111,7 @@ export const Summary: FC<IProps> = (props: any) => {
     subSale = "",
     t,
     isPrivateHouse,
+    ownCheckList,
   } = props;
   const { locale } = useContext(LocaleContext);
   const { lang } = useParams();
@@ -362,6 +364,7 @@ export const Summary: FC<IProps> = (props: any) => {
       transportationPrice: city.price,
       language: locale,
       creationDate: getDateString(new Date()),
+      ownCheckList,
     };
 
     const mainService = {
@@ -506,7 +509,10 @@ export const Summary: FC<IProps> = (props: any) => {
           <SummaryService
             serviceTitle={title}
             counterValue={counter}
-            subServiceList={subService}
+            subServiceList={subService.filter(
+              (item: { title: string }) =>
+                item.title !== "Own_supplies_sub_service"
+            )}
             onRemoveSubService={onRemoveSubService}
             t={t}
             manualCleanersCount={mainServiceManualCleanersCount}

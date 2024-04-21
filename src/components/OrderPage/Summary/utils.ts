@@ -33,24 +33,6 @@ export const getEstimateFromCounterByService = (
         return acc;
       }, 360);
 
-    case "Regular":
-    case "Eco cleaning":
-    case "Move in/out":
-    case "Airbnb":
-    case "After party":
-    case "Subscription":
-      return counter.reduce((acc: number, el: any, i: number) => {
-        if (i === 0 && el.value !== 1) {
-          return acc + (el.value - 1) * 30;
-        } else if (i === 1 && el.value !== 1) {
-          return acc + (el.value - 1) * 60;
-        } else if (el.value === "Kitchen") {
-          return acc + 30;
-        }
-
-        return acc;
-      }, 180);
-
     case "Office":
       return counter.reduce((acc: number, el: any) => {
         if (el.value <= 100) {
@@ -92,7 +74,17 @@ export const getEstimateFromCounterByService = (
       }, 0);
 
     default:
-      return 0;
+      return counter.reduce((acc: number, el: any, i: number) => {
+        if (i === 0 && el.value !== 1) {
+          return acc + (el.value - 1) * 30;
+        } else if (i === 1 && el.value !== 1) {
+          return acc + (el.value - 1) * 60;
+        } else if (el.value === "Kitchen") {
+          return acc + 30;
+        }
+
+        return acc;
+      }, 180);
   }
 };
 

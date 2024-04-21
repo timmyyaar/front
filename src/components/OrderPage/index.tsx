@@ -36,7 +36,8 @@ export const OrderPage = () => {
   const [selectedSecondService, setSecondService] = useState<string>("");
   const [secondCounterValue, setSecondCounterValue] = useState([]);
   const [secondSelectedSubService, setSecondSubService] = useState([]);
-  const [isPrivateHouse, setIsPrivateHouse] = useState(false);
+  const [isPrivateHouse, setIsPrivateHouse] = useState<boolean>(false);
+  const [ownCheckList, setOwnCheckList] = useState<boolean>(false);
 
   useEffect(() => {
     if (!PRIVATE_HOUSE_SERVICES.includes(selectedService)) {
@@ -139,6 +140,8 @@ export const OrderPage = () => {
               subServices={selectedSubService}
               setSubService={setSubService}
               t={i18n.t}
+              ownCheckList={ownCheckList}
+              setOwnCheckList={setOwnCheckList}
             />
           </div>
           <div className="right-col">
@@ -153,6 +156,7 @@ export const OrderPage = () => {
               setSecSubService={setSecondSubService}
               t={i18n.t}
               isPrivateHouse={isPrivateHouse}
+              ownCheckList={ownCheckList}
             />
           </div>
         </div>

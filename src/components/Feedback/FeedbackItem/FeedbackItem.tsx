@@ -1,3 +1,5 @@
+"use client";
+
 import React, { Dispatch, SetStateAction, useState } from "react";
 
 import Image from "next/image";
@@ -80,6 +82,8 @@ function FeedbackItem({
       setIsSubmitLoading(false);
     }
   };
+
+  console.log(t("feedback_how_was_your_experience"));
 
   return (
     <div className="feedback-wrapper  _h-full _w-full _flex _flex-col _items-center">
