@@ -510,7 +510,8 @@ export const Summary: FC<IProps> = (props: any) => {
             serviceTitle={title}
             counterValue={counter}
             subServiceList={subService.filter(
-              (item) => item.title !== "Own_supplies_sub_service"
+              (item: { title: string }) =>
+                item.title !== "Own_supplies_sub_service"
             )}
             onRemoveSubService={onRemoveSubService}
             t={t}
