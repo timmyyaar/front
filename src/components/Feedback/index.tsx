@@ -1,15 +1,17 @@
 "use client";
 
 import { useSearchParams, useRouter, useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import "./style.scss";
 
 import FeedbackItem from "@/components/Feedback/FeedbackItem/FeedbackItem";
 import { useLocales } from "@/hooks/useLocales";
 import FinishedFeedback from "@/components/Feedback/FinishedFeedback/FinishedFeedback";
+import { LocaleContext } from "@/components/Providers";
 
-function Feedback({ locales }: any) {
+function Feedback() {
+  const { locales } = useContext(LocaleContext);
   const { t } = useLocales(locales);
 
   const router = useRouter();

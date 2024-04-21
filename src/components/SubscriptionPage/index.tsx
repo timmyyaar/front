@@ -18,6 +18,7 @@ export const SubscriptionPage = () => {
 
   const [sale, setSale] = useState(sales[0]);
   const [isPrivateHouse, setIsPrivateHouse] = useState<boolean>(false);
+  const [ownCheckList, setOwnCheckList] = useState<boolean>(false);
 
   // main service
   const [counterValue, setCounterValue] = useState([]);
@@ -81,6 +82,8 @@ export const SubscriptionPage = () => {
             subServices={selectedSubService}
             setSubService={setSubService}
             priceMultiplier={priceMultiplier}
+            ownCheckList={ownCheckList}
+            setOwnCheckList={setOwnCheckList}
             t={t}
           />
         </div>

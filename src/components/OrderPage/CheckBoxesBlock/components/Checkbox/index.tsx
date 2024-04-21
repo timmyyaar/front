@@ -15,7 +15,7 @@ const CheckBox: FC<any> = ({
   t,
   isCentral,
 }) => {
-  const isNegativePrice = price.substring(0, 1) === "-";
+  const isNegativePrice = price?.substring(0, 1) === "-";
 
   return (
     <div
@@ -45,16 +45,20 @@ const CheckBox: FC<any> = ({
             {subTitle ? <div className="sub-title">{t(subTitle)}</div> : null}
           </div>
         </div>
-        <div
-          className={`price-wrapper _whitespace-nowrap ${
-            isNegativePrice ? "price-negative" : "price-positive"
-          } ${!isCentral ? "_ml-auto" : ""}`}
-        >
-          <div>{t(price)}</div>
-          {oldPrice ? (
-            <div className="olr-price-wrapper _whitespace-nowrap">{t(oldPrice)}</div>
-          ) : null}
-        </div>
+        {price && (
+          <div
+            className={`price-wrapper _whitespace-nowrap ${
+              isNegativePrice ? "price-negative" : "price-positive"
+            } ${!isCentral ? "_ml-auto" : ""}`}
+          >
+            <div>{t(price)}</div>
+            {oldPrice ? (
+              <div className="olr-price-wrapper _whitespace-nowrap">
+                {t(oldPrice)}
+              </div>
+            ) : null}
+          </div>
+        )}
       </div>
     </div>
   );
