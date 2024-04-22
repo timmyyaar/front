@@ -1,7 +1,9 @@
 import { ReactNode } from "react";
+import { ALTERNATES_LANGUAGES } from "@/app/constants";
+import { Language } from "@/types";
 
 type MetadataProps = {
-  params: { lang: string };
+  params: { lang: Language };
 };
 
 export async function generateMetadata({ params }: MetadataProps) {
@@ -10,9 +12,13 @@ export async function generateMetadata({ params }: MetadataProps) {
   return {
     alternates: {
       canonical: `https://www.takeutime.pl/${lang}/feedback`,
-      languages: {
-        [`${lang}`]: `https://www.takeutime.pl/${lang}/feedback`,
-      },
+      languages: ALTERNATES_LANGUAGES.reduce(
+        (result, { hrefLang, language }) => ({
+          ...result,
+          [`${hrefLang}`]: `https://www.takeutime.pl/${language}/feedback`,
+        }),
+        {}
+      ),
     },
   };
 }

@@ -11,3 +11,5 @@ export type Blog = {
 };
 
 export type TranslateFunction = (text: string) => string;
+
+export type Language = "pl" | "ru" | "en" | "ua";
