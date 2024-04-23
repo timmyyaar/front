@@ -68,7 +68,7 @@ const DEEP_CLEANING_BLOCKS = [
 
 function DeepCleaningModalContent({ t }: { t: TranslateFunction }) {
   return (
-    <div className="_grid _grid-cols-2 _gap-6">
+    <div className="_grid col-2-mobile-1 _gap-6">
       {DEEP_CLEANING_BLOCKS.map(({ title, items }, index) => (
         <TextBlock
           key={index}

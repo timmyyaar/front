@@ -59,7 +59,7 @@ function AfterPartyModalContent({ t }: { t: TranslateFunction }) {
         </div>
         <div className="wrapper-text">{t("after_party_description")}</div>
       </div>
-      <div className="_grid _grid-cols-2 _gap-6">
+      <div className="_grid col-2-mobile-1 _gap-6">
         {AFTER_PARTY_BLOCKS.map(({ title, items }, index) => (
           <TextBlock key={index} title={title} items={items} t={t} />
         ))}

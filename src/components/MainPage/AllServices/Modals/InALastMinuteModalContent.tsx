@@ -57,7 +57,7 @@ function InALastMinuteModalContent({ t }: { t: TranslateFunction }) {
         </div>
         <div className="wrapper-text">{t("in_a_last_minute_description")}</div>
       </div>
-      <div className="_grid _grid-cols-2 _gap-6">
+      <div className="_grid col-2-mobile-1 _gap-6">
         {IN_A_LAST_MINUTE_BLOCKS.map(({ title, items }, index) => (
           <TextBlock key={index} title={title} items={items} t={t} />
         ))}
