@@ -15,7 +15,7 @@ function WindowModalContent({ t }: { t: TranslateFunction }) {
       <div className="wrapper-title text-gradient">
         <Writer text={t("window_cleaning_title")} />
       </div>
-      <div className="_grid _grid-cols-3 _gap-2">
+      <div className="_grid col-3-mobile-1 _gap-6">
         {[...new Array(6)].map((_, i) => {
           const windowImg = {
             0: window0,

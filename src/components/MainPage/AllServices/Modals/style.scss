@@ -10,6 +10,22 @@
   background: #fff;
   overflow: auto;
 
+  .col-2-mobile-1 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    @media screen and (max-width: 950px) {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+  }
+
+  .col-3-mobile-1 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    @media screen and (max-width: 950px) {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+  }
+
   .icon-wrapper-modal {
     position: absolute;
     top: 14px;
@@ -31,6 +47,10 @@
 
     &.cell-full-width {
       grid-column: span 2;
+
+      @media screen and (max-width: 950px) {
+        grid-column: 1;
+      }
     }
 
     .wrapper-modal-reg-title {
@@ -51,6 +71,10 @@
     .wrapper-modal-reg-list-row {
       display: flex;
       gap: 8px;
+
+      @media screen and (max-width: 950px) {
+        flex-wrap: wrap;
+      }
     }
 
     .wrapper-modal-reg-item {

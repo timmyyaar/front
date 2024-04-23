@@ -32,7 +32,7 @@ const DRY_CLEANING_BLOCKS = [
 
 function DryCleaningModalContent({ t }: { t: TranslateFunction }) {
   return (
-    <div className="_grid _grid-cols-2 _gap-6">
+    <div className="_grid col-2-mobile-1 _gap-6">
       {DRY_CLEANING_BLOCKS.map(({ title, items }, index) => (
         <TextBlock key={index} title={title} items={items} t={t} />
       ))}
