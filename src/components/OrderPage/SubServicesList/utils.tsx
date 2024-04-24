@@ -42,7 +42,7 @@ import officeSvg from "./icons/office.svg";
 const getRoundedServicePrice = (number: number) =>
   Number(parseFloat(number.toFixed(1)));
 
-const allServices = (priceMultiplier: number = 1) => [
+export const allServices = (priceMultiplier: number = 1) => [
   // {
   //   title: "Office cleaning",
   //   icons: officeSvg,
@@ -483,6 +483,48 @@ const allServices = (priceMultiplier: number = 1) => [
     time: 30,
   },
 ];
+
+const getSubService = (title, priceMultiplier = 1) => {
+  const allSubServices = allServices(priceMultiplier);
+
+  return allSubServices.find((subService) => title === subService.title);
+};
+
+export const getDefaultSubServicesByService = (service) => {
+  const balcony = getSubService("Balcony");
+  const fridge = getSubService("Clean the fridge");
+  const oven = getSubService("Clean the oven");
+  const kitchenCabinets = getSubService("Clean kitchen cabinets");
+  const hood = getSubService("Clean the hood");
+  const wardrobe = getSubService("Wardrobe cleaning");
+  const microWave = getSubService("Wash the microwave");
+  const dishes = getSubService("Wash dishes");
+
+  switch (service) {
+    case "Move in/out":
+    case "Deep":
+      return [
+        ...Array.from({ length: 5 }).map(() => ({ ...balcony })),
+        { ...fridge },
+        { ...oven },
+        { ...kitchenCabinets },
+        { ...hood },
+        { ...wardrobe },
+        { ...microWave },
+      ];
+    case "After party":
+      return [
+        ...Array.from({ length: 5 }).map(() => ({ ...balcony })),
+        { ...fridge },
+        { ...oven },
+        { ...kitchenCabinets },
+        { ...microWave },
+        { ...dishes },
+      ];
+    default:
+      return [];
+  }
+};
 
 export interface ISubService {
   title: string;

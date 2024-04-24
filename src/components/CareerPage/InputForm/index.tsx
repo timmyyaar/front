@@ -19,6 +19,7 @@ export const InputForm = ({ t }: any) => {
   const [about, setAbout] = useState("");
   const [isSendLoading, setIsSendLoading] = useState<boolean>(false);
   const [phoneCountry, setPhoneCountry] = useState<Country>(DEFAULT_COUNTRY!);
+  const [referralCode, setReferralCode] = useState<string>("");
 
   const [modal, setModal] = useState(false);
   const ref = useClickOutside(() => setModal(false));
@@ -45,6 +46,7 @@ export const InputForm = ({ t }: any) => {
             phone: `+${phoneCountry.phoneCode}${phone}`,
             email,
             about,
+            referralCode: referralCode || null,
           }),
         }
       );
@@ -111,6 +113,13 @@ export const InputForm = ({ t }: any) => {
               placeholder={t("E-mail")}
             />
           </div>
+        </div>
+        <div className="input-wrapper">
+          <input
+            value={referralCode}
+            onChange={(e) => setReferralCode(e.target.value)}
+            placeholder={t("referral_code")}
+          />
         </div>
         <div className="input-wrapper text-about-input">
           <textarea
