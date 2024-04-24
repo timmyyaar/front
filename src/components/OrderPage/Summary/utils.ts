@@ -9,17 +9,7 @@ export const getEstimateFromCounterByService = (
     case "Deep kitchen":
       return 360;
 
-    case "While sickness":
-      return counter.reduce((acc: number, el: any, i: number) => {
-        if (i === 0 && el.value > 1) acc += (el.value - 1) * 45;
-        if (i === 1 && el.value > 1) acc += (el.value - 1) * 30;
-        if (i === 2 && el.value === "Kitchen") {
-          return acc + 30;
-        }
-
-        return acc;
-      }, 60);
-
+    case "Move in/out":
     case "Deep":
       return counter.reduce((acc: number, el: any, i: number) => {
         if (i === 0 && el.value > 1) {
@@ -31,7 +21,31 @@ export const getEstimateFromCounterByService = (
         }
 
         return acc;
-      }, 360);
+      }, 210);
+
+    case "After party":
+      return counter.reduce((acc: number, el: any, i: number) => {
+        if (i === 0 && el.value !== 1) {
+          return acc + (el.value - 1) * 60;
+        } else if (i === 1 && el.value !== 1) {
+          return acc + (el.value - 1) * 60;
+        } else if (el.value === "Kitchen") {
+          return acc + 30;
+        }
+
+        return acc;
+      }, 210);
+
+    case "While sickness":
+      return counter.reduce((acc: number, el: any, i: number) => {
+        if (i === 0 && el.value > 1) acc += (el.value - 1) * 45;
+        if (i === 1 && el.value > 1) acc += (el.value - 1) * 30;
+        if (i === 2 && el.value === "Kitchen") {
+          return acc + 30;
+        }
+
+        return acc;
+      }, 60);
 
     case "Office":
       return counter.reduce((acc: number, el: any) => {
@@ -94,7 +108,7 @@ export const getPriceFromCounterByService = (
 ) => {
   switch (mainService) {
     case "Deep kitchen":
-      return 355;
+      return 290;
 
     case "Custom cleaning":
       return counter.reduce((acc: number, el: any, i: number) => {
@@ -107,15 +121,15 @@ export const getPriceFromCounterByService = (
 
     case "Deep":
     case "Move in/out":
+    case "After party":
       return counter.reduce((acc: number, el: any, i: number) => {
         if (i === 0 && el.value > 1) acc += (el.value - 1) * 60;
         if (i === 1 && el.value > 1) acc += (el.value - 1) * 80;
-        if (i === 2 && el.value === "Kitchen") acc += 30;
+        if (i === 2 && el.value === "Kitchen") acc += 50;
 
         return acc;
-      }, 499);
+      }, 230);
 
-    case "After party":
     case "In a last minute":
       return counter.reduce((acc: number, el: any, i: number) => {
         if (i === 0 && el.value > 1) acc += (el.value - 1) * 60;

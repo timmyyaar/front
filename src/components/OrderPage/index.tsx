@@ -18,6 +18,10 @@ import "./style.scss";
 import PrivateHouse from "@/components/OrderPage/PrivateHouse";
 import { LocaleContext } from "@/components/Providers";
 import { MAIN_CATEGORIES } from "@/constants";
+import {
+  getDefaultSubServicesByService,
+  ISubService,
+} from "@/components/OrderPage/SubServicesList/utils";
 
 export const OrderPage = () => {
   const { locales } = useContext(LocaleContext);
@@ -31,7 +35,7 @@ export const OrderPage = () => {
   // main service
   const [selectedService, setService] = useState<string>("");
   const [counterValue, setCounterValue] = useState([]);
-  const [selectedSubService, setSubService] = useState([]);
+  const [selectedSubService, setSubService] = useState<ISubService[]>([]);
   // second service
   const [selectedSecondService, setSecondService] = useState<string>("");
   const [secondCounterValue, setSecondCounterValue] = useState([]);
@@ -45,8 +49,9 @@ export const OrderPage = () => {
     }
 
     setSecondService("");
-    setSubService([]);
     setSecondSubService([]);
+
+    setSubService(getDefaultSubServicesByService(selectedService));
   }, [selectedService]);
 
   useEffect(() => {
