@@ -42,7 +42,7 @@ import officeSvg from "./icons/office.svg";
 const getRoundedServicePrice = (number: number) =>
   Number(parseFloat(number.toFixed(1)));
 
-export const allServices = (priceMultiplier: number = 1) => [
+export const allServices = (priceMultiplier: number = 1): ISubService[] => [
   // {
   //   title: "Office cleaning",
   //   icons: officeSvg,
@@ -484,13 +484,15 @@ export const allServices = (priceMultiplier: number = 1) => [
   },
 ];
 
-const getSubService = (title, priceMultiplier = 1) => {
+const getSubService = (title: string, priceMultiplier = 1): ISubService => {
   const allSubServices = allServices(priceMultiplier);
 
-  return allSubServices.find((subService) => title === subService.title);
+  return allSubServices.find((subService) => title === subService.title)!;
 };
 
-export const getDefaultSubServicesByService = (service) => {
+export const getDefaultSubServicesByService = (
+  service: string
+): ISubService[] => {
   const balcony = getSubService("Balcony");
   const fridge = getSubService("Clean the fridge");
   const oven = getSubService("Clean the oven");
