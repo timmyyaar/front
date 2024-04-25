@@ -5,6 +5,7 @@ import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { Header } from "@/components/Header";
 import Script from "next/script";
+import { ILocales } from "@/locales";
 
 const inter = Rubik({
   subsets: ["latin", "cyrillic", "latin-ext"],
@@ -24,7 +25,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const locales = [];
+  const locales = [] as ILocales[];
 
   return (
     <Providers locales={locales}>
