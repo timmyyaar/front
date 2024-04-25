@@ -117,7 +117,7 @@ export const InputForm = ({ t }: any) => {
         <div className="input-wrapper">
           <input
             value={referralCode}
-            onChange={(e) => setReferralCode(e.target.value)}
+            onChange={({ target: { value } }) => setReferralCode(value)}
             placeholder={t("referral_code")}
           />
         </div>
