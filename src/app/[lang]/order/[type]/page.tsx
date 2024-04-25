@@ -1,25 +1,18 @@
-"use client";
-
 import { OrderPage as Page } from "@/components/OrderPage";
-import React, { useEffect } from "react";
-import { sendGAEvent } from "@/google-analytics";
-import { useParams } from "next/navigation";
+import React from "react";
+import { getLocales } from "@/app/api";
+import { Providers } from "@/components/Providers";
+import { Header } from "@/components/Header";
 
-export default function OrderType() {
-  const { type } = useParams();
-
-  useEffect(() => {
-    sendGAEvent({
-      action: "page_view",
-      category: "order",
-      label: "Order page view",
-      value: type,
-    });
-  }, []);
+export default async function OrderType() {
+  const locales = await getLocales();
 
   return (
-    <main>
-      <Page />
-    </main>
+    <Providers locales={locales}>
+      <main>
+        <Header />
+        <Page />
+      </main>
+    </Providers>
   );
 }

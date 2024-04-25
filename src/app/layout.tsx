@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 
 import "./globals.css";
-import { Providers } from "@/components/Providers";
 import { Header } from "@/components/Header";
 import { ILocales } from "@/locales";
 import Script from "next/script";
@@ -13,6 +12,7 @@ const inter = Rubik({
 });
 
 async function getServerSideProps(): Promise<ILocales[]> {
+  console.log('wtf')
   const response = await fetch(process.env.API_URL + "/api/locales", {
     method: "GET",
     headers: {
@@ -34,15 +34,13 @@ export const metadata: Metadata = {
     "professional cleaning, housekeeping, office cleaning, commercial cleaning, eco-friendly cleaning",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const locales = await getServerSideProps();
 
   return (
-    <Providers locales={locales}>
       <html lang="en">
         <head>
           <meta
@@ -55,7 +53,6 @@ export default async function RootLayout({
           />
         </head>
         <body className={`${inter.className} custom-scroll`}>
-          <Header />
           {children}
         </body>
         <Script
@@ -72,6 +69,5 @@ export default async function RootLayout({
           `}
         </Script>
       </html>
-    </Providers>
   );
 }

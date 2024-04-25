@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Image from "next/image";
 
 import { Footer } from "@/components/Footer";
@@ -14,10 +14,20 @@ import cSvg from "./icons/350.svg";
 import dSvg from "./icons/500.svg";
 import "./style.scss";
 import { LocaleContext } from "@/components/Providers";
+import { sendGAEvent } from "@/google-analytics";
 
 export const GiftPage = () => {
   const { locales } = useContext(LocaleContext);
   const { t } = useLocales(locales);
+
+  useEffect(() => {
+    sendGAEvent({
+      action: "page_view",
+      category: "gift",
+      label: "Gift page view",
+      value: "gift",
+    });
+  }, []);
 
   return (
     <div className="gift-page">

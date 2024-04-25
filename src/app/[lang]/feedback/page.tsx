@@ -1,23 +1,19 @@
-"use client";
-
-import React, { useEffect } from "react";
+import React from "react";
 
 import Feedback from "../../../components/Feedback/index";
-import { sendGAEvent } from "@/google-analytics";
+import { getLocales } from "@/app/api";
+import { Providers } from "@/components/Providers";
+import { Header } from "@/components/Header";
 
-export default function FeedbackPage() {
-  useEffect(() => {
-    sendGAEvent({
-      action: "page_view",
-      category: "feedback",
-      label: "Feedback page view",
-      value: "feedback",
-    });
-  }, []);
+export default async function FeedbackPage() {
+  const locales = await getLocales();
 
   return (
-    <main>
-      <Feedback />
-    </main>
+    <Providers locales={locales}>
+      <main>
+        <Header />
+        <Feedback />
+      </main>
+    </Providers>
   );
 }

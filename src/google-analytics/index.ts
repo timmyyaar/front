@@ -11,7 +11,7 @@ export const sendGAEvent = ({
   label,
   value,
 }: GAEventArgs) => {
-  if (process.env.NEXT_PUBLIC_MODE === "Dev") {
+  if (process.env.NEXT_PUBLIC_MODE !== "prod") {
     return;
   }
 

@@ -1,23 +1,19 @@
-"use client";
-
-import React, { useEffect } from "react";
+import React from "react";
 
 import { CareerPage as Page } from "@/components/CareerPage";
-import { sendGAEvent } from "@/google-analytics";
+import { getLocales } from "@/app/api";
+import { Providers } from "@/components/Providers";
+import { Header } from "@/components/Header";
 
-export default function CareerPage() {
-  useEffect(() => {
-    sendGAEvent({
-      action: "page_view",
-      category: "career",
-      label: "Career page view",
-      value: "career",
-    });
-  }, []);
+export default async function CareerPage() {
+  const locales = await getLocales();
 
   return (
-    <main>
-      <Page />
-    </main>
+    <Providers locales={locales}>
+      <main>
+        <Header />
+        <Page />
+      </main>
+    </Providers>
   );
 }
