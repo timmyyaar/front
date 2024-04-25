@@ -1,7 +1,7 @@
 export const getOzonationMultiplier = (value: number) =>
   value > 120 ? 4 : value > 50 ? 5 : 6;
 
-export const getDateString = (date) => {
+export const getDateString = (date: Date) => {
   const day = date.getDate();
   const month = date.getMonth() + 1;
   const twoDigitsMonth = month < 10 ? `0${month}` : month;
