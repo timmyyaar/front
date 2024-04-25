@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import { SubscriptionPage as Page } from "@/components/SubscriptionPage";
 import { sendGAEvent } from "@/google-analytics";
 
-export default async function SubscriptionPage() {
+export default function SubscriptionPage() {
   useEffect(() => {
     sendGAEvent({
       action: "page_view",
