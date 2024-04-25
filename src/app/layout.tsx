@@ -4,27 +4,12 @@ import { Rubik } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { Header } from "@/components/Header";
-import { ILocales } from "@/locales";
 import Script from "next/script";
 
 const inter = Rubik({
   subsets: ["latin", "cyrillic", "latin-ext"],
   weight: "400",
 });
-
-async function getServerSideProps(): Promise<ILocales[]> {
-  const response = await fetch(process.env.API_URL + "/api/locales", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    cache: "no-store",
-  });
-
-  const data = await response.json();
-
-  return data.locales;
-}
 
 export const metadata: Metadata = {
   title: "Take Your Time",
@@ -39,7 +24,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const locales = await getServerSideProps();
+  const locales = [];
 
   return (
     <Providers locales={locales}>
