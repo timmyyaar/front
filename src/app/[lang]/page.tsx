@@ -1,23 +1,19 @@
-"use client";
-
-import React, { useEffect } from "react";
+import React from "react";
 
 import { MainPage } from "@/components/MainPage";
-import { sendGAEvent } from "@/google-analytics";
+import { Providers } from "@/components/Providers";
+import { getLocales } from "@/app/api";
+import { Header } from "@/components/Header";
 
-export default function Page() {
-  useEffect(() => {
-    sendGAEvent({
-      action: "page_view",
-      category: "main",
-      label: "Main page view",
-      value: "main",
-    });
-  }, []);
+export default async function Page() {
+  const locales = await getLocales();
 
   return (
-    <main>
-      <MainPage />
-    </main>
+    <Providers locales={locales}>
+      <main>
+        <Header />
+        <MainPage />
+      </main>
+    </Providers>
   );
 }

@@ -1,11 +1,19 @@
 import React from "react";
 
 import OrderCategory from "@/components/OrderCategory";
+import { getLocales } from "@/app/api";
+import { Providers } from "@/components/Providers";
+import { Header } from "@/components/Header";
 
-export default function OrderPage() {
+export default async function OrderPage() {
+  const locales = await getLocales();
+
   return (
-    <main>
-      <OrderCategory />
-    </main>
+    <Providers locales={locales}>
+      <main>
+        <Header />
+        <OrderCategory />
+      </main>
+    </Providers>
   );
 }

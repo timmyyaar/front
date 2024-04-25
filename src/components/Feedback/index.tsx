@@ -9,6 +9,7 @@ import FeedbackItem from "@/components/Feedback/FeedbackItem/FeedbackItem";
 import { useLocales } from "@/hooks/useLocales";
 import FinishedFeedback from "@/components/Feedback/FinishedFeedback/FinishedFeedback";
 import { LocaleContext } from "@/components/Providers";
+import { sendGAEvent } from "@/google-analytics";
 
 function Feedback() {
   const { locales } = useContext(LocaleContext);
@@ -23,6 +24,15 @@ function Feedback() {
   }>({});
   const [error, setError] = useState<boolean>(false);
   const [isOrdersLoading, setIsOrdersLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    sendGAEvent({
+      action: "page_view",
+      category: "feedback",
+      label: "Feedback page view",
+      value: "feedback",
+    });
+  }, []);
 
   const ordersSearch = searchParams.get("orders");
   const decryptedOrders = atob(ordersSearch as string);

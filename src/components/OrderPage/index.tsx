@@ -22,6 +22,7 @@ import {
   getDefaultSubServicesByService,
   ISubService,
 } from "@/components/OrderPage/SubServicesList/utils";
+import { sendGAEvent } from "@/google-analytics";
 
 export const OrderPage = () => {
   const { locales } = useContext(LocaleContext);
@@ -42,6 +43,15 @@ export const OrderPage = () => {
   const [secondSelectedSubService, setSecondSubService] = useState([]);
   const [isPrivateHouse, setIsPrivateHouse] = useState<boolean>(false);
   const [ownCheckList, setOwnCheckList] = useState<boolean>(false);
+
+  useEffect(() => {
+    sendGAEvent({
+      action: "page_view",
+      category: "order",
+      label: "Order page view",
+      value: type,
+    });
+  }, []);
 
   useEffect(() => {
     if (!PRIVATE_HOUSE_SERVICES.includes(selectedService)) {

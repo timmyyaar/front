@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { Footer } from "@/components/Footer";
 import { useLocales } from "@/hooks/useLocales";
@@ -11,6 +11,7 @@ import { SubServicesList } from "../OrderPage/SubServicesList";
 import { Summary } from "../OrderPage/Summary";
 import "./style.scss";
 import { LocaleContext } from "@/components/Providers";
+import { sendGAEvent } from "@/google-analytics";
 
 export const SubscriptionPage = () => {
   const { locales } = useContext(LocaleContext);
@@ -27,6 +28,15 @@ export const SubscriptionPage = () => {
   const match = sale.sale.match(/^(-?\d*\.?\d+)\s*%$/);
   const salePercents = 100 - -parseFloat(match![0]);
   const priceMultiplier = salePercents / 100;
+
+  useEffect(() => {
+    sendGAEvent({
+      action: "page_view",
+      category: "subscription",
+      label: "Subscription page view",
+      value: "subscription",
+    });
+  }, []);
 
   return (
     <div className="subscription-page">

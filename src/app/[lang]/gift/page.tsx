@@ -1,23 +1,19 @@
-"use client";
-
-import React, { useEffect } from "react";
+import React from "react";
 
 import { GiftPage as Page } from "@/components/GiftPage";
-import { sendGAEvent } from "@/google-analytics";
+import { getLocales } from "@/app/api";
+import { Header } from "@/components/Header";
+import { Providers } from "@/components/Providers";
 
-export default function GiftPage() {
-  useEffect(() => {
-    sendGAEvent({
-      action: "page_view",
-      category: "gift",
-      label: "Gift page view",
-      value: "gift",
-    });
-  }, []);
+export default async function GiftPage() {
+  const locales = await getLocales();
 
   return (
-    <main>
-      <Page />
-    </main>
+    <Providers locales={locales}>
+      <main>
+        <Header />
+        <Page />
+      </main>
+    </Providers>
   );
 }

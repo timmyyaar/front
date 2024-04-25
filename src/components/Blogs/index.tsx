@@ -15,6 +15,7 @@ import { Blog } from "@/types";
 import { Footer } from "@/components/Footer";
 import { useLocales } from "@/hooks/useLocales";
 import { LocaleContext } from "@/components/Providers";
+import { sendGAEvent } from "@/google-analytics";
 
 const TITLE_REGEXP = /{([^}]*)}/g;
 
@@ -27,6 +28,15 @@ function Blogs() {
   const [blogError, setBlogError] = useState<boolean>(false);
 
   const { blogId } = useParams();
+
+  useEffect(() => {
+    sendGAEvent({
+      action: "page_view",
+      category: "blog",
+      label: "Blog page view",
+      value: blogId,
+    });
+  }, []);
 
   const getBlog = async () => {
     try {
