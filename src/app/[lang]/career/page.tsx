@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import { CareerPage as Page } from "@/components/CareerPage";
 import { sendGAEvent } from "@/google-analytics";
 
-export default async function CareerPage() {
+export default function CareerPage() {
   useEffect(() => {
     sendGAEvent({
       action: "page_view",
