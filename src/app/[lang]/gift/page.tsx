@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import { GiftPage as Page } from "@/components/GiftPage";
 import { sendGAEvent } from "@/google-analytics";
 
-export default async function GiftPage() {
+export default function GiftPage() {
   useEffect(() => {
     sendGAEvent({
       action: "page_view",

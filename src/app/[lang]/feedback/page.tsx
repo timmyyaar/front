@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import Feedback from "../../../components/Feedback/index";
 import { sendGAEvent } from "@/google-analytics";
 
-export default async function FeedbackPage() {
+export default function FeedbackPage() {
   useEffect(() => {
     sendGAEvent({
       action: "page_view",
