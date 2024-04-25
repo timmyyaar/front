@@ -175,6 +175,7 @@ export const Summary: FC<IProps> = (props: any) => {
 
   const onCloseModal = () => {
     setModal(false);
+
     router.push(`/${lang}`);
   };
 
