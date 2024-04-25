@@ -9,7 +9,6 @@ import { ModalRequest } from "@/components/common/ModalRequest";
 import { Overlay } from "@/components/common/Overlay";
 import { useClickOutside } from "@/hooks/useClickOutSide";
 import { ISubService } from "../SubServicesList/utils";
-import { IconCrosse } from "./icons/IconCrosse";
 import { PromoInput } from "./PromoCodeInput";
 import { UserData } from "./UserData";
 import {
@@ -31,7 +30,7 @@ import { OWN_SUPPLES_SERVICE_NAME } from "@/components/OrderPage/constants";
 import { City } from "@/components/OrderPage/Summary/UserData/components/Cities";
 import SummaryService from "@/components/OrderPage/Summary/SummaryService";
 import { LocaleContext } from "@/components/Providers";
-import { getDateString } from "@/utils";
+import { getDateTimeString } from "@/utils";
 import { sendGAEvent } from "@/google-analytics";
 
 interface IProps {
@@ -364,7 +363,7 @@ export const Summary: FC<IProps> = (props: any) => {
       city: city.name,
       transportationPrice: city.price,
       language: locale,
-      creationDate: getDateString(new Date()),
+      creationDate: getDateTimeString(new Date()),
       ownCheckList,
     };
 

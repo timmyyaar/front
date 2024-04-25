@@ -4,6 +4,7 @@ import { ArrowLeft } from "../../icons/ArrowLeft";
 import { ArrowRight } from "../../icons/ArrowRight";
 
 import "./style.scss";
+import { getDateString } from "@/utils";
 
 const pages = {
   0: [0, 5],
@@ -38,9 +39,7 @@ const getIsTimeDisabled = (
 
 export const TimePicker = ({ time, setTime, t, data }: any) => {
   const [timePage, setTimePage] = useState(1);
-  const selectedDate = data ? data.split("/") : null;
-  const selectedDateDay = data.split("/")[0] ? +selectedDate[0] : null;
-  const isTodaySelected = new Date().getDate() === selectedDateDay;
+  const isTodaySelected = data === getDateString(new Date());
 
   const generateTimeOptions = () => {
     const timeOptions = [];

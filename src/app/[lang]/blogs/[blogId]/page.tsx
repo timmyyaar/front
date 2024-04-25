@@ -1,25 +1,18 @@
-"use client";
-
 import Blogs from "@/components/Blogs";
-import { useParams } from "next/navigation";
-import { useEffect } from "react";
-import { sendGAEvent } from "@/google-analytics";
+import React from "react";
+import { getLocales } from "@/app/api";
+import { Providers } from "@/components/Providers";
+import { Header } from "@/components/Header";
 
-export default function Page() {
-  const { blogId } = useParams();
-
-  useEffect(() => {
-    sendGAEvent({
-      action: "page_view",
-      category: "blog",
-      label: "Blog page view",
-      value: blogId,
-    });
-  }, []);
+export default async function Page() {
+  const locales = await getLocales();
 
   return (
-    <main>
-      <Blogs />
-    </main>
+    <Providers locales={locales}>
+      <main>
+        <Header />
+        <Blogs />
+      </main>
+    </Providers>
   );
 }

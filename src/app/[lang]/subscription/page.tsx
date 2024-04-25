@@ -1,23 +1,19 @@
-"use client";
-
-import React, { useEffect } from "react";
+import React from "react";
 
 import { SubscriptionPage as Page } from "@/components/SubscriptionPage";
-import { sendGAEvent } from "@/google-analytics";
+import { getLocales } from "@/app/api";
+import { Providers } from "@/components/Providers";
+import { Header } from "@/components/Header";
 
-export default function SubscriptionPage() {
-  useEffect(() => {
-    sendGAEvent({
-      action: "page_view",
-      category: "subscription",
-      label: "Subscription page view",
-      value: "subscription",
-    });
-  }, []);
+export default async function SubscriptionPage() {
+  const locales = await getLocales();
 
   return (
-    <main>
-      <Page />
-    </main>
+    <Providers locales={locales}>
+      <main>
+        <Header />
+        <Page />
+      </main>
+    </Providers>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { Footer } from "@/components/Footer";
 import { useLocales } from "@/hooks/useLocales";
@@ -18,10 +18,20 @@ import Reviews from "@/components/MainPage/Reviews";
 import "./style.scss";
 import { LocaleContext } from "@/components/Providers";
 import Blogs from "@/components/MainPage/Blogs";
+import { sendGAEvent } from "@/google-analytics";
 
-export const MainPage= () => {
+export const MainPage = () => {
   const { locales } = useContext(LocaleContext);
   const { t, lng } = useLocales(locales);
+
+  useEffect(() => {
+    sendGAEvent({
+      action: "page_view",
+      category: "main",
+      label: "Main page view",
+      value: "main",
+    });
+  }, []);
 
   return (
     <div className="main-page">
