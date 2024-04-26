@@ -21,6 +21,7 @@ import { MAIN_CATEGORIES } from "@/constants";
 import {
   getDefaultSubServicesByService,
   ISubService,
+  SelectedSubService,
 } from "@/components/OrderPage/SubServicesList/utils";
 import { sendGAEvent } from "@/google-analytics";
 
@@ -36,7 +37,9 @@ export const OrderPage = () => {
   // main service
   const [selectedService, setService] = useState<string>("");
   const [counterValue, setCounterValue] = useState([]);
-  const [selectedSubService, setSubService] = useState<ISubService[]>([]);
+  const [selectedSubService, setSubService] = useState<SelectedSubService[]>(
+    []
+  );
   // second service
   const [selectedSecondService, setSecondService] = useState<string>("");
   const [secondCounterValue, setSecondCounterValue] = useState([]);

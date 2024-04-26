@@ -492,7 +492,7 @@ const getSubService = (title: string, priceMultiplier = 1): ISubService => {
 
 export const getDefaultSubServicesByService = (
   service: string
-): ISubService[] => {
+): SelectedSubService[] => {
   const balcony = getSubService("Balcony");
   const fridge = getSubService("Clean the fridge");
   const oven = getSubService("Clean the oven");
@@ -506,22 +506,22 @@ export const getDefaultSubServicesByService = (
     case "Move in/out":
     case "Deep":
       return [
-        ...Array.from({ length: 5 }).map(() => ({ ...balcony })),
-        { ...fridge },
-        { ...oven },
-        { ...kitchenCabinets },
-        { ...hood },
-        { ...wardrobe },
-        { ...microWave },
+        { ...balcony, count: 5 },
+        { ...fridge, count: 1 },
+        { ...oven, count: 1 },
+        { ...kitchenCabinets, count: 1 },
+        { ...hood, count: 1 },
+        { ...wardrobe, count: 1 },
+        { ...microWave, count: 1 },
       ];
     case "After party":
       return [
-        ...Array.from({ length: 5 }).map(() => ({ ...balcony })),
-        { ...fridge },
-        { ...oven },
-        { ...kitchenCabinets },
-        { ...microWave },
-        { ...dishes },
+        { ...balcony, count: 5 },
+        { ...fridge, count: 1 },
+        { ...oven, count: 1 },
+        { ...kitchenCabinets, count: 1 },
+        { ...microWave, count: 1 },
+        { ...dishes, count: 1 },
       ];
     default:
       return [];

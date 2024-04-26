@@ -48,7 +48,7 @@ export const SubServicesList = (props: IProps) => {
       subServices.find((subService) => service.title === subService.title)
         ?.count === (service.title === "Office cleaning" ? 60 : 1);
 
-    setSubService((prev) =>
+    setSubService((prev: SelectedSubService[]) =>
       isSelectedServiceSingle
         ? prev.filter(
             (selectedSubService) => selectedSubService.title !== service.title
@@ -126,7 +126,7 @@ export const SubServicesList = (props: IProps) => {
                         </svg>
                       </div>
                       <div className="count">
-                        {getIsSubServiceSelected(el.title).count}
+                        {getIsSubServiceSelected(el.title)!.count}
                         {showSubServiceSquareMeters(el.title) ? (
                           <span className="_ml-1">
                             m<sup>2</sup>
@@ -170,7 +170,7 @@ export const SubServicesList = (props: IProps) => {
                   </div>
                 )}
                 <div className="price-wrapper">
-                  {t(el.price)}
+                  {el.price}
                   {t("zl")}
                   {el.title === "Ironing" || el.title === "Extra tasks"
                     ? t("/hour")
@@ -182,7 +182,7 @@ export const SubServicesList = (props: IProps) => {
                   ) : null}
                   {el.oldPrice && (
                     <div className="old-price">
-                      {t(el.oldPrice)}
+                      {el.oldPrice}
                       {t("zl")}
                     </div>
                   )}
