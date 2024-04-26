@@ -16,7 +16,7 @@ interface SummaryServiceProps {
     value: string;
     param: boolean;
   }[];
-  subServiceList: ISubService[];
+  subServiceList: SelectedSubService[];
   cleanersCount: number;
   onRemoveSubService: (title: string, isSecond?: boolean) => void;
   manualCleanersCount: number;

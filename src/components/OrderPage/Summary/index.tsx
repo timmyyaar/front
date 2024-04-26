@@ -211,7 +211,7 @@ export const Summary: FC<IProps> = (props: any) => {
     getDiscounts();
   }, []);
 
-  const onRemoveSubService = (title: string, isSecond: boolean) => {
+  const onRemoveSubService = (title: string, isSecond?: boolean) => {
     const setSubServiceFunction = isSecond ? setSecSubService : setSubService;
 
     setSubServiceFunction((oldSubServices: SelectedSubService[]) =>
