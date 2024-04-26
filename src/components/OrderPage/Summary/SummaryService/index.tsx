@@ -1,7 +1,10 @@
-import { ISubService } from "@/components/OrderPage/SubServicesList/utils";
-import { IconCrosse } from "@/components/OrderPage/Summary/icons/IconCrosse";
 import React, { Dispatch, SetStateAction } from "react";
-import { getSubServices } from "@/components/OrderPage/Summary/utils";
+import {
+  ISubService,
+  SelectedSubService,
+  showSubServiceSquareMeters,
+} from "@/components/OrderPage/SubServicesList/utils";
+import { IconCrosse } from "@/components/OrderPage/Summary/icons/IconCrosse";
 
 import CleanersCount from "@/components/OrderPage/Summary/SummaryService/CleanersCount";
 
@@ -13,25 +16,25 @@ interface SummaryServiceProps {
     value: string;
     param: boolean;
   }[];
-  sec?: boolean;
   subServiceList: ISubService[];
   cleanersCount: number;
-  onRemoveSubService: (title: string, sec: boolean) => void;
+  onRemoveSubService: (title: string, isSecond?: boolean) => void;
   manualCleanersCount: number;
   setManualCleanersCount: Dispatch<SetStateAction<number>>;
   t: (text: string) => string;
+  isSecond?: boolean;
 }
 
 function SummaryService({
   serviceTitle,
   counterValue,
   subServiceList,
-  sec = false,
   cleanersCount,
   onRemoveSubService,
   manualCleanersCount,
   setManualCleanersCount,
   t,
+  isSecond = false,
 }: SummaryServiceProps) {
   return (
     <>
@@ -68,18 +71,17 @@ function SummaryService({
         serviceTitle={serviceTitle}
         t={t}
       />
-      {getSubServices(subServiceList).length ? (
+      {subServiceList.length ? (
         <div className="services-in-summary">
           <div className="title-sub-service-title">{t("Add services")}</div>
-          {getSubServices(subServiceList).map((title: string, i: number) => (
-            <div className="service-item _flex _items-center" key={title + i}>
+          {subServiceList.map((subService: SelectedSubService, i: number) => (
+            <div
+              className="service-item _flex _items-center"
+              key={subService.title + i}
+            >
               <div>
-                {t(title + "_summery")} (
-                {
-                  subServiceList.filter((el: ISubService) => el.title === title)
-                    .length
-                }
-                {["Carpet dry cleaning", "Balcony"].includes(title) && (
+                {t(subService.title + "_summery")} ({subService.count}
+                {showSubServiceSquareMeters(subService.title) && (
                   <>
                     {t("m")}
                     <sup>2</sup>
@@ -89,7 +91,7 @@ function SummaryService({
               </div>
               <div
                 className="icon-wrapper _cursor-pointer"
-                onClick={() => onRemoveSubService(title, sec)}
+                onClick={() => onRemoveSubService(subService.title, isSecond)}
               >
                 <IconCrosse />
               </div>

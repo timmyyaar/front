@@ -43,17 +43,17 @@ const getRoundedServicePrice = (number: number) =>
   Number(parseFloat(number.toFixed(1)));
 
 export const allServices = (priceMultiplier: number = 1): ISubService[] => [
-  // {
-  //   title: "Office cleaning",
-  //   icons: officeSvg,
-  //   originalPrice: CounterCoasts["Office cleaning"].price,
-  //   price: getRoundedServicePrice(
-  //     priceMultiplier * CounterCoasts["Office cleaning"].price
-  //   ),
-  //   oldPrice:
-  //     priceMultiplier === 1 ? "" : CounterCoasts["Office cleaning"].price,
-  //   time: 1,
-  // },
+  {
+    title: "Office cleaning",
+    icons: officeSvg,
+    originalPrice: CounterCoasts["Office cleaning"].price,
+    price: getRoundedServicePrice(
+      priceMultiplier * CounterCoasts["Office cleaning"].price
+    ),
+    oldPrice:
+      priceMultiplier === 1 ? "" : CounterCoasts["Office cleaning"].price,
+    time: 1,
+  },
   {
     title: "Clean the room",
     icons: readingRoomSvg,
@@ -537,6 +537,8 @@ export interface ISubService {
   time: number;
 }
 
+export type SelectedSubService = ISubService & { count: number };
+
 export const getSubServiceListByMainService = (
   mainService: string,
   priceMultiplier: number = 1
@@ -576,6 +578,7 @@ export const getSubServiceListByMainService = (
           "Chair",
           "Office chair",
           "Cleaning baby stroller",
+          "Office cleaning",
         ];
 
         return !excludedTitles.includes(el.title);
@@ -625,3 +628,6 @@ export const getSubServiceListByMainService = (
       return [];
   }
 };
+
+export const showSubServiceSquareMeters = (title: string) =>
+  ["Carpet dry cleaning", "Balcony", "Office cleaning"].includes(title);
