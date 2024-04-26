@@ -1,5 +1,8 @@
 import { getOzonationMultiplier } from "@/utils";
-import { ISubService } from "@/components/OrderPage/SubServicesList/utils";
+import {
+  ISubService,
+  SelectedSubService,
+} from "@/components/OrderPage/SubServicesList/utils";
 
 export const getEstimateFromCounterByService = (
   mainService: string,
@@ -70,7 +73,7 @@ export const getEstimateFromCounterByService = (
         if (i === 0) {
           return acc + el.value * 60;
         } else if (i === 1) {
-          return acc + el.value * 10;
+          return acc + el.value * 6;
         }
 
         return acc;
@@ -87,7 +90,10 @@ export const getEstimateFromCounterByService = (
         return acc;
       }, 0);
 
-    default:
+    case "Regular":
+    case "Eco cleaning":
+    case "Airbnb":
+    case "Subscription":
       return counter.reduce((acc: number, el: any, i: number) => {
         if (i === 0 && el.value !== 1) {
           return acc + (el.value - 1) * 30;
@@ -99,6 +105,9 @@ export const getEstimateFromCounterByService = (
 
         return acc;
       }, 180);
+
+    default:
+      return 0;
   }
 };
 
@@ -324,7 +333,17 @@ export const getServiceEstimate = (
 ) => {
   const countEstimate = getEstimateFromCounterByService(title, counter);
   const subServiceEstimate = subService.reduce(
-    (acc: number, el: ISubService) => (acc += el?.time || 0),
+    (acc: number, el: SelectedSubService) => {
+      if (el.title === "Office cleaning") {
+        if (el.count <= 100) {
+          return acc + 180;
+        } else {
+          return acc + 180 + (el.count - 100);
+        }
+      }
+
+      return acc + el.time * el.count;
+    },
     0
   );
   const divider = title === "Dry cleaning" ? 720 : 480;
@@ -362,16 +381,6 @@ export const getHitherEstimate = (
   }
 
   return mainEstimate;
-};
-
-export const getSubServices = (data: ISubService[]) => {
-  const result: string[] = [];
-
-  data.forEach((el: any) => {
-    if (!result.includes(el.title)) result.push(el.title);
-  });
-
-  return result;
 };
 
 export const getServicePriceBasedOnManualCleaners = (

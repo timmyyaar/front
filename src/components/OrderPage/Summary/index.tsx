@@ -8,7 +8,7 @@ import faceWithRollingEyesSvg from "./icons/face-with-rolling-eyes.svg";
 import { ModalRequest } from "@/components/common/ModalRequest";
 import { Overlay } from "@/components/common/Overlay";
 import { useClickOutside } from "@/hooks/useClickOutSide";
-import { ISubService } from "../SubServicesList/utils";
+import { ISubService, SelectedSubService } from "../SubServicesList/utils";
 import { PromoInput } from "./PromoCodeInput";
 import { UserData } from "./UserData";
 import {
@@ -18,7 +18,6 @@ import {
   getPriceWithSaleOrSubSale,
   getServiceEstimate,
   getServicePriceBasedOnManualCleaners,
-  getSubServices,
 } from "./utils";
 import "./style.scss";
 import { EMAIL_REGEX, NUMBER_REGEX } from "@/constants";
@@ -106,7 +105,7 @@ export const Summary: FC<IProps> = (props: any) => {
     secTitle = "",
     secCounter = [],
     secSubService = [],
-    setSecSubService = () => {},
+    setSecSubService,
     subSale = "",
     t,
     isPrivateHouse,
@@ -168,6 +167,7 @@ export const Summary: FC<IProps> = (props: any) => {
     secondServiceManualCleanersCount,
     setSecondServiceManualCleanersCount,
   ] = useState<number>(0);
+  const orderButtonRef = useRef<HTMLDivElement | null>(null);
 
   const dayDiscount =
     discounts.find(({ date }) => date === totalDate?.split(" ")[0])?.value || 0;
@@ -211,62 +211,46 @@ export const Summary: FC<IProps> = (props: any) => {
     getDiscounts();
   }, []);
 
-  const onRemoveSubService = (title: string, sec: boolean) => {
-    if (!sec) {
-      setSubService((oldSubServices: any) => {
-        return oldSubServices.filter((el: ISubService) => el.title !== title);
-      });
-    } else {
-      setSecSubService((oldSubServices: any) => {
-        return oldSubServices.filter((el: ISubService) => el.title !== title);
-      });
-    }
+  const onRemoveSubService = (title: string, isSecond: boolean) => {
+    const setSubServiceFunction = isSecond ? setSecSubService : setSubService;
+
+    setSubServiceFunction((oldSubServices: SelectedSubService[]) =>
+      oldSubServices.filter((el: SelectedSubService) => el.title !== title)
+    );
   };
 
   const getMainServicePrice = () => {
-    const countEstimate =
+    const countPrice =
       getPriceFromCounterByService(title, counter) * (isPrivateHouse ? 1.3 : 1);
-    const subServiceEstimate = subService.reduce(
-      (acc: number, el: ISubService) =>
-        (acc += el?.originalPrice
+    const subServicePrice = subService.reduce(
+      (acc: number, el: SelectedSubService) =>
+        acc + el?.originalPrice
           ? [
               "Clean the room",
               "Clean the bathroom",
               "Clean the kitchen",
               "Clean the corridor",
             ].includes(el.title) && isPrivateHouse
-            ? el.originalPrice * 1.3
-            : el.originalPrice
-          : 0),
+            ? el.originalPrice * el.count * 1.3
+            : el.originalPrice * el.count
+          : 0,
       0
     );
 
-    return countEstimate
-      ? countEstimate + subServiceEstimate
-      : subServiceEstimate;
+    return countPrice ? countPrice + subServicePrice : subServicePrice;
   };
 
   const getSecondServicePrice = () => {
-    const secCountEstimate = getPriceFromCounterByService(secTitle, secCounter);
-    const secSubServiceEstimate = secSubService.reduce(
-      (acc: number, el: ISubService) => (acc += el?.originalPrice || 0),
+    const secCountPrice = getPriceFromCounterByService(secTitle, secCounter);
+    const secSubServicePrice = secSubService.reduce(
+      (acc: number, el: SelectedSubService) =>
+        acc + el.originalPrice * el.count,
       0
     );
 
-    const isCounterValues = secCounter.reduce(
-      (result: number, item: { value: number | string }) => {
-        if (typeof item.value === "number") {
-          return result + item.value;
-        }
-
-        return result;
-      },
-      0
-    );
-
-    return isCounterValues
-      ? secCountEstimate + secSubServiceEstimate
-      : secSubServiceEstimate;
+    return secCountPrice
+      ? secCountPrice + secSubServicePrice
+      : secSubServicePrice;
   };
 
   const mainServiceEstimate = getServiceEstimate(
@@ -321,7 +305,7 @@ export const Summary: FC<IProps> = (props: any) => {
   );
 
   const handleScroll = () => {
-    const targetElement = document.getElementById("order-btn");
+    const targetElement = orderButtonRef.current;
 
     if (targetElement) {
       targetElement.scrollIntoView({
@@ -374,12 +358,10 @@ export const Summary: FC<IProps> = (props: any) => {
           el.title ? el.title + "(" + el.value + ")" : el.value
         )
         .join(" "),
-      subService: getSubServices(subService)
+      subService: subService
         .map(
-          (title: string) =>
-            `${title + "_summery"} (${
-              subService.filter((el: ISubService) => el.title === title).length
-            })`
+          (service: SelectedSubService) =>
+            `${service.title + "_summery"} (${service.count})`
         )
         .join(" "),
     };
@@ -393,14 +375,10 @@ export const Summary: FC<IProps> = (props: any) => {
                 el.title ? el.title + "(" + el.value + ")" : el.value
               )
               .join(" "),
-            secSubService: getSubServices(secSubService)
+            secSubService: secSubService
               .map(
-                (title: string) =>
-                  `${title + "_summery"} (${
-                    secSubService.filter(
-                      (el: ISubService) => el.title === title
-                    ).length
-                  })`
+                (service: SelectedSubService) =>
+                  `${service.title + "_summery"} (${service.count})`
               )
               .join(" "),
           }
@@ -531,6 +509,7 @@ export const Summary: FC<IProps> = (props: any) => {
                 manualCleanersCount={secondServiceManualCleanersCount}
                 setManualCleanersCount={setSecondServiceManualCleanersCount}
                 {...secondServiceEstimate}
+                isSecond
               />
             </>
           ) : null}
@@ -581,7 +560,7 @@ export const Summary: FC<IProps> = (props: any) => {
             )}
           </div>
         </div>
-        <div id="order-btn">
+        <div ref={orderButtonRef}>
           {!order ? (
             <div
               className={`order-wrapper _cursor-pointer ${

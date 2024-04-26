@@ -69,6 +69,7 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
           originalPrice: 30,
           price: priceMultiplier * 30,
           oldPrice: priceMultiplier === 1 ? "" : 30,
+          count: 1,
         },
       ]);
     } else {
@@ -87,6 +88,7 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
           time: 0,
           price: -15,
           originalPrice: -15,
+          count: 1,
         },
       ]);
     } else {
