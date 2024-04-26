@@ -1,59 +1,90 @@
-import React, { FC, useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 
 import { Writer } from "@/components/common/Writer";
 
-import { getSubServiceListByMainService, ISubService } from "./utils";
+import {
+  getSubServiceListByMainService,
+  ISubService,
+  SelectedSubService,
+  showSubServiceSquareMeters,
+} from "./utils";
 import "./style.scss";
 
 interface IProps {
   mainService: string;
-  subServices: ISubService[];
+  subServices: SelectedSubService[];
   setSubService: (service: any) => void;
   priceMultiplier?: number;
-  t: any;
+  t: (text: string) => string;
 }
 
-export const SubServicesList: FC<IProps> = (props) => {
-  const { mainService, subServices, setSubService, priceMultiplier = 1, t } = props;
-  const [selectedService, setSelectedService] = useState<string[]>([]);
+export const SubServicesList = (props: IProps) => {
+  const {
+    mainService,
+    subServices,
+    setSubService,
+    priceMultiplier = 1,
+    t,
+  } = props;
 
   const addService = (service: ISubService) => {
-    if (!selectedService.includes(service.title)) {
-      setSelectedService((oldServices) => [...oldServices, service.title]);
-      setSubService((oldSubServices: any) => [...oldSubServices, service]);
+    const isServiceExist = subServices.find(
+      (subService) => subService.title === service.title
+    );
+
+    if (!isServiceExist) {
+      setSubService((oldSubServices: any) => [
+        ...oldSubServices,
+        { ...service, count: service.title === "Office cleaning" ? 60 : 1 },
+      ]);
     }
   };
 
   const minusService = (e: any, service: ISubService) => {
     e.stopPropagation();
-    // if (selectedService.filter((el) => el === service.title).length > 1) {
-    setSelectedService((oldServices) => {
-      const newServices = [...oldServices];
-      const index = newServices.findIndex((el) => el === service.title);
-      newServices.splice(index, 1);
-      return newServices;
-    });
-    setSubService((oldSubServices: any) => {
-      const newServices = [...oldSubServices];
-      const index = newServices.findIndex(
-        (el: any) => el.title === service.title
-      );
-      newServices.splice(index, 1);
-      return newServices;
-    });
-    // }
+
+    const isSelectedServiceSingle =
+      subServices.find((subService) => service.title === subService.title)
+        ?.count === (service.title === "Office cleaning" ? 60 : 1);
+
+    setSubService((prev) =>
+      isSelectedServiceSingle
+        ? prev.filter(
+            (selectedSubService) => selectedSubService.title !== service.title
+          )
+        : prev.map((selectedSubService) =>
+            selectedSubService.title === service.title
+              ? {
+                  ...selectedSubService,
+                  count:
+                    selectedSubService.count -
+                    (service.title === "Office cleaning" ? 10 : 1),
+                }
+              : selectedSubService
+          )
+    );
   };
 
   const plusService = (e: any, service: ISubService) => {
     e.stopPropagation();
-    setSelectedService((oldServices) => [...oldServices, service.title]);
-    setSubService((oldSubServices: any) => [...oldSubServices, service]);
+
+    setSubService((prev: SelectedSubService[]) =>
+      prev.map((prevService: SelectedSubService) =>
+        prevService.title === service.title
+          ? {
+              ...prevService,
+              count:
+                prevService.count +
+                (service.title === "Office cleaning" ? 10 : 1),
+            }
+          : prevService
+      )
+    );
   };
 
-  useEffect(() => {
-    setSelectedService(subServices.map((el) => el.title));
-  }, [subServices]);
+  const getIsSubServiceSelected = (title: string) =>
+    subServices.find((subService) => subService.title === title);
 
   return getSubServiceListByMainService(mainService).length ? (
     <div className="sub-services-list-component">
@@ -62,9 +93,8 @@ export const SubServicesList: FC<IProps> = (props) => {
         {getSubServiceListByMainService(mainService, priceMultiplier).map(
           (el: ISubService, i: number) => (
             <div
-              // @ts-ignore
               className={`sub-services-item ${
-                selectedService.includes(el.title)
+                getIsSubServiceSelected(el.title)
                   ? "sub-services-item-active"
                   : ""
               }`}
@@ -74,9 +104,8 @@ export const SubServicesList: FC<IProps> = (props) => {
               <div className="sub-services-title">
                 <Writer text={t(el.title)} whiteSpaceNormal />
               </div>
-              {/* @ts-ignore */}
               <div className="counter-and-price-wrapper">
-                {selectedService.includes(el.title) ? (
+                {getIsSubServiceSelected(el.title) ? (
                   <div className="counter-wrapper">
                     <div className="counter-sub-wrapper">
                       <div
@@ -97,14 +126,8 @@ export const SubServicesList: FC<IProps> = (props) => {
                         </svg>
                       </div>
                       <div className="count">
-                        {
-                          selectedService.filter(
-                            (service) => service === el.title
-                          ).length
-                        }
-                        {["Carpet dry cleaning", "Balcony"].includes(
-                          el.title
-                        ) ? (
+                        {getIsSubServiceSelected(el.title).count}
+                        {showSubServiceSquareMeters(el.title) ? (
                           <span className="_ml-1">
                             m<sup>2</sup>
                           </span>
@@ -152,7 +175,7 @@ export const SubServicesList: FC<IProps> = (props) => {
                   {el.title === "Ironing" || el.title === "Extra tasks"
                     ? t("/hour")
                     : null}
-                  {["Carpet dry cleaning", "Balcony"].includes(el.title) ? (
+                  {showSubServiceSquareMeters(el.title) ? (
                     <>
                       /m<sup>2</sup>
                     </>
