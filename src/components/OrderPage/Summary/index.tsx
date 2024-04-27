@@ -224,7 +224,8 @@ export const Summary: FC<IProps> = (props: any) => {
       getPriceFromCounterByService(title, counter) * (isPrivateHouse ? 1.3 : 1);
     const subServicePrice = subService.reduce(
       (acc: number, el: SelectedSubService) =>
-        acc + el?.originalPrice
+        acc +
+        (el?.originalPrice
           ? [
               "Clean the room",
               "Clean the bathroom",
@@ -233,7 +234,7 @@ export const Summary: FC<IProps> = (props: any) => {
             ].includes(el.title) && isPrivateHouse
             ? el.originalPrice * el.count * 1.3
             : el.originalPrice * el.count
-          : 0,
+          : 0),
       0
     );
 
