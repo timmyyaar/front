@@ -12,6 +12,7 @@ interface RequestProps {
   includeCredentials?: boolean;
   headers?: any;
   body?: any;
+  cache?: string;
 }
 
 const request = async ({
@@ -20,6 +21,7 @@ const request = async ({
   includeCredentials = false,
   headers = {},
   body,
+  cache = "force-cache",
 }: RequestProps) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/${url}`,
@@ -33,6 +35,7 @@ const request = async ({
       ...(body && {
         body: body instanceof FormData ? body : JSON.stringify(body),
       }),
+      cache,
     }
   );
 

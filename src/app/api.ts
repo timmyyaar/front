@@ -9,7 +9,7 @@ export async function getLocales(): Promise<ILocales[]> {
 }
 
 export async function getPrices(): Promise<Prices> {
-  const pricesResponse = await request({ url: "prices" });
+  const pricesResponse = await request({ url: "prices", cache: 'no-store' });
 
   return pricesResponse.reduce(
     (result: Prices, item: { key: string; price: number }) => ({
