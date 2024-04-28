@@ -199,6 +199,12 @@ export const getPriceFromCounterByService = (
         return acc;
       }, prices.defaultWindow);
 
+    case "Dry cleaning":
+      return prices.defaultDry;
+
+    case "Custom cleaning":
+      return prices.defaultCustom;
+
     default:
       return 0;
   }
