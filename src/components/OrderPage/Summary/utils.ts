@@ -214,8 +214,6 @@ export const getMinimalPriceByMainService = (
   prices: Prices,
   mainService: string
 ) => {
-  console.log(prices, mainService);
-
   switch (mainService) {
     case "Custom cleaning":
       return prices.minimalCustom;
