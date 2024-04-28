@@ -1,5 +1,11 @@
-export const getOzonationMultiplier = (value: number) =>
-  value > 120 ? 4 : value > 50 ? 5 : 6;
+import { Prices } from "@/types";
+
+export const getOzonationMultiplier = (prices: Prices, value: number) =>
+  value > 120
+    ? prices.ozonationBigArea
+    : value > 50
+    ? prices.ozonationMediumArea
+    : prices.ozonationSmallArea;
 
 export const getDateString = (date: Date) => {
   const day = date.getDate();
@@ -21,4 +27,8 @@ export const getDateTimeString = (date: Date) => {
   const twoDigitsMinutes = minutes < 10 ? `0${minutes}` : minutes;
 
   return `${day}/${twoDigitsMonth}/${year} ${twoDigitsHours}:${twoDigitsMinutes}`;
+};
+
+export const capitalizeFirstLetter = (string: string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 };

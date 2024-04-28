@@ -2,29 +2,12 @@ import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 
 import "./globals.css";
-import { Header } from "@/components/Header";
-import { ILocales } from "@/locales";
 import Script from "next/script";
 
 const inter = Rubik({
   subsets: ["latin", "cyrillic", "latin-ext"],
   weight: "400",
 });
-
-async function getServerSideProps(): Promise<ILocales[]> {
-  console.log('wtf')
-  const response = await fetch(process.env.API_URL + "/api/locales", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    cache: "no-store",
-  });
-
-  const data = await response.json();
-
-  return data.locales;
-}
 
 export const metadata: Metadata = {
   title: "Take Your Time",
