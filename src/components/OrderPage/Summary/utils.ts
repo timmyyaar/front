@@ -1,8 +1,9 @@
-import { getOzonationMultiplier } from "@/utils";
+import { capitalizeFirstLetter, getOzonationMultiplier } from "@/utils";
 import {
   ISubService,
   SelectedSubService,
 } from "@/components/OrderPage/SubServicesList/utils";
+import { Counter, Prices } from "@/types";
 
 export const getEstimateFromCounterByService = (
   mainService: string,
@@ -111,160 +112,141 @@ export const getEstimateFromCounterByService = (
   }
 };
 
+const getDefaultCounterPrice = (
+  counter: Counter[],
+  prices: Prices,
+  prefix: string
+) => {
+  const bedroomPrice = prices[`${prefix}Bedroom`];
+  const bathroomPrice = prices[`${prefix}Bathroom`];
+  const kitchenPrice = prices[`${prefix}Kitchen`];
+  const defaultPrice = prices[`default${capitalizeFirstLetter(prefix)}`];
+
+  return counter.reduce((acc: number, el: any, i: number) => {
+    if (i === 0 && el.value > 1) acc += (el.value - 1) * bedroomPrice;
+    if (i === 1 && el.value > 1) acc += (el.value - 1) * bathroomPrice;
+    if (i === 2 && el.value === "Kitchen") acc += kitchenPrice;
+
+    return acc;
+  }, defaultPrice);
+};
+
 export const getPriceFromCounterByService = (
+  prices: Prices,
   mainService: string,
-  counter: any
+  counter: Counter[]
 ) => {
   switch (mainService) {
     case "Deep kitchen":
-      return 290;
-
-    case "Custom cleaning":
-      return counter.reduce((acc: number, el: any, i: number) => {
-        if (i === 0 && el.value >= 1) acc += (el.value - 1) * 60;
-        if (i === 1 && el.value >= 1) acc += (el.value - 1) * 80;
-        if (i === 2 && el.value === "Kitchen") acc += 30;
-
-        return acc;
-      }, 0);
+      return prices.defaultDeepKitchen;
 
     case "Deep":
-    case "Move in/out":
-    case "After party":
-      return counter.reduce((acc: number, el: any, i: number) => {
-        if (i === 0 && el.value > 1) acc += (el.value - 1) * 60;
-        if (i === 1 && el.value > 1) acc += (el.value - 1) * 80;
-        if (i === 2 && el.value === "Kitchen") acc += 50;
+      return getDefaultCounterPrice(counter, prices, "deep");
 
-        return acc;
-      }, 230);
+    case "Move in/out":
+      return getDefaultCounterPrice(counter, prices, "moveInOut");
+
+    case "After party":
+      return getDefaultCounterPrice(counter, prices, "afterParty");
 
     case "In a last minute":
-      return counter.reduce((acc: number, el: any, i: number) => {
-        if (i === 0 && el.value > 1) acc += (el.value - 1) * 60;
-        if (i === 1 && el.value > 1) acc += (el.value - 1) * 80;
-        if (i === 2) {
-          if (el.value === "Kitchen") {
-            acc += 80;
-          } else {
-            acc += 50;
-          }
-        }
-
-        return acc;
-      }, 320);
+      return getDefaultCounterPrice(counter, prices, "lastMinute");
 
     case "While sickness":
-      return counter.reduce((acc: number, el: any, i: number) => {
-        if (i === 0 && el.value > 1) acc += (el.value - 1) * 40;
-        if (i === 1 && el.value > 1) acc += (el.value - 1) * 60;
-
-        return acc;
-      }, 155);
+      return getDefaultCounterPrice(counter, prices, "whileSickness");
 
     case "Airbnb":
-    case "Regular":
-    case "Subscription":
-      return counter.reduce((acc: number, el: any, i: number) => {
-        if (i === 0 && el.value > 1) acc += (el.value - 1) * 40;
-        if (i === 1 && el.value > 1) acc += (el.value - 1) * 50;
-        if (i === 2 && el.value === "Kitchen") acc += 30;
+      return getDefaultCounterPrice(counter, prices, "airbnb");
 
-        return acc;
-      }, 199);
+    case "Regular":
+      return getDefaultCounterPrice(counter, prices, "regular");
+
+    case "Subscription":
+      return getDefaultCounterPrice(counter, prices, "subscription");
 
     case "Eco cleaning":
-      return counter.reduce((acc: number, el: any, i: number) => {
-        if (i === 0 && el.value > 1) acc += (el.value - 1) * 40;
-        if (i === 1 && el.value > 1) acc += (el.value - 1) * 50;
-        if (i === 2 && el.value === "Kitchen") acc += 30;
-
-        return acc;
-      }, 229);
+      return getDefaultCounterPrice(counter, prices, "eco");
 
     case "Office":
       return counter.reduce((acc: number, el: any, i: number) => {
-        acc += el.value * 2.5;
+        acc += el.value * prices.officeSquareMeter;
         return acc;
-      }, 0);
+      }, prices.defaultOffice);
 
     case "Ozonation":
       return counter.reduce((acc: number, { value }: any, i: number) => {
-        if (i === 0) acc += value * getOzonationMultiplier(value);
-        if (i === 1) acc += value * 40;
+        if (i === 0) acc += value * getOzonationMultiplier(prices, value);
 
         return acc;
-      }, 0);
+      }, prices.defaultOzonation);
 
     case "Post-construction":
       return counter.reduce((acc: number, el: any, i: number) => {
         if (i === 0) {
-          acc += el.value * 50;
+          acc += el.value * prices.postConstructionWindow;
         } else if (i === 1) {
-          acc += el.value * 6;
+          acc += el.value * prices.postConstructionSquareMeter;
         }
 
         return acc;
-      }, 0);
-
-    case "Dry cleaning":
-      return counter.reduce((acc: number, el: any, i: number) => {
-        const minimalSofaSeats = 2;
-
-        if (i === 0) {
-          acc += el.value * 10;
-        } else if (i === 1 && el.value > 0) {
-          acc +=
-            el.value === minimalSofaSeats
-              ? 155
-              : (el.value - minimalSofaSeats) * 15 + 155;
-        }
-
-        return acc;
-      }, 0);
+      }, prices.defaultPostConstruction);
 
     case "Window cleaning":
       return counter.reduce((acc: number, el: any, i: number) => {
-        if (i === 0) acc += el.value * 30;
-        if (i === 1) acc += el.value * 2.5;
+        if (i === 0) acc += el.value * prices.window;
+        if (i === 1) acc += el.value * prices.windowBalconySquareMeter;
 
         return acc;
-      }, 0);
+      }, prices.defaultWindow);
+
+    case "Dry cleaning":
+      return prices.defaultDry;
+
+    case "Custom cleaning":
+      return prices.defaultCustom;
 
     default:
       return 0;
   }
 };
 
-export const getMinimalPriceByMainService = (mainService: string) => {
+export const getMinimalPriceByMainService = (
+  prices: Prices,
+  mainService: string
+) => {
   switch (mainService) {
     case "Custom cleaning":
+      return prices.minimalCustom;
     case "Subscription":
+      return prices.minimalSubscription;
     case "Airbnb":
+      return prices.minimalAirbnb;
     case "Move in/out":
+      return prices.minimalMoveInOut;
     case "Eco cleaning":
+      return prices.minimalEco;
     case "Regular":
-      return 199;
-
+      return prices.minimalRegular;
     case "While sickness":
-      return 155;
-
+      return prices.minimalWhileSickness;
     case "After party":
+      return prices.minimalAfterParty;
     case "In a last minute":
-      return 370;
+      return prices.minimalLastMinute;
     case "Deep":
-      return 499;
+      return prices.minimalDeep;
     case "Deep kitchen":
-      return 355;
-
+      return prices.minimalDeepKitchen;
     case "Office":
+      return prices.minimalOffice;
     case "Ozonation":
+      return prices.minimalOzonation;
     case "Window cleaning":
+      return prices.minimalWindow;
     case "Dry cleaning":
-      return 150;
-
+      return prices.minimalDry;
     case "Post-construction":
-      return 199;
+      return prices.minimalPostConstruction;
 
     default:
       return 199;

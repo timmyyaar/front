@@ -13,3 +13,12 @@ export type Blog = {
 export type TranslateFunction = (text: string) => string;
 
 export type Language = "pl" | "ru" | "en" | "ua";
+
+export type Prices = { [key: string]: number };
+
+export type Counter = {
+  title?: string;
+  value: string;
+  type?: string;
+  param?: string;
+};

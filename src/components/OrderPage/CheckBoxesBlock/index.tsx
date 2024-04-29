@@ -4,6 +4,7 @@ import React, {
   useEffect,
   Dispatch,
   SetStateAction,
+  useContext,
 } from "react";
 
 import CheckBox from "./components/Checkbox";
@@ -15,6 +16,7 @@ import ownSuppliesSvg from "./icons/own-supplies.svg";
 import checkListSvg from "./icons/check-list.svg";
 import "./style.scss";
 import { OWN_SUPPLES_SERVICE_NAME } from "@/components/OrderPage/constants";
+import { PricesContext } from "@/components/Providers";
 
 interface IProps {
   mainService: string;
@@ -27,6 +29,7 @@ interface IProps {
 }
 
 export const CheckBoxesBlock: FC<IProps> = (props) => {
+  const { prices } = useContext(PricesContext);
   const {
     mainService,
     subServices,
@@ -66,9 +69,9 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
         {
           title: "Vacuum_cleaner_sub_service",
           time: 0,
-          originalPrice: 30,
-          price: priceMultiplier * 30,
-          oldPrice: priceMultiplier === 1 ? "" : 30,
+          originalPrice: prices.vacuumCleaner,
+          price: priceMultiplier * prices.vacuumCleaner,
+          oldPrice: priceMultiplier === 1 ? "" : prices.vacuumCleaner,
           count: 1,
         },
       ]);
@@ -86,8 +89,8 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
         {
           title: OWN_SUPPLES_SERVICE_NAME,
           time: 0,
-          price: -15,
-          originalPrice: -15,
+          price: prices.ownSupplies,
+          originalPrice: prices.ownSupplies,
           count: 1,
         },
       ]);

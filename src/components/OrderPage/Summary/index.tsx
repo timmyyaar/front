@@ -28,13 +28,14 @@ import {
 import { OWN_SUPPLES_SERVICE_NAME } from "@/components/OrderPage/constants";
 import { City } from "@/components/OrderPage/Summary/UserData/components/Cities";
 import SummaryService from "@/components/OrderPage/Summary/SummaryService";
-import { LocaleContext } from "@/components/Providers";
+import { LocaleContext, PricesContext } from "@/components/Providers";
 import { getDateTimeString } from "@/utils";
 import { sendGAEvent } from "@/google-analytics";
+import { Counter } from "@/types";
 
 interface IProps {
   title: string;
-  counter: { title: string; value: string; type?: string; param?: string }[];
+  counter: Counter[];
   subService: ISubService[];
   setSubService: (service: any) => void;
   secTitle?: string;
@@ -112,6 +113,7 @@ export const Summary: FC<IProps> = (props: any) => {
     ownCheckList,
   } = props;
   const { locale } = useContext(LocaleContext);
+  const { prices } = useContext(PricesContext);
   const { lang } = useParams();
   const [sale, setSale] = useState(0);
   const [promoInputValue, setPromoInputValue] = useState<string>("");
@@ -221,7 +223,8 @@ export const Summary: FC<IProps> = (props: any) => {
 
   const getMainServicePrice = () => {
     const countPrice =
-      getPriceFromCounterByService(title, counter) * (isPrivateHouse ? 1.3 : 1);
+      getPriceFromCounterByService(prices, title, counter) *
+      (isPrivateHouse ? 1.3 : 1);
     const subServicePrice = subService.reduce(
       (acc: number, el: SelectedSubService) =>
         acc +
@@ -242,7 +245,11 @@ export const Summary: FC<IProps> = (props: any) => {
   };
 
   const getSecondServicePrice = () => {
-    const secCountPrice = getPriceFromCounterByService(secTitle, secCounter);
+    const secCountPrice = getPriceFromCounterByService(
+      prices,
+      secTitle,
+      secCounter
+    );
     const secSubServicePrice = secSubService.reduce(
       (acc: number, el: SelectedSubService) =>
         acc + el.originalPrice * el.count,
@@ -429,7 +436,7 @@ export const Summary: FC<IProps> = (props: any) => {
   const provideOwnSuppliesSelected = subService.find(
     ({ title }: { title: string }) => title === OWN_SUPPLES_SERVICE_NAME
   );
-  const minimalPrice = getMinimalPriceByMainService(title);
+  const minimalPrice = getMinimalPriceByMainService(prices, title);
   const minimalPriceWithSales = getPriceWithSaleOrSubSale(
     minimalPrice + (provideOwnSuppliesSelected?.price || 0),
     sale,

@@ -16,11 +16,10 @@ import { PRIVATE_HOUSE_SERVICES } from "./constants";
 
 import "./style.scss";
 import PrivateHouse from "@/components/OrderPage/PrivateHouse";
-import { LocaleContext } from "@/components/Providers";
+import { LocaleContext, PricesContext } from "@/components/Providers";
 import { MAIN_CATEGORIES } from "@/constants";
 import {
   getDefaultSubServicesByService,
-  ISubService,
   SelectedSubService,
 } from "@/components/OrderPage/SubServicesList/utils";
 import { sendGAEvent } from "@/google-analytics";
@@ -28,6 +27,7 @@ import { sendGAEvent } from "@/google-analytics";
 export const OrderPage = () => {
   const { locales } = useContext(LocaleContext);
   const i18n = useLocales(locales);
+  const { prices } = useContext(PricesContext);
   const { lang, type } = useParams();
   const router = useRouter();
   const categoryTitle =
@@ -64,7 +64,7 @@ export const OrderPage = () => {
     setSecondService("");
     setSecondSubService([]);
 
-    setSubService(getDefaultSubServicesByService(selectedService));
+    setSubService(getDefaultSubServicesByService(prices, selectedService));
   }, [selectedService]);
 
   useEffect(() => {
