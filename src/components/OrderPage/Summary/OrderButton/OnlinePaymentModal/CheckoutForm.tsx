@@ -7,6 +7,10 @@ import {
 import request, { HTTP_METHODS } from "@/utils/request";
 import ArrowDown from "@/components/OrderPage/Summary/OrderButton/OnlinePaymentModal/icons/ArrowDown";
 import { LocaleContext } from "@/components/Providers";
+import {
+  getPaymentIntentDescription,
+  getTranslatedServices,
+} from "@/components/OrderPage/Summary/utils";
 
 interface CheckoutFormProps {
   payload: any;
@@ -53,7 +57,10 @@ function CheckoutForm({
         await request({
           url: `payment-intent/${paymentIntentId}`,
           method: HTTP_METHODS.PATCH,
-          body: { metadata: { orderIds: responseOrderIds.join(",") } },
+          body: {
+            metadata: { orderIds: responseOrderIds.join(",") },
+            description: getPaymentIntentDescription(payload, t),
+          },
         });
       }
 

@@ -4,6 +4,7 @@ import {
   SelectedSubService,
 } from "@/components/OrderPage/SubServicesList/utils";
 import { Counter, Prices } from "@/types";
+import { BRACKETS_REGEX, SHOW_CORRIDOR_TITLES } from "@/constants";
 
 export const getEstimateFromCounterByService = (
   mainService: string,
@@ -381,3 +382,97 @@ export const getServicePriceBasedOnManualCleaners = (
 
   return price + extraPriceRounded;
 };
+
+export const getSubServiceWithBalcony = (subService: string) => {
+  const balconyMatch = subService.match(/Balcony_summery\s+\(\d+\)/)?.[0];
+
+  if (!balconyMatch) {
+    return subService;
+  }
+
+  const metersSquare = balconyMatch.match(/\d+/);
+  const balconyWithMetersSquare = balconyMatch.replace(
+    metersSquare as any,
+    `${metersSquare}m2`
+  );
+
+  return subService.replace(balconyMatch, balconyWithMetersSquare);
+};
+
+export const getSubServiceWithCarpet = (subService: string) => {
+  const carpetMatch = subService.match(
+    /Carpet\sdry\scleaning_summery\s+\(\d+\)/
+  )?.[0];
+
+  if (!carpetMatch) {
+    return subService;
+  }
+
+  const metersSquare = carpetMatch.match(/\d+/);
+  const carpetWithMetersSquare = carpetMatch.replace(
+    metersSquare as any,
+    `${metersSquare}m2`
+  );
+
+  return subService.replace(carpetMatch, carpetWithMetersSquare);
+};
+
+export const getTranslatedServices = (
+  t: (text: string) => string,
+  services: string,
+  title?: string
+) => {
+  let transformedServicesString = services;
+
+  if (title && SHOW_CORRIDOR_TITLES.includes(title)) {
+    transformedServicesString = `${transformedServicesString}, ${t(
+      "Corridor"
+    )} (1)`;
+  }
+
+  services
+    .split(BRACKETS_REGEX)
+    .map((service) => service.trim())
+    .forEach((service) => {
+      transformedServicesString = transformedServicesString.replace(
+        service,
+        t(service)
+      );
+    });
+
+  return transformedServicesString;
+};
+
+export const getPaymentIntentDescription = (
+  payload: any,
+  t: (text: string) => string
+) =>
+  `Customer name: ${payload.name}, ${payload.title}: ${getTranslatedServices(
+    t,
+    payload.counter,
+    payload.title
+  )}${
+    payload.subService
+      ? `, Additional services: ${getTranslatedServices(
+          t,
+          getSubServiceWithBalcony(getSubServiceWithCarpet(payload.subService))
+        )}`
+      : ""
+  }${
+    payload.secTitle
+      ? `, ${payload.secTitle}: ${getTranslatedServices(
+          t,
+          payload.secCounter,
+          payload.secTitle
+        )}${payload.secCounter && payload.secSubService ? ", " : ""}${
+          payload.secSubService
+            ? `${getTranslatedServices(
+                t,
+                getSubServiceWithBalcony(
+                  getSubServiceWithCarpet(payload.secSubService)
+                )
+              )}`
+            : ""
+        }`
+      : ""
+  }, Date: ${payload.date}`;
