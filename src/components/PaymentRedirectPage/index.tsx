@@ -14,6 +14,7 @@ import "./style.scss";
 const REDIRECT_STATUSES = {
   SUCCEEDED: "succeeded",
   FAILED: "failed",
+  PENDING: "pending",
 };
 
 function PaymentRedirect() {
@@ -25,32 +26,49 @@ function PaymentRedirect() {
   const router = useRouter();
 
   const redirectStatus = searchParams.get("redirect_status") || "";
+  const paymentIntent = searchParams.get("payment_intent");
 
   useEffect(() => {
-    if (!Object.values(REDIRECT_STATUSES).includes(redirectStatus)) {
+    if (
+      !Object.values(REDIRECT_STATUSES).includes(redirectStatus) ||
+      !paymentIntent
+    ) {
       router.push(`/${lang}`);
     }
-  }, [redirectStatus]);
+  }, [redirectStatus, paymentIntent]);
+
+  const onTryAgainClick = () => {
+    router.push(`/${lang}/payment/${paymentIntent}`);
+  };
 
   return (
     <div className="payment-redirect">
       <div className="_flex _flex-col _items-center">
-        <div className="payment-status-title _mb-10 _mt-12 text-gradient">
+        <div className="payment-status-title _mb-8 _mt-12 text-gradient">
           <span>
-            {redirectStatus === REDIRECT_STATUSES.SUCCEEDED
-              ? t("payment_successful")
-              : t("payment_failed")}
+            {redirectStatus === REDIRECT_STATUSES.FAILED
+              ? t("payment_failed")
+              : t("payment_successful")}
           </span>
         </div>
-        {redirectStatus === REDIRECT_STATUSES.SUCCEEDED ? (
+        {redirectStatus === REDIRECT_STATUSES.FAILED ? (
+          <>
+            <Image
+              src={failedDesktop}
+              alt=""
+              className="payment-status-image"
+            />
+            <button className="pay-button _mt-4" onClick={onTryAgainClick}>
+              {t("try_again")}
+            </button>
+          </>
+        ) : (
           <>
             <Image src={successDesktop} alt="" />
             <div className="success-payment-message">
               {t("success_payment_contact_message")}
             </div>
           </>
-        ) : (
-          <Image src={failedDesktop} alt="" />
         )}
       </div>
     </div>

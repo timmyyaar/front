@@ -9,8 +9,6 @@ import "./style.scss";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISH_KEY!);
 
-console.log(process.env.NEXT_PUBLIC_STRIPE_PUBLISH_KEY);
-
 const appearance = {
   labels: "floating",
   theme: "stripe",
