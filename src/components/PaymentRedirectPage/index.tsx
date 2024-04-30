@@ -43,7 +43,12 @@ function PaymentRedirect() {
           </span>
         </div>
         {redirectStatus === REDIRECT_STATUSES.SUCCEEDED ? (
-          <Image src={successDesktop} alt="" />
+          <>
+            <Image src={successDesktop} alt="" />
+            <div className="success-payment-message">
+              {t("success_payment_contact_message")}
+            </div>
+          </>
         ) : (
           <Image src={failedDesktop} alt="" />
         )}
