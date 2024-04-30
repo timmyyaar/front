@@ -446,33 +446,47 @@ export const getTranslatedServices = (
 export const getPaymentIntentDescription = (
   payload: any,
   t: (text: string) => string
-) =>
-  `Customer name: ${payload.name}, ${payload.title}: ${getTranslatedServices(
-    t,
-    payload.counter,
-    payload.title
-  )}${
-    payload.subService
-      ? `, Additional services: ${getTranslatedServices(
-          t,
-          getSubServiceWithBalcony(getSubServiceWithCarpet(payload.subService))
-        )}`
-      : ""
-  }${
-    payload.secTitle
-      ? `, ${payload.secTitle}: ${getTranslatedServices(
-          t,
-          payload.secCounter,
-          payload.secTitle
-        )}${payload.secCounter && payload.secSubService ? ", " : ""}${
-          payload.secSubService
-            ? `${getTranslatedServices(
-                t,
-                getSubServiceWithBalcony(
-                  getSubServiceWithCarpet(payload.secSubService)
-                )
-              )}`
-            : ""
-        }`
-      : ""
-  }, Date: ${payload.date}`;
+) => {
+  let paymentDescription = `Customer name: ${payload.name}; Date: ${payload.date}; `;
+
+  const addCounterAndSubService = (
+    counter: string,
+    title: string,
+    subService: string
+  ) => {
+    const translatedSubServices = getTranslatedServices(
+      t,
+      getSubServiceWithBalcony(getSubServiceWithCarpet(subService || ""))
+    );
+
+    if (counter) {
+      paymentDescription =
+        paymentDescription +
+        `${title}: ` +
+        getTranslatedServices(t, counter, title);
+
+      if (subService) {
+        paymentDescription =
+          paymentDescription +
+          `, Additional services: ${translatedSubServices}`;
+      }
+    } else {
+      paymentDescription =
+        paymentDescription + `${title}: ` + translatedSubServices;
+    }
+  };
+
+  addCounterAndSubService(payload.counter, payload.title, payload.subService);
+
+  if (payload.secTitle) {
+    paymentDescription = paymentDescription + "; ";
+
+    addCounterAndSubService(
+      payload.secCounter,
+      payload.secTitle,
+      payload.secSubService
+    );
+  }
+
+  return paymentDescription;
+};
