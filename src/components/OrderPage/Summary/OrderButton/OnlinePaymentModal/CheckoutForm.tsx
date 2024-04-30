@@ -7,10 +7,7 @@ import {
 import request, { HTTP_METHODS } from "@/utils/request";
 import ArrowDown from "@/components/OrderPage/Summary/OrderButton/OnlinePaymentModal/icons/ArrowDown";
 import { LocaleContext } from "@/components/Providers";
-import {
-  getPaymentIntentDescription,
-  getTranslatedServices,
-} from "@/components/OrderPage/Summary/utils";
+import { getPaymentIntentDescription } from "@/components/OrderPage/Summary/utils";
 
 interface CheckoutFormProps {
   payload: any;
