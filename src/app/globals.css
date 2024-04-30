@@ -111,7 +111,7 @@ code {
 
 .text-gradient {
   color: #13277e;
-  background: radial-gradient(#13277e, #2247e4);
+  background: radial-gradient(#19286d, #214aff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

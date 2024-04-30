@@ -1,0 +1,14 @@
+.payment-redirect {
+  background-color: #ecf0ff;
+  flex: 1;
+
+  .payment-status-title {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 130%;
+
+    @media screen and (max-width: 950px) {
+      font-size: 18px;
+    }
+  }
+}
