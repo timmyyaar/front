@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useContext } from "react";
+import React, { useContext } from "react";
 import { loadStripe, StripeElementLocale, Appearance } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "@/components/OrderPage/Summary/OrderButton/OnlinePaymentModal/CheckoutForm";
@@ -8,6 +8,8 @@ import { LocaleContext } from "@/components/Providers";
 import "./style.scss";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISH_KEY!);
+
+console.log(process.env.NEXT_PUBLIC_STRIPE_PUBLISH_KEY)
 
 const appearance = {
   labels: "floating",
