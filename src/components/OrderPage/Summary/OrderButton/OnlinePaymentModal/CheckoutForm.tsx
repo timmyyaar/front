@@ -97,12 +97,11 @@ function CheckoutForm({
         </div>
       </div>
       <PaymentElement />
-      {error ||
-        (promoError && (
-          <div className="text-danger _mt-1 _text-center">
-            {error || t("promo_error_modal_title")}
-          </div>
-        ))}
+      {(error || promoError) && (
+        <div className="text-danger _mt-1 _text-center">
+          {error || t("promo_error_modal_title")}
+        </div>
+      )}
       <div className="d-flex justify-content-center _mt-4">
         <button
           className={`pay-button ${isPaymentLoading ? "disabled loading" : ""}`}
