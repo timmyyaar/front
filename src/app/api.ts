@@ -3,13 +3,13 @@ import request from "@/utils/request";
 import { Prices } from "@/types";
 
 export async function getLocales(): Promise<ILocales[]> {
-  const { locales } = await request({ url: "locales" });
+  const { locales } = await request({ url: "locales", cache: "no-store" });
 
   return locales;
 }
 
 export async function getPrices(): Promise<Prices> {
-  const pricesResponse = await request({ url: "prices", cache: 'no-store' });
+  const pricesResponse = await request({ url: "prices", cache: "no-store" });
 
   return pricesResponse.reduce(
     (result: Prices, item: { key: string; price: number }) => ({
