@@ -7,7 +7,6 @@ import {
 import request, { HTTP_METHODS } from "@/utils/request";
 import ArrowDown from "@/components/OrderPage/Summary/OrderButton/OnlinePaymentModal/icons/ArrowDown";
 import { LocaleContext } from "@/components/Providers";
-import { getPaymentIntentDescription } from "@/components/OrderPage/Summary/utils";
 
 interface CheckoutFormProps {
   payload: any;
@@ -42,7 +41,7 @@ function CheckoutForm({
         const orderResponse = await request({
           url: "order",
           method: HTTP_METHODS.POST,
-          body: payload,
+          body: { ...payload, paymentIntentId },
         });
 
         const responseOrderIds = Array.isArray(orderResponse)
@@ -56,7 +55,13 @@ function CheckoutForm({
           method: HTTP_METHODS.PATCH,
           body: {
             metadata: { orderIds: responseOrderIds.join(",") },
-            description: getPaymentIntentDescription(payload, t),
+            description: `Customer name: ${payload.name}, Date: ${
+              payload.date
+            }, Service: ${payload.title}${
+              payload.secTitle
+                ? `, Second service title: ${payload.secTitle}`
+                : ""
+            }`,
           },
         });
       }
