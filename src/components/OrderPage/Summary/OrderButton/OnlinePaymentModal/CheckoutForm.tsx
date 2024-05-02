@@ -92,8 +92,14 @@ function CheckoutForm({
     <div className="_w-full">
       <div>
         <div
-          className="back-button _flex _items-center _justify-center"
-          onClick={onClose}
+          className={`back-button _flex _items-center _justify-center ${
+            isPaymentLoading ? "disabled" : ""
+          }`}
+          onClick={() => {
+            if (!isPaymentLoading) {
+              onClose();
+            }
+          }}
         >
           <ArrowDown />
         </div>
