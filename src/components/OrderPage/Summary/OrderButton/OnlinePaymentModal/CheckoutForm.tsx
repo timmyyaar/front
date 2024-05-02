@@ -93,7 +93,7 @@ function CheckoutForm({
       <div>
         <div
           className={`back-button _flex _items-center _justify-center ${
-            isPaymentLoading ? "disabled" : ""
+            isPaymentLoading ? "primary-button-disabled" : ""
           }`}
           onClick={() => {
             if (!isPaymentLoading) {
@@ -107,7 +107,7 @@ function CheckoutForm({
           {t("payment_modal_charges_title")}
         </div>
       </div>
-      <PaymentElement />
+      <PaymentElement onReady={(element) => element.focus()} />
       {(error || promoError) && (
         <div className="text-danger _mt-1 _text-center">
           {error || t("promo_error_modal_title")}
