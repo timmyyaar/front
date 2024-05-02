@@ -23,6 +23,7 @@ interface PaymentProps {
 
 const PAYMENT_INTENT_STATUS = {
   REQUIRES_PAYMENT_METHOD: "requires_payment_method",
+  REQUIRES_ACTION: "requires_action",
 };
 
 const appearance = {
@@ -39,7 +40,7 @@ function Payment({ paymentIntent }: PaymentProps) {
 
   const needRedirect =
     !paymentIntent ||
-    paymentIntent.status !== PAYMENT_INTENT_STATUS.REQUIRES_PAYMENT_METHOD ||
+    !Object.values(PAYMENT_INTENT_STATUS).includes(paymentIntent.status) ||
     !paymentIntent.metadata.orderIds;
 
   useEffect(() => {
