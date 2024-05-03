@@ -30,8 +30,8 @@ import { City } from "@/components/OrderPage/Summary/UserData/components/Cities"
 import SummaryService from "@/components/OrderPage/Summary/SummaryService";
 import { LocaleContext, PricesContext } from "@/components/Providers";
 import { getDateTimeString } from "@/utils";
-import { sendGAEvent } from "@/google-analytics";
 import { Counter } from "@/types";
+import OrderButton from "@/components/OrderPage/Summary/OrderButton";
 
 interface IProps {
   title: string;
@@ -159,7 +159,7 @@ export const Summary: FC<IProps> = (props: any) => {
 
   const router = useRouter();
 
-  const [modal, setModal] = useState(false);
+  const [successModal, setSuccessModal] = useState(false);
   const [discounts, setDiscounts] = useState<Discount[]>([]);
   const [showPromoErrorModal, setShowPromoErrorModal] =
     useState<boolean>(false);
@@ -175,12 +175,12 @@ export const Summary: FC<IProps> = (props: any) => {
     discounts.find(({ date }) => date === totalDate?.split(" ")[0])?.value || 0;
 
   const onCloseModal = () => {
-    setModal(false);
+    setSuccessModal(false);
 
     router.push(`/${lang}`);
   };
 
-  const onClosePromoErrorModal = () => {
+  const onCleanPromoData = () => {
     setShowPromoErrorModal(false);
     setPromo("");
     setSale(0);
@@ -189,7 +189,7 @@ export const Summary: FC<IProps> = (props: any) => {
   };
 
   const ref = useClickOutside(() => onCloseModal());
-  const promoModalRef = useClickOutside(() => onClosePromoErrorModal());
+  const promoModalRef = useClickOutside(() => onCleanPromoData());
 
   const getDiscounts = async () => {
     try {
@@ -322,112 +322,66 @@ export const Summary: FC<IProps> = (props: any) => {
     }
   };
 
-  const sendData = async () => {
-    const main = {
-      name: name.trim(),
-      number: `+${phoneCountry.phoneCode}${number}`,
-      email,
-      address: `Street: ${street}, House: ${house}${
-        isPrivateHouse ? " (Private house)" : ""
-      }${apartment ? `, Apartment: ${apartment}` : ""}${
-        postcode ? `, Postcode: ${postcode}` : ""
-      }${entrance ? `, Entrance: ${entrance}` : ""}${
-        doorPhone ? `, Door phone: ${doorPhone}` : ""
-      }`,
-      date: totalDate,
-      onlinePayment: onlinePayment,
-      requestPreviousCleaner: previousCleaner,
-      personalData: personalData,
-      mainServicePrice: mainServicePriceWithSale,
-      secondServicePrice: secondServicePriceWithSale,
-      price: priceWithSale,
-      mainServicePriceOriginal: mainServicePrice,
-      secondServicePriceOriginal: secondServicePrice,
-      priceOriginal: price,
-      promo,
-      mainServiceEstimate: mainServiceEstimate.time,
-      mainServiceCleanersCount:
-        mainServiceEstimate.cleanersCount + mainServiceManualCleanersCount,
-      secondServiceEstimate: secondServiceEstimate.time,
-      secondServiceCleanersCount:
-        secondServiceEstimate.cleanersCount + secondServiceManualCleanersCount,
-      additionalInformation: more,
-      city: city.name,
-      transportationPrice: city.price,
-      language: locale,
-      creationDate: getDateTimeString(new Date()),
-      ownCheckList,
-    };
-
-    const mainService = {
-      title,
-      counter: counter
-        .map((el: any) =>
-          el.title ? el.title + "(" + el.value + ")" : el.value
-        )
-        .join(" "),
-      subService: subService
-        .map(
-          (service: SelectedSubService) =>
-            `${service.title + "_summery"} (${service.count})`
-        )
-        .join(" "),
-    };
-
-    const secService =
-      secondServicePrice > 0 && secTitle
-        ? {
-            secTitle,
-            secCounter: secCounter
-              .map((el: any) =>
-                el.title ? el.title + "(" + el.value + ")" : el.value
-              )
-              .join(" "),
-            secSubService: secSubService
-              .map(
-                (service: SelectedSubService) =>
-                  `${service.title + "_summery"} (${service.count})`
-              )
-              .join(" "),
-          }
-        : {};
-
-    setIsOrderLoading(true);
-
-    try {
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + "/api/order",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          cache: "no-store",
-          body: JSON.stringify({ ...main, ...mainService, ...secService }),
+  const payload = {
+    name: name.trim(),
+    number: `+${phoneCountry.phoneCode}${number}`,
+    email,
+    address: `Street: ${street}, House: ${house}${
+      isPrivateHouse ? " (Private house)" : ""
+    }${apartment ? `, Apartment: ${apartment}` : ""}${
+      postcode ? `, Postcode: ${postcode}` : ""
+    }${entrance ? `, Entrance: ${entrance}` : ""}${
+      doorPhone ? `, Door phone: ${doorPhone}` : ""
+    }`,
+    date: totalDate,
+    onlinePayment: onlinePayment,
+    requestPreviousCleaner: previousCleaner,
+    personalData: personalData,
+    mainServicePrice: mainServicePriceWithSale,
+    secondServicePrice: secondServicePriceWithSale,
+    price: priceWithSale,
+    mainServicePriceOriginal: mainServicePrice,
+    secondServicePriceOriginal: secondServicePrice,
+    priceOriginal: price,
+    promo,
+    mainServiceEstimate: mainServiceEstimate.time,
+    mainServiceCleanersCount:
+      mainServiceEstimate.cleanersCount + mainServiceManualCleanersCount,
+    secondServiceEstimate: secondServiceEstimate.time,
+    secondServiceCleanersCount:
+      secondServiceEstimate.cleanersCount + secondServiceManualCleanersCount,
+    additionalInformation: more,
+    city: city.name,
+    transportationPrice: city.price,
+    language: locale,
+    creationDate: getDateTimeString(new Date()),
+    ownCheckList,
+    title,
+    counter: counter
+      .map((el: any) => (el.title ? el.title + "(" + el.value + ")" : el.value))
+      .join(" "),
+    subService: subService
+      .map(
+        (service: SelectedSubService) =>
+          `${service.title + "_summery"} (${service.count})`
+      )
+      .join(" "),
+    ...(secondServicePrice > 0 && secTitle
+      ? {
+          secTitle,
+          secCounter: secCounter
+            .map((el: any) =>
+              el.title ? el.title + "(" + el.value + ")" : el.value
+            )
+            .join(" "),
+          secSubService: secSubService
+            .map(
+              (service: SelectedSubService) =>
+                `${service.title + "_summery"} (${service.count})`
+            )
+            .join(" "),
         }
-      );
-
-      if (!response.ok && response.status === 409) {
-        setShowPromoErrorModal(true);
-
-        return;
-      }
-
-      const data = await response.json();
-
-      if (data) {
-        setModal(true);
-
-        sendGAEvent({
-          action: "create_order",
-          category: secTitle ? `${title} + ${secTitle}` : title,
-          label: "Order created",
-          value: Array.isArray(data)
-            ? `${title}: ${data[0].id} id, ${secTitle}: ${data[1].id} id`
-            : `${title}: ${data.id} id`,
-        });
-      }
-    } finally {
-      setIsOrderLoading(false);
-    }
+      : {}),
   };
 
   const addressRequiredFields =
@@ -462,11 +416,14 @@ export const Summary: FC<IProps> = (props: any) => {
     secondServiceEstimate.time
   );
 
+  const isOrderButtonDisabled =
+    !requiredFields || isOrderLoading || isOrderPriceLessThanMinimum;
+
   return (
     <>
       <div className="summary-layout">
-        <Overlay active={modal || showPromoErrorModal}>
-          {modal ? (
+        <Overlay active={successModal || showPromoErrorModal}>
+          {successModal ? (
             <div ref={ref}>
               <ModalRequest
                 text={t("order_page_modal_title")}
@@ -485,7 +442,7 @@ export const Summary: FC<IProps> = (props: any) => {
                     {t("promo_error_modal_title")}
                   </>
                 }
-                onClose={onClosePromoErrorModal}
+                onClose={onCleanPromoData}
                 showLogo={false}
               />
             </div>
@@ -574,7 +531,11 @@ export const Summary: FC<IProps> = (props: any) => {
               className={`order-wrapper _cursor-pointer ${
                 isOrderPriceLessThanMinimum ? "order-wrapper-disabled" : ""
               }`}
-              onClick={() => setOrder(true)}
+              onClick={() => {
+                if (!isOrderPriceLessThanMinimum) {
+                  setOrder(true);
+                }
+              }}
             >
               {t("Order")}
             </div>
@@ -603,27 +564,16 @@ export const Summary: FC<IProps> = (props: any) => {
                 setPhoneCountry={setPhoneCountry}
                 discounts={discounts}
               />
-              <div
-                className={`order-wrapper _cursor-pointer ${
-                  !requiredFields ||
-                  isOrderLoading ||
-                  isOrderPriceLessThanMinimum
-                    ? "order-wrapper-disabled"
-                    : ""
-                } ${isOrderLoading ? "loading" : ""}`}
-                style={{ marginTop: "24px" }}
-                onClick={() => {
-                  if (
-                    !requiredFields ||
-                    isOrderLoading ||
-                    isOrderPriceLessThanMinimum
-                  )
-                    return void 0;
-                  sendData();
-                }}
-              >
-                {t("Order")}
-              </div>
+              <OrderButton
+                payload={payload}
+                setShowSuccessModal={setSuccessModal}
+                setShowPromoErrorModal={setShowPromoErrorModal}
+                onCleanPromoData={onCleanPromoData}
+                isDisabled={isOrderButtonDisabled}
+                isLoading={isOrderLoading}
+                setIsLoading={setIsOrderLoading}
+                t={t}
+              />
             </>
           )}
         </div>

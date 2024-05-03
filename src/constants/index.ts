@@ -33,16 +33,29 @@ export const MOBILE_PHONE_REGEX = /^\+[1-9]{1}[0-9]{3,14}$/;
 
 export const FIGURE_BRACKETS_REGEX = /{([^}]*)}/g;
 
+export const BRACKETS_REGEX = /\([^()]*\)/;
+
 export const LOCALE_LOCAL_STORAGE_KEY = "locale";
 
 export const MAIN_CATEGORIES_URLS = {
-  GENERAL: 'general',
+  GENERAL: "general",
   HEALTHCARE: "healthcare",
-  SPECIAL: 'special'
-}
+  SPECIAL: "special",
+};
 
 export const MAIN_CATEGORIES = {
   general: "General cleaning",
   healthcare: "Healthcare",
   special: "Special cleaning",
 };
+
+export const SHOW_CORRIDOR_TITLES = [
+  "Regular",
+  "Deep",
+  "Eco cleaning",
+  "Move in/out",
+  "In a last minute",
+  "After party",
+  "While sickness",
+  "Airbnb",
+];
