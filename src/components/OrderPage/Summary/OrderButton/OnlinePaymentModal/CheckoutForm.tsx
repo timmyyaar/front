@@ -28,6 +28,7 @@ function CheckoutForm({
   const [error, setError] = useState("");
   const [orderIds, setOrderIds] = useState<number[] | null>(null);
   const [promoError, setPromoError] = useState(false);
+  const [isPayButtonEnabled, setIsPayButtonEnabled] = useState(false);
 
   const stripe = useStripe();
   const elements = useElements();
@@ -107,7 +108,12 @@ function CheckoutForm({
           {t("payment_modal_charges_title")}
         </div>
       </div>
-      <PaymentElement onReady={(element) => element.focus()} />
+      <PaymentElement
+        onReady={(element) => element.focus()}
+        onChange={(formState) => {
+          setIsPayButtonEnabled(formState.complete);
+        }}
+      />
       {(error || promoError) && (
         <div className="text-danger _mt-1 _text-center">
           {error || t("promo_error_modal_title")}
@@ -115,9 +121,11 @@ function CheckoutForm({
       )}
       <div className="d-flex justify-content-center _mt-4">
         <button
-          className={`pay-button ${isPaymentLoading ? "disabled loading" : ""}`}
+          className={`pay-button ${
+            isPaymentLoading ? "primary-button-disabled loading" : ""
+          }`}
           onClick={onPayClick}
-          disabled={isPaymentLoading}
+          disabled={isPaymentLoading || !isPayButtonEnabled}
         >
           {t("pay")} {payload.price} zl
         </button>
