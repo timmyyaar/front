@@ -64,7 +64,11 @@ function PaymentRedirect() {
           </>
         ) : (
           <>
-            <Image src={successDesktop} alt="" />
+            <Image
+              src={successDesktop}
+              alt=""
+              className="payment-status-image"
+            />
             <div className="success-payment-message">
               {t("success_payment_contact_message")}
             </div>
