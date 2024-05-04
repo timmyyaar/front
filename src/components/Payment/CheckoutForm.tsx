@@ -58,7 +58,7 @@ function CheckoutForm({ t, paymentIntent }: CheckoutFormProps) {
           onClick={onPayClick}
           disabled={isPaymentLoading}
         >
-          {t("pay")} {paymentIntent.amount / 100} zl
+          {t("pay")} {parseFloat((paymentIntent.amount / 100).toFixed(1))} zl
         </button>
       </div>
     </div>
