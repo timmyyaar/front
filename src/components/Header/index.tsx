@@ -19,18 +19,20 @@ import { Polygon } from "./icons/Polygon";
 import "./style.scss";
 import NavigationItemsMobile from "@/components/Header/NavigationItemsMobile";
 import { sendGAEvent } from "@/google-analytics";
+import { useClickOutside } from "@/hooks/useClickOutSide";
 
 const mainLocales = {
   en: "English",
-  ru: "Russian",
-  pl: "Polish",
-  ua: "Ukrainian",
+  ru: "Русский",
+  pl: "Polski",
+  ua: "Україньска",
 };
 
 export const Header = () => {
   const { locales, locale, setNewLocal } = useContext(LocaleContext);
   const { t } = useLocales(locales);
   const [localesModal, setLocalesModal] = useState(false);
+  const localesSelectRef = useClickOutside(() => setLocalesModal(false));
   const headerRef = useRef<HTMLHeadingElement | null>(null);
   const router = useRouter();
   const pathname = usePathname();
@@ -114,14 +116,14 @@ export const Header = () => {
             </div>
           </div>
           {localesModal ? (
-            <div className="navigation-sub-menu-wrapper">
+            <div className="navigation-sub-menu-wrapper" ref={localesSelectRef}>
               {Object.values(mainLocales).map((option) => (
                 <div
                   className="navigation-sub-menu-item"
                   onClick={(e) => onSelectLocale(e, option)}
                   key={option}
                 >
-                  {t(option)}
+                  {option}
                 </div>
               ))}
             </div>
