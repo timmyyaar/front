@@ -227,7 +227,9 @@ export const Summary: FC<IProps> = (props: any) => {
       getPriceFromCounterByService(prices, title, counter) *
       (isPrivateHouse ? 1.3 : 1);
     const subServicePrice = subService
-      .filter(({ title }) => title !== "Own_supplies_sub_service")
+      .filter(
+        ({ title }: { title: string }) => title !== OWN_SUPPLES_SERVICE_NAME
+      )
       .reduce(
         (acc: number, el: SelectedSubService) =>
           acc +

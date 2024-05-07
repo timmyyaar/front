@@ -383,5 +383,5 @@ export const getServicePriceBasedOnManualCleaners = (
   return price + extraPriceRounded;
 };
 
-export const getPriceWithOwnSupplies = (price, provideOwnSuppliesSelected) =>
+export const getPriceWithOwnSupplies = (price: number, provideOwnSuppliesSelected: ISubService) =>
   price + (provideOwnSuppliesSelected ? provideOwnSuppliesSelected.price : 0);
