@@ -15,6 +15,7 @@ import {
   getHitherEstimate,
   getMinimalPriceByMainService,
   getPriceFromCounterByService,
+  getPriceWithOwnSupplies,
   getPriceWithSaleOrSubSale,
   getServiceEstimate,
   getServicePriceBasedOnManualCleaners,
@@ -225,21 +226,23 @@ export const Summary: FC<IProps> = (props: any) => {
     const countPrice =
       getPriceFromCounterByService(prices, title, counter) *
       (isPrivateHouse ? 1.3 : 1);
-    const subServicePrice = subService.reduce(
-      (acc: number, el: SelectedSubService) =>
-        acc +
-        (el?.originalPrice
-          ? [
-              "Clean the room",
-              "Clean the bathroom",
-              "Clean the kitchen",
-              "Clean the corridor",
-            ].includes(el.title) && isPrivateHouse
-            ? el.originalPrice * el.count * 1.3
-            : el.originalPrice * el.count
-          : 0),
-      0
-    );
+    const subServicePrice = subService
+      .filter(({ title }) => title !== "Own_supplies_sub_service")
+      .reduce(
+        (acc: number, el: SelectedSubService) =>
+          acc +
+          (el?.originalPrice
+            ? [
+                "Clean the room",
+                "Clean the bathroom",
+                "Clean the kitchen",
+                "Clean the corridor",
+              ].includes(el.title) && isPrivateHouse
+              ? el.originalPrice * el.count * 1.3
+              : el.originalPrice * el.count
+            : 0),
+        0
+      );
 
     return countPrice ? countPrice + subServicePrice : subServicePrice;
   };
@@ -275,6 +278,10 @@ export const Summary: FC<IProps> = (props: any) => {
     secondServiceManualCleanersCount
   );
 
+  const provideOwnSuppliesSelected = subService.find(
+    ({ title }: { title: string }) => title === OWN_SUPPLES_SERVICE_NAME
+  );
+
   const mainServicePrice = getServicePriceBasedOnManualCleaners(
     getMainServicePrice(),
     mainServiceEstimate.cleanersCount,
@@ -285,11 +292,9 @@ export const Summary: FC<IProps> = (props: any) => {
     secondServiceEstimate.cleanersCount,
     secondServiceManualCleanersCount
   );
-  const mainServicePriceWithSale = getPriceWithSaleOrSubSale(
-    mainServicePrice,
-    sale,
-    subSale,
-    dayDiscount
+  const mainServicePriceWithSale = getPriceWithOwnSupplies(
+    getPriceWithSaleOrSubSale(mainServicePrice, sale, subSale, dayDiscount),
+    provideOwnSuppliesSelected
   );
   const secondServicePriceWithSale = getPriceWithSaleOrSubSale(
     secondServicePrice,
@@ -305,11 +310,9 @@ export const Summary: FC<IProps> = (props: any) => {
   };
 
   const price = getPrice();
-  const priceWithSale = getPriceWithSaleOrSubSale(
-    price,
-    sale,
-    subSale,
-    dayDiscount
+  const priceWithSale = getPriceWithOwnSupplies(
+    getPriceWithSaleOrSubSale(price, sale, subSale, dayDiscount),
+    provideOwnSuppliesSelected
   );
 
   const handleScroll = () => {
@@ -340,16 +343,21 @@ export const Summary: FC<IProps> = (props: any) => {
     mainServicePrice: mainServicePriceWithSale,
     secondServicePrice: secondServicePriceWithSale,
     price: priceWithSale,
-    mainServicePriceOriginal: mainServicePrice,
+    mainServicePriceOriginal: getPriceWithOwnSupplies(
+      mainServicePrice,
+      provideOwnSuppliesSelected
+    ),
     secondServicePriceOriginal: secondServicePrice,
-    priceOriginal: price,
+    priceOriginal: getPriceWithOwnSupplies(price, provideOwnSuppliesSelected),
     promo,
     mainServiceEstimate: mainServiceEstimate.time,
     mainServiceCleanersCount:
       mainServiceEstimate.cleanersCount + mainServiceManualCleanersCount,
+    mainServiceManualCleanersCount,
     secondServiceEstimate: secondServiceEstimate.time,
     secondServiceCleanersCount:
       secondServiceEstimate.cleanersCount + secondServiceManualCleanersCount,
+    secondServiceManualCleanersCount,
     additionalInformation: more,
     city: city.name,
     transportationPrice: city.price,
@@ -387,9 +395,6 @@ export const Summary: FC<IProps> = (props: any) => {
   const addressRequiredFields =
     street && house && (isPrivateHouse ? true : apartment);
 
-  const provideOwnSuppliesSelected = subService.find(
-    ({ title }: { title: string }) => title === OWN_SUPPLES_SERVICE_NAME
-  );
   const minimalPrice = getMinimalPriceByMainService(prices, title);
   const minimalPriceWithSales = getPriceWithSaleOrSubSale(
     minimalPrice + (provideOwnSuppliesSelected?.price || 0),
@@ -409,7 +414,7 @@ export const Summary: FC<IProps> = (props: any) => {
     privacyAndPolicy &&
     personalData &&
     addressRequiredFields &&
-    price > 0;
+    getPriceWithOwnSupplies(price, provideOwnSuppliesSelected) > 0;
 
   const higherEstimate = getHitherEstimate(
     mainServiceEstimate.time,
@@ -509,17 +514,25 @@ export const Summary: FC<IProps> = (props: any) => {
             {subSale || Boolean(sale) || Boolean(dayDiscount) ? (
               <>
                 <div className="current-price">
-                  {getPriceWithSaleOrSubSale(price, sale, subSale, dayDiscount)}
+                  {getPriceWithOwnSupplies(
+                    getPriceWithSaleOrSubSale(
+                      price,
+                      sale,
+                      subSale,
+                      dayDiscount
+                    ),
+                    provideOwnSuppliesSelected
+                  )}
                   {t("zl")}
                 </div>
                 <div className="old-price">
-                  {price}
+                  {getPriceWithOwnSupplies(price, provideOwnSuppliesSelected)}
                   {t("zl")}
                 </div>
               </>
             ) : (
               <div className="current-price">
-                {price}
+                {getPriceWithOwnSupplies(price, provideOwnSuppliesSelected)}
                 {t("zl")}
               </div>
             )}
@@ -585,22 +598,25 @@ export const Summary: FC<IProps> = (props: any) => {
           }`}
           onClick={handleScroll}
         >
-          {price === 0 ? (
+          {getPriceWithOwnSupplies(price, provideOwnSuppliesSelected) === 0 ? (
             t("Order")
           ) : subSale || Boolean(sale) || Boolean(dayDiscount) ? (
             <div className="_flex _items-end">
               <div className="current-price _mr-2">
-                {getPriceWithSaleOrSubSale(price, sale, subSale, dayDiscount)}
+                {getPriceWithOwnSupplies(
+                  getPriceWithSaleOrSubSale(price, sale, subSale, dayDiscount),
+                  provideOwnSuppliesSelected
+                )}
                 {t("zl")}
               </div>
               <div className="old-price">
-                {price}
+                {getPriceWithOwnSupplies(price, provideOwnSuppliesSelected)}
                 {t("zl")}
               </div>
             </div>
           ) : (
             <div className="current-price">
-              {price}
+              {getPriceWithOwnSupplies(price, provideOwnSuppliesSelected)}
               {t("zl")}
             </div>
           )}

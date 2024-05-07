@@ -329,7 +329,7 @@ export const getServiceEstimate = (
     },
     0
   );
-  const divider = title === "Dry cleaning" ? 720 : 480;
+  const divider = title === "Dry cleaning" ? 720 : 600;
 
   const subTotal =
     countEstimate + subServiceEstimate + (isPrivateHouse ? 60 : 0);
@@ -382,3 +382,6 @@ export const getServicePriceBasedOnManualCleaners = (
 
   return price + extraPriceRounded;
 };
+
+export const getPriceWithOwnSupplies = (price, provideOwnSuppliesSelected) =>
+  price + (provideOwnSuppliesSelected ? provideOwnSuppliesSelected.price : 0);
