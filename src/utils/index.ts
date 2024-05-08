@@ -32,11 +32,11 @@ export const getDateTimeString = (date: Date) => {
 export const getDateObjectFromString = (string: string) => {
   const dateArray = string.split("/");
 
-  const day = dateArray[0];
-  const month = dateArray[1];
-  const year = dateArray[2];
+  const day = +dateArray[0];
+  const month = +dateArray[1];
+  const year = +dateArray[2];
 
-  return new Date(`${year}-${month}-${day}`);
+  return new Date(year, month - 1, day);
 };
 
 export const capitalizeFirstLetter = (string: string) => {
