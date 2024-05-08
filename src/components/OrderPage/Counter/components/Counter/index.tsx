@@ -10,17 +10,43 @@ interface IProps {
   onChange: (n: number) => void;
   onMinus: () => void;
   onPlus: () => void;
-  t: any;
+  mainService: string;
 }
 
+const NON_ZERO_COUNTER_MAIN_SERVICES = [
+  "Deep",
+  "Move in/out",
+  "After party",
+  "In a last minute",
+  "While sickness",
+  "Airbnb",
+  "Regular",
+  "Subscription",
+  "Eco cleaning",
+];
+
 export const Counter: FC<IProps> = (props) => {
-  const { value, title = "", minValue, onChange, onMinus, onPlus, t } = props;
+  const {
+    value,
+    title = "",
+    minValue,
+    onChange,
+    onMinus,
+    onPlus,
+    mainService,
+  } = props;
   const limit = value === minValue;
+
+  const minimumCounterValue = NON_ZERO_COUNTER_MAIN_SERVICES.includes(
+    mainService
+  )
+    ? 1
+    : 0;
 
   const enterNumbers = ({
     target: { value: updatedValue },
   }: ChangeEvent<HTMLInputElement>) => {
-    onChange(+updatedValue || 0);
+    onChange(+updatedValue || minimumCounterValue);
   };
 
   const countTitle = () => {
