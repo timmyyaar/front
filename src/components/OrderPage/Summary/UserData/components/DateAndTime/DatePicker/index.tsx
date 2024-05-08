@@ -4,7 +4,8 @@ import { ArrowLeft } from "../../icons/ArrowLeft";
 import { ArrowRight } from "../../icons/ArrowRight";
 
 import "./style.scss";
-import {Discount} from "@/components/OrderPage/Summary";
+import { Discount } from "@/components/OrderPage/Summary";
+import { getDateObjectFromString } from "@/utils";
 
 const months = [
   "Январь",
@@ -57,19 +58,14 @@ export const DatePicker = ({ data, setData, t, discounts }: any) => {
   };
 
   const checkDisableDay = (date: string) => {
-    const today = new Date();
-    const currentMonth = today.getMonth() + 1;
-    const formattedMonth =
-      currentMonth < 10 ? `0${currentMonth}` : currentMonth;
-    const currentDate = `${today.getDate()}/${formattedMonth}/${today.getFullYear()}`;
-    const parts1 = currentDate.split("/") as unknown as number[];
-    const parts2 = date.split("/");
-    const d1 = new Date(`${parts1[2]}-${parts1[1]}-${parts1[0] - 1}`);
-    const d2 = new Date(`${parts2[2]}-${parts2[1]}-${parts2[0]}`);
+    const d1 = new Date();
+
+    const d2 = getDateObjectFromString(date);
+
     d1.setHours(0, 0, 0, 0);
     d2.setHours(0, 0, 0, 0);
 
-    return d1 >= d2;
+    return d1 > d2;
   };
 
   const generateCalendar = () => {
@@ -90,7 +86,9 @@ export const DatePicker = ({ data, setData, t, discounts }: any) => {
         month: "2-digit",
       })}/${currentMonth.getFullYear()}`;
 
-      const discount = discounts.find(({ date }: Discount) => date === currentDay)?.value;
+      const discount = discounts.find(
+        ({ date }: Discount) => date === currentDay
+      )?.value;
       const dayCellClassName = currentDay === data ? "selected-day" : "";
       const dayCellDiscountClassName = discount
         ? discount < 0
