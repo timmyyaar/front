@@ -29,6 +29,16 @@ export const getDateTimeString = (date: Date) => {
   return `${day}/${twoDigitsMonth}/${year} ${twoDigitsHours}:${twoDigitsMinutes}`;
 };
 
+export const getDateObjectFromString = (string: string) => {
+  const dateArray = string.split("/");
+
+  const day = +dateArray[0];
+  const month = +dateArray[1];
+  const year = +dateArray[2];
+
+  return new Date(year, month - 1, day);
+};
+
 export const capitalizeFirstLetter = (string: string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };

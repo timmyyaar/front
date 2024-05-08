@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { ArrowLeft } from "../../icons/ArrowLeft";
 import { ArrowRight } from "../../icons/ArrowRight";
@@ -40,6 +40,22 @@ const getIsTimeDisabled = (
 export const TimePicker = ({ time, setTime, t, data }: any) => {
   const [timePage, setTimePage] = useState(1);
   const isTodaySelected = data === getDateString(new Date());
+
+  useEffect(() => {
+    if (time) {
+      const splittedTime = time.split(":");
+
+      const isTimeDisabled = getIsTimeDisabled(
+        +splittedTime[0],
+        +splittedTime[1],
+        isTodaySelected
+      );
+
+      if (isTimeDisabled) {
+        setTime("");
+      }
+    }
+  }, [isTodaySelected]);
 
   const generateTimeOptions = () => {
     const timeOptions = [];

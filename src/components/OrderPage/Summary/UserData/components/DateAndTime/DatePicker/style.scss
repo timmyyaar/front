@@ -94,6 +94,7 @@
 
   .disable-day {
     color: #9e9e9e;
+    pointer-events: none;
 
     &:hover {
       color: #9e9e9e;
