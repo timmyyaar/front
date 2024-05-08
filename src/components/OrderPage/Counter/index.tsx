@@ -104,6 +104,7 @@ export const CounterComponent: FC<IProps> = (props) => {
           {el.type === "counter" ? (
             <>
               <Counter
+                mainService={mainService}
                 value={el.count}
                 minValue={el?.minCount ?? 0}
                 title={el.value!}
@@ -118,7 +119,6 @@ export const CounterComponent: FC<IProps> = (props) => {
 
                   onChangeCounter(updatedCount, i);
                 }}
-                t={t}
               />
             </>
           ) : null}
