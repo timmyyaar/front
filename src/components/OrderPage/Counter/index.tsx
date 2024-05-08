@@ -119,7 +119,6 @@ export const CounterComponent: FC<IProps> = (props) => {
 
                   onChangeCounter(updatedCount, i);
                 }}
-                t={t}
               />
             </>
           ) : null}
