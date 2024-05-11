@@ -23,3 +23,7 @@ export async function getPrices(): Promise<Prices> {
 export async function getPaymentIntent(id: string) {
   return await request({ url: `payment-intent/${id}`, cache: "no-store" });
 }
+
+export async function getBlogs() {
+  return await request({ url: "blogs" });
+}

@@ -14,12 +14,13 @@ const NavigationItems = ({ t }: NavigationItemsProps) => {
     { href: "/subscription", title: "Subscription header" },
     { href: "/career", title: "Career header" },
     { href: "/gift", title: "Gift header" },
+    { href: "#blog", title: "Blog" },
   ];
 
   return navigation.map((navItem) => (
     <div
       className={`navigation-wrapper mobile-none ${
-        pathname === navItem.href ? "navigation-wrapper-active" : ""
+        pathname === navItem?.href ? "navigation-wrapper-active" : ""
       } _flex _flex-col _justify-center`}
       key={navItem.title}
     >
@@ -29,7 +30,7 @@ const NavigationItems = ({ t }: NavigationItemsProps) => {
         }}
         className="_px-4 _py-2 link"
       >
-        <div className="nav-link">{t(navItem.title)}</div>
+        <div className="nav-link text-gradient">{t(navItem.title)}</div>
       </div>
     </div>
   ));
