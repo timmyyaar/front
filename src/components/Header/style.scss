@@ -46,14 +46,14 @@ header {
     }
 
     a {
-      border: 1px solid #f9f9f9;
+      outline: 1px solid #f9f9f9;
     }
   }
 
   .navigation-wrapper:hover .link {
     color: #2b8afc;
     border-radius: 100px;
-    border: 1px solid #c1dbff;
+    outline: 1px solid #c1dbff;
 
     svg {
       path {
