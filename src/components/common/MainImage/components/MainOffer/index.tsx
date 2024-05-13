@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
+import reactStringReplace from "react-string-replace";
+import { FIGURE_BRACKETS_REGEX } from "@/constants";
 
 import { CheckSvg } from "./icons/check-fill";
 import vector from "./icons/vector.svg";
@@ -21,12 +23,14 @@ export const MainOffer: FC<any> = (props) => {
       <div className="vector-wrapper mobile-none">
         <Image src={vector} alt="" />
         <div className="offer-wrapper">
-          <div className="title main-title">
-            <b>{t("Service")}</b>
-          </div>
-          <div className="title sub-title">{t("to suit your")}</div>
-          <div className="title main-title">
-            <b>{t("needs")}</b>
+          <div className="title sub-title _w-max _whitespace-pre-wrap">
+            {reactStringReplace(
+              t("main_page_title"),
+              FIGURE_BRACKETS_REGEX,
+              (match) => (
+                <b className="main-title">{match}</b>
+              )
+            )}
           </div>
           <div className="_mt-5 _flex _gap-5">
             {advantages.map((el) => (

@@ -1,15 +1,6 @@
 import React, { useEffect } from "react";
-import Image from "next/image";
 
-import { Writer } from "@/components/common/Writer";
 import { CloseSvg } from "@/components/common/icons/closeButton";
-
-import window0 from "./images/0.png";
-import window1 from "./images/1.png";
-import window2 from "./images/2.png";
-import window3 from "./images/3.png";
-import window4 from "./images/4.png";
-import window5 from "./images/5.png";
 
 import "./style.scss";
 import DeepCleaningModalContent from "@/components/MainPage/AllServices/Modals/DeepCleaningModalContent";

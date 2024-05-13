@@ -1,6 +1,10 @@
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
-import React from "react";
+import React, { useContext } from "react";
 import { TranslateFunction } from "@/types";
+import { PricesContext } from "@/components/Providers";
+import Costs from "@/components/MainPage/AllServices/Modals/Costs";
+import { ALL_SERVICE } from "@/components/OrderPage/constants";
+import { MAIN_CATEGORIES_URLS } from "@/constants";
 
 const REGULAR_CLEANING_BLOCKS = [
   {
@@ -51,12 +55,50 @@ const REGULAR_CLEANING_BLOCKS = [
 ];
 
 function RegularCleaningModalContent({ t }: { t: TranslateFunction }) {
+  const { prices } = useContext(PricesContext);
+
+  const regularCosts = [
+    {
+      title: "1-bedroom",
+      text: "One-time 1-bedroom cleaning",
+      price: prices.defaultRegular,
+    },
+    {
+      title: "2-bedroom",
+      text: "One-time 2-bedroom cleaning",
+      price: prices.defaultRegular + prices.regularBedroom,
+    },
+    {
+      title: "3-bedroom",
+      text: "One-time 3-bedroom cleaning",
+      price: prices.defaultRegular + prices.regularBedroom * 2,
+    },
+  ];
+
   return (
-    <div className="_grid col-2-mobile-1 _gap-6">
-      {REGULAR_CLEANING_BLOCKS.map(({ title, items }, index) => (
-        <TextBlock key={index} title={title} items={items} t={t} />
-      ))}
-    </div>
+    <>
+      <div className="modal-title-wrapper _text-center">
+        <span className="modal-title-text text-gradient">
+          {t("what_is_included")}
+        </span>
+      </div>
+      <div className="_grid col-2-mobile-1 _gap-6">
+        {REGULAR_CLEANING_BLOCKS.map(({ title, items }, index) => (
+          <TextBlock key={index} title={title} items={items} t={t} />
+        ))}
+      </div>
+      <div className="mt-16-mobile-8">
+        <div className="modal-title-wrapper _text-center">
+          <span className="modal-title-text text-gradient">{t("Prices")}</span>
+        </div>
+        <Costs
+          t={t}
+          redirectPathname={`order/${MAIN_CATEGORIES_URLS.GENERAL}?selectedService=${ALL_SERVICE.REGULAR}`}
+          costs={regularCosts}
+          description="regular_price_description_mobile"
+        />
+      </div>
+    </>
   );
 }
 

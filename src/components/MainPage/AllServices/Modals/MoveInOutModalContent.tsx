@@ -1,9 +1,11 @@
-import { Writer } from "@/components/common/Writer";
 import reactStringReplace from "react-string-replace";
-import { FIGURE_BRACKETS_REGEX } from "@/constants";
+import { FIGURE_BRACKETS_REGEX, MAIN_CATEGORIES_URLS } from "@/constants";
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
-import React from "react";
+import React, { useContext } from "react";
 import { TranslateFunction } from "@/types";
+import { PricesContext } from "@/components/Providers";
+import Costs from "@/components/MainPage/AllServices/Modals/Costs";
+import { ALL_SERVICE } from "@/components/OrderPage/constants";
 
 const MOVE_IN_OUT_CLEANING_BLOCKS = [
   {
@@ -70,21 +72,56 @@ const MOVE_IN_OUT_CLEANING_BLOCKS = [
 ];
 
 function MoveInOutModalContent({ t }: { t: TranslateFunction }) {
+  const { prices } = useContext(PricesContext);
+
+  const generalMoveInOutPrice =
+    prices.defaultMoveInOut +
+    prices.subServiceBalcony * 5 +
+    prices.subServiceOven +
+    prices.subServiceKitchenCabinets +
+    prices.subServiceFridge +
+    prices.subServiceHood +
+    prices.subServiceWardrobe +
+    prices.subServiceMicrowave;
+
+  const moveInOutCosts = [
+    {
+      title: "1-bedroom",
+      text: "deep_price_description",
+      price: generalMoveInOutPrice,
+    },
+    {
+      title: "2-bedroom",
+      text: "deep_price_description",
+      price: generalMoveInOutPrice + prices.moveInOutBedroom,
+    },
+    {
+      title: "3-bedroom",
+      text: "deep_price_description",
+      price: generalMoveInOutPrice + prices.moveInOutBedroom * 2,
+    },
+  ];
+
   return (
-    <div>
-      <div className="wrapper-title-text _mb-20">
-        <div className="wrapper-title text-gradient">
-          <Writer text={t("move_in_out_title")} />
+    <>
+      <div className="_text-center mb-16-mobile-8">
+        <div className="modal-title-wrapper _text-center">
+          <span className="modal-title-text text-gradient">
+            {t("move_in_out_title")}
+          </span>
         </div>
-        <div className="wrapper-text">
-          {reactStringReplace(
-            t("move_in_out_description"),
-            FIGURE_BRACKETS_REGEX,
-            (match) => (
-              <b>{match}</b>
-            )
-          )}
-        </div>
+        {reactStringReplace(
+          t("move_in_out_description"),
+          FIGURE_BRACKETS_REGEX,
+          (match) => (
+            <b>{match}</b>
+          )
+        )}
+      </div>
+      <div className="modal-title-wrapper _text-center">
+        <span className="modal-title-text text-gradient">
+          {t("what_is_included")}
+        </span>
       </div>
       <div className="_grid col-2-mobile-1 _gap-6">
         {MOVE_IN_OUT_CLEANING_BLOCKS.map(({ title, items }, index) => (
@@ -97,7 +134,18 @@ function MoveInOutModalContent({ t }: { t: TranslateFunction }) {
           />
         ))}
       </div>
-    </div>
+      <div className="mt-16-mobile-8">
+        <div className="modal-title-wrapper _text-center">
+          <span className="modal-title-text text-gradient">{t("Prices")}</span>
+        </div>
+        <Costs
+          t={t}
+          redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.MOVE_IN_OUT}`}
+          costs={moveInOutCosts}
+          description="deep_price_description"
+        />
+      </div>
+    </>
   );
 }
 
