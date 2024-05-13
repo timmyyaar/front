@@ -42,3 +42,6 @@ export const getDateObjectFromString = (string: string) => {
 export const capitalizeFirstLetter = (string: string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
+
+export const getOneDigitFloat = (number: number) =>
+  Number(parseFloat(number.toFixed(1)));
