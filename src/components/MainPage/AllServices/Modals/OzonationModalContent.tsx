@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useContext } from "react";
 import { Writer } from "@/components/common/Writer";
 import { TranslateFunction } from "@/types";

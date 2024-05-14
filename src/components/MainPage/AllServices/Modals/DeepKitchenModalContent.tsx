@@ -1,3 +1,5 @@
+"use client";
+
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
 import React, { useContext } from "react";
 import reactStringReplace from "react-string-replace";

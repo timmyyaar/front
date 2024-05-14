@@ -1,7 +1,7 @@
 import React from "react";
 
 interface LogoIconProps {
-  className: string;
+  className?: string;
 }
 
 export const LogoIcon = ({ className }: LogoIconProps) => (

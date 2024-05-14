@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useContext } from "react";
 import reactStringReplace from "react-string-replace";
 import { FIGURE_BRACKETS_REGEX, MAIN_CATEGORIES_URLS } from "@/constants";

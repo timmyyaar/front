@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useContext } from "react";
 import { TranslateFunction } from "@/types";
 import { PricesContext } from "@/components/Providers";
