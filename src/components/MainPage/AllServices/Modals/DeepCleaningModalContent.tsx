@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useContext } from "react";
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
 import { TranslateFunction } from "@/types";

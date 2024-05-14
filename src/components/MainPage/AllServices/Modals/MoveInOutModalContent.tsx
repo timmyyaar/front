@@ -1,3 +1,5 @@
+"use client";
+
 import reactStringReplace from "react-string-replace";
 import { FIGURE_BRACKETS_REGEX, MAIN_CATEGORIES_URLS } from "@/constants";
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";

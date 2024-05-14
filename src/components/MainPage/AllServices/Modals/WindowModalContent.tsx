@@ -1,3 +1,5 @@
+"use client";
+
 import { Writer } from "@/components/common/Writer";
 import window0 from "@/components/MainPage/AllServices/Modals/images/0.png";
 import window1 from "@/components/MainPage/AllServices/Modals/images/1.png";

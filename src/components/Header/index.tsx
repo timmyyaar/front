@@ -1,6 +1,5 @@
 "use client";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { useRouter, usePathname, useParams } from "next/navigation";
 import Cookies from "js-cookie";
 
@@ -13,13 +12,14 @@ import MenuIcon from "@/components/Header/icons/MenuIcon";
 import NavigationItems from "@/components/Header/NavigrationItems";
 import { LocaleContext } from "@/components/Providers";
 
-import { LogoIcon } from "./icons/Logo";
+import { LogoIcon } from "../common/icons/components/Logo";
 import { Polygon } from "./icons/Polygon";
 
-import "./style.scss";
 import NavigationItemsMobile from "@/components/Header/NavigationItemsMobile";
 import { sendGAEvent } from "@/google-analytics";
 import { useClickOutside } from "@/hooks/useClickOutSide";
+
+import "./style.scss";
 
 const mainLocales = {
   en: "English",

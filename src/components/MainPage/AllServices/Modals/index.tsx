@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect } from "react";
 
 import { CloseSvg } from "@/components/common/icons/closeButton";
