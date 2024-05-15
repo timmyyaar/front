@@ -106,15 +106,15 @@ export const Costs = (props: any) => {
             <div className="sales-list _flex _flex-col _justify-center">
               {sales.map((el) => (
                 <div
-                  className={`
-                    sale-item
-                    ${el.title === salesCost ? " active " : " "}
-                    _flex _justify-between _items-center _cursor-pointer
-                  `}
+                  className={`sale-item _flex _justify-between _items-center _cursor-pointer ${
+                    el.title === salesCost ? " active " : ""
+                  }`}
                   onClick={() => setSalesCost(el.title)}
                   key={el.title}
                 >
-                  <div className="title _flex _items-center">{t(el.title)}</div>
+                  <div className="title _flex _items-center _whitespace-nowrap _mr-1">
+                    {t(el.title)}
+                  </div>
                   <div className="sale _flex _items-center">{el.sale}</div>
                 </div>
               ))}
@@ -140,29 +140,31 @@ export const Costs = (props: any) => {
               <div className="costs-item _flex _flex-col" key={el.title}>
                 <div className="title">{t(el.title)}</div>
                 <div className="text _whitespace-pre-wrap">{t(el.text)}</div>
-                <div className="_flex _justify-center">
-                  <div className="coast">
-                    {el.coast}
-                    {t("zl")}
-                  </div>
-                  {el.oldCoast ? (
-                    <div className="old-coast _flex _flex-col _justify-center">
-                      {el.oldCoast}
+                <div className="_mt-auto">
+                  <div className="_flex _justify-center">
+                    <div className="coast">
+                      {el.coast}
                       {t("zl")}
                     </div>
-                  ) : null}
-                </div>
-                <div
-                  className="button _cursor-pointer"
-                  onClick={() => {
-                    router.push(
-                      `${pathname}/${
-                        tab === TABS.SUBSCRIPTION ? "subscription" : "order"
-                      }`
-                    );
-                  }}
-                >
-                  {t("Order")}
+                    {el.oldCoast ? (
+                      <div className="old-coast _flex _flex-col _justify-center">
+                        {el.oldCoast}
+                        {t("zl")}
+                      </div>
+                    ) : null}
+                  </div>
+                  <div
+                    className="button _cursor-pointer"
+                    onClick={() => {
+                      router.push(
+                        `${pathname}/${
+                          tab === TABS.SUBSCRIPTION ? "subscription" : "order"
+                        }`
+                      );
+                    }}
+                  >
+                    {t("Order")}
+                  </div>
                 </div>
               </div>
             ))}

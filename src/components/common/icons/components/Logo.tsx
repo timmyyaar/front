@@ -34,8 +34,8 @@ export const LogoIcon = ({ className }: LogoIconProps) => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(18.5 33) rotate(90) scale(33 17.5)"
       >
-        <stop stop-color="#19286D" />
-        <stop offset="1" stop-color="#214AFF" />
+        <stop stopColor="#19286D" />
+        <stop offset="1" stopColor="#214AFF" />
       </radialGradient>
       <radialGradient
         id="paint1_radial_11916_93919"
@@ -45,8 +45,8 @@ export const LogoIcon = ({ className }: LogoIconProps) => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(72.8359 33) rotate(90) scale(33 17.5)"
       >
-        <stop stop-color="#19286D" />
-        <stop offset="1" stop-color="#214AFF" />
+        <stop stopColor="#19286D" />
+        <stop offset="1" stopColor="#214AFF" />
       </radialGradient>
       <radialGradient
         id="paint2_radial_11916_93919"
@@ -56,8 +56,8 @@ export const LogoIcon = ({ className }: LogoIconProps) => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(45 32.2227) rotate(-90) scale(33 19)"
       >
-        <stop stop-color="#19286D" />
-        <stop offset="1" stop-color="#214AFF" />
+        <stop stopColor="#19286D" />
+        <stop offset="1" stopColor="#214AFF" />
       </radialGradient>
     </defs>
   </svg>
