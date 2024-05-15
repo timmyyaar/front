@@ -55,6 +55,7 @@ const NavigationItemsMobile = ({
                   setIsMenuOpened(false);
                 } else {
                   router.push(`/${lang}${navItem.href}`);
+                  setIsMenuOpened(false);
                 }
               }}
             >

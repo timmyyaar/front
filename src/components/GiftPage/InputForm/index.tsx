@@ -11,46 +11,18 @@ import {
   DEFAULT_COUNTRY,
 } from "@/components/common/PhoneInput/constants";
 import PhoneInput from "@/components/common/PhoneInput";
+import { createGift } from "@/components/GiftPage/InputForm/actions";
 
 export const InputForm = ({ t }: any) => {
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [comment, setComment] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [comment, setComment] = useState<string>("");
   const [isSendLoading, setIsSendLoading] = useState<boolean>(false);
   const [phoneCountry, setPhoneCountry] = useState<Country>(DEFAULT_COUNTRY!);
+  const [giftError, setGiftError] = useState<boolean>(false);
 
   const [modal, setModal] = useState(false);
   const ref = useClickOutside(() => setModal(false));
-
-  const onSend = async () => {
-    try {
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + "/api/gift",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          cache: "no-store",
-          body: JSON.stringify({
-            email,
-            phone: `+${phoneCountry.phoneCode}${phone}`,
-            comment,
-          }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (data.gift.id) {
-        setModal(true);
-      }
-
-      setEmail("");
-      setPhone("");
-      setComment("");
-    } finally {
-      setIsSendLoading(false);
-    }
-  };
 
   const isEmailValid = EMAIL_REGEX.test(email);
   const isPhoneValid = POSITIVE_NUMBER_EMPTY_REGEX.test(phone);
@@ -59,13 +31,43 @@ export const InputForm = ({ t }: any) => {
     (email && !isEmailValid) ||
     (isPhoneValid && !isPhoneValid);
 
+  const onSend = async () => {
+    if (isSendGiftButtonDisabled) {
+      return;
+    }
+
+    try {
+      setIsSendLoading(true);
+      setGiftError(false);
+
+      const response = await createGift({
+        email,
+        phone: `+${phoneCountry.phoneCode}${phone}`,
+        comment,
+      });
+
+      if (response.isError) {
+        setGiftError(true);
+
+        return;
+      }
+
+      setModal(true);
+      setEmail("");
+      setPhone("");
+      setComment("");
+    } finally {
+      setIsSendLoading(false);
+    }
+  };
+
   return (
     <div className="input-form-component">
       <Overlay active={modal}>
         <div ref={ref}>
           <ModalRequest
-            text={t("gift_page_modal_title")}
-            title={t("gift_page_modal_text")}
+            text={t("gift_page_modal_text")}
+            title={t("order_page_modal_text")}
             onClose={() => setModal(false)}
           />
         </div>
@@ -95,21 +97,22 @@ export const InputForm = ({ t }: any) => {
           />
         </div>
       </div>
-      <div className="_mb-6 _flex _flex-col _gap-3">
+      <div className="_mb-4">
         <div
           className={`button-wrapper ${
             isSendGiftButtonDisabled || isSendLoading
               ? "order-wrapper-disabled"
               : ""
           } ${isSendLoading ? "loading" : ""}`}
-          onClick={() => {
-            if (!isSendGiftButtonDisabled) {
-              onSend();
-            }
-          }}
+          onClick={onSend}
         >
           {t("send")}
         </div>
+        {giftError && (
+          <div className="text-center _mt-2 text-danger _text-center">
+            {t("unexpected_error")}
+          </div>
+        )}
       </div>
     </div>
   );

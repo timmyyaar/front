@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { FC, useState, useEffect, useRef, useContext } from "react";
 
@@ -36,6 +36,23 @@ import { getDateTimeString } from "@/utils";
 import { Counter } from "@/types";
 import OrderButton from "@/components/OrderPage/Summary/OrderButton";
 
+export interface OrderAddress {
+  street: string;
+  house: string;
+  apartment: string;
+  postcode: string;
+  entrance: string;
+  doorPhone: string;
+  more: string;
+  city: City;
+}
+
+export type Discount = {
+  id: number;
+  date: string;
+  value: number;
+};
+
 interface IProps {
   title: string;
   counter: Counter[];
@@ -54,6 +71,7 @@ interface IProps {
   t: any;
   isPrivateHouse?: boolean;
   ownCheckList?: boolean;
+  discounts: Discount[];
 }
 
 function ScrollDetector() {
@@ -83,23 +101,6 @@ function ScrollDetector() {
   return [scrolledToElement, targetElementRef];
 }
 
-export interface OrderAddress {
-  street: string;
-  house: string;
-  apartment: string;
-  postcode: string;
-  entrance: string;
-  doorPhone: string;
-  more: string;
-  city: City;
-}
-
-export type Discount = {
-  id: number;
-  date: string;
-  value: number;
-};
-
 export const Summary: FC<IProps> = (props: any) => {
   const {
     title,
@@ -114,29 +115,30 @@ export const Summary: FC<IProps> = (props: any) => {
     t,
     isPrivateHouse,
     ownCheckList,
+    discounts,
   } = props;
   const { locale } = useContext(LocaleContext);
   const { prices } = useContext(PricesContext);
   const { lang } = useParams();
-  const [sale, setSale] = useState(0);
+  const [sale, setSale] = useState<number>(0);
   const [promoInputValue, setPromoInputValue] = useState<string>("");
-  const [promo, setPromo] = useState("");
+  const [promo, setPromo] = useState<string>("");
   const [promoStatus, setPromoStatus] = useState<string>("");
-  const [order, setOrder] = useState(false);
+  const [order, setOrder] = useState<boolean>(false);
   const [scrolledToElement, targetElementRef] = ScrollDetector();
 
-  const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
+  const [name, setName] = useState<string>("");
+  const [number, setNumber] = useState<string>("");
   const [phoneCountry, setPhoneCountry] = useState<Country>(DEFAULT_COUNTRY!);
-  const [email, setEmail] = useState("");
-  const [totalDate, setTotalDate] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [totalDate, setTotalDate] = useState<string>("");
 
-  const [onlinePayment, setOnlinePayment] = useState(false);
+  const [onlinePayment, setOnlinePayment] = useState<boolean>(false);
 
-  const [previousCleaner, setPreviousCleaner] = useState(false);
-  const [privacyAndPolicy, setPrivacyAndPolicy] = useState(false);
-  const [personalData, setPersonalData] = useState(false);
-  const [isOrderLoading, setIsOrderLoading] = useState(false);
+  const [previousCleaner, setPreviousCleaner] = useState<boolean>(false);
+  const [privacyAndPolicy, setPrivacyAndPolicy] = useState<boolean>(false);
+  const [personalData, setPersonalData] = useState<boolean>(false);
+  const [isOrderLoading, setIsOrderLoading] = useState<boolean>(false);
 
   const [addressObject, setAddressObject] = useState<OrderAddress>({
     street: "",
@@ -163,7 +165,6 @@ export const Summary: FC<IProps> = (props: any) => {
   const router = useRouter();
 
   const [successModal, setSuccessModal] = useState(false);
-  const [discounts, setDiscounts] = useState<Discount[]>([]);
   const [showPromoErrorModal, setShowPromoErrorModal] =
     useState<boolean>(false);
   const [mainServiceManualCleanersCount, setMainServiceManualCleanersCount] =
@@ -175,7 +176,8 @@ export const Summary: FC<IProps> = (props: any) => {
   const orderButtonRef = useRef<HTMLDivElement | null>(null);
 
   const dayDiscount =
-    discounts.find(({ date }) => date === totalDate?.split(" ")[0])?.value || 0;
+    discounts.find(({ date }: Discount) => date === totalDate?.split(" ")[0])
+      ?.value || 0;
 
   const onCloseModal = () => {
     setSuccessModal(false);
@@ -193,28 +195,6 @@ export const Summary: FC<IProps> = (props: any) => {
 
   const ref = useClickOutside(() => onCloseModal());
   const promoModalRef = useClickOutside(() => onCleanPromoData());
-
-  const getDiscounts = async () => {
-    try {
-      const discountsResponse = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + "/api/discounts"
-      );
-
-      if (!discountsResponse.ok) {
-        setDiscounts([]);
-      } else {
-        const parsedDiscounts = (await discountsResponse.json()) as Discount[];
-
-        setDiscounts(parsedDiscounts);
-      }
-    } catch (error) {
-      setDiscounts([]);
-    }
-  };
-
-  useEffect(() => {
-    getDiscounts();
-  }, []);
 
   const onRemoveSubService = (title: string, isSecond?: boolean) => {
     const setSubServiceFunction = isSecond ? setSecSubService : setSubService;

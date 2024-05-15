@@ -23,8 +23,13 @@ import {
   SelectedSubService,
 } from "@/components/OrderPage/SubServicesList/utils";
 import { sendGAEvent } from "@/google-analytics";
+import { Discount } from "@/components/OrderPage/Summary";
 
-export const OrderPage = () => {
+interface OrderPageProps {
+  discounts: Discount[];
+}
+
+export const OrderPage = ({ discounts }: OrderPageProps) => {
   const { locales } = useContext(LocaleContext);
   const i18n = useLocales(locales);
   const { prices } = useContext(PricesContext);
@@ -189,6 +194,7 @@ export const OrderPage = () => {
               t={i18n.t}
               isPrivateHouse={isPrivateHouse}
               ownCheckList={ownCheckList}
+              discounts={discounts}
             />
           </div>
         </div>

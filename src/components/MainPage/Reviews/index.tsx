@@ -1,10 +1,9 @@
 import "./style.scss";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import ReviewItem from "./ReviewItem";
 import SliderInfinite from "@/components/common/Slider/SliderInfinite";
 import Swiper from "@/components/common/Swiper";
 import { Review } from "@/components/MainPage/Reviews/types";
-import { fetchReviews } from "./action";
 
 const GOOGLE_REVIEW_REDIRECT_LINK = "https://g.page/r/CW4tBwhrljwjEBI/review";
 
@@ -13,21 +12,10 @@ const LEAVE_YOUR_REVIEW_KEY = "leave_your_review";
 
 interface Props {
   t: (text: string) => string;
+  reviews: Review[];
 }
 
-const Reviews = ({ t }: Props) => {
-  const [reviews, setReviews] = useState<Review[]>([]);
-
-  const getReviews = async () => {
-    const reviewsResponse = await fetchReviews();
-
-    setReviews(reviewsResponse);
-  };
-
-  useEffect(() => {
-    getReviews();
-  }, []);
-
+const Reviews = ({ t, reviews }: Props) => {
   const visibleReviews = useMemo(
     () => reviews.filter(({ visible }) => visible),
     [reviews]
