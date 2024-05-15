@@ -14,6 +14,7 @@ import { ModalRequest } from "@/components/common/ModalRequest";
 import { Overlay } from "@/components/common/Overlay";
 import { useClickOutside } from "@/hooks/useClickOutSide";
 import { sendGAEvent } from "@/google-analytics";
+import { sendFeedback } from "@/components/Feedback/FeedbackItem/actions";
 
 const icons = [
   { image: crySvg, rating: 1 },
@@ -47,37 +48,32 @@ function FeedbackItem({
   const [isFeedbackError, setIsFeedbackError] = useState<boolean>(false);
   const errorRef = useClickOutside(() => setIsFeedbackError(false));
 
-  const sendFeedback = async () => {
+  const onSendFeedback = async () => {
     try {
       setIsSubmitLoading(true);
 
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + `/api/order/${id}/send-feedback`,
-        {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            feedback: feedback || "-",
-            rating: selectedRating,
-          }),
-        }
-      );
+      const sendFeedbackResponse = await sendFeedback(id, {
+        feedback: feedback || "-",
+        rating: selectedRating,
+      });
 
-      if (response.ok) {
-        setWasSubmitted(true);
-        setFinishedRating((prev: any) => ({ ...prev, [id]: selectedRating }));
-
-        sendGAEvent({
-          action: "send_feedback",
-          category: "feedback",
-          label: "Feedback has been sent",
-          value: `Order id: ${id}, Feedback: ${
-            feedback || "-"
-          }, Rating: ${selectedRating}`,
-        });
-      } else {
+      if (sendFeedbackResponse.isError) {
         setIsFeedbackError(true);
+
+        return;
       }
+
+      setWasSubmitted(true);
+      setFinishedRating((prev: any) => ({ ...prev, [id]: selectedRating }));
+
+      sendGAEvent({
+        action: "send_feedback",
+        category: "feedback",
+        label: "Feedback has been sent",
+        value: `Order id: ${id}, Feedback: ${
+          feedback || "-"
+        }, Rating: ${selectedRating}`,
+      });
     } finally {
       setIsSubmitLoading(false);
     }
@@ -137,7 +133,7 @@ function FeedbackItem({
         disabled={
           !selectedRating || isSubmitLoading || wasSubmitted || isOrdersLoading
         }
-        onClick={sendFeedback}
+        onClick={onSendFeedback}
       >
         {t("submit")}
       </button>

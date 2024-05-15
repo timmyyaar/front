@@ -1,7 +1,47 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import OnlinePaymentModal from "@/components/OrderPage/Summary/OrderButton/OnlinePaymentModal";
-import request, { HTTP_METHODS } from "@/utils/request";
 import { sendGAEvent } from "@/google-analytics";
+import {
+  createOrder,
+  createPaymentIntent,
+  deletePaymentIntent,
+} from "@/components/OrderPage/Summary/OrderButton/actions";
+
+export type CreateOrderPayload = {
+  name: string;
+  number: string;
+  email: string;
+  address: string;
+  date: string;
+  onlinePayment: boolean;
+  requestPreviousCleaner: boolean;
+  personalData: boolean;
+  mainServicePrice: number;
+  secondServicePrice: number;
+  price: number;
+  mainServicePriceOriginal: number;
+  secondServicePriceOriginal: number;
+  priceOriginal: number;
+  promo: string;
+  mainServiceEstimate: string;
+  mainServiceCleanersCount: number;
+  mainServiceManualCleanersCount: number;
+  secondServiceEstimate: string;
+  secondServiceCleanersCount: number;
+  secondServiceManualCleanersCount: number;
+  additionalInformation: string;
+  city: string;
+  transportationPrice: number;
+  language: string;
+  creationDate: string;
+  ownCheckList: boolean;
+  title: string;
+  counter: string;
+  subService: string;
+  secTitle?: string;
+  secCounter?: string;
+  secSubService?: string;
+};
 
 interface OrderButtonProps {
   payload: any;
@@ -24,10 +64,13 @@ function OrderButton({
   setIsLoading,
   t,
 }: OrderButtonProps) {
-  const [showOnlinePaymentModal, setShowOnlinePaymentModal] = useState(false);
-  const [clientSecret, setClientSecret] = useState("");
-  const [isClientSecretLoading, setIsClientSecretLoading] = useState(false);
-  const [paymentIntentId, setPaymentIntentId] = useState(null);
+  const [showOnlinePaymentModal, setShowOnlinePaymentModal] =
+    useState<boolean>(false);
+  const [clientSecret, setClientSecret] = useState<string>("");
+  const [isClientSecretLoading, setIsClientSecretLoading] =
+    useState<boolean>(false);
+  const [paymentIntentId, setPaymentIntentId] = useState<string>("");
+  const [orderError, setOrderError] = useState<boolean>(false);
 
   const trackSuccessOrder = (response: { id: number | number[] }) => {
     sendGAEvent({
@@ -42,75 +85,85 @@ function OrderButton({
     });
   };
 
-  const createPaymentIntent = async () => {
+  const onCreatePaymentIntent = async () => {
     try {
       setIsClientSecretLoading(true);
+      setOrderError(false);
 
-      const intentResponse = await request({
-        url: "payment-intent",
-        method: HTTP_METHODS.POST,
-        body: { price: payload.price, email: payload.email },
+      const intentResponse = await createPaymentIntent({
+        price: payload.price,
+        email: payload.email,
       });
+
+      if (intentResponse.isError) {
+        setOrderError(true);
+
+        return;
+      }
 
       setPaymentIntentId(intentResponse.id);
       setClientSecret(intentResponse.clientSecret as string);
       setShowOnlinePaymentModal(true);
-    } catch (error) {
     } finally {
       setIsClientSecretLoading(false);
     }
   };
 
   const onPaymentModalClose = async () => {
-    await request({
-      url: `payment-intent/${paymentIntentId}`,
-      method: HTTP_METHODS.DELETE,
-    });
+    await deletePaymentIntent(paymentIntentId);
 
     setShowOnlinePaymentModal(false);
     setClientSecret("");
   };
 
-  const orderButtonClassName = `order-wrapper _mt-6 _cursor-pointer ${
+  const orderButtonClassName = `order-wrapper _cursor-pointer ${
     isDisabled || isClientSecretLoading ? "order-wrapper-disabled" : ""
   } ${isLoading || isClientSecretLoading ? "loading" : ""}`;
 
   return (
     <>
-      <div
-        className={orderButtonClassName}
-        onClick={async () => {
-          if (isDisabled) {
-            return;
-          }
-
-          if (payload.onlinePayment) {
-            await createPaymentIntent();
-          } else {
-            try {
-              setIsLoading(true);
-
-              const orderResponse = await request({
-                url: "order",
-                method: HTTP_METHODS.POST,
-                body: payload,
-              });
-
-              trackSuccessOrder(orderResponse as { id: number | number[] });
-              setShowSuccessModal(true);
-            } catch (error: any) {
-              if (error.code === 409) {
-                setShowPromoErrorModal(true);
-              }
-            } finally {
-              setIsLoading(false);
+      <div className="_mt-6">
+        <div
+          className={orderButtonClassName}
+          onClick={async () => {
+            if (isDisabled) {
+              return;
             }
-          }
-        }}
-      >
-        {t("Order")}
+
+            if (payload.onlinePayment) {
+              await onCreatePaymentIntent();
+            } else {
+              try {
+                setIsLoading(true);
+                setOrderError(false);
+
+                const orderResponse = await createOrder(payload);
+
+                if (orderResponse.isError) {
+                  if (orderResponse.code === 409) {
+                    setShowPromoErrorModal(true);
+                  } else {
+                    setOrderError(true);
+                  }
+                } else {
+                  trackSuccessOrder(orderResponse as { id: number | number[] });
+                  setShowSuccessModal(true);
+                }
+              } finally {
+                setIsLoading(false);
+              }
+            }
+          }}
+        >
+          {t("Order")}
+        </div>
+        {orderError && (
+          <div className="text-center _mt-2 text-danger _text-center">
+            {t("unexpected_error")}
+          </div>
+        )}
       </div>
-      {clientSecret && showOnlinePaymentModal && paymentIntentId && (
+      {clientSecret && showOnlinePaymentModal && Boolean(paymentIntentId) && (
         <OnlinePaymentModal
           clientSecret={clientSecret}
           paymentIntentId={paymentIntentId}

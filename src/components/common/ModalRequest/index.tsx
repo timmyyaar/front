@@ -1,9 +1,8 @@
 import React from "react";
-import Image from "next/image";
 
 import { CloseSvg } from "@/components/common/icons/closeButton";
+import LogoBig from "@/components/common/icons/components/LogoBig";
 
-import img from "./Frame 1262.png";
 import "./style.scss";
 
 interface Props {
@@ -11,6 +10,7 @@ interface Props {
   text?: JSX.Element;
   onClose: any;
   showLogo?: boolean;
+  showLogoTitle?: boolean;
 }
 
 export const ModalRequest: React.FC<Props> = ({
@@ -18,13 +18,27 @@ export const ModalRequest: React.FC<Props> = ({
   text = "",
   onClose,
   showLogo = true,
+  showLogoTitle = true,
 }) => (
   <div className="modal-request-wrapper">
     <div className="icon-wrapper-modal" onClick={onClose}>
       <CloseSvg />
     </div>
-    {title && <div className="title">{title}</div>}
-    {showLogo && <Image src={img} alt="" />}
-    <div className="text">{text}</div>
+    {title && (
+      <div className="title">
+        <span className="text-gradient">{title}</span>
+      </div>
+    )}
+    {showLogo && (
+      <div className="_flex _flex-col _items-center">
+        <LogoBig className="logo-icon" />
+        {showLogoTitle && (
+          <div className="_text-center logo-title _mt-1">
+            <span className="text-gradient">Take Your Time</span>
+          </div>
+        )}
+      </div>
+    )}
+    <div className="_text-center _whitespace-pre">{text}</div>
   </div>
 );
