@@ -41,7 +41,7 @@ export const Footer = (props: any) => {
           target="_blank"
           onClick={() => trackSocialMediaClick("Telegram")}
         >
-          <TelegramIcon />
+          <TelegramIcon isTransparent />
         </a>
         <a
           className="icon"
@@ -49,7 +49,7 @@ export const Footer = (props: any) => {
           target="_blank"
           onClick={() => trackSocialMediaClick("WhatsApp")}
         >
-          <WhatsappIcon />
+          <WhatsappIcon isTransparent />
         </a>
         <a
           className="icon"
@@ -57,7 +57,7 @@ export const Footer = (props: any) => {
           target="_blank"
           onClick={() => trackSocialMediaClick("Instagram")}
         >
-          <InstIcon />
+          <InstIcon isTransparent />
         </a>
         <a
           className="icon"
@@ -65,22 +65,22 @@ export const Footer = (props: any) => {
           target="_blank"
           onClick={() => trackSocialMediaClick("Google")}
         >
-          <GoogleIcon />
+          <GoogleIcon isTransparent />
         </a>
       </div>
       <div className="_flex _justify-center">
         <div className="contacts-wrapper _flex _justify-between _gap-3">
           <div className="_flex _gap-1">
-            <PhoneIcon />
-            <span className="text-gradient">+48 730 003 997</span>
+            <PhoneIcon isTransparent />
+            +48 730 003 997
           </div>
         </div>
       </div>
       <div className="_flex _justify-center">
         <div className="contacts-wrapper _flex _justify-between _gap-3">
           <div className="_flex _gap-1 _items-center">
-            <MailIcon />
-            <span className="text-gradient">Mail: tytimeinbox@gmail.com</span>
+            <MailIcon isTransparent />
+            Mail: tytimeinbox@gmail.com
           </div>
         </div>
       </div>
@@ -92,14 +92,12 @@ export const Footer = (props: any) => {
           <a
             href="/Polityka_prywatności.pdf"
             target="_blank"
-            className="text-gradient"
           >
             <Writer text={t("Privacy and policy")} />
           </a>
           <a
             href="/Warunki_i_postanowienia.pdf"
             target="_blank"
-            className="text-gradient"
           >
             <Writer text={t("Terms and conditions")} />
           </a>

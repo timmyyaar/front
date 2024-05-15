@@ -23,7 +23,8 @@ function Costs({ costs, t, redirectPathname, isSubscription }: CostsProps) {
 
   const isSingleItem = costs.length === 1;
 
-  const costsOptions = isSubscription && !Array.isArray(costs) ? costs[salesCost] : costs;
+  const costsOptions =
+    isSubscription && !Array.isArray(costs) ? costs[salesCost] : costs;
 
   return (
     <div className="_p-7 main-cost-wrapper _flex _rounded-3xl">
@@ -69,7 +70,11 @@ function Costs({ costs, t, redirectPathname, isSubscription }: CostsProps) {
           </>
         </div>
       )}
-      <div className={`_flex _gap-8 ${isSingleItem ? "_w-1/2" : "_w-full"}`}>
+      <div
+        className={`_grid _content-center grid-template-rows-1-max _gap-8 ${
+          isSingleItem ? "_w-1/2 _grid-cols-1" : "_w-full _grid-cols-3"
+        }`}
+      >
         {(costsOptions as Cost[]).map(
           ({ title, text, price, oldPrice }: Cost, index: number) => (
             <div
@@ -86,28 +91,30 @@ function Costs({ costs, t, redirectPathname, isSubscription }: CostsProps) {
                   {typeof text === "object" ? text : t(text as string)}
                 </div>
               )}
-              <div className="_flex _items-center">
-                {Boolean(price) && (
-                  <div className="cost-price _text-center">
-                    {price}
-                    {t("zl")}
-                  </div>
-                )}
-                {Boolean(oldPrice) && (
-                  <div className="old-cost-price text-secondary _ml-2">
-                    {oldPrice}
-                    {t("zl")}
-                  </div>
-                )}
+              <div className="_flex _flex-col _gap-4 _w-full _items-center _mt-auto">
+                <div className="_flex _items-center">
+                  {Boolean(price) && (
+                    <div className="cost-price _text-center">
+                      {price}
+                      {t("zl")}
+                    </div>
+                  )}
+                  {Boolean(oldPrice) && (
+                    <div className="old-cost-price text-secondary _ml-2">
+                      {oldPrice}
+                      {t("zl")}
+                    </div>
+                  )}
+                </div>
+                <button
+                  className="cost-order-button _cursor-pointer _w-full"
+                  onClick={() => {
+                    router.push(`${pathname}/${redirectPathname}`);
+                  }}
+                >
+                  {t("Order")}
+                </button>
               </div>
-              <button
-                className="cost-order-button _cursor-pointer _w-full"
-                onClick={() => {
-                  router.push(`${pathname}/${redirectPathname}`);
-                }}
-              >
-                {t("Order")}
-              </button>
             </div>
           )
         )}
