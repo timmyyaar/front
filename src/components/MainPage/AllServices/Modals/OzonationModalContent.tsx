@@ -6,7 +6,7 @@ import { TranslateFunction } from "@/types";
 import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { PricesContext } from "@/components/Providers";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
-import {MAIN_CATEGORIES_URLS} from "@/constants";
+import { MAIN_CATEGORIES_URLS } from "@/constants";
 
 const OZONATION_BLOCKS = [
   {
@@ -29,7 +29,13 @@ const OZONATION_BLOCKS = [
   { title: "ventilation", description: "ventilation_description" },
 ];
 
-function OzonationModalContent({ t }: { t: TranslateFunction }) {
+function OzonationModalContent({
+  t,
+  isOrder,
+}: {
+  t: TranslateFunction;
+  isOrder?: boolean;
+}) {
   const { prices } = useContext(PricesContext);
 
   const ozonationCosts = [
@@ -120,16 +126,20 @@ function OzonationModalContent({ t }: { t: TranslateFunction }) {
       <div className="reminder_text mobile-none">
         {t("ozonation_reminder_text")}
       </div>
-      <div className="mt-16-mobile-8">
-        <div className="modal-title-wrapper _text-center">
-          <span className="modal-title-text text-gradient">{t("Prices")}</span>
+      {!isOrder && (
+        <div className="mt-16-mobile-8">
+          <div className="modal-title-wrapper _text-center">
+            <span className="modal-title-text text-gradient">
+              {t("Prices")}
+            </span>
+          </div>
+          <Costs
+            t={t}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.HEALTHCARE}?selectedService=${ALL_SERVICE.OZONATION}`}
+            costs={ozonationCosts}
+          />
         </div>
-        <Costs
-          t={t}
-          redirectPathname={`order/${MAIN_CATEGORIES_URLS.HEALTHCARE}?selectedService=${ALL_SERVICE.OZONATION}`}
-          costs={ozonationCosts}
-        />
-      </div>
+      )}
     </>
   );
 }

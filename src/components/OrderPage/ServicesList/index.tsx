@@ -30,10 +30,11 @@ export const ServicesList: FC<IProps> = (props) => {
             title={serviceModal}
             onClose={() => setServiceModal("")}
             t={t}
+            isOrder
           />
         </div>
       </Overlay>
-      <div className="_grid _grid-cols-3">
+      <div className="_grid _grid-cols-3 _auto-rows-fr">
         {SERVICES[mainCategory].map((el, i) => (
           <div
             className={`service-wrapper ${

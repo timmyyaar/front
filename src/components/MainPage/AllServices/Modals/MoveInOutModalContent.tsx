@@ -73,7 +73,13 @@ const MOVE_IN_OUT_CLEANING_BLOCKS = [
   },
 ];
 
-function MoveInOutModalContent({ t }: { t: TranslateFunction }) {
+function MoveInOutModalContent({
+  t,
+  isOrder,
+}: {
+  t: TranslateFunction;
+  isOrder?: boolean;
+}) {
   const { prices } = useContext(PricesContext);
 
   const generalMoveInOutPrice =
@@ -136,17 +142,21 @@ function MoveInOutModalContent({ t }: { t: TranslateFunction }) {
           />
         ))}
       </div>
-      <div className="mt-16-mobile-8">
-        <div className="modal-title-wrapper _text-center">
-          <span className="modal-title-text text-gradient">{t("Prices")}</span>
+      {!isOrder && (
+        <div className="mt-16-mobile-8">
+          <div className="modal-title-wrapper _text-center">
+            <span className="modal-title-text text-gradient">
+              {t("Prices")}
+            </span>
+          </div>
+          <Costs
+            t={t}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.MOVE_IN_OUT}`}
+            costs={moveInOutCosts}
+            description="deep_price_description"
+          />
         </div>
-        <Costs
-          t={t}
-          redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.MOVE_IN_OUT}`}
-          costs={moveInOutCosts}
-          description="deep_price_description"
-        />
-      </div>
+      )}
     </>
   );
 }

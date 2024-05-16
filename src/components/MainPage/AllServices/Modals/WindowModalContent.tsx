@@ -15,7 +15,13 @@ import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
 import { MAIN_CATEGORIES_URLS } from "@/constants";
 
-function WindowModalContent({ t }: { t: TranslateFunction }) {
+function WindowModalContent({
+  t,
+  isOrder,
+}: {
+  t: TranslateFunction;
+  isOrder?: boolean;
+}) {
   const { prices } = useContext(PricesContext);
 
   const windowCosts = [
@@ -63,16 +69,20 @@ function WindowModalContent({ t }: { t: TranslateFunction }) {
           );
         })}
       </div>
-      <div className="mt-16-mobile-8">
-        <div className="modal-title-wrapper _text-center">
-          <span className="modal-title-text text-gradient">{t("Prices")}</span>
+      {!isOrder && (
+        <div className="mt-16-mobile-8">
+          <div className="modal-title-wrapper _text-center">
+            <span className="modal-title-text text-gradient">
+              {t("Prices")}
+            </span>
+          </div>
+          <Costs
+            t={t}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.WINDOW}`}
+            costs={windowCosts}
+          />
         </div>
-        <Costs
-          t={t}
-          redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.WINDOW}`}
-          costs={windowCosts}
-        />
-      </div>
+      )}
     </div>
   );
 }

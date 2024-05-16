@@ -17,7 +17,13 @@ const WHILE_SICK_ITEMS = [
   "air_ventilation",
 ];
 
-function WhileSickModalContent({ t }: { t: TranslateFunction }) {
+function WhileSickModalContent({
+  t,
+  isOrder,
+}: {
+  t: TranslateFunction;
+  isOrder?: boolean;
+}) {
   const { prices } = useContext(PricesContext);
 
   const regularCosts = [
@@ -50,17 +56,21 @@ function WhileSickModalContent({ t }: { t: TranslateFunction }) {
         items={WHILE_SICK_ITEMS}
         t={t}
       />
-      <div className="mt-16-mobile-8">
-        <div className="modal-title-wrapper _text-center">
-          <span className="modal-title-text text-gradient">{t("Prices")}</span>
+      {!isOrder && (
+        <div className="mt-16-mobile-8">
+          <div className="modal-title-wrapper _text-center">
+            <span className="modal-title-text text-gradient">
+              {t("Prices")}
+            </span>
+          </div>
+          <Costs
+            t={t}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.HEALTHCARE}?selectedService=${ALL_SERVICE.WHILE_SICKNESS}`}
+            costs={regularCosts}
+            description="regular_price_description_mobile"
+          />
         </div>
-        <Costs
-          t={t}
-          redirectPathname={`order/${MAIN_CATEGORIES_URLS.HEALTHCARE}?selectedService=${ALL_SERVICE.WHILE_SICKNESS}`}
-          costs={regularCosts}
-          description="regular_price_description_mobile"
-        />
-      </div>
+      )}
     </>
   );
 }

@@ -52,7 +52,13 @@ const OFFICE_CLEANING_BLOCKS = [
   },
 ];
 
-function OfficeCleaningModalContent({ t }: { t: TranslateFunction }) {
+function OfficeCleaningModalContent({
+  t,
+  isOrder,
+}: {
+  t: TranslateFunction;
+  isOrder?: boolean;
+}) {
   const { prices } = useContext(PricesContext);
 
   const officeCosts = [
@@ -82,16 +88,20 @@ function OfficeCleaningModalContent({ t }: { t: TranslateFunction }) {
           <TextBlock key={index} title={title} items={items} t={t} />
         ))}
       </div>
-      <div className="mt-16-mobile-8">
-        <div className="modal-title-wrapper _text-center">
-          <span className="modal-title-text text-gradient">{t("Prices")}</span>
+      {!isOrder && (
+        <div className="mt-16-mobile-8">
+          <div className="modal-title-wrapper _text-center">
+            <span className="modal-title-text text-gradient">
+              {t("Prices")}
+            </span>
+          </div>
+          <Costs
+            t={t}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.GENERAL}?selectedService=${ALL_SERVICE.OFFICE}`}
+            costs={officeCosts}
+          />
         </div>
-        <Costs
-          t={t}
-          redirectPathname={`order/${MAIN_CATEGORIES_URLS.GENERAL}?selectedService=${ALL_SERVICE.OFFICE}`}
-          costs={officeCosts}
-        />
-      </div>
+      )}
     </>
   );
 }

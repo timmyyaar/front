@@ -53,7 +53,13 @@ const AFTER_PARTY_BLOCKS = [
   },
 ];
 
-function AfterPartyModalContent({ t }: { t: TranslateFunction }) {
+function AfterPartyModalContent({
+  t,
+  isOrder,
+}: {
+  t: TranslateFunction;
+  isOrder?: boolean;
+}) {
   const { prices } = useContext(PricesContext);
 
   const generalAfterPartyPrice =
@@ -103,17 +109,21 @@ function AfterPartyModalContent({ t }: { t: TranslateFunction }) {
           <TextBlock key={index} title={title} items={items} t={t} />
         ))}
       </div>
-      <div className="mt-16-mobile-8">
-        <div className="modal-title-wrapper _text-center">
-          <span className="modal-title-text text-gradient">{t("Prices")}</span>
+      {!isOrder && (
+        <div className="mt-16-mobile-8">
+          <div className="modal-title-wrapper _text-center">
+            <span className="modal-title-text text-gradient">
+              {t("Prices")}
+            </span>
+          </div>
+          <Costs
+            t={t}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.AFTER_PARTY}`}
+            costs={afterPartyCosts}
+            description="deep_price_description"
+          />
         </div>
-        <Costs
-          t={t}
-          redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.AFTER_PARTY}`}
-          costs={afterPartyCosts}
-          description="deep_price_description"
-        />
-      </div>
+      )}
     </>
   );
 }
