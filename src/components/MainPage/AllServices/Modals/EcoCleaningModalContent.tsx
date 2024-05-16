@@ -54,7 +54,13 @@ const ECO_CLEANING_BLOCKS = [
   },
 ];
 
-function EcoCleaningModalContent({ t }: { t: TranslateFunction }) {
+function EcoCleaningModalContent({
+  t,
+  isOrder,
+}: {
+  t: TranslateFunction;
+  isOrder?: boolean;
+}) {
   const { prices } = useContext(PricesContext);
 
   const ecoCosts = [
@@ -112,17 +118,21 @@ function EcoCleaningModalContent({ t }: { t: TranslateFunction }) {
           <TextBlock key={index} title={title} items={items} t={t} />
         ))}
       </div>
-      <div className="mt-16-mobile-8">
-        <div className="modal-title-wrapper _text-center">
-          <span className="modal-title-text text-gradient">{t("Prices")}</span>
+      {!isOrder && (
+        <div className="mt-16-mobile-8">
+          <div className="modal-title-wrapper _text-center">
+            <span className="modal-title-text text-gradient">
+              {t("Prices")}
+            </span>
+          </div>
+          <Costs
+            t={t}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.GENERAL}?selectedService=${ALL_SERVICE.ECO}`}
+            costs={ecoCosts}
+            description="regular_price_description_mobile"
+          />
         </div>
-        <Costs
-          t={t}
-          redirectPathname={`order/${MAIN_CATEGORIES_URLS.GENERAL}?selectedService=${ALL_SERVICE.ECO}`}
-          costs={ecoCosts}
-          description="regular_price_description_mobile"
-        />
-      </div>
+      )}
     </div>
   );
 }

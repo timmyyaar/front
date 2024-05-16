@@ -64,7 +64,7 @@ export const AdditionalServices = (props: any) => {
       <div className="_flex _justify-center">
         <Image src={icons} alt='' />
       </div>
-      <div className="item-title _whitespace-nowrap">
+      <div className="item-title _px-4">
         <Writer text={t(title)} />
       </div>
     </div>

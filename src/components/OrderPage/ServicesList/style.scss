@@ -37,6 +37,13 @@
     }
 
     .how-it-works-wrapper {
+      font-size: 14px;
+      line-height: 24px;
+
+      &:hover {
+        color: #2b8afc;
+      }
+
       @media screen and (max-width: 350px) {
         flex-direction: column;
         align-items: center;

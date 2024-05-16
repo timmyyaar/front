@@ -41,7 +41,13 @@ const POST_CUNSTRUCTION_CLEANING_BLOCKS = [
   },
 ];
 
-function PortConstructionModalContent({ t }: { t: TranslateFunction }) {
+function PortConstructionModalContent({
+  t,
+  isOrder,
+}: {
+  t: TranslateFunction;
+  isOrder?: boolean;
+}) {
   const { prices } = useContext(PricesContext);
 
   const postConstructionCosts = [
@@ -84,16 +90,20 @@ function PortConstructionModalContent({ t }: { t: TranslateFunction }) {
           />
         ))}
       </div>
-      <div className="mt-16-mobile-8">
-        <div className="modal-title-wrapper _text-center">
-          <span className="modal-title-text text-gradient">{t("Prices")}</span>
+      {!isOrder && (
+        <div className="mt-16-mobile-8">
+          <div className="modal-title-wrapper _text-center">
+            <span className="modal-title-text text-gradient">
+              {t("Prices")}
+            </span>
+          </div>
+          <Costs
+            t={t}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.GENERAL}?selectedService=${ALL_SERVICE.POST_CONSTRUCTION}`}
+            costs={postConstructionCosts}
+          />
         </div>
-        <Costs
-          t={t}
-          redirectPathname={`order/${MAIN_CATEGORIES_URLS.GENERAL}?selectedService=${ALL_SERVICE.POST_CONSTRUCTION}`}
-          costs={postConstructionCosts}
-        />
-      </div>
+      )}
     </>
   );
 }

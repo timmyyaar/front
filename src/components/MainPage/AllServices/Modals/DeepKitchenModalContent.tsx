@@ -41,7 +41,13 @@ const DEEP_KITCHEN_BLOCKS = [
   },
 ];
 
-function DeepKitchenModalContent({ t }: { t: TranslateFunction }) {
+function DeepKitchenModalContent({
+  t,
+  isOrder,
+}: {
+  t: TranslateFunction;
+  isOrder?: boolean;
+}) {
   const { prices } = useContext(PricesContext);
 
   const deepKitchenCosts = [{ price: prices.defaultDeepKitchen }];
@@ -65,16 +71,20 @@ function DeepKitchenModalContent({ t }: { t: TranslateFunction }) {
       {DEEP_KITCHEN_BLOCKS.map(({ title, items }, index) => (
         <TextBlock key={index} title={title} items={items} t={t} inline />
       ))}
-      <div className="mt-16-mobile-8">
-        <div className="modal-title-wrapper _text-center">
-          <span className="modal-title-text text-gradient">{t("Prices")}</span>
+      {!isOrder && (
+        <div className="mt-16-mobile-8">
+          <div className="modal-title-wrapper _text-center">
+            <span className="modal-title-text text-gradient">
+              {t("Prices")}
+            </span>
+          </div>
+          <Costs
+            t={t}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.DEEP_KITCHEN}`}
+            costs={deepKitchenCosts}
+          />
         </div>
-        <Costs
-          t={t}
-          redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.DEEP_KITCHEN}`}
-          costs={deepKitchenCosts}
-        />
-      </div>
+      )}
     </>
   );
 }

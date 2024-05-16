@@ -7,7 +7,13 @@ import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { SALES } from "@/components/MainPage/AllServices/Modals/Costs/constants";
 import { getOneDigitFloat } from "@/utils";
 
-function SubscriptionModalContent({ t }: { t: TranslateFunction }) {
+function SubscriptionModalContent({
+  t,
+  isOrder,
+}: {
+  t: TranslateFunction;
+  isOrder?: boolean;
+}) {
   const { prices } = useContext(PricesContext);
 
   const subscriptionCosts = {
@@ -97,18 +103,22 @@ function SubscriptionModalContent({ t }: { t: TranslateFunction }) {
           {t("subscription_description")}
         </div>
       </div>
-      <div className="mt-16-mobile-8">
-        <div className="modal-title-wrapper _text-center">
-          <span className="modal-title-text text-gradient">{t("Prices")}</span>
+      {!isOrder && (
+        <div className="mt-16-mobile-8">
+          <div className="modal-title-wrapper _text-center">
+            <span className="modal-title-text text-gradient">
+              {t("Prices")}
+            </span>
+          </div>
+          <Costs
+            t={t}
+            redirectPathname="subscription"
+            costs={subscriptionCosts}
+            isSubscription
+            description="regular_price_description_mobile"
+          />
         </div>
-        <Costs
-          t={t}
-          redirectPathname="subscription"
-          costs={subscriptionCosts}
-          isSubscription
-          description="regular_price_description_mobile"
-        />
-      </div>
+      )}
     </>
   );
 }
