@@ -1,9 +1,12 @@
-import { Writer } from "@/components/common/Writer";
-import reactStringReplace from "react-string-replace";
-import { FIGURE_BRACKETS_REGEX } from "@/constants";
+"use client";
+
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
-import React from "react";
+import React, { useContext } from "react";
 import { TranslateFunction } from "@/types";
+import { PricesContext } from "@/components/Providers";
+import Costs from "@/components/MainPage/AllServices/Modals/Costs";
+import { ALL_SERVICE } from "@/components/OrderPage/constants";
+import { MAIN_CATEGORIES_URLS } from "@/constants";
 
 const POST_CUNSTRUCTION_CLEANING_BLOCKS = [
   {
@@ -38,14 +41,43 @@ const POST_CUNSTRUCTION_CLEANING_BLOCKS = [
   },
 ];
 
-function PortConstructionModalContent({ t }: { t: TranslateFunction }) {
+function PortConstructionModalContent({
+  t,
+  isOrder,
+}: {
+  t: TranslateFunction;
+  isOrder?: boolean;
+}) {
+  const { prices } = useContext(PricesContext);
+
+  const postConstructionCosts = [
+    {
+      title: (
+        <span className="cost-price">
+          {prices.postConstructionSquareMeter}
+          <span className="_ml-1">
+            {t("zl")}/{t("m")}
+            <sup>2</sup>
+          </span>
+        </span>
+      ),
+    },
+  ];
+
   return (
-    <div>
-      <div className="wrapper-title-text _mb-20">
-        <div className="wrapper-title text-gradient">
-          <Writer text={t("post_construction_cleaning")} />
+    <>
+      <div className="_text-center mb-16-mobile-8">
+        <div className="modal-title-wrapper _text-center">
+          <span className="modal-title-text text-gradient">
+            {t("post_construction_cleaning")}
+          </span>
         </div>
-        <div className="wrapper-text">{t("post_construction_description")}</div>
+        {t("post_construction_description")}
+      </div>
+      <div className="modal-title-wrapper _text-center">
+        <span className="modal-title-text text-gradient">
+          {t("what_is_included")}
+        </span>
       </div>
       <div className="_grid col-2-mobile-1 _gap-6">
         {POST_CUNSTRUCTION_CLEANING_BLOCKS.map(({ title, items }, index) => (
@@ -58,7 +90,21 @@ function PortConstructionModalContent({ t }: { t: TranslateFunction }) {
           />
         ))}
       </div>
-    </div>
+      {!isOrder && (
+        <div className="mt-16-mobile-8">
+          <div className="modal-title-wrapper _text-center">
+            <span className="modal-title-text text-gradient">
+              {t("Prices")}
+            </span>
+          </div>
+          <Costs
+            t={t}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.GENERAL}?selectedService=${ALL_SERVICE.POST_CONSTRUCTION}`}
+            costs={postConstructionCosts}
+          />
+        </div>
+      )}
+    </>
   );
 }
 

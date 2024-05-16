@@ -1,9 +1,12 @@
-import { Writer } from "@/components/common/Writer";
+"use client";
+
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
-import React from "react";
-import reactStringReplace from "react-string-replace";
-import { FIGURE_BRACKETS_REGEX } from "@/constants";
+import React, { useContext } from "react";
 import { TranslateFunction } from "@/types";
+import Costs from "@/components/MainPage/AllServices/Modals/Costs";
+import { PricesContext } from "@/components/Providers";
+import { ALL_SERVICE } from "@/components/OrderPage/constants";
+import { MAIN_CATEGORIES_URLS } from "@/constants";
 
 const AFTER_PARTY_BLOCKS = [
   {
@@ -50,21 +53,78 @@ const AFTER_PARTY_BLOCKS = [
   },
 ];
 
-function AfterPartyModalContent({ t }: { t: TranslateFunction }) {
+function AfterPartyModalContent({
+  t,
+  isOrder,
+}: {
+  t: TranslateFunction;
+  isOrder?: boolean;
+}) {
+  const { prices } = useContext(PricesContext);
+
+  const generalAfterPartyPrice =
+    prices.defaultAfterParty +
+    prices.subServiceBalcony * 5 +
+    prices.subServiceOven +
+    prices.subServiceKitchenCabinets +
+    prices.subServiceFridge +
+    prices.subServiceMicrowave +
+    prices.subServiceDishes;
+
+  const afterPartyCosts = [
+    {
+      title: "1-bedroom",
+      text: "deep_price_description",
+      price: generalAfterPartyPrice,
+    },
+    {
+      title: "2-bedroom",
+      text: "deep_price_description",
+      price: generalAfterPartyPrice + prices.afterPartyBedroom,
+    },
+    {
+      title: "3-bedroom",
+      text: "deep_price_description",
+      price: generalAfterPartyPrice + prices.afterPartyBedroom * 2,
+    },
+  ];
+
   return (
-    <div>
-      <div className="wrapper-title-text _mb-20">
-        <div className="wrapper-title text-gradient">
-          <Writer text={t("after_party_title")} />
+    <>
+      <div className="_text-center mb-16-mobile-8">
+        <div className="modal-title-wrapper _text-center">
+          <span className="modal-title-text text-gradient">
+            {t("after_party_title")}
+          </span>
         </div>
-        <div className="wrapper-text">{t("after_party_description")}</div>
+        {t("after_party_description")}
+      </div>
+      <div className="modal-title-wrapper _text-center">
+        <span className="modal-title-text text-gradient">
+          {t("what_is_included")}
+        </span>
       </div>
       <div className="_grid col-2-mobile-1 _gap-6">
         {AFTER_PARTY_BLOCKS.map(({ title, items }, index) => (
           <TextBlock key={index} title={title} items={items} t={t} />
         ))}
       </div>
-    </div>
+      {!isOrder && (
+        <div className="mt-16-mobile-8">
+          <div className="modal-title-wrapper _text-center">
+            <span className="modal-title-text text-gradient">
+              {t("Prices")}
+            </span>
+          </div>
+          <Costs
+            t={t}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.AFTER_PARTY}`}
+            costs={afterPartyCosts}
+            description="deep_price_description"
+          />
+        </div>
+      )}
+    </>
   );
 }
 

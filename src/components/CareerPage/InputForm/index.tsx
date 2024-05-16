@@ -11,6 +11,7 @@ import {
   Country,
   DEFAULT_COUNTRY,
 } from "@/components/common/PhoneInput/constants";
+import { createCareer } from "./actions";
 
 export const InputForm = ({ t }: any) => {
   const [name, setName] = useState("");
@@ -20,6 +21,7 @@ export const InputForm = ({ t }: any) => {
   const [isSendLoading, setIsSendLoading] = useState<boolean>(false);
   const [phoneCountry, setPhoneCountry] = useState<Country>(DEFAULT_COUNTRY!);
   const [referralCode, setReferralCode] = useState<string>("");
+  const [careerError, setCareerError] = useState<boolean>(false);
 
   const [modal, setModal] = useState(false);
   const ref = useClickOutside(() => setModal(false));
@@ -32,31 +34,29 @@ export const InputForm = ({ t }: any) => {
     EMAIL_REGEX.test(email);
 
   const onSend = async () => {
+    if (!requiredFields) {
+      return;
+    }
+
     try {
       setIsSendLoading(true);
+      setCareerError(false);
 
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + "/api/careers",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          cache: "no-store",
-          body: JSON.stringify({
-            name,
-            phone: `+${phoneCountry.phoneCode}${phone}`,
-            email,
-            about,
-            referralCode: referralCode || null,
-          }),
-        }
-      );
+      const response = await createCareer({
+        name,
+        phone: `+${phoneCountry.phoneCode}${phone}`,
+        email,
+        about,
+        referralCode: referralCode || null,
+      });
 
-      const data = await response.json();
+      if (response.isError) {
+        setCareerError(true);
 
-      if (data.id) {
-        setModal(true);
+        return;
       }
 
+      setModal(true);
       setName("");
       setPhone("");
       setEmail("");
@@ -71,8 +71,8 @@ export const InputForm = ({ t }: any) => {
       <Overlay active={modal}>
         <div ref={ref}>
           <ModalRequest
-            text={t("career_page_modal_title")}
-            title={t("career_page_modal_text")}
+            text={t("career_page_modal_text")}
+            title={t("career_page_modal_title")}
             onClose={() => setModal(false)}
           />
         </div>
@@ -129,17 +129,20 @@ export const InputForm = ({ t }: any) => {
           />
         </div>
       </div>
-      <div className="_mb-4 _flex _flex-col _gap-3">
+      <div className="_mb-4">
         <div
           className={`button-wrapper ${
             !requiredFields || isSendLoading ? "order-wrapper-disabled" : ""
           } ${isSendLoading ? "loading" : ""}`}
-          onClick={() => {
-            if (requiredFields) onSend();
-          }}
+          onClick={onSend}
         >
           {t("send")}
         </div>
+        {careerError && (
+          <div className="text-center _mt-2 text-danger _text-center">
+            {t("unexpected_error")}
+          </div>
+        )}
       </div>
     </div>
   );

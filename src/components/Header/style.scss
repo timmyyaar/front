@@ -46,14 +46,14 @@ header {
     }
 
     a {
-      border: 1px solid #f9f9f9;
+      outline: 1px solid #f9f9f9;
     }
   }
 
   .navigation-wrapper:hover .link {
     color: #2b8afc;
     border-radius: 100px;
-    border: 1px solid #c1dbff;
+    outline: 1px solid #c1dbff;
 
     svg {
       path {
@@ -73,7 +73,7 @@ header {
       color: #13277e;
     }
 
-    &.active {
+    &:active {
       color: #13277e;
     }
   }
@@ -113,9 +113,9 @@ header {
 
   .sub-menu-wrapper {
     color: #13277e;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
-    line-height: 130%;
+    line-height: 22px;
 
     @media screen and (max-width: 950px) {
       font-size: 14px;
@@ -162,7 +162,7 @@ header {
   z-index: 1000;
 }
 
-@media screen and (max-width: 1040px) {
+@media screen and (max-width: 1247px) {
   .phone {
     display: none;
   }

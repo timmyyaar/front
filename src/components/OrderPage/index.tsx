@@ -1,6 +1,6 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 import { Footer } from "@/components/Footer";
 import { useLocales } from "@/hooks/useLocales";
@@ -12,7 +12,7 @@ import { CounterComponent } from "./Counter";
 import { ServicesList } from "./ServicesList";
 import { SubServicesList } from "./SubServicesList";
 import { Summary } from "./Summary";
-import { PRIVATE_HOUSE_SERVICES } from "./constants";
+import { PRIVATE_HOUSE_SERVICES, SERVICES } from "./constants";
 
 import "./style.scss";
 import PrivateHouse from "@/components/OrderPage/PrivateHouse";
@@ -23,8 +23,13 @@ import {
   SelectedSubService,
 } from "@/components/OrderPage/SubServicesList/utils";
 import { sendGAEvent } from "@/google-analytics";
+import { Discount } from "@/components/OrderPage/Summary";
 
-export const OrderPage = () => {
+interface OrderPageProps {
+  discounts: Discount[];
+}
+
+export const OrderPage = ({ discounts }: OrderPageProps) => {
   const { locales } = useContext(LocaleContext);
   const i18n = useLocales(locales);
   const { prices } = useContext(PricesContext);
@@ -47,6 +52,30 @@ export const OrderPage = () => {
   const [isPrivateHouse, setIsPrivateHouse] = useState<boolean>(false);
   const [ownCheckList, setOwnCheckList] = useState<boolean>(false);
 
+  const servicesList = SERVICES[categoryTitle];
+
+  const searchParams = useSearchParams();
+  const urlService = searchParams.get("selectedService");
+
+  const onServiceSelect = (service: string) => {
+    const updatedSearchParams = new URLSearchParams(searchParams.toString());
+
+    updatedSearchParams.set("selectedService", service);
+
+    window.history.pushState(null, "", `?${updatedSearchParams.toString()}`);
+  };
+
+  useEffect(() => {
+    const needToSyncUrl =
+      urlService &&
+      servicesList.some(({ title }) => title === urlService) &&
+      urlService !== selectedService;
+
+    if (needToSyncUrl) {
+      setService(urlService);
+    }
+  }, [urlService, servicesList]);
+
   useEffect(() => {
     sendGAEvent({
       action: "page_view",
@@ -66,17 +95,6 @@ export const OrderPage = () => {
 
     setSubService(getDefaultSubServicesByService(prices, selectedService));
   }, [selectedService]);
-
-  useEffect(() => {
-    setService("");
-    setSubService([]);
-    setSecondSubService([]);
-
-    setSecondService("");
-    setSecondCounterValue([]);
-    setSecondSubService([]);
-    setIsPrivateHouse(false);
-  }, [categoryTitle]);
 
   return (
     <div className="order-page">
@@ -99,7 +117,8 @@ export const OrderPage = () => {
             <ServicesList
               mainCategory={categoryTitle}
               t={i18n.t}
-              setService={setService}
+              selectedService={selectedService}
+              setSelectedService={onServiceSelect}
             />
             <CounterComponent
               mainService={selectedService}
@@ -175,6 +194,7 @@ export const OrderPage = () => {
               t={i18n.t}
               isPrivateHouse={isPrivateHouse}
               ownCheckList={ownCheckList}
+              discounts={discounts}
             />
           </div>
         </div>

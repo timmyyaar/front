@@ -4,7 +4,6 @@ import {
   SelectedSubService,
 } from "@/components/OrderPage/SubServicesList/utils";
 import { Counter, Prices } from "@/types";
-import { BRACKETS_REGEX, SHOW_CORRIDOR_TITLES } from "@/constants";
 
 export const getEstimateFromCounterByService = (
   mainService: string,

@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 
 import happyFeedbackSvg from "../icons/happy-feedback.svg";
 import sadFeedbackSvg from "../icons/sad-feedback.svg";
-import { LogoIcon } from "@/components/Header/icons/Logo";
+import { LogoIcon } from "@/components/common/icons/components/Logo";
 
 interface FinishedFeedbackProps {
   finishedRating: { [key: string]: number };

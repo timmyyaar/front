@@ -1,7 +1,7 @@
 .costs-switcher {
   position: relative;
-  width: 277px;
   width: 100%;
+  min-width: 17rem;
   height: 67px;
   border-radius: 96px;
   border: 2px solid #2b8afc;
@@ -13,7 +13,6 @@
 
   .costs-switcher-title {
     height: 100%;
-    width: 50%;
     z-index: 2;
     text-align: center;
     font-size: 16px;
@@ -26,6 +25,10 @@
 
     &:hover {
       color: #0073fc;
+    }
+
+    @media screen and (max-width: 350px) {
+      font-size: 14px;
     }
   }
 

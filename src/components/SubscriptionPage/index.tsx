@@ -12,8 +12,13 @@ import { Summary } from "../OrderPage/Summary";
 import "./style.scss";
 import { LocaleContext } from "@/components/Providers";
 import { sendGAEvent } from "@/google-analytics";
+import { Discount } from "@/components/OrderPage/Summary";
 
-export const SubscriptionPage = () => {
+interface SubscriptionPageProps {
+  discounts: Discount[];
+}
+
+export const SubscriptionPage = ({ discounts }: SubscriptionPageProps) => {
   const { locales } = useContext(LocaleContext);
   const { t } = useLocales(locales);
 
@@ -106,6 +111,7 @@ export const SubscriptionPage = () => {
             subSale={sale.sale}
             t={t}
             isPrivateHouse={isPrivateHouse}
+            discounts={discounts}
           />
         </div>
       </div>

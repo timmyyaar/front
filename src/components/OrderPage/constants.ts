@@ -1,3 +1,66 @@
+import Regular from "@/components/common/icons/services/regular.svg";
+import Deep from "@/components/common/icons/services/deep.svg";
+import EcoCleaning from "@/components/common/icons/services/eco-cleaning.svg";
+import CustomCleaning from "@/components/common/icons/services/custom-cleaning.svg";
+import Office from "@/components/common/icons/services/office.svg";
+import PostConstruction from "@/components/common/icons/services/post-construction.svg";
+import DryCleaning from "@/components/common/icons/services/dry-cleaning.svg";
+import Ozonation from "@/components/common/icons/services/ozonation.svg";
+import WhileSickness from "@/components/common/icons/services/while-sickness.svg";
+import WindowCleaning from "@/components/common/icons/services/window-cleaning.svg";
+import MoveInOut from "@/components/common/icons/services/move-in-out.svg";
+import DeepKitchen from "@/components/common/icons/services/deep-kitchen.svg";
+import AfterParty from "@/components/common/icons/services/after-party.svg";
+import Airbnb from "@/components/common/icons/services/airbnb.svg";
+import InaLastMinute from "@/components/common/icons/services/in-a-last-minute.svg";
+
+interface IService {
+  [key: string]: { title: string; icon: any }[];
+}
+
+export const ALL_SERVICE = {
+  REGULAR: "Regular",
+  DEEP: "Deep",
+  ECO: "Eco cleaning",
+  CUSTOM: "Custom cleaning",
+  OFFICE: "Office",
+  POST_CONSTRUCTION: "Post-construction",
+  DRY: "Dry cleaning",
+  OZONATION: "Ozonation",
+  WHILE_SICKNESS: "While sickness",
+  WINDOW: "Window cleaning",
+  MOVE_IN_OUT: "Move in/out",
+  DEEP_KITCHEN: "Deep kitchen",
+  AFTER_PARTY: "After party",
+  AIRBNB: "Airbnb",
+  LAST_MINUTE: "In a last minute",
+  SUBSCRIPTION: "Subscription",
+};
+
+export const SERVICES: IService = {
+  "General cleaning": [
+    { title: "Regular", icon: Regular },
+    { title: "Deep", icon: Deep },
+    { title: "Eco cleaning", icon: EcoCleaning },
+    { title: "Custom cleaning", icon: CustomCleaning },
+    { title: "Office", icon: Office },
+    { title: "Post-construction", icon: PostConstruction },
+  ],
+  Healthcare: [
+    { title: "Dry cleaning", icon: DryCleaning },
+    { title: "Ozonation", icon: Ozonation },
+    { title: "While sickness", icon: WhileSickness },
+  ],
+  "Special cleaning": [
+    { title: "Window cleaning", icon: WindowCleaning },
+    { title: "Move in/out", icon: MoveInOut },
+    { title: "Deep kitchen", icon: DeepKitchen },
+    { title: "After party", icon: AfterParty },
+    { title: "Airbnb", icon: Airbnb },
+    { title: "In a last minute", icon: InaLastMinute },
+  ],
+};
+
 export const PRIVATE_HOUSE_SERVICES = [
   "In a last minute",
   "After party",

@@ -1,6 +1,7 @@
 import React, { Dispatch, FC, SetStateAction, useState } from "react";
 
 import { DiscountCoupon } from "../icons/DiscountCoupon";
+import { checkPromo } from "@/components/OrderPage/Summary/PromoCodeInput/actions";
 
 interface IProps {
   setSale: any;
@@ -30,15 +31,7 @@ export const PromoInput: FC<IProps> = (props) => {
       try {
         setIsCheckPromoLoading(true);
 
-        const response = await fetch(
-          process.env.NEXT_PUBLIC_API_URL + "/api/promo/" + promoInputValue,
-          {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-            cache: "no-store",
-          }
-        );
-        const data = await response.json();
+        const data = await checkPromo(promoInputValue);
 
         if (data?.promo?.sale) {
           setPromoStatus("#82D46D");

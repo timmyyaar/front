@@ -10,6 +10,7 @@ import { useLocales } from "@/hooks/useLocales";
 import FinishedFeedback from "@/components/Feedback/FinishedFeedback/FinishedFeedback";
 import { LocaleContext } from "@/components/Providers";
 import { sendGAEvent } from "@/google-analytics";
+import {getOrdersByIds} from "@/components/Feedback/actions";
 
 function Feedback() {
   const { locales } = useContext(LocaleContext);
@@ -40,11 +41,7 @@ function Feedback() {
   const getClientOrders = async (ids: string) => {
     setIsOrdersLoading(true);
 
-    const response = await fetch(
-      process.env.NEXT_PUBLIC_API_URL + `/api/order/client-order?ids=${ids}`,
-      {}
-    );
-    const ordersResponse = await response.json();
+    const ordersResponse = await getOrdersByIds(ids)
 
     setFinishedRating(
       ordersResponse.reduce(

@@ -69,8 +69,6 @@
     }
 
     .costs-wrapper {
-      width: 950px;
-
       .costs-item {
         text-align: center;
         margin: 28px 0;
@@ -83,7 +81,7 @@
         }
 
         .text {
-          margin: 16px 0 24px 0;
+          margin: 1rem 0 1.5rem 0;
           padding: 0 20px;
           color: #5c5c5c;
           font-size: 16px;
@@ -156,7 +154,6 @@
           font-size: 18px;
           font-weight: 600;
           line-height: 22px;
-          margin-bottom: 4px;
         }
 
         .sub-mobile-sales-title {

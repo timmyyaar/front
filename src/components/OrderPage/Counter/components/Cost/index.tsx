@@ -1,3 +1,5 @@
+"use client"
+
 import { NUMBER_REGEX } from "@/constants";
 import { getOzonationMultiplier } from "@/utils";
 import React, { useContext } from "react";

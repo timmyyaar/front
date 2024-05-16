@@ -20,6 +20,7 @@ function CheckoutForm({ t, paymentIntent }: CheckoutFormProps) {
   const { locale } = useContext(LocaleContext);
   const [error, setError] = useState("");
   const [isPaymentLoading, setIsPaymentLoading] = useState(false);
+  const [isPayButtonEnabled, setIsPayButtonEnabled] = useState(false);
 
   const stripe = useStripe();
   const elements = useElements();
@@ -46,7 +47,12 @@ function CheckoutForm({ t, paymentIntent }: CheckoutFormProps) {
 
   return (
     <div>
-      <PaymentElement />
+      <PaymentElement
+        onReady={(element) => element.focus()}
+        onChange={(formState) => {
+          setIsPayButtonEnabled(formState.complete);
+        }}
+      />
       {error && (
         <div className="text-danger _mt-1 _text-center">
           {error || t("promo_error_modal_title")}
@@ -56,7 +62,7 @@ function CheckoutForm({ t, paymentIntent }: CheckoutFormProps) {
         <button
           className={`pay-button ${isPaymentLoading ? "disabled loading" : ""}`}
           onClick={onPayClick}
-          disabled={isPaymentLoading}
+          disabled={isPaymentLoading || !isPayButtonEnabled}
         >
           {t("pay")} {parseFloat((paymentIntent.amount / 100).toFixed(1))} zl
         </button>

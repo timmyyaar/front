@@ -1,6 +1,12 @@
+"use client";
+
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
-import React from "react";
+import React, { useContext } from "react";
 import { TranslateFunction } from "@/types";
+import { PricesContext } from "@/components/Providers";
+import Costs from "@/components/MainPage/AllServices/Modals/Costs";
+import { ALL_SERVICE } from "@/components/OrderPage/constants";
+import { MAIN_CATEGORIES_URLS } from "@/constants";
 
 const DRY_CLEANING_BLOCKS = [
   {
@@ -30,13 +36,61 @@ const DRY_CLEANING_BLOCKS = [
   },
 ];
 
-function DryCleaningModalContent({ t }: { t: TranslateFunction }) {
+function DryCleaningModalContent({
+  t,
+  isOrder,
+}: {
+  t: TranslateFunction;
+  isOrder?: boolean;
+}) {
+  const { prices } = useContext(PricesContext);
+
+  const dryCosts = [
+    {
+      title: "Two-seater sofa",
+      text: "dry_price_description",
+      price: prices.subServiceTwoSeaterSofa,
+    },
+    {
+      title: "Three-seater sofa",
+      text: "dry_price_description",
+      price: prices.subServiceThreeSeaterSofa,
+    },
+    {
+      title: "Four-seater sofa",
+      text: "dry_price_description",
+      price: prices.subServiceFourSeaterSofa,
+    },
+  ];
+
   return (
-    <div className="_grid col-2-mobile-1 _gap-6">
-      {DRY_CLEANING_BLOCKS.map(({ title, items }, index) => (
-        <TextBlock key={index} title={title} items={items} t={t} />
-      ))}
-    </div>
+    <>
+      <div className="modal-title-wrapper _text-center">
+        <span className="modal-title-text text-gradient">
+          {t("what_is_included")}
+        </span>
+      </div>
+      <div className="_grid col-2-mobile-1 _gap-6">
+        {DRY_CLEANING_BLOCKS.map(({ title, items }, index) => (
+          <TextBlock key={index} title={title} items={items} t={t} />
+        ))}
+      </div>
+      {!isOrder && (
+        <div className="mt-16-mobile-8">
+          <div className="modal-title-wrapper _text-center">
+            <span className="modal-title-text text-gradient">
+              {t("Prices")}
+            </span>
+          </div>
+          <Costs
+            t={t}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.HEALTHCARE}?selectedService=${ALL_SERVICE.DRY}`}
+            costs={dryCosts}
+            description="dry_price_description"
+          />
+        </div>
+      )}
+    </>
   );
 }
 

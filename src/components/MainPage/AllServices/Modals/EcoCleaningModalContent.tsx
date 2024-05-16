@@ -1,9 +1,13 @@
-import { Writer } from "@/components/common/Writer";
-import React from "react";
+"use client";
+
+import React, { useContext } from "react";
 import reactStringReplace from "react-string-replace";
-import { FIGURE_BRACKETS_REGEX } from "@/constants";
+import { FIGURE_BRACKETS_REGEX, MAIN_CATEGORIES_URLS } from "@/constants";
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
 import { TranslateFunction } from "@/types";
+import { PricesContext } from "@/components/Providers";
+import Costs from "./Costs";
+import { ALL_SERVICE } from "@/components/OrderPage/constants";
 
 const ECO_CLEANING_BLOCKS = [
   {
@@ -50,20 +54,50 @@ const ECO_CLEANING_BLOCKS = [
   },
 ];
 
-function EcoCleaningModalContent({ t }: { t: TranslateFunction }) {
+function EcoCleaningModalContent({
+  t,
+  isOrder,
+}: {
+  t: TranslateFunction;
+  isOrder?: boolean;
+}) {
+  const { prices } = useContext(PricesContext);
+
+  const ecoCosts = [
+    {
+      title: "1-bedroom",
+      text: "One-time 1-bedroom cleaning",
+      price: prices.defaultEco,
+    },
+    {
+      title: "2-bedroom",
+      text: "One-time 2-bedroom cleaning",
+      price: prices.defaultEco + prices.ecoBedroom,
+    },
+    {
+      title: "3-bedroom",
+      text: "One-time 3-bedroom cleaning",
+      price: prices.defaultEco + prices.ecoBedroom * 2,
+    },
+  ];
+
   return (
     <div>
-      <div className="wrapper-title-text _mb-6">
-        <div className="wrapper-title text-gradient">
-          <Writer text={t("eco_cleaning_title")} />
+      <div className="_text-center _mb-6">
+        <div className="modal-title-wrapper">
+          <span className="text-gradient modal-title-text">
+            {t("eco_cleaning_title")}
+          </span>
         </div>
-        <div className="wrapper-text">{t("eco_cleaning_description")}</div>
+        {t("eco_cleaning_description")}
       </div>
-      <div className="wrapper-title-text _mb-20">
-        <div className="wrapper-title text-gradient">
-          <Writer text={t("eco_cleaning_how_is_made_title")} />
+      <div className="_text-center mb-16-mobile-8">
+        <div className="modal-title-wrapper _text-center">
+          <span className="text-gradient modal-title-text">
+            {t("eco_cleaning_how_is_made_title")}
+          </span>
         </div>
-        <div className="wrapper-text _mb-10">
+        <div className="_mb-10">
           {reactStringReplace(
             t("eco_cleaning_how_is_made_description"),
             FIGURE_BRACKETS_REGEX,
@@ -72,15 +106,33 @@ function EcoCleaningModalContent({ t }: { t: TranslateFunction }) {
             )
           )}
         </div>
-        <div className="wrapper-text">
-          {t("eco_cleaning_we_use_products_description")}
-        </div>
+        {t("eco_cleaning_we_use_products_description")}
+      </div>
+      <div className="modal-title-wrapper _text-center">
+        <span className="text-gradient modal-title-text">
+          {t("what_is_included")}
+        </span>
       </div>
       <div className="_grid col-2-mobile-1 _gap-6">
         {ECO_CLEANING_BLOCKS.map(({ title, items }, index) => (
           <TextBlock key={index} title={title} items={items} t={t} />
         ))}
       </div>
+      {!isOrder && (
+        <div className="mt-16-mobile-8">
+          <div className="modal-title-wrapper _text-center">
+            <span className="modal-title-text text-gradient">
+              {t("Prices")}
+            </span>
+          </div>
+          <Costs
+            t={t}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.GENERAL}?selectedService=${ALL_SERVICE.ECO}`}
+            costs={ecoCosts}
+            description="regular_price_description_mobile"
+          />
+        </div>
+      )}
     </div>
   );
 }

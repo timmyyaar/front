@@ -19,8 +19,15 @@ import "./style.scss";
 import { LocaleContext } from "@/components/Providers";
 import Blogs from "@/components/MainPage/Blogs";
 import { sendGAEvent } from "@/google-analytics";
+import { Blog } from "@/types";
+import { Review } from "@/components/MainPage/Reviews/types";
 
-export const MainPage = () => {
+interface MainPageProps {
+  blogs: Blog[];
+  reviews: Review[];
+}
+
+export const MainPage = ({ blogs, reviews }: MainPageProps) => {
   const { locales } = useContext(LocaleContext);
   const { t, lng } = useLocales(locales);
 
@@ -44,9 +51,9 @@ export const MainPage = () => {
         <AdditionalServices t={t} />
         <PriceByPhoto t={t} />
         <Promotions t={t} />
-        <Blogs t={t} />
+        <Blogs t={t} blogs={blogs} />
         <FAQ t={t} />
-        <Reviews t={t} />
+        <Reviews t={t} reviews={reviews} />
         <div className="_flex _flex-col">
           <Order t={t} />
           <Footer t={t} />

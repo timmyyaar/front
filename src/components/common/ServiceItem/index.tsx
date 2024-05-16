@@ -13,8 +13,8 @@ interface Props {
 }
 
 export const ServiceItem: React.FC<Props> = ({ title, icon, t, onClick }) => (
-  <div className="service-wrapper _w-full _flex _flex-col _justify-center _gap-5">
-    <div className="item-title _whitespace-nowrap">{title}</div>
+  <div className="service-wrapper _w-full _flex _flex-col _justify-between _gap-5 _h-full">
+    <div className="item-title _px-4">{title}</div>
     <div className="_flex _justify-center">
       <Image src={icon} alt="" />
     </div>

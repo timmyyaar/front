@@ -111,7 +111,7 @@ code {
 
 .text-gradient {
   color: #13277e;
-  background: radial-gradient(#19286d, #214aff);
+  background: radial-gradient(circle at center, #19286d, #214aff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -140,4 +140,8 @@ code {
     width: 100%;
     max-width: 100%;
   }
+}
+
+.grid-template-rows-1-max {
+  grid-template-rows: max-content;
 }

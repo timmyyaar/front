@@ -1,15 +1,8 @@
+"use client";
+
 import React, { useEffect } from "react";
-import Image from "next/image";
 
-import { Writer } from "@/components/common/Writer";
 import { CloseSvg } from "@/components/common/icons/closeButton";
-
-import window0 from "./images/0.png";
-import window1 from "./images/1.png";
-import window2 from "./images/2.png";
-import window3 from "./images/3.png";
-import window4 from "./images/4.png";
-import window5 from "./images/5.png";
 
 import "./style.scss";
 import DeepCleaningModalContent from "@/components/MainPage/AllServices/Modals/DeepCleaningModalContent";
@@ -28,16 +21,16 @@ import WindowModalContent from "@/components/MainPage/AllServices/Modals/WindowM
 import OzonationModalContent from "@/components/MainPage/AllServices/Modals/OzonationModalContent";
 import WhileSickModalContent from "@/components/MainPage/AllServices/Modals/WhileSickModalContent";
 import SubscriptionModalContent from "@/components/MainPage/AllServices/Modals/SubscriptionModalContent";
+import { TranslateFunction } from "@/types";
 
-export const Modals = ({
-  title,
-  onClose,
-  t,
-}: {
+interface ModalsProps {
   title: string;
   onClose: () => void;
-  t: any;
-}) => {
+  t: TranslateFunction;
+  isOrder?: boolean;
+}
+
+export const Modals = ({ title, onClose, t, isOrder }: ModalsProps) => {
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
@@ -57,28 +50,54 @@ export const Modals = ({
         <CloseSvg />
       </div>
       <div>
-        {title === "Regular" ? <RegularCleaningModalContent t={t} /> : null}
-        {title === "Dry cleaning" ? <DryCleaningModalContent t={t} /> : null}
-        {title === "Deep" ? <DeepCleaningModalContent t={t} /> : null}
-        {title === "Window cleaning" ? <WindowModalContent t={t} /> : null}
-        {title === "Eco cleaning" ? <EcoCleaningModalContent t={t} /> : null}
-        {title === "Post-construction" ? (
-          <PortConstructionModalContent t={t} />
+        {title === "Regular" ? (
+          <RegularCleaningModalContent t={t} isOrder={isOrder} />
         ) : null}
-        {title === "Move in/out" ? <MoveInOutModalContent t={t} /> : null}
-        {title === "Ozonation" ? <OzonationModalContent t={t} /> : null}
-        {title === "Subscription" ? <SubscriptionModalContent t={t} /> : null}
+        {title === "Dry cleaning" ? (
+          <DryCleaningModalContent t={t} isOrder={isOrder} />
+        ) : null}
+        {title === "Deep" ? (
+          <DeepCleaningModalContent t={t} isOrder={isOrder} />
+        ) : null}
+        {title === "Window cleaning" ? (
+          <WindowModalContent t={t} isOrder={isOrder} />
+        ) : null}
+        {title === "Eco cleaning" ? (
+          <EcoCleaningModalContent t={t} isOrder={isOrder} />
+        ) : null}
+        {title === "Post-construction" ? (
+          <PortConstructionModalContent t={t} isOrder={isOrder} />
+        ) : null}
+        {title === "Move in/out" ? (
+          <MoveInOutModalContent t={t} isOrder={isOrder} />
+        ) : null}
+        {title === "Ozonation" ? (
+          <OzonationModalContent t={t} isOrder={isOrder} />
+        ) : null}
+        {title === "Subscription" ? (
+          <SubscriptionModalContent t={t} isOrder={isOrder} />
+        ) : null}
         {title === "In a last minute" ? (
-          <InALastMinuteModalContent t={t} />
+          <InALastMinuteModalContent t={t} isOrder={isOrder} />
         ) : null}
         {title === "Custom cleaning" ? (
-          <CustomCleaningModalContent t={t} />
+          <CustomCleaningModalContent t={t} isOrder={isOrder} />
         ) : null}
-        {title === "After party" ? <AfterPartyModalContent t={t} /> : null}
-        {title === "Office" ? <OfficeCleaningModalContent t={t} /> : null}
-        {title === "While sickness" ? <WhileSickModalContent t={t} /> : null}
-        {title === "Deep kitchen" ? <DeepKitchenModalContent t={t} /> : null}
-        {title === "Airbnb" ? <AirbnbModalContent t={t} /> : null}
+        {title === "After party" ? (
+          <AfterPartyModalContent t={t} isOrder={isOrder} />
+        ) : null}
+        {title === "Office" ? (
+          <OfficeCleaningModalContent t={t} isOrder={isOrder} />
+        ) : null}
+        {title === "While sickness" ? (
+          <WhileSickModalContent t={t} isOrder={isOrder} />
+        ) : null}
+        {title === "Deep kitchen" ? (
+          <DeepKitchenModalContent t={t} isOrder={isOrder} />
+        ) : null}
+        {title === "Airbnb" ? (
+          <AirbnbModalContent t={t} isOrder={isOrder} />
+        ) : null}
       </div>
     </div>
   );

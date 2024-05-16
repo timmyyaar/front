@@ -1,12 +1,17 @@
+"use client";
+
 import React, { useContext, useState } from "react";
 import {
   PaymentElement,
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
-import request, { HTTP_METHODS } from "@/utils/request";
 import ArrowDown from "@/components/OrderPage/Summary/OrderButton/OnlinePaymentModal/icons/ArrowDown";
 import { LocaleContext } from "@/components/Providers";
+import {
+  createOrder,
+  editPaymentIntent,
+} from "@/components/OrderPage/Summary/OrderButton/actions";
 
 interface CheckoutFormProps {
   payload: any;
@@ -24,11 +29,12 @@ function CheckoutForm({
   onCleanPromoData,
 }: CheckoutFormProps) {
   const { locale } = useContext(LocaleContext);
-  const [isPaymentLoading, setIsPaymentLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [isPaymentLoading, setIsPaymentLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const [orderError, setOrderError] = useState<boolean>(false);
   const [orderIds, setOrderIds] = useState<number[] | null>(null);
-  const [promoError, setPromoError] = useState(false);
-  const [isPayButtonEnabled, setIsPayButtonEnabled] = useState(false);
+  const [promoError, setPromoError] = useState<boolean>(false);
+  const [isPayButtonEnabled, setIsPayButtonEnabled] = useState<boolean>(false);
 
   const stripe = useStripe();
   const elements = useElements();
@@ -37,13 +43,25 @@ function CheckoutForm({
     try {
       setIsPaymentLoading(true);
       setError("");
+      setOrderError(false);
+      setPromoError(false);
 
       if (!orderIds) {
-        const orderResponse = await request({
-          url: "order",
-          method: HTTP_METHODS.POST,
-          body: { ...payload, paymentIntentId },
+        const orderResponse = await createOrder({
+          ...payload,
+          paymentIntentId,
         });
+
+        if (orderResponse.isError) {
+          if (orderResponse.code === 409) {
+            setPromoError(true);
+            onCleanPromoData();
+          } else {
+            setOrderError(true);
+          }
+
+          return;
+        }
 
         const responseOrderIds = Array.isArray(orderResponse)
           ? orderResponse.map(({ id }) => id)
@@ -51,19 +69,15 @@ function CheckoutForm({
 
         setOrderIds(responseOrderIds);
 
-        await request({
-          url: `payment-intent/${paymentIntentId}`,
-          method: HTTP_METHODS.PATCH,
-          body: {
-            metadata: { orderIds: responseOrderIds.join(",") },
-            description: `Customer name: ${payload.name}, Date: ${
-              payload.date
-            }, Service: ${payload.title}${
-              payload.secTitle
-                ? `, Second service title: ${payload.secTitle}`
-                : ""
-            }`,
-          },
+        await editPaymentIntent(paymentIntentId, {
+          metadata: { orderIds: responseOrderIds.join(",") },
+          description: `Customer name: ${payload.name}, Date: ${
+            payload.date
+          }, Service: ${payload.title}${
+            payload.secTitle
+              ? `, Second service title: ${payload.secTitle}`
+              : ""
+          }`,
         });
       }
 
@@ -78,11 +92,6 @@ function CheckoutForm({
         if (error) {
           setError(error.message as string);
         }
-      }
-    } catch (error: any) {
-      if (error.code === 409) {
-        setPromoError(true);
-        onCleanPromoData();
       }
     } finally {
       setIsPaymentLoading(false);
@@ -114,9 +123,11 @@ function CheckoutForm({
           setIsPayButtonEnabled(formState.complete);
         }}
       />
-      {(error || promoError) && (
+      {(error || orderError || promoError) && (
         <div className="text-danger _mt-1 _text-center">
-          {error || t("promo_error_modal_title")}
+          {error || promoError
+            ? t("promo_error_modal_title")
+            : t("unexpected_error")}
         </div>
       )}
       <div className="d-flex justify-content-center _mt-4">

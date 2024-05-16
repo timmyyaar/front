@@ -18,6 +18,7 @@ const MenuIcon = ({ className }: MenuIconProps) => (
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      fill="currentColor"
     />
   </svg>
 );

@@ -2,12 +2,13 @@
 import React, { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
-import { Coasts } from "@/constants";
+import { Coasts, FIGURE_BRACKETS_REGEX } from "@/constants";
 import { Writer } from "@/components/common/Writer";
 import { Switcher } from "@/components/common/Switcher";
 import { Discount } from "./icons/Discount";
 import { tabs, sales, TABS } from "./constants";
 import "./style.scss";
+import reactStringReplace from "react-string-replace";
 
 export const Costs = (props: any) => {
   const { t } = props;
@@ -91,7 +92,7 @@ export const Costs = (props: any) => {
       <div className="main-title-mobile mobile-only">
         <b>{t("How_much_it_costs_mobile")}</b>
       </div>
-      <div style={{ width: "277px" }}>
+      <div className="_w-max">
         <Switcher
           tab={tab}
           tabs={tabs}
@@ -105,15 +106,15 @@ export const Costs = (props: any) => {
             <div className="sales-list _flex _flex-col _justify-center">
               {sales.map((el) => (
                 <div
-                  className={`
-                    sale-item
-                    ${el.title === salesCost ? " active " : " "}
-                    _flex _justify-between _items-center _cursor-pointer
-                  `}
+                  className={`sale-item _flex _justify-between _items-center _cursor-pointer ${
+                    el.title === salesCost ? " active " : ""
+                  }`}
                   onClick={() => setSalesCost(el.title)}
                   key={el.title}
                 >
-                  <div className="title _flex _items-center">{t(el.title)}</div>
+                  <div className="title _flex _items-center _whitespace-nowrap _mr-1">
+                    {t(el.title)}
+                  </div>
                   <div className="sale _flex _items-center">{el.sale}</div>
                 </div>
               ))}
@@ -123,21 +124,14 @@ export const Costs = (props: any) => {
               <div className="_flex _justify-center">
                 <Discount />
               </div>
-              <div className="_flex _flex-col">
-                <div className="title _flex _justify-center _font-semibold">
-                  {t("Get the discount")}
-                </div>
-                <div className="no-sales-text-wrapper _text-center">
-                  <span>
-                    <Writer text={t("Promo code")} />
-                  </span>
-                  <span className="_font-semibold">
-                    <Writer text={t("TYT - 20%")} />
-                  </span>
-                  <span>
-                    <Writer text={t("off your first order")} />
-                  </span>
-                </div>
+              <div className="_whitespace-pre-wrap _text-center">
+                {reactStringReplace(
+                  t("main_page_get_the_discount"),
+                  FIGURE_BRACKETS_REGEX,
+                  (match) => (
+                    <b>{match}</b>
+                  )
+                )}
               </div>
             </div>
           )}
@@ -145,32 +139,32 @@ export const Costs = (props: any) => {
             {costs.map((el) => (
               <div className="costs-item _flex _flex-col" key={el.title}>
                 <div className="title">{t(el.title)}</div>
-                <div className="text _whitespace-pre-line">
-                  <Writer text={t(el.text)} />
-                </div>
-                <div className="_flex _justify-center">
-                  <div className="coast">
-                    {el.coast}
-                    {t("zl")}
-                  </div>
-                  {el.oldCoast ? (
-                    <div className="old-coast _flex _flex-col _justify-center">
-                      {el.oldCoast}
+                <div className="text _whitespace-pre-wrap">{t(el.text)}</div>
+                <div className="_mt-auto">
+                  <div className="_flex _justify-center">
+                    <div className="coast">
+                      {el.coast}
                       {t("zl")}
                     </div>
-                  ) : null}
-                </div>
-                <div
-                  className="button _cursor-pointer"
-                  onClick={() => {
-                    router.push(
-                      `${pathname}/${
-                        tab === TABS.SUBSCRIPTION ? "subscription" : "order"
-                      }`
-                    );
-                  }}
-                >
-                  {t("Order")}
+                    {el.oldCoast ? (
+                      <div className="old-coast _flex _flex-col _justify-center">
+                        {el.oldCoast}
+                        {t("zl")}
+                      </div>
+                    ) : null}
+                  </div>
+                  <div
+                    className="button _cursor-pointer"
+                    onClick={() => {
+                      router.push(
+                        `${pathname}/${
+                          tab === TABS.SUBSCRIPTION ? "subscription" : "order"
+                        }`
+                      );
+                    }}
+                  >
+                    {t("Order")}
+                  </div>
                 </div>
               </div>
             ))}

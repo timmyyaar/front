@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type Blog = {
   id: number;
   title: string;
@@ -21,4 +23,12 @@ export type Counter = {
   value: string;
   type?: string;
   param?: string;
+};
+
+export type Cost = {
+  title?: ReactNode;
+  text?: ReactNode;
+  price?: number;
+  oldPrice?: number;
+  isOzonation?: boolean;
 };

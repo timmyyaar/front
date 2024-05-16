@@ -1,7 +1,12 @@
-import { Writer } from "@/components/common/Writer";
+"use client";
+
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
-import React from "react";
+import React, { useContext } from "react";
 import { TranslateFunction } from "@/types";
+import { PricesContext } from "@/components/Providers";
+import Costs from "@/components/MainPage/AllServices/Modals/Costs";
+import { ALL_SERVICE } from "@/components/OrderPage/constants";
+import { MAIN_CATEGORIES_URLS } from "@/constants";
 
 const IN_A_LAST_MINUTE_BLOCKS = [
   {
@@ -48,21 +53,64 @@ const IN_A_LAST_MINUTE_BLOCKS = [
   },
 ];
 
-function InALastMinuteModalContent({ t }: { t: TranslateFunction }) {
+function InALastMinuteModalContent({
+  t,
+  isOrder,
+}: {
+  t: TranslateFunction;
+  isOrder?: boolean;
+}) {
+  const { prices } = useContext(PricesContext);
+
+  const lastMinuteCosts = [
+    {
+      title: "1-bedroom",
+      text: "One-time 1-bedroom cleaning",
+      price: prices.defaultLastMinute,
+    },
+    {
+      title: "2-bedroom",
+      text: "One-time 2-bedroom cleaning",
+      price: prices.defaultLastMinute + prices.lastMinuteBedroom,
+    },
+    {
+      title: "3-bedroom",
+      text: "One-time 3-bedroom cleaning",
+      price: prices.defaultLastMinute + prices.lastMinuteBedroom * 2,
+    },
+  ];
+
   return (
-    <div>
-      <div className="wrapper-title-text _mb-20">
-        <div className="wrapper-title text-gradient">
-          <Writer text={t("in_a_last_minute_title")} />
+    <>
+      <div className="_text-center mb-16-mobile-8">
+        <div className="modal-title-wrapper _text-center">
+          <span className="modal-title-text text-gradient">
+            {t("in_a_last_minute_title")}
+          </span>
         </div>
-        <div className="wrapper-text">{t("in_a_last_minute_description")}</div>
+        {t("in_a_last_minute_description")}
       </div>
       <div className="_grid col-2-mobile-1 _gap-6">
         {IN_A_LAST_MINUTE_BLOCKS.map(({ title, items }, index) => (
           <TextBlock key={index} title={title} items={items} t={t} />
         ))}
       </div>
-    </div>
+      {!isOrder && (
+        <div className="mt-16-mobile-8">
+          <div className="modal-title-wrapper _text-center">
+            <span className="modal-title-text text-gradient">
+              {t("Prices")}
+            </span>
+          </div>
+          <Costs
+            t={t}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.LAST_MINUTE}`}
+            costs={lastMinuteCosts}
+            description="regular_price_description_mobile"
+          />
+        </div>
+      )}
+    </>
   );
 }
 

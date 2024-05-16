@@ -1,11 +1,10 @@
 "use client";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { useRouter, usePathname, useParams } from "next/navigation";
 import Cookies from "js-cookie";
 
 import { useLocales } from "@/hooks/useLocales";
-import { MessengerIcon } from "@/components/common/icons/components/Messenger";
+import GoogleIcon from "@/components/common/icons/components/Google";
 import { TelegramIcon } from "@/components/common/icons/components/Telegram";
 import { WhatsappIcon } from "@/components/common/icons/components/Whatsapp";
 import { InstIcon } from "@/components/common/icons/components/Inst";
@@ -13,13 +12,14 @@ import MenuIcon from "@/components/Header/icons/MenuIcon";
 import NavigationItems from "@/components/Header/NavigrationItems";
 import { LocaleContext } from "@/components/Providers";
 
-import { LogoIcon } from "./icons/Logo";
+import { LogoIcon } from "../common/icons/components/Logo";
 import { Polygon } from "./icons/Polygon";
 
-import "./style.scss";
 import NavigationItemsMobile from "@/components/Header/NavigationItemsMobile";
 import { sendGAEvent } from "@/google-analytics";
 import { useClickOutside } from "@/hooks/useClickOutSide";
+
+import "./style.scss";
 
 const mainLocales = {
   en: "English",
@@ -92,7 +92,7 @@ export const Header = () => {
             </div>
           </div>
           <div className="sub-menu-wrapper _flex _flex-col _justify-center _pl-4">
-            Krakow
+            <span className="text-gradient">Krakow</span>
           </div>
         </div>
         <NavigationItems t={t} />
@@ -109,8 +109,10 @@ export const Header = () => {
               e.preventDefault();
             }}
           >
-            {/* @ts-ignore */}
-            <div className="nav-link">{t(mainLocales[locale])}</div>
+            <div className="nav-link text-gradient">
+              {/* @ts-ignore */}
+              {t(mainLocales[locale])}
+            </div>
             <div className="_flex _items-center">
               <Polygon />
             </div>
@@ -130,7 +132,7 @@ export const Header = () => {
           ) : null}
         </div>
         <div className="sub-menu-wrapper mobile-none _ml-auto _flex _gap-6">
-          <div className="phone _flex _flex-col _justify-center">
+          <div className="phone _flex _flex-col _justify-center text-gradient">
             +48 730 003 997
           </div>
           <div className="_flex _gap-3">
@@ -152,19 +154,19 @@ export const Header = () => {
             </a>
             <a
               className="icon _flex _flex-col _justify-center"
-              href="https://m.me/227130810472971"
-              target="_blank"
-              onClick={() => trackSocialMediaClick("Messanger")}
-            >
-              <MessengerIcon />
-            </a>
-            <a
-              className="icon _flex _flex-col _justify-center"
               href="https://www.instagram.com/takeyourtime_krakow/"
               target="_blank"
               onClick={() => trackSocialMediaClick("Instagram")}
             >
               <InstIcon />
+            </a>
+            <a
+              className="icon _flex _flex-col _justify-center"
+              href="https://maps.app.goo.gl/uTEhCrLkdEXG6DDd8"
+              target="_blank"
+              onClick={() => trackSocialMediaClick("Google")}
+            >
+              <GoogleIcon />
             </a>
           </div>
         </div>
