@@ -183,7 +183,7 @@ export const Cleaning = (props: any) => {
       <div className="main-title-mobile mobile-only">
         {t("What_cleaning_consists_of_mobile")}
       </div>
-      <div className="switcher-wrapper" style={{ width: "277px" }}>
+      <div className="switcher-wrapper">
         <Switcher
           tab={tab}
           tabs={tabs}

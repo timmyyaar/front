@@ -92,7 +92,7 @@ export const Costs = (props: any) => {
       <div className="main-title-mobile mobile-only">
         <b>{t("How_much_it_costs_mobile")}</b>
       </div>
-      <div style={{ width: "277px" }}>
+      <div className="_w-max">
         <Switcher
           tab={tab}
           tabs={tabs}

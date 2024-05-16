@@ -1,5 +1,5 @@
 export const TABS = {
-  SUBSCRIPTION: "Subscription",
+  SUBSCRIPTION: "Subscription switcher",
   ONE_TIME: "One-time",
 };
 
