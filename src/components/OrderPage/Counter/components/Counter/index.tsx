@@ -148,7 +148,9 @@ export const Counter: FC<IProps> = (props) => {
   return (
     <div className="counter-component">
       <div
-        className={`counter-icons icon-minus ${limit ? "icon-limit" : ""}`}
+        className={`_z-10 counter-icons icon-minus ${
+          limit ? "icon-limit" : ""
+        }`}
         onClick={limit ? () => {} : onMinus}
       >
         <svg

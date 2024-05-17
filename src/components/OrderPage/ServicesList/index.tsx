@@ -5,7 +5,7 @@ import howItWorksSvg from "@/components/common/icons/howItWorks.svg";
 import { Modals } from "@/components/MainPage/AllServices/Modals";
 import { Overlay } from "@/components/common/Overlay";
 import { useClickOutside } from "@/hooks/useClickOutSide";
-import {SERVICES} from "@/components/OrderPage/constants";
+import { SERVICES } from "@/components/OrderPage/constants";
 
 import "./style.scss";
 
@@ -43,12 +43,12 @@ export const ServicesList: FC<IProps> = (props) => {
             onClick={() => setSelectedService(el.title)}
             key={el.title + i}
           >
-            <div className="item-title">{t(el.title)}</div>
+            <div className="item-title _px-4">{t(el.title)}</div>
             <div
               className="_flex _justify-center"
               style={{ userSelect: "none" }}
             >
-              <Image src={el.icon} alt="" />
+              <Image src={el.icon} alt="" width="80" />
             </div>
             <div className="how-to-work _flex _justify-center">
               <div
