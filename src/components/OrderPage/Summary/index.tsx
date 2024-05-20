@@ -415,7 +415,13 @@ export const Summary: FC<IProps> = (props: any) => {
           {successModal ? (
             <div ref={ref}>
               <ModalRequest
-                text={t("order_page_modal_title")}
+                text={
+                  <div className="_flex _justify-center">
+                    <div className="_whitespace-normal success-order-modal-text _w-full">
+                      {t("order_page_modal_title")}
+                    </div>
+                  </div>
+                }
                 title={t("order_page_modal_text")}
                 onClose={onCloseModal}
               />

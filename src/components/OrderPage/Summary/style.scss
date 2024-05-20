@@ -23,6 +23,14 @@
       background: #0073fc;
     }
   }
+
+  .success-order-modal-text {
+    width: 70%;
+
+    @media screen and (max-width: 950px) {
+      width: 100%;
+    }
+  }
 }
 
 .order-wrapper-disabled {
