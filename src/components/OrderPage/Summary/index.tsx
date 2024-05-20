@@ -380,12 +380,11 @@ export const Summary: FC<IProps> = (props: any) => {
     street && house && (isPrivateHouse ? true : apartment);
 
   const minimalPrice = getMinimalPriceByMainService(prices, title);
-  const minimalPriceWithSales = getPriceWithSaleOrSubSale(
-    minimalPrice + (provideOwnSuppliesSelected?.price || 0),
-    sale,
-    subSale,
-    dayDiscount
+  const minimalPriceWithSales = getPriceWithOwnSupplies(
+    getPriceWithSaleOrSubSale(minimalPrice, sale, subSale, dayDiscount),
+    provideOwnSuppliesSelected
   );
+
   const isOrderPriceLessThanMinimum = priceWithSale < minimalPriceWithSales;
 
   const requiredFields =
