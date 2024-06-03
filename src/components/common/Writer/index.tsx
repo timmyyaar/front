@@ -4,6 +4,7 @@ interface Props {
   text: string;
   alignLeft?: boolean;
   whiteSpaceNormal?: boolean;
+  className?: string;
 }
 
 export const Writer: FC<Props> = (props) => {

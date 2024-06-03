@@ -122,7 +122,7 @@ export const PriceByPhoto = (props: any) => {
             href="https://m.me/227130810472971"
             target="_blank"
           >
-            <MessengerIcon isTransparent />
+            <MessengerIcon />
             <div>Messenger</div>
           </a>
         </div>

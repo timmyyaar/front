@@ -219,6 +219,7 @@ export const Cleaning = (props: any) => {
               </b>
               {openRooms.includes(el) && (
                 <div className="_mt-3.5">
+                  {/* @ts-ignore */}
                   {[...new Array(HOW_IT_WORKS_TEXTS[tab][el].length)].map(
                     (_, i) => (
                       <div
@@ -226,6 +227,7 @@ export const Cleaning = (props: any) => {
                         key={"text-mobile-room" + (i + 1)}
                       >
                         <Writer
+                          //@ts-ignore
                           text={t(HOW_IT_WORKS_TEXTS[tab][el][i])}
                           alignLeft
                         />

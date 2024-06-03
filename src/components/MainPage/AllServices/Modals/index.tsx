@@ -30,14 +30,7 @@ interface ModalsProps {
 
 export const Modals = ({ title, onClose, t, isOrder }: ModalsProps) => {
   return (
-    <Modal
-      isWhiteBackground
-      className="_max-h-[80%]"
-      onClick={(e) => {
-        e.stopPropagation();
-      }}
-      onClose={onClose}
-    >
+    <Modal isWhiteBackground className="_max-h-[80%]" onClose={onClose}>
       <div className="_py-14 lg:_py-0">
         {title === "Regular" ? (
           <RegularCleaningModalContent t={t} isOrder={isOrder} />

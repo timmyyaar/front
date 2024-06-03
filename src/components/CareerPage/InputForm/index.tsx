@@ -134,7 +134,7 @@ export const InputForm = ({ t }: any) => {
             value={about}
             onChange={(e) => setAbout(e.target.value)}
             placeholder={t("Add more details")}
-            rows="4"
+            rows={4}
           />
         </div>
       </div>

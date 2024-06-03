@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 
 import { PaymentForm } from "./components/PaymentForm";
 import { CheckBox } from "./components/Checkbox";
@@ -91,7 +91,9 @@ export const UserData = ({
           type="text"
           placeholder={t("Surname and Name")}
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={({ target: { value } }: ChangeEvent<HTMLInputElement>) =>
+            setName(value)
+          }
         />
         <div className="_relative mobile-only">
           <PhoneInput
@@ -116,7 +118,9 @@ export const UserData = ({
             type="text"
             placeholder={t("E-mail")}
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={({ target: { value } }: ChangeEvent<HTMLInputElement>) =>
+              setEmail(value)
+            }
           />
         </div>
         <div className="_flex _gap-5">
@@ -204,7 +208,11 @@ export const UserData = ({
                   type="text"
                   placeholder={t("Street")}
                   value={street}
-                  onChange={(e) => setAddressField("street", e.target.value)}
+                  onChange={({
+                    target: { value },
+                  }: ChangeEvent<HTMLInputElement>) =>
+                    setAddressField("street", value)
+                  }
                 />
                 <div className="_flex _gap-5">
                   <Input
@@ -212,7 +220,11 @@ export const UserData = ({
                     type="text"
                     placeholder={t("House number")}
                     value={house}
-                    onChange={(e) => setAddressField("house", e.target.value)}
+                    onChange={({
+                      target: { value },
+                    }: ChangeEvent<HTMLInputElement>) =>
+                      setAddressField("house", value)
+                    }
                   />
                   {!isPrivateHouse && (
                     <Input
@@ -220,8 +232,10 @@ export const UserData = ({
                       type="text"
                       placeholder={t("Apartment")}
                       value={apartment}
-                      onChange={(e) =>
-                        setAddressField("apartment", e.target.value)
+                      onChange={({
+                        target: { value },
+                      }: ChangeEvent<HTMLInputElement>) =>
+                        setAddressField("apartment", value)
                       }
                     />
                   )}
@@ -231,7 +245,11 @@ export const UserData = ({
                   type="text"
                   placeholder={t("Postcode")}
                   value={postcode}
-                  onChange={(e) => setAddressField("postcode", e.target.value)}
+                  onChange={({
+                    target: { value },
+                  }: ChangeEvent<HTMLInputElement>) =>
+                    setAddressField("postcode", value)
+                  }
                 />
                 <Cities
                   t={t}
@@ -246,8 +264,10 @@ export const UserData = ({
                       type="text"
                       placeholder={t("Entrance number")}
                       value={entrance}
-                      onChange={(e) =>
-                        setAddressField("entrance", e.target.value)
+                      onChange={({
+                        target: { value },
+                      }: ChangeEvent<HTMLInputElement>) =>
+                        setAddressField("entrance", value)
                       }
                     />
                     <Input
@@ -255,8 +275,10 @@ export const UserData = ({
                       type="text"
                       placeholder={t("Doorphone code")}
                       value={doorPhone}
-                      onChange={(e) =>
-                        setAddressField("doorPhone", e.target.value)
+                      onChange={({
+                        target: { value },
+                      }: ChangeEvent<HTMLInputElement>) =>
+                        setAddressField("doorPhone", value)
                       }
                     />
                   </div>
@@ -267,7 +289,11 @@ export const UserData = ({
                     _w-full _bg-light _rounded-xl _outline-0 _text-gray-dark`}
                 placeholder={t("Add more details (optional)")}
                 value={more}
-                onChange={(e) => setAddressField("more", e.target.value)}
+                onChange={({
+                  target: { value },
+                }: ChangeEvent<HTMLTextAreaElement>) =>
+                  setAddressField("more", value)
+                }
               />
               <Button
                 className="_mt-6 _w-full _h-11"

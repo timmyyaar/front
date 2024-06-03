@@ -97,7 +97,7 @@ export const InputForm = ({ t }: any) => {
             value={comment}
             onChange={(e) => setComment(e.target.value)}
             placeholder={t("Accompanying text")}
-            rows="4"
+            rows={4}
           />
         </div>
       </div>

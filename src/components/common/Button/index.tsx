@@ -1,6 +1,20 @@
 import React from "react";
 
-function Button({ className, title, isLink, isLoading, ...props }) {
+interface ButtonProps {
+  className?: string;
+  title: React.ReactNode;
+  isLink?: boolean;
+  isLoading?: boolean;
+  [prop: string]: any;
+}
+
+function Button({
+  className,
+  title,
+  isLink,
+  isLoading,
+  ...props
+}: ButtonProps) {
   return (
     <button
       className={`_flex _items-center _justify-center _bg-primary hover:_bg-primary-dark
