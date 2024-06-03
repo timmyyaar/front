@@ -52,7 +52,7 @@ function CleanersCount({
         >
           {t("Cleaners")}: <b>{cleanersCount}</b>
           {manualCleanersCount > 0 && (
-            <span className="_font-semibold _bg-primary _ml-1">
+            <span className="_font-semibold _text-primary _ml-1">
               (+{manualCleanersCount})
             </span>
           )}
