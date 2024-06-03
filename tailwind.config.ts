@@ -23,6 +23,7 @@ const config: Config = {
       "gray-dark": "#5c5c5c",
       white: "#f9f9f9",
       black: "#232323",
+      danger: "#dc3545",
       warning: "#f9c630",
       success: "#29cc7e",
       transparent: "transparent",
