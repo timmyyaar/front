@@ -3,14 +3,12 @@
 import { useSearchParams, useRouter, useParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 
-import "./style.scss";
-
 import FeedbackItem from "@/components/Feedback/FeedbackItem/FeedbackItem";
 import { useLocales } from "@/hooks/useLocales";
 import FinishedFeedback from "@/components/Feedback/FinishedFeedback/FinishedFeedback";
 import { LocaleContext } from "@/components/Providers";
 import { sendGAEvent } from "@/google-analytics";
-import {getOrdersByIds} from "@/components/Feedback/actions";
+import { getOrdersByIds } from "@/components/Feedback/actions";
 
 function Feedback() {
   const { locales } = useContext(LocaleContext);
@@ -41,7 +39,7 @@ function Feedback() {
   const getClientOrders = async (ids: string) => {
     setIsOrdersLoading(true);
 
-    const ordersResponse = await getOrdersByIds(ids)
+    const ordersResponse = await getOrdersByIds(ids);
 
     setFinishedRating(
       ordersResponse.reduce(
@@ -101,9 +99,10 @@ function Feedback() {
     <FinishedFeedback finishedRating={finishedRating} t={t} />
   ) : (
     <div
-      className={`_flex feedbacks-wrapper _gap-10 ${
-        orders.length > 1 ? "multi-feedbacks-wrapper" : "_h-screen"
-      }`}
+      className={`_flex _flex-col lg:_flex-row _bg-light _py-8 _px-4
+        lg:_py-20 lg:_px-16 _gap-10 ${
+          orders.length > 1 ? "_h-auto lg:_h-screen" : "_h-screen"
+        }`}
     >
       {orders.map(({ id, title }) => (
         <FeedbackItem

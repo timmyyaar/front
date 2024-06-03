@@ -23,7 +23,6 @@ import WhileSickness from "@/components/common/icons/services/while-sickness.svg
 import WindowCleaning from "@/components/common/icons/services/window-cleaning.svg";
 
 import { Modals } from "./Modals";
-import "./style.scss";
 
 export const AllServices = (props: any) => {
   const { t } = props;
@@ -64,13 +63,13 @@ export const AllServices = (props: any) => {
 
   return (
     <>
-      <div className="all-service-component mobile-none">
+      <div className="_px-24 mobile-none">
         <Overlay active={!!active}>
           <div ref={ref}>
             <Modals title={active} onClose={() => setActive("")} t={t} />
           </div>
         </Overlay>
-        <div className="main-title">{t("All service")}</div>
+        <div className="_mb-5 _main-title">{t("All service")}</div>
         <Slider
           elements={getServicesGroup().map((el) => ({
             id: el.id,
@@ -93,13 +92,13 @@ export const AllServices = (props: any) => {
           }))}
         />
       </div>
-      <div className="all-service-component-mobile">
+      <div className="mobile-only _px-5-percents _mb-14">
         <Overlay active={!!active}>
           <div ref={ref}>
             <Modals title={active} onClose={() => setActive("")} t={t} />
           </div>
         </Overlay>
-        <div className="main-title">
+        <div className="_mb-3 _main-title">
           <b>{t("All service")}</b>
         </div>
         <div className="_grid _grid-cols-2 _gap-6">

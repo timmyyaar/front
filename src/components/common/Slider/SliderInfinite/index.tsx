@@ -3,7 +3,6 @@ import React, { FC, useState } from "react";
 
 import { LeftArrow } from "../icons/LeftArrow";
 import { RightArrow } from "../icons/RightArrow";
-import "../style.scss";
 
 interface Props {
   elements: JSX.Element[];
@@ -20,14 +19,14 @@ const SliderSwitch: FC<Props> = (props) => {
     highlightedItemIndex === elements.length - 1 ? 0 : highlightedItemIndex + 1;
 
   return (
-    <div className="slider-scroll-wrapper">
+    <div className="_relative">
       <div
-        className="arrow-button arrow-button-left"
+        className="_group _cursor-pointer _absolute _top-1/2 _-translate-y-2/4 _-left-12"
         onClick={() => setHighlightedItemIndex(previousItemIndex)}
       >
-        <LeftArrow />
+        <LeftArrow className="group-hover:_text-primary _transition-all" />
       </div>
-      <div className="slider-component">
+      <div className="_overflow-hidden">
         <div className="_flex">
           <div className="_flex-shrink-0 _w-1/3 _flex _items-center _justify-center _opacity-60">
             {elements[previousItemIndex]}
@@ -41,10 +40,10 @@ const SliderSwitch: FC<Props> = (props) => {
         </div>
       </div>
       <div
-        className="arrow-button arrow-button-right"
+        className="_group _cursor-pointer _absolute _top-1/2 _-translate-y-2/4 _-right-12"
         onClick={() => setHighlightedItemIndex(nextItemIndex)}
       >
-        <RightArrow />
+        <RightArrow className="group-hover:_text-primary _transition-all" />
       </div>
     </div>
   );

@@ -12,7 +12,6 @@ import aSvg from "./icons/150.svg";
 import bSvg from "./icons/250.svg";
 import cSvg from "./icons/350.svg";
 import dSvg from "./icons/500.svg";
-import "./style.scss";
 import { LocaleContext } from "@/components/Providers";
 import { sendGAEvent } from "@/google-analytics";
 
@@ -31,24 +30,24 @@ export const GiftPage = () => {
 
   return (
     <div className="gift-page">
-      <div className="gift-content _flex _flex-col">
+      <div className="gift-content _gap-6 _mt-6 lg:_gap-10 lg:_mt-14 _flex _flex-col">
         <div>
-          <div className="gifts-title">{t("Gifts card")}</div>
-          <div className="gifts-text _mt-8 _font-semibold mobile-none">
+          <div className="_main-title">{t("Gifts card")}</div>
+          <div className="_text-center _mt-8 _font-semibold mobile-none">
             {t("Gifts card text")}
           </div>
         </div>
         <div className="_flex _justify-center">
-          <div className="_grid _grid-cols-2 image-wrapper">
-            <Image src={aSvg} alt="" />
-            <Image src={bSvg} alt="" />
-            <Image src={cSvg} alt="" />
-            <Image src={dSvg} alt="" />
+          <div className="_grid _grid-cols-2 _gap-5 _px-4 lg:_gap-4 lg:_px-0">
+            <Image src={aSvg} alt="" className="_rounded-2xl" />
+            <Image src={bSvg} alt="" className="_rounded-2xl" />
+            <Image src={cSvg} alt="" className="_rounded-2xl" />
+            <Image src={dSvg} alt="" className="_rounded-2xl" />
           </div>
         </div>
-        <div className="gifts-title block-wrapper">{t("How it works?")}</div>
+        <div className="_main-title _mt-6 lg:_mt-0">{t("How it works?")}</div>
         <Instruction title="gifts" cardsCount={5} t={t} />
-        <div className="gifts-title block-wrapper">{t("Filling form")}</div>
+        <div className="_main-title _mt-6 lg:_mt-0">{t("Filling form")}</div>
         <InputForm t={t} />
         <div className="_flex _flex-col">
           <Footer t={t} />

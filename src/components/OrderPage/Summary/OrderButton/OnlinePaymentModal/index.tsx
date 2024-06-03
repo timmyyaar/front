@@ -7,8 +7,6 @@ import CheckoutForm from "@/components/OrderPage/Summary/OrderButton/OnlinePayme
 import Modal from "@/components/common/Modal";
 import { LocaleContext } from "@/components/Providers";
 
-import "./style.scss";
-
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISH_KEY!);
 
 const appearance = {
@@ -21,7 +19,7 @@ interface OnlinePaymentModalProps {
   clientSecret: string;
   payload: any;
   paymentIntentId: string;
-  t: (text: string) => string;
+  t: (text: string, defaultText?: string) => string;
   onCleanPromoData: () => void;
 }
 

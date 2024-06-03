@@ -5,7 +5,6 @@ import OzonSvg from "./icons/ozone-layer.svg";
 import CleanSvg from "./icons/rectangle.svg";
 import caretUpSvg from "./icons/caret-up.svg";
 import { getAdditionalServices } from "./utils";
-import "./style.scss";
 interface IProps {
   mainService: string;
   setSecondService: (props: any) => void;
@@ -37,20 +36,30 @@ export const AddedMainService: FC<IProps> = (props) => {
   }, [mainService]);
 
   return addService ? (
-    <div className="added-main-service-component">
-      <div className="switch-component" onClick={onClickSecondService}>
-        <div className="image-wrapper">
+    <div>
+      <div
+        className="_group _min-h-[4.5rem] lg:_min-h-0 _px-3 lg:_px-24 _gap-2 lg:_gap-5 _flex _justify-center lg:_justify-between _items-center _rounded-xl _bg-light _cursor-pointer"
+        onClick={onClickSecondService}
+      >
+        <div className="_flex _items-center _select-none _w-16 _h-16 lg:_w-28 lg:_h-24">
           <Image src={isOzonation ? OzonSvg : CleanSvg} alt="" />
         </div>
-        <div className={`title ${addServiceList ? "title-active" : ""}`}>
+        <div
+          className={`_text-center group-hover:_text-primary lg:_text-xl _font-semibold
+           _transition-all ${addServiceList ? "_text-primary" : ""}`}
+        >
           {t(addService)}
         </div>
-        <div className={`icon ${addServiceList ? "" : "flipped-icon"}`}>
+        <div
+          className={`_transition-all _duration-300 _h-7 _w-7 lg:_h-auto lg:_w-auto ${
+            addServiceList ? "" : "_rotateX-180"
+          }`}
+        >
           <Image src={caretUpSvg} alt="" />
         </div>
       </div>
       {addServiceList ? (
-        <div className="add-service-list-wrapper">{children}</div>
+        <div className="_mt-6 _flex _justify-center">{children}</div>
       ) : null}
     </div>
   ) : null;

@@ -4,11 +4,9 @@ import Costs from "@/components/MainPage/AllServices/Modals/Costs/Costs";
 import CostsMobile from "@/components/MainPage/AllServices/Modals/Costs/CostsMobile";
 import { Cost } from "@/types";
 
-import "./style.scss";
-
 interface CostsProps {
   costs: Cost[] | { [key: string]: Cost[] };
-  t: (text: string) => string;
+  t: (text: string, defaultText?: string) => string;
   isSubscription?: boolean;
   redirectPathname: string;
   description?: string;

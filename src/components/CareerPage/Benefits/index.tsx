@@ -1,18 +1,13 @@
 import React from "react";
 import Image from "next/image";
 
-import benefitSvg from "./icons/benefit.svg";
 import cleaningProductsSvg from "./icons/cleaning-products.svg";
-import clipPathGroupSvg from "./icons/clip-path-group.svg";
 import discountSvg from "./icons/discount.svg";
-import dollarSvg from "./icons/dollar.svg";
 import likeSvg from "./icons/like.svg";
 import moneyBagSvg from "./icons/money-bag.svg";
 import saluteSvg from "./icons/salute.svg";
 import timerSvg from "./icons/timer.svg";
 import teamSvg from "./icons/team.svg";
-import tramSvg from "./icons/tram.svg";
-import "./style.scss";
 
 export const Benefits = ({ t }: any) => {
   const benefits = [
@@ -28,15 +23,19 @@ export const Benefits = ({ t }: any) => {
   ];
 
   return (
-    <div className="benefits-component _flex _flex-col _items-center _gap-6">
-      <div className="benefits-list _grid _gap-3 _w-full">
+    <div className="_flex _flex-col _items-center _gap-6">
+      <div
+        className={`_px-[20vw] _px-5-percents-mobile _grid _grid-cols-2
+          lg:_grid-cols-4 _px-4 _gap-3 _w-full`}
+      >
         {benefits.map((el, i) => (
           <div
-            className="benefit-wrapper _flex _flex-col _items-center _gap-4"
+            className={`_py-4 _rounded-2xl _bg-light _flex _flex-col
+              _justify-center _items-center _gap-4`}
             key={el.title + i}
           >
             <Image src={el.svg} alt="" />
-            <div className="benefit-text">
+            <div className="_text-center">
               {[...new Array(el.lines)].map((_, j) => (
                 <div key={el.title + i + j}>{t(el.title + "_line_" + j)}</div>
               ))}

@@ -7,8 +7,8 @@ import { Writer } from "@/components/common/Writer";
 import { Switcher } from "@/components/common/Switcher";
 import { Discount } from "./icons/Discount";
 import { tabs, sales, TABS } from "./constants";
-import "./style.scss";
 import reactStringReplace from "react-string-replace";
+import Button from "@/components/common/Button";
 
 export const Costs = (props: any) => {
   const { t } = props;
@@ -84,13 +84,10 @@ export const Costs = (props: any) => {
   return (
     <div
       id="costs-block"
-      className="costs-component _flex _flex-col _items-center"
+      className="_px-5-percents lg:_px-24 _mb-14 lg:_mb-0 _flex _flex-col _items-center"
     >
-      <div className="main-title mobile-none">
+      <div className="_main-title _mb-3 lg:_mb-5">
         <b>{t("How much it costs")}</b>
-      </div>
-      <div className="main-title-mobile mobile-only">
-        <b>{t("How_much_it_costs_mobile")}</b>
       </div>
       <div className="_w-max">
         <Switcher
@@ -100,27 +97,37 @@ export const Costs = (props: any) => {
           onClick={(el: string) => setTab(el)}
         />
       </div>
-      <div className="mobile-none">
-        <div className="costs-sales-wrapper _flex _justify-between">
+      <div className="mobile-none _w-full">
+        <div className="_mt-8 _w-full _rounded-3xl _bg-light _flex _justify-around">
           {tab === TABS.SUBSCRIPTION ? (
-            <div className="sales-list _flex _flex-col _justify-center">
+            <div className="_m-6 _w-64 _flex _flex-col _justify-center">
               {sales.map((el) => (
                 <div
-                  className={`sale-item _flex _justify-between _items-center _cursor-pointer ${
-                    el.title === salesCost ? " active " : ""
+                  className={`_py-3.5 _px-7 _flex _justify-between _items-center _cursor-pointer ${
+                    el.title === salesCost ? " _rounded-full _bg-primary " : ""
                   }`}
                   onClick={() => setSalesCost(el.title)}
                   key={el.title}
                 >
-                  <div className="title _flex _items-center _whitespace-nowrap _mr-1">
+                  <div
+                    className={`_w-full _text-center _font-semibold _text-xl
+                      _flex _items-center _whitespace-nowrap _mr-1 ${
+                        el.title === salesCost ? "_text-white" : ""
+                      }`}
+                  >
                     {t(el.title)}
                   </div>
-                  <div className="sale _flex _items-center">{el.sale}</div>
+                  <div
+                    className={`_p-2 _flex _items-center _rounded-full _bg-warning
+                      _text-xl _font-semibold`}
+                  >
+                    {el.sale}
+                  </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="no-sales-wrapper _flex _flex-col _justify-center">
+            <div className="_m-6 _w-64 _flex _flex-col _justify-center">
               <div className="_flex _justify-center">
                 <Discount />
               </div>
@@ -135,26 +142,31 @@ export const Costs = (props: any) => {
               </div>
             </div>
           )}
-          <div className="costs-wrapper _flex _justify-around">
+          <div className="_flex _justify-around _gap-4 _p-4">
             {costs.map((el) => (
-              <div className="costs-item _flex _flex-col" key={el.title}>
-                <div className="title">{t(el.title)}</div>
-                <div className="text _whitespace-pre-wrap">{t(el.text)}</div>
+              <div
+                className="_my-3 _text-center _flex _flex-col"
+                key={el.title}
+              >
+                <div className="_text-xl _font-semibold">{t(el.title)}</div>
+                <div className="_text-gray-dark _mt-6 _mb-4 _px-5 _whitespace-pre-wrap">
+                  {t(el.text)}
+                </div>
                 <div className="_mt-auto">
                   <div className="_flex _justify-center">
-                    <div className="coast">
+                    <div className="_text-2xl _font-bold">
                       {el.coast}
                       {t("zl")}
                     </div>
                     {el.oldCoast ? (
-                      <div className="old-coast _flex _flex-col _justify-center">
+                      <div className="_ml-2 _text-gray-dark _line-through _flex _flex-col _justify-center">
                         {el.oldCoast}
                         {t("zl")}
                       </div>
                     ) : null}
                   </div>
-                  <div
-                    className="button _cursor-pointer"
+                  <Button
+                    className="_mt-6 _w-full"
                     onClick={() => {
                       router.push(
                         `${pathname}/${
@@ -162,30 +174,37 @@ export const Costs = (props: any) => {
                         }`
                       );
                     }}
-                  >
-                    {t("Order")}
-                  </div>
+                    title={t("Order")}
+                  />
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
-      <div className="sub-mobile-wrapper mobile-only">
+      <div className="mobile-only _w-full">
         {tab === TABS.SUBSCRIPTION ? (
-          <div className="sub-mobile-sales-wrapper">
+          <div className="_mt-5 _flex _justify-center _gap-4">
             {sales.map((el, i) => (
               <div
-                className={`sub-mobile-sales-item ${
-                  el.title === salesCost
-                    ? " sub-mobile-sales-item-active "
-                    : " "
+                className={`_w-1/3 _py-3 _px-1 _text-center ${
+                  el.title === salesCost ? "_rounded-md _bg-primary" : ""
                 }`}
                 onClick={() => setSalesCost(el.title)}
                 key={el.title + "-mobile-sales-" + i}
               >
-                <div className="sub-mobile-sales-sale">{el.sale}</div>
-                <div className="sub-mobile-sales-title">
+                <div
+                  className={`_mx-auto _mb-1 _w-3/4 _py-2 _text-lg _font-semibold ${
+                    el.title === salesCost ? "_rounded-full _bg-warning" : ""
+                  }`}
+                >
+                  {el.sale}
+                </div>
+                <div
+                  className={`_text-sm _font-medium _whitespace-nowrap ${
+                    el.title === salesCost ? "_text-white" : ""
+                  }`}
+                >
                   <b>
                     <Writer text={t(el.title)} />
                   </b>
@@ -194,26 +213,29 @@ export const Costs = (props: any) => {
             ))}
           </div>
         ) : null}
-        <div className="grid-sales-mobile">
+        <div className="_mt-5 _flex _flex-col _gap-5">
           {costs.map((el, j) => (
-            <div className="sales-mobile-item" key={el.title + "_mobile_" + j}>
-              <div className="sales-mobile-title _mt-4">
+            <div
+              className="_p-4 _rounded-xl _bg-light"
+              key={el.title + "_mobile_" + j}
+            >
+              <div className="_text-center _font-medium _mt-4">
                 <b>{t(el.title)}</b>
               </div>
-              <div className="sales-mobile-price-wrapper">
-                <div className="sales-mobile-current-price">
+              <div className="_my-3 _flex _justify-center _gap-2">
+                <div className="_text-lg _font-semibold">
                   {el.coast}
                   {t("zl")}
                 </div>
                 {el.oldCoast ? (
-                  <div className="sales-mobile-old-price _flex _flex-col _justify-center">
+                  <div className="_text-gray-dark _line-through _flex _flex-col _justify-center">
                     {el.oldCoast}
                     {t("zl")}
                   </div>
                 ) : null}
               </div>
-              <div
-                className="sales-mobile-item-order-btn"
+              <Button
+                className="_w-36 _mx-auto _mt-7"
                 onClick={() => {
                   router.push(
                     `${pathname}/${
@@ -221,13 +243,12 @@ export const Costs = (props: any) => {
                     }`
                   );
                 }}
-              >
-                {t("Order")}
-              </div>
+                title={t("Order")}
+              />
             </div>
           ))}
         </div>
-        <div className="sub-text-below-mobile">
+        <div className="_text-gray-dark _mt-5 _text-center _text-sm">
           <div>{t("sub-text-below-mobile_line-1")}</div>
           <div>{t("sub-text-below-mobile_line-2")}</div>
           <div>{t("sub-text-below-mobile_line-3")}</div>

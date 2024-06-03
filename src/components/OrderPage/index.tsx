@@ -14,7 +14,6 @@ import { SubServicesList } from "./SubServicesList";
 import { Summary } from "./Summary";
 import { PRIVATE_HOUSE_SERVICES, SERVICES } from "./constants";
 
-import "./style.scss";
 import PrivateHouse from "@/components/OrderPage/PrivateHouse";
 import { LocaleContext, PricesContext } from "@/components/Providers";
 import { MAIN_CATEGORIES } from "@/constants";
@@ -99,21 +98,28 @@ export const OrderPage = ({ discounts }: OrderPageProps) => {
   return (
     <div className="order-page">
       <div>
-        <div className="header-wrapper _flex _items-center">
+        <div
+          className={`header-wrapper _text-2xl _font-semibold _text-primary
+            _px-24 _h-14 _mb-10 _border-b _border-solid _border-light _px-5-percents-mobile
+            _flex _items-center`}
+        >
           <div
             className="_cursor-pointer _flex _items-center"
             onClick={() => {
               router.push(`/${lang}/order`);
             }}
           >
-            <div className="arrow-button">
-              <LeftArrow />
+            <div className="_h-7 _w-7 _mr-3 _cursor-pointer _text-gray-dark hover:_text-primary">
+              <LeftArrow className="_w-full _h-full" />
             </div>
             {i18n.t(categoryTitle)}
           </div>
         </div>
-        <div className="content-wrapper">
-          <div className="left-col">
+        <div
+          className={`_flex _flex-col lg:_flex-row _px-5-percents-mobile
+            _px-24 _flex _gap-14 lg:_gap-10`}
+        >
+          <div className="_gap-20 _flex _flex-col _w-full lg:_w-4/6">
             <ServicesList
               mainCategory={categoryTitle}
               t={i18n.t}
@@ -181,7 +187,7 @@ export const OrderPage = ({ discounts }: OrderPageProps) => {
               setOwnCheckList={setOwnCheckList}
             />
           </div>
-          <div className="right-col">
+          <div className="_w-full lg:_w-2/6 _min-w-2/6">
             <Summary
               title={selectedService}
               counter={counterValue}

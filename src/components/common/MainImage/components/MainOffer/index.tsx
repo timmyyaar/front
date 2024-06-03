@@ -6,7 +6,7 @@ import { FIGURE_BRACKETS_REGEX } from "@/constants";
 
 import { CheckSvg } from "./icons/check-fill";
 import vector from "./icons/vector.svg";
-import "./style.scss";
+import Button from "@/components/common/Button";
 
 export const MainOffer: FC<any> = (props) => {
   const { t, handleScroll } = props;
@@ -20,10 +20,13 @@ export const MainOffer: FC<any> = (props) => {
 
   return (
     <>
-      <div className="vector-wrapper mobile-none">
+      <div
+        className={`_-translate-y-2/4 _-translate-x-2/4
+          _absolute _top-2/4 _left-2/4 mobile-none`}
+      >
         <Image src={vector} alt="" />
-        <div className="offer-wrapper">
-          <div className="title sub-title _w-max _whitespace-pre-wrap">
+        <div className="_top-[6.5%] _left-[15%] _absolute">
+          <div className="_text-7xl _text-dark _w-max _whitespace-pre-wrap">
             {reactStringReplace(
               t("main_page_title"),
               FIGURE_BRACKETS_REGEX,
@@ -34,44 +37,46 @@ export const MainOffer: FC<any> = (props) => {
           </div>
           <div className="_mt-5 _flex _gap-5">
             {advantages.map((el) => (
-              <div className="advantages-block _flex _gap-3" key={el.title}>
+              <div className="_flex _gap-3" key={el.title}>
                 <CheckSvg />
                 <div>
-                  <div className="advantages-title">{t(el.title)}</div>
-                  <div className="advantages-text">{t(el.text)}</div>
+                  <div className="_font-semibold _text-dark">{t(el.title)}</div>
+                  <div>{t(el.text)}</div>
                 </div>
               </div>
             ))}
           </div>
           <div className="_mt-10 _flex _gap-6">
-            <div
-              className="main-button _cursor-pointer"
+            <Button
+              className="_py-6 _font-semibold _min-w-44"
               onClick={() => router.push(`${pathname}/order`)}
-            >
-              {t("Order online now")}
-            </div>
-            <div
-              className="sub-button _cursor-pointer"
+              title={t("Order online now")}
+            />
+            <button
+              className={`_flex _justify-center _items-center hover:_bg-primary-dark active:_bg-primary-dark
+                hover:_text-white active:_text-white _transition-all _min-w-24 _py-6
+                _text-center _border-40 _bg-white _text-dark _font-semibold _cursor-pointer`}
               onClick={() => handleScroll("costs-block")}
             >
               {t("Pricing")}
-            </div>
+            </button>
           </div>
         </div>
       </div>
-      <div className="main-offer-wrapper-mobile">
-        <div
-          className="main-button _cursor-pointer"
+      <div className="_px-[13vw] mobile-only _absolute _top-0 _w-full">
+        <Button
+          className="_mt-[20vh] _py-6 _font-semibold _h-12 _w-full _mb-2"
           onClick={() => router.push(`${pathname}/order`)}
-        >
-          {t("Order")}
-        </div>
-        <div
-          className="sub-button _cursor-pointer"
+          title={t("Order")}
+        />
+        <button
+          className={`_flex _justify-center _items-center _h-12 _w-full
+            hover:_bg-primary-dark active:_bg-primary-dark hover:_text-white active:_text-white _transition-all _min-w-24
+            _py-6 _text-center _border-40 _bg-white _text-dark _font-semibold _cursor-pointer`}
           onClick={() => handleScroll("costs-block")}
         >
           {t("Pricing")}
-        </div>
+        </button>
       </div>
     </>
   );

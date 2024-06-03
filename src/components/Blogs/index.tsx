@@ -5,8 +5,6 @@ import React, { useContext, useEffect } from "react";
 import reactStringReplace from "react-string-replace";
 import Image from "next/image";
 
-import "./style.scss";
-
 import calendarSvg from "./icons/calendar.svg";
 import timeSvg from "./icons/time.svg";
 import { Blog } from "@/types";
@@ -37,15 +35,15 @@ function Blogs({ blog }: BlogsProps) {
   }, []);
 
   return (
-    <div className="blogs-wrapper">
+    <div className="blogs-wrapper _bg-light">
       <>
-        <div className="blog-wrapper">
-          <div className="blog-title text-center">
-            {t(`blogs_title_${blog.id}`)}
+        <div className="_pt-6 lg:_px-48 lg:_py-9">
+          <div className="_main-title _px-6">
+            {t(`blogs_title_${blog.id}`, "Blog title")}
           </div>
-          <div className="_flex _justify-center _gap-6 _my-6 blog-images-wrapper">
-            <img src={blog.blog_image_one} alt="" className="blog-image" />
-            <img src={blog.blog_image_two} alt="" className="blog-image" />
+          <div className="_flex _justify-center _gap-6 _my-6 _flex-collg:_flex-row _px-6 lg:_px-0">
+            <img src={blog.blog_image_one} alt="" className="_rounded-3xl" />
+            <img src={blog.blog_image_two} alt="" className="_rounded-3xl" />
           </div>
           <div className="_px-6">
             <div className="_flex _gap-4 _mb-6">
@@ -62,7 +60,7 @@ function Blogs({ blog }: BlogsProps) {
             </div>
             <div className="_whitespace-pre-wrap">
               {reactStringReplace(
-                t(`blogs_text_${blog.id}`),
+                t(`blogs_text_${blog.id}`, "Blog text"),
                 TITLE_REGEXP,
                 (match) => (
                   <span className="_font-semibold">{match}</span>

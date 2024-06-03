@@ -1,21 +1,17 @@
-import "./style.scss";
-
 import BlogItem from "@/components/MainPage/Blogs/Blog";
 import SliderStep from "@/components/common/Slider/SliderStep";
 import Swiper from "@/components/common/Swiper";
 import { Blog } from "@/types";
 
 interface BlogsProps {
-  t: (text: string) => string;
+  t: (text: string, defaultText?: string) => string;
   blogs: Blog[];
 }
 
 function Blogs({ t, blogs }: BlogsProps) {
   return blogs.length > 0 ? (
-    <div className="main-blogs-wrapper" id="blog">
-      <div className="title _mb-8 _font-semibold _text-center">
-        TYT {t("blogs_title")}
-      </div>
+    <div className="_mb-14 lg:_mx-24 lg:_mb-0 _px-5-percents-mobile" id="blog">
+      <div className="_main-title _mb-8">TYT {t("blogs_title")}</div>
       <div className="mobile-none">
         <SliderStep
           elements={blogs.map((blog) => (

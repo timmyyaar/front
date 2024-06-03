@@ -6,6 +6,7 @@ import {
   createPaymentIntent,
   deletePaymentIntent,
 } from "@/components/OrderPage/Summary/OrderButton/actions";
+import Button from "@/components/common/Button";
 
 export type CreateOrderPayload = {
   name: string;
@@ -51,7 +52,7 @@ interface OrderButtonProps {
   isDisabled: boolean;
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
-  t: (text: string) => string;
+  t: (text: string, defaultText?: string) => string;
 }
 
 function OrderButton({
@@ -116,15 +117,13 @@ function OrderButton({
     setClientSecret("");
   };
 
-  const orderButtonClassName = `order-wrapper _cursor-pointer ${
-    isDisabled || isClientSecretLoading ? "order-wrapper-disabled" : ""
-  } ${isLoading || isClientSecretLoading ? "loading" : ""}`;
-
   return (
     <>
       <div className="_mt-6">
-        <div
-          className={orderButtonClassName}
+        <Button
+          className="_w-full _h-14"
+          disabled={isDisabled || isClientSecretLoading}
+          isLoading={isLoading || isClientSecretLoading}
           onClick={async () => {
             if (isDisabled) {
               return;
@@ -154,9 +153,8 @@ function OrderButton({
               }
             }
           }}
-        >
-          {t("Order")}
-        </div>
+          title={t("Order")}
+        />
         {orderError && (
           <div className="text-center _mt-2 text-danger _text-center">
             {t("unexpected_error")}

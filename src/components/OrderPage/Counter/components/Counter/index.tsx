@@ -1,8 +1,6 @@
 import React, { ChangeEvent, FC } from "react";
 import Cookies from "js-cookie";
 
-import "./style.scss";
-
 interface IProps {
   value: number;
   minValue: number;
@@ -49,6 +47,9 @@ export const Counter: FC<IProps> = (props) => {
     onChange(+updatedValue || minimumCounterValue);
   };
 
+  //everyone understands it's bad, but we keep it just because i18n
+  // can't work with some pluralization, 3-5 is few for him, but in russian,
+  // for example, 5 is different then 4
   const countTitle = () => {
     if (Cookies.get("locale") === "ru") {
       if (title === "bedroom") {
@@ -146,10 +147,10 @@ export const Counter: FC<IProps> = (props) => {
   const valueLength = value.toString().length;
 
   return (
-    <div className="counter-component">
+    <div className="_relative _w-full _h-12 lg:_h-20 _rounded-full _bg-light _overflow-hidden">
       <div
-        className={`_z-10 counter-icons icon-minus ${
-          limit ? "icon-limit" : ""
+        className={`_z-10 _cursor-pointer _absolute _top-1/2 _-translateY-50 _left-4 ${
+          limit ? "_text-gray-lighter" : "hover:_text-primary"
         }`}
         onClick={limit ? () => {} : onMinus}
       >
@@ -159,18 +160,21 @@ export const Counter: FC<IProps> = (props) => {
           height="80"
           viewBox="0 0 81 80"
           fill="none"
-          className="icon"
+          className="_h-12 _w-12 lg:_h-auto lg:_w-auto"
         >
           <rect x="0.5" width="80" height="80" rx="40" fill="#ECF0FF" />
           <path
             d="M31.167 40L49.8337 40"
-            stroke="#232323"
+            stroke="currentColor"
             strokeWidth="5"
             strokeLinecap="round"
           />
         </svg>
       </div>
-      <div className="counter-title _font-semibold">
+      <div
+        className={`_absolute _top-1/2 _right-0 _left-0 _-translateY-50 _text-center
+          lg:_text-xl _select-none _font-semibold`}
+      >
         <input
           type="text"
           style={{
@@ -194,25 +198,29 @@ export const Counter: FC<IProps> = (props) => {
           countTitle()
         )}
       </div>
-      <div className="counter-icons icon-plus" onClick={onPlus}>
+      <div
+        className={`hover:_text-primary _cursor-pointer _absolute _top-1/2
+          _-translateY-50 _right-4`}
+        onClick={onPlus}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="81"
           height="80"
           viewBox="0 0 81 80"
           fill="none"
-          className="icon"
+          className="_h-12 _w-12 lg:_h-auto lg:_w-auto"
         >
           <rect x="0.5" width="80" height="80" rx="40" fill="#ECF0FF" />
           <path
             d="M40.5 30.6689V49.3356"
-            stroke="#232323"
+            stroke="currentColor"
             strokeWidth="5"
             strokeLinecap="round"
           />
           <path
             d="M31.1689 40L49.8356 40"
-            stroke="#232323"
+            stroke="currentColor"
             strokeWidth="5"
             strokeLinecap="round"
           />

@@ -1,17 +1,9 @@
 .main-image-wrapper {
-  position: relative;
   height: calc(100vh - 85px);
-  overflow: hidden;
 }
 
-.main-image-wrapper-mobile {
-  display: none;
-}
-
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 1024px) {
   .main-image-wrapper-mobile {
-    display: block;
-    position: relative;
-    margin-bottom: 120px;
+    height: 400px;
   }
 }

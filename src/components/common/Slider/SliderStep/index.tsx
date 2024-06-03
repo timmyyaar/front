@@ -4,7 +4,6 @@ import React, { useState } from "react";
 
 import { LeftArrow } from "../icons/LeftArrow";
 import { RightArrow } from "../icons/RightArrow";
-import "../style.scss";
 
 interface SliderStepProps {
   elements: JSX.Element[];
@@ -34,11 +33,14 @@ const SliderStep = ({ elements, itemsPerPage = 4 }: SliderStepProps) => {
   };
 
   return (
-    <div className="slider-wrapper">
-      <div className="arrow-button arrow-button-left" onClick={prevSlide}>
-        <LeftArrow />
+    <div className="_relative">
+      <div
+        className="_group _cursor-pointer _absolute _top-1/2 _-translate-y-2/4 _-left-12"
+        onClick={prevSlide}
+      >
+        <LeftArrow className="group-hover:_text-primary _transition-all" />
       </div>
-      <div className="slider-component">
+      <div className="_overflow-hidden">
         <div
           className="_flex _transition-transform _duration-500 ease-in-out"
           style={{
@@ -55,8 +57,11 @@ const SliderStep = ({ elements, itemsPerPage = 4 }: SliderStepProps) => {
           ))}
         </div>
       </div>
-      <div className="arrow-button arrow-button-right" onClick={nextSlide}>
-        <RightArrow />
+      <div
+        className="_group _cursor-pointer _absolute _top-1/2 _-translate-y-2/4 _-right-12"
+        onClick={nextSlide}
+      >
+        <RightArrow className="group-hover:_text-primary _transition-all" />
       </div>
     </div>
   );

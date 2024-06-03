@@ -8,7 +8,6 @@ import { Writer } from "@/components/common/Writer";
 import { sendGAEvent } from "@/google-analytics";
 import { LogoIcon } from "@/components/common/icons/components/Logo";
 
-import "./style.scss";
 import PhoneIcon from "@/components/common/icons/components/PhoneIcon";
 import MailIcon from "@/components/common/icons/components/MailIcon";
 
@@ -25,16 +24,16 @@ export const Footer = (props: any) => {
   };
 
   return (
-    <footer className="footer-wrapper">
+    <footer className="footer-wrapper _py-10 _text-dark">
       <div className="_flex _justify-center">
         <div className="_mb-0.5">
           <LogoIcon />
         </div>
       </div>
-      <div className="title _flex _justify-center">
+      <div className="_mb-6 _main-title _flex _justify-center">
         <div className="text-gradient">{t("Take Your Time")}</div>
       </div>
-      <div className="contacts-wrapper _flex _justify-center _gap-3">
+      <div className="_mb-5 _text-dark _flex _justify-center _gap-3">
         <a
           className="icon"
           href="https://t.me/takeyoourtime"
@@ -69,7 +68,7 @@ export const Footer = (props: any) => {
         </a>
       </div>
       <div className="_flex _justify-center">
-        <div className="contacts-wrapper _flex _justify-between _gap-3">
+        <div className="_mb-5 _text-dark _flex _justify-between _gap-3">
           <div className="_flex _gap-1">
             <PhoneIcon isTransparent />
             +48 730 003 997
@@ -77,7 +76,7 @@ export const Footer = (props: any) => {
         </div>
       </div>
       <div className="_flex _justify-center">
-        <div className="contacts-wrapper _flex _justify-between _gap-3">
+        <div className="_mb-5 _text-dark _flex _justify-between _gap-3">
           <div className="_flex _gap-1 _items-center">
             <MailIcon isTransparent />
             Mail: tytimeinbox@gmail.com
@@ -89,16 +88,10 @@ export const Footer = (props: any) => {
           className="_flex _justify-between _text-center"
           style={{ width: 300, marginBottom: "20px" }}
         >
-          <a
-            href="/Polityka_prywatności.pdf"
-            target="_blank"
-          >
+          <a href="/Polityka_prywatności.pdf" target="_blank">
             <Writer text={t("Privacy and policy")} />
           </a>
-          <a
-            href="/Warunki_i_postanowienia.pdf"
-            target="_blank"
-          >
+          <a href="/Warunki_i_postanowienia.pdf" target="_blank">
             <Writer text={t("Terms and conditions")} />
           </a>
         </div>

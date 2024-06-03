@@ -21,7 +21,7 @@ interface SummaryServiceProps {
   onRemoveSubService: (title: string, isSecond?: boolean) => void;
   manualCleanersCount: number;
   setManualCleanersCount: Dispatch<SetStateAction<number>>;
-  t: (text: string) => string;
+  t: (text: string, defaultText?: string) => string;
   isSecond?: boolean;
 }
 
@@ -38,9 +38,11 @@ function SummaryService({
 }: SummaryServiceProps) {
   return (
     <>
-      <div className="summary-title">{t(serviceTitle + "_summary_title")}</div>
+      <div className="_text-2xl _font-semibold">
+        {t(serviceTitle + "_summary_title")}
+      </div>
       {counterValue?.length > 0 && (
-        <div className="summary-counter">
+        <div className="_flex _gap-3 _overflow-hidden _mt-2">
           {counterValue.map((el: any, i: number, arr: any[]) =>
             el.type === "counter" ? (
               <div key={el.title + el.value + i}>
@@ -72,11 +74,14 @@ function SummaryService({
         t={t}
       />
       {subServiceList.length ? (
-        <div className="services-in-summary">
-          <div className="title-sub-service-title">{t("Add services")}</div>
+        <div>
+          <div className="_my-2 _text-lg _font-semibold">
+            {t("Add services")}
+          </div>
           {subServiceList.map((subService: SelectedSubService, i: number) => (
             <div
-              className="service-item _flex _items-center"
+              className={`_mr-2 _mb-2 _float-left _h-full _w-max _pl-3 _pr-1.5
+                _flex _items-center _rounded-full _max-w-full _border _border-solid _border-gray`}
               key={subService.title + i}
             >
               <div>
@@ -90,7 +95,7 @@ function SummaryService({
                 )
               </div>
               <div
-                className="icon-wrapper _cursor-pointer"
+                className="_ml-1 _cursor-pointer"
                 onClick={() => onRemoveSubService(subService.title, isSecond)}
               >
                 <IconCrosse />

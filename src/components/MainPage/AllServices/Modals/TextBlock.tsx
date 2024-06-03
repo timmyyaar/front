@@ -12,22 +12,24 @@ interface TextBlockProps {
 
 function TextBlock({ t, title, items, center, inline }: TextBlockProps) {
   return (
-    <div className={`wrapper-modal-reg ${center ? "cell-full-width" : ""}`}>
-      <div className="wrapper-modal-reg-title">
+    <div
+      className={`_p-10 _border-40 _bg-light ${
+        center ? "_col-span-1 lg:_col-span-2" : ""
+      }`}
+    >
+      <div className="_text-2xl _mb-10 _text-center _font-semibold">
         <Writer text={t(title)} />
       </div>
       {inline ? (
-        <div className="wrapper-modal-reg-list-row _justify-between">
+        <div className="_flex-wrap lg:_flex-nowrap _flex _gap-2 _justify-between">
           {(items as string[][]).map((innerItems: string[]) => (
             <div>
               {innerItems.map((innerItem, index) => (
                 <div
-                  className="wrapper-modal-reg-item"
+                  className="_flex before:_content-['\2022'] before:_inline-block before:_mr-3"
                   key={`${innerItem}-${index}`}
                 >
-                  <div className="wrapper-modal-reg-item-text">
-                    <Writer text={t(innerItem)} />
-                  </div>
+                  <Writer text={t(innerItem)} />
                 </div>
               ))}
             </div>
@@ -35,12 +37,13 @@ function TextBlock({ t, title, items, center, inline }: TextBlockProps) {
         </div>
       ) : (
         <div className="_flex _justify-center">
-          <div className="wrapper-modal-reg-list">
+          <div className="_flex _flex-col _gap-2">
             {(items as string[]).map((item, index) => (
-              <div className="wrapper-modal-reg-item" key={`${item}-${index}`}>
-                <div className="wrapper-modal-reg-item-text">
-                  <Writer text={t(item)} />
-                </div>
+              <div
+                className="_flex before:_content-['\2022'] before:_inline-block before:_mr-3"
+                key={`${item}-${index}`}
+              >
+                <Writer text={t(item)} />
               </div>
             ))}
           </div>

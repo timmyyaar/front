@@ -55,8 +55,8 @@ function DeepKitchenModalContent({
   return (
     <>
       <div className="_text-center _mb-10">
-        <div className="modal-title-wrapper">
-          <span className="text-gradient modal-title-text">
+        <div className="_mb-4 lg:_mb-6">
+          <span className="text-gradient _main-title">
             {t("deep_kitchen_cleaning_title")}
           </span>
         </div>
@@ -72,9 +72,9 @@ function DeepKitchenModalContent({
         <TextBlock key={index} title={title} items={items} t={t} inline />
       ))}
       {!isOrder && (
-        <div className="mt-16-mobile-8">
-          <div className="modal-title-wrapper _text-center">
-            <span className="modal-title-text text-gradient">
+        <div className="_mt-8 lg:_mt-16">
+          <div className="_mb-4 lg:_mb-6 _text-center">
+            <span className="_main-title text-gradient">
               {t("Prices")}
             </span>
           </div>

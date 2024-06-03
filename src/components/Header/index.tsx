@@ -19,8 +19,6 @@ import NavigationItemsMobile from "@/components/Header/NavigationItemsMobile";
 import { sendGAEvent } from "@/google-analytics";
 import { useClickOutside } from "@/hooks/useClickOutSide";
 
-import "./style.scss";
-
 const mainLocales = {
   en: "English",
   ru: "Русский",
@@ -48,7 +46,7 @@ export const Header = () => {
         return mainLocales[key] === language;
       }) || "pl";
 
-    Cookies.set("locale", newLocale);
+    Cookies.set("locale", newLocale, { expires: 30 });
 
     sendGAEvent({
       action: "language_change",
@@ -78,9 +76,15 @@ export const Header = () => {
   };
 
   return (
-    <header ref={headerRef} className={isMenuOpened ? "header-sticky" : ""}>
-      <nav className="_flex">
-        <div className="logo-wrapper _flex">
+    <header
+      ref={headerRef}
+      className={`_h-auto lg:_h-20 _py-2 _px-6 lg:_py-2 lg:_px-24 _bg-white
+        _flex _items-center ${
+          isMenuOpened ? "_fixed _top-0 _w-full _z-50" : ""
+        }`}
+    >
+      <nav className="_flex _w-full">
+        <div className="_m-0 lg:_mr-3 _flex">
           <div
             className="navbar-brand _flex _items-center _cursor-pointer"
             onClick={() => {
@@ -88,23 +92,28 @@ export const Header = () => {
             }}
           >
             <div>
-              <LogoIcon className="logo-icon" />
+              <LogoIcon className="_w-11 _h-9 lg:_w-auto lg:_h-auto" />
             </div>
           </div>
-          <div className="sub-menu-wrapper _flex _flex-col _justify-center _pl-4">
+          <div
+            className={`_text-sm lg:_text-lg _font-semibold _pl-2 lg:_pl-4
+              _text-dark _flex _flex-col _justify-center`}
+          >
             <span className="text-gradient">Krakow</span>
           </div>
         </div>
         <NavigationItems t={t} />
         <div
-          className="navigation-wrapper _flex _justify-between _items-center _cursor-pointer"
+          className={`_flex _justify-between _items-center _relative
+            _text-dark _ml-[10%] lg:_ml-0 _cursor-pointer _group`}
           onClick={(e) => {
             e.preventDefault();
             setLocalesModal(true);
           }}
         >
           <div
-            className="_px-4 _py-2 _flex _gap-1 link"
+            className={`_px-4 _py-2 _flex _gap-1 group-hover:_rounded-full
+              group-hover:_outline group-hover:_outline-1 group-hover:_outline-primary-light`}
             onClick={(e) => {
               e.preventDefault();
             }}
@@ -114,14 +123,20 @@ export const Header = () => {
               {t(mainLocales[locale])}
             </div>
             <div className="_flex _items-center">
-              <Polygon />
+              <Polygon className="group-hover:_text-primary" />
             </div>
           </div>
           {localesModal ? (
-            <div className="navigation-sub-menu-wrapper" ref={localesSelectRef}>
+            <div
+              className={`_z-50 _absolute _top-2.5 _rounded-xl _border _border-solid
+                _border-primary-light _bg-white`}
+              ref={localesSelectRef}
+            >
               {Object.values(mainLocales).map((option) => (
                 <div
-                  className="navigation-sub-menu-item"
+                  className={`_py-2 _pr-6 _pl-4 hover:_bg-light active:_bg-light
+                    first:_rounded-t-xl last:_rounded-b-xl last:_border-b-0
+                    _border-b _border-solid _border-primary-light`}
                   onClick={(e) => onSelectLocale(e, option)}
                   key={option}
                 >
@@ -131,13 +146,16 @@ export const Header = () => {
             </div>
           ) : null}
         </div>
-        <div className="sub-menu-wrapper mobile-none _ml-auto _flex _gap-6">
-          <div className="phone _flex _flex-col _justify-center text-gradient">
+        <div
+          className={`_text-sm lg:_text-lg _font-semibold _pl-2
+            lg:_pl-0 mobile-none _ml-auto _flex _gap-6`}
+        >
+          <div className="_hidden xl:_flex _flex-col _justify-center text-gradient">
             +48 730 003 997
           </div>
           <div className="_flex _gap-3">
             <a
-              className="icon _flex _flex-col _justify-center"
+              className="_flex _flex-col _justify-center"
               href="https://t.me/takeyoourtime"
               target="_blank"
               onClick={() => trackSocialMediaClick("Telegram")}
@@ -145,7 +163,7 @@ export const Header = () => {
               <TelegramIcon />
             </a>
             <a
-              className="icon _flex _flex-col _justify-center"
+              className="_flex _flex-col _justify-center"
               href="https://wa.me/48730003997"
               target="_blank"
               onClick={() => trackSocialMediaClick("WhatsApp")}
@@ -153,7 +171,7 @@ export const Header = () => {
               <WhatsappIcon />
             </a>
             <a
-              className="icon _flex _flex-col _justify-center"
+              className="_flex _flex-col _justify-center"
               href="https://www.instagram.com/takeyourtime_krakow/"
               target="_blank"
               onClick={() => trackSocialMediaClick("Instagram")}
@@ -161,7 +179,7 @@ export const Header = () => {
               <InstIcon />
             </a>
             <a
-              className="icon _flex _flex-col _justify-center"
+              className="_flex _flex-col _justify-center"
               href="https://maps.app.goo.gl/uTEhCrLkdEXG6DDd8"
               target="_blank"
               onClick={() => trackSocialMediaClick("Google")}
@@ -171,15 +189,17 @@ export const Header = () => {
           </div>
         </div>
         <div
-          className="mobile-only-flex _items-center menu-icon"
+          className="mobile-only-flex _items-center _ml-auto"
           onClick={() => setIsMenuOpened(!isMenuOpened)}
         >
-          <MenuIcon className={`icon ${isMenuOpened ? "active" : ""}`} />
+          <MenuIcon
+            className={`${isMenuOpened ? "_text-primary" : "_text-dark"}`}
+          />
         </div>
       </nav>
       {isMenuOpened && (
         <div
-          className="_fixed _w-full _h-full _left-0 menu-container _z-10"
+          className="_fixed _w-full _h-full _left-0 _bg-light _z-10"
           style={{
             top: headerHeight ? headerHeight - 1 : 0,
           }}

@@ -3,7 +3,6 @@
 import React, { FC, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import "./style.scss";
 import "swiper/css";
 
 interface Props {
@@ -31,9 +30,10 @@ const MobileSwiper: FC<Props> = (props) => {
 
           return (
             <div
-              className={`slider-status _transition-all _duration-500 ${
-                subElement ? "" : "sub"
-              }`}
+              className={`slider-status _w-12 _h-2.5 _rounded-full _bg-primary
+                _transition-all _duration-500 ${
+                  subElement ? "" : "_w-2.5 _h-2.5 _bg-light"
+                }`}
               key={"slider-status" + index}
             />
           );

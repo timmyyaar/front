@@ -3,14 +3,13 @@ import Minus from "@/components/OrderPage/Summary/SummaryService/icons/Minus";
 import Plus from "@/components/OrderPage/Summary/SummaryService/icons/Plus";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useClickOutside } from "@/hooks/useClickOutSide";
-import "./style.scss";
 
 interface CleanersCountProps {
   cleanersCount: number;
   manualCleanersCount: number;
   setManualCleanersCount: Dispatch<SetStateAction<number>>;
   serviceTitle: string;
-  t: (text: string) => string;
+  t: (text: string, defaultText?: string) => string;
 }
 
 function CleanersCount({
@@ -39,7 +38,7 @@ function CleanersCount({
   );
 
   return (
-    <div className="_mt-2 cleaners-count-wrapper">
+    <div className="_mt-2">
       <span className="_flex _items-center">
         <span
           onClick={() => {
@@ -47,11 +46,13 @@ function CleanersCount({
               setShowManualPopup(true);
             }
           }}
-          className={`${!isDryCleaningOrOzonation ? "original-cleaners" : ""}`}
+          className={`${
+            !isDryCleaningOrOzonation ? "_cursor-pointer hover:_opacity-80" : ""
+          }`}
         >
           {t("Cleaners")}: <b>{cleanersCount}</b>
           {manualCleanersCount > 0 && (
-            <span className="cleaners-text difference _ml-1">
+            <span className="_font-semibold _bg-primary _ml-1">
               (+{manualCleanersCount})
             </span>
           )}
@@ -73,12 +74,12 @@ function CleanersCount({
       </span>
       {isCleanersInfoHovered && (
         <>
-          <div className="mobile-none cleaners-count-popover info _flex _flex-col _gap-3 _rounded-2xl _p-3">
+          <div className="mobile-none _z-10 _absolute _bg-light _border _border-solid _border-primary _shadow-md max-w-[80%] _text-center _flex _flex-col _gap-3 _rounded-2xl _p-3">
             {t("extra_cleaners_information")}
           </div>
           <div
             ref={cleanersInfoPopoverRef}
-            className="mobile-only cleaners-count-popover info _flex _flex-col _gap-3 _rounded-2xl _p-3"
+            className="mobile-only _z-10 _absolute _bg-light _border _border-solid _border-primary _shadow-md max-w-[80%] _text-center _flex _flex-col _gap-3 _rounded-2xl _p-3"
           >
             {t("extra_cleaners_information")}
           </div>
@@ -87,15 +88,17 @@ function CleanersCount({
       {showManualPopup && (
         <div
           ref={cleanersPopoverRef}
-          className="cleaners-count-popover _flex _flex-col _gap-3 _rounded-2xl _p-3"
+          className="_z-10 _absolute _bg-light _border _border-solid _border-primary _shadow-md _flex _flex-col _gap-3 _rounded-2xl _p-3"
         >
-          <div className="_text-center cleaners-text">
+          <div className="_text-center _font-semibold">
             {t("extra_cleaners")}
           </div>
           <div className="_flex _items-center">
             <Minus
-              className={`icon ${
-                isMinusCleanersIconDisabled ? "disabled" : ""
+              className={`${
+                isMinusCleanersIconDisabled
+                  ? "_cursor-default _text-gray-lighter _pointer-events-none"
+                  : "_cursor-pointer hover:_opacity-70 active:_text-primary"
               }`}
               onClick={() => {
                 if (!isMinusCleanersIconDisabled) {
@@ -103,9 +106,11 @@ function CleanersCount({
                 }
               }}
             />
-            <span className="cleaners-count _mx-2">{manualCleanersCount}</span>
+            <span className="cleaners-count _text-xl _font-semibold _mx-2">
+              {manualCleanersCount}
+            </span>
             <Plus
-              className="icon"
+              className="_cursor-pointer hover:_opacity-70 active:_text-primary"
               onClick={() => {
                 setManualCleanersCount(manualCleanersCount + 1);
               }}

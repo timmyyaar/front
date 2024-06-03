@@ -2,14 +2,13 @@
 
 import Image from "next/image";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { LocaleContext } from "@/components/Providers";
 import { useLocales } from "@/hooks/useLocales";
 
 import successDesktop from "./images/success-desktop.svg";
 import failedDesktop from "./images/failed-desktop.svg";
-
-import "./style.scss";
+import Button from "@/components/common/Button";
 
 const REDIRECT_STATUSES = {
   SUCCEEDED: "succeeded",
@@ -42,9 +41,9 @@ function PaymentRedirect() {
   };
 
   return (
-    <div className="payment-redirect">
+    <div className="payment-redirect _bg-light _flex-1">
       <div className="_flex _flex-col _items-center">
-        <div className="payment-status-title _mb-8 _mt-12 text-gradient">
+        <div className="_main-title _mb-8 _mt-12 text-gradient">
           <span>
             {redirectStatus === REDIRECT_STATUSES.FAILED
               ? t("payment_failed")
@@ -53,23 +52,17 @@ function PaymentRedirect() {
         </div>
         {redirectStatus === REDIRECT_STATUSES.FAILED ? (
           <>
-            <Image
-              src={failedDesktop}
-              alt=""
-              className="payment-status-image"
+            <Image src={failedDesktop} alt="" className="_max-h-80" />
+            <Button
+              className="_w-full _max-w-full lg:_w-[30rem] _mt-4"
+              onClick={onTryAgainClick}
+              title={t("try_again")}
             />
-            <button className="pay-button _mt-4" onClick={onTryAgainClick}>
-              {t("try_again")}
-            </button>
           </>
         ) : (
           <>
-            <Image
-              src={successDesktop}
-              alt=""
-              className="payment-status-image"
-            />
-            <div className="success-payment-message">
+            <Image src={successDesktop} alt="" className="_max-h-80" />
+            <div className="_px-4 _my-4 _text-center _max-w-3xl">
               {t("success_payment_contact_message")}
             </div>
           </>

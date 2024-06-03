@@ -2,6 +2,7 @@ import React, { Dispatch, FC, SetStateAction, useState } from "react";
 
 import { DiscountCoupon } from "../icons/DiscountCoupon";
 import { checkPromo } from "@/components/OrderPage/Summary/PromoCodeInput/actions";
+import Button from "@/components/common/Button";
 
 interface IProps {
   setSale: any;
@@ -49,19 +50,19 @@ export const PromoInput: FC<IProps> = (props) => {
   };
 
   return (
-    <div className="input-promo-code _cursor-pointer">
+    <div className="_mt-3 _cursor-pointer">
       <div
-        className="input-wrapper _flex"
+        className="_р-14 _flex _rounded-full"
         style={{ background: promoStatus || "#F9F9F9" }}
       >
-        <div className="icon-wrapper">
+        <div className="_my-auto _mr-3 _ml-5">
           <DiscountCoupon />
         </div>
         <input
           type="text"
           placeholder={t("Promo code")}
-          className={`input promo-code-input ${
-            !promoStatus ? "" : "promo-status"
+          className={`_w-full _bg-white _outline-0 ${
+            !promoStatus ? "" : "placeholder:_text-white"
           }`}
           style={{
             background: promoStatus,
@@ -71,14 +72,12 @@ export const PromoInput: FC<IProps> = (props) => {
           onChange={({ target: { value } }) => setPromoInputValue(value)}
           disabled={isCheckPromoLoading}
         />
-        <div
-          className={`button-wrapper ${
-            isCheckPromoLoading ? "primary-button-disabled" : ""
-          }`}
+        <Button
+          className="_ml-auto"
+          disabled={isCheckPromoLoading}
           onClick={checkCode}
-        >
-          {t("Apply")}
-        </div>
+          title={t("Apply")}
+         />
       </div>
     </div>
   );

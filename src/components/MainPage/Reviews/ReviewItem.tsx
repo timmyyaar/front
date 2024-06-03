@@ -1,10 +1,10 @@
 import Image from "next/image";
 import starIcon from "@/components/MainPage/Reviews/icons/star.svg";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Review } from "@/components/MainPage/Reviews/types";
 
 interface Props {
-  t: (text: string) => string;
+  t: (text: string, defaultText?: string) => string;
   review: Review;
 }
 
@@ -25,10 +25,10 @@ function ReviewItem({ review, t }: Props) {
     translatedReviewText === reviewTextKey ? review.text : translatedReviewText;
 
   return (
-    <section className="review _p-5 _text-center _flex _flex-col _w-full">
+    <section className="_h-64 _bg-light _rounded-xl lg:_m-2.5 _p-5 _text-center _flex _flex-col _w-full">
       <span
         ref={(element) => setReviewItem(element)}
-        className="four-lines-text"
+        className="_line-clamp-4 _text-ellipsis"
         title={isEllipsis ? review.text : ""}
       >
         {reviewText}

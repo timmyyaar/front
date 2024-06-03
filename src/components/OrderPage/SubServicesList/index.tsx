@@ -9,7 +9,6 @@ import {
   SelectedSubService,
   showSubServiceSquareMeters,
 } from "./utils";
-import "./style.scss";
 import { PricesContext } from "@/components/Providers";
 
 interface IProps {
@@ -17,7 +16,7 @@ interface IProps {
   subServices: SelectedSubService[];
   setSubService: (service: any) => void;
   priceMultiplier?: number;
-  t: (text: string) => string;
+  t: (text: string, defaultText?: string) => string;
 }
 
 export const SubServicesList = (props: IProps) => {
@@ -90,30 +89,34 @@ export const SubServicesList = (props: IProps) => {
     subServices.find((subService) => subService.title === title);
 
   return getSubServiceListByMainService(prices, mainService).length ? (
-    <div className="sub-services-list-component">
-      <div className="title">{t("Choose additional cleaning services")}</div>
-      <div className="_grid _grid-cols-4 _auto-rows-fr">
+    <div className="_select-none">
+      <div className="_mb-4 _text-center _text-lg lg:_text-2xl _font-semibold">
+        {t("Choose additional cleaning services")}
+      </div>
+      <div className="_grid _grid-cols-2 lg:_grid-cols-4 _gap-5 _auto-rows-fr">
         {getSubServiceListByMainService(
           prices,
           mainService,
           priceMultiplier
         ).map((el: ISubService, i: number) => (
           <div
-            className={`sub-services-item ${
-              getIsSubServiceSelected(el.title)
-                ? "sub-services-item-active"
-                : ""
-            }`}
+            className={`_flex _flex-col _justify-between _items-center _py-5
+              _rounded-2xl _bg-light _border-solid _border-4 _border-light
+              hover:_bg-light-dark hover:_border-light-dark ${
+                getIsSubServiceSelected(el.title)
+                  ? "_outline _outline-4 _outline-primary"
+                  : ""
+              }`}
             onClick={() => addService(el)}
             key={JSON.stringify(el) + i}
           >
-            <div className="sub-services-title">
+            <div className="_text-center _font-semibold">
               <Writer text={t(el.title)} whiteSpaceNormal />
             </div>
-            <div className="counter-and-price-wrapper">
+            <div className="_w-full _flex _flex-col _items-center _px-4">
               {getIsSubServiceSelected(el.title) ? (
-                <div className="counter-wrapper">
-                  <div className="counter-sub-wrapper">
+                <div className="_w-full _py-3.5">
+                  <div className="_min-h-12 _flex _justify-between _items-center _w-full _select-none">
                     <div
                       className="_cursor-pointer"
                       onClick={(e) => minusService(e, el)}
@@ -131,7 +134,7 @@ export const SubServicesList = (props: IProps) => {
                         />
                       </svg>
                     </div>
-                    <div className="count">
+                    <div className="_text-center _text-xl _font-semibold">
                       {getIsSubServiceSelected(el.title)!.count}
                       {showSubServiceSquareMeters(el.title) ? (
                         <span className="_ml-1">
@@ -165,17 +168,20 @@ export const SubServicesList = (props: IProps) => {
                   </div>
                 </div>
               ) : (
-                <div className="img-wrapper">
+                <div className="_py-3.5 _flex _justify-center">
                   <Image
                     src={el.icons}
                     alt=""
                     width="48"
                     height="48"
-                    className="image"
+                    className="_w-12 _h-12"
                   />
                 </div>
               )}
-              <div className="price-wrapper">
+              <div
+                className={`_w-max _flex _justify-center _items-center _rounded-full
+                  _py-2 _px-4 _bg-warning _text-lg lg:_text-xl _font-semibold`}
+              >
                 {el.price}
                 {t("zl")}
                 {el.title === "Ironing" || el.title === "Extra tasks"
@@ -187,7 +193,7 @@ export const SubServicesList = (props: IProps) => {
                   </>
                 ) : null}
                 {el.oldPrice && (
-                  <div className="old-price">
+                  <div className="_ml-2.5 _text-gray _text-sm _font-semibold _line-through">
                     {el.oldPrice}
                     {t("zl")}
                   </div>

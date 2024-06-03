@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-// import { QuestionIcon } from './icons/QuestionIcon';
-// import { ReferralIcon } from './icons/ReferralIcon';
 import { PaymentForm } from "./components/PaymentForm";
 import { CheckBox } from "./components/Checkbox";
 import { DateAndTime } from "./components/DateAndTime";
@@ -11,6 +9,8 @@ import PhoneInput from "@/components/common/PhoneInput";
 import Cities, {
   City,
 } from "@/components/OrderPage/Summary/UserData/components/Cities";
+import Input from "@/components/OrderPage/Summary/UserData/components/Input";
+import Button from "@/components/common/Button";
 
 export const UserData = ({
   name,
@@ -85,16 +85,14 @@ export const UserData = ({
   }, [data, time]);
 
   return (
-    <div className="user-data-from">
+    <div>
       <div className="_mb-6 _flex _flex-col _gap-3">
-        <div className="input-wrapper">
-          <input
-            type="text"
-            placeholder={t("Surname and Name")}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
+        <Input
+          type="text"
+          placeholder={t("Surname and Name")}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
         <div className="_relative mobile-only">
           <PhoneInput
             t={t}
@@ -114,24 +112,25 @@ export const UserData = ({
               setPhoneCountry={setPhoneCountry}
             />
           </div>
-          <div className="input-wrapper">
-            <input
-              type="text"
-              placeholder={t("E-mail")}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
+          <Input
+            type="text"
+            placeholder={t("E-mail")}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div className="_flex _gap-5">
           {!dataLayout ? (
             <div
-              className={`select-block ${data && time ? "selected-block" : ""}`}
-              style={{ cursor: "pointer" }}
+              className={`_flex _justify-between _items-center _p-3 _cursor-pointer
+                _w-full _bg-light _rounded-xl _text-gray-lighter ${
+                  data && time ? "_text-gray-dark" : ""
+                }`}
               onClick={() => setDataLayout(true)}
             >
               {!(data && time) ? t("Data and time") : `${data} ${time}`}
               <svg
+                className="_rotate-180 _text-gray-lighter"
                 xmlns="http://www.w3.org/2000/svg"
                 width="28"
                 height="28"
@@ -140,12 +139,15 @@ export const UserData = ({
               >
                 <path
                   d="M24.0009 14.9027C25.4009 14.9027 26.8009 15.4427 27.8609 16.5027L40.9009 29.5427C41.4809 30.1227 41.4809 31.0827 40.9009 31.6627C40.3209 32.2427 39.3609 32.2427 38.7809 31.6627L25.7409 18.6227C24.7809 17.6627 23.2209 17.6627 22.2609 18.6227L9.22094 31.6627C8.64095 32.2427 7.68094 32.2427 7.10094 31.6627C6.52094 31.0827 6.52094 30.1227 7.10094 29.5427L20.1409 16.5027C21.2009 15.4427 22.6009 14.9027 24.0009 14.9027Z"
-                  fill="#13277E"
+                  fill="currentColor"
                 />
               </svg>
             </div>
           ) : (
-            <div className="select-block-open select-block-open-data-time">
+            <div
+              className={`_p-3 _w-full _bg-light _rounded-xl _overflow-hidden
+                select-block-open-data-time`}
+            >
               <DateAndTime
                 data={data}
                 setData={setData}
@@ -154,29 +156,29 @@ export const UserData = ({
                 t={t}
                 discounts={discounts}
               />
-              <div
-                className={`order-wrapper ${
-                  !(data && time) ? " order-wrapper-disabled" : ""
-                }`}
+              <Button
+                className="_mt-2 _w-full _h-11"
+                disabled={!(data && time)}
                 onClick={() => {
                   if (!(data && time)) return void 0;
+
                   setDataLayout(false);
                 }}
-              >
-                {t("Continue")}
-              </div>
+                title={t("Continue")}
+              />
             </div>
           )}
         </div>
         <div className="_flex _gap-5">
           {!addressLayout ? (
             <div
-              className="select-block"
-              style={{ cursor: "pointer" }}
+              className={`_flex _justify-between _items-center _p-3 _cursor-pointer
+                _w-full _bg-light _rounded-xl _text-gray-lighter`}
               onClick={() => setAddressLayout(true)}
             >
               {isAddressEmpty ? t("Address") : shortAddress}
               <svg
+                className="_rotate-180 _text-gray-lighter"
                 xmlns="http://www.w3.org/2000/svg"
                 width="28"
                 height="28"
@@ -185,57 +187,52 @@ export const UserData = ({
               >
                 <path
                   d="M24.0009 14.9027C25.4009 14.9027 26.8009 15.4427 27.8609 16.5027L40.9009 29.5427C41.4809 30.1227 41.4809 31.0827 40.9009 31.6627C40.3209 32.2427 39.3609 32.2427 38.7809 31.6627L25.7409 18.6227C24.7809 17.6627 23.2209 17.6627 22.2609 18.6227L9.22094 31.6627C8.64095 32.2427 7.68094 32.2427 7.10094 31.6627C6.52094 31.0827 6.52094 30.1227 7.10094 29.5427L20.1409 16.5027C21.2009 15.4427 22.6009 14.9027 24.0009 14.9027Z"
-                  fill="#13277E"
+                  fill="currentColor"
                 />
               </svg>
             </div>
           ) : (
             <div
-              className={`select-block-open select-block-open-address ${
-                overflowUnset ? "overflow-visible" : ""
-              }`}
+              className={`_p-3 _w-full _bg-light _rounded-xl _overflow-hidden
+               select-block-open-address ${
+                 overflowUnset ? "overflow-visible" : ""
+               }`}
             >
               <div className="_mb-6 _flex _flex-col _gap-3">
-                <div className="input-wrapper address-layout">
-                  <input
-                    type="text"
-                    placeholder={t("Street")}
-                    value={street}
-                    onChange={(e) => setAddressField("street", e.target.value)}
-                  />
-                </div>
+                <Input
+                  isBordered
+                  type="text"
+                  placeholder={t("Street")}
+                  value={street}
+                  onChange={(e) => setAddressField("street", e.target.value)}
+                />
                 <div className="_flex _gap-5">
-                  <div className="input-wrapper address-layout">
-                    <input
-                      type="text"
-                      placeholder={t("House number")}
-                      value={house}
-                      onChange={(e) => setAddressField("house", e.target.value)}
-                    />
-                  </div>
+                  <Input
+                    isBordered
+                    type="text"
+                    placeholder={t("House number")}
+                    value={house}
+                    onChange={(e) => setAddressField("house", e.target.value)}
+                  />
                   {!isPrivateHouse && (
-                    <div className="input-wrapper address-layout">
-                      <input
-                        type="text"
-                        placeholder={t("Apartment")}
-                        value={apartment}
-                        onChange={(e) =>
-                          setAddressField("apartment", e.target.value)
-                        }
-                      />
-                    </div>
+                    <Input
+                      isBordered
+                      type="text"
+                      placeholder={t("Apartment")}
+                      value={apartment}
+                      onChange={(e) =>
+                        setAddressField("apartment", e.target.value)
+                      }
+                    />
                   )}
                 </div>
-                <div className="input-wrapper address-layout">
-                  <input
-                    type="text"
-                    placeholder={t("Postcode")}
-                    value={postcode}
-                    onChange={(e) =>
-                      setAddressField("postcode", e.target.value)
-                    }
-                  />
-                </div>
+                <Input
+                  isBordered
+                  type="text"
+                  placeholder={t("Postcode")}
+                  value={postcode}
+                  onChange={(e) => setAddressField("postcode", e.target.value)}
+                />
                 <Cities
                   t={t}
                   city={city}
@@ -244,53 +241,49 @@ export const UserData = ({
                 />
                 {!isPrivateHouse && (
                   <div className="_flex _gap-5">
-                    <div className="input-wrapper address-layout">
-                      <input
-                        type="text"
-                        placeholder={t("Entrance number")}
-                        value={entrance}
-                        onChange={(e) =>
-                          setAddressField("entrance", e.target.value)
-                        }
-                      />
-                    </div>
-                    <div className="input-wrapper address-layout">
-                      <input
-                        type="text"
-                        placeholder={t("Doorphone code")}
-                        value={doorPhone}
-                        onChange={(e) =>
-                          setAddressField("doorPhone", e.target.value)
-                        }
-                      />
-                    </div>
+                    <Input
+                      isBordered
+                      type="text"
+                      placeholder={t("Entrance number")}
+                      value={entrance}
+                      onChange={(e) =>
+                        setAddressField("entrance", e.target.value)
+                      }
+                    />
+                    <Input
+                      isBordered
+                      type="text"
+                      placeholder={t("Doorphone code")}
+                      value={doorPhone}
+                      onChange={(e) =>
+                        setAddressField("doorPhone", e.target.value)
+                      }
+                    />
                   </div>
                 )}
               </div>
-              <div className="input-wrapper address-layout">
-                <textarea
-                  placeholder={t("Add more details (optional)")}
-                  value={more}
-                  onChange={(e) => setAddressField("more", e.target.value)}
-                />
-              </div>
-              <div
-                className={`order-wrapper ${
-                  !requiredFields ? "order-wrapper-disabled" : ""
-                }`}
-                style={{ marginTop: "24px" }}
+              <textarea
+                className={`_w-full _border _border-solid _border-gray _py-3 _pl-3
+                    _w-full _bg-light _rounded-xl _outline-0 _text-gray-dark`}
+                placeholder={t("Add more details (optional)")}
+                value={more}
+                onChange={(e) => setAddressField("more", e.target.value)}
+              />
+              <Button
+                className="_mt-6 _w-full _h-11"
+                disabled={!requiredFields}
                 onClick={() => {
                   if (!requiredFields) return void 0;
+
                   setAddressLayout(false);
                 }}
-              >
-                {t("Continue")}
-              </div>
+                title={t("Continue")}
+              />
             </div>
           )}
         </div>
       </div>
-      <div style={{ marginTop: "24px" }}>
+      <div className="_mt-6">
         <CheckBox
           title={"Request previous cleaner"}
           checked={previousCleaner}
@@ -298,10 +291,10 @@ export const UserData = ({
           t={t}
         />
       </div>
-      <div style={{ marginTop: "24px" }}>
+      <div className="_mt-6">
         <PaymentForm setOnlinePayment={setOnlinePayment} t={t} />
       </div>
-      <div style={{ marginTop: "24px" }}>
+      <div className="_mt-6">
         <CheckBox
           title={"Public agreement and Privacy Policy"}
           checked={privacyAndPolicy}
@@ -310,7 +303,7 @@ export const UserData = ({
           link="/Polityka_prywatności.pdf"
         />
       </div>
-      <div style={{ marginTop: "24px" }}>
+      <div className="_mt-6">
         <CheckBox
           title={"Personal data"}
           checked={personalData}

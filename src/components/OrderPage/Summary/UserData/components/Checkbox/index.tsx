@@ -2,13 +2,12 @@ import React, { FC } from "react";
 import Image from "next/image";
 
 import checkSvg from "./icons/mingcute_check-fill.svg";
-import "./style.scss";
 
 export const CheckBox: FC<any> = ({ title, checked, setCheck, t, link }) => {
   return (
-    <div className="check-boxes-component">
+    <div>
       <div
-        className="check-box-wrapper _cursor-pointer"
+        className="_cursor-pointer _flex _items-center _gap-4"
         onClick={() => {
           if (!link) {
             setCheck((ch: boolean) => !ch);
@@ -16,7 +15,7 @@ export const CheckBox: FC<any> = ({ title, checked, setCheck, t, link }) => {
         }}
       >
         <div
-          className="checked-icon-wrapper"
+          className="_flex _justify-center _items-center _w-11 _h-11 _rounded-full _bg-white"
           onClick={() => {
             if (link) {
               setCheck((ch: boolean) => !ch);
@@ -24,15 +23,17 @@ export const CheckBox: FC<any> = ({ title, checked, setCheck, t, link }) => {
           }}
         >
           {checked ? (
-            <div className="checked-icon">
+            <div className="_w-6 _h-6">
               <Image src={checkSvg} alt="" />
             </div>
           ) : null}
         </div>
-        <div className="content-wrapper-checkbox">
+        <div className="_flex _items-center _select-none _w-4/5">
           {link ? (
             <a href={link} target="_blank">
-              <div className="_whitespace-pre-line link">{t(title)}</div>
+              <div className="_whitespace-pre-line hover:_text-primary active:_bg-primary">
+                {t(title)}
+              </div>
             </a>
           ) : (
             <div className="_whitespace-pre-line">{t(title)}</div>

@@ -1,7 +1,6 @@
-@import "bootstrap/dist/css/bootstrap.min.css";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 body {
   margin: 0;
@@ -15,17 +14,9 @@ body {
   letter-spacing: -0.41px;
 }
 
-.bg-light {
-  background: #f9f9f9;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-.cursor-pointer {
-  cursor: pointer;
 }
 
 .mobile-only {
@@ -40,7 +31,7 @@ code {
   display: none;
 }
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 1024px) {
   body {
     overflow-x: hidden;
   }
@@ -88,12 +79,6 @@ code {
   word-break: break-word;
 }
 
-.primary-button-disabled {
-  pointer-events: none;
-  background: #7eb8ff !important;
-  cursor: default !important;
-}
-
 .custom-scroll::-webkit-scrollbar {
   width: 10px;
 }
@@ -116,32 +101,54 @@ code {
   -webkit-text-fill-color: transparent;
 }
 
-.pay-button {
-  width: 30rem;
-  background-color: #2187f1;
-  color: white;
-  line-height: 128%;
-  font-weight: 600;
-  padding: 18px 0;
+._border-40 {
   border-radius: 40px;
 }
 
-.pay-button:disabled {
-  background-color: #7eb8ff;
-  pointer-events: none;
+._main-title {
+  font-size: 1.25rem;
+  line-height: 1.375rem;
+  font-weight: 600;
+  text-align: center;
+  color: #13277e;
 }
 
-.pay-button:hover {
-  background-color: #0073fc;
-}
+@media (min-width: 1024px) {
+  ._main-title {
+    font-size: 2.5rem;
+    line-height: 130%;
+  }
 
-@media screen and (max-width: 950px) {
-  .pay-button {
-    width: 100%;
-    max-width: 100%;
+  ._px-20-percents-desktop {
+    padding-left: 20%;
+    padding-right: 20%;
   }
 }
 
-.grid-template-rows-1-max {
-  grid-template-rows: max-content;
+._px-5-percents {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+@media (max-width: 1024px) {
+  ._px-5-percents-mobile {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
+._min-w-2\/6 {
+  min-width: 33.333333%;
+}
+
+._rounded-2\.5xl {
+  border-radius: 1.25rem;
+}
+
+._rotateX-180 {
+  transform: rotateX(180deg);
+}
+
+._-translateY-50 {
+  transform: translateY(-50%);
 }

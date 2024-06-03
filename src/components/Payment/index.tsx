@@ -8,8 +8,6 @@ import CheckoutForm from "./CheckoutForm";
 import { LocaleContext } from "@/components/Providers";
 import { useLocales } from "@/hooks/useLocales";
 
-import "./style.scss";
-
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISH_KEY!);
 
 interface PaymentProps {
@@ -50,7 +48,7 @@ function Payment({ paymentIntent }: PaymentProps) {
   }, [paymentIntent]);
 
   return (
-    <div className="payment-page-wrapper _flex-1 _flex _flex-col _justify-center">
+    <div className="_p-4 _bg-light lg:_py-20 lg:_px-40 _flex-1 _flex _flex-col _justify-center">
       {needRedirect ? null : (
         <Elements
           stripe={stripePromise}

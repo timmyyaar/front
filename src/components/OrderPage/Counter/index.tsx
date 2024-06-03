@@ -11,7 +11,6 @@ import { Switcher } from "@/components/common/Switcher";
 
 import { Counter } from "./components/Counter";
 import { getCounterByMainService, getIsPrivateHouse } from "./utils";
-import "./style.scss";
 import PrivateHouse from "@/components/OrderPage/PrivateHouse";
 import Cost from "@/components/OrderPage/Counter/components/Cost";
 
@@ -87,17 +86,20 @@ export const CounterComponent: FC<IProps> = (props) => {
   const showIsPrivateHouse = getIsPrivateHouse(mainService);
 
   return counter.length ? (
-    <div className="counter-component-wrapper">
+    <div className="_flex _flex-col _gap-5 _w-full">
       {counter.map((el: any, i: number) => (
         <Fragment key={i}>
           {el.title ? (
             <div>
-              <div className="title-wrapper">
+              <div
+                className={`_flex _justify-center _items-center _gap-3 _text-lg
+                  lg:_text-2xl _font-bold`}
+              >
                 {el.title ? <div className="title">{t(el.title)}</div> : null}
                 {el.cost ? <Cost {...el} /> : null}
               </div>
               {el.subtitle ? (
-                <div className="sub-title-wrapper">{t(el.subtitle)}</div>
+                <div className="_mt-3 _text-gray-dark _text-center">{t(el.subtitle)}</div>
               ) : null}
             </div>
           ) : null}

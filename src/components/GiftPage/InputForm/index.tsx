@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { ModalRequest } from "@/components/common/ModalRequest";
 import { Overlay } from "@/components/common/Overlay";
 import { useClickOutside } from "@/hooks/useClickOutSide";
-import "./style.scss";
 import { EMAIL_REGEX, POSITIVE_NUMBER_EMPTY_REGEX } from "@/constants";
 import {
   Country,
@@ -12,6 +11,7 @@ import {
 } from "@/components/common/PhoneInput/constants";
 import PhoneInput from "@/components/common/PhoneInput";
 import { createGift } from "@/components/GiftPage/InputForm/actions";
+import Button from "@/components/common/Button";
 
 export const InputForm = ({ t }: any) => {
   const [email, setEmail] = useState<string>("");
@@ -62,7 +62,7 @@ export const InputForm = ({ t }: any) => {
   };
 
   return (
-    <div className="input-form-component">
+    <div className="_px-20-percents-desktop _px-4">
       <Overlay active={modal}>
         <div ref={ref}>
           <ModalRequest
@@ -73,8 +73,10 @@ export const InputForm = ({ t }: any) => {
         </div>
       </Overlay>
       <div className="_mb-4 _flex _flex-col _gap-4">
-        <div className="input-wrapper">
+        <div className="_w-full">
           <input
+            className={`_w-full _py-3.5 _pl-3.5 __w-full _bg-light
+              _rounded-xl _outline-0 _text-gray-dark`}
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -87,29 +89,28 @@ export const InputForm = ({ t }: any) => {
           setNumber={setPhone}
           phoneCountry={phoneCountry}
           setPhoneCountry={setPhoneCountry}
-          isPhoneRelative
         />
-        <div className="input-wrapper text-about-input">
+        <div className="_w-full">
           <textarea
+            className={`_w-full _py-3.5 _pl-3.5 __w-full _bg-light
+              _rounded-xl _outline-0 _text-gray-dark`}
             value={comment}
             onChange={(e) => setComment(e.target.value)}
             placeholder={t("Accompanying text")}
+            rows="4"
           />
         </div>
       </div>
       <div className="_mb-4">
-        <div
-          className={`button-wrapper ${
-            isSendGiftButtonDisabled || isSendLoading
-              ? "order-wrapper-disabled"
-              : ""
-          } ${isSendLoading ? "loading" : ""}`}
+        <Button
+          className="_w-full"
           onClick={onSend}
-        >
-          {t("send")}
-        </div>
+          title={t("send")}
+          disabled={isSendGiftButtonDisabled || isSendLoading}
+          isLoading={isSendLoading}
+        />
         {giftError && (
-          <div className="text-center _mt-2 text-danger _text-center">
+          <div className="_text-center _mt-2 text-danger _text-center">
             {t("unexpected_error")}
           </div>
         )}
