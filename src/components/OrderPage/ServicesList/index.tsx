@@ -37,10 +37,10 @@ export const ServicesList: FC<IProps> = (props) => {
           <div
             className={`_py-3.5 _flex _flex-col _justify-center _items-center _gap-5
               _rounded-2xl _border-solid _bg-light _border-4 _border-light _cursor-pointer
-              hover:_bg-light-dark hover:_border-light-dark ${
+              hover:_bg-light-dark ${
                 el.title === selectedService
-                  ? "_border-solid _border-4 _border-primary"
-                  : ""
+                  ? "_border-solid _border-4 _border-primary hover:_border-primary"
+                  : "hover:_border-light-dark"
               }`}
             onClick={() => setSelectedService(el.title)}
             key={el.title + i}
