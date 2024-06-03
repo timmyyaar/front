@@ -55,7 +55,7 @@ function CheckoutForm({ t, paymentIntent }: CheckoutFormProps) {
         }}
       />
       {error && (
-        <div className="text-danger _mt-1 _text-center">
+        <div className="_text-danger _mt-1 _text-center">
           {error || t("promo_error_modal_title")}
         </div>
       )}

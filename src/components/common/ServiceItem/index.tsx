@@ -29,7 +29,7 @@ export const ServiceItem: React.FC<Props> = ({ title, icon, t, onClick }) => (
         className="_flex _gap-2 _transition-all _items-center"
         onClick={onClick}
       >
-        <div className="text-center">{t("How it works")}</div>
+        <div className="_text-center">{t("How it works")}</div>
         <div className="_cursor-pointer">
           <Image src={howItWorksSvg} alt="" />
         </div>

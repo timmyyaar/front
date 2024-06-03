@@ -22,7 +22,7 @@ function FinishedFeedback({ finishedRating, t }: FinishedFeedbackProps) {
     <div className="_bg-light _h-screen _py-20 _px-16 _flex _flex-col _items-center _justify-center _gap-10">
       <>
         <Image src={isBadRating ? sadFeedbackSvg : happyFeedbackSvg} alt="" />
-        <span className="text-center">
+        <span className="_text-center">
           {isBadRating ? (
             <>
               <span className="_font-semibold _mr-1">

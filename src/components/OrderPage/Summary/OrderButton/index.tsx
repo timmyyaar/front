@@ -156,7 +156,7 @@ function OrderButton({
           title={t("Order")}
         />
         {orderError && (
-          <div className="text-center _mt-2 text-danger _text-center">
+          <div className="_text-center _mt-2 _text-danger">
             {t("unexpected_error")}
           </div>
         )}
