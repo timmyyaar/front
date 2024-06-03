@@ -130,7 +130,7 @@ function CheckoutForm({
         }}
       />
       {(error || orderError || promoError) && (
-        <div className="text-danger _mt-1 _text-center">
+        <div className="_text-danger _mt-1 _text-center">
           {error || promoError
             ? t("promo_error_modal_title")
             : t("unexpected_error")}
