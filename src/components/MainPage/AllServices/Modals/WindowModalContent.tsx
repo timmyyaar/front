@@ -27,7 +27,7 @@ function WindowModalContent({
   const windowCosts = [
     {
       title: (
-        <span className="cost-price">
+        <span className="_text-2lx _font-bold">
           {prices.window * 5}
           <span className="_ml-1">{t("zl")}</span>
         </span>
@@ -38,12 +38,12 @@ function WindowModalContent({
 
   return (
     <div className="_text-center">
-      <div className="modal-title-wrapper _text-center">
-        <span className="modal-title-text text-gradient">
+      <div className="_mb-4 lg:_mb-6 _text-center">
+        <span className="_main-title text-gradient">
           {t("window_cleaning_title")}
         </span>
       </div>
-      <div className="_grid col-3-mobile-1 _gap-6">
+      <div className="_grid _grid-cols-1 lg:_grid-cols-3 _gap-6">
         {[...new Array(6)].map((_, i) => {
           const windowImg = {
             0: window0,
@@ -55,11 +55,14 @@ function WindowModalContent({
           };
 
           return (
-            <div className="window-block">
-              <div className="img-wrapper">
+            <div
+              className={`_flex _flex-col _py-6 _px-4 _items-center _justify-center
+                _gap-6 _rounded-xl _bg-light`}
+            >
+              <div className="_flex _justify-center">
                 <Image src={windowImg[i as 0 | 1 | 2 | 3 | 4 | 5]} alt="" />
               </div>
-              <div className="title">
+              <div className="_text-center">
                 <Writer
                   text={t("window_cleaning_description_" + (i + 1))}
                   key={"window_cleaning" + "_" + i}
@@ -70,11 +73,9 @@ function WindowModalContent({
         })}
       </div>
       {!isOrder && (
-        <div className="mt-16-mobile-8">
-          <div className="modal-title-wrapper _text-center">
-            <span className="modal-title-text text-gradient">
-              {t("Prices")}
-            </span>
+        <div className="_mt-8 lg:_mt-16">
+          <div className="_mb-4 lg:_mb-6 _text-center">
+            <span className="_main-title text-gradient">{t("Prices")}</span>
           </div>
           <Costs
             t={t}

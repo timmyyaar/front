@@ -3,7 +3,7 @@ import CheckBox from "@/components/OrderPage/CheckBoxesBlock/components/Checkbox
 import houseSvg from "./icons/house.svg";
 
 interface Props {
-  t: (text: string) => string;
+  t: (text: string, defaultText?: string) => string;
   isPrivateHouse?: boolean;
   setIsPrivateHouse?: Dispatch<SetStateAction<boolean>>;
 }

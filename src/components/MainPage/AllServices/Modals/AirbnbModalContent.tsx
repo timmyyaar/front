@@ -38,12 +38,10 @@ function AirbnbModalContent({
   return (
     <>
       <div className="_text-center">
-        <div className="modal-title-wrapper _text-center">
-          <span className="modal-title-text text-gradient">
-            {t("airbnb_title")}
-          </span>
+        <div className="_mb-4 lg:_mb-6 _text-center">
+          <span className="_main-title text-gradient">{t("airbnb_title")}</span>
         </div>
-        <div className="mb-16-mobile-8">
+        <div className="_mb-8 lg:_mb-16">
           {reactStringReplace(
             t("airbnb_description"),
             FIGURE_BRACKETS_REGEX,
@@ -52,28 +50,34 @@ function AirbnbModalContent({
             )
           )}
         </div>
-        <div className="modal-title-wrapper _text-center">
-          <span className="modal-title-text text-gradient">
+        <div className="_mb-4 lg:_mb-6 _text-center">
+          <span className="_main-title text-gradient">
             {t("stages_of_preparing")}
           </span>
         </div>
       </div>
-      <div className="_flex _flex-row _justify-between airbnb-mobile _gap-5">
+      <div className="_grid _grid-cols-2 _grid-rows-2 lg:_flex _flex-row _justify-between _gap-5">
         {["Prepare", "Cleaning", "Sanitize", "Finish"].map((el, i) => (
-          <div className="step-card">
-            <div className="number-wrapper">
-              <div className="number">{i + 1}</div>
+          <div
+            className={`hover:_bg-light-dark active:_bg-light-dark _flex _flex-col _flex-1 _gap-4
+              _py-11 _px-5 _bg-light _rounded-xl`}
+          >
+            <div className="_flex _justify-center">
+              <div
+                className={`_w-10 _h-10 _flex _justify-center _items-center
+                    _rounded-full _bg-primary _text-white`}
+              >
+                {i + 1}
+              </div>
             </div>
-            <div className="name">{t(el + "_airbnb_title")}</div>
+            <div className="_text-center _font-medium">{t(el + "_airbnb_title")}</div>
           </div>
         ))}
       </div>
       {!isOrder && (
-        <div className="mt-16-mobile-8">
-          <div className="modal-title-wrapper _text-center">
-            <span className="modal-title-text text-gradient">
-              {t("Prices")}
-            </span>
+        <div className="_mt-8 lg:_mt-16">
+          <div className="_mb-4 lg:_mb-6 _text-center">
+            <span className="_main-title text-gradient">{t("Prices")}</span>
           </div>
           <Costs
             t={t}

@@ -1,23 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 
-import { Overlay } from "@/components/common/Overlay";
-import { Slider } from "@/components/common/SliderScroll";
 import { Writer } from "@/components/common/Writer";
-import { useClickOutside } from "@/hooks/useClickOutSide";
-import { CloseSvg } from "@/components/common/icons/closeButton";
 
-import { DiscountItem } from "./DiscountItem";
 import giftSvg from "./images/gift.svg";
 import parentAndChildrenSvg from "./images/parent-and-children.svg";
 import studentSvg from "./images/student.svg";
-import "./style.scss";
 
 export const Promotions = (props: any) => {
   const { t } = props;
-  const [active, setActive] = useState(false);
-  const [popupTitle, setPopupTitle] = useState("");
 
   const promotions = [
     {
@@ -57,87 +49,79 @@ export const Promotions = (props: any) => {
     { save: "-20%", services: ["Dry cleaning", "Ozonation"] },
   ];
 
-  const ref = useClickOutside(() => setActive(false));
-
-  const setActivePopup = (title: string) => {
-    setPopupTitle(title);
-    setActive(true);
-  };
-
   return (
     <>
-      <div className="promotions-component _flex _flex-col mobile-none">
-        <Overlay active={active}>
-          <div className="overlay-wrapper-component" ref={ref}>
-            <div
-              className="icon-wrapper _cursor-pointer"
-              onClick={() => setActive(false)}
-            >
-              <CloseSvg />
-            </div>
-            <div className="overlay-wrapper-component-title">
-              <Writer text={t(popupTitle + "_title")} />
-            </div>
-            <div className="overlay-wrapper-component-text">
-              <Writer text={t(popupTitle + "_text")} />
-            </div>
-          </div>
-        </Overlay>
-        <div className="title">{t("Promotions and discounts")}</div>
-        <div className="promotions-block _flex _justify-around">
+      <div className="_flex _flex-col mobile-none">
+        <div className="_main-title _mb-8">
+          {t("Promotions and discounts")}
+        </div>
+        <div className="promotions-block _mx-24 _py-7 _rounded-3xl _bg-light _flex _justify-around">
           {promotions.map((el, i) => (
-            <div className="promotion-card" key={el.text + i}>
+            <div className="_w-60" key={el.text + i}>
               <div className="_flex _justify-center">
                 <Image src={el.img} alt="" />
               </div>
-              <div className="text">
+              <div className="_mt-1 _text-center">
                 <b>
-                  <Writer text={t(el.text)} />
+                  <Writer text={t(el.text)} className="_inline" />
                 </b>
-                {el.text2 && <Writer text={t(el.text2)} />}
-                <b>{el.text3 && <Writer text={t(el.text3)} />}</b>
-                {el.text4 && <Writer text={t(el.text4)} />}
-                <b>{el.text5 && <Writer text={t(el.text5)} />}</b>
-                {el.text6 && <Writer text={t(el.text6)} />}
+                {el.text2 && <Writer text={t(el.text2)} className="_inline" />}
+                <b>
+                  {el.text3 && (
+                    <Writer text={t(el.text3)} className="_inline" />
+                  )}
+                </b>
+                {el.text4 && <Writer text={t(el.text4)} className="_inline" />}
+                <b>
+                  {el.text5 && (
+                    <Writer text={t(el.text5)} className="_inline" />
+                  )}
+                </b>
+                {el.text6 && <Writer text={t(el.text6)} className="_inline" />}
               </div>
             </div>
           ))}
         </div>
-        <div className="discounts-wrapper" style={{ display: "none" }}>
-          <Slider
-            elements={discounts.map((el, i) => ({
-              id: el.services.join("n" + i),
-              content: (): JSX.Element => (
-                <DiscountItem
-                  discount={{ ...el, key: el.services.join("n" + i) }}
-                  t={t}
-                  onActive={setActivePopup}
-                />
-              ),
-            }))}
-            status={false}
-          />
-        </div>
       </div>
-      <div className="promotions-component-mobile">
-        <div className="promotions-title-wrapper">
+      <div className="mobile-only _px-5-percents-mobile _mb-14">
+        <div className="_main-title _mb-4">
           {t("promotions_title_mobile1")}
         </div>
-        <div className="content-mobile-wrapper">
+        <div className="_py-6 _flex _flex-col _items-center _gap-5 _rounded-3xl _bg-light">
           {promotions.map((el, i) => (
-            <div className="promotion-card" key={el.text + i}>
+            <div key={el.text + i}>
               <div className="_flex _justify-center">
                 <Image src={el.img} alt="" />
               </div>
-              <div className="text">
+              <div className="_mt-1 _text-center">
                 <b>
-                  <Writer text={t(el.text + "_mobile")} />
+                  <Writer text={t(el.text + "_mobile")} className="_inline" />
                 </b>
-                {el.text2 && <Writer text={t(el.text2 + "_mobile")} />}
-                <b>{el.text3 && <Writer text={t(el.text3 + "_mobile")} />}</b>
-                {el.text4 && <Writer text={t(el.text4 + "_mobile")} />}
-                <b>{el.text5 && <Writer text={t(el.text5 + "_mobile")} />}</b>
-                {el.text6 && <Writer text={t(el.text6 + "_mobile")} />}
+                {el.text2 && (
+                  <Writer text={t(el.text2 + "_mobile")} className="_inline" />
+                )}
+                <b>
+                  {el.text3 && (
+                    <Writer
+                      text={t(el.text3 + "_mobile")}
+                      className="_inline"
+                    />
+                  )}
+                </b>
+                {el.text4 && (
+                  <Writer text={t(el.text4 + "_mobile")} className="_inline" />
+                )}
+                <b>
+                  {el.text5 && (
+                    <Writer
+                      text={t(el.text5 + "_mobile")}
+                      className="_inline"
+                    />
+                  )}
+                </b>
+                {el.text6 && (
+                  <Writer text={t(el.text6 + "_mobile")} className="_inline" />
+                )}
               </div>
             </div>
           ))}

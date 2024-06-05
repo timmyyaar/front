@@ -22,7 +22,6 @@ import {
   getServiceEstimate,
   getServicePriceBasedOnManualCleaners,
 } from "./utils";
-import "./style.scss";
 import { EMAIL_REGEX, NUMBER_REGEX } from "@/constants";
 import {
   DEFAULT_COUNTRY,
@@ -35,6 +34,7 @@ import { LocaleContext, PricesContext } from "@/components/Providers";
 import { getDateTimeString } from "@/utils";
 import { Counter } from "@/types";
 import OrderButton from "@/components/OrderPage/Summary/OrderButton";
+import Button from "@/components/common/Button";
 
 export interface OrderAddress {
   street: string;
@@ -409,14 +409,14 @@ export const Summary: FC<IProps> = (props: any) => {
 
   return (
     <>
-      <div className="summary-layout">
+      <div className="_flex _flex-col _gap-6 _sticky _top-2">
         <Overlay active={successModal || showPromoErrorModal}>
           {successModal ? (
             <div ref={ref}>
               <ModalRequest
                 text={
                   <div className="_flex _justify-center">
-                    <div className="_whitespace-normal success-order-modal-text _w-full">
+                    <div className="_whitespace-normal _w-full lg:_w-3/4">
                       {t("order_page_modal_title")}
                     </div>
                   </div>
@@ -442,7 +442,7 @@ export const Summary: FC<IProps> = (props: any) => {
             </div>
           )}
         </Overlay>
-        <div className="summary-wrapper _flex _flex-col">
+        <div className="_p-10 _bg-light _rounded-3xl _flex _flex-col">
           <SummaryService
             serviceTitle={title}
             counterValue={counter}
@@ -458,7 +458,7 @@ export const Summary: FC<IProps> = (props: any) => {
           />
           {secTitle !== "" ? (
             <>
-              <div className="summary-wrapper-separator" />
+              <div className="_mt-1 _mb-2 _border-t _border-dashed _border-gray-lighter-x2" />
               <SummaryService
                 serviceTitle={secTitle}
                 counterValue={secCounter}
@@ -489,20 +489,20 @@ export const Summary: FC<IProps> = (props: any) => {
           </div>
           {city?.price > 0 && (
             <div className="_mt-2">
-              <span className="title">
+              <span className="_mr-1.5">
                 {t("summary_transportation_title")}:
               </span>
-              <span className="price-title">{city.price} zl</span>
+              <span className="_text-2xl _font-semibold">{city.price} zl</span>
             </div>
           )}
           <div
-            className="to-pay-wrapper _flex _items-baseline _mt-2"
+            className="_h-8 _flex _items-baseline _mt-2"
             ref={targetElementRef as any}
           >
-            <div className="title">{t("To pay:")}</div>
+            <div className="_mr-1.5">{t("To pay:")}</div>
             {subSale || Boolean(sale) || Boolean(dayDiscount) ? (
               <>
-                <div className="current-price">
+                <div className="_mr-1.5 _text-2xl _font-semibold">
                   {getPriceWithOwnSupplies(
                     getPriceWithSaleOrSubSale(
                       price,
@@ -514,13 +514,13 @@ export const Summary: FC<IProps> = (props: any) => {
                   )}
                   {t("zl")}
                 </div>
-                <div className="old-price">
+                <div className="_text-gray _text-lg _font-semibold _line-through">
                   {getPriceWithOwnSupplies(price, provideOwnSuppliesSelected)}
                   {t("zl")}
                 </div>
               </>
             ) : (
-              <div className="current-price">
+              <div className="_mr-1.5 _text-2xl _font-semibold">
                 {getPriceWithOwnSupplies(price, provideOwnSuppliesSelected)}
                 {t("zl")}
               </div>
@@ -529,18 +529,16 @@ export const Summary: FC<IProps> = (props: any) => {
         </div>
         <div ref={orderButtonRef}>
           {!order ? (
-            <div
-              className={`order-wrapper _cursor-pointer ${
-                isOrderPriceLessThanMinimum ? "order-wrapper-disabled" : ""
-              }`}
+            <Button
+              className="_w-full _h-14"
+              disabled={isOrderPriceLessThanMinimum}
               onClick={() => {
                 if (!isOrderPriceLessThanMinimum) {
                   setOrder(true);
                 }
               }}
-            >
-              {t("Order")}
-            </div>
+              title={t("Order")}
+            />
           ) : (
             <>
               <UserData
@@ -581,35 +579,41 @@ export const Summary: FC<IProps> = (props: any) => {
         </div>
       </div>
       {!scrolledToElement ? (
-        <div
-          className={`order-wrapper-absolute _cursor-pointer mobile-only-flex ${
-            isOrderPriceLessThanMinimum ? "order-wrapper-disabled" : ""
-          }`}
+        <Button
+          className={`mobile-only _fixed _bottom-6 _left-1/2 _-translate-y-1/2 _-translate-x-1/2
+            _z-50 _w-[90%] _h-14`}
+          disabled={isOrderPriceLessThanMinimum}
           onClick={handleScroll}
-        >
-          {getPriceWithOwnSupplies(price, provideOwnSuppliesSelected) === 0 ? (
-            t("Order")
-          ) : subSale || Boolean(sale) || Boolean(dayDiscount) ? (
-            <div className="_flex _items-end">
-              <div className="current-price _mr-2">
-                {getPriceWithOwnSupplies(
-                  getPriceWithSaleOrSubSale(price, sale, subSale, dayDiscount),
-                  provideOwnSuppliesSelected
-                )}
-                {t("zl")}
+          title={
+            getPriceWithOwnSupplies(price, provideOwnSuppliesSelected) === 0 ? (
+              t("Order")
+            ) : subSale || Boolean(sale) || Boolean(dayDiscount) ? (
+              <div className="_flex _items-end">
+                <div className="_mr-2">
+                  {getPriceWithOwnSupplies(
+                    getPriceWithSaleOrSubSale(
+                      price,
+                      sale,
+                      subSale,
+                      dayDiscount
+                    ),
+                    provideOwnSuppliesSelected
+                  )}
+                  {t("zl")}
+                </div>
+                <div className="_text-xs _line-through">
+                  {getPriceWithOwnSupplies(price, provideOwnSuppliesSelected)}
+                  {t("zl")}
+                </div>
               </div>
-              <div className="old-price">
+            ) : (
+              <div>
                 {getPriceWithOwnSupplies(price, provideOwnSuppliesSelected)}
                 {t("zl")}
               </div>
-            </div>
-          ) : (
-            <div className="current-price">
-              {getPriceWithOwnSupplies(price, provideOwnSuppliesSelected)}
-              {t("zl")}
-            </div>
-          )}
-        </div>
+            )
+          }
+        />
       ) : null}
     </>
   );

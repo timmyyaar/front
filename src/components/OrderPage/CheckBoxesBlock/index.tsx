@@ -16,7 +16,6 @@ import airSvg from "./icons/air-purifier.svg";
 import vacuumCleanerSvg from "./icons/vacuum-cleaner.svg";
 import ownSuppliesSvg from "./icons/own-supplies.svg";
 import checkListSvg from "./icons/check-list.svg";
-import "./style.scss";
 import { OWN_SUPPLES_SERVICE_NAME } from "@/components/OrderPage/constants";
 import { PricesContext } from "@/components/Providers";
 
@@ -128,7 +127,7 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
   }, [subServices]);
 
   return checkBoxes ? (
-    <div className="check-boxes-block-component">
+    <div className="_gap-10 lg:_gap-20 _flex _flex-col">
       {checkBoxes.includes("dry") ? (
         <CheckBox
           icon={airSvg}

@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { ModalRequest } from "@/components/common/ModalRequest";
 import { Overlay } from "@/components/common/Overlay";
 import { useClickOutside } from "@/hooks/useClickOutSide";
-import "./style.scss";
 import { EMAIL_REGEX, POSITIVE_NUMBER_EMPTY_REGEX } from "@/constants";
 import PhoneInput from "@/components/common/PhoneInput";
 import {
@@ -12,6 +11,7 @@ import {
   DEFAULT_COUNTRY,
 } from "@/components/common/PhoneInput/constants";
 import { createCareer } from "./actions";
+import Button from "@/components/common/Button";
 
 export const InputForm = ({ t }: any) => {
   const [name, setName] = useState("");
@@ -67,7 +67,7 @@ export const InputForm = ({ t }: any) => {
   };
 
   return (
-    <div className="input-form-component">
+    <div className="_px-20-percents-desktop _px-4">
       <Overlay active={modal}>
         <div ref={ref}>
           <ModalRequest
@@ -78,8 +78,10 @@ export const InputForm = ({ t }: any) => {
         </div>
       </Overlay>
       <div className="_mb-6 _flex _flex-col _gap-3">
-        <div className="input-wrapper">
+        <div className="_w-full">
           <input
+            className={`_w-full _py-3.5 _pl-3.5 __w-full _bg-light
+              _rounded-xl _outline-0 _text-gray-dark`}
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -105,8 +107,10 @@ export const InputForm = ({ t }: any) => {
               setPhoneCountry={setPhoneCountry}
             />
           </div>
-          <div className="input-wrapper">
+          <div className="_w-full">
             <input
+              className={`_w-full _py-3.5 _pl-3.5 __w-full _bg-light
+                _rounded-xl _outline-0 _text-gray-dark`}
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -114,32 +118,36 @@ export const InputForm = ({ t }: any) => {
             />
           </div>
         </div>
-        <div className="input-wrapper">
+        <div className="_w-full">
           <input
+            className={`_w-full _py-3.5 _pl-3.5 __w-full _bg-light
+              _rounded-xl _outline-0 _text-gray-dark`}
             value={referralCode}
             onChange={({ target: { value } }) => setReferralCode(value)}
             placeholder={t("referral_code")}
           />
         </div>
-        <div className="input-wrapper text-about-input">
+        <div className="_w-full">
           <textarea
+            className={`_w-full _py-3.5 _pl-3.5 __w-full _bg-light
+              _rounded-xl _outline-0 _text-gray-dark`}
             value={about}
             onChange={(e) => setAbout(e.target.value)}
             placeholder={t("Add more details")}
+            rows={4}
           />
         </div>
       </div>
       <div className="_mb-4">
-        <div
-          className={`button-wrapper ${
-            !requiredFields || isSendLoading ? "order-wrapper-disabled" : ""
-          } ${isSendLoading ? "loading" : ""}`}
+        <Button
+          className="_w-full"
+          disabled={!requiredFields || isSendLoading}
+          isLoading={isSendLoading}
           onClick={onSend}
-        >
-          {t("send")}
-        </div>
+          title={t("send")}
+        />
         {careerError && (
-          <div className="text-center _mt-2 text-danger _text-center">
+          <div className="_text-center _mt-2 _text-danger">
             {t("unexpected_error")}
           </div>
         )}

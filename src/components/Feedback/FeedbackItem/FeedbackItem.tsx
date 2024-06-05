@@ -15,6 +15,7 @@ import { Overlay } from "@/components/common/Overlay";
 import { useClickOutside } from "@/hooks/useClickOutSide";
 import { sendGAEvent } from "@/google-analytics";
 import { sendFeedback } from "@/components/Feedback/FeedbackItem/actions";
+import Button from "@/components/common/Button";
 
 const icons = [
   { image: crySvg, rating: 1 },
@@ -28,7 +29,7 @@ interface FeedbackItemProps {
   id: number;
   title: string;
   orders: { id: number; title: string }[];
-  t: (text: string) => string;
+  t: (text: string, defaultText?: string) => string;
   isOrdersLoading: boolean;
   setFinishedRating: Dispatch<SetStateAction<{ [key: string]: number }>>;
 }
@@ -80,7 +81,7 @@ function FeedbackItem({
   };
 
   return (
-    <div className="feedback-wrapper  _h-full _w-full _flex _flex-col _items-center">
+    <div className="_h-full _w-full _flex _flex-col _items-center">
       {isFeedbackError && (
         <Overlay active={isFeedbackError}>
           <div ref={errorRef}>
@@ -91,21 +92,21 @@ function FeedbackItem({
           </div>
         </Overlay>
       )}
-      <div className="title _text-center _pb-6">
+      <div className="_font-semibold _text-center _pb-6">
         {t("feedback_how_was_your_experience")}
         {orders.length > 1 ? <span className="_ml-1">({t(title)})</span> : ""}
       </div>
       <div
-        className={`_flex _justify-center rating-wrapper ${
-          orders.length > 1 ? "rating-multi-orders" : ""
+        className={`_flex _justify-center ${
+          orders.length > 1 ? "_gap-2 lg:_gap-4" : "_gap-2 lg:_gap-20"
         }`}
       >
         {icons.map(({ image, rating }) => (
           <Image
             src={image}
             alt={`${rating}`}
-            className={`_cursor-pointer rating-image ${
-              rating === selectedRating ? "selected" : ""
+            className={`_cursor-pointer _transition-all _duration-200 hover:_scale-125 ${
+              rating === selectedRating ? "_scale-[1.3]" : ""
             }`}
             onClick={() => {
               if (!wasSubmitted) {
@@ -117,26 +118,27 @@ function FeedbackItem({
       </div>
       <div
         className={`_py-10 _w-full ${
-          orders.length > 1 ? "text-wrapper-multi" : "text-wrapper"
+          orders.length > 1 ? "_h-72 _flex-none lg:_flex-1" : "_flex-1"
         }`}
       >
         <textarea
-          className="_w-full feedback-text _h-full"
+          className={`_w-full _h-full _border _border-solid _bg-light _outline-0
+            _p-3.5 _border-neutral-500 _rounded-xl`}
           placeholder={t("feedback_add_more_details")}
           value={feedback}
           onChange={({ target: { value } }) => setFeedback(value)}
           disabled={isSubmitLoading || wasSubmitted}
         />
       </div>
-      <button
-        className={`submit-feedback-button ${isSubmitLoading ? "loading" : ""}`}
+      <Button
+        className="_w-72"
+        isLoading={isSubmitLoading}
         disabled={
           !selectedRating || isSubmitLoading || wasSubmitted || isOrdersLoading
         }
         onClick={onSendFeedback}
-      >
-        {t("submit")}
-      </button>
+        title={t("submit")}
+      />
     </div>
   );
 }

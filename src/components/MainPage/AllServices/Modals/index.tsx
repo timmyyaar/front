@@ -1,10 +1,7 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 
-import { CloseSvg } from "@/components/common/icons/closeButton";
-
-import "./style.scss";
 import DeepCleaningModalContent from "@/components/MainPage/AllServices/Modals/DeepCleaningModalContent";
 import RegularCleaningModalContent from "@/components/MainPage/AllServices/Modals/RegularCleaningModalContent";
 import EcoCleaningModalContent from "@/components/MainPage/AllServices/Modals/EcoCleaningModalContent";
@@ -22,6 +19,7 @@ import OzonationModalContent from "@/components/MainPage/AllServices/Modals/Ozon
 import WhileSickModalContent from "@/components/MainPage/AllServices/Modals/WhileSickModalContent";
 import SubscriptionModalContent from "@/components/MainPage/AllServices/Modals/SubscriptionModalContent";
 import { TranslateFunction } from "@/types";
+import Modal from "@/components/common/Modal";
 
 interface ModalsProps {
   title: string;
@@ -31,25 +29,9 @@ interface ModalsProps {
 }
 
 export const Modals = ({ title, onClose, t, isOrder }: ModalsProps) => {
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, []);
-
   return (
-    <div
-      className="modal-wrapper-component custom-scroll"
-      onClick={(e) => {
-        e.stopPropagation();
-      }}
-    >
-      <div className="icon-wrapper-modal" onClick={onClose}>
-        <CloseSvg />
-      </div>
-      <div>
+    <Modal isWhiteBackground className="_max-h-[80%]" onClose={onClose}>
+      <div className="_py-14 lg:_py-0">
         {title === "Regular" ? (
           <RegularCleaningModalContent t={t} isOrder={isOrder} />
         ) : null}
@@ -99,6 +81,6 @@ export const Modals = ({ title, onClose, t, isOrder }: ModalsProps) => {
           <AirbnbModalContent t={t} isOrder={isOrder} />
         ) : null}
       </div>
-    </div>
+    </Modal>
   );
 };

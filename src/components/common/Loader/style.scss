@@ -192,7 +192,7 @@
   height: 30px;
   width: 30px;
 
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: 1024px) {
     animation: 4s infinite normal loader-left-mobile;
     height: 15px;
     width: 15px;
@@ -207,7 +207,7 @@
   height: 30px;
   width: 30px;
 
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: 1024px) {
     animation: 4s infinite normal loader-central-mobile;
     height: 15px;
     width: 15px;
@@ -222,7 +222,7 @@
   height: 30px;
   width: 30px;
 
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: 1024px) {
     animation: 4s infinite normal loader-right-mobile;
     height: 15px;
     width: 15px;

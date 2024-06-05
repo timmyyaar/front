@@ -7,7 +7,6 @@ import { useLocales } from "@/hooks/useLocales";
 import { Benefits } from "./Benefits";
 import { InputForm } from "./InputForm";
 import { Instruction } from "./Instruction";
-import "./style.scss";
 import { LocaleContext } from "@/components/Providers";
 import { sendGAEvent } from "@/google-analytics";
 
@@ -26,12 +25,18 @@ export const CareerPage = () => {
 
   return (
     <div className="career-page">
-      <div className="career-content _flex _flex-col">
-        <div className="career-title">{t("Do you want to join T⅄T team?")}</div>
+      <div className="career-content _flex _flex-col _gap-6 _mt-6 lg:_gap-10 lg:_mt-14">
+        <div className="_main-title">
+          {t("Do you want to join T⅄T team?")}
+        </div>
         <Benefits t={t} />
-        <div className="career-title block-wrapper">{t("How to join?")}</div>
+        <div className="_main-title _mt-6 lg:_mt-0">
+          {t("How to join?")}
+        </div>
         <Instruction title="career" cardsCount={3} t={t} />
-        <div className="career-title block-wrapper">{t("Filling form")}</div>
+        <div className="_main-title _mt-6 lg:_mt-0">
+          {t("Filling form")}
+        </div>
         <InputForm t={t} />
         <div className="_flex _flex-col">
           <Footer t={t} />

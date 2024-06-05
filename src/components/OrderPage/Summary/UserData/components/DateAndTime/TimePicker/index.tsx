@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { ArrowLeft } from "../../icons/ArrowLeft";
 import { ArrowRight } from "../../icons/ArrowRight";
 
-import "./style.scss";
 import { getDateString } from "@/utils";
 
 const pages = {
@@ -78,8 +77,11 @@ export const TimePicker = ({ time, setTime, t, data }: any) => {
 
         timeOptions.push(
           <div
-            className={`time-cell ${timeItem === time ? "time-selected" : ""} ${
-              isTimeDisabled ? "time-disabled" : ""
+            className={`_mb-3 _h-10 _transition-all _font-semibold _cursor-pointer
+              _rounded-full hover:_text-white hover:_bg-primary ${
+                timeItem === time ? "_text-white _bg-primary" : ""
+              } ${
+              isTimeDisabled ? "_pointer-events-none _text-gray-lighter" : ""
             } _flex _items-center _justify-center _cursor-pointer`}
             onClick={() => setTime(timeItem)}
             key={timeItem}
@@ -105,15 +107,17 @@ export const TimePicker = ({ time, setTime, t, data }: any) => {
     <div className="_p-2">
       <div className="_flex _items-center _justify-between _mb-5">
         <div className="_text-xl _font-bold">{t("Time")}</div>
-        <div className="button-date-picker-wrapper _flex _justify-between">
+        <div className="_w-24 _flex _justify-between">
           <button
-            className="button-date-picker _flex _items-center _justify-center"
+            className={`_w-7 _h-7 _rounded-md hover:_text-primary _transition-all
+              _bg-white _shadow-md _flex _items-center _justify-center`}
             onClick={prevPage}
           >
             <ArrowLeft />
           </button>
           <button
-            className="button-date-picker _flex _items-center _justify-center"
+            className={`_w-7 _h-7 _rounded-md hover:_text-primary _transition-all
+              _bg-white _shadow-md _flex _items-center _justify-center`}
             onClick={nextPage}
           >
             <ArrowRight />

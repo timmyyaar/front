@@ -9,7 +9,6 @@ import { CheckBoxesBlock } from "../OrderPage/CheckBoxesBlock";
 import { CounterComponent } from "../OrderPage/Counter";
 import { SubServicesList } from "../OrderPage/SubServicesList";
 import { Summary } from "../OrderPage/Summary";
-import "./style.scss";
 import { LocaleContext } from "@/components/Providers";
 import { sendGAEvent } from "@/google-analytics";
 import { Discount } from "@/components/OrderPage/Summary";
@@ -44,34 +43,46 @@ export const SubscriptionPage = ({ discounts }: SubscriptionPageProps) => {
   }, []);
 
   return (
-    <div className="subscription-page">
-      <div className="content-wrapper">
-        <div className="left-col">
-          <div className="subscription_header-block">
-            <div className="subscription_header-title">
+    <>
+      <div className="_gap-10 _mt-10 _px-24 _px-5-percents-mobile _flex _flex-col lg:_flex-row">
+        <div className="_w-full lg:_w-4/6 _gap-10 lg:_gap-20 _flex _flex-col">
+          <div>
+            <div className="_text-2xl _gap-2 _flex _justify-center _font-semibold _mb-5">
               <>
-                <div className="mobile-none subscription_title">
+                <div className="mobile-none">
                   {t("Subscription_page_title")}
                 </div>
-                <div className="mobile-none subscription_sub_title">
+                <div className="mobile-none _text-primary">
                   {t("subscription_sub_title")}
                 </div>
-                <div className="mobile-only subscription_mobile_title">
+                <div className="mobile-only _text-dark">
                   {t("How much it costs")}
                 </div>
               </>
             </div>
-            <div className="subscription_content">
+            <div className="_flex _justify-center _gap-4 lg:_gap-6">
               {sales.map((item) => (
                 <div
-                  className={`subscription_item ${
-                    sale.sale === item.sale ? "subscription_item_active" : ""
-                  }`}
+                  className={`hover:_rounded-xl hover:_border-4 hover:_border-solid
+                    hover:_border-primary _flex _flex-col _justify-center _items-center
+                    _cursor-pointer _border-4 _border-solid _border-transparent
+                    _rounded-xl _p-3 ${
+                      sale.sale === item.sale ? "_bg-primary" : ""
+                    }`}
                   onClick={() => setSale(item)}
                   key={JSON.stringify(item)}
                 >
-                  <div className="subscription_item_percent">{item.sale}</div>
-                  <div className="subscription_item_percent-wrapper _mt-1">
+                  <div
+                    className={`_p-2 _rounded-full _bg-warning _text-lg lg:_text-xl
+                    _font-semibold`}
+                  >
+                    {item.sale}
+                  </div>
+                  <div
+                    className={`_text-sm lg:_text-xl _font-medium _text-center _mt-1 ${
+                      sale.sale === item.sale ? "_text-white" : ""
+                    }`}
+                  >
                     {t(item.title)}
                   </div>
                 </div>
@@ -102,7 +113,7 @@ export const SubscriptionPage = ({ discounts }: SubscriptionPageProps) => {
             t={t}
           />
         </div>
-        <div className="right-col">
+        <div className="__w-full _min-w-2/6 lg:_w-2/6">
           <Summary
             title={"Subscription"}
             counter={counterValue}
@@ -116,6 +127,6 @@ export const SubscriptionPage = ({ discounts }: SubscriptionPageProps) => {
         </div>
       </div>
       <Footer t={t} />
-    </div>
+    </>
   );
 };

@@ -15,7 +15,6 @@ import { Order } from "./Order";
 import { PriceByPhoto } from "./PriceByPhoto";
 import { Promotions } from "./Promotions";
 import Reviews from "@/components/MainPage/Reviews";
-import "./style.scss";
 import { LocaleContext } from "@/components/Providers";
 import Blogs from "@/components/MainPage/Blogs";
 import { sendGAEvent } from "@/google-analytics";
@@ -41,23 +40,21 @@ export const MainPage = ({ blogs, reviews }: MainPageProps) => {
   }, []);
 
   return (
-    <div className="main-page">
-      <div className="main-content _flex _flex-col">
-        <MainImage common t={t} />
-        <Advantages t={t} />
-        <AllServices t={t} />
-        <Cleaning t={t} lng={lng} />
-        <Costs t={t} />
-        <AdditionalServices t={t} />
-        <PriceByPhoto t={t} />
-        <Promotions t={t} />
-        <Blogs t={t} blogs={blogs} />
-        <FAQ t={t} />
-        <Reviews t={t} reviews={reviews} />
-        <div className="_flex _flex-col">
-          <Order t={t} />
-          <Footer t={t} />
-        </div>
+    <div className="_gap-0 lg:_gap-28 _flex _flex-col">
+      <MainImage common t={t} />
+      <Advantages t={t} />
+      <AllServices t={t} />
+      <Cleaning t={t} lng={lng} />
+      <Costs t={t} />
+      <AdditionalServices t={t} />
+      <PriceByPhoto t={t} />
+      <Promotions t={t} />
+      <Blogs t={t} blogs={blogs} />
+      <FAQ t={t} />
+      <Reviews t={t} reviews={reviews} />
+      <div className="_flex _flex-col">
+        <Order t={t} />
+        <Footer t={t} />
       </div>
     </div>
   );

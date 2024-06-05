@@ -1,20 +1,17 @@
 import Image from "next/image";
 import { Dispatch, SetStateAction, useState } from "react";
 
-import "./style.scss";
-
 import { useClickOutside } from "@/hooks/useClickOutSide";
 import { COUNTRIES, Country } from "./constants";
 import { POSITIVE_NUMBER_EMPTY_REGEX } from "@/constants";
 import CaretDownIcon from "@/components/common/PhoneInput/icons/CaretDown";
 
 interface PhoneInputProps {
-  t: (text: string) => string;
+  t: (text: string, defaultText?: string) => string;
   number: string;
   setNumber: Dispatch<SetStateAction<string>>;
   phoneCountry: Country;
   setPhoneCountry: Dispatch<SetStateAction<Country>>;
-  isPhoneRelative?: boolean;
 }
 
 const PhoneInput = ({
@@ -23,7 +20,6 @@ const PhoneInput = ({
   setNumber,
   phoneCountry,
   setPhoneCountry,
-  isPhoneRelative,
 }: PhoneInputProps) => {
   const [isDropdownOpened, setIsDropdownOpened] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>("");
@@ -52,19 +48,20 @@ const PhoneInput = ({
 
   return (
     <div
-      className={`phone-input-wrapper _w-full ${
-        isPhoneRelative ? "phone-relative" : ""
-      }`}
+      className="_flex _relative _w-full"
       ref={dropdownRef}
     >
       {!isDropdownOpened && (
         <>
           <div
-            className="phone-dropdown _cursor-pointer _relative _flex _items-center"
+            className={`after:_h-4/6 after:_border-r after:_border-gray-light
+              after:_absolute after:_right-0 after:_w-px after:_content-['']
+              _cursor-pointer _relative _flex _items-center _bg-light _py-3.5
+              _pl-3.5 _pr-2 _rounded-l-xl`}
             onClick={onDropdownOpen}
           >
-            <div className="_font-semibold _flex _items-center">
-              <div className="country-flag-image">
+            <div className="_group _font-semibold _flex _items-center">
+              <div className="_w-5 _h-3.5">
                 <Image
                   src={`/countries-flags/${phoneCountry.code}.svg`}
                   width="20"
@@ -75,12 +72,12 @@ const PhoneInput = ({
               <span className="_mx-1 _whitespace-nowrap">
                 +{phoneCountry.phoneCode}
               </span>
-              <CaretDownIcon className="caret-icon" />
+              <CaretDownIcon className="group-hover:_text-primary" />
             </div>
           </div>
           <input
             type="text"
-            className="phone-input"
+            className="_rounded-e-xl _py-3.5 _pl-2 _w-full _bg-light _outline-0 _text-gray-dark"
             placeholder={t("Contact number")}
             value={number}
             onChange={({ target: { value } }) => {
@@ -94,17 +91,23 @@ const PhoneInput = ({
       {isDropdownOpened && (
         <>
           <input
-            className="phone-input search-input"
+            className="_w-full _bg-light _outline-0 _text-gray-dark _p-3.5 _rounded-t-xl"
             autoFocus
             value={searchValue}
             onChange={({ target: { value } }) => setSearchValue(value)}
           />
-          <div className="_absolute _top-full _w-full menu _z-10 custom-scroll">
+          <div
+            className={`custom-scroll _overflow-auto _max-h-80 _rounded-b-xl
+              _absolute _top-full _w-full _shadow-md _outline _outline-1 _outline-gray-light
+              _bg-light _z-10`}
+          >
             {filteredCountries.length > 0 ? (
               filteredCountries.map(({ name, code, phoneCode }) => (
                 <div
                   key={code}
-                  className="_py-4 _px-3.5 _flex _items-center _cursor-pointer country-item"
+                  className={`_py-4 _px-3.5 _flex _items-center _cursor-pointer
+                    hover:_opacity-70 active:_opacity-100 active:_text-primary
+                    [&:not(:last-child)]:_border-b _border-gray-light`}
                   onClick={() => onCountrySelect({ name, code, phoneCode })}
                 >
                   <Image

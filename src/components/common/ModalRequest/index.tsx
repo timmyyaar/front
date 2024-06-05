@@ -1,9 +1,8 @@
 import React from "react";
 
-import { CloseSvg } from "@/components/common/icons/closeButton";
 import LogoBig from "@/components/common/icons/components/LogoBig";
 
-import "./style.scss";
+import Modal from "@/components/common/Modal";
 
 interface Props {
   title?: string;
@@ -20,25 +19,27 @@ export const ModalRequest: React.FC<Props> = ({
   showLogo = true,
   showLogoTitle = true,
 }) => (
-  <div className="modal-request-wrapper">
-    <div className="icon-wrapper-modal" onClick={onClose}>
-      <CloseSvg />
-    </div>
-    {title && (
-      <div className="title">
-        <span className="text-gradient">{title}</span>
-      </div>
-    )}
-    {showLogo && (
-      <div className="_flex _flex-col _items-center">
-        <LogoBig className="logo-icon" />
-        {showLogoTitle && (
-          <div className="_text-center logo-title _mt-1">
-            <span className="text-gradient">Take Your Time</span>
-          </div>
-        )}
-      </div>
-    )}
-    <div className="_text-center _whitespace-pre">{text}</div>
-  </div>
+  <Modal
+    onClose={onClose}
+    className="_px-6 lg:_p-20 _flex _flex-col _items-center _justify-center _gap-6 lg:_gap-10"
+  >
+    <>
+      {title && (
+        <div className="_text-2xl lg:_text-3xl _text-center _font-semibold">
+          <span className="text-gradient">{title}</span>
+        </div>
+      )}
+      {showLogo && (
+        <div className="_flex _flex-col _items-center">
+          <LogoBig className="_w-24 _h-16 lg:_w-auto lg:_h-auto" />
+          {showLogoTitle && (
+            <div className="_text-center _main-title _font-bold _mt-1">
+              <span className="text-gradient">Take Your Time</span>
+            </div>
+          )}
+        </div>
+      )}
+      <div className="_text-center _whitespace-pre">{text}</div>
+    </>
+  </Modal>
 );

@@ -5,6 +5,7 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { LocaleContext } from "@/components/Providers";
+import Button from "@/components/common/Button";
 
 interface CheckoutFormProps {
   paymentIntent: {
@@ -13,7 +14,7 @@ interface CheckoutFormProps {
     client_secret: string;
     amount: number;
   };
-  t: (text: string) => string;
+  t: (text: string, defaultText?: string) => string;
 }
 
 function CheckoutForm({ t, paymentIntent }: CheckoutFormProps) {
@@ -54,18 +55,20 @@ function CheckoutForm({ t, paymentIntent }: CheckoutFormProps) {
         }}
       />
       {error && (
-        <div className="text-danger _mt-1 _text-center">
+        <div className="_text-danger _mt-1 _text-center">
           {error || t("promo_error_modal_title")}
         </div>
       )}
-      <div className="d-flex justify-content-center _mt-4">
-        <button
-          className={`pay-button ${isPaymentLoading ? "disabled loading" : ""}`}
+      <div className="_flex _justify-center _mt-4">
+        <Button
+          className="_w-full _max-w-full lg:_w-[30rem]"
           onClick={onPayClick}
+          isLoading={isPaymentLoading}
           disabled={isPaymentLoading || !isPayButtonEnabled}
-        >
-          {t("pay")} {parseFloat((paymentIntent.amount / 100).toFixed(1))} zl
-        </button>
+          title={`${t("pay")} ${parseFloat(
+            (paymentIntent.amount / 100).toFixed(1)
+          )} zl`}
+        />
       </div>
     </div>
   );

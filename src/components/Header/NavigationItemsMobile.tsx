@@ -9,7 +9,7 @@ import GoogleIcon from "@/components/common/icons/components/Google";
 import { sendGAEvent } from "@/google-analytics";
 
 interface NavigationItemsMobileProps {
-  t: (text: string) => string;
+  t: (text: string, defaultText?: string) => string;
   setIsMenuOpened: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -43,13 +43,13 @@ const NavigationItemsMobile = ({
       <div>
         {navigation.map((navItem) => (
           <div
-            className={`navigation-wrapper-mobile mobile-only-flex _font-semibold ${
-              pathname.includes(navItem.href) ? "active" : ""
+            className={` mobile-only-flex _font-semibold ${
+              pathname.includes(navItem.href) ? "_text-dark" : ""
             } _flex _flex-col _justify-center`}
             key={navItem.title}
           >
             <div
-              className="_flex _justify-center _py-2 link"
+              className="_flex _justify-center _py-2"
               onClick={() => {
                 if (pathname.includes(navItem.href)) {
                   setIsMenuOpened(false);
@@ -100,13 +100,19 @@ const NavigationItemsMobile = ({
             <GoogleIcon />
           </a>
         </div>
-        <div className="_flex _gap-2.5 _justify-center _items-center mobile-sub-header _px-4 _py-2">
+        <div
+          className={`_flex _gap-2.5 _justify-center _items-center _text-lg
+            _text-dark _px-4 _py-2`}
+        >
           <span className="text-gradient">
             <PhoneIcon />
           </span>
           <span className="_font-semibold text-gradient">+48 730 003 997</span>
         </div>
-        <div className="_flex _gap-2.5 _justify-center _items-center mobile-sub-header _px-4 _py-2">
+        <div
+          className={`_flex _gap-2.5 _justify-center _items-center
+            _text-lg _text-dark _px-4 _py-2`}
+        >
           <MailIcon />
           <span className="_font-semibold text-gradient">
             Mail: tytimeinbox@gmail.com

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import Image, { StaticImageData } from "next/image";
 
 import { Switcher } from "@/components/common/Switcher";
@@ -46,8 +46,7 @@ import BalconyEngDeep from "./images/BalconyEngDeep.png";
 import BalconyPolDeep from "./images/BalconyPolDeep.png";
 import BalconyRusDeep from "./images/BalconyRusDeep.png";
 import BalconyUkrDeep from "./images/BalconyUkrDeep.png";
-
-import "./style.scss";
+import { HOW_IT_WORKS_TEXTS } from "@/components/MainPage/constants";
 
 const roomsImages: {
   [key: string]: { [key: string]: { [key: string]: StaticImageData } };
@@ -118,29 +117,6 @@ const roomsImages: {
   },
 };
 
-const roomsLines: { [key: string]: { [key: string]: number } } = {
-  Bedroom: {
-    Regular: 7,
-    Deep: 9,
-  },
-  Kitchen: {
-    Regular: 5,
-    Deep: 8,
-  },
-  Corridor: {
-    Regular: 5,
-    Deep: 7,
-  },
-  Bathroom: {
-    Regular: 5,
-    Deep: 7,
-  },
-  Balcony: {
-    Regular: 0,
-    Deep: 3,
-  },
-};
-
 const tabs: string[] = ["Regular", "Deep"];
 const rooms: { [key: string]: string[] } = {
   Regular: ["Bedroom", "Kitchen", "Corridor", "Bathroom"],
@@ -176,14 +152,17 @@ export const Cleaning = (props: any) => {
   }, [tab, room]);
 
   return (
-    <div className="cleaning-component _flex _flex-col _items-center">
-      <div className="main-title mobile-none">
+    <div
+      className={`_h-auto _mb-14 lg:_mb-0 _px-5-percents lg:_px-24 _flex
+       _flex-col _items-center`}
+    >
+      <div className="_main-title _mb-3 lg:_mb-5 mobile-none">
         {t("What cleaning consists of")}
       </div>
-      <div className="main-title-mobile mobile-only">
+      <div className="_main-title _mb-3 lg:_mb-5 mobile-only">
         {t("What_cleaning_consists_of_mobile")}
       </div>
-      <div className="switcher-wrapper">
+      <div className="_flex _justify-center _mb-6 lg:_mb-0">
         <Switcher
           tab={tab}
           tabs={tabs}
@@ -192,14 +171,28 @@ export const Cleaning = (props: any) => {
         />
       </div>
       <div className="mobile-none _w-full">
-        <div className={"room-img-wrapper" + " " + room.toLowerCase()}>
-          <Image src={roomImage} alt="" priority />
+        <div
+          className={
+            "_my-8 _relative _overflow-hidden _flex _justify-center" +
+            " " +
+            room.toLowerCase()
+          }
+        >
+          <Image
+            src={roomImage}
+            alt=""
+            priority
+            className="_rounded-3xl _h-full _w-3/4"
+          />
         </div>
         <div className="_flex _justify-around">
           {/* @ts-ignore */}
           {rooms[tab].map((el: any) => (
             <div
-              className={`room-item ${el === room && "active"}`}
+              className={`room-item _w-52 _h-16 _flex _items-center 
+                _justify-center _font-medium _cursor-pointer ${
+                  el === room && "_text-white _bg-primary _rounded-full"
+                }`}
               onClick={() => setRoom(el as string)}
               key={el}
             >
@@ -208,16 +201,11 @@ export const Cleaning = (props: any) => {
           ))}
         </div>
       </div>
-      <div className="rooms-info-mobile">
+      <div className="mobile-only _p-5 _w-full _bg-light _rounded-3xl">
         {rooms[tab].map((el: string, i: number) => (
-          <div
-            className="rooms-info-mobile-wrapper"
-            key={JSON.stringify(el) + i}
-          >
+          <div className="_mb-3.5" key={JSON.stringify(el) + i}>
             <div
-              className={`rooms-info-mobile-title ${
-                openRooms.includes(el) ? " active-rooms-info-mobile-title" : ""
-              }`}
+              className="_mb-3 _text-center"
               onClick={() =>
                 setOpenedRooms((arr) =>
                   arr.includes(el)
@@ -226,35 +214,32 @@ export const Cleaning = (props: any) => {
                 )
               }
             >
-              <b>{t(el)}</b>
+              <b className={`${openRooms.includes(el) ? "_text-primary" : ""}`}>
+                {t(el)}
+              </b>
               {openRooms.includes(el) && (
-                <div className="rooms-info-mobile-text-list">
-                  {[...new Array(roomsLines[el][tab])].map((_, i) => (
-                    <div
-                      className="rooms-info-mobile-text-item"
-                      key={"text-mobile-room" + (i + 1)}
-                    >
-                      <div className="rooms-info-mobile-text-item-text">
+                <div className="_mt-3.5">
+                  {/* @ts-ignore */}
+                  {[...new Array(HOW_IT_WORKS_TEXTS[tab][el].length)].map(
+                    (_, i) => (
+                      <div
+                        className="_flex before:_content-['\2022'] before:_inline-block before:_mr-3"
+                        key={"text-mobile-room" + (i + 1)}
+                      >
                         <Writer
-                          text={t(
-                            "text-rooms-info-mobile-" +
-                              el +
-                              "_" +
-                              tab +
-                              "_" +
-                              (i + 1)
-                          )}
+                          //@ts-ignore
+                          text={t(HOW_IT_WORKS_TEXTS[tab][el][i])}
                           alignLeft
                         />
                       </div>
-                    </div>
-                  ))}
+                    )
+                  )}
                 </div>
               )}
             </div>
           </div>
         ))}
-        <div className="_text-center _mb-4 rooms-info-description">
+        <div className="_text-center _text-sm _text-gray-dark">
           {t("what_cleaning_consists_of_description")}
         </div>
       </div>

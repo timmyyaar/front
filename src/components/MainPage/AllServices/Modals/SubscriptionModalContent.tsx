@@ -94,8 +94,8 @@ function SubscriptionModalContent({
   return (
     <>
       <div className="_text-center">
-        <div className="modal-title-wrapper _text-center">
-          <span className="modal-title-text text-gradient">
+        <div className="_mb-4 lg:_mb-6 _text-center">
+          <span className="_main-title text-gradient">
             {t("Subscription")}
           </span>
         </div>
@@ -104,9 +104,9 @@ function SubscriptionModalContent({
         </div>
       </div>
       {!isOrder && (
-        <div className="mt-16-mobile-8">
-          <div className="modal-title-wrapper _text-center">
-            <span className="modal-title-text text-gradient">
+        <div className="_mt-8 lg:_mt-16">
+          <div className="_mb-4 lg:_mb-6 _text-center">
+            <span className="_main-title text-gradient">
               {t("Prices")}
             </span>
           </div>

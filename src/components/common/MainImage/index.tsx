@@ -21,7 +21,7 @@ export const MainImage = (props: any) => {
 
   return (
     <>
-      <div className="main-image-wrapper mobile-none">
+      <div className="main-image-wrapper mobile-none _relative _overflow-hidden">
         <Image
           src={mainPng}
           alt=""
@@ -36,7 +36,7 @@ export const MainImage = (props: any) => {
           <SelectService t={t} services={services} setService={setService} />
         )}
       </div>
-      <div className="main-image-wrapper-mobile">
+      <div className="mobile-only main-image-wrapper-mobile _mb-24 _relative">
         <Image
           src={mainPng}
           alt=""

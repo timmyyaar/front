@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { NUMBER_REGEX } from "@/constants";
 import { getOzonationMultiplier } from "@/utils";
@@ -18,7 +18,10 @@ const Cost = ({ title, cost, count }: Props) => {
     : cost;
 
   return (
-    <div className="cost-wrapper">
+    <div
+      className={`_py-3 _px-4 _flex _justify-center _items-center _border-40
+        _bg-warning _leading-5 lg:_leading-8`}
+    >
       {transformedCost.indexOf("m2") !== -1 ? (
         <>
           {transformedCost.replace("m2", "")}

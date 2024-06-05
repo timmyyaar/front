@@ -64,7 +64,7 @@ function OfficeCleaningModalContent({
   const officeCosts = [
     {
       title: (
-        <span className="cost-price">
+        <span className="_text-2lx _font-bold">
           {prices.officeSquareMeter}
           <span className="_ml-1">
             {t("zl")}/{t("m")}
@@ -78,20 +78,20 @@ function OfficeCleaningModalContent({
 
   return (
     <>
-      <div className="modal-title-wrapper _text-center">
-        <span className="modal-title-text text-gradient">
+      <div className="_mb-4 lg:_mb-6 _text-center">
+        <span className="_main-title text-gradient">
           {t("what_is_included")}
         </span>
       </div>
-      <div className="_grid col-2-mobile-1 _gap-6">
+      <div className="_grid _grid-cols-1 lg:_grid-cols-2 _gap-6">
         {OFFICE_CLEANING_BLOCKS.map(({ title, items }, index) => (
           <TextBlock key={index} title={title} items={items} t={t} />
         ))}
       </div>
       {!isOrder && (
-        <div className="mt-16-mobile-8">
-          <div className="modal-title-wrapper _text-center">
-            <span className="modal-title-text text-gradient">
+        <div className="_mt-8 lg:_mt-16">
+          <div className="_mb-4 lg:_mb-6 _text-center">
+            <span className="_main-title text-gradient">
               {t("Prices")}
             </span>
           </div>

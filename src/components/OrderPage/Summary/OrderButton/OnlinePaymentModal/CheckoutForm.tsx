@@ -12,12 +12,13 @@ import {
   createOrder,
   editPaymentIntent,
 } from "@/components/OrderPage/Summary/OrderButton/actions";
+import Button from "@/components/common/Button";
 
 interface CheckoutFormProps {
   payload: any;
   paymentIntentId: string;
   onClose: () => void;
-  t: (text: string) => string;
+  t: (text: string, defaultText?: string) => string;
   onCleanPromoData: () => void;
 }
 
@@ -102,9 +103,10 @@ function CheckoutForm({
     <div className="_w-full">
       <div>
         <div
-          className={`back-button _flex _items-center _justify-center ${
-            isPaymentLoading ? "primary-button-disabled" : ""
-          }`}
+          className={`_bg-primary _rounded-full _w-10 _h-10 _cursor-pointer
+            _absolute _top-4 _left-4 _flex _items-center _justify-center ${
+              isPaymentLoading ? "primary-button-disabled" : ""
+            }`}
           onClick={() => {
             if (!isPaymentLoading) {
               onClose();
@@ -113,7 +115,10 @@ function CheckoutForm({
         >
           <ArrowDown />
         </div>
-        <div className="text-gradient payment-confirm-title _text-center">
+        <div
+          className="text-gradient _mt-14 lg:_mt-0 _mb-4 lg:_mb-8
+            lg:_text-2xl _font-semibold _text-center"
+        >
           {t("payment_modal_charges_title")}
         </div>
       </div>
@@ -121,25 +126,24 @@ function CheckoutForm({
         onReady={(element) => element.focus()}
         onChange={(formState) => {
           setIsPayButtonEnabled(formState.complete);
+          setError("");
         }}
       />
       {(error || orderError || promoError) && (
-        <div className="text-danger _mt-1 _text-center">
+        <div className="_text-danger _mt-1 _text-center">
           {error || promoError
             ? t("promo_error_modal_title")
             : t("unexpected_error")}
         </div>
       )}
-      <div className="d-flex justify-content-center _mt-4">
-        <button
-          className={`pay-button ${
-            isPaymentLoading ? "primary-button-disabled loading" : ""
-          }`}
+      <div className="_flex _justify-center _mt-4">
+        <Button
+          className="_w-full _max-w-full lg:_w-[30rem]"
           onClick={onPayClick}
+          isLoading={isPaymentLoading}
           disabled={isPaymentLoading || !isPayButtonEnabled}
-        >
-          {t("pay")} {payload.price} zl
-        </button>
+          title={`${t("pay")} ${payload.price} zl`}
+        />
       </div>
     </div>
   );
