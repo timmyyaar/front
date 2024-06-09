@@ -149,9 +149,6 @@ export const getPriceFromCounterByService = (
     case "After party":
       return getDefaultCounterPrice(counter, prices, "afterParty");
 
-    case "In a last minute":
-      return getDefaultCounterPrice(counter, prices, "lastMinute");
-
     case "While sickness":
       return getDefaultCounterPrice(counter, prices, "whileSickness");
 
@@ -231,8 +228,6 @@ export const getMinimalPriceByMainService = (
       return prices.minimalWhileSickness;
     case "After party":
       return prices.minimalAfterParty;
-    case "In a last minute":
-      return prices.minimalLastMinute;
     case "Deep":
       return prices.minimalDeep;
     case "Deep kitchen":

@@ -15,7 +15,6 @@ const NON_ZERO_COUNTER_MAIN_SERVICES = [
   "Deep",
   "Move in/out",
   "After party",
-  "In a last minute",
   "While sickness",
   "Airbnb",
   "Regular",

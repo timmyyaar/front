@@ -12,7 +12,6 @@ import cookerHoodSvg from "./icons/cooker-hood.svg";
 import fridgeSvg from "./icons/fridge.svg";
 import hoursglassSvg from "./icons/hoursglass.svg";
 import ironSvg from "./icons/iron.svg";
-import kitchenSvg from "./icons/kitchen.svg";
 import kitchenCabinets from "./icons/kitchen-cabinets.svg";
 import laundrySvg from "./icons/laundry.svg";
 import microwaveSvg from "./icons/microwave.svg";
@@ -45,19 +44,6 @@ export const AdditionalServices = (props: any) => {
     { title: "Clean slow-cooker", icons: SlowCooker },
   ];
 
-  const getServicesGroup = () => {
-    const group = [];
-
-    for (let i = 1; i <= services.length; i += 2) {
-      group.push({
-        id: services[i - 1].title + "n" + i + services[i].title,
-        coll: [services[i - 1], services[i]],
-      });
-    }
-
-    return group;
-  };
-
   const getItem = ({ title, icons }: any) => (
     <div
       className={`_rounded-2.5xl _bg-light _min-h-36 lg:_min-h-52 _w-full
@@ -76,17 +62,7 @@ export const AdditionalServices = (props: any) => {
     <div className="_px-5-percents lg:_px-24 _mb-14 lg:_mb-0">
       <div className="mobile-none">
         <div className="_main-title _mb-8">{t("Additional services")}</div>
-        <Slider
-          elements={getServicesGroup().map((el) => ({
-            id: el.id,
-            content: (): JSX.Element => (
-              <div className="_px-2.5 _flex _flex-col _w-full _gap-6">
-                {getItem(el.coll[0])}
-                {getItem(el.coll[1])}
-              </div>
-            ),
-          }))}
-        />
+        <Slider elements={services.map((el) => getItem(el))} />
       </div>
       <div className="mobile-only">
         <div className="_main-title _mb-3">

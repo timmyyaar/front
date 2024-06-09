@@ -12,7 +12,6 @@ import DeepKitchen from "@/components/common/icons/services/deep-kitchen.svg";
 import Deep from "@/components/common/icons/services/deep.svg";
 import DryCleaning from "@/components/common/icons/services/dry-cleaning.svg";
 import EcoCleaning from "@/components/common/icons/services/eco-cleaning.svg";
-import InaLastMinute from "@/components/common/icons/services/in-a-last-minute.svg";
 import MoveInOut from "@/components/common/icons/services/move-in-out.svg";
 import Office from "@/components/common/icons/services/office.svg";
 import Ozonation from "@/components/common/icons/services/ozonation.svg";
@@ -39,7 +38,6 @@ export const AllServices = (props: any) => {
     { title: "Move in/out", icon: MoveInOut },
     { title: "Ozonation", icon: Ozonation },
     { title: "Subscription", icon: Subscription },
-    { title: "In a last minute", icon: InaLastMinute },
     { title: "Custom cleaning", icon: CustomCleaning },
     { title: "After party", icon: AfterParty },
     { title: "Office", icon: Office },
@@ -47,19 +45,6 @@ export const AllServices = (props: any) => {
     { title: "Deep kitchen", icon: DeepKitchen },
     { title: "Airbnb", icon: Airbnb },
   ];
-
-  const getServicesGroup = () => {
-    const group = [];
-
-    for (let i = 1; i <= services.length; i += 2) {
-      group.push({
-        id: services[i - 1].title + "n" + i + services[i].title,
-        coll: [services[i - 1], services[i]],
-      });
-    }
-
-    return group;
-  };
 
   return (
     <>
@@ -71,25 +56,14 @@ export const AllServices = (props: any) => {
         </Overlay>
         <div className="_mb-5 _main-title">{t("All service")}</div>
         <Slider
-          elements={getServicesGroup().map((el) => ({
-            id: el.id,
-            content: (): JSX.Element => (
-              <div className="_px-2.5 _flex _flex-col _w-full _gap-6 _h-full">
-                <ServiceItem
-                  title={t(el.coll[0].title)}
-                  icon={el.coll[0].icon}
-                  t={t}
-                  onClick={() => setActive(el.coll[0].title)}
-                />
-                <ServiceItem
-                  title={t(el.coll[1].title)}
-                  icon={el.coll[1].icon}
-                  t={t}
-                  onClick={() => setActive(el.coll[1].title)}
-                />
-              </div>
-            ),
-          }))}
+          elements={services.map((el, index) => (
+            <ServiceItem
+              title={t(el.title)}
+              icon={el.icon}
+              t={t}
+              onClick={() => setActive(el.title)}
+            />
+          ))}
         />
       </div>
       <div className="mobile-only _px-5-percents _mb-14">
