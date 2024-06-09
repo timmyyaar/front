@@ -12,6 +12,7 @@ import DeepKitchen from "@/components/common/icons/services/deep-kitchen.svg";
 import Deep from "@/components/common/icons/services/deep.svg";
 import DryCleaning from "@/components/common/icons/services/dry-cleaning.svg";
 import EcoCleaning from "@/components/common/icons/services/eco-cleaning.svg";
+import InaLastMinute from "@/components/common/icons/services/in-a-last-minute.svg";
 import MoveInOut from "@/components/common/icons/services/move-in-out.svg";
 import Office from "@/components/common/icons/services/office.svg";
 import Ozonation from "@/components/common/icons/services/ozonation.svg";
@@ -38,6 +39,7 @@ export const AllServices = (props: any) => {
     { title: "Move in/out", icon: MoveInOut },
     { title: "Ozonation", icon: Ozonation },
     { title: "Subscription", icon: Subscription },
+    { title: "In a last minute", icon: InaLastMinute },
     { title: "Custom cleaning", icon: CustomCleaning },
     { title: "After party", icon: AfterParty },
     { title: "Office", icon: Office },

@@ -475,6 +475,7 @@ export const getSubServiceListByMainService = (
 ) => {
   switch (mainService) {
     case "After party":
+    case "In a last minute":
     case "Window cleaning":
     case "Airbnb":
     case "Deep":
