@@ -8,6 +8,7 @@ interface Props {
   elements: JSX.Element[];
   step?: number;
   status?: boolean;
+  rowsCount?: number;
 }
 
 export const Slider: FC<Props> = (props) => {
