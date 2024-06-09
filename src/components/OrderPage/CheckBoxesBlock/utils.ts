@@ -3,6 +3,7 @@ export const getCheckBoxByMainService = (mainService: string) => {
     case "Custom cleaning":
     case "Subscription":
     case "After party":
+    case "In a last minute":
     case "Airbnb":
     case "Deep kitchen":
     case "Move in/out":

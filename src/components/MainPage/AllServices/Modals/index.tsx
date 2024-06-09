@@ -12,6 +12,7 @@ import MoveInOutModalContent from "@/components/MainPage/AllServices/Modals/Move
 import DeepKitchenModalContent from "@/components/MainPage/AllServices/Modals/DeepKitchenModalContent";
 import AfterPartyModalContent from "@/components/MainPage/AllServices/Modals/AfterPartyModalContent";
 import AirbnbModalContent from "@/components/MainPage/AllServices/Modals/AirbnbModalContent";
+import InALastMinuteModalContent from "@/components/MainPage/AllServices/Modals/InALastMinuteModalContent";
 import DryCleaningModalContent from "@/components/MainPage/AllServices/Modals/DryCleaningModalContent";
 import WindowModalContent from "@/components/MainPage/AllServices/Modals/WindowModalContent";
 import OzonationModalContent from "@/components/MainPage/AllServices/Modals/OzonationModalContent";
@@ -57,6 +58,9 @@ export const Modals = ({ title, onClose, t, isOrder }: ModalsProps) => {
         ) : null}
         {title === "Subscription" ? (
           <SubscriptionModalContent t={t} isOrder={isOrder} />
+        ) : null}
+        {title === "In a last minute" ? (
+          <InALastMinuteModalContent t={t} isOrder={isOrder} />
         ) : null}
         {title === "Custom cleaning" ? (
           <CustomCleaningModalContent t={t} isOrder={isOrder} />

@@ -31,7 +31,7 @@ import { OWN_SUPPLES_SERVICE_NAME } from "@/components/OrderPage/constants";
 import { City } from "@/components/OrderPage/Summary/UserData/components/Cities";
 import SummaryService from "@/components/OrderPage/Summary/SummaryService";
 import { LocaleContext, PricesContext } from "@/components/Providers";
-import { getDateString, getDateTimeString } from "@/utils";
+import { getDateTimeString } from "@/utils";
 import { Counter } from "@/types";
 import OrderButton from "@/components/OrderPage/Summary/OrderButton";
 import Button from "@/components/common/Button";
@@ -175,10 +175,9 @@ export const Summary: FC<IProps> = (props: any) => {
   ] = useState<number>(0);
   const orderButtonRef = useRef<HTMLDivElement | null>(null);
 
-  const selectedDateDay = totalDate?.split(" ")[0];
   const dayDiscount =
-    discounts.find(({ date }: Discount) => date === selectedDateDay)?.value ||
-    (selectedDateDay === getDateString(new Date()) ? -10 : 0);
+    discounts.find(({ date }: Discount) => date === totalDate?.split(" ")[0])
+      ?.value || 0;
 
   const onCloseModal = () => {
     setSuccessModal(false);
