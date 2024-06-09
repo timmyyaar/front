@@ -46,19 +46,6 @@ export const AllServices = (props: any) => {
     { title: "Airbnb", icon: Airbnb },
   ];
 
-  const getServicesGroup = () => {
-    const group = [];
-
-    for (let i = 1; i <= services.length; i += 2) {
-      group.push({
-        id: services[i - 1].title + "n" + i + services[i].title,
-        coll: [services[i - 1], services[i]],
-      });
-    }
-
-    return group;
-  };
-
   return (
     <>
       <div className="_px-24 mobile-none">
@@ -69,25 +56,14 @@ export const AllServices = (props: any) => {
         </Overlay>
         <div className="_mb-5 _main-title">{t("All service")}</div>
         <Slider
-          elements={getServicesGroup().map((el) => ({
-            id: el.id,
-            content: (): JSX.Element => (
-              <div className="_px-2.5 _flex _flex-col _w-full _gap-6 _h-full">
-                <ServiceItem
-                  title={t(el.coll[0].title)}
-                  icon={el.coll[0].icon}
-                  t={t}
-                  onClick={() => setActive(el.coll[0].title)}
-                />
-                <ServiceItem
-                  title={t(el.coll[1].title)}
-                  icon={el.coll[1].icon}
-                  t={t}
-                  onClick={() => setActive(el.coll[1].title)}
-                />
-              </div>
-            ),
-          }))}
+          elements={services.map((el, index) => (
+            <ServiceItem
+              title={t(el.title)}
+              icon={el.icon}
+              t={t}
+              onClick={() => setActive(el.title)}
+            />
+          ))}
         />
       </div>
       <div className="mobile-only _px-5-percents _mb-14">
