@@ -2,7 +2,6 @@ import { PRIVATE_HOUSE_SERVICES } from "@/components/OrderPage/constants";
 
 export const getCounterByMainService = (mainService: string) => {
   switch (mainService) {
-    case "In a last minute":
     case "After party":
     case "Airbnb":
     case "While sickness":

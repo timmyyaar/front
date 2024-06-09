@@ -12,7 +12,6 @@ import MoveInOut from "@/components/common/icons/services/move-in-out.svg";
 import DeepKitchen from "@/components/common/icons/services/deep-kitchen.svg";
 import AfterParty from "@/components/common/icons/services/after-party.svg";
 import Airbnb from "@/components/common/icons/services/airbnb.svg";
-import InaLastMinute from "@/components/common/icons/services/in-a-last-minute.svg";
 
 interface IService {
   [key: string]: { title: string; icon: any }[];
@@ -33,7 +32,6 @@ export const ALL_SERVICE = {
   DEEP_KITCHEN: "Deep kitchen",
   AFTER_PARTY: "After party",
   AIRBNB: "Airbnb",
-  LAST_MINUTE: "In a last minute",
   SUBSCRIPTION: "Subscription",
 };
 
@@ -57,12 +55,10 @@ export const SERVICES: IService = {
     { title: "Deep kitchen", icon: DeepKitchen },
     { title: "After party", icon: AfterParty },
     { title: "Airbnb", icon: Airbnb },
-    { title: "In a last minute", icon: InaLastMinute },
   ],
 };
 
 export const PRIVATE_HOUSE_SERVICES = [
-  "In a last minute",
   "After party",
   "Custom cleaning",
   "Airbnb",

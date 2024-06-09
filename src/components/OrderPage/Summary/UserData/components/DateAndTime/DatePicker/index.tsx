@@ -4,7 +4,7 @@ import { ArrowLeft } from "../../icons/ArrowLeft";
 import { ArrowRight } from "../../icons/ArrowRight";
 
 import { Discount } from "@/components/OrderPage/Summary";
-import { getDateObjectFromString } from "@/utils";
+import { getDateObjectFromString, getDateString } from "@/utils";
 
 const months = [
   "Январь",
@@ -88,15 +88,22 @@ export const DatePicker = ({ data, setData, t, discounts }: any) => {
         month: "2-digit",
       })}/${currentMonth.getFullYear()}`;
 
-      const discount = discounts.find(
-        ({ date }: Discount) => date === currentDay
-      )?.value;
-      const dayCellClassName =
-        currentDay === data ? "_text-white _bg-primary _rounded-full" : "";
+      const discount =
+        currentDay === getDateString(new Date())
+          ? -10
+          : discounts.find(({ date }: Discount) => date === currentDay)?.value;
+      const isDaySelected = currentDay === data;
+      const dayCellClassName = isDaySelected
+        ? "_text-white _bg-primary _rounded-full"
+        : "";
       const dayCellDiscountClassName = discount
         ? discount < 0
-          ? "_border _border-solid _border-warning hover:_bg-warning"
-          : "_border _border-solid _border-success hover:_bg-success"
+          ? `_border _border-solid _border-warning hover:_bg-warning ${
+              isDaySelected ? "_bg-warning" : ""
+            }`
+          : `_border _border-solid _border-success hover:_bg-success ${
+              isDaySelected ? "_bg-success" : ""
+            }`
         : "";
 
       calendar.push(
