@@ -41,9 +41,11 @@ export const Slider: FC<Props> = (props) => {
           <div className="_overflow-hidden">
             <div
               className={`_grid _grid-rows-2 _grid-flow-col
-                _gap-y-4 _grid-cols-[repeat(${lengthDivider},_25%)]
-               _transition-transform _duration-500 ease-in-out`}
-              style={{ transform: `translateX(-${currentSlide * 25}%)` }}
+                _gap-y-4 _transition-transform _duration-500 ease-in-out`}
+              style={{
+                transform: `translateX(-${currentSlide * 25}%)`,
+                gridTemplateColumns: `repeat(${lengthDivider}, ${100 / step}%)`
+              }}
             >
               {elements.map((item, index) => (
                 <div
