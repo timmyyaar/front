@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
 import Man from "./icons/Man.svg";
@@ -13,6 +13,7 @@ export const Order = (props: any) => {
   const [hover, setHover] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   return (
     <div className="_mb-14 lg:_mb-0 _flex _justify-center _px-5-percents-mobile lg:_px-24">
@@ -45,7 +46,9 @@ export const Order = (props: any) => {
         <div className="_flex _justify-center">
           <Button
             className="_w-72 _mt-8"
-            onClick={() => router.push(`${pathname}/order`)}
+            onClick={() =>
+              router.push(`${pathname}/order?${searchParams.toString()}`)
+            }
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
             title={t("Order")}

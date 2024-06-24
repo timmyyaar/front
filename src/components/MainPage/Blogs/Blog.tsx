@@ -1,4 +1,4 @@
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Blog } from "@/types";
 
 interface BlogProps {
@@ -9,9 +9,10 @@ interface BlogProps {
 function Blog({ blog, t }: BlogProps) {
   const pathname = usePathname();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const onBlogClick = () => {
-    router.push(`${pathname}/blogs/${blog.id}`);
+    router.push(`${pathname}/blogs/${blog.id}?${searchParams.toString()}`);
   };
 
   return (

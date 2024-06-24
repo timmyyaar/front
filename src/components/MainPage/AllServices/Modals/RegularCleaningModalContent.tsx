@@ -8,6 +8,7 @@ import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
 import { MAIN_CATEGORIES_URLS } from "@/constants";
 import { HOW_IT_WORKS_TEXTS } from "@/components/MainPage/constants";
+import { useSearchParams } from "next/navigation";
 
 const REGULAR_CLEANING_BLOCKS = [
   {
@@ -36,6 +37,8 @@ function RegularCleaningModalContent({
   isOrder?: boolean;
 }) {
   const { prices } = useContext(PricesContext);
+  const searchParams = useSearchParams();
+  const city = searchParams.get("city");
 
   const regularCosts = [
     {
@@ -74,7 +77,7 @@ function RegularCleaningModalContent({
           </div>
           <Costs
             t={t}
-            redirectPathname={`order/${MAIN_CATEGORIES_URLS.GENERAL}?selectedService=${ALL_SERVICE.REGULAR}`}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.GENERAL}?selectedService=${ALL_SERVICE.REGULAR}${city ? `&city=${city}` : ""}`}
             costs={regularCosts}
             description="regular_price_description_mobile"
           />

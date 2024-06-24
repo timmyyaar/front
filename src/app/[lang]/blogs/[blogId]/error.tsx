@@ -1,12 +1,13 @@
 "use client";
 
 import React from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 import Button from "@/components/common/Button";
 
 export default function Error() {
   const { lang } = useParams();
+  const searchParams = useSearchParams();
   const router = useRouter();
 
   return (
@@ -17,7 +18,7 @@ export default function Error() {
         </span>
         <Button
           className="_w-max _mt-4"
-          onClick={() => router.push(`/${lang}`)}
+          onClick={() => router.push(`/${lang}?${searchParams.toString()}`)}
           title="Back home"
         />
       </div>

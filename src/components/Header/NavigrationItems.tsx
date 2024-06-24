@@ -1,5 +1,10 @@
 import React from "react";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 
 interface NavigationItemsProps {
   t: (text: string, defaultText?: string) => string;
@@ -9,6 +14,7 @@ const NavigationItems = ({ t }: NavigationItemsProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const { lang } = useParams();
+  const searchParams = useSearchParams();
 
   const navigation = [
     { href: "/subscription", title: "Subscription header" },
@@ -16,6 +22,8 @@ const NavigationItems = ({ t }: NavigationItemsProps) => {
     { href: "/gift", title: "Gift header" },
     { href: "#blog", title: "Blog" },
   ];
+
+  const city = searchParams.get("city");
 
   return navigation.map((navItem) => (
     <div
@@ -27,7 +35,7 @@ const NavigationItems = ({ t }: NavigationItemsProps) => {
     >
       <div
         onClick={() => {
-          router.push(`/${lang}${navItem.href}`);
+          router.push(`/${lang}${navItem.href}${city ? `?city=${city}` : ""}`);
         }}
         className={`_px-4 _py-2 group-hover:_rounded-full group-hover:_outline
           group-hover:_outline-1 group-hover:_outline-primary-light`}

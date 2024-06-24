@@ -2,7 +2,7 @@
 
 import React, { FC, useState, useEffect, useRef, useContext } from "react";
 
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
 import faceWithRollingEyesSvg from "./icons/face-with-rolling-eyes.svg";
@@ -22,7 +22,7 @@ import {
   getServiceEstimate,
   getServicePriceBasedOnManualCleaners,
 } from "./utils";
-import { EMAIL_REGEX, NUMBER_REGEX } from "@/constants";
+import { CITIES, EMAIL_REGEX, NUMBER_REGEX } from "@/constants";
 import {
   DEFAULT_COUNTRY,
   Country,
@@ -120,6 +120,7 @@ export const Summary: FC<IProps> = (props: any) => {
   const { locale } = useContext(LocaleContext);
   const { prices } = useContext(PricesContext);
   const { lang } = useParams();
+  const searchParams = useSearchParams();
   const [sale, setSale] = useState<number>(0);
   const [promoInputValue, setPromoInputValue] = useState<string>("");
   const [promo, setPromo] = useState<string>("");
@@ -148,7 +149,7 @@ export const Summary: FC<IProps> = (props: any) => {
     entrance: "",
     doorPhone: "",
     more: "",
-    city: { name: "Kraków", price: 0 },
+    city: { name: CITIES.KRAKOW.name, price: 0 },
   });
 
   const {
@@ -183,7 +184,7 @@ export const Summary: FC<IProps> = (props: any) => {
   const onCloseModal = () => {
     setSuccessModal(false);
 
-    router.push(`/${lang}`);
+    router.push(`/${lang}?${searchParams.toString()}`);
   };
 
   const onCleanPromoData = () => {
@@ -201,7 +202,7 @@ export const Summary: FC<IProps> = (props: any) => {
     const setSubServiceFunction = isSecond ? setSecSubService : setSubService;
 
     setSubServiceFunction((oldSubServices: SelectedSubService[]) =>
-      oldSubServices.filter((el: SelectedSubService) => el.title !== title)
+      oldSubServices.filter((el: SelectedSubService) => el.title !== title),
     );
   };
 
@@ -211,7 +212,7 @@ export const Summary: FC<IProps> = (props: any) => {
       (isPrivateHouse ? 1.3 : 1);
     const subServicePrice = subService
       .filter(
-        ({ title }: { title: string }) => title !== OWN_SUPPLES_SERVICE_NAME
+        ({ title }: { title: string }) => title !== OWN_SUPPLES_SERVICE_NAME,
       )
       .reduce(
         (acc: number, el: SelectedSubService) =>
@@ -226,7 +227,7 @@ export const Summary: FC<IProps> = (props: any) => {
               ? el.originalPrice * el.count * 1.3
               : el.originalPrice * el.count
             : 0),
-        0
+        0,
       );
 
     return countPrice ? countPrice + subServicePrice : subServicePrice;
@@ -236,12 +237,12 @@ export const Summary: FC<IProps> = (props: any) => {
     const secCountPrice = getPriceFromCounterByService(
       prices,
       secTitle,
-      secCounter
+      secCounter,
     );
     const secSubServicePrice = secSubService.reduce(
       (acc: number, el: SelectedSubService) =>
         acc + el.originalPrice * el.count,
-      0
+      0,
     );
 
     return secCountPrice
@@ -254,38 +255,38 @@ export const Summary: FC<IProps> = (props: any) => {
     counter,
     subService,
     mainServiceManualCleanersCount,
-    isPrivateHouse
+    isPrivateHouse,
   );
   const secondServiceEstimate = getServiceEstimate(
     secTitle,
     secCounter,
     secSubService,
-    secondServiceManualCleanersCount
+    secondServiceManualCleanersCount,
   );
 
   const provideOwnSuppliesSelected = subService.find(
-    ({ title }: { title: string }) => title === OWN_SUPPLES_SERVICE_NAME
+    ({ title }: { title: string }) => title === OWN_SUPPLES_SERVICE_NAME,
   );
 
   const mainServicePrice = getServicePriceBasedOnManualCleaners(
     getMainServicePrice(),
     mainServiceEstimate.cleanersCount,
-    mainServiceManualCleanersCount
+    mainServiceManualCleanersCount,
   );
   const secondServicePrice = getServicePriceBasedOnManualCleaners(
     getSecondServicePrice(),
     secondServiceEstimate.cleanersCount,
-    secondServiceManualCleanersCount
+    secondServiceManualCleanersCount,
   );
   const mainServicePriceWithSale = getPriceWithOwnSupplies(
     getPriceWithSaleOrSubSale(mainServicePrice, sale, subSale, dayDiscount),
-    provideOwnSuppliesSelected
+    provideOwnSuppliesSelected,
   );
   const secondServicePriceWithSale = getPriceWithSaleOrSubSale(
     secondServicePrice,
     sale,
     subSale,
-    dayDiscount
+    dayDiscount,
   );
 
   const getPrice = () => {
@@ -297,7 +298,7 @@ export const Summary: FC<IProps> = (props: any) => {
   const price = getPrice();
   const priceWithSale = getPriceWithOwnSupplies(
     getPriceWithSaleOrSubSale(price, sale, subSale, dayDiscount),
-    provideOwnSuppliesSelected
+    provideOwnSuppliesSelected,
   );
 
   const handleScroll = () => {
@@ -309,6 +310,10 @@ export const Summary: FC<IProps> = (props: any) => {
       });
     }
   };
+
+  const cityUrl = searchParams.get("city");
+  const selectedCity =
+    Object.values(CITIES).find(({ name }) => name === cityUrl) || CITIES.KRAKOW;
 
   const payload = {
     name: name.trim(),
@@ -330,7 +335,7 @@ export const Summary: FC<IProps> = (props: any) => {
     price: priceWithSale,
     mainServicePriceOriginal: getPriceWithOwnSupplies(
       mainServicePrice,
-      provideOwnSuppliesSelected
+      provideOwnSuppliesSelected,
     ),
     secondServicePriceOriginal: secondServicePrice,
     priceOriginal: getPriceWithOwnSupplies(price, provideOwnSuppliesSelected),
@@ -345,6 +350,7 @@ export const Summary: FC<IProps> = (props: any) => {
     secondServiceManualCleanersCount,
     additionalInformation: more,
     city: city.name,
+    mainCity: selectedCity.name,
     transportationPrice: city.price,
     language: locale,
     creationDate: getDateTimeString(new Date()),
@@ -356,7 +362,7 @@ export const Summary: FC<IProps> = (props: any) => {
     subService: subService
       .map(
         (service: SelectedSubService) =>
-          `${service.title + "_summery"} (${service.count})`
+          `${service.title + "_summery"} (${service.count})`,
       )
       .join(" "),
     ...(secondServicePrice > 0 && secTitle
@@ -364,13 +370,13 @@ export const Summary: FC<IProps> = (props: any) => {
           secTitle,
           secCounter: secCounter
             .map((el: any) =>
-              el.title ? el.title + "(" + el.value + ")" : el.value
+              el.title ? el.title + "(" + el.value + ")" : el.value,
             )
             .join(" "),
           secSubService: secSubService
             .map(
               (service: SelectedSubService) =>
-                `${service.title + "_summery"} (${service.count})`
+                `${service.title + "_summery"} (${service.count})`,
             )
             .join(" "),
         }
@@ -383,7 +389,7 @@ export const Summary: FC<IProps> = (props: any) => {
   const minimalPrice = getMinimalPriceByMainService(prices, title);
   const minimalPriceWithSales = getPriceWithOwnSupplies(
     getPriceWithSaleOrSubSale(minimalPrice, sale, subSale, dayDiscount),
-    provideOwnSuppliesSelected
+    provideOwnSuppliesSelected,
   );
 
   const isOrderPriceLessThanMinimum = priceWithSale < minimalPriceWithSales;
@@ -402,7 +408,7 @@ export const Summary: FC<IProps> = (props: any) => {
 
   const higherEstimate = getHitherEstimate(
     mainServiceEstimate.time,
-    secondServiceEstimate.time
+    secondServiceEstimate.time,
   );
 
   const isOrderButtonDisabled =
@@ -449,7 +455,7 @@ export const Summary: FC<IProps> = (props: any) => {
             counterValue={counter}
             subServiceList={subService.filter(
               (item: { title: string }) =>
-                item.title !== "Own_supplies_sub_service"
+                item.title !== "Own_supplies_sub_service",
             )}
             onRemoveSubService={onRemoveSubService}
             t={t}
@@ -509,9 +515,9 @@ export const Summary: FC<IProps> = (props: any) => {
                       price,
                       sale,
                       subSale,
-                      dayDiscount
+                      dayDiscount,
                     ),
-                    provideOwnSuppliesSelected
+                    provideOwnSuppliesSelected,
                   )}
                   {t("zl")}
                 </div>
@@ -596,9 +602,9 @@ export const Summary: FC<IProps> = (props: any) => {
                       price,
                       sale,
                       subSale,
-                      dayDiscount
+                      dayDiscount,
                     ),
-                    provideOwnSuppliesSelected
+                    provideOwnSuppliesSelected,
                   )}
                   {t("zl")}
                 </div>

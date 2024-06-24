@@ -8,7 +8,8 @@ import { TranslateFunction } from "@/types";
 import { PricesContext } from "@/components/Providers";
 import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
-import {HOW_IT_WORKS_TEXTS} from "@/components/MainPage/constants";
+import { HOW_IT_WORKS_TEXTS } from "@/components/MainPage/constants";
+import { useSearchParams } from "next/navigation";
 
 const MOVE_IN_OUT_CLEANING_BLOCKS = [
   {
@@ -41,6 +42,8 @@ function MoveInOutModalContent({
   isOrder?: boolean;
 }) {
   const { prices } = useContext(PricesContext);
+  const searchParams = useSearchParams();
+  const city = searchParams.get("city");
 
   const generalMoveInOutPrice =
     prices.defaultMoveInOut +
@@ -83,7 +86,7 @@ function MoveInOutModalContent({
           FIGURE_BRACKETS_REGEX,
           (match) => (
             <b>{match}</b>
-          )
+          ),
         )}
       </div>
       <div className="_mb-4 lg:_mb-6 _text-center">
@@ -105,13 +108,11 @@ function MoveInOutModalContent({
       {!isOrder && (
         <div className="_mt-8 lg:_mt-16">
           <div className="_mb-4 lg:_mb-6 _text-center">
-            <span className="_main-title text-gradient">
-              {t("Prices")}
-            </span>
+            <span className="_main-title text-gradient">{t("Prices")}</span>
           </div>
           <Costs
             t={t}
-            redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.MOVE_IN_OUT}`}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.MOVE_IN_OUT}${city ? `&city=${city}` : ""}`}
             costs={moveInOutCosts}
             description="deep_price_description"
           />

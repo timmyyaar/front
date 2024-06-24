@@ -1,6 +1,11 @@
 "use client";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { useRouter, usePathname, useParams } from "next/navigation";
+import {
+  useRouter,
+  usePathname,
+  useParams,
+  useSearchParams,
+} from "next/navigation";
 import Cookies from "js-cookie";
 
 import { useLocales } from "@/hooks/useLocales";
@@ -13,11 +18,11 @@ import NavigationItems from "@/components/Header/NavigrationItems";
 import { LocaleContext } from "@/components/Providers";
 
 import { LogoIcon } from "../common/icons/components/Logo";
-import { Polygon } from "./icons/Polygon";
 
 import NavigationItemsMobile from "@/components/Header/NavigationItemsMobile";
 import { sendGAEvent } from "@/google-analytics";
-import { useClickOutside } from "@/hooks/useClickOutSide";
+import Dropdown from "@/components/Header/Dropdown";
+import { CITIES } from "@/constants";
 
 const mainLocales = {
   en: "English",
@@ -29,12 +34,11 @@ const mainLocales = {
 export const Header = () => {
   const { locales, locale, setNewLocal } = useContext(LocaleContext);
   const { t } = useLocales(locales);
-  const [localesModal, setLocalesModal] = useState(false);
-  const localesSelectRef = useClickOutside(() => setLocalesModal(false));
   const headerRef = useRef<HTMLHeadingElement | null>(null);
   const router = useRouter();
   const pathname = usePathname();
   const { lang } = useParams();
+  const searchParams = useSearchParams();
 
   const [isMenuOpened, setIsMenuOpened] = useState(false);
 
@@ -55,13 +59,13 @@ export const Header = () => {
       value: `Previous language: ${lang}, Selected language: ${newLocale}`,
     });
 
-    router.push(`${pathname.replace(/\/(en|ru|pl|ua)/, `/${newLocale}`)}`);
-
-    setLocalesModal(false);
+    router.push(
+      `${pathname.replace(/\/(en|ru|pl|ua)/, `/${newLocale}`)}?${searchParams.toString()}`,
+    );
   };
 
   useEffect(() => {
-    setNewLocal(lang as string);
+    setNewLocal(lang as "en" | "ru" | "pl" | "ua");
   }, [lang]);
 
   const headerHeight = headerRef?.current?.offsetHeight;
@@ -75,6 +79,20 @@ export const Header = () => {
     });
   };
 
+  const selectedCity = searchParams.get("city");
+
+  const onCitySelect = (
+    event: React.MouseEvent<HTMLDivElement>,
+    service: string,
+  ) => {
+    event.stopPropagation();
+    const updatedSearchParams = new URLSearchParams(searchParams.toString());
+
+    updatedSearchParams.set("city", service);
+
+    window.history.pushState(null, "", `?${updatedSearchParams.toString()}`);
+  };
+
   return (
     <header
       ref={headerRef}
@@ -83,69 +101,36 @@ export const Header = () => {
           isMenuOpened ? "_fixed _top-0 _w-full _z-50" : ""
         }`}
     >
-      <nav className="_flex _w-full">
+      <nav className="_flex _w-full _items-center">
         <div className="_m-0 lg:_mr-3 _flex">
           <div
             className="navbar-brand _flex _items-center _cursor-pointer"
             onClick={() => {
-              router.push(`/${lang}`);
+              router.push(`/${lang}?${searchParams.toString()}`);
             }}
           >
             <div>
               <LogoIcon className="_w-11 _h-9 lg:_w-auto lg:_h-auto" />
             </div>
           </div>
-          <div
-            className={`_text-sm lg:_text-lg _font-semibold _pl-2 lg:_pl-4
-              _text-dark _flex _flex-col _justify-center`}
-          >
-            <span className="text-gradient">Krakow</span>
+          <div className="_ml-2 _flex _items-center">
+            <Dropdown
+              isBoldText
+              translateOptions
+              options={Object.values(CITIES).map(({ name }) => name)}
+              onSelect={onCitySelect}
+              t={t}
+              value={selectedCity || CITIES.KRAKOW.name}
+            />
           </div>
         </div>
         <NavigationItems t={t} />
-        <div
-          className={`_flex _justify-between _items-center _relative
-            _text-dark _ml-[10%] lg:_ml-0 _cursor-pointer _group`}
-          onClick={(e) => {
-            e.preventDefault();
-            setLocalesModal(true);
-          }}
-        >
-          <div
-            className={`_px-4 _py-2 _flex _gap-1 group-hover:_rounded-full
-              group-hover:_outline group-hover:_outline-1 group-hover:_outline-primary-light`}
-            onClick={(e) => {
-              e.preventDefault();
-            }}
-          >
-            <div className="nav-link text-gradient">
-              {/* @ts-ignore */}
-              {t(mainLocales[locale])}
-            </div>
-            <div className="_flex _items-center">
-              <Polygon className="group-hover:_text-primary" />
-            </div>
-          </div>
-          {localesModal ? (
-            <div
-              className={`_z-50 _absolute _top-2.5 _rounded-xl _border _border-solid
-                _border-primary-light _bg-white`}
-              ref={localesSelectRef}
-            >
-              {Object.values(mainLocales).map((option) => (
-                <div
-                  className={`_py-2 _pr-6 _pl-4 hover:_bg-light active:_bg-light
-                    first:_rounded-t-xl last:_rounded-b-xl last:_border-b-0
-                    _border-b _border-solid _border-primary-light`}
-                  onClick={(e) => onSelectLocale(e, option)}
-                  key={option}
-                >
-                  {option}
-                </div>
-              ))}
-            </div>
-          ) : null}
-        </div>
+        <Dropdown
+          options={Object.values(mainLocales)}
+          onSelect={onSelectLocale}
+          t={t}
+          value={mainLocales[locale]}
+        />
         <div
           className={`_text-sm lg:_text-lg _font-semibold _pl-2
             lg:_pl-0 mobile-none _ml-auto _flex _gap-6`}

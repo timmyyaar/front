@@ -8,6 +8,7 @@ import { TranslateFunction } from "@/types";
 import Costs from "./Costs";
 import { PricesContext } from "@/components/Providers";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
+import { useSearchParams } from "next/navigation";
 
 const DEEP_KITCHEN_BLOCKS = [
   {
@@ -49,6 +50,8 @@ function DeepKitchenModalContent({
   isOrder?: boolean;
 }) {
   const { prices } = useContext(PricesContext);
+  const searchParams = useSearchParams();
+  const city = searchParams.get("city");
 
   const deepKitchenCosts = [{ price: prices.defaultDeepKitchen }];
 
@@ -65,7 +68,7 @@ function DeepKitchenModalContent({
           FIGURE_BRACKETS_REGEX,
           (match) => (
             <b>{match}</b>
-          )
+          ),
         )}
       </div>
       {DEEP_KITCHEN_BLOCKS.map(({ title, items }, index) => (
@@ -74,13 +77,11 @@ function DeepKitchenModalContent({
       {!isOrder && (
         <div className="_mt-8 lg:_mt-16">
           <div className="_mb-4 lg:_mb-6 _text-center">
-            <span className="_main-title text-gradient">
-              {t("Prices")}
-            </span>
+            <span className="_main-title text-gradient">{t("Prices")}</span>
           </div>
           <Costs
             t={t}
-            redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.DEEP_KITCHEN}`}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.DEEP_KITCHEN}${city ? `&city=${city}` : ""}`}
             costs={deepKitchenCosts}
           />
         </div>

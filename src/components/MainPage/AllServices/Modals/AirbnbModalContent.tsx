@@ -7,6 +7,7 @@ import { TranslateFunction } from "@/types";
 import { PricesContext } from "@/components/Providers";
 import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
+import { useSearchParams } from "next/navigation";
 
 function AirbnbModalContent({
   t,
@@ -16,6 +17,8 @@ function AirbnbModalContent({
   isOrder?: boolean;
 }) {
   const { prices } = useContext(PricesContext);
+  const searchParams = useSearchParams();
+  const city = searchParams.get("city");
 
   const airbnbCosts = [
     {
@@ -47,7 +50,7 @@ function AirbnbModalContent({
             FIGURE_BRACKETS_REGEX,
             (match) => (
               <b>{match}</b>
-            )
+            ),
           )}
         </div>
         <div className="_mb-4 lg:_mb-6 _text-center">
@@ -70,7 +73,9 @@ function AirbnbModalContent({
                 {i + 1}
               </div>
             </div>
-            <div className="_text-center _font-medium">{t(el + "_airbnb_title")}</div>
+            <div className="_text-center _font-medium">
+              {t(el + "_airbnb_title")}
+            </div>
           </div>
         ))}
       </div>
@@ -81,7 +86,7 @@ function AirbnbModalContent({
           </div>
           <Costs
             t={t}
-            redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.AIRBNB}`}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.AIRBNB}${city ? `&city=${city}` : ""}`}
             costs={airbnbCosts}
             description="regular_price_description_mobile"
           />
