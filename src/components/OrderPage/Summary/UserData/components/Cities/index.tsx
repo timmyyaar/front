@@ -37,7 +37,7 @@ const Cities = ({ city, setCity, t, callback }: CitiesProps) => {
 
   const filteredCountries = CITIES.filter(
     ({ name }) =>
-      !searchValue || name.toLowerCase().includes(searchValue.toLowerCase())
+      !searchValue || name.toLowerCase().includes(searchValue.toLowerCase()),
   );
 
   return (
@@ -48,7 +48,7 @@ const Cities = ({ city, setCity, t, callback }: CitiesProps) => {
             _border-gray _rounded-xl _flex _items-center _bg-light`}
           onClick={onDropdownOpen}
         >
-          <div className="_w-full">{city.name}</div>
+          <div className="_w-full">{t(city.name)}</div>
           <div className="px-2">
             <CaretDownIcon className="group-hover:_text-primary" />
           </div>
@@ -58,8 +58,7 @@ const Cities = ({ city, setCity, t, callback }: CitiesProps) => {
         <>
           <input
             className={`_p-3.5 _cursor-pointer _w-full _border _border-solid
-              _border-gray _rounded-xl _flex _items-center _bg-light _outline-0
-              _p-3.5 _rounded-b-none`}
+              _border-gray _rounded-xl _flex _items-center _bg-light _outline-0 _rounded-b-none`}
             autoFocus
             value={searchValue}
             onChange={({ target: { value } }) => setSearchValue(value)}
@@ -83,7 +82,7 @@ const Cities = ({ city, setCity, t, callback }: CitiesProps) => {
                       city.name === name ? "_font-bold" : ""
                     }`}
                   >
-                    {name}
+                    {t(name)}
                   </span>
                   {price > 0 && (
                     <div className="_py-1.5 _px-2 _bg-warning _rounded-full _font-semibold">

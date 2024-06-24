@@ -42,7 +42,7 @@ export const OrderPage = ({ discounts }: OrderPageProps) => {
   const [selectedService, setService] = useState<string>("");
   const [counterValue, setCounterValue] = useState([]);
   const [selectedSubService, setSubService] = useState<SelectedSubService[]>(
-    []
+    [],
   );
   // second service
   const [selectedSecondService, setSecondService] = useState<string>("");
@@ -106,7 +106,7 @@ export const OrderPage = ({ discounts }: OrderPageProps) => {
           <div
             className="_cursor-pointer _flex _items-center"
             onClick={() => {
-              router.push(`/${lang}/order`);
+              router.push(`/${lang}/order?${searchParams.toString()}`);
             }}
           >
             <div className="_h-7 _w-7 _mr-3 _cursor-pointer _text-gray-dark hover:_text-primary">

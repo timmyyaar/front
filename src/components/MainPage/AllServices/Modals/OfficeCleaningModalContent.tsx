@@ -7,6 +7,7 @@ import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { PricesContext } from "@/components/Providers";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
 import { MAIN_CATEGORIES_URLS } from "@/constants";
+import { useSearchParams } from "next/navigation";
 
 const OFFICE_CLEANING_BLOCKS = [
   {
@@ -60,6 +61,8 @@ function OfficeCleaningModalContent({
   isOrder?: boolean;
 }) {
   const { prices } = useContext(PricesContext);
+  const searchParams = useSearchParams();
+  const city = searchParams.get("city");
 
   const officeCosts = [
     {
@@ -91,13 +94,11 @@ function OfficeCleaningModalContent({
       {!isOrder && (
         <div className="_mt-8 lg:_mt-16">
           <div className="_mb-4 lg:_mb-6 _text-center">
-            <span className="_main-title text-gradient">
-              {t("Prices")}
-            </span>
+            <span className="_main-title text-gradient">{t("Prices")}</span>
           </div>
           <Costs
             t={t}
-            redirectPathname={`order/${MAIN_CATEGORIES_URLS.GENERAL}?selectedService=${ALL_SERVICE.OFFICE}`}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.GENERAL}?selectedService=${ALL_SERVICE.OFFICE}${city ? `&city=${city}` : ""}`}
             costs={officeCosts}
           />
         </div>

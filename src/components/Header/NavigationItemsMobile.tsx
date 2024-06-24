@@ -1,5 +1,10 @@
 import React, { Dispatch, SetStateAction, useContext } from "react";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { TelegramIcon } from "@/components/common/icons/components/Telegram";
 import { WhatsappIcon } from "@/components/common/icons/components/Whatsapp";
 import { InstIcon } from "@/components/common/icons/components/Inst";
@@ -20,6 +25,7 @@ const NavigationItemsMobile = ({
   const { lang } = useParams();
   const pathname = usePathname();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const navigation = [
     { href: "/order", title: "Services header" },
@@ -38,6 +44,8 @@ const NavigationItemsMobile = ({
     });
   };
 
+  const city = searchParams.get("city");
+
   return (
     <div className="_mt-4 _flex _flex-col _gap-10">
       <div>
@@ -54,7 +62,9 @@ const NavigationItemsMobile = ({
                 if (pathname.includes(navItem.href)) {
                   setIsMenuOpened(false);
                 } else {
-                  router.push(`/${lang}${navItem.href}`);
+                  router.push(
+                    `/${lang}${navItem.href}${city ? `?city=${city}` : ""}`,
+                  );
                   setIsMenuOpened(false);
                 }
               }}

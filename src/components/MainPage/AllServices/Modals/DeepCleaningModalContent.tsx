@@ -8,6 +8,7 @@ import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
 import { MAIN_CATEGORIES_URLS } from "@/constants";
 import { HOW_IT_WORKS_TEXTS } from "@/components/MainPage/constants";
+import { useSearchParams } from "next/navigation";
 
 const DEEP_CLEANING_BLOCKS = [
   {
@@ -40,6 +41,8 @@ function DeepCleaningModalContent({
   isOrder?: boolean;
 }) {
   const { prices } = useContext(PricesContext);
+  const searchParams = useSearchParams();
+  const city = searchParams.get("city");
 
   const generalDeepPrice =
     prices.defaultDeep +
@@ -94,7 +97,7 @@ function DeepCleaningModalContent({
           </div>
           <Costs
             t={t}
-            redirectPathname={`order/${MAIN_CATEGORIES_URLS.GENERAL}?selectedService=${ALL_SERVICE.DEEP}`}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.GENERAL}?selectedService=${ALL_SERVICE.DEEP}${city ? `&city=${city}` : ""}`}
             costs={deepCosts}
             description="deep_price_description"
           />

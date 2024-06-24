@@ -58,3 +58,8 @@ export const SHOW_CORRIDOR_TITLES = [
   "While sickness",
   "Airbnb",
 ];
+
+export const CITIES = {
+  KRAKOW: { name: "Krakow", isSingle: false },
+  WARSAW: { name: "Warsaw", isSingle: true },
+};

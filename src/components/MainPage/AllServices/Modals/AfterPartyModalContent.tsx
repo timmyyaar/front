@@ -7,6 +7,7 @@ import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { PricesContext } from "@/components/Providers";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
 import { MAIN_CATEGORIES_URLS } from "@/constants";
+import { useSearchParams } from "next/navigation";
 
 const AFTER_PARTY_BLOCKS = [
   {
@@ -61,6 +62,8 @@ function AfterPartyModalContent({
   isOrder?: boolean;
 }) {
   const { prices } = useContext(PricesContext);
+  const searchParams = useSearchParams();
+  const city = searchParams.get('city')
 
   const generalAfterPartyPrice =
     prices.defaultAfterParty +
@@ -112,13 +115,11 @@ function AfterPartyModalContent({
       {!isOrder && (
         <div className="_mt-8 lg:_mt-16">
           <div className="_mb-4 lg:_mb-6 _text-center">
-            <span className="_main-title text-gradient">
-              {t("Prices")}
-            </span>
+            <span className="_main-title text-gradient">{t("Prices")}</span>
           </div>
           <Costs
             t={t}
-            redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.AFTER_PARTY}`}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.AFTER_PARTY}${city ? `&city=${city}` : ""}`}
             costs={afterPartyCosts}
             description="deep_price_description"
           />

@@ -32,12 +32,12 @@ function PaymentRedirect() {
       !Object.values(REDIRECT_STATUSES).includes(redirectStatus) ||
       !paymentIntent
     ) {
-      router.push(`/${lang}`);
+      router.push(`/${lang}?${searchParams.toString()}`);
     }
   }, [redirectStatus, paymentIntent]);
 
   const onTryAgainClick = () => {
-    router.push(`/${lang}/payment/${paymentIntent}`);
+    router.push(`/${lang}/payment/${paymentIntent}?${searchParams.toString()}`);
   };
 
   return (

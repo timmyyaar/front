@@ -6,6 +6,7 @@ import { PricesContext } from "@/components/Providers";
 import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { SALES } from "@/components/MainPage/AllServices/Modals/Costs/constants";
 import { getOneDigitFloat } from "@/utils";
+import { useSearchParams } from "next/navigation";
 
 function SubscriptionModalContent({
   t,
@@ -15,6 +16,8 @@ function SubscriptionModalContent({
   isOrder?: boolean;
 }) {
   const { prices } = useContext(PricesContext);
+  const searchParams = useSearchParams();
+  const city = searchParams.get("city");
 
   const subscriptionCosts = {
     [SALES[0].title]: [
@@ -28,7 +31,7 @@ function SubscriptionModalContent({
         title: "2-bedroom",
         text: "One-time 2-bedroom cleaning",
         price: getOneDigitFloat(
-          (prices.defaultRegular + prices.regularBedroom) * 0.8
+          (prices.defaultRegular + prices.regularBedroom) * 0.8,
         ),
         oldPrice: prices.defaultRegular + prices.regularBedroom,
       },
@@ -36,7 +39,7 @@ function SubscriptionModalContent({
         title: "3-bedroom",
         text: "One-time 3-bedroom cleaning",
         price: getOneDigitFloat(
-          (prices.defaultRegular + prices.regularBedroom * 2) * 0.8
+          (prices.defaultRegular + prices.regularBedroom * 2) * 0.8,
         ),
         oldPrice: prices.defaultRegular + prices.regularBedroom * 2,
       },
@@ -52,7 +55,7 @@ function SubscriptionModalContent({
         title: "2-bedroom",
         text: "Twice a month 2-bedroom cleaning",
         price: getOneDigitFloat(
-          (prices.defaultRegular + prices.regularBedroom) * 0.85
+          (prices.defaultRegular + prices.regularBedroom) * 0.85,
         ),
         oldPrice: prices.defaultRegular + prices.regularBedroom,
       },
@@ -60,7 +63,7 @@ function SubscriptionModalContent({
         title: "3-bedroom",
         text: "Twice a month 3-bedroom cleaning",
         price: getOneDigitFloat(
-          (prices.defaultRegular + prices.regularBedroom * 2) * 0.85
+          (prices.defaultRegular + prices.regularBedroom * 2) * 0.85,
         ),
         oldPrice: prices.defaultRegular + prices.regularBedroom * 2,
       },
@@ -76,7 +79,7 @@ function SubscriptionModalContent({
         title: "2-bedroom",
         text: "Once a month 2-bedroom cleaning",
         price: getOneDigitFloat(
-          (prices.defaultRegular + prices.regularBedroom) * 0.9
+          (prices.defaultRegular + prices.regularBedroom) * 0.9,
         ),
         oldPrice: prices.defaultRegular + prices.regularBedroom,
       },
@@ -84,7 +87,7 @@ function SubscriptionModalContent({
         title: "3-bedroom",
         text: "Once a month 3-bedroom cleaning",
         price: getOneDigitFloat(
-          (prices.defaultRegular + prices.regularBedroom * 2) * 0.9
+          (prices.defaultRegular + prices.regularBedroom * 2) * 0.9,
         ),
         oldPrice: prices.defaultRegular + prices.regularBedroom * 2,
       },
@@ -95,9 +98,7 @@ function SubscriptionModalContent({
     <>
       <div className="_text-center">
         <div className="_mb-4 lg:_mb-6 _text-center">
-          <span className="_main-title text-gradient">
-            {t("Subscription")}
-          </span>
+          <span className="_main-title text-gradient">{t("Subscription")}</span>
         </div>
         <div className="_whitespace-pre-wrap">
           {t("subscription_description")}
@@ -106,13 +107,11 @@ function SubscriptionModalContent({
       {!isOrder && (
         <div className="_mt-8 lg:_mt-16">
           <div className="_mb-4 lg:_mb-6 _text-center">
-            <span className="_main-title text-gradient">
-              {t("Prices")}
-            </span>
+            <span className="_main-title text-gradient">{t("Prices")}</span>
           </div>
           <Costs
             t={t}
-            redirectPathname="subscription"
+            redirectPathname={`subscription${city ? `?city=${city}` : ""}`}
             costs={subscriptionCosts}
             isSubscription
             description="regular_price_description_mobile"

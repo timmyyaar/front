@@ -10,9 +10,9 @@ interface Props {
 }
 
 export const LocaleContext = createContext({
-  locale: "en",
+  locale: "en" as "en" | "ru" | "pl" | "ua",
   locales: [] as ILocales[],
-  setNewLocal: (locale: string) => {},
+  setNewLocal: (locale: "en" | "ru" | "pl" | "ua") => {},
 });
 
 export const PricesContext = createContext({
@@ -20,7 +20,7 @@ export const PricesContext = createContext({
 });
 
 export const Providers = ({ children, locales, prices = {} }: Props) => {
-  const [locale, setNewLocal] = useState("en");
+  const [locale, setNewLocal] = useState<"en" | "ru" | "pl" | "ua">("en");
 
   return (
     <PricesContext.Provider value={{ prices }}>

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import reactStringReplace from "react-string-replace";
 import { FIGURE_BRACKETS_REGEX } from "@/constants";
@@ -12,6 +12,7 @@ export const MainOffer: FC<any> = (props) => {
   const { t, handleScroll } = props;
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const advantages = [
     { title: "Clear", text: "space" },
     { title: "Professional", text: "service" },
@@ -32,7 +33,7 @@ export const MainOffer: FC<any> = (props) => {
               FIGURE_BRACKETS_REGEX,
               (match) => (
                 <b className="main-title">{match}</b>
-              )
+              ),
             )}
           </div>
           <div className="_mt-5 _flex _gap-5">
@@ -49,7 +50,9 @@ export const MainOffer: FC<any> = (props) => {
           <div className="_mt-10 _flex _gap-6">
             <Button
               className="_py-6 _font-semibold _min-w-44"
-              onClick={() => router.push(`${pathname}/order`)}
+              onClick={() =>
+                router.push(`${pathname}/order?${searchParams.toString()}`)
+              }
               title={t("Order online now")}
             />
             <button
@@ -66,7 +69,7 @@ export const MainOffer: FC<any> = (props) => {
       <div className="_px-[13vw] mobile-only _absolute _top-0 _w-full">
         <Button
           className="_mt-[20vh] _py-6 _font-semibold _h-12 _w-full _mb-2"
-          onClick={() => router.push(`${pathname}/order`)}
+          onClick={() => router.push(`${pathname}/order?${searchParams.toString()}`)}
           title={t("Order")}
         />
         <button
