@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import reactStringReplace from "react-string-replace";
-import { FIGURE_BRACKETS_REGEX } from "@/constants";
+import { CITIES, FIGURE_BRACKETS_REGEX } from "@/constants";
 
 import { CheckSvg } from "./icons/check-fill";
 import vector from "./icons/vector.svg";
@@ -18,6 +18,8 @@ export const MainOffer: FC<any> = (props) => {
     { title: "Professional", text: "service" },
     { title: "Fair", text: "price" },
   ];
+
+  const cityUrl = searchParams.get("city");
 
   return (
     <>
@@ -35,6 +37,9 @@ export const MainOffer: FC<any> = (props) => {
                 <b className="main-title">{match}</b>
               ),
             )}
+            <div>
+              <b className="main-title">{t(cityUrl || CITIES.KRAKOW.name)}</b>
+            </div>
           </div>
           <div className="_mt-5 _flex _gap-5">
             {advantages.map((el) => (
@@ -69,7 +74,9 @@ export const MainOffer: FC<any> = (props) => {
       <div className="_px-[13vw] mobile-only _absolute _top-0 _w-full">
         <Button
           className="_mt-[20vh] _py-6 _font-semibold _h-12 _w-full _mb-2"
-          onClick={() => router.push(`${pathname}/order?${searchParams.toString()}`)}
+          onClick={() =>
+            router.push(`${pathname}/order?${searchParams.toString()}`)
+          }
           title={t("Order")}
         />
         <button
