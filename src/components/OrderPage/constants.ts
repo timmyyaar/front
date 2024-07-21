@@ -123,3 +123,27 @@ export const CITIES = [
   { name: "Myślenice", price: 50 },
   { name: "Brzeźnica", price: 50 },
 ];
+
+export const EXCLUDED_SERVICES_WARSAW = [
+  "Dry cleaning",
+  "Ozonation",
+  "Post-construction",
+];
+
+export const DRY_CLEANING_SUB_TITLES = [
+  "Two-seater sofa",
+  "Three-seater sofa",
+  "Four-seater sofa",
+  "Five-seater sofa",
+  "Six-seater sofa",
+  "Upholstered to bed",
+  "Carpet dry cleaning",
+  "Single mattress",
+  "Single mattress from both sides",
+  "Double mattress",
+  "Double mattress from both sides",
+  "Armchair",
+  "Chair",
+  "Office chair",
+  "Cleaning baby stroller",
+];
