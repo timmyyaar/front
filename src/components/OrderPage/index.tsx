@@ -16,7 +16,7 @@ import { PRIVATE_HOUSE_SERVICES, SERVICES } from "./constants";
 
 import PrivateHouse from "@/components/OrderPage/PrivateHouse";
 import { LocaleContext, PricesContext } from "@/components/Providers";
-import { MAIN_CATEGORIES } from "@/constants";
+import { CITIES, MAIN_CATEGORIES } from "@/constants";
 import {
   getDefaultSubServicesByService,
   SelectedSubService,
@@ -27,6 +27,8 @@ import { Discount } from "@/components/OrderPage/Summary";
 interface OrderPageProps {
   discounts: Discount[];
 }
+
+const OZONATION_ADDITIONAL_SERVICE_TITLE = "ADD OZONATION SERVICE";
 
 export const OrderPage = ({ discounts }: OrderPageProps) => {
   const { locales } = useContext(LocaleContext);
@@ -95,6 +97,27 @@ export const OrderPage = ({ discounts }: OrderPageProps) => {
     setSubService(getDefaultSubServicesByService(prices, selectedService));
   }, [selectedService]);
 
+  const cityUrl = searchParams.get("city");
+  const isWarsaw = cityUrl === CITIES.WARSAW.name;
+
+  const additionalService = getAdditionalServices(selectedService);
+  const filteredAdditionalService =
+    isWarsaw && additionalService !== OZONATION_ADDITIONAL_SERVICE_TITLE
+      ? ""
+      : additionalService;
+
+  useEffect(() => {
+    setSecondService("");
+    setSecondSubService([]);
+  }, [selectedService]);
+
+  useEffect(() => {
+    if (selectedSecondService && !filteredAdditionalService) {
+      setSecondService("");
+      setSecondSubService([]);
+    }
+  }, [selectedSecondService, filteredAdditionalService]);
+
   return (
     <div className="order-page">
       <div>
@@ -117,7 +140,7 @@ export const OrderPage = ({ discounts }: OrderPageProps) => {
         </div>
         <div
           className={`_flex _flex-col lg:_flex-row _px-5-percents-mobile
-            _px-24 _flex _gap-14 lg:_gap-10`}
+            _px-24 _gap-14 lg:_gap-10`}
         >
           <div className="_gap-20 _flex _flex-col _w-full lg:_w-4/6">
             <ServicesList
@@ -146,15 +169,16 @@ export const OrderPage = ({ discounts }: OrderPageProps) => {
               setSubService={setSubService}
               t={i18n.t}
             />
-            <AddedMainService
-              mainService={selectedService}
-              setSecondService={setSecondService}
-              t={i18n.t}
-            >
-              {getAdditionalServices(selectedService).length ? (
+            {filteredAdditionalService.length > 0 && (
+              <AddedMainService
+                mainService={selectedService}
+                selectedSecondService={selectedSecondService}
+                setSecondService={setSecondService}
+                t={i18n.t}
+              >
                 <>
-                  {getAdditionalServices(selectedService) ===
-                  "ADD OZONATION SERVICE" ? (
+                  {filteredAdditionalService ===
+                  OZONATION_ADDITIONAL_SERVICE_TITLE ? (
                     <CounterComponent
                       mainService={"Ozonation"}
                       setCounterValue={setSecondCounterValue}
@@ -176,8 +200,8 @@ export const OrderPage = ({ discounts }: OrderPageProps) => {
                     </div>
                   )}
                 </>
-              ) : null}
-            </AddedMainService>
+              </AddedMainService>
+            )}
             <CheckBoxesBlock
               mainService={selectedService}
               subServices={selectedSubService}
