@@ -22,29 +22,48 @@ import WhileSickness from "@/components/common/icons/services/while-sickness.svg
 import WindowCleaning from "@/components/common/icons/services/window-cleaning.svg";
 
 import { Modals } from "./Modals";
+import { useSearchParams } from "next/navigation";
+import { CITIES } from "@/constants";
+
+const ALL_CITIES_SERVICES = [
+  { title: "Regular", icon: Regular },
+  { title: "Deep", icon: Deep },
+  { title: "Window cleaning", icon: WindowCleaning },
+  { title: "Eco cleaning", icon: EcoCleaning },
+  { title: "Move in/out", icon: MoveInOut },
+  { title: "Subscription", icon: Subscription },
+  { title: "Custom cleaning", icon: CustomCleaning },
+  { title: "After party", icon: AfterParty },
+  { title: "Office", icon: Office },
+  { title: "While sickness", icon: WhileSickness },
+  { title: "Deep kitchen", icon: DeepKitchen },
+  { title: "Airbnb", icon: Airbnb },
+];
+
+const KRAKOW_ONLY_SERVICES = [
+  { title: "Dry cleaning", icon: DryCleaning },
+  { title: "Post-construction", icon: PostConstruction },
+  { title: "Ozonation", icon: Ozonation },
+];
+
+const INDEX_TO_INSERT = 3;
 
 export const AllServices = (props: any) => {
   const { t } = props;
   const [active, setActive] = useState("");
   const ref = useClickOutside(() => setActive(""));
+  const searchParams = useSearchParams();
+  const cityUrl = searchParams.get("city");
 
-  const services = [
-    { title: "Regular", icon: Regular },
-    { title: "Dry cleaning", icon: DryCleaning },
-    { title: "Deep", icon: Deep },
-    { title: "Window cleaning", icon: WindowCleaning },
-    { title: "Eco cleaning", icon: EcoCleaning },
-    { title: "Post-construction", icon: PostConstruction },
-    { title: "Move in/out", icon: MoveInOut },
-    { title: "Ozonation", icon: Ozonation },
-    { title: "Subscription", icon: Subscription },
-    { title: "Custom cleaning", icon: CustomCleaning },
-    { title: "After party", icon: AfterParty },
-    { title: "Office", icon: Office },
-    { title: "While sickness", icon: WhileSickness },
-    { title: "Deep kitchen", icon: DeepKitchen },
-    { title: "Airbnb", icon: Airbnb },
-  ];
+  const isWarsaw = cityUrl === CITIES.WARSAW.name;
+
+  const services = isWarsaw
+    ? ALL_CITIES_SERVICES
+    : [
+        ...ALL_CITIES_SERVICES.slice(0, INDEX_TO_INSERT),
+        ...KRAKOW_ONLY_SERVICES,
+        ...ALL_CITIES_SERVICES.slice(INDEX_TO_INSERT),
+      ];
 
   return (
     <>
