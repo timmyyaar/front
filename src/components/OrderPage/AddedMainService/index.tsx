@@ -10,30 +10,26 @@ interface IProps {
   setSecondService: (props: any) => void;
   t: any;
   children: any;
+  selectedSecondService: string;
 }
 
 export { getAdditionalServices };
 
 export const AddedMainService: FC<IProps> = (props) => {
-  const { mainService, setSecondService, t, children } = props;
-  const [addServiceList, setAddServiceList] = React.useState(false);
+  const { mainService, selectedSecondService, setSecondService, t, children } =
+    props;
   const addService = getAdditionalServices(mainService);
   const isOzonation = addService === "ADD OZONATION SERVICE";
 
   const onClickSecondService = () => {
-    setAddServiceList((sL) => !sL);
-    setSecondService((s: any) => {
-      if (s) {
+    setSecondService((prevSecondService: string) => {
+      if (prevSecondService) {
         return "";
       } else {
         return isOzonation ? "Ozonation" : "Dry cleaning";
       }
     });
   };
-
-  useEffect(() => {
-    setAddServiceList(false);
-  }, [mainService]);
 
   return addService ? (
     <div>
@@ -46,19 +42,19 @@ export const AddedMainService: FC<IProps> = (props) => {
         </div>
         <div
           className={`_text-center group-hover:_text-primary lg:_text-xl _font-semibold
-           _transition-all ${addServiceList ? "_text-primary" : ""}`}
+           _transition-all ${selectedSecondService ? "_text-primary" : ""}`}
         >
           {t(addService)}
         </div>
         <div
           className={`_transition-all _duration-300 _h-7 _w-7 lg:_h-auto lg:_w-auto ${
-            addServiceList ? "" : "_rotateX-180"
+            selectedSecondService ? "" : "_rotateX-180"
           }`}
         >
           <Image src={caretUpSvg} alt="" />
         </div>
       </div>
-      {addServiceList ? (
+      {selectedSecondService ? (
         <div className="_mt-6 _flex _justify-center">{children}</div>
       ) : null}
     </div>

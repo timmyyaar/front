@@ -7,6 +7,7 @@ import { PricesContext } from "@/components/Providers";
 import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
 import { MAIN_CATEGORIES_URLS } from "@/constants";
+import { useSearchParams } from "next/navigation";
 
 const WHILE_SICK_ITEMS = [
   "preventive_disinfection_treatment_to_surfaces",
@@ -25,6 +26,8 @@ function WhileSickModalContent({
   isOrder?: boolean;
 }) {
   const { prices } = useContext(PricesContext);
+  const searchParams = useSearchParams();
+  const city = searchParams.get("city");
 
   const regularCosts = [
     {
@@ -59,13 +62,11 @@ function WhileSickModalContent({
       {!isOrder && (
         <div className="_mt-8 lg:_mt-16">
           <div className="_mb-4 lg:_mb-6 _text-center">
-            <span className="_main-title text-gradient">
-              {t("Prices")}
-            </span>
+            <span className="_main-title text-gradient">{t("Prices")}</span>
           </div>
           <Costs
             t={t}
-            redirectPathname={`order/${MAIN_CATEGORIES_URLS.HEALTHCARE}?selectedService=${ALL_SERVICE.WHILE_SICKNESS}`}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.HEALTHCARE}?selectedService=${ALL_SERVICE.WHILE_SICKNESS}${city ? `&city=${city}` : ""}`}
             costs={regularCosts}
             description="regular_price_description_mobile"
           />

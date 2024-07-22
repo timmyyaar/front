@@ -71,7 +71,7 @@ export const PRIVATE_HOUSE_SERVICES = [
 export const OWN_SUPPLES_SERVICE_NAME = "Own_supplies_sub_service";
 
 export const CITIES = [
-  { name: "Kraków", price: 0 },
+  { name: "Krakow", price: 0 },
   { name: "Wieliczka", price: 30 },
   { name: "Skawina", price: 30 },
   { name: "Niepolimice", price: 30 },
@@ -122,4 +122,28 @@ export const CITIES = [
   { name: "Krzeszowice", price: 50 },
   { name: "Myślenice", price: 50 },
   { name: "Brzeźnica", price: 50 },
+];
+
+export const EXCLUDED_SERVICES_WARSAW = [
+  "Dry cleaning",
+  "Ozonation",
+  "Post-construction",
+];
+
+export const DRY_CLEANING_SUB_TITLES = [
+  "Two-seater sofa",
+  "Three-seater sofa",
+  "Four-seater sofa",
+  "Five-seater sofa",
+  "Six-seater sofa",
+  "Upholstered to bed",
+  "Carpet dry cleaning",
+  "Single mattress",
+  "Single mattress from both sides",
+  "Double mattress",
+  "Double mattress from both sides",
+  "Armchair",
+  "Chair",
+  "Office chair",
+  "Cleaning baby stroller",
 ];

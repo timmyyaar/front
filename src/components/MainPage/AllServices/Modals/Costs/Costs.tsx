@@ -105,7 +105,7 @@ function Costs({ costs, t, redirectPathname, isSubscription }: CostsProps) {
                     </div>
                   )}
                   {Boolean(oldPrice) && (
-                    <div className="_text-gray-dark _line-through _text-gray-dark _ml-2">
+                    <div className="_text-gray-dark _line-through _ml-2">
                       {oldPrice}
                       {t("zl")}
                     </div>

@@ -3,7 +3,7 @@
 import { loadStripe, StripeElementLocale, Appearance } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import React, { useContext, useEffect } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import CheckoutForm from "./CheckoutForm";
 import { LocaleContext } from "@/components/Providers";
 import { useLocales } from "@/hooks/useLocales";
@@ -32,6 +32,7 @@ const appearance = {
 function Payment({ paymentIntent }: PaymentProps) {
   const { locales, locale } = useContext(LocaleContext);
   const { t } = useLocales(locales);
+  const searchParams = useSearchParams();
 
   const { lang } = useParams();
   const router = useRouter();
@@ -43,7 +44,7 @@ function Payment({ paymentIntent }: PaymentProps) {
 
   useEffect(() => {
     if (needRedirect) {
-      router.push(`/${lang}`);
+      router.push(`/${lang}?${searchParams.toString()}`);
     }
   }, [paymentIntent]);
 

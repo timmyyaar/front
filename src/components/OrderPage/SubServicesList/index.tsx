@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Image from "next/image";
 
 import { Writer } from "@/components/common/Writer";
@@ -10,6 +10,9 @@ import {
   showSubServiceSquareMeters,
 } from "./utils";
 import { PricesContext } from "@/components/Providers";
+import { useSearchParams } from "next/navigation";
+import { CITIES } from "@/constants";
+import { DRY_CLEANING_SUB_TITLES } from "@/components/OrderPage/constants";
 
 interface IProps {
   mainService: string;
@@ -21,6 +24,8 @@ interface IProps {
 
 export const SubServicesList = (props: IProps) => {
   const { prices } = useContext(PricesContext);
+  const searchParams = useSearchParams();
+  const cityUrl = searchParams.get("city");
 
   const {
     mainService,
@@ -30,9 +35,24 @@ export const SubServicesList = (props: IProps) => {
     t,
   } = props;
 
+  useEffect(() => {
+    const isWarsaw = cityUrl === CITIES.WARSAW.name;
+    const needToFilterOutDrySubServices =
+      isWarsaw &&
+      subServices.some(({ title }) => DRY_CLEANING_SUB_TITLES.includes(title));
+
+    if (needToFilterOutDrySubServices) {
+      setSubService(
+        subServices.filter(
+          ({ title }) => !DRY_CLEANING_SUB_TITLES.includes(title),
+        ),
+      );
+    }
+  }, [cityUrl]);
+
   const addService = (service: ISubService) => {
     const isServiceExist = subServices.find(
-      (subService) => subService.title === service.title
+      (subService) => subService.title === service.title,
     );
 
     if (!isServiceExist) {
@@ -53,7 +73,7 @@ export const SubServicesList = (props: IProps) => {
     setSubService((prev: SelectedSubService[]) =>
       isSelectedServiceSingle
         ? prev.filter(
-            (selectedSubService) => selectedSubService.title !== service.title
+            (selectedSubService) => selectedSubService.title !== service.title,
           )
         : prev.map((selectedSubService) =>
             selectedSubService.title === service.title
@@ -63,8 +83,8 @@ export const SubServicesList = (props: IProps) => {
                     selectedSubService.count -
                     (service.title === "Office cleaning" ? 10 : 1),
                 }
-              : selectedSubService
-          )
+              : selectedSubService,
+          ),
     );
   };
 
@@ -80,25 +100,28 @@ export const SubServicesList = (props: IProps) => {
                 prevService.count +
                 (service.title === "Office cleaning" ? 10 : 1),
             }
-          : prevService
-      )
+          : prevService,
+      ),
     );
   };
 
   const getIsSubServiceSelected = (title: string) =>
     subServices.find((subService) => subService.title === title);
 
-  return getSubServiceListByMainService(prices, mainService).length ? (
+  const subServicesByMainService = getSubServiceListByMainService(
+    prices,
+    mainService,
+    priceMultiplier,
+    cityUrl,
+  );
+
+  return subServicesByMainService.length ? (
     <div className="_select-none">
       <div className="_mb-4 _text-center _text-lg lg:_text-2xl _font-semibold">
         {t("Choose additional cleaning services")}
       </div>
       <div className="_grid _grid-cols-2 lg:_grid-cols-4 _gap-5 _auto-rows-fr">
-        {getSubServiceListByMainService(
-          prices,
-          mainService,
-          priceMultiplier
-        ).map((el: ISubService, i: number) => (
+        {subServicesByMainService.map((el: ISubService, i: number) => (
           <div
             className={`_flex _flex-col _justify-between _items-center _py-5
               _rounded-2xl _bg-light _border-solid _border-4 _border-light

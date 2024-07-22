@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 import happyFeedbackSvg from "../icons/happy-feedback.svg";
 import sadFeedbackSvg from "../icons/sad-feedback.svg";
@@ -13,9 +13,10 @@ interface FinishedFeedbackProps {
 function FinishedFeedback({ finishedRating, t }: FinishedFeedbackProps) {
   const router = useRouter();
   const { lang } = useParams();
+  const searchParams = useSearchParams();
 
   const isBadRating = Object.values(finishedRating).some(
-    (rating) => rating < 4
+    (rating) => rating < 4,
   );
 
   return (
@@ -39,7 +40,7 @@ function FinishedFeedback({ finishedRating, t }: FinishedFeedbackProps) {
             </>
           )}
         </span>
-        <div onClick={() => router.push(`/${lang}`)}>
+        <div onClick={() => router.push(`/${lang}?${searchParams.toString()}`)}>
           <LogoIcon className="_cursor-pointer hover:_opacity-80" />
         </div>
       </>

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Coasts, FIGURE_BRACKETS_REGEX } from "@/constants";
 import { Writer } from "@/components/common/Writer";
@@ -16,6 +16,7 @@ export const Costs = (props: any) => {
   const [salesCost, setSalesCost] = useState(() => sales[0].title);
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const getText = (title: string) => {
     if (tab === TABS.ONE_TIME) {
@@ -137,7 +138,7 @@ export const Costs = (props: any) => {
                   FIGURE_BRACKETS_REGEX,
                   (match) => (
                     <b>{match}</b>
-                  )
+                  ),
                 )}
               </div>
             </div>
@@ -171,7 +172,7 @@ export const Costs = (props: any) => {
                       router.push(
                         `${pathname}/${
                           tab === TABS.SUBSCRIPTION ? "subscription" : "order"
-                        }`
+                        }?${searchParams.toString()}`,
                       );
                     }}
                     title={t("Order")}
@@ -240,7 +241,7 @@ export const Costs = (props: any) => {
                   router.push(
                     `${pathname}/${
                       tab === TABS.SUBSCRIPTION ? "subscription" : "order"
-                    }`
+                    }?${searchParams.toString()}`,
                   );
                 }}
                 title={t("Order")}

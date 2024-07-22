@@ -14,6 +14,7 @@ import { PricesContext } from "@/components/Providers";
 import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
 import { MAIN_CATEGORIES_URLS } from "@/constants";
+import { useSearchParams } from "next/navigation";
 
 function WindowModalContent({
   t,
@@ -23,6 +24,8 @@ function WindowModalContent({
   isOrder?: boolean;
 }) {
   const { prices } = useContext(PricesContext);
+  const searchParams = useSearchParams();
+  const city = searchParams.get("city");
 
   const windowCosts = [
     {
@@ -79,7 +82,7 @@ function WindowModalContent({
           </div>
           <Costs
             t={t}
-            redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.WINDOW}`}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.SPECIAL}?selectedService=${ALL_SERVICE.WINDOW}${city ? `&city=${city}` : ""}`}
             costs={windowCosts}
           />
         </div>

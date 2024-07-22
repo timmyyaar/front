@@ -11,6 +11,9 @@ import Cities, {
 } from "@/components/OrderPage/Summary/UserData/components/Cities";
 import Input from "@/components/OrderPage/Summary/UserData/components/Input";
 import Button from "@/components/common/Button";
+import lockSvg from "./icons/lock.svg";
+import { useSearchParams } from "next/navigation";
+import { CITIES } from "@/constants";
 
 export const UserData = ({
   name,
@@ -40,6 +43,8 @@ export const UserData = ({
   const [time, setTime] = useState("");
   const [addressLayout, setAddressLayout] = useState(false);
   const [overflowUnset, setOverflowUnset] = useState(false);
+
+  const searchParams = useSearchParams();
 
   const {
     street,
@@ -83,6 +88,15 @@ export const UserData = ({
   useEffect(() => {
     setTotalDate(`${data} ${time}`);
   }, [data, time]);
+
+  const cityUrl = searchParams.get("city");
+  const selectedCity =
+    Object.values(CITIES).find(({ name }) => name === cityUrl) || CITIES.KRAKOW;
+  const isSingleCity = selectedCity.isSingle;
+
+  useEffect(() => {
+    setAddressField("city", { name: selectedCity.name, price: 0 });
+  }, [selectedCity]);
 
   return (
     <div>
@@ -197,10 +211,9 @@ export const UserData = ({
             </div>
           ) : (
             <div
-              className={`_p-3 _w-full _bg-light _rounded-xl _overflow-hidden
-               select-block-open-address ${
-                 overflowUnset ? "overflow-visible" : ""
-               }`}
+              className={`_p-3 _w-full _bg-light _rounded-xl _overflow-hidden ${
+                overflowUnset ? "_overflow-visible" : ""
+              }`}
             >
               <div className="_mb-6 _flex _flex-col _gap-3">
                 <Input
@@ -251,12 +264,23 @@ export const UserData = ({
                     setAddressField("postcode", value)
                   }
                 />
-                <Cities
-                  t={t}
-                  city={city}
-                  setCity={(newCity) => setAddressField("city", newCity)}
-                  callback={setOverflowUnset}
-                />
+                {isSingleCity ? (
+                  <Input
+                    isBordered
+                    icon={lockSvg}
+                    disabled
+                    type="text"
+                    placeholder={t("E-mail")}
+                    value={t(selectedCity.name)}
+                  />
+                ) : (
+                  <Cities
+                    t={t}
+                    city={city}
+                    setCity={(newCity) => setAddressField("city", newCity)}
+                    callback={setOverflowUnset}
+                  />
+                )}
                 {!isPrivateHouse && (
                   <div className="_flex _gap-5">
                     <Input

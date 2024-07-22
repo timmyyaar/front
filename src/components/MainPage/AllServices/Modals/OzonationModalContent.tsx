@@ -7,6 +7,7 @@ import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { PricesContext } from "@/components/Providers";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
 import { MAIN_CATEGORIES_URLS } from "@/constants";
+import { useSearchParams } from "next/navigation";
 
 const OZONATION_BLOCKS = [
   {
@@ -37,6 +38,8 @@ function OzonationModalContent({
   isOrder?: boolean;
 }) {
   const { prices } = useContext(PricesContext);
+  const searchParams = useSearchParams();
+  const city = searchParams.get("city");
 
   const ozonationCosts = [
     {
@@ -152,7 +155,7 @@ function OzonationModalContent({
           </div>
           <Costs
             t={t}
-            redirectPathname={`order/${MAIN_CATEGORIES_URLS.HEALTHCARE}?selectedService=${ALL_SERVICE.OZONATION}`}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.HEALTHCARE}?selectedService=${ALL_SERVICE.OZONATION}${city ? `&city=${city}` : ""}`}
             costs={ozonationCosts}
           />
         </div>

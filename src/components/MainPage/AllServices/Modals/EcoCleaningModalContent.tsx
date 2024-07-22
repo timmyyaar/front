@@ -9,6 +9,7 @@ import { PricesContext } from "@/components/Providers";
 import Costs from "./Costs";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
 import { HOW_IT_WORKS_TEXTS } from "@/components/MainPage/constants";
+import { useSearchParams } from "next/navigation";
 
 const ECO_CLEANING_BLOCKS = [
   {
@@ -37,6 +38,8 @@ function EcoCleaningModalContent({
   isOrder?: boolean;
 }) {
   const { prices } = useContext(PricesContext);
+  const searchParams = useSearchParams();
+  const city = searchParams.get("city");
 
   const ecoCosts = [
     {
@@ -78,7 +81,7 @@ function EcoCleaningModalContent({
             FIGURE_BRACKETS_REGEX,
             (match) => (
               <b>{match}</b>
-            )
+            ),
           )}
         </div>
         {t("eco_cleaning_we_use_products_description")}
@@ -100,7 +103,7 @@ function EcoCleaningModalContent({
           </div>
           <Costs
             t={t}
-            redirectPathname={`order/${MAIN_CATEGORIES_URLS.GENERAL}?selectedService=${ALL_SERVICE.ECO}`}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.GENERAL}?selectedService=${ALL_SERVICE.ECO}${city ? `&city=${city}` : ""}`}
             costs={ecoCosts}
             description="regular_price_description_mobile"
           />
