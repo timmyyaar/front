@@ -157,7 +157,7 @@ export const Header = () => {
             </a>
             <a
               className="_flex _flex-col _justify-center"
-              href="https://www.instagram.com/takeyourtime_krakow/"
+              href="https://www.instagram.com/takeyourtime_pln/"
               target="_blank"
               onClick={() => trackSocialMediaClick("Instagram")}
             >
