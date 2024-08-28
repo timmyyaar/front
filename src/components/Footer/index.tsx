@@ -52,7 +52,7 @@ export const Footer = (props: any) => {
         </a>
         <a
           className="icon"
-          href="https://www.instagram.com/takeyourtime_krakow/"
+          href="https://www.instagram.com/takeyourtime_pln/"
           target="_blank"
           onClick={() => trackSocialMediaClick("Instagram")}
         >
