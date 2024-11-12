@@ -24,8 +24,7 @@ function Dropdown({
 
   return (
     <div
-      className={`_flex _justify-between _items-center _relative
-            _text-dark _ml-[10%] lg:_ml-0 _cursor-pointer _group`}
+      className="_flex _justify-between _items-center _relative _text-dark _cursor-pointer _group"
       onClick={(e) => {
         e.preventDefault();
         setIsDropdownOpened(true);
