@@ -125,12 +125,14 @@ export const Header = () => {
           </div>
         </div>
         <NavigationItems t={t} />
-        <Dropdown
-          options={Object.values(mainLocales)}
-          onSelect={onSelectLocale}
-          t={t}
-          value={mainLocales[locale]}
-        />
+        <div className="_ml-auto lg:_ml-0 _mr-3 lg:_mr-0">
+          <Dropdown
+            options={Object.values(mainLocales)}
+            onSelect={onSelectLocale}
+            t={t}
+            value={mainLocales[locale]}
+          />
+        </div>
         <div
           className={`_text-sm lg:_text-lg _font-semibold _pl-2
             lg:_pl-0 mobile-none _ml-auto _flex _gap-6`}
@@ -174,7 +176,7 @@ export const Header = () => {
           </div>
         </div>
         <div
-          className="mobile-only-flex _items-center _ml-auto"
+          className="mobile-only-flex _items-center"
           onClick={() => setIsMenuOpened(!isMenuOpened)}
         >
           <MenuIcon
