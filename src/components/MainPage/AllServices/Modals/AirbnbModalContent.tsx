@@ -2,12 +2,17 @@
 
 import React, { useContext } from "react";
 import reactStringReplace from "react-string-replace";
-import { FIGURE_BRACKETS_REGEX, MAIN_CATEGORIES_URLS } from "@/constants";
+import {
+  CITIES,
+  FIGURE_BRACKETS_REGEX,
+  MAIN_CATEGORIES_URLS,
+} from "@/constants";
 import { TranslateFunction } from "@/types";
 import { PricesContext } from "@/components/Providers";
 import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
 import { useSearchParams } from "next/navigation";
+import { getTransformedPrices } from "@/utils";
 
 function AirbnbModalContent({
   t,
@@ -18,23 +23,26 @@ function AirbnbModalContent({
 }) {
   const { prices } = useContext(PricesContext);
   const searchParams = useSearchParams();
-  const city = searchParams.get("city");
+  const city = searchParams.get("city") || CITIES.KRAKOW.name;
+
+  const transformedPrices = getTransformedPrices(prices, city);
 
   const airbnbCosts = [
     {
       title: "1-bedroom",
       text: "One-time 1-bedroom cleaning",
-      price: prices.defaultAirbnb,
+      price: transformedPrices.defaultAirbnb,
     },
     {
       title: "2-bedroom",
       text: "One-time 2-bedroom cleaning",
-      price: prices.defaultAirbnb + prices.airbnbBedroom,
+      price: transformedPrices.defaultAirbnb + transformedPrices.airbnbBedroom,
     },
     {
       title: "3-bedroom",
       text: "One-time 3-bedroom cleaning",
-      price: prices.defaultAirbnb + prices.airbnbBedroom * 2,
+      price:
+        transformedPrices.defaultAirbnb + transformedPrices.airbnbBedroom * 2,
     },
   ];
 

@@ -2,7 +2,11 @@
 
 import React, { useContext } from "react";
 import reactStringReplace from "react-string-replace";
-import { FIGURE_BRACKETS_REGEX, MAIN_CATEGORIES_URLS } from "@/constants";
+import {
+  CITIES,
+  FIGURE_BRACKETS_REGEX,
+  MAIN_CATEGORIES_URLS,
+} from "@/constants";
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
 import { TranslateFunction } from "@/types";
 import { PricesContext } from "@/components/Providers";
@@ -10,6 +14,7 @@ import Costs from "./Costs";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
 import { HOW_IT_WORKS_TEXTS } from "@/components/MainPage/constants";
 import { useSearchParams } from "next/navigation";
+import { getTransformedPrices } from "@/utils";
 
 const ECO_CLEANING_BLOCKS = [
   {
@@ -39,23 +44,25 @@ function EcoCleaningModalContent({
 }) {
   const { prices } = useContext(PricesContext);
   const searchParams = useSearchParams();
-  const city = searchParams.get("city");
+  const city = searchParams.get("city") || CITIES.KRAKOW.name;
+
+  const transformedPrices = getTransformedPrices(prices, city);
 
   const ecoCosts = [
     {
       title: "1-bedroom",
       text: "One-time 1-bedroom cleaning",
-      price: prices.defaultEco,
+      price: transformedPrices.defaultEco,
     },
     {
       title: "2-bedroom",
       text: "One-time 2-bedroom cleaning",
-      price: prices.defaultEco + prices.ecoBedroom,
+      price: transformedPrices.defaultEco + transformedPrices.ecoBedroom,
     },
     {
       title: "3-bedroom",
       text: "One-time 3-bedroom cleaning",
-      price: prices.defaultEco + prices.ecoBedroom * 2,
+      price: transformedPrices.defaultEco + transformedPrices.ecoBedroom * 2,
     },
   ];
 

@@ -3,12 +3,17 @@
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
 import React, { useContext } from "react";
 import reactStringReplace from "react-string-replace";
-import { FIGURE_BRACKETS_REGEX, MAIN_CATEGORIES_URLS } from "@/constants";
+import {
+  CITIES,
+  FIGURE_BRACKETS_REGEX,
+  MAIN_CATEGORIES_URLS,
+} from "@/constants";
 import { TranslateFunction } from "@/types";
 import Costs from "./Costs";
 import { PricesContext } from "@/components/Providers";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
 import { useSearchParams } from "next/navigation";
+import { getTransformedPrices } from "@/utils";
 
 const DEEP_KITCHEN_BLOCKS = [
   {
@@ -51,9 +56,11 @@ function DeepKitchenModalContent({
 }) {
   const { prices } = useContext(PricesContext);
   const searchParams = useSearchParams();
-  const city = searchParams.get("city");
+  const city = searchParams.get("city") || CITIES.KRAKOW.name;
 
-  const deepKitchenCosts = [{ price: prices.defaultDeepKitchen }];
+  const transformedPrices = getTransformedPrices(prices, city);
+
+  const deepKitchenCosts = [{ price: transformedPrices.defaultDeepKitchen }];
 
   return (
     <>

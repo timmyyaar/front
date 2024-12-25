@@ -6,8 +6,9 @@ import { TranslateFunction } from "@/types";
 import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { PricesContext } from "@/components/Providers";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
-import { MAIN_CATEGORIES_URLS } from "@/constants";
+import { CITIES, MAIN_CATEGORIES_URLS } from "@/constants";
 import { useSearchParams } from "next/navigation";
+import { getTransformedPrices } from "@/utils";
 
 const AFTER_PARTY_BLOCKS = [
   {
@@ -63,16 +64,18 @@ function AfterPartyModalContent({
 }) {
   const { prices } = useContext(PricesContext);
   const searchParams = useSearchParams();
-  const city = searchParams.get('city')
+  const city = searchParams.get("city") || CITIES.KRAKOW.name;
+
+  const transformedPrices = getTransformedPrices(prices, city);
 
   const generalAfterPartyPrice =
-    prices.defaultAfterParty +
-    prices.subServiceBalcony * 5 +
-    prices.subServiceOven +
-    prices.subServiceKitchenCabinets +
-    prices.subServiceFridge +
-    prices.subServiceMicrowave +
-    prices.subServiceDishes;
+    transformedPrices.defaultAfterParty +
+    transformedPrices.subServiceBalcony * 5 +
+    transformedPrices.subServiceOven +
+    transformedPrices.subServiceKitchenCabinets +
+    transformedPrices.subServiceFridge +
+    transformedPrices.subServiceMicrowave +
+    transformedPrices.subServiceDishes;
 
   const afterPartyCosts = [
     {
@@ -83,12 +86,12 @@ function AfterPartyModalContent({
     {
       title: "2-bedroom",
       text: "deep_price_description",
-      price: generalAfterPartyPrice + prices.afterPartyBedroom,
+      price: generalAfterPartyPrice + transformedPrices.afterPartyBedroom,
     },
     {
       title: "3-bedroom",
       text: "deep_price_description",
-      price: generalAfterPartyPrice + prices.afterPartyBedroom * 2,
+      price: generalAfterPartyPrice + transformedPrices.afterPartyBedroom * 2,
     },
   ];
 

@@ -1,12 +1,9 @@
 import React, { Dispatch, SetStateAction } from "react";
-import {
-  ISubService,
-  SelectedSubService,
-  showSubServiceSquareMeters,
-} from "@/components/OrderPage/SubServicesList/utils";
+import { showSubServiceSquareMeters } from "@/components/OrderPage/SubServicesList/utils";
 import { IconCrosse } from "@/components/OrderPage/Summary/icons/IconCrosse";
 
 import CleanersCount from "@/components/OrderPage/Summary/SummaryService/CleanersCount";
+import { ISubService } from "@/types";
 
 interface SummaryServiceProps {
   serviceTitle: string;
@@ -16,7 +13,7 @@ interface SummaryServiceProps {
     value: string;
     param: boolean;
   }[];
-  subServiceList: SelectedSubService[];
+  subServiceList: ISubService[];
   cleanersCount: number;
   onRemoveSubService: (title: string, isSecond?: boolean) => void;
   manualCleanersCount: number;
@@ -62,7 +59,7 @@ function SummaryService({
               </div>
             ) : (
               <div key={el.title + el.value + i}>{t(el.value)}</div>
-            )
+            ),
           )}
         </div>
       )}
@@ -78,7 +75,7 @@ function SummaryService({
           <div className="_my-2 _text-lg _font-semibold">
             {t("Add services")}
           </div>
-          {subServiceList.map((subService: SelectedSubService, i: number) => (
+          {subServiceList.map((subService: ISubService, i: number) => (
             <div
               className={`_mr-2 _mb-2 _float-left _h-full _w-max _pl-3 _pr-1.5
                 _flex _items-center _rounded-full _max-w-full _border _border-solid _border-gray`}

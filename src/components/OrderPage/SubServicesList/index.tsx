@@ -1,22 +1,21 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 
 import { Writer } from "@/components/common/Writer";
 
 import {
   getSubServiceListByMainService,
-  ISubService,
-  SelectedSubService,
   showSubServiceSquareMeters,
 } from "./utils";
-import { PricesContext } from "@/components/Providers";
+import { PricesContext, ServicesContext } from "@/components/Providers";
 import { useSearchParams } from "next/navigation";
 import { CITIES } from "@/constants";
-import { DRY_CLEANING_SUB_TITLES } from "@/components/OrderPage/constants";
+import { getTransformedPrices } from "@/utils";
+import { ISubService } from "@/types";
 
 interface IProps {
   mainService: string;
-  subServices: SelectedSubService[];
+  subServices: ISubService[];
   setSubService: (service: any) => void;
   priceMultiplier?: number;
   t: (text: string, defaultText?: string) => string;
@@ -24,8 +23,15 @@ interface IProps {
 
 export const SubServicesList = (props: IProps) => {
   const { prices } = useContext(PricesContext);
+  const {
+    mainServices: mainServicesResponse,
+    subServices: subServicesResponse,
+  } = useContext(ServicesContext);
+
   const searchParams = useSearchParams();
-  const cityUrl = searchParams.get("city");
+  const cityUrl = searchParams.get("city") || CITIES.KRAKOW.name;
+
+  const transformedPrices = getTransformedPrices(prices, cityUrl);
 
   const {
     mainService,
@@ -35,20 +41,20 @@ export const SubServicesList = (props: IProps) => {
     t,
   } = props;
 
-  useEffect(() => {
-    const isWarsaw = cityUrl === CITIES.WARSAW.name;
-    const needToFilterOutDrySubServices =
-      isWarsaw &&
-      subServices.some(({ title }) => DRY_CLEANING_SUB_TITLES.includes(title));
-
-    if (needToFilterOutDrySubServices) {
-      setSubService(
-        subServices.filter(
-          ({ title }) => !DRY_CLEANING_SUB_TITLES.includes(title),
-        ),
-      );
-    }
-  }, [cityUrl]);
+  // TODO: We may need this code in future when we implement automatic price change on city change for all services.
+  // useEffect(() => {
+  //   const subServicesToReset = subServices.filter(({ disabledCities }) =>
+  //     disabledCities.includes(cityUrl),
+  //   );
+  //
+  //   if (subServicesToReset.length) {
+  //     setSubService(
+  //       subServices.filter(
+  //         ({ id }) => !subServicesToReset.some((item) => item.id === id),
+  //       ),
+  //     );
+  //   }
+  // }, [cityUrl]);
 
   const addService = (service: ISubService) => {
     const isServiceExist = subServices.find(
@@ -70,7 +76,7 @@ export const SubServicesList = (props: IProps) => {
       subServices.find((subService) => service.title === subService.title)
         ?.count === (service.title === "Office cleaning" ? 60 : 1);
 
-    setSubService((prev: SelectedSubService[]) =>
+    setSubService((prev: ISubService[]) =>
       isSelectedServiceSingle
         ? prev.filter(
             (selectedSubService) => selectedSubService.title !== service.title,
@@ -91,8 +97,8 @@ export const SubServicesList = (props: IProps) => {
   const plusService = (e: any, service: ISubService) => {
     e.stopPropagation();
 
-    setSubService((prev: SelectedSubService[]) =>
-      prev.map((prevService: SelectedSubService) =>
+    setSubService((prev: ISubService[]) =>
+      prev.map((prevService: ISubService) =>
         prevService.title === service.title
           ? {
               ...prevService,
@@ -109,8 +115,10 @@ export const SubServicesList = (props: IProps) => {
     subServices.find((subService) => subService.title === title);
 
   const subServicesByMainService = getSubServiceListByMainService(
-    prices,
+    transformedPrices,
     mainService,
+    mainServicesResponse,
+    subServicesResponse,
     priceMultiplier,
     cityUrl,
   );

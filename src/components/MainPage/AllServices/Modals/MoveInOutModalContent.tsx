@@ -1,7 +1,11 @@
 "use client";
 
 import reactStringReplace from "react-string-replace";
-import { FIGURE_BRACKETS_REGEX, MAIN_CATEGORIES_URLS } from "@/constants";
+import {
+  CITIES,
+  FIGURE_BRACKETS_REGEX,
+  MAIN_CATEGORIES_URLS,
+} from "@/constants";
 import TextBlock from "@/components/MainPage/AllServices/Modals/TextBlock";
 import React, { useContext } from "react";
 import { TranslateFunction } from "@/types";
@@ -10,6 +14,7 @@ import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
 import { HOW_IT_WORKS_TEXTS } from "@/components/MainPage/constants";
 import { useSearchParams } from "next/navigation";
+import { getTransformedPrices } from "@/utils";
 
 const MOVE_IN_OUT_CLEANING_BLOCKS = [
   {
@@ -43,17 +48,19 @@ function MoveInOutModalContent({
 }) {
   const { prices } = useContext(PricesContext);
   const searchParams = useSearchParams();
-  const city = searchParams.get("city");
+  const city = searchParams.get("city") || CITIES.KRAKOW.name;
+
+  const transformedPrices = getTransformedPrices(prices, city);
 
   const generalMoveInOutPrice =
-    prices.defaultMoveInOut +
-    prices.subServiceBalcony * 5 +
-    prices.subServiceOven +
-    prices.subServiceKitchenCabinets +
-    prices.subServiceFridge +
-    prices.subServiceHood +
-    prices.subServiceWardrobe +
-    prices.subServiceMicrowave;
+    transformedPrices.defaultMoveInOut +
+    transformedPrices.subServiceBalcony * 5 +
+    transformedPrices.subServiceOven +
+    transformedPrices.subServiceKitchenCabinets +
+    transformedPrices.subServiceFridge +
+    transformedPrices.subServiceHood +
+    transformedPrices.subServiceWardrobe +
+    transformedPrices.subServiceMicrowave;
 
   const moveInOutCosts = [
     {
@@ -64,12 +71,12 @@ function MoveInOutModalContent({
     {
       title: "2-bedroom",
       text: "deep_price_description",
-      price: generalMoveInOutPrice + prices.moveInOutBedroom,
+      price: generalMoveInOutPrice + transformedPrices.moveInOutBedroom,
     },
     {
       title: "3-bedroom",
       text: "deep_price_description",
-      price: generalMoveInOutPrice + prices.moveInOutBedroom * 2,
+      price: generalMoveInOutPrice + transformedPrices.moveInOutBedroom * 2,
     },
   ];
 

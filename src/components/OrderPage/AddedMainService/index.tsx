@@ -1,10 +1,11 @@
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import Image from "next/image";
 
 import OzonSvg from "./icons/ozone-layer.svg";
 import CleanSvg from "./icons/rectangle.svg";
 import caretUpSvg from "./icons/caret-up.svg";
 import { getAdditionalServices } from "./utils";
+
 interface IProps {
   mainService: string;
   setSecondService: (props: any) => void;
