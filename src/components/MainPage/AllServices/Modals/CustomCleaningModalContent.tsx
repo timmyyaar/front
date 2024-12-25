@@ -1,13 +1,18 @@
 "use client";
 
 import reactStringReplace from "react-string-replace";
-import { FIGURE_BRACKETS_REGEX, MAIN_CATEGORIES_URLS } from "@/constants";
+import {
+  CITIES,
+  FIGURE_BRACKETS_REGEX,
+  MAIN_CATEGORIES_URLS,
+} from "@/constants";
 import React, { useContext } from "react";
 import { TranslateFunction } from "@/types";
 import { PricesContext } from "@/components/Providers";
 import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
 import { useSearchParams } from "next/navigation";
+import { getTransformedPrices } from "@/utils";
 
 function CustomCleaningModalContent({
   t,
@@ -18,13 +23,15 @@ function CustomCleaningModalContent({
 }) {
   const { prices } = useContext(PricesContext);
   const searchParams = useSearchParams();
-  const city = searchParams.get("city");
+  const city = searchParams.get("city") || CITIES.KRAKOW.name;
+
+  const transformedPrices = getTransformedPrices(prices, city);
 
   const customCosts = [
     {
       title: (
         <>
-          {t("minimal_price")} {prices.minimalCustom}
+          {t("minimal_price")} {transformedPrices.minimalCustom}
           {t("zl")}
         </>
       ),

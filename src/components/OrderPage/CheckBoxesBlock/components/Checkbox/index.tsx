@@ -34,7 +34,7 @@ const CheckBox: FC<any> = ({
               </div>
             ) : null}
           </div>
-          <div className="_w-10 _w-10 lg:_w-14 lg:_h-14 lg:_mr-3">
+          <div className="_w-10 lg:_w-14 lg:_h-14 lg:_mr-3">
             <Image src={icon} alt="" />
           </div>
         </div>

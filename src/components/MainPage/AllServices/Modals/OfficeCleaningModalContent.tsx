@@ -6,8 +6,9 @@ import { TranslateFunction } from "@/types";
 import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { PricesContext } from "@/components/Providers";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
-import { MAIN_CATEGORIES_URLS } from "@/constants";
+import { CITIES, MAIN_CATEGORIES_URLS } from "@/constants";
 import { useSearchParams } from "next/navigation";
+import { getTransformedPrices } from "@/utils";
 
 const OFFICE_CLEANING_BLOCKS = [
   {
@@ -62,13 +63,15 @@ function OfficeCleaningModalContent({
 }) {
   const { prices } = useContext(PricesContext);
   const searchParams = useSearchParams();
-  const city = searchParams.get("city");
+  const city = searchParams.get("city") || CITIES.KRAKOW.name;
+
+  const transformedPrices = getTransformedPrices(prices, city);
 
   const officeCosts = [
     {
       title: (
         <span className="_text-2lx _font-bold">
-          {prices.officeSquareMeter}
+          {transformedPrices.officeSquareMeter}
           <span className="_ml-1">
             {t("zl")}/{t("m")}
             <sup>2</sup>

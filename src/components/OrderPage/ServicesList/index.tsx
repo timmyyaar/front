@@ -1,16 +1,14 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import Image from "next/image";
 
 import howItWorksSvg from "@/components/common/icons/howItWorks.svg";
 import { Modals } from "@/components/MainPage/AllServices/Modals";
 import { Overlay } from "@/components/common/Overlay";
 import { useClickOutside } from "@/hooks/useClickOutSide";
-import {
-  EXCLUDED_SERVICES_WARSAW,
-  SERVICES,
-} from "@/components/OrderPage/constants";
 import { useSearchParams } from "next/navigation";
-import { CITIES } from "@/constants";
+import { CITIES, MAIN_CATEGORIES_REVERSED } from "@/constants";
+import { ServicesContext } from "@/components/Providers";
+import { getServicesWithIconsByCity } from "@/utils";
 
 interface IProps {
   mainCategory: string;
@@ -19,23 +17,17 @@ interface IProps {
   setSelectedService: (val: string) => void;
 }
 
-const getFilteredServices = (
-  city: string | null,
-  services: { title: string; icon: any }[],
-) => {
-  const isWarsaw = city === CITIES.WARSAW.name;
-
-  return isWarsaw
-    ? services.filter(({ title }) => !EXCLUDED_SERVICES_WARSAW.includes(title))
-    : services;
-};
-
 export const ServicesList: FC<IProps> = (props) => {
   const { mainCategory, t, selectedService, setSelectedService } = props;
+  const { mainServices } = useContext(ServicesContext);
   const searchParams = useSearchParams();
 
-  const cityUrl = searchParams.get("city");
-  const filteredServices = getFilteredServices(cityUrl, SERVICES[mainCategory]);
+  const cityUrl = searchParams.get("city") || CITIES.KRAKOW.name;
+  const filteredServices = getServicesWithIconsByCity({
+    services: mainServices,
+    city: cityUrl,
+    serviceCategory: MAIN_CATEGORIES_REVERSED[mainCategory],
+  });
 
   useEffect(() => {
     const needToResetSelectedService =
@@ -88,7 +80,11 @@ export const ServicesList: FC<IProps> = (props) => {
               <div
                 className={`_flex _items-center _gap-2 _text-sm _transition-all
                   hover:_text-primary`}
-                onClick={() => setServiceModal(el.title)}
+                onClick={(event: React.MouseEvent<HTMLDivElement>) => {
+                  event.stopPropagation();
+
+                  setServiceModal(el.title);
+                }}
               >
                 <div className="_text-center">{t("How it works")}</div>
                 <div className="_py-1 _cursor-pointer">

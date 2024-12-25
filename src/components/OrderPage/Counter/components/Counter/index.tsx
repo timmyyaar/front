@@ -46,9 +46,9 @@ export const Counter: FC<IProps> = (props) => {
     onChange(+updatedValue || minimumCounterValue);
   };
 
-  //everyone understands it's bad, but we keep it just because i18n
+  // everyone understands it's bad, but we keep it just because i18n
   // can't work with some pluralization, 3-5 is few for him, but in russian,
-  // for example, 5 is different then 4
+  // for example, 5 is different from 4
   const countTitle = () => {
     if (Cookies.get("locale") === "ru") {
       if (title === "bedroom") {

@@ -1,11 +1,12 @@
-import { Prices } from "@/types";
+import { MainService, Price, Prices } from "@/types";
+import { MAIN_SERVICES } from "@/constants";
 
 export const getOzonationMultiplier = (prices: Prices, value: number) =>
   value > 120
     ? prices.ozonationBigArea
     : value > 50
-    ? prices.ozonationMediumArea
-    : prices.ozonationSmallArea;
+      ? prices.ozonationMediumArea
+      : prices.ozonationSmallArea;
 
 export const getDateString = (date: Date) => {
   const day = date.getDate();
@@ -45,3 +46,59 @@ export const capitalizeFirstLetter = (string: string) => {
 
 export const getOneDigitFloat = (number: number) =>
   Number(parseFloat(number.toFixed(1)));
+
+export const getTransformedPrices = (prices: Price[], city: string) => {
+  const currentCityPrices = prices
+    .filter((price) => city === price.city)
+    .reduce(
+      (result: Prices, item: { key: string; price: number }) => ({
+        ...result,
+        [item.key]: item.price,
+      }),
+      {},
+    );
+
+  return {
+    ...prices.reduce(
+      (result: Prices, item: { key: string; price: number }) => ({
+        ...result,
+        [item.key]: item.price,
+      }),
+      {},
+    ),
+    ...currentCityPrices,
+  };
+};
+
+type GetServicesWithIconsByCityProps = {
+  services: MainService[];
+  city: string;
+  includeEmptyCategory?: boolean;
+  serviceCategory?: string;
+};
+
+export const getServicesWithIconsByCity = ({
+  services,
+  city,
+  includeEmptyCategory,
+  serviceCategory,
+}: GetServicesWithIconsByCityProps) => {
+  const servicesByCity = services.filter(
+    ({ disabledCities }) => !disabledCities.includes(city),
+  );
+  const servicesByCategory = servicesByCity.filter(({ category }) =>
+    serviceCategory
+      ? category === serviceCategory
+      : includeEmptyCategory
+        ? true
+        : category,
+  );
+
+  return servicesByCategory.map((mainService) => {
+    const icon = MAIN_SERVICES.find(
+      ({ title }) => mainService.title === title,
+    )!.icon;
+
+    return { ...mainService, icon };
+  });
+};

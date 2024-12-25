@@ -6,9 +6,10 @@ import { TranslateFunction } from "@/types";
 import { PricesContext } from "@/components/Providers";
 import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
-import { MAIN_CATEGORIES_URLS } from "@/constants";
+import { CITIES, MAIN_CATEGORIES_URLS } from "@/constants";
 import { HOW_IT_WORKS_TEXTS } from "@/components/MainPage/constants";
 import { useSearchParams } from "next/navigation";
+import { getTransformedPrices } from "@/utils";
 
 const DEEP_CLEANING_BLOCKS = [
   {
@@ -42,17 +43,19 @@ function DeepCleaningModalContent({
 }) {
   const { prices } = useContext(PricesContext);
   const searchParams = useSearchParams();
-  const city = searchParams.get("city");
+  const city = searchParams.get("city") || CITIES.KRAKOW.name;
+
+  const transformedPrices = getTransformedPrices(prices, city);
 
   const generalDeepPrice =
-    prices.defaultDeep +
-    prices.subServiceBalcony * 5 +
-    prices.subServiceOven +
-    prices.subServiceKitchenCabinets +
-    prices.subServiceFridge +
-    prices.subServiceHood +
-    prices.subServiceWardrobe +
-    prices.subServiceMicrowave;
+    transformedPrices.defaultDeep +
+    transformedPrices.subServiceBalcony * 5 +
+    transformedPrices.subServiceOven +
+    transformedPrices.subServiceKitchenCabinets +
+    transformedPrices.subServiceFridge +
+    transformedPrices.subServiceHood +
+    transformedPrices.subServiceWardrobe +
+    transformedPrices.subServiceMicrowave;
 
   const deepCosts = [
     {
@@ -63,12 +66,12 @@ function DeepCleaningModalContent({
     {
       title: "2-bedroom",
       text: "deep_price_description",
-      price: generalDeepPrice + prices.deepBedroom,
+      price: generalDeepPrice + transformedPrices.deepBedroom,
     },
     {
       title: "3-bedroom",
       text: "deep_price_description",
-      price: generalDeepPrice + prices.deepBedroom * 2,
+      price: generalDeepPrice + transformedPrices.deepBedroom * 2,
     },
   ];
 

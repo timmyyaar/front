@@ -6,8 +6,9 @@ import { TranslateFunction } from "@/types";
 import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { PricesContext } from "@/components/Providers";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
-import { MAIN_CATEGORIES_URLS } from "@/constants";
+import { CITIES, MAIN_CATEGORIES_URLS } from "@/constants";
 import { useSearchParams } from "next/navigation";
+import { getTransformedPrices } from "@/utils";
 
 const OZONATION_BLOCKS = [
   {
@@ -39,14 +40,16 @@ function OzonationModalContent({
 }) {
   const { prices } = useContext(PricesContext);
   const searchParams = useSearchParams();
-  const city = searchParams.get("city");
+  const city = searchParams.get("city") || CITIES.KRAKOW.name;
+
+  const transformedPrices = getTransformedPrices(prices, city);
 
   const ozonationCosts = [
     {
       isOzonation: true,
       title: (
         <span className="_text-2lx _font-bold">
-          {prices.ozonationSmallArea}
+          {transformedPrices.ozonationSmallArea}
           <span className="_ml-1">
             {t("zl")}/{t("m")}
             <sup>2</sup>
@@ -57,15 +60,15 @@ function OzonationModalContent({
         <>
           <div>
             {t("up_to")} 50 {t("m")}
-            <sup>2</sup> - {prices.ozonationSmallArea} zl
+            <sup>2</sup> - {transformedPrices.ozonationSmallArea} zl
           </div>
           <div>
             {t("up_to")} 120 {t("m")}
-            <sup>2</sup> - {prices.ozonationMediumArea} zl
+            <sup>2</sup> - {transformedPrices.ozonationMediumArea} zl
           </div>
           <div>
             {`>`} 120 {t("m")}
-            <sup>2</sup> - {prices.ozonationBigArea} zl
+            <sup>2</sup> - {transformedPrices.ozonationBigArea} zl
           </div>
         </>
       ),
