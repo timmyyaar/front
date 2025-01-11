@@ -1,4 +1,20 @@
 // How much it costs
+import Regular from "@/components/common/icons/services/regular.svg";
+import Deep from "@/components/common/icons/services/deep.svg";
+import WindowCleaning from "@/components/common/icons/services/window-cleaning.svg";
+import EcoCleaning from "@/components/common/icons/services/eco-cleaning.svg";
+import MoveInOut from "@/components/common/icons/services/move-in-out.svg";
+import Subscription from "@/components/common/icons/services/subscription.svg";
+import CustomCleaning from "@/components/common/icons/services/custom-cleaning.svg";
+import AfterParty from "@/components/common/icons/services/after-party.svg";
+import Office from "@/components/common/icons/services/office.svg";
+import WhileSickness from "@/components/common/icons/services/while-sickness.svg";
+import DeepKitchen from "@/components/common/icons/services/deep-kitchen.svg";
+import Airbnb from "@/components/common/icons/services/airbnb.svg";
+import DryCleaning from "@/components/common/icons/services/dry-cleaning.svg";
+import PostConstruction from "@/components/common/icons/services/post-construction.svg";
+import Ozonation from "@/components/common/icons/services/ozonation.svg";
+
 export const Coasts = {
   "One-time": {
     "1-bedroom": 199,
@@ -49,17 +65,29 @@ export const MAIN_CATEGORIES = {
   special: "Special cleaning",
 };
 
-export const SHOW_CORRIDOR_TITLES = [
-  "Regular",
-  "Deep",
-  "Eco cleaning",
-  "Move in/out",
-  "After party",
-  "While sickness",
-  "Airbnb",
-];
+export const MAIN_CATEGORIES_REVERSED = Object.fromEntries(
+    Object.entries(MAIN_CATEGORIES).map(([key, value]) => [value, key]),
+);
 
 export const CITIES = {
   KRAKOW: { name: "Krakow", isSingle: false },
   WARSAW: { name: "Warsaw", isSingle: true },
 };
+
+export const MAIN_SERVICES = [
+  { title: "Regular", icon: Regular },
+  { title: "Deep", icon: Deep },
+  { title: "Window cleaning", icon: WindowCleaning },
+  { title: "Eco cleaning", icon: EcoCleaning },
+  { title: "Move in/out", icon: MoveInOut },
+  { title: "Subscription", icon: Subscription },
+  { title: "Custom cleaning", icon: CustomCleaning },
+  { title: "After party", icon: AfterParty },
+  { title: "Office", icon: Office },
+  { title: "While sickness", icon: WhileSickness },
+  { title: "Deep kitchen", icon: DeepKitchen },
+  { title: "Airbnb", icon: Airbnb },
+  { title: "Dry cleaning", icon: DryCleaning },
+  { title: "Post-construction", icon: PostConstruction },
+  { title: "Ozonation", icon: Ozonation },
+];

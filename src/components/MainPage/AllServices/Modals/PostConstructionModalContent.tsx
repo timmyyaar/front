@@ -6,8 +6,9 @@ import { TranslateFunction } from "@/types";
 import { PricesContext } from "@/components/Providers";
 import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
-import { MAIN_CATEGORIES_URLS } from "@/constants";
+import { CITIES, MAIN_CATEGORIES_URLS } from "@/constants";
 import { useSearchParams } from "next/navigation";
+import { getTransformedPrices } from "@/utils";
 
 const POST_CUNSTRUCTION_CLEANING_BLOCKS = [
   {
@@ -51,13 +52,15 @@ function PortConstructionModalContent({
 }) {
   const { prices } = useContext(PricesContext);
   const searchParams = useSearchParams();
-  const city = searchParams.get("city");
+  const city = searchParams.get("city") || CITIES.KRAKOW.name;
+
+  const transformedPrices = getTransformedPrices(prices, city);
 
   const postConstructionCosts = [
     {
       title: (
         <span className="_text-2lx _font-bold">
-          {prices.postConstructionSquareMeter}
+          {transformedPrices.postConstructionSquareMeter}
           <span className="_ml-1">
             {t("zl")}/{t("m")}
             <sup>2</sup>

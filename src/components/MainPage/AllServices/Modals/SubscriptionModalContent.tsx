@@ -5,8 +5,9 @@ import { TranslateFunction } from "@/types";
 import { PricesContext } from "@/components/Providers";
 import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { SALES } from "@/components/MainPage/AllServices/Modals/Costs/constants";
-import { getOneDigitFloat } from "@/utils";
+import {getOneDigitFloat, getTransformedPrices} from "@/utils";
 import { useSearchParams } from "next/navigation";
+import {CITIES} from "@/constants";
 
 function SubscriptionModalContent({
   t,
@@ -17,79 +18,81 @@ function SubscriptionModalContent({
 }) {
   const { prices } = useContext(PricesContext);
   const searchParams = useSearchParams();
-  const city = searchParams.get("city");
+  const city = searchParams.get('city') || CITIES.KRAKOW.name
+
+  const transformedPrices = getTransformedPrices(prices, city);
 
   const subscriptionCosts = {
     [SALES[0].title]: [
       {
         title: "1-bedroom",
         text: "One-time 1-bedroom cleaning",
-        price: getOneDigitFloat(prices.defaultRegular * 0.8),
-        oldPrice: prices.defaultRegular,
+        price: getOneDigitFloat(transformedPrices.defaultRegular * 0.8),
+        oldPrice: transformedPrices.defaultRegular,
       },
       {
         title: "2-bedroom",
         text: "One-time 2-bedroom cleaning",
         price: getOneDigitFloat(
-          (prices.defaultRegular + prices.regularBedroom) * 0.8,
+          (transformedPrices.defaultRegular + transformedPrices.regularBedroom) * 0.8,
         ),
-        oldPrice: prices.defaultRegular + prices.regularBedroom,
+        oldPrice: transformedPrices.defaultRegular + transformedPrices.regularBedroom,
       },
       {
         title: "3-bedroom",
         text: "One-time 3-bedroom cleaning",
         price: getOneDigitFloat(
-          (prices.defaultRegular + prices.regularBedroom * 2) * 0.8,
+          (transformedPrices.defaultRegular + transformedPrices.regularBedroom * 2) * 0.8,
         ),
-        oldPrice: prices.defaultRegular + prices.regularBedroom * 2,
+        oldPrice: transformedPrices.defaultRegular + transformedPrices.regularBedroom * 2,
       },
     ],
     [SALES[1].title]: [
       {
         title: "1-bedroom",
         text: "Twice a month 1-bedroom cleaning",
-        price: getOneDigitFloat(prices.defaultRegular * 0.85),
-        oldPrice: prices.defaultRegular,
+        price: getOneDigitFloat(transformedPrices.defaultRegular * 0.85),
+        oldPrice: transformedPrices.defaultRegular,
       },
       {
         title: "2-bedroom",
         text: "Twice a month 2-bedroom cleaning",
         price: getOneDigitFloat(
-          (prices.defaultRegular + prices.regularBedroom) * 0.85,
+          (transformedPrices.defaultRegular + transformedPrices.regularBedroom) * 0.85,
         ),
-        oldPrice: prices.defaultRegular + prices.regularBedroom,
+        oldPrice: transformedPrices.defaultRegular + transformedPrices.regularBedroom,
       },
       {
         title: "3-bedroom",
         text: "Twice a month 3-bedroom cleaning",
         price: getOneDigitFloat(
-          (prices.defaultRegular + prices.regularBedroom * 2) * 0.85,
+          (transformedPrices.defaultRegular + transformedPrices.regularBedroom * 2) * 0.85,
         ),
-        oldPrice: prices.defaultRegular + prices.regularBedroom * 2,
+        oldPrice: transformedPrices.defaultRegular + transformedPrices.regularBedroom * 2,
       },
     ],
     [SALES[2].title]: [
       {
         title: "1-bedroom",
         text: "Once a month 1-bedroom cleaning",
-        price: getOneDigitFloat(prices.defaultRegular * 0.9),
-        oldPrice: prices.defaultRegular,
+        price: getOneDigitFloat(transformedPrices.defaultRegular * 0.9),
+        oldPrice: transformedPrices.defaultRegular,
       },
       {
         title: "2-bedroom",
         text: "Once a month 2-bedroom cleaning",
         price: getOneDigitFloat(
-          (prices.defaultRegular + prices.regularBedroom) * 0.9,
+          (transformedPrices.defaultRegular + transformedPrices.regularBedroom) * 0.9,
         ),
-        oldPrice: prices.defaultRegular + prices.regularBedroom,
+        oldPrice: transformedPrices.defaultRegular + transformedPrices.regularBedroom,
       },
       {
         title: "3-bedroom",
         text: "Once a month 3-bedroom cleaning",
         price: getOneDigitFloat(
-          (prices.defaultRegular + prices.regularBedroom * 2) * 0.9,
+          (transformedPrices.defaultRegular + transformedPrices.regularBedroom * 2) * 0.9,
         ),
-        oldPrice: prices.defaultRegular + prices.regularBedroom * 2,
+        oldPrice: transformedPrices.defaultRegular + transformedPrices.regularBedroom * 2,
       },
     ],
   };

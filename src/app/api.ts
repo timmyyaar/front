@@ -1,6 +1,6 @@
 import { ILocales } from "@/locales";
 import request from "@/utils/request";
-import { Prices } from "@/types";
+import { Price } from "@/types";
 
 export async function getLocales(): Promise<ILocales[]> {
   const { locales } = await request({ url: "locales", cache: "no-store" });
@@ -8,16 +8,11 @@ export async function getLocales(): Promise<ILocales[]> {
   return locales;
 }
 
-export async function getPrices(): Promise<Prices> {
-  const pricesResponse = await request({ url: "prices", cache: "no-store" });
-
-  return pricesResponse.reduce(
-    (result: Prices, item: { key: string; price: number }) => ({
-      ...result,
-      [item.key]: item.price,
-    }),
-    {}
-  );
+export async function getPrices(): Promise<Price[]> {
+  return await request({
+    url: "prices",
+    cache: "no-store",
+  });
 }
 
 export async function getPaymentIntent(id: string) {
@@ -34,4 +29,12 @@ export async function getDiscounts() {
 
 export async function getReviews() {
   return await request({ url: "reviews", cache: "no-store" });
+}
+
+export async function getMainServices() {
+  return await request({ url: "main-services", cache: "no-store" });
+}
+
+export async function getSubServices() {
+  return await request({ url: "sub-services", cache: "no-store" });
 }
