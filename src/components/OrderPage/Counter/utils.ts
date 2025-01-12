@@ -46,7 +46,7 @@ export const getCounterByMainService = (mainService: string) => {
         {
           type: "counter",
           title: "Ozonation_title_counter",
-          cost: "7 zl",
+          cost: "7 zl/m2",
           value: "m2",
           count: 0,
         },
