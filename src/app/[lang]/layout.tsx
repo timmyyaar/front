@@ -7,17 +7,17 @@ type MetadataProps = {
 };
 
 const titleByLanguage = {
-  pl: "Sprzątanie mieszkań Kraków | Firma sprzątająca TYT",
-  ru: "Уборка квартир Краков | Клининг TYT",
-  en: "Cleaning services Cracow | TYT Cleaning company",
-  ua: "Прибирання квартир, клінінг у Кракові | Клінінгова компанія TYT",
+  pl: "Sprzątanie mieszkań Polska | Firma sprzątająca TYT",
+  ru: "Уборка квартир Польша | Клининг TYT",
+  en: "Cleaning services Poland | TYT Cleaning company",
+  ua: "Прибирання квартир, клінінг у Польщі | Клінінгова компанія TYT",
 };
 
 const descriptionByLanguage = {
-  pl: "Skuteczne i kompleksowe sprzątanie mieszkań Kraków. Profesjionalna firma sprzątająca z całym niezbędnym sprzętem,  przyjeżdżamy i zaczynamy sprzątanie.",
-  ru: "Эффективная и комплексная уборка квартир в Кракове. Профессиональная клининговая компания со всем необходимым оборудованием, мы приезжаем и начинаем уборку.",
-  en: "Effective and comprehensive apartment cleaning services in Krakow. Professional cleaning company with all the necessary equipment, we arrive and start cleaning.",
-  ua: "Якісне та комплексне прибирання квартир у Кракові  Надаємо всі види клінінгових послуг, аби ваша оселя була чистою.",
+  pl: "Skuteczne i kompleksowe sprzątanie mieszkań Polska. Profesjionalna firma sprzątająca z całym niezbędnym sprzętem,  przyjeżdżamy i zaczynamy sprzątanie.",
+  ru: "Эффективная и комплексная уборка квартир в Польше. Профессиональная клининговая компания со всем необходимым оборудованием, мы приезжаем и начинаем уборку.",
+  en: "Effective and comprehensive apartment cleaning services in Poland. Professional cleaning company with all the necessary equipment, we arrive and start cleaning.",
+  ua: "Якісне та комплексне прибирання квартир у Польщі  Надаємо всі види клінінгових послуг, аби ваша оселя була чистою.",
 };
 
 export async function generateMetadata({ params }: MetadataProps) {
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: MetadataProps) {
           ...result,
           [`${hrefLang}`]: `https://www.takeutime.pl/${language}`,
         }),
-        {}
+        {},
       ),
     },
   };
