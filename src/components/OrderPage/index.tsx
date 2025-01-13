@@ -12,17 +12,20 @@ import { CounterComponent } from "./Counter";
 import { ServicesList } from "./ServicesList";
 import { SubServicesList } from "./SubServicesList";
 import { Summary } from "./Summary";
-import { PRIVATE_HOUSE_SERVICES, SERVICES } from "./constants";
+import { PRIVATE_HOUSE_SERVICES } from "./constants";
 
 import PrivateHouse from "@/components/OrderPage/PrivateHouse";
-import { LocaleContext, PricesContext } from "@/components/Providers";
-import { CITIES, MAIN_CATEGORIES } from "@/constants";
 import {
-  getDefaultSubServicesByService,
-  SelectedSubService,
-} from "@/components/OrderPage/SubServicesList/utils";
+  LocaleContext,
+  PricesContext,
+  ServicesContext,
+} from "@/components/Providers";
+import { CITIES, MAIN_CATEGORIES, MAIN_CATEGORIES_REVERSED } from "@/constants";
+import { getDefaultSubServicesByService } from "@/components/OrderPage/SubServicesList/utils";
 import { sendGAEvent } from "@/google-analytics";
 import { Discount } from "@/components/OrderPage/Summary";
+import { getServicesWithIconsByCity, getTransformedPrices } from "@/utils";
+import { ISubService } from "@/types";
 
 interface OrderPageProps {
   discounts: Discount[];
@@ -34,29 +37,39 @@ export const OrderPage = ({ discounts }: OrderPageProps) => {
   const { locales } = useContext(LocaleContext);
   const i18n = useLocales(locales);
   const { prices } = useContext(PricesContext);
+  const { mainServices, subServices } = useContext(ServicesContext);
   const { lang, type } = useParams();
   const router = useRouter();
   const categoryTitle =
     MAIN_CATEGORIES[
       type as keyof { general: string; healthcare: string; special: string }
     ];
+
+  const searchParams = useSearchParams();
+  const urlService = searchParams.get("selectedService");
+  const cityUrl = searchParams.get("city") || CITIES.KRAKOW.name;
+  const isWarsaw = cityUrl === CITIES.WARSAW.name;
+
+  const transformedPrices = getTransformedPrices(prices, cityUrl);
+
   // main service
-  const [selectedService, setService] = useState<string>("");
-  const [counterValue, setCounterValue] = useState([]);
-  const [selectedSubService, setSubService] = useState<SelectedSubService[]>(
-    [],
+  const filteredServices = getServicesWithIconsByCity({
+    services: mainServices,
+    city: cityUrl,
+    serviceCategory: MAIN_CATEGORIES_REVERSED[categoryTitle],
+  });
+
+  const [selectedService, setService] = useState<string>(
+    filteredServices.find(({ title }) => title === urlService)?.title || "",
   );
+  const [counterValue, setCounterValue] = useState([]);
+  const [selectedSubService, setSubService] = useState<ISubService[]>([]);
   // second service
   const [selectedSecondService, setSecondService] = useState<string>("");
   const [secondCounterValue, setSecondCounterValue] = useState([]);
   const [secondSelectedSubService, setSecondSubService] = useState([]);
   const [isPrivateHouse, setIsPrivateHouse] = useState<boolean>(false);
   const [ownCheckList, setOwnCheckList] = useState<boolean>(false);
-
-  const servicesList = SERVICES[categoryTitle];
-
-  const searchParams = useSearchParams();
-  const urlService = searchParams.get("selectedService");
 
   const onServiceSelect = (service: string) => {
     const updatedSearchParams = new URLSearchParams(searchParams.toString());
@@ -69,13 +82,13 @@ export const OrderPage = ({ discounts }: OrderPageProps) => {
   useEffect(() => {
     const needToSyncUrl =
       urlService &&
-      servicesList.some(({ title }) => title === urlService) &&
+      filteredServices.some(({ title }) => title === urlService) &&
       urlService !== selectedService;
 
     if (needToSyncUrl) {
       setService(urlService);
     }
-  }, [urlService, servicesList]);
+  }, [urlService]);
 
   useEffect(() => {
     sendGAEvent({
@@ -94,11 +107,14 @@ export const OrderPage = ({ discounts }: OrderPageProps) => {
     setSecondService("");
     setSecondSubService([]);
 
-    setSubService(getDefaultSubServicesByService(prices, selectedService));
-  }, [selectedService]);
-
-  const cityUrl = searchParams.get("city");
-  const isWarsaw = cityUrl === CITIES.WARSAW.name;
+    setSubService(
+      getDefaultSubServicesByService(
+        transformedPrices,
+        selectedService,
+        subServices,
+      ),
+    );
+  }, [selectedService, cityUrl]);
 
   const additionalService = getAdditionalServices(selectedService);
   const filteredAdditionalService =

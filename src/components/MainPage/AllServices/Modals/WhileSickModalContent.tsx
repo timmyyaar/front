@@ -6,8 +6,9 @@ import { TranslateFunction } from "@/types";
 import { PricesContext } from "@/components/Providers";
 import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
-import { MAIN_CATEGORIES_URLS } from "@/constants";
+import { CITIES, MAIN_CATEGORIES_URLS } from "@/constants";
 import { useSearchParams } from "next/navigation";
+import { getTransformedPrices } from "@/utils";
 
 const WHILE_SICK_ITEMS = [
   "preventive_disinfection_treatment_to_surfaces",
@@ -27,23 +28,29 @@ function WhileSickModalContent({
 }) {
   const { prices } = useContext(PricesContext);
   const searchParams = useSearchParams();
-  const city = searchParams.get("city");
+  const city = searchParams.get("city") || CITIES.KRAKOW.name;
+
+  const transformedPrices = getTransformedPrices(prices, city);
 
   const regularCosts = [
     {
       title: "1-bedroom",
       text: "One-time 1-bedroom cleaning",
-      price: prices.defaultWhiteSickness,
+      price: transformedPrices.defaultWhiteSickness,
     },
     {
       title: "2-bedroom",
       text: "One-time 2-bedroom cleaning",
-      price: prices.defaultWhiteSickness + prices.whileSicknessBedroom,
+      price:
+        transformedPrices.defaultWhiteSickness +
+        transformedPrices.whileSicknessBedroom,
     },
     {
       title: "3-bedroom",
       text: "One-time 3-bedroom cleaning",
-      price: prices.defaultWhiteSickness + prices.whileSicknessBedroom * 2,
+      price:
+        transformedPrices.defaultWhiteSickness +
+        transformedPrices.whileSicknessBedroom * 2,
     },
   ];
 

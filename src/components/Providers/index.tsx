@@ -1,12 +1,14 @@
 "use client";
 import React, { useState, createContext } from "react";
 import { ILocales } from "@/locales";
-import { Prices } from "@/types";
+import { MainService, Price, SubService } from "@/types";
 
 interface Props {
   children: React.ReactNode;
   locales: ILocales[];
-  prices?: Prices;
+  prices?: Price[];
+  mainServices?: MainService[];
+  subServices?: SubService[];
 }
 
 export const LocaleContext = createContext({
@@ -16,17 +18,30 @@ export const LocaleContext = createContext({
 });
 
 export const PricesContext = createContext({
-  prices: {} as Prices,
+  prices: {} as Price[],
 });
 
-export const Providers = ({ children, locales, prices = {} }: Props) => {
+export const ServicesContext = createContext({
+  mainServices: [] as MainService[],
+  subServices: [] as SubService[],
+});
+
+export const Providers = ({
+  children,
+  locales,
+  prices = [],
+  mainServices = [],
+  subServices = [],
+}: Props) => {
   const [locale, setNewLocal] = useState<"en" | "ru" | "pl" | "ua">("en");
 
   return (
-    <PricesContext.Provider value={{ prices }}>
-      <LocaleContext.Provider value={{ locale, setNewLocal, locales }}>
-        {children}
-      </LocaleContext.Provider>
-    </PricesContext.Provider>
+    <ServicesContext.Provider value={{ mainServices, subServices }}>
+      <PricesContext.Provider value={{ prices }}>
+        <LocaleContext.Provider value={{ locale, setNewLocal, locales }}>
+          {children}
+        </LocaleContext.Provider>
+      </PricesContext.Provider>
+    </ServicesContext.Provider>
   );
 };

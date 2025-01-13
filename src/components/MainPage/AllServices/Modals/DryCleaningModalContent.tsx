@@ -6,8 +6,9 @@ import { TranslateFunction } from "@/types";
 import { PricesContext } from "@/components/Providers";
 import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
-import { MAIN_CATEGORIES_URLS } from "@/constants";
+import { CITIES, MAIN_CATEGORIES_URLS } from "@/constants";
 import { useSearchParams } from "next/navigation";
+import { getTransformedPrices } from "@/utils";
 
 const DRY_CLEANING_BLOCKS = [
   {
@@ -46,23 +47,25 @@ function DryCleaningModalContent({
 }) {
   const { prices } = useContext(PricesContext);
   const searchParams = useSearchParams();
-  const city = searchParams.get("city");
+  const city = searchParams.get("city") || CITIES.KRAKOW.name;
+
+  const transformedPrices = getTransformedPrices(prices, city);
 
   const dryCosts = [
     {
       title: "Two-seater sofa",
       text: "dry_price_description",
-      price: prices.subServiceTwoSeaterSofa,
+      price: transformedPrices.subServiceTwoSeaterSofa,
     },
     {
       title: "Three-seater sofa",
       text: "dry_price_description",
-      price: prices.subServiceThreeSeaterSofa,
+      price: transformedPrices.subServiceThreeSeaterSofa,
     },
     {
       title: "Four-seater sofa",
       text: "dry_price_description",
-      price: prices.subServiceFourSeaterSofa,
+      price: transformedPrices.subServiceFourSeaterSofa,
     },
   ];
 

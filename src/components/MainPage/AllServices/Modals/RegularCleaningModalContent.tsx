@@ -6,9 +6,10 @@ import { TranslateFunction } from "@/types";
 import { PricesContext } from "@/components/Providers";
 import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { ALL_SERVICE } from "@/components/OrderPage/constants";
-import { MAIN_CATEGORIES_URLS } from "@/constants";
+import { CITIES, MAIN_CATEGORIES_URLS } from "@/constants";
 import { HOW_IT_WORKS_TEXTS } from "@/components/MainPage/constants";
 import { useSearchParams } from "next/navigation";
+import { getTransformedPrices } from "@/utils";
 
 const REGULAR_CLEANING_BLOCKS = [
   {
@@ -38,23 +39,27 @@ function RegularCleaningModalContent({
 }) {
   const { prices } = useContext(PricesContext);
   const searchParams = useSearchParams();
-  const city = searchParams.get("city");
+  const city = searchParams.get("city") || CITIES.KRAKOW.name;
+
+  const transformedPrices = getTransformedPrices(prices, city);
 
   const regularCosts = [
     {
       title: "1-bedroom",
       text: "One-time 1-bedroom cleaning",
-      price: prices.defaultRegular,
+      price: transformedPrices.defaultRegular,
     },
     {
       title: "2-bedroom",
       text: "One-time 2-bedroom cleaning",
-      price: prices.defaultRegular + prices.regularBedroom,
+      price:
+        transformedPrices.defaultRegular + transformedPrices.regularBedroom,
     },
     {
       title: "3-bedroom",
       text: "One-time 3-bedroom cleaning",
-      price: prices.defaultRegular + prices.regularBedroom * 2,
+      price:
+        transformedPrices.defaultRegular + transformedPrices.regularBedroom * 2,
     },
   ];
 

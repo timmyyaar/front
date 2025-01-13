@@ -1,13 +1,9 @@
 import { capitalizeFirstLetter, getOzonationMultiplier } from "@/utils";
-import {
-  ISubService,
-  SelectedSubService,
-} from "@/components/OrderPage/SubServicesList/utils";
-import { Counter, Prices } from "@/types";
+import { Counter, ISubService, Prices, SubService } from "@/types";
 
 export const getEstimateFromCounterByService = (
   mainService: string,
-  counter: any
+  counter: any,
 ) => {
   switch (mainService) {
     case "Deep kitchen":
@@ -115,7 +111,7 @@ export const getEstimateFromCounterByService = (
 const getDefaultCounterPrice = (
   counter: Counter[],
   prices: Prices,
-  prefix: string
+  prefix: string,
 ) => {
   const bedroomPrice = prices[`${prefix}Bedroom`];
   const bathroomPrice = prices[`${prefix}Bathroom`];
@@ -134,7 +130,7 @@ const getDefaultCounterPrice = (
 export const getPriceFromCounterByService = (
   prices: Prices,
   mainService: string,
-  counter: Counter[]
+  counter: Counter[],
 ) => {
   switch (mainService) {
     case "Deep kitchen":
@@ -207,9 +203,22 @@ export const getPriceFromCounterByService = (
   }
 };
 
+export const getSubServicesPrice = (
+  subServices: ISubService[],
+  isPrivateHouse?: boolean,
+) =>
+  subServices.reduce(
+    (acc: number, el) =>
+      acc +
+      (el.countInPrivateHouse && isPrivateHouse
+        ? el.originalPrice * el.count * 1.3
+        : el.originalPrice * el.count),
+    0,
+  );
+
 export const getMinimalPriceByMainService = (
   prices: Prices,
-  mainService: string
+  mainService: string,
 ) => {
   switch (mainService) {
     case "Custom cleaning":
@@ -250,7 +259,7 @@ export const getMinimalPriceByMainService = (
 
 export const getNewPrice = (
   originalPrice: number,
-  discountPercentage: number
+  discountPercentage: number,
 ) => {
   const discountAmount = (originalPrice * discountPercentage) / 100;
   const discountedPrice = originalPrice - discountAmount;
@@ -278,7 +287,7 @@ export const getPriceWithSaleOrSubSale = (
   price: number,
   sale: number,
   subSale: string,
-  discount: number
+  discount: number,
 ) => {
   if (subSale) {
     return makeSaleFromSub(price, subSale);
@@ -306,11 +315,11 @@ export const getServiceEstimate = (
   counter: any,
   subService: any,
   manualCleanersCount: number,
-  isPrivateHouse?: boolean
+  isPrivateHouse?: boolean,
 ) => {
   const countEstimate = getEstimateFromCounterByService(title, counter);
   const subServiceEstimate = subService.reduce(
-    (acc: number, el: SelectedSubService) => {
+    (acc: number, el: ISubService) => {
       if (el.title === "Office cleaning") {
         if (el.count <= 100) {
           return acc + 180;
@@ -321,7 +330,7 @@ export const getServiceEstimate = (
 
       return acc + el.time * el.count;
     },
-    0
+    0,
   );
   const divider = title === "Dry cleaning" ? 720 : 600;
 
@@ -344,7 +353,7 @@ export const getServiceEstimate = (
 
 export const getHitherEstimate = (
   mainEstimate: string,
-  secondEstimate: string
+  secondEstimate: string,
 ) => {
   const getTimeNumber = (estimate: string) =>
     Number(estimate.match(/\d+/g)?.join(".") || 0);
@@ -363,7 +372,7 @@ export const getHitherEstimate = (
 export const getServicePriceBasedOnManualCleaners = (
   price: number,
   cleanersCount: number,
-  manualCleanersCount: number
+  manualCleanersCount: number,
 ) => {
   if (!manualCleanersCount) {
     return price;
@@ -376,6 +385,3 @@ export const getServicePriceBasedOnManualCleaners = (
 
   return price + extraPriceRounded;
 };
-
-export const getPriceWithOwnSupplies = (price: number, provideOwnSuppliesSelected: ISubService) =>
-  price + (provideOwnSuppliesSelected ? provideOwnSuppliesSelected.price : 0);

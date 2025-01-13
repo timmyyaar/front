@@ -2,7 +2,6 @@
 
 import React, {
   FC,
-  useState,
   useEffect,
   Dispatch,
   SetStateAction,
@@ -11,13 +10,16 @@ import React, {
 
 import CheckBox from "./components/Checkbox";
 
-import { getCheckBoxByMainService } from "./utils";
-import airSvg from "./icons/air-purifier.svg";
-import vacuumCleanerSvg from "./icons/vacuum-cleaner.svg";
-import ownSuppliesSvg from "./icons/own-supplies.svg";
 import checkListSvg from "./icons/check-list.svg";
-import { OWN_SUPPLES_SERVICE_NAME } from "@/components/OrderPage/constants";
-import { PricesContext } from "@/components/Providers";
+import {
+  ALL_SERVICE,
+  ALL_SUB_SERVICES,
+} from "@/components/OrderPage/constants";
+import { PricesContext, ServicesContext } from "@/components/Providers";
+import { useSearchParams } from "next/navigation";
+import { CITIES } from "@/constants";
+import { getTransformedPrices } from "@/utils";
+import { SubService } from "@/types";
 
 interface IProps {
   mainService: string;
@@ -32,6 +34,16 @@ interface IProps {
 export const CheckBoxesBlock: FC<IProps> = (props) => {
   const { prices } = useContext(PricesContext);
   const {
+    mainServices: mainServicesResponse,
+    subServices: subServicesResponse,
+  } = useContext(ServicesContext);
+
+  const searchParams = useSearchParams();
+  const city = searchParams.get("city") || CITIES.KRAKOW.name;
+
+  const transformedPrices = getTransformedPrices(prices, city);
+
+  const {
     mainService,
     subServices,
     setSubService,
@@ -40,130 +52,82 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
     ownCheckList,
     setOwnCheckList,
   } = props;
-  const [dryCleaner, setDryCleaner] = useState(false);
-  const [vacuumCleaner, setVacuumCleaner] = useState(false);
-  const [ownSupplies, setOwnSupplies] = useState(false);
 
-  const checkBoxes = getCheckBoxByMainService(mainService);
+  const standaloneSubServices = subServicesResponse.filter(
+    ({ mainServices, isStandalone }) => {
+      const selectedMainService = mainServicesResponse.find(
+        ({ title }) => title === mainService,
+      );
+
+      return mainServices.includes(selectedMainService!.id) && isStandalone;
+    },
+  );
 
   useEffect(() => {
     setOwnCheckList(false);
   }, [mainService]);
 
-  useEffect(() => {
-    if (dryCleaner) {
-      setSubService((sS: any) => [
-        ...sS,
-        { title: "Dry_cleaner_sub_service", time: 60, price: 50 },
-      ]);
-    } else {
-      setSubService((sS: any) =>
-        sS.filter((el: any) => el.title !== "Dry_cleaner_sub_service")
+  const onStandaloneServiceCheck = (
+    subService: SubService & {
+      oldPrice: string | number;
+      originalPrice: number;
+      price: number;
+    },
+  ) => {
+    if (subServices.some((item) => item.id === subService.id)) {
+      setSubService((prev: any) =>
+        prev.filter((el: any) => el.id !== subService.id),
       );
-    }
-  }, [dryCleaner]);
-
-  useEffect(() => {
-    if (vacuumCleaner) {
-      setSubService((sS: any) => [
-        ...sS,
+    } else {
+      setSubService((prev: any) => [
+        ...prev,
         {
-          title: "Vacuum_cleaner_sub_service",
-          time: 0,
-          originalPrice: prices.vacuumCleaner,
-          price: priceMultiplier * prices.vacuumCleaner,
-          oldPrice: priceMultiplier === 1 ? "" : prices.vacuumCleaner,
+          ...subService,
           count: 1,
         },
       ]);
-    } else {
-      setSubService((sS: any) =>
-        sS.filter((el: any) => el.title !== "Vacuum_cleaner_sub_service")
-      );
     }
-  }, [vacuumCleaner]);
+  };
 
-  useEffect(() => {
-    if (ownSupplies) {
-      setSubService((sS: any) => [
-        ...sS,
-        {
-          title: OWN_SUPPLES_SERVICE_NAME,
-          time: 0,
-          price: prices.ownSupplies,
-          originalPrice: prices.ownSupplies,
-          count: 1,
-        },
-      ]);
-    } else {
-      setSubService((sS: any) =>
-        sS.filter((el: any) => el.title !== OWN_SUPPLES_SERVICE_NAME)
-      );
-    }
-  }, [ownSupplies]);
+  const isOffice = mainService === ALL_SERVICE.OFFICE;
+  const showCheckboxes = standaloneSubServices.length > 0 || isOffice;
 
-  useEffect(() => {
-    const dryCleanerSubService = subServices.filter(
-      (el) => el.title === "Dry_cleaner_sub_service"
-    );
-    const vacuumCleanerSubService = subServices.filter(
-      (el) => el.title === "Vacuum_cleaner_sub_service"
-    );
-    const ownSuppliesSubService = subServices.filter(
-      (el) => el.title === OWN_SUPPLES_SERVICE_NAME
-    );
-
-    if (!dryCleanerSubService.length) {
-      setDryCleaner(false);
-    }
-
-    if (!vacuumCleanerSubService.length) {
-      setVacuumCleaner(false);
-    }
-
-    if (!ownSuppliesSubService.length) {
-      setOwnSupplies(false);
-    }
-  }, [subServices]);
-
-  return checkBoxes ? (
+  return showCheckboxes ? (
     <div className="_gap-10 lg:_gap-20 _flex _flex-col">
-      {checkBoxes.includes("dry") ? (
-        <CheckBox
-          icon={airSvg}
-          title={"title-dry-cleaner-checkbox"}
-          subTitle={"sub-text-dry-cleaner-checkbox"}
-          price={"50 zl"}
-          // oldPrice={'60 zl'}
-          setCheck={setDryCleaner}
-          checked={dryCleaner}
-          t={t}
-        />
-      ) : null}
-      {checkBoxes.includes("vacuum cleaner") ? (
-        <CheckBox
-          icon={vacuumCleanerSvg}
-          title={"title-vacuum-cleaner-checkbox"}
-          subTitle={"sub-text-vacuum-cleaner-checkbox"}
-          price={`${30 * priceMultiplier} zl`}
-          oldPrice={priceMultiplier === 1 ? "" : "30 zl"}
-          setCheck={setVacuumCleaner}
-          checked={vacuumCleaner}
-          t={t}
-        />
-      ) : null}
-      {checkBoxes.includes("own supplies") ? (
-        <CheckBox
-          icon={ownSuppliesSvg}
-          title={"title-own-supplies-checkbox"}
-          subTitle={"sub-text-own-supplies-checkbox"}
-          price={"-15 zl"}
-          setCheck={setOwnSupplies}
-          checked={ownSupplies}
-          t={t}
-        />
-      ) : null}
-      {checkBoxes.includes("own check list") ? (
+      {standaloneSubServices.map((subService) => {
+        const originalPrice = transformedPrices[subService.key];
+        const price =
+          transformedPrices[subService.key] *
+          (subService.isDiscountExcluded ? 1 : priceMultiplier);
+        const oldPrice =
+          subService.isDiscountExcluded || priceMultiplier === 1
+            ? ""
+            : originalPrice;
+
+        return (
+          <CheckBox
+            icon={
+              ALL_SUB_SERVICES.find((item) => item.title === subService.title)!
+                .icons
+            }
+            title={`${subService.key}Title`}
+            subTitle={`${subService.key}SubTitle`}
+            price={`${price} zl`}
+            oldPrice={oldPrice ? `${oldPrice} zl` : ""}
+            setCheck={() =>
+              onStandaloneServiceCheck({
+                ...subService,
+                originalPrice,
+                price,
+                oldPrice,
+              })
+            }
+            checked={subServices.some(({ id }) => id === subService.id)}
+            t={t}
+          />
+        );
+      })}
+      {isOffice ? (
         <CheckBox
           icon={checkListSvg}
           title={"we_provide_our_own_check_list"}

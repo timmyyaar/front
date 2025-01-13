@@ -2,7 +2,9 @@ import { useContext } from "react";
 import Image from "next/image";
 import { PricesContext } from "@/components/Providers";
 import ozonationIcon from "@/components/common/icons/services/ozonation.svg";
-import { capitalizeFirstLetter } from "@/utils";
+import { capitalizeFirstLetter, getTransformedPrices } from "@/utils";
+import { useSearchParams } from "next/navigation";
+import { CITIES } from "@/constants";
 
 interface OzonationCostsProps {
   t: (text: string, defaultText?: string) => string;
@@ -10,6 +12,10 @@ interface OzonationCostsProps {
 
 function OzonationCosts({ t }: OzonationCostsProps) {
   const { prices } = useContext(PricesContext);
+  const searchParams = useSearchParams();
+  const city = searchParams.get("city") || CITIES.KRAKOW.name;
+
+  const transformedPrices = getTransformedPrices(prices, city);
 
   return (
     <div className="_rounded-xl _bg-light _p-6 _grid _grid-cols-3 _gap-6">
@@ -21,8 +27,8 @@ function OzonationCosts({ t }: OzonationCostsProps) {
         <div className="_flex _justify-center">
           <Image src={ozonationIcon} width="48" height="48" alt="Ozonation" />
         </div>
-        <div className="_text-2lx _font-bold _font-bold _text-center">
-          {prices.ozonationSmallArea} {t("zl")}/{t("m")}
+        <div className="_text-2lx _font-bold _text-center">
+          {transformedPrices.ozonationSmallArea} {t("zl")}/{t("m")}
           <sup>2</sup>
         </div>
       </div>
@@ -34,8 +40,8 @@ function OzonationCosts({ t }: OzonationCostsProps) {
         <div className="_flex _justify-center">
           <Image src={ozonationIcon} width="48" height="48" alt="Ozonation" />
         </div>
-        <div className="_text-2lx _font-bold _font-bold _text-center">
-          {prices.ozonationMediumArea} {t("zl")}/{t("m")}
+        <div className="_text-2lx _font-bold _text-center">
+          {transformedPrices.ozonationMediumArea} {t("zl")}/{t("m")}
           <sup>2</sup>
         </div>
       </div>
@@ -47,8 +53,8 @@ function OzonationCosts({ t }: OzonationCostsProps) {
         <div className="_flex _justify-center">
           <Image src={ozonationIcon} width="48" height="48" alt="Ozonation" />
         </div>
-        <div className="_text-2lx _font-bold _font-bold _text-center">
-          {prices.ozonationBigArea} {t("zl")}/{t("m")}
+        <div className="_text-2lx _font-bold _text-center">
+          {transformedPrices.ozonationBigArea} {t("zl")}/{t("m")}
           <sup>2</sup>
         </div>
       </div>

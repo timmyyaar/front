@@ -1,8 +1,9 @@
 "use client";
 
-import { NUMBER_REGEX } from "@/constants";
-import { getOzonationMultiplier } from "@/utils";
+import { CITIES, NUMBER_REGEX } from "@/constants";
+import { getOzonationMultiplier, getTransformedPrices } from "@/utils";
 import React, { useContext } from "react";
+import { useSearchParams } from "next/navigation";
 import { LocaleContext, PricesContext } from "@/components/Providers";
 import { useLocales } from "@/hooks/useLocales";
 
@@ -14,10 +15,19 @@ interface Props {
 
 const Cost = ({ title, cost, count }: Props) => {
   const { prices } = useContext(PricesContext);
+  const searchParams = useSearchParams();
+  const city = searchParams.get("city") || CITIES.KRAKOW.name;
+
+  const transformedPrices = getTransformedPrices(prices, city);
+
   const { locales } = useContext(LocaleContext);
   const { t } = useLocales(locales);
+  
   const transformedCost = title.toLowerCase().includes("ozonation")
-    ? cost.replace(NUMBER_REGEX, String(getOzonationMultiplier(prices, count)))
+    ? cost.replace(
+        NUMBER_REGEX,
+        String(getOzonationMultiplier(transformedPrices, count)),
+      )
     : cost;
 
   return (
