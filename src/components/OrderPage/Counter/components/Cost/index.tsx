@@ -3,8 +3,9 @@
 import { CITIES, NUMBER_REGEX } from "@/constants";
 import { getOzonationMultiplier, getTransformedPrices } from "@/utils";
 import React, { useContext } from "react";
-import { PricesContext } from "@/components/Providers";
 import { useSearchParams } from "next/navigation";
+import { LocaleContext, PricesContext } from "@/components/Providers";
+import { useLocales } from "@/hooks/useLocales";
 
 interface Props {
   title: string;
@@ -19,6 +20,9 @@ const Cost = ({ title, cost, count }: Props) => {
 
   const transformedPrices = getTransformedPrices(prices, city);
 
+  const { locales } = useContext(LocaleContext);
+  const { t } = useLocales(locales);
+  
   const transformedCost = title.toLowerCase().includes("ozonation")
     ? cost.replace(
         NUMBER_REGEX,
@@ -33,9 +37,10 @@ const Cost = ({ title, cost, count }: Props) => {
     >
       {transformedCost.indexOf("m2") !== -1 ? (
         <>
-          {transformedCost.replace("m2", "")}
+          {transformedCost.replace(`m2`, "")}
           <>
-            m<sup>2</sup>
+            {t("m")}
+            <sup>2</sup>
           </>
         </>
       ) : (
