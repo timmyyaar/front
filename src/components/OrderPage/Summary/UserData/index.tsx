@@ -310,7 +310,7 @@ export const UserData = ({
               </div>
               <textarea
                 className={`_w-full _border _border-solid _border-gray _py-3 _pl-3
-                    _w-full _bg-light _rounded-xl _outline-0 _text-gray-dark`}
+                    _bg-light _rounded-xl _outline-0 _text-gray-dark`}
                 placeholder={t("Add more details (optional)")}
                 value={more}
                 onChange={({

@@ -18,7 +18,6 @@ const NON_ZERO_COUNTER_MAIN_SERVICES = [
   "While sickness",
   "Airbnb",
   "Regular",
-  "Subscription",
   "Eco cleaning",
 ];
 
@@ -161,7 +160,7 @@ export const Counter: FC<IProps> = (props) => {
           fill="none"
           className="_h-12 _w-12 lg:_h-auto lg:_w-auto"
         >
-          <rect x="0.5" width="80" height="80" rx="40" fill="#ECF0FF" />
+          <rect x="0.5" width="80" height="80" rx="40" fill="#f9f9f9" />
           <path
             d="M31.167 40L49.8337 40"
             stroke="currentColor"
@@ -176,9 +175,9 @@ export const Counter: FC<IProps> = (props) => {
       >
         <input
           type="text"
+          className="_bg-light"
           style={{
             textAlign: "end",
-            backgroundColor: "#ECF0FF",
             outline: "none",
             width: `${valueLength}ch`,
             marginRight: "2px",
@@ -210,7 +209,7 @@ export const Counter: FC<IProps> = (props) => {
           fill="none"
           className="_h-12 _w-12 lg:_h-auto lg:_w-auto"
         >
-          <rect x="0.5" width="80" height="80" rx="40" fill="#ECF0FF" />
+          <rect x="0.5" width="80" height="80" rx="40" fill="#f9f9f9" />
           <path
             d="M40.5 30.6689V49.3356"
             stroke="currentColor"

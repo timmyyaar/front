@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Image from "next/image";
 import { PricesContext } from "@/components/Providers";
-import ozonationIcon from "@/components/common/icons/services/ozonation.svg";
+import ozonationIcon from "@/assets/icons/main-services/ozonation.png";
 import { capitalizeFirstLetter, getTransformedPrices } from "@/utils";
 import { useSearchParams } from "next/navigation";
 import { CITIES } from "@/constants";

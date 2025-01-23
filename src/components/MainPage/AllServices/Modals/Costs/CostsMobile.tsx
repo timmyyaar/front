@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import reactStringReplace from "react-string-replace";
-import { Discount } from "@/components/MainPage/Costs/icons/Discount";
+import discountPng from "@/components/MainPage/Costs/icons/discount.png";
 import { FIGURE_BRACKETS_REGEX } from "@/constants";
 import { usePathname, useRouter } from "next/navigation";
 import { SALES } from "@/components/MainPage/AllServices/Modals/Costs/constants";
 import OzonationCosts from "@/components/MainPage/AllServices/Modals/Costs/OzonationCosts";
 import { Cost } from "@/types";
 import Button from "@/components/common/Button";
+import Image from "next/image";
 
 interface CostsMobileProps {
   costs: Cost[] | { [key: string]: Cost[] };
@@ -65,7 +66,12 @@ function CostsMobile({
         <div className="_flex _flex-col _rounded-xl _bg-light _p-6 _gap-10">
           <div>
             <div className="_flex _justify-center">
-              <Discount width={102} height={102} />
+              <Image
+                src={discountPng}
+                alt="Discount"
+                width={102}
+                height={102}
+              />
             </div>
             <div className="_whitespace-pre _text-center">
               {reactStringReplace(
@@ -73,7 +79,7 @@ function CostsMobile({
                 FIGURE_BRACKETS_REGEX,
                 (match) => (
                   <b className="_text-lg">{match}</b>
-                )
+                ),
               )}
             </div>
           </div>
@@ -111,7 +117,12 @@ function CostsMobile({
         <>
           <div className="_flex _gap-4 _p-6 _rounded-xl _bg-light _items-center _justify-center">
             <div className="_flex _items-center">
-              <Discount width={102} height={102} />
+              <Image
+                src={discountPng}
+                alt="Discount"
+                width={102}
+                height={102}
+              />
             </div>
             <div className="_whitespace-pre _text-center _h-max">
               {reactStringReplace(
@@ -119,7 +130,7 @@ function CostsMobile({
                 FIGURE_BRACKETS_REGEX,
                 (match) => (
                   <b className="_text-lg">{match}</b>
-                )
+                ),
               )}
             </div>
           </div>
@@ -168,7 +179,7 @@ function CostsMobile({
                     title={t("Order")}
                   />
                 </div>
-              )
+              ),
           )}
         </>
       )}

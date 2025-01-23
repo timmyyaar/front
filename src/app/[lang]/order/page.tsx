@@ -19,7 +19,7 @@ export default async function OrderPage() {
 
   return (
     <Providers locales={locales} mainServices={mainServices}>
-      <main>
+      <main className="_flex _flex-col _h-screen">
         <Header />
         <OrderCategory />
       </main>

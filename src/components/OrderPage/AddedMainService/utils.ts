@@ -9,6 +9,7 @@ export const getAdditionalServices = (mainService: string) => {
     case "Regular":
     case "After party":
     case "Deep":
+    case "Airbnb":
       return "ADD DRY CLEANING OF FURNITURE AND CARPETS";
 
     default:

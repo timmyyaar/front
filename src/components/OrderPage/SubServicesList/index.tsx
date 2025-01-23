@@ -131,7 +131,7 @@ export const SubServicesList = (props: IProps) => {
       <div className="_grid _grid-cols-2 lg:_grid-cols-4 _gap-5 _auto-rows-fr">
         {subServicesByMainService.map((el: ISubService, i: number) => (
           <div
-            className={`_flex _flex-col _justify-between _items-center _py-5
+            className={`hover:_shadow-custom-light-dark _flex _flex-col _justify-between _items-center _py-5
               _rounded-2xl _bg-light _border-solid _border-4 _border-light
               hover:_bg-light-dark hover:_border-light-dark ${
                 getIsSubServiceSelected(el.title)
@@ -201,7 +201,7 @@ export const SubServicesList = (props: IProps) => {
               ) : (
                 <div className="_py-3.5 _flex _justify-center">
                   <Image
-                    src={el.icons}
+                    src={el.icons!}
                     alt=""
                     width="48"
                     height="48"

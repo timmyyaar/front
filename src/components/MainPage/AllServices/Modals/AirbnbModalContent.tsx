@@ -61,31 +61,6 @@ function AirbnbModalContent({
             ),
           )}
         </div>
-        <div className="_mb-4 lg:_mb-6 _text-center">
-          <span className="_main-title text-gradient">
-            {t("stages_of_preparing")}
-          </span>
-        </div>
-      </div>
-      <div className="_grid _grid-cols-2 _grid-rows-2 lg:_flex _flex-row _justify-between _gap-5">
-        {["Prepare", "Cleaning", "Sanitize", "Finish"].map((el, i) => (
-          <div
-            className={`hover:_bg-light-dark active:_bg-light-dark _flex _flex-col _flex-1 _gap-4
-              _py-11 _px-5 _bg-light _rounded-xl`}
-          >
-            <div className="_flex _justify-center">
-              <div
-                className={`_w-10 _h-10 _flex _justify-center _items-center
-                    _rounded-full _bg-primary _text-white`}
-              >
-                {i + 1}
-              </div>
-            </div>
-            <div className="_text-center _font-medium">
-              {t(el + "_airbnb_title")}
-            </div>
-          </div>
-        ))}
       </div>
       {!isOrder && (
         <div className="_mt-8 lg:_mt-16">

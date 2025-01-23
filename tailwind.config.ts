@@ -10,11 +10,12 @@ const config: Config = {
   theme: {
     colors: {
       primary: "#2b8afc",
+      "primary-background": "#ecf0ff",
       "primary-light": "#c1dbff",
       "primary-dark": "#0073fc",
       "primary-disabled": "#7eb8ff",
-      light: "#ecf0ff",
-      "light-dark": "#dee5ff",
+      light: "#f9f9f9",
+      "light-dark": "#f1f4ff",
       dark: "#13277e",
       gray: "#848484",
       "gray-lighter": "#a6a6a6",
@@ -33,6 +34,9 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      boxShadow: {
+        "custom-light-dark": "0 4px 8px rgba(150, 160, 255, 0.3)",
       },
     },
   },

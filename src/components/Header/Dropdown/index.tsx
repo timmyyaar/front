@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { Polygon } from "@/components/Header/icons/Polygon";
 import { useClickOutside } from "@/hooks/useClickOutSide";
 
@@ -6,9 +6,10 @@ interface DropdownProps {
   isBoldText?: boolean;
   translateOptions?: boolean;
   onSelect: (event: React.MouseEvent<HTMLDivElement>, option: string) => void;
-  options: string[];
+  options: { value: string; icon?: ReactNode }[];
   t: (text: string) => string;
-  value: string;
+  value?: string;
+  plainContent?: ReactNode;
 }
 
 function Dropdown({
@@ -17,7 +18,8 @@ function Dropdown({
   onSelect,
   options,
   t,
-  value,
+  value = '',
+  plainContent,
 }: DropdownProps) {
   const [isDropdownOpened, setIsDropdownOpened] = useState<boolean>(false);
   const dropdownMenuRef = useClickOutside(() => setIsDropdownOpened(false));
@@ -37,13 +39,17 @@ function Dropdown({
           e.preventDefault();
         }}
       >
-        <div
-          className={`nav-link text-gradient ${isBoldText ? "_text-sm lg:_text-lg _font-semibold" : ""}`}
-        >
-          {t(value)}
-        </div>
+        {plainContent ? (
+          plainContent
+        ) : (
+          <div
+            className={`nav-link text-gradient ${isBoldText ? "_text-sm lg:_text-lg _font-semibold" : ""}`}
+          >
+            {t(value)}
+          </div>
+        )}
         <div className="_flex _items-center">
-          <Polygon className="group-hover:_text-primary" />
+          <Polygon className="_text-primary-dark group-hover:_text-primary" />
         </div>
       </div>
       {isDropdownOpened ? (
@@ -51,21 +57,22 @@ function Dropdown({
           className="_z-50 _absolute _top-full _rounded-xl _border _border-solid _border-primary-light _bg-white"
           ref={dropdownMenuRef}
         >
-          {options.map((option) => (
+          {options.map(({ icon, value }) => (
             <div
-              className={`_py-2 _pr-6 _pl-4 hover:_bg-light active:_bg-light
+              className={`_py-2 _pr-6 _pl-4 hover:_bg-primary-background active:_bg-primary-background
                     first:_rounded-t-xl last:_rounded-b-xl last:_border-b-0
-                    _border-b _border-solid _border-primary-light`}
+                    _border-b _border-solid _border-primary-light _flex _items-center _gap-2`}
               onClick={(e) => {
-                onSelect(e, option);
+                onSelect(e, value);
                 setIsDropdownOpened(false);
               }}
-              key={option}
+              key={value}
             >
+              {Boolean(icon) && icon}
               <span
                 className={`${isBoldText ? "_text-sm lg:_text-lg _font-semibold text-gradient" : ""}`}
               >
-                {translateOptions ? t(option) : option}
+                {translateOptions ? t(value) : value}
               </span>
             </div>
           ))}

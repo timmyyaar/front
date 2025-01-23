@@ -35,7 +35,9 @@ export const AllServices = (props: any) => {
             <Modals title={active} onClose={() => setActive("")} t={t} />
           </div>
         </Overlay>
-        <div className="_mb-5 _main-title">{t("All service")}</div>
+        <div className="_mb-5 _main-title">
+          <span className="text-gradient">{t("All service")}</span>
+        </div>
         <Slider
           elements={services.map((el) => (
             <ServiceItem
@@ -54,7 +56,9 @@ export const AllServices = (props: any) => {
           </div>
         </Overlay>
         <div className="_mb-3 _main-title">
-          <b>{t("All service")}</b>
+          <b>
+            <span className="text-gradient">{t("All service")}</span>
+          </b>
         </div>
         <div className="_grid _grid-cols-2 _gap-6">
           {services.map((el, i) => (

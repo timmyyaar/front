@@ -29,7 +29,7 @@ interface ModalsProps {
 
 export const Modals = ({ title, onClose, t, isOrder }: ModalsProps) => {
   return (
-    <Modal isWhiteBackground className="_max-h-[80%]" onClose={onClose}>
+    <Modal className="_max-h-[80%] _bg-primary-background" onClose={onClose}>
       <div className="_py-14 lg:_py-0">
         {title === "Regular" ? (
           <RegularCleaningModalContent t={t} isOrder={isOrder} />
@@ -55,9 +55,7 @@ export const Modals = ({ title, onClose, t, isOrder }: ModalsProps) => {
         {title === "Ozonation" ? (
           <OzonationModalContent t={t} isOrder={isOrder} />
         ) : null}
-        {title === "Subscription" ? (
-          <SubscriptionModalContent t={t} isOrder={isOrder} />
-        ) : null}
+        {title === "Subscription" ? <SubscriptionModalContent t={t} /> : null}
         {title === "Custom cleaning" ? (
           <CustomCleaningModalContent t={t} isOrder={isOrder} />
         ) : null}

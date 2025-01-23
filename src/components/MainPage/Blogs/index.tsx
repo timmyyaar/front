@@ -11,7 +11,9 @@ interface BlogsProps {
 function Blogs({ t, blogs }: BlogsProps) {
   return blogs.length > 0 ? (
     <div className="_mb-14 lg:_mx-24 lg:_mb-0 _px-5-percents-mobile" id="blog">
-      <div className="_main-title _mb-8">TYT {t("blogs_title")}</div>
+      <div className="_main-title lg:_mb-6">
+        <span className="text-gradient">TYT {t("blogs_title")}</span>
+      </div>
       <div className="mobile-none">
         <SliderStep
           elements={blogs.map((blog) => (
