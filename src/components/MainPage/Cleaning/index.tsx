@@ -128,10 +128,10 @@ export const Cleaning = (props: any) => {
 
   const [tab, setTab] = useState<(typeof tabs)[number]>(tabs[0]);
   const [room, setRoom] = useState<(typeof rooms)[string][number]>(
-    rooms[tab][0]
+    rooms[tab][0],
   );
   const [roomImage, setRoomImage] = useState<any>(
-    () => roomsImages.Bedroom.Regular[lng]
+    () => roomsImages.Bedroom.Regular[lng],
   );
 
   const [openRooms, setOpenedRooms] = useState<string[]>([]);
@@ -157,10 +157,12 @@ export const Cleaning = (props: any) => {
        _flex-col _items-center`}
     >
       <div className="_main-title _mb-3 lg:_mb-5 mobile-none">
-        {t("What cleaning consists of")}
+        <span className="text-gradient">{t("What cleaning consists of")}</span>
       </div>
       <div className="_main-title _mb-3 lg:_mb-5 mobile-only">
-        {t("What_cleaning_consists_of_mobile")}
+        <span className="text-gradient">
+          {t("What_cleaning_consists_of_mobile")}
+        </span>
       </div>
       <div className="_flex _justify-center _mb-6 lg:_mb-0">
         <Switcher
@@ -210,7 +212,7 @@ export const Cleaning = (props: any) => {
                 setOpenedRooms((arr) =>
                   arr.includes(el)
                     ? arr.filter((room) => room !== el)
-                    : [...arr, el]
+                    : [...arr, el],
                 )
               }
             >
@@ -232,7 +234,7 @@ export const Cleaning = (props: any) => {
                           alignLeft
                         />
                       </div>
-                    )
+                    ),
                   )}
                 </div>
               )}

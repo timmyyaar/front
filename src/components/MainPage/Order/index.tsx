@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
+import boyPng from "@/assets/icons/main-cleaners/boy.png";
+import girlPng from "@/assets/icons/main-cleaners/girl.png";
 import Man from "./icons/Man.svg";
 import Women from "./icons/Women.svg";
-import { Calendar } from "./Calendar";
+import calendaPng from "./icons/calendar.png";
 import "./style.scss";
 import Button from "@/components/common/Button";
 
@@ -22,26 +24,26 @@ export const Order = (props: any) => {
           _overflow-hidden _transition-all _duration-300`}
       >
         <div className="_main-title lg:_mb-8 _flex _justify-center">
-          {t("Order cleaning today")}
+          <span className="text-gradient">{t("Order cleaning today")}</span>
         </div>
         <div className="_flex _justify-center">
-          <Calendar />
+          <Image src={calendaPng} alt="Calendar" width="187" height="187" />
         </div>
         <div
-          className={`_hidden lg:_block _absolute _-left-full _top-[17%]
+          className={`_hidden lg:_block _absolute _-left-full _bottom-4 _pl-4
             _transition-all _duration-[2000ms] ${
               hover ? "man-icon-wrapper-animated" : ""
             }`}
         >
-          <Image src={Man} alt="" />
+          <Image src={boyPng} alt="Boy" height="360" />
         </div>
         <div
-          className={`_hidden lg:_block _absolute _-right-full _top-[29%]
+          className={`_hidden lg:_block _absolute _-right-full _bottom-4
             _transition-all _duration-[2000ms] ${
               hover ? "woman-icon-wrapper-animated" : ""
             }`}
         >
-          <Image src={Women} alt="" />
+          <Image src={girlPng} alt="Girl" height="360" />
         </div>
         <div className="_flex _justify-center">
           <Button

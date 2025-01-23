@@ -90,7 +90,6 @@ export const getEstimateFromCounterByService = (
     case "Regular":
     case "Eco cleaning":
     case "Airbnb":
-    case "Subscription":
       return counter.reduce((acc: number, el: any, i: number) => {
         if (i === 0 && el.value !== 1) {
           return acc + (el.value - 1) * 30;
@@ -153,9 +152,6 @@ export const getPriceFromCounterByService = (
 
     case "Regular":
       return getDefaultCounterPrice(counter, prices, "regular");
-
-    case "Subscription":
-      return getDefaultCounterPrice(counter, prices, "subscription");
 
     case "Eco cleaning":
       return getDefaultCounterPrice(counter, prices, "eco");
@@ -223,8 +219,6 @@ export const getMinimalPriceByMainService = (
   switch (mainService) {
     case "Custom cleaning":
       return prices.minimalCustom;
-    case "Subscription":
-      return prices.minimalSubscription;
     case "Airbnb":
       return prices.minimalAirbnb;
     case "Move in/out":

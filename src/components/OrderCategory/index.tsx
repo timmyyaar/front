@@ -1,12 +1,12 @@
 "use client";
 
-import { MainImage } from "@/components/common/MainImage";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useContext } from "react";
 import { LocaleContext, ServicesContext } from "@/components/Providers";
 import { useLocales } from "@/hooks/useLocales";
 import { CITIES, MAIN_CATEGORIES, MAIN_CATEGORIES_REVERSED } from "@/constants";
 import { getServicesWithIconsByCity } from "@/utils";
+import SelectService from "./SelectService";
 
 const MAIN_CATEGORIES_OPTIONS = Object.values(MAIN_CATEGORIES);
 
@@ -21,25 +21,23 @@ function OrderCategory() {
   const city = searchParams.get("city") || CITIES.KRAKOW.name;
 
   return (
-    <div className="_flex-1">
-      <MainImage
-        services={MAIN_CATEGORIES_OPTIONS}
-        setService={(service: string) => {
-          const mainCategoryUrl = MAIN_CATEGORIES_REVERSED[service];
+    <SelectService
+      services={MAIN_CATEGORIES_OPTIONS}
+      setService={(service: string) => {
+        const mainCategoryUrl = MAIN_CATEGORIES_REVERSED[service];
 
-          const filteredServices = getServicesWithIconsByCity({
-            services: mainServices,
-            city,
-            serviceCategory: MAIN_CATEGORIES_REVERSED[service],
-          });
+        const filteredServices = getServicesWithIconsByCity({
+          services: mainServices,
+          city,
+          serviceCategory: MAIN_CATEGORIES_REVERSED[service],
+        });
 
-          router.push(
-            `${pathname}/${mainCategoryUrl}?selectedService=${filteredServices[0].title}${city ? `&city=${city}` : ""}`,
-          );
-        }}
-        t={t}
-      />
-    </div>
+        router.push(
+          `${pathname}/${mainCategoryUrl}?selectedService=${filteredServices[0].title}${city ? `&city=${city}` : ""}`,
+        );
+      }}
+      t={t}
+    />
   );
 }
 

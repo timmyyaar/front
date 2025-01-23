@@ -3,8 +3,8 @@ import Image from 'next/image';
 
 import { Switcher } from '@/components/common/Switcher';
 
-import back from './bank-card.svg';
-import cash from './cash.svg';
+import creditCardPng from './icons/credit-card.png';
+import cashPng from './icons/cash.png';
 
 export const PaymentForm = ({ setOnlinePayment, t }: any) => {
   const tabs = ['Cash', 'Online'];
@@ -19,10 +19,10 @@ export const PaymentForm = ({ setOnlinePayment, t }: any) => {
       <Switcher
         icons={[
           <div className="_flex _justify-center">
-            <Image src={cash} alt="" />
+            <Image src={cashPng} alt="" width="36" height="36"/>
           </div>,
           <div className="_flex _justify-center">
-            <Image src={back} alt="" />
+            <Image src={creditCardPng} alt="" width="36" height="36" />
           </div>
         ]}
         tab={tab} tabs={tabs} onClick={(el: string) => setTab(el)} t={t}

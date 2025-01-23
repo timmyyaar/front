@@ -1,57 +1,40 @@
-import Regular from "@/components/common/icons/services/regular.svg";
-import Deep from "@/components/common/icons/services/deep.svg";
-import EcoCleaning from "@/components/common/icons/services/eco-cleaning.svg";
-import CustomCleaning from "@/components/common/icons/services/custom-cleaning.svg";
-import Office from "@/components/common/icons/services/office.svg";
-import PostConstruction from "@/components/common/icons/services/post-construction.svg";
-import DryCleaning from "@/components/common/icons/services/dry-cleaning.svg";
-import Ozonation from "@/components/common/icons/services/ozonation.svg";
-import WhileSickness from "@/components/common/icons/services/while-sickness.svg";
-import WindowCleaning from "@/components/common/icons/services/window-cleaning.svg";
-import MoveInOut from "@/components/common/icons/services/move-in-out.svg";
-import DeepKitchen from "@/components/common/icons/services/deep-kitchen.svg";
-import AfterParty from "@/components/common/icons/services/after-party.svg";
-import Airbnb from "@/components/common/icons/services/airbnb.svg";
-import officeSvg from "@/components/OrderPage/SubServicesList/icons/office.svg";
-import readingRoomSvg from "@/components/OrderPage/SubServicesList/icons/reading-room.svg";
-import bathroomSvg from "@/components/OrderPage/SubServicesList/icons/bathroom.svg";
-import kitchenSvg from "@/components/MainPage/AdditionalServices/icons/kitchen.svg";
-import corredSvg from "@/components/OrderPage/SubServicesList/icons/corred.svg";
-import hangerSvg from "@/components/OrderPage/SubServicesList/icons/hanger.svg";
-import windowSvg from "@/components/MainPage/AdditionalServices/icons/window.svg";
-import balconySvg from "@/components/OrderPage/SubServicesList/icons/balcony.svg";
-import ovenSvg from "@/components/MainPage/AdditionalServices/icons/oven.svg";
-import fridgeSvg from "@/components/MainPage/AdditionalServices/icons/fridge.svg";
-import kitchenCabinets from "@/components/MainPage/AdditionalServices/icons/kitchen-cabinets.svg";
-import cookerHoodSvg from "@/components/MainPage/AdditionalServices/icons/cooker-hood.svg";
-import hoursglassSvg from "@/components/MainPage/AdditionalServices/icons/hoursglass.svg";
-import iconsSvg from "@/components/OrderPage/SubServicesList/icons/Icons.svg";
-import ironSvg from "@/components/MainPage/AdditionalServices/icons/iron.svg";
-import cleanClothesSvg from "@/components/MainPage/AdditionalServices/icons/clean-clothes.svg";
-import closetSvg from "@/components/MainPage/AdditionalServices/icons/closet.svg";
-import cleanDishesSvg from "@/components/MainPage/AdditionalServices/icons/clean-dishes.svg";
-import wateringPlantsSvg from "@/components/MainPage/AdditionalServices/icons/watering-plants.svg";
-import laundrySvg from "@/components/MainPage/AdditionalServices/icons/laundry.svg";
-import microwaveSvg from "@/components/MainPage/AdditionalServices/icons/microwave.svg";
-import petToiletTraySvg from "@/components/MainPage/AdditionalServices/icons/pet-toilet-tray.svg";
-import mirrorSvg from "@/components/OrderPage/SubServicesList/icons/mirror.svg";
-import SlowCooker from "@/components/MainPage/AdditionalServices/icons/slow-cooker.svg";
-import coffeeMachineSvg from "@/components/MainPage/AdditionalServices/icons/coffee-machine.svg";
-import twoSeaterSofaSvg from "@/components/OrderPage/SubServicesList/icons/two-seater-sofa.svg";
-import threeSeaterSofaSvg from "@/components/OrderPage/SubServicesList/icons/three-seater-sofa.svg";
-import fourSeaterSofaSvg from "@/components/OrderPage/SubServicesList/icons/four-seater-sofa.svg";
-import fiveSeaterSofaSvg from "@/components/OrderPage/SubServicesList/icons/five-seater-sofa.svg";
-import sixSeaterSofaSvg from "@/components/OrderPage/SubServicesList/icons/six-seater-sofa.svg";
-import bedSvg from "@/components/OrderPage/SubServicesList/icons/bed.svg";
-import carpetSvg from "@/components/OrderPage/SubServicesList/icons/carpet.svg";
-import mattressSvg from "@/components/OrderPage/SubServicesList/icons/mattress.svg";
-import mattressDblSvg from "@/components/OrderPage/SubServicesList/icons/mattressDbl.svg";
-import sofaSvg from "@/components/OrderPage/SubServicesList/icons/sofa.svg";
-import chairSvg from "@/components/OrderPage/SubServicesList/icons/chair.svg";
-import officeChairSvg from "@/components/OrderPage/SubServicesList/icons/office-chair.svg";
-import babyStrollerSvg from "@/components/OrderPage/SubServicesList/icons/baby-stroller.svg";
-import vacuumCleanerSvg from "@/components/OrderPage/SubServicesList/icons/vacuum-cleaner.svg";
-import ownSuppliesSvg from "@/components/OrderPage/SubServicesList/icons/own-supplies.svg";
+import officePng from "@/assets/icons/sub-services/office.png";
+import roomPng from "@/assets/icons/sub-services/room.png";
+import bathroomPng from "@/assets/icons/sub-services/bathroom.png";
+import kitchenPng from "@/assets/icons/sub-services/kitchen.png";
+import corridorPng from "@/assets/icons/sub-services/corridor.png";
+import cloakRoomPng from "@/assets/icons/sub-services/cloak-room.png";
+import showerCubiclePng from "@/assets/icons/sub-services/shower-cubicle.png";
+import mirrorPng from "@/assets/icons/sub-services/mirror.png";
+import twoSeaterSofaPng from "@/assets/icons/sub-services/two-seater-sofa.png";
+import threeSeaterSofaPng from "@/assets/icons/sub-services/three-seater-sofa.png";
+import fourSeaterSofaPng from "@/assets/icons/sub-services/four_seater_sofa.png";
+import upholsteredToBedPng from '@/assets/icons/sub-services/upholstered_to_bed.png'
+import carpetPng from "@/assets/icons/sub-services/carpet.png";
+import singleMattressPng from '@/assets/icons/sub-services/single-mattress.png'
+import doubleMattressPng from '@/assets/icons/sub-services/double-mattress.png'
+import armchairPng from '@/assets/icons/sub-services/armchair.png'
+import chairPng from '@/assets/icons/sub-services/chair.png'
+import officeChairPng from '@/assets/icons/sub-services/office-chair.png'
+import babyStrollerPng from '@/assets/icons/sub-services/baby-stroller.png'
+import ownSuppliesPng from '@/assets/icons/sub-services/own-supplies.png'
+import vacuumCleanerPng from '@/assets/icons/sub-services/vacuum-cleaner.png'
+import coffeeMachinePng from "@/assets/icons/sub-services/coffee-machine.png";
+import spaceOrganizerPng from "@/assets/icons/sub-services/space-organizer.png";
+import dishesPng from "@/assets/icons/sub-services/dishes.png";
+import hoodPng from "@/assets/icons/sub-services/hood.png";
+import fridgePng from "@/assets/icons/sub-services/fridge.png";
+import extraTasksPng from "@/assets/icons/sub-services/extra-tasks.png";
+import ironPng from "@/assets/icons/sub-services/iron.png";
+import wardrobePng from "@/assets/icons/sub-services/wardrobe.png";
+import laundryPng from "@/assets/icons/sub-services/laundry.png";
+import microwavePng from "@/assets/icons/sub-services/microwave.png";
+import ovenPng from "@/assets/icons/sub-services/oven.png";
+import animalsTrayPng from "@/assets/icons/sub-services/animals-tray.png";
+import balconyPng from "@/assets/icons/sub-services/balcony.png";
+import plantsPng from "@/assets/icons/sub-services/plants.png";
+import windowPng from "@/assets/icons/sub-services/window.png";
+import kitchenCabinetsPng from "@/assets/icons/sub-services/kitchen-cabinets.png";
 
 export const ALL_SERVICE = {
   REGULAR: "Regular",
@@ -140,170 +123,166 @@ export const CITIES = [
 export const ALL_SUB_SERVICES = [
   {
     title: "Office cleaning",
-    icons: officeSvg,
+    icons: officePng,
   },
   {
     title: "Clean the room",
-    icons: readingRoomSvg,
+    icons: roomPng,
   },
   {
     title: "Clean the bathroom",
-    icons: bathroomSvg,
+    icons: bathroomPng,
   },
   {
     title: "Clean the kitchen",
-    icons: kitchenSvg,
+    icons: kitchenPng,
   },
   {
     title: "Clean the corridor",
-    icons: corredSvg,
+    icons: corridorPng,
   },
   {
     title: "Clean the cloak room",
-    icons: hangerSvg,
+    icons: cloakRoomPng,
   },
   {
     title: "Wash the window",
-    icons: windowSvg,
+    icons: windowPng,
   },
   {
     title: "Balcony",
-    icons: balconySvg,
+    icons: balconyPng,
   },
   {
     title: "Clean the oven",
-    icons: ovenSvg,
+    icons: ovenPng,
   },
   {
     title: "Clean the fridge",
-    icons: fridgeSvg,
+    icons: fridgePng,
   },
   {
     title: "Clean kitchen cabinets",
-    icons: kitchenCabinets,
+    icons: kitchenCabinetsPng,
   },
   {
     title: "Clean the hood",
-    icons: cookerHoodSvg,
+    icons: hoodPng,
   },
   {
     title: "Extra tasks",
-    icons: hoursglassSvg,
+    icons: extraTasksPng,
   },
   {
     title: "Cleaning bath or shower cubicle",
-    icons: iconsSvg,
+    icons: showerCubiclePng,
   },
   {
     title: "Ironing",
-    icons: ironSvg,
+    icons: ironPng,
   },
   {
     title: "Space organizer",
-    icons: cleanClothesSvg,
+    icons: spaceOrganizerPng,
   },
   {
     title: "Wardrobe cleaning",
-    icons: closetSvg,
+    icons: wardrobePng,
   },
   {
     title: "Wash dishes",
-    icons: cleanDishesSvg,
+    icons: dishesPng,
   },
   {
     title: "Water plants",
-    icons: wateringPlantsSvg,
+    icons: plantsPng,
   },
   {
     title: "Laundry",
-    icons: laundrySvg,
+    icons: laundryPng,
   },
   {
     title: "Wash the microwave",
-    icons: microwaveSvg,
+    icons: microwavePng,
   },
   {
     title: "Clean animal's tray",
-    icons: petToiletTraySvg,
+    icons: animalsTrayPng,
   },
   {
     title: "Clean the mirror",
-    icons: mirrorSvg,
-  },
-  {
-    title: "Clean slow-cooker",
-    icons: SlowCooker,
+    icons: mirrorPng,
   },
   {
     title: "Clean coffee-machine",
-    icons: coffeeMachineSvg,
+    icons: coffeeMachinePng,
   },
   {
     title: "Two-seater sofa",
-    icons: twoSeaterSofaSvg,
+    icons: twoSeaterSofaPng,
   },
   {
     title: "Three-seater sofa",
-    icons: threeSeaterSofaSvg,
+    icons: threeSeaterSofaPng,
   },
   {
     title: "Four-seater sofa",
-    icons: fourSeaterSofaSvg,
+    icons: fourSeaterSofaPng,
   },
   {
     title: "Five-seater sofa",
-    icons: fiveSeaterSofaSvg,
+    icons: fourSeaterSofaPng,
   },
   {
     title: "Six-seater sofa",
-    icons: sixSeaterSofaSvg,
+    icons: fourSeaterSofaPng,
   },
   {
     title: "Upholstered to bed",
-    icons: bedSvg,
+    icons: upholsteredToBedPng,
   },
   {
     title: "Carpet dry cleaning",
-    icons: carpetSvg,
+    icons: carpetPng,
   },
   {
     title: "Single mattress",
-    icons: mattressSvg,
+    icons: singleMattressPng,
   },
   {
     title: "Single mattress from both sides",
-    icons: mattressSvg,
+    icons: singleMattressPng,
   },
   {
     title: "Double mattress",
-    icons: mattressDblSvg,
+    icons: doubleMattressPng,
   },
   {
     title: "Double mattress from both sides",
-    icons: mattressDblSvg,
+    icons: doubleMattressPng,
   },
   {
     title: "Armchair",
-    icons: sofaSvg,
+    icons: armchairPng,
   },
   {
     title: "Chair",
-    icons: chairSvg,
+    icons: chairPng,
   },
   {
     title: "Office chair",
-    icons: officeChairSvg,
+    icons: officeChairPng,
   },
   {
     title: "Cleaning baby stroller",
-    icons: babyStrollerSvg,
+    icons: babyStrollerPng,
   },
   {
     title: "Vacuum_cleaner_sub_service",
-    icons: vacuumCleanerSvg,
+    icons: vacuumCleanerPng,
   },
   {
     title: "Own_supplies_sub_service",
-    icons: ownSuppliesSvg,
+    icons: ownSuppliesPng,
   },
 ];

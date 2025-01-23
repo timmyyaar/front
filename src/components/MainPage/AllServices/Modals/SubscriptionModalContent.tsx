@@ -2,125 +2,70 @@
 
 import React, { useContext } from "react";
 import { TranslateFunction } from "@/types";
-import { PricesContext } from "@/components/Providers";
+import { LocaleContext, PricesContext } from "@/components/Providers";
 import Costs from "@/components/MainPage/AllServices/Modals/Costs";
 import { SALES } from "@/components/MainPage/AllServices/Modals/Costs/constants";
-import {getOneDigitFloat, getTransformedPrices} from "@/utils";
+import { getOneDigitFloat, getTransformedPrices } from "@/utils";
 import { useSearchParams } from "next/navigation";
-import {CITIES} from "@/constants";
+import { CITIES, FIGURE_BRACKETS_REGEX } from "@/constants";
+import Image from "next/image";
+import subscriptionPng from "@/assets/icons/main-services/subscription.png";
+import reactStringReplace from "react-string-replace";
+import Button from "@/components/common/Button";
 
 function SubscriptionModalContent({
   t,
-  isOrder,
 }: {
   t: TranslateFunction;
   isOrder?: boolean;
 }) {
+  const { locale } = useContext(LocaleContext);
   const { prices } = useContext(PricesContext);
   const searchParams = useSearchParams();
-  const city = searchParams.get('city') || CITIES.KRAKOW.name
-
-  const transformedPrices = getTransformedPrices(prices, city);
-
-  const subscriptionCosts = {
-    [SALES[0].title]: [
-      {
-        title: "1-bedroom",
-        text: "One-time 1-bedroom cleaning",
-        price: getOneDigitFloat(transformedPrices.defaultRegular * 0.8),
-        oldPrice: transformedPrices.defaultRegular,
-      },
-      {
-        title: "2-bedroom",
-        text: "One-time 2-bedroom cleaning",
-        price: getOneDigitFloat(
-          (transformedPrices.defaultRegular + transformedPrices.regularBedroom) * 0.8,
-        ),
-        oldPrice: transformedPrices.defaultRegular + transformedPrices.regularBedroom,
-      },
-      {
-        title: "3-bedroom",
-        text: "One-time 3-bedroom cleaning",
-        price: getOneDigitFloat(
-          (transformedPrices.defaultRegular + transformedPrices.regularBedroom * 2) * 0.8,
-        ),
-        oldPrice: transformedPrices.defaultRegular + transformedPrices.regularBedroom * 2,
-      },
-    ],
-    [SALES[1].title]: [
-      {
-        title: "1-bedroom",
-        text: "Twice a month 1-bedroom cleaning",
-        price: getOneDigitFloat(transformedPrices.defaultRegular * 0.85),
-        oldPrice: transformedPrices.defaultRegular,
-      },
-      {
-        title: "2-bedroom",
-        text: "Twice a month 2-bedroom cleaning",
-        price: getOneDigitFloat(
-          (transformedPrices.defaultRegular + transformedPrices.regularBedroom) * 0.85,
-        ),
-        oldPrice: transformedPrices.defaultRegular + transformedPrices.regularBedroom,
-      },
-      {
-        title: "3-bedroom",
-        text: "Twice a month 3-bedroom cleaning",
-        price: getOneDigitFloat(
-          (transformedPrices.defaultRegular + transformedPrices.regularBedroom * 2) * 0.85,
-        ),
-        oldPrice: transformedPrices.defaultRegular + transformedPrices.regularBedroom * 2,
-      },
-    ],
-    [SALES[2].title]: [
-      {
-        title: "1-bedroom",
-        text: "Once a month 1-bedroom cleaning",
-        price: getOneDigitFloat(transformedPrices.defaultRegular * 0.9),
-        oldPrice: transformedPrices.defaultRegular,
-      },
-      {
-        title: "2-bedroom",
-        text: "Once a month 2-bedroom cleaning",
-        price: getOneDigitFloat(
-          (transformedPrices.defaultRegular + transformedPrices.regularBedroom) * 0.9,
-        ),
-        oldPrice: transformedPrices.defaultRegular + transformedPrices.regularBedroom,
-      },
-      {
-        title: "3-bedroom",
-        text: "Once a month 3-bedroom cleaning",
-        price: getOneDigitFloat(
-          (transformedPrices.defaultRegular + transformedPrices.regularBedroom * 2) * 0.9,
-        ),
-        oldPrice: transformedPrices.defaultRegular + transformedPrices.regularBedroom * 2,
-      },
-    ],
-  };
+  const city = searchParams.get("city") || CITIES.KRAKOW.name;
 
   return (
     <>
-      <div className="_text-center">
-        <div className="_mb-4 lg:_mb-6 _text-center">
-          <span className="_main-title text-gradient">{t("Subscription")}</span>
-        </div>
-        <div className="_whitespace-pre-wrap">
-          {t("subscription_description")}
-        </div>
-      </div>
-      {!isOrder && (
-        <div className="_mt-8 lg:_mt-16">
-          <div className="_mb-4 lg:_mb-6 _text-center">
-            <span className="_main-title text-gradient">{t("Prices")}</span>
-          </div>
-          <Costs
-            t={t}
-            redirectPathname={`subscription${city ? `?city=${city}` : ""}`}
-            costs={subscriptionCosts}
-            isSubscription
-            description="regular_price_description_mobile"
+      <div className="_mb-4 lg:_mb-6">
+        <div className="_flex _justify-center _items-center _gap-2">
+          <span className="text-gradient _main-title">{t("Subscription")}</span>
+          <Image
+            src={subscriptionPng}
+            alt="Subscription"
+            className="_w-8 lg:_w-12"
           />
         </div>
-      )}
+      </div>
+      <div className="_bg-light lg:_mx-20 _py-7 _px-4 _rounded-3xl">
+        <div className="_text-center _mb-6">
+          <span className="_text-xl _font-semibold text-gradient">
+            {t("subscription_how_it_works")}
+          </span>
+        </div>
+        <div className="_whitespace-pre-wrap">
+          {reactStringReplace(
+            t("subscription_page_description"),
+            FIGURE_BRACKETS_REGEX,
+            (match) => (
+              <b key={match}>{match}</b>
+            ),
+          )}
+        </div>
+        <br />
+        🚨 {t("subscription_page_window_disappear")}{" "}
+        <a
+          className="_text-primary hover:_text-primary-dark _break-all"
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}${locale}/subscription`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {process.env.NEXT_PUBLIC_SITE_URL}
+          {locale}/subscription
+        </a>
+      </div>
+      <div className="_mt-6 lg:_mx-20">
+        <Button title={t("create_account")} className="_w-full" disabled />
+      </div>
     </>
   );
 }

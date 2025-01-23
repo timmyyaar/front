@@ -23,16 +23,12 @@ export const PriceByPhoto = (props: any) => {
       <div className="price-by-photo-wrapper mobile-none _pt-12 _pb-10 _rounded-3xl _bg-light">
         <div className="_flex _flex-col">
           <div className="_main-title _whitespace-pre-line _mb-5 _flex _justify-center">
-            <Writer
-              text={t("Get the price from the photo with 99% accuracy")}
-            />
+            <span className="text-gradient">
+              {t("post_cleaning_photos_and_messenger_support")}
+            </span>
           </div>
           <div className="_whitespace-pre-line _flex _justify-center _text-center">
-            <Writer
-              text={t(
-                "Send a photo of the room and comments in any convenient messenger, and we will make an accurate calculation for you"
-              )}
-            />
+            {t("get_post_cleaning_photos")}
           </div>
           <div className="img-wrapper _relative _mt-8 _mb-10 _flex _justify-center">
             <Image src={bubblesSvg} alt="" className="_absolute" />
@@ -75,10 +71,14 @@ export const PriceByPhoto = (props: any) => {
       </div>
       <div className="mobile-only _bg-light _rounded-3xl mobile-wrapper _py-10">
         <div className="_main-title _mb-3">
-          <Writer text={t("price_by_photo_title_mobile")} />
+          <span className="text-gradient _whitespace-pre">
+            {t("price_by_photo_title_mobile")}
+          </span>
         </div>
         <div className="_text-center _mb-12">
-          <Writer text={t("price_by_photo_text_mobile")} />
+          <span className="_whitespace-pre">
+            {t("price_by_photo_text_mobile")}
+          </span>
         </div>
         <div className="img-wrapper-mobile _relative _flex _justify-center">
           <Image src={chatPng} alt="" className="_absolute" />

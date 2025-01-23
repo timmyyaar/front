@@ -23,12 +23,40 @@ import NavigationItemsMobile from "@/components/Header/NavigationItemsMobile";
 import { sendGAEvent } from "@/google-analytics";
 import Dropdown from "@/components/Header/Dropdown";
 import { CITIES } from "@/constants";
+import SocialMedia from "./icons/SocialMedia";
 
 const mainLocales = {
   en: "English",
   ru: "Русский",
   pl: "Polski",
   ua: "Україньска",
+};
+
+const SOCIAL_MEDIAS = {
+  GOOGLE: "Google",
+  INSTAGRAM: "Instagram",
+  WHATSAPP: "Whatsapp",
+  TELEGRAM: "Telegram",
+};
+
+const SOCIAL_MEDIAS_OPTIONS = [
+  { value: SOCIAL_MEDIAS.GOOGLE, icon: <GoogleIcon className="_w-5 _h-5" /> },
+  { value: SOCIAL_MEDIAS.INSTAGRAM, icon: <InstIcon className="_w-5 _h-5" /> },
+  {
+    value: SOCIAL_MEDIAS.WHATSAPP,
+    icon: <WhatsappIcon className="_w-5 _h-5" />,
+  },
+  {
+    value: SOCIAL_MEDIAS.TELEGRAM,
+    icon: <TelegramIcon className="_w-5 _h-5" />,
+  },
+];
+
+const SOCIAL_MEDIA_LINKS = {
+  [SOCIAL_MEDIAS.GOOGLE]: "https://maps.app.goo.gl/uTEhCrLkdEXG6DDd8",
+  [SOCIAL_MEDIAS.INSTAGRAM]: "https://www.instagram.com/takeyourtime_pln/",
+  [SOCIAL_MEDIAS.WHATSAPP]: "https://wa.me/48730003997",
+  [SOCIAL_MEDIAS.TELEGRAM]: "https://t.me/takeyoourtime",
 };
 
 export const Header = () => {
@@ -93,6 +121,17 @@ export const Header = () => {
     window.history.pushState(null, "", `?${updatedSearchParams.toString()}`);
   };
 
+  const onSocialMediaClick = (
+    event: React.MouseEvent<HTMLDivElement>,
+    value: string,
+  ) => {
+    event.stopPropagation();
+
+    trackSocialMediaClick(value);
+
+    window.open(SOCIAL_MEDIA_LINKS[value], "_blank", "noopener,noreferrer");
+  };
+
   return (
     <header
       ref={headerRef}
@@ -117,7 +156,9 @@ export const Header = () => {
             <Dropdown
               isBoldText
               translateOptions
-              options={Object.values(CITIES).map(({ name }) => name)}
+              options={Object.values(CITIES).map(({ name }) => ({
+                value: name,
+              }))}
               onSelect={onCitySelect}
               t={t}
               value={selectedCity || CITIES.KRAKOW.name}
@@ -127,52 +168,25 @@ export const Header = () => {
         <NavigationItems t={t} />
         <div className="_ml-auto lg:_ml-0 _mr-3 lg:_mr-0">
           <Dropdown
-            options={Object.values(mainLocales)}
+            options={Object.values(mainLocales).map((item) => ({
+              value: item,
+            }))}
             onSelect={onSelectLocale}
             t={t}
             value={mainLocales[locale]}
           />
         </div>
-        <div
-          className={`_text-sm lg:_text-lg _font-semibold _pl-2
-            lg:_pl-0 mobile-none _ml-auto _flex _gap-6`}
-        >
-          <div className="_hidden xl:_flex _flex-col _justify-center text-gradient">
+        <div className={`_pl-2 lg:_pl-0 mobile-none _ml-auto _flex _gap-6`}>
+          <div className="_hidden xl:_flex _flex-col _justify-center text-gradient _text-sm lg:_text-lg _font-semibold">
             +48 730 003 997
           </div>
           <div className="_flex _gap-3">
-            <a
-              className="_flex _flex-col _justify-center"
-              href="https://t.me/takeyoourtime"
-              target="_blank"
-              onClick={() => trackSocialMediaClick("Telegram")}
-            >
-              <TelegramIcon />
-            </a>
-            <a
-              className="_flex _flex-col _justify-center"
-              href="https://wa.me/48730003997"
-              target="_blank"
-              onClick={() => trackSocialMediaClick("WhatsApp")}
-            >
-              <WhatsappIcon />
-            </a>
-            <a
-              className="_flex _flex-col _justify-center"
-              href="https://www.instagram.com/takeyourtime_pln/"
-              target="_blank"
-              onClick={() => trackSocialMediaClick("Instagram")}
-            >
-              <InstIcon />
-            </a>
-            <a
-              className="_flex _flex-col _justify-center"
-              href="https://maps.app.goo.gl/uTEhCrLkdEXG6DDd8"
-              target="_blank"
-              onClick={() => trackSocialMediaClick("Google")}
-            >
-              <GoogleIcon />
-            </a>
+            <Dropdown
+              options={SOCIAL_MEDIAS_OPTIONS}
+              onSelect={onSocialMediaClick}
+              t={t}
+              plainContent={<SocialMedia />}
+            />
           </div>
         </div>
         <div

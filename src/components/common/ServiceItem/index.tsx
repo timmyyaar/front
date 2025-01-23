@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-import howItWorksSvg from "@/components/common/icons/howItWorks.svg";
+import moreDetailsPng from "@/assets/icons/common/more-details.png";
 
 interface Props {
   title: string;
@@ -19,7 +19,7 @@ export const ServiceItem: React.FC<Props> = ({ title, icon, t, onClick }) => (
       {title}
     </div>
     <div className="_flex _justify-center">
-      <Image src={icon} alt="" />
+      <Image src={icon} alt="" width={96} height={96} />
     </div>
     <div
       className={`_flex _justify-center _cursor-pointer hover:_text-primary
@@ -31,7 +31,7 @@ export const ServiceItem: React.FC<Props> = ({ title, icon, t, onClick }) => (
       >
         <div className="_text-center">{t("How it works")}</div>
         <div className="_cursor-pointer">
-          <Image src={howItWorksSvg} alt="" />
+          <Image src={moreDetailsPng} alt="" width="22" height="22" />
         </div>
       </div>
     </div>

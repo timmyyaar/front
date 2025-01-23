@@ -1,6 +1,7 @@
 import React, { Dispatch, FC, SetStateAction, useState } from "react";
+import Image from "next/image";
 
-import { DiscountCoupon } from "../icons/DiscountCoupon";
+import discountPng from "../icons/discount.png";
 import { checkPromo } from "@/components/OrderPage/Summary/PromoCodeInput/actions";
 import Button from "@/components/common/Button";
 
@@ -56,7 +57,7 @@ export const PromoInput: FC<IProps> = (props) => {
         style={{ background: promoStatus || "#F9F9F9" }}
       >
         <div className="_my-auto _mr-3 _ml-5">
-          <DiscountCoupon />
+          <Image src={discountPng} alt="Promo" width="32" height="32" className="_max-w-max _h-8 _w-8" />
         </div>
         <input
           type="text"
@@ -77,7 +78,7 @@ export const PromoInput: FC<IProps> = (props) => {
           disabled={isCheckPromoLoading}
           onClick={checkCode}
           title={t("Apply")}
-         />
+        />
       </div>
     </div>
   );

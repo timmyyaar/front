@@ -2,11 +2,12 @@ import reactStringReplace from "react-string-replace";
 import React, { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { FIGURE_BRACKETS_REGEX } from "@/constants";
-import { Discount } from "@/components/MainPage/Costs/icons/Discount";
+import discountPng from "@/components/MainPage/Costs/icons/discount.png";
 import { SALES } from "@/components/MainPage/AllServices/Modals/Costs/constants";
 
 import { Cost } from "@/types";
 import Button from "@/components/common/Button";
+import Image from "next/image";
 
 interface CostsProps {
   costs: Cost[] | { [key: string]: Cost[] };
@@ -61,7 +62,13 @@ function Costs({ costs, t, redirectPathname, isSubscription }: CostsProps) {
         >
           <>
             <div className="_flex _justify-center">
-              <Discount />
+              <Image
+                className="_mb-2"
+                src={discountPng}
+                alt="Discount"
+                width="128"
+                height="128"
+              />
             </div>
             <div className="_whitespace-pre _text-center">
               {reactStringReplace(
@@ -69,7 +76,7 @@ function Costs({ costs, t, redirectPathname, isSubscription }: CostsProps) {
                 FIGURE_BRACKETS_REGEX,
                 (match) => (
                   <b>{match}</b>
-                )
+                ),
               )}
             </div>
           </>
@@ -120,7 +127,7 @@ function Costs({ costs, t, redirectPathname, isSubscription }: CostsProps) {
                 />
               </div>
             </div>
-          )
+          ),
         )}
       </div>
     </div>

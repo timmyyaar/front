@@ -1,21 +1,21 @@
 // How much it costs
-import Regular from "@/components/common/icons/services/regular.svg";
-import Deep from "@/components/common/icons/services/deep.svg";
-import WindowCleaning from "@/components/common/icons/services/window-cleaning.svg";
-import EcoCleaning from "@/components/common/icons/services/eco-cleaning.svg";
-import MoveInOut from "@/components/common/icons/services/move-in-out.svg";
-import Subscription from "@/components/common/icons/services/subscription.svg";
-import CustomCleaning from "@/components/common/icons/services/custom-cleaning.svg";
-import AfterParty from "@/components/common/icons/services/after-party.svg";
-import Office from "@/components/common/icons/services/office.svg";
-import WhileSickness from "@/components/common/icons/services/while-sickness.svg";
-import DeepKitchen from "@/components/common/icons/services/deep-kitchen.svg";
-import Airbnb from "@/components/common/icons/services/airbnb.svg";
-import DryCleaning from "@/components/common/icons/services/dry-cleaning.svg";
-import PostConstruction from "@/components/common/icons/services/post-construction.svg";
-import Ozonation from "@/components/common/icons/services/ozonation.svg";
+import Regular from "@/assets/icons/main-services/regular.png";
+import Deep from "@/assets/icons/main-services/deep.png";
+import WindowCleaning from "@/assets/icons/main-services/window.png";
+import EcoCleaning from "@/assets/icons/main-services/eco.png";
+import MoveInOut from "@/assets/icons/main-services/move-in-out.png";
+import Subscription from "@/assets/icons/main-services/subscription.png";
+import CustomCleaning from "@/assets/icons/main-services/custom.png";
+import AfterParty from "@/assets/icons/main-services/after-party.png";
+import Office from "@/assets/icons/main-services/office.png";
+import WhileSickness from "@/assets/icons/main-services/while-sickness.png";
+import DeepKitchen from "@/assets/icons/main-services/deep-kitchen.png";
+import Airbnb from "@/assets/icons/main-services/airbnb.png";
+import DryCleaning from "@/assets/icons/main-services/dry.png";
+import PostConstruction from "@/assets/icons/main-services/post-construction.png";
+import Ozonation from "@/assets/icons/main-services/ozonation.png";
 
-export const Coasts = {
+export const Costs = {
   "One-time": {
     "1-bedroom": 199,
     "2-bedroom": 239,
@@ -66,7 +66,7 @@ export const MAIN_CATEGORIES = {
 };
 
 export const MAIN_CATEGORIES_REVERSED = Object.fromEntries(
-    Object.entries(MAIN_CATEGORIES).map(([key, value]) => [value, key]),
+  Object.entries(MAIN_CATEGORIES).map(([key, value]) => [value, key]),
 );
 
 export const CITIES = {
