@@ -143,7 +143,7 @@ export const MainImage = ({ t, ordersCount }: MainImageProps) => {
             <span className="_text-2xl text-gradient _font-bold _text-center">
               Take your time
             </span>
-            <div className="_mt-4 _flex _gap-6 _justify-center">
+            <div className="_mt-4 _flex _flex-col _gap-3 _justify-center">
               <Button
                 className="_text-lg _h-12 _font-medium _min-w-44 _z-10"
                 onClick={() =>
@@ -151,14 +151,12 @@ export const MainImage = ({ t, ordersCount }: MainImageProps) => {
                 }
                 title={t("Order online now")}
               />
-              <button
-                className={`_text-lg _flex _justify-center _items-center hover:_bg-primary-dark active:_bg-primary-dark
-                hover:_text-white active:_text-white _transition-all _min-w-24 _z-10
-                _text-center _border-40 _bg-white _text-dark _font-medium _cursor-pointer`}
+              <Button
+                isSecondary
+                className="_h-12 _text-lg _z-10 _font-medium"
                 onClick={() => handleScroll("costs-block")}
-              >
-                {t("Pricing")}
-              </button>
+                title={t("Pricing")}
+              />
             </div>
             <div className="_mt-3 _text-lg _font-semibold _text-center text-gradient">
               {ordersCount} {t("happy_clients")}
