@@ -86,7 +86,7 @@ export const MainImage = ({ t, ordersCount }: MainImageProps) => {
                 />
                 <div className="_flex _flex-col _text-xl _p-20">
                   <span className="text-gradient _text-center">
-                    {t("main_page_title")}
+                    <b>{t("main_page_title")}</b>
                     <b> {t(cityUrl || CITIES.KRAKOW.name)}</b>
                   </span>
                   <span className="_text-5xl text-gradient _font-bold _text-center">
@@ -135,9 +135,9 @@ export const MainImage = ({ t, ordersCount }: MainImageProps) => {
             priority
             className="_rotate-[15deg] _absolute _-left-3"
           />
-          <div className="_flex _flex-col _text-xl">
+          <div className="_flex _flex-col _text-lg">
             <span className="text-gradient _text-center">
-              {t("main_page_title")}
+              <b>{t("main_page_title")}</b>
               <b> {t(cityUrl || CITIES.KRAKOW.name)}</b>
             </span>
             <span className="_text-2xl text-gradient _font-bold _text-center">
@@ -145,7 +145,7 @@ export const MainImage = ({ t, ordersCount }: MainImageProps) => {
             </span>
             <div className="_mt-4 _flex _flex-col _gap-3 _justify-center">
               <Button
-                className="_text-lg _h-12 _font-medium _min-w-44 _z-10"
+                className="_text-base _h-12 _font-medium _min-w-44 _z-10"
                 onClick={() =>
                   router.push(`${pathname}/order?${searchParams.toString()}`)
                 }
@@ -153,7 +153,7 @@ export const MainImage = ({ t, ordersCount }: MainImageProps) => {
               />
               <Button
                 isSecondary
-                className="_h-12 _text-lg _z-10 _font-medium"
+                className="_text-base _h-12 _z-10 _font-medium"
                 onClick={() => handleScroll("costs-block")}
                 title={t("Pricing")}
               />

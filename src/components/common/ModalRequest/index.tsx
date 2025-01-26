@@ -1,8 +1,9 @@
 import React from "react";
 
-import LogoBig from "@/components/common/icons/components/LogoBig";
+import logoSvg from "@/assets/icons/common/logo.svg";
 
 import Modal from "@/components/common/Modal";
+import Image from "next/image";
 
 interface Props {
   title?: string;
@@ -31,7 +32,11 @@ export const ModalRequest: React.FC<Props> = ({
       )}
       {showLogo && (
         <div className="_flex _flex-col _items-center">
-          <LogoBig className="_w-24 _h-16 lg:_w-auto lg:_h-auto" />
+          <Image
+            src={logoSvg}
+            alt="Logo"
+            className="_w-24 _h-16 lg:_w-36 lg:_h-auto"
+          />
           {showLogoTitle && (
             <div className="_text-center _main-title _font-bold _mt-1">
               <span className="text-gradient">Take Your Time</span>
