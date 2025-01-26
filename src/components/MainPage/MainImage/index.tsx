@@ -59,7 +59,7 @@ export const MainImage = ({ t, ordersCount }: MainImageProps) => {
             <Image
               src={broomPng}
               alt="Broom"
-              className="_absolute _bottom-0 _-left-36 _-rotate-[165deg] _w-1/4"
+              className="_absolute _-left-36 _-bottom-20 _-rotate-[165deg] _w-1/4"
             />
             <Image
               src={vacuumPng}

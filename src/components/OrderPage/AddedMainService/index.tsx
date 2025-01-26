@@ -3,6 +3,10 @@ import Image from "next/image";
 
 import OzonSvg from "./icons/ozone-layer.svg";
 import CleanSvg from "./icons/rectangle.svg";
+
+import ozonationPng from '@/assets/icons/main-services/ozonation.png'
+import dryPng from '@/assets/icons/main-services/dry.png'
+
 import caretUpSvg from "./icons/caret-up.svg";
 import { getAdditionalServices } from "./utils";
 
@@ -38,8 +42,8 @@ export const AddedMainService: FC<IProps> = (props) => {
         className="_group _min-h-[4.5rem] lg:_min-h-0 _px-3 lg:_px-24 _gap-2 lg:_gap-5 _flex _justify-center lg:_justify-between _items-center _rounded-xl _bg-light _cursor-pointer"
         onClick={onClickSecondService}
       >
-        <div className="_flex _items-center _select-none _w-16 _h-16 lg:_w-28 lg:_h-24">
-          <Image src={isOzonation ? OzonSvg : CleanSvg} alt="" />
+        <div className="_flex _items-center _select-none _w-11 lg:_w-20">
+          <Image src={isOzonation ? ozonationPng : dryPng} alt="" />
         </div>
         <div
           className={`_text-center group-hover:_text-primary lg:_text-xl _font-semibold
