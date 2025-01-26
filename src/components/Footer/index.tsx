@@ -33,14 +33,14 @@ export const Footer = (props: any) => {
       <div className="_mb-6 _main-title _flex _justify-center">
         <div className="text-gradient">{t("Take Your Time")}</div>
       </div>
-      <div className="_mb-5 _text-dark _flex _justify-center _gap-3">
+      <div className="_mb-5 _text-dark _flex _justify-center _gap-3 text-gradient">
         <a
           className="icon"
           href="https://t.me/takeyoourtime"
           target="_blank"
           onClick={() => trackSocialMediaClick("Telegram")}
         >
-          <TelegramIcon isTransparent />
+          <TelegramIcon />
         </a>
         <a
           className="icon"
@@ -48,7 +48,7 @@ export const Footer = (props: any) => {
           target="_blank"
           onClick={() => trackSocialMediaClick("WhatsApp")}
         >
-          <WhatsappIcon isTransparent />
+          <WhatsappIcon />
         </a>
         <a
           className="icon"
@@ -56,7 +56,7 @@ export const Footer = (props: any) => {
           target="_blank"
           onClick={() => trackSocialMediaClick("Instagram")}
         >
-          <InstIcon isTransparent />
+          <InstIcon />
         </a>
         <a
           className="icon"
@@ -64,26 +64,26 @@ export const Footer = (props: any) => {
           target="_blank"
           onClick={() => trackSocialMediaClick("Google")}
         >
-          <GoogleIcon isTransparent />
+          <GoogleIcon />
         </a>
       </div>
-      <div className="_flex _justify-center">
+      <div className="_flex _justify-center text-gradient">
         <div className="_mb-5 _text-dark _flex _justify-between _gap-3">
           <div className="_flex _gap-1">
-            <PhoneIcon isTransparent />
+            <PhoneIcon />
             +48 730 003 997
           </div>
         </div>
       </div>
-      <div className="_flex _justify-center">
+      <div className="_flex _justify-center text-gradient">
         <div className="_mb-5 _text-dark _flex _justify-between _gap-3">
           <div className="_flex _gap-1 _items-center">
-            <MailIcon isTransparent />
+            <MailIcon />
             Mail: tytimeinbox@gmail.com
           </div>
         </div>
       </div>
-      <div className="_flex _justify-center">
+      <div className="_flex _justify-center text-gradient">
         <div
           className="_flex _justify-between _text-center"
           style={{ width: 300, marginBottom: "20px" }}

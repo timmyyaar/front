@@ -51,17 +51,17 @@ function SubscriptionModalContent({
             ),
           )}
         </div>
-        <br />
-        🚨 {t("subscription_page_window_disappear")}{" "}
-        <a
-          className="_text-primary hover:_text-primary-dark _break-all"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}${locale}/subscription`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {process.env.NEXT_PUBLIC_SITE_URL}
-          {locale}/subscription
-        </a>
+        {/*<br />*/}
+        {/*🚨 {t("subscription_page_window_disappear")}{" "}*/}
+        {/*<a*/}
+        {/*  className="_text-primary hover:_text-primary-dark _break-all"*/}
+        {/*  href={`${process.env.NEXT_PUBLIC_SITE_URL}${locale}/subscription`}*/}
+        {/*  target="_blank"*/}
+        {/*  rel="noopener noreferrer"*/}
+        {/*>*/}
+        {/*  {process.env.NEXT_PUBLIC_SITE_URL}*/}
+        {/*  {locale}/subscription*/}
+        {/*</a>*/}
       </div>
       <div className="_mt-6 lg:_mx-20">
         <Button title={t("create_account")} className="_w-full" disabled />
