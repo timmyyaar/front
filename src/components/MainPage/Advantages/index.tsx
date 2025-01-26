@@ -45,7 +45,7 @@ export const Advantages = () => {
             <div className="_flex _justify-center _basis-1/4">
               <Image src={el.icon} alt="" width={96} />
             </div>
-            <div className="_mt-2 _text-xl _text-dark _font-semibold _text-center">
+            <div className="_mt-2 _text-xl _text-dark _font-semibold _text-center text-gradient">
               {t(el.title)}
             </div>
             <div className="_mt-5 _text-center">
