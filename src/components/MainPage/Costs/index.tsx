@@ -114,7 +114,7 @@ export const Costs = (props: any) => {
                     height="128"
                   />
                   <div className="_text-xl _font-semibold _whitespace-nowrap">
-                    {t("Subscription")} - 18{t("zl")}/{t("month")}
+                    {t("how_much_it_costs_subscription_title")} - 18{t("zl")}/{t("month")}
                   </div>
                   <div
                     className={`_text-gray-dark _text-sm _flex _items-center _gap-2 hover:_text-primary
@@ -223,7 +223,7 @@ export const Costs = (props: any) => {
                 height="128"
               />
               <div className="_text-xl _font-semibold _whitespace-nowrap">
-                {t("Subscription")} - 18{t("zl")}/{t("month")}
+                {t("how_much_it_costs_subscription_title")} - 18{t("zl")}/{t("month")}
               </div>
               <div
                 className={`_text-gray-dark _text-sm _flex _items-center _gap-2 hover:_text-primary

@@ -26,15 +26,15 @@ export const CareerPage = () => {
   return (
     <div className="career-page">
       <div className="career-content _flex _flex-col _gap-6 _mt-6 lg:_gap-10 lg:_mt-14">
-        <div className="_main-title">
+        <div className="_main-title text-gradient">
           {t("Do you want to join T⅄T team?")}
         </div>
         <Benefits t={t} />
-        <div className="_main-title _mt-6 lg:_mt-0">
+        <div className="_main-title _mt-6 lg:_mt-0 text-gradient">
           {t("How to join?")}
         </div>
         <Instruction title="career" cardsCount={3} t={t} />
-        <div className="_main-title _mt-6 lg:_mt-0">
+        <div className="_main-title _mt-6 lg:_mt-0 text-gradient">
           {t("Filling form")}
         </div>
         <InputForm t={t} />
