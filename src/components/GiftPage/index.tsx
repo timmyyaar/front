@@ -32,7 +32,7 @@ export const GiftPage = () => {
     <div className="gift-page">
       <div className="gift-content _gap-6 _mt-6 lg:_gap-10 lg:_mt-14 _flex _flex-col">
         <div>
-          <div className="_main-title">{t("Gifts card")}</div>
+          <div className="_main-title text-gradient">{t("Gifts card")}</div>
           <div className="_text-center _mt-8 _font-semibold mobile-none">
             {t("Gifts card text")}
           </div>
@@ -45,9 +45,9 @@ export const GiftPage = () => {
             <Image src={dSvg} alt="" className="_rounded-2xl" />
           </div>
         </div>
-        <div className="_main-title _mt-6 lg:_mt-0">{t("How it works?")}</div>
+        <div className="_main-title _mt-6 lg:_mt-0 text-gradient">{t("How it works?")}</div>
         <Instruction title="gifts" cardsCount={5} t={t} />
-        <div className="_main-title _mt-6 lg:_mt-0">{t("Filling form")}</div>
+        <div className="_main-title _mt-6 lg:_mt-0 text-gradient">{t("Filling form")}</div>
         <InputForm t={t} />
         <div className="_flex _flex-col">
           <Footer t={t} />

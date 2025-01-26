@@ -59,7 +59,7 @@ export const MainImage = ({ t, ordersCount }: MainImageProps) => {
             <Image
               src={broomPng}
               alt="Broom"
-              className="_absolute _bottom-0 _-left-36 _-rotate-[165deg] _w-1/4"
+              className="_absolute _-left-36 _-bottom-20 _-rotate-[165deg] _w-1/4"
             />
             <Image
               src={vacuumPng}
@@ -102,14 +102,12 @@ export const MainImage = ({ t, ordersCount }: MainImageProps) => {
                       }
                       title={t("Order online now")}
                     />
-                    <button
-                      className={`_text-lg _flex _justify-center _items-center hover:_bg-primary-dark active:_bg-primary-dark
-                hover:_text-white active:_text-white _transition-all _min-w-24 _py-6
-                _text-center _border-40 _bg-white _text-dark _font-medium _cursor-pointer`}
+                    <Button
+                      isSecondary
+                      className="_text-base _z-10 _font-medium _shadow-md"
                       onClick={() => handleScroll("costs-block")}
-                    >
-                      {t("Pricing")}
-                    </button>
+                      title={t("Pricing")}
+                    />
                   </div>
                   <div className="_mt-8 _text-lg _font-semibold _text-center text-gradient">
                     {ordersCount} {t("happy_clients")}
@@ -153,7 +151,7 @@ export const MainImage = ({ t, ordersCount }: MainImageProps) => {
               />
               <Button
                 isSecondary
-                className="_text-base _h-12 _z-10 _font-medium"
+                className="_text-base _h-12 _z-10 _font-medium _shadow-md"
                 onClick={() => handleScroll("costs-block")}
                 title={t("Pricing")}
               />
