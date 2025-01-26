@@ -3,7 +3,7 @@ import React, { useContext, useEffect } from "react";
 
 import { Footer } from "@/components/Footer";
 import { useLocales } from "@/hooks/useLocales";
-import { MainImage } from "@/components/common/MainImage";
+import { MainImage } from "src/components/MainPage/MainImage";
 
 import { AdditionalServices } from "./AdditionalServices";
 import { Advantages } from "./Advantages";
@@ -13,7 +13,6 @@ import { Costs } from "./Costs";
 import { FAQ } from "./FAQ";
 import { Order } from "./Order";
 import { PriceByPhoto } from "./PriceByPhoto";
-import { Promotions } from "./Promotions";
 import Reviews from "@/components/MainPage/Reviews";
 import { LocaleContext } from "@/components/Providers";
 import Blogs from "@/components/MainPage/Blogs";
@@ -24,9 +23,10 @@ import { Review } from "@/components/MainPage/Reviews/types";
 interface MainPageProps {
   blogs: Blog[];
   reviews: Review[];
+  ordersCount: number;
 }
 
-export const MainPage = ({ blogs, reviews }: MainPageProps) => {
+export const MainPage = ({ blogs, reviews, ordersCount }: MainPageProps) => {
   const { locales } = useContext(LocaleContext);
   const { t, lng } = useLocales(locales);
 
@@ -41,14 +41,13 @@ export const MainPage = ({ blogs, reviews }: MainPageProps) => {
 
   return (
     <div className="_gap-0 lg:_gap-28 _flex _flex-col">
-      <MainImage common t={t} />
-      <Advantages t={t} />
+      <MainImage t={t} ordersCount={ordersCount}/>
+      <Advantages />
       <AllServices t={t} />
       <Cleaning t={t} lng={lng} />
       <Costs t={t} />
       <AdditionalServices t={t} />
       <PriceByPhoto t={t} />
-      <Promotions t={t} />
       <Blogs t={t} blogs={blogs} />
       <FAQ t={t} />
       <Reviews t={t} reviews={reviews} />

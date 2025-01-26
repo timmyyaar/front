@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import {StaticImageData} from "next/image";
 
 export type Blog = {
   id: number;
@@ -48,7 +49,7 @@ export interface ISubService {
   key: string;
   mainServices: number[];
   title: string;
-  icons: string;
+  icons?: StaticImageData;
   price: number;
   originalPrice: number;
   oldPrice: string | number;

@@ -106,6 +106,7 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
 
         return (
           <CheckBox
+            key={subService.key}
             icon={
               ALL_SUB_SERVICES.find((item) => item.title === subService.title)!
                 .icons

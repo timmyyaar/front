@@ -1,37 +1,20 @@
 "use client";
-import React, { useContext, useEffect, useState } from "react";
 
+import React, { useContext, useEffect } from "react";
+import Image from "next/image";
+import reactStringReplace from "react-string-replace";
+
+import { sendGAEvent } from "@/google-analytics";
+import { FIGURE_BRACKETS_REGEX } from "@/constants";
 import { Footer } from "@/components/Footer";
 import { useLocales } from "@/hooks/useLocales";
-
-import { sales } from "@/components/MainPage/Costs/constants";
-import { CheckBoxesBlock } from "../OrderPage/CheckBoxesBlock";
-import { CounterComponent } from "../OrderPage/Counter";
-import { SubServicesList } from "../OrderPage/SubServicesList";
-import { Summary } from "../OrderPage/Summary";
 import { LocaleContext } from "@/components/Providers";
-import { sendGAEvent } from "@/google-analytics";
-import { Discount } from "@/components/OrderPage/Summary";
+import subscriptionPng from "@/assets/icons/main-services/subscription.png";
+import Button from "@/components/common/Button";
 
-interface SubscriptionPageProps {
-  discounts: Discount[];
-}
-
-export const SubscriptionPage = ({ discounts }: SubscriptionPageProps) => {
-  const { locales } = useContext(LocaleContext);
+export const SubscriptionPage = () => {
+  const { locale, locales } = useContext(LocaleContext);
   const { t } = useLocales(locales);
-
-  const [sale, setSale] = useState(sales[0]);
-  const [isPrivateHouse, setIsPrivateHouse] = useState<boolean>(false);
-  const [ownCheckList, setOwnCheckList] = useState<boolean>(false);
-
-  // main service
-  const [counterValue, setCounterValue] = useState([]);
-  const [selectedSubService, setSubService] = useState([]);
-
-  const match = sale.sale.match(/^(-?\d*\.?\d+)\s*%$/);
-  const salePercents = 100 - -parseFloat(match![0]);
-  const priceMultiplier = salePercents / 100;
 
   useEffect(() => {
     sendGAEvent({
@@ -44,87 +27,45 @@ export const SubscriptionPage = ({ discounts }: SubscriptionPageProps) => {
 
   return (
     <>
-      <div className="_gap-10 _mt-10 _px-24 _px-5-percents-mobile _flex _flex-col lg:_flex-row">
-        <div className="_w-full lg:_w-4/6 _gap-10 lg:_gap-20 _flex _flex-col">
-          <div>
-            <div className="_text-2xl _gap-2 _flex _justify-center _font-semibold _mb-5">
-              <>
-                <div className="mobile-none">
-                  {t("Subscription_page_title")}
-                </div>
-                <div className="mobile-none _text-primary">
-                  {t("subscription_sub_title")}
-                </div>
-                <div className="mobile-only _text-dark">
-                  {t("How much it costs")}
-                </div>
-              </>
-            </div>
-            <div className="_flex _justify-center _gap-4 lg:_gap-6">
-              {sales.map((item) => (
-                <div
-                  className={`hover:_rounded-xl hover:_border-4 hover:_border-solid
-                    hover:_border-primary _flex _flex-col _justify-center _items-center
-                    _cursor-pointer _border-4 _border-solid _border-transparent
-                    _rounded-xl _p-3 ${
-                      sale.sale === item.sale ? "_bg-primary" : ""
-                    }`}
-                  onClick={() => setSale(item)}
-                  key={JSON.stringify(item)}
-                >
-                  <div
-                    className={`_p-2 _rounded-full _bg-warning _text-lg lg:_text-xl
-                    _font-semibold`}
-                  >
-                    {item.sale}
-                  </div>
-                  <div
-                    className={`_text-sm lg:_text-xl _font-medium _text-center _mt-1 ${
-                      sale.sale === item.sale ? "_text-white" : ""
-                    }`}
-                  >
-                    {t(item.title)}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <CounterComponent
-            mainService={"Subscription"}
-            setCounterValue={setCounterValue}
-            t={t}
-            isPrivateHouse={isPrivateHouse}
-            setIsPrivateHouse={setIsPrivateHouse}
-          />
-          <SubServicesList
-            mainService={"Subscription"}
-            subServices={selectedSubService}
-            setSubService={setSubService}
-            priceMultiplier={priceMultiplier}
-            t={t}
-          />
-          <CheckBoxesBlock
-            mainService={"Subscription"}
-            subServices={selectedSubService}
-            setSubService={setSubService}
-            priceMultiplier={priceMultiplier}
-            ownCheckList={ownCheckList}
-            setOwnCheckList={setOwnCheckList}
-            t={t}
+      <div className="_mt-8 lg:_mt-14 _mb-4 lg:_mb-6">
+        <div className="_flex _justify-center _items-center _gap-2">
+          <span className="text-gradient _main-title">{t("Subscription")}</span>
+          <Image
+            src={subscriptionPng}
+            alt="Subscription"
+            className="_w-8 lg:_w-12"
           />
         </div>
-        <div className="__w-full _min-w-2/6 lg:_w-2/6">
-          <Summary
-            title={"Subscription"}
-            counter={counterValue}
-            subService={selectedSubService}
-            setSubService={setSubService}
-            subSale={sale.sale}
-            t={t}
-            isPrivateHouse={isPrivateHouse}
-            discounts={discounts}
-          />
+      </div>
+      <div className="_bg-light _mx-4 lg:_mx-72 _py-7 _px-4 _rounded-3xl">
+        <div className="_text-center _mb-6">
+          <span className="_text-xl _font-semibold text-gradient">
+            {t("subscription_how_it_works")}
+          </span>
         </div>
+        <div className="_whitespace-pre-wrap">
+          {reactStringReplace(
+            t("subscription_page_description"),
+            FIGURE_BRACKETS_REGEX,
+            (match) => (
+              <b key={match}>{match}</b>
+            ),
+          )}
+        </div>
+        {/*<br />*/}
+        {/*🚨 {t("subscription_page_window_disappear")}{" "}*/}
+        {/*<a*/}
+        {/*  className="_text-primary hover:_text-primary-dark _break-all"*/}
+        {/*  href={`${process.env.NEXT_PUBLIC_SITE_URL}${locale}/subscription`}*/}
+        {/*  target="_blank"*/}
+        {/*  rel="noopener noreferrer"*/}
+        {/*>*/}
+        {/*  {process.env.NEXT_PUBLIC_SITE_URL}*/}
+        {/*  {locale}/subscription*/}
+        {/*</a>*/}
+      </div>
+      <div className="_mt-6 _mx-4 lg:_mx-72">
+        <Button title={t("create_account")} className="_w-full" disabled />
       </div>
       <Footer t={t} />
     </>

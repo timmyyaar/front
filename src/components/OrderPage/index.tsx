@@ -138,7 +138,7 @@ export const OrderPage = ({ discounts }: OrderPageProps) => {
     <div className="order-page">
       <div>
         <div
-          className={`header-wrapper _text-2xl _font-semibold _text-primary
+          className={`header-wrapper _text-2xl _font-semibold _text-primary hover:_text-primary-dark _group
             _px-24 _h-14 _mb-10 _border-b _border-solid _border-light _px-5-percents-mobile
             _flex _items-center`}
         >
@@ -148,7 +148,7 @@ export const OrderPage = ({ discounts }: OrderPageProps) => {
               router.push(`/${lang}/order?${searchParams.toString()}`);
             }}
           >
-            <div className="_h-7 _w-7 _mr-3 _cursor-pointer _text-gray-dark hover:_text-primary">
+            <div className="_h-7 _w-7 _mr-3 _cursor-pointer _text-gray-dark group-hover:_text-primary">
               <LeftArrow className="_w-full _h-full" />
             </div>
             {i18n.t(categoryTitle)}

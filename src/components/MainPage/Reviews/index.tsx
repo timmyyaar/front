@@ -17,13 +17,13 @@ interface Props {
 const Reviews = ({ t, reviews }: Props) => {
   const visibleReviews = useMemo(
     () => reviews.filter(({ visible }) => visible),
-    [reviews]
+    [reviews],
   );
 
   return reviews.length ? (
     <section className="_px-5-percents-mobile lg:_px-24 _mb-14 lg:_mb-0">
       <section className="_main-title">
-        {t(WHAT_CLIENTS_SAY_KEY)}
+        <span className="text-gradient">{t(WHAT_CLIENTS_SAY_KEY)}</span>
       </section>
       <section className="_py-8 mobile-none">
         <SliderInfinite

@@ -17,7 +17,7 @@ export const Instruction = ({ title, cardsCount, t }: any) => {
             }))
             .map((el, i) => (
               <div
-                className={`_group hover:_bg-light-dark active:_bg-light-dark _transition-all _min-h-44
+                className={`_group hover:_shadow-custom-light-dark hover:_bg-light-dark active:_bg-light-dark _transition-all _min-h-44
                   _rounded-2xl _bg-light _flex _flex-col _justify-center _relative`}
                 key={el.step}
               >

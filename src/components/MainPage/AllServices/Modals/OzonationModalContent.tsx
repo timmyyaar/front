@@ -118,7 +118,7 @@ function OzonationModalContent({
               </div>
             </div>
             <div
-              className={`_invisible group-hover:_invisible _absolute
+              className={`_invisible group-hover:_visible _absolute
                 _left-0 _text-center _px-2`}
             >
               {t(description)}

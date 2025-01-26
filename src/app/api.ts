@@ -38,3 +38,7 @@ export async function getMainServices() {
 export async function getSubServices() {
   return await request({ url: "sub-services", cache: "no-store" });
 }
+
+export async function getOrdersCount() {
+  return await request({ url: "order/orders-count", cache: "no-store" });
+}

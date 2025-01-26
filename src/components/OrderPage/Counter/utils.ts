@@ -9,7 +9,6 @@ export const getCounterByMainService = (mainService: string) => {
     case "Eco cleaning":
     case "Regular":
     case "Deep":
-    case "Subscription":
       return [
         {
           type: "counter",

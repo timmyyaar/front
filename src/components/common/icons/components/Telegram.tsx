@@ -2,9 +2,13 @@ import React from "react";
 
 interface TelegramIconProps {
   isTransparent?: boolean;
+  className?: string;
 }
 
-export const TelegramIcon = ({ isTransparent }: TelegramIconProps) =>
+export const TelegramIcon = ({
+  isTransparent,
+  className,
+}: TelegramIconProps) =>
   isTransparent ? (
     <svg
       width="24"
@@ -12,6 +16,7 @@ export const TelegramIcon = ({ isTransparent }: TelegramIconProps) =>
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         fillRule="evenodd"
@@ -27,25 +32,33 @@ export const TelegramIcon = ({ isTransparent }: TelegramIconProps) =>
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
-      <path
-        d="M22.0517 0.729594L0.788779 8.97144C-0.0668777 9.35525 -0.356284 10.1239 0.581966 10.541L6.03681 12.2835L19.2259 4.0902C19.9461 3.57584 20.6833 3.713 20.0489 4.27883L8.72125 14.5883L8.36542 18.9512C8.695 19.6249 9.29847 19.628 9.6834 19.2932L12.8174 16.3124L18.1848 20.3525C19.4314 21.0943 20.1098 20.6156 20.378 19.2559L23.8985 2.49945C24.2641 0.825781 23.6407 0.0883438 22.0517 0.729594Z"
-        fill="url(#paint1_radial_11916_93924)"
-      />
+      <g clip-path="url(#clip0_14163_9009)">
+        <path
+          d="M22.5517 2.53038L1.28878 10.7722C0.433122 11.156 0.143716 11.9246 1.08197 12.3418L6.53681 14.0843L19.7259 5.89098C20.4461 5.37663 21.1833 5.51378 20.5489 6.07961L9.22125 16.3891L8.86542 20.752C9.195 21.4256 9.79847 21.4288 10.1834 21.094L13.3174 18.1132L18.6848 22.1532C19.9314 22.8951 20.6098 22.4163 20.878 21.0566L24.3985 4.30023C24.7641 2.62656 24.1407 1.88913 22.5517 2.53038Z"
+          fill="url(#paint0_radial_14163_9009)"
+        />
+      </g>
       <defs>
         <radialGradient
-          id="paint1_radial_11916_93924"
+          id="paint0_radial_14163_9009"
           cx="0"
           cy="0"
           r="1"
           gradientUnits="userSpaceOnUse"
-          gradientTransform="translate(12 10.6004) rotate(90) scale(10.1004 12)"
+          gradientTransform="translate(12.5 12.4012) rotate(90) scale(10.1004 12)"
         >
-          <stop stopColor="#19286D" />
-          <stop offset="1" stopColor="#214AFF" />
+          <stop stopColor="#5A74E8" />
+          <stop offset="1" stopColor="#173CDC" />
         </radialGradient>
-        <clipPath id="clip0_11916_93924">
-          <rect width="24" height="24" fill="white" />
+        <clipPath id="clip0_14163_9009">
+          <rect
+            width="24"
+            height="24"
+            fill="white"
+            transform="translate(0.5 0.300781)"
+          />
         </clipPath>
       </defs>
     </svg>
