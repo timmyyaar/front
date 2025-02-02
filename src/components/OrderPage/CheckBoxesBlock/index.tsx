@@ -10,7 +10,7 @@ import React, {
 
 import CheckBox from "./components/Checkbox";
 
-import checkListSvg from "./icons/check-list.svg";
+import checkListPng from "./icons/check-list.png";
 import {
   ALL_SERVICE,
   ALL_SUB_SERVICES,
@@ -130,7 +130,7 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
       })}
       {isOffice ? (
         <CheckBox
-          icon={checkListSvg}
+          icon={checkListPng}
           title={"we_provide_our_own_check_list"}
           setCheck={setOwnCheckList}
           checked={ownCheckList}
