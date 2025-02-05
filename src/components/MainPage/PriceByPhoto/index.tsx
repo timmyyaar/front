@@ -41,7 +41,7 @@ export const PriceByPhoto = (props: any) => {
             className={`_flex _justify-center _items-center _gap-2 _bg-primary
               hover:_bg-primary-dark active:_bg-primary-dark _text-white _px-6 _py-4 _transition-all _text-center
               _font-medium _border-40 _cursor-pointer`}
-            href="https://t.me/takeyoourtime"
+            href="https://t.me/takeyourtime_pln"
             target="_blank"
           >
             <TelegramIcon isTransparent />
@@ -89,7 +89,7 @@ export const PriceByPhoto = (props: any) => {
             className={`_flex _justify-center _items-center _gap-2 _bg-primary
               hover:_bg-primary-dark active:_bg-primary-dark _text-white lg:_px-6 _py-4 _transition-all _text-center
               _font-medium _border-40 _cursor-pointer`}
-            href="https://t.me/takeyoourtime"
+            href="https://t.me/takeyourtime_pln"
             target="_blank"
           >
             <TelegramIcon isTransparent />
