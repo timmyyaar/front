@@ -56,7 +56,7 @@ const SOCIAL_MEDIA_LINKS = {
   [SOCIAL_MEDIAS.GOOGLE]: "https://maps.app.goo.gl/uTEhCrLkdEXG6DDd8",
   [SOCIAL_MEDIAS.INSTAGRAM]: "https://www.instagram.com/takeyourtime_pln/",
   [SOCIAL_MEDIAS.WHATSAPP]: "https://wa.me/48730003997",
-  [SOCIAL_MEDIAS.TELEGRAM]: "https://t.me/takeyoourtime",
+  [SOCIAL_MEDIAS.TELEGRAM]: "https://t.me/takeyourtime_pln",
 };
 
 export const Header = () => {
