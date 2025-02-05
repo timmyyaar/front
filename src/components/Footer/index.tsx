@@ -36,7 +36,7 @@ export const Footer = (props: any) => {
       <div className="_mb-5 _text-dark _flex _justify-center _gap-3 text-gradient">
         <a
           className="icon"
-          href="https://t.me/takeyoourtime"
+          href="https://t.me/takeyourtime_pln"
           target="_blank"
           onClick={() => trackSocialMediaClick("Telegram")}
         >

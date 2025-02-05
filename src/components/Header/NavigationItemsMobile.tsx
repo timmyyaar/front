@@ -79,7 +79,7 @@ const NavigationItemsMobile = ({
         <div className="_flex _gap-3">
           <a
             className="icon _flex _flex-col _justify-center"
-            href="https://t.me/takeyoourtime"
+            href="https://t.me/takeyourtime_pln"
             target="_blank"
             onClick={() => trackSocialMediaClick("Telegram")}
           >
