@@ -143,7 +143,7 @@ export const Header = () => {
       <nav className="_flex _w-full _items-center">
         <div className="_m-0 lg:_mr-3 _flex">
           <div
-            className="navbar-brand _flex _items-center _cursor-pointer"
+            className="_flex _items-center _cursor-pointer"
             onClick={() => {
               router.push(`/${lang}?${searchParams.toString()}`);
             }}

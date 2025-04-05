@@ -1,4 +1,4 @@
-import Blogs from "@/components/Blogs";
+import Blogs from "@/components/Blogs/Blog";
 import React from "react";
 import { getLocales } from "@/app/api";
 import { Providers } from "@/components/Providers";

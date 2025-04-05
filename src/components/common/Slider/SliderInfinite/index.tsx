@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC, useState, type JSX } from "react";
 
 import { LeftArrow } from "../icons/LeftArrow";
 import { RightArrow } from "../icons/RightArrow";

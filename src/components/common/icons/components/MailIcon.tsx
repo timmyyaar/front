@@ -30,7 +30,7 @@ const MailIcon = ({ isTransparent }: MailIconProps) =>
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_13586_105783)">
+      <g clipPath="url(#clip0_13586_105783)">
         <path
           d="M22 8.03516V17.5002C22 18.2654 21.7077 19.0017 21.1827 19.5584C20.6578 20.1152 19.9399 20.4503 19.176 20.4952L19 20.5002H5C4.23479 20.5002 3.49849 20.2078 2.94174 19.6829C2.38499 19.1579 2.04989 18.4401 2.005 17.6762L2 17.5002V8.03516L11.445 14.3322L11.561 14.3982C11.6977 14.465 11.8478 14.4997 12 14.4997C12.1522 14.4997 12.3023 14.465 12.439 14.3982L12.555 14.3322L22 8.03516Z"
           fill="url(#paint0_radial_13586_105783)"
@@ -49,8 +49,8 @@ const MailIcon = ({ isTransparent }: MailIconProps) =>
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 14.2677) rotate(90) scale(6.2325 10)"
         >
-          <stop stop-color="#5A74E8" />
-          <stop offset="1" stop-color="#173CDC" />
+          <stop stopColor="#5A74E8" />
+          <stop offset="1" stopColor="#173CDC" />
         </radialGradient>
         <radialGradient
           id="paint1_radial_13586_105783"
@@ -60,8 +60,8 @@ const MailIcon = ({ isTransparent }: MailIconProps) =>
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.0003 8.3985) rotate(90) scale(3.8985 9.555)"
         >
-          <stop stop-color="#5A74E8" />
-          <stop offset="1" stop-color="#173CDC" />
+          <stop stopColor="#5A74E8" />
+          <stop offset="1" stopColor="#173CDC" />
         </radialGradient>
         <clipPath id="clip0_13586_105783">
           <rect

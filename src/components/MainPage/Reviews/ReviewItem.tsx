@@ -27,7 +27,9 @@ function ReviewItem({ review, t }: Props) {
   return (
     <section className="_h-64 _bg-light _rounded-xl lg:_m-2.5 _p-5 _text-center _flex _flex-col _w-full">
       <span
-        ref={(element) => setReviewItem(element)}
+        ref={element => {
+          setReviewItem(element);
+        }}
         className="_line-clamp-4 _text-ellipsis"
         title={isEllipsis ? review.text : ""}
       >
