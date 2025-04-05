@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
-import {StaticImageData} from "next/image";
+import { StaticImageData } from "next/image";
 
-export type Blog = {
+export type TBlog = {
   id: number;
   title: string;
   text: string;

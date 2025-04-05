@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type JSX } from "react";
 
 import logoSvg from "@/assets/icons/common/logo.svg";
 

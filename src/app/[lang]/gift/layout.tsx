@@ -3,7 +3,7 @@ import { ALTERNATES_LANGUAGES } from "@/app/constants";
 import { Language } from "@/types";
 
 type MetadataProps = {
-  params: { lang: Language };
+  params: Promise<{ lang: Language }>;
 };
 
 const titleByLanguage = {
@@ -21,7 +21,7 @@ const descriptionByLanguage = {
 };
 
 export async function generateMetadata({ params }: MetadataProps) {
-  const { lang } = params;
+  const { lang } = await params;
 
   return {
     title: titleByLanguage[lang],

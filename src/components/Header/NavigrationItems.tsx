@@ -20,7 +20,7 @@ const NavigationItems = ({ t }: NavigationItemsProps) => {
     { href: "/subscription", title: "Subscription header" },
     { href: "/career", title: "Career header" },
     { href: "/gift", title: "Gift header" },
-    { href: "#blog", title: "Blog" },
+    { href: "/blogs", title: "Blog" },
   ];
 
   const city = searchParams.get("city");
