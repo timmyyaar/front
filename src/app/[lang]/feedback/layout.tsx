@@ -3,11 +3,11 @@ import { ALTERNATES_LANGUAGES } from "@/app/constants";
 import { Language } from "@/types";
 
 type MetadataProps = {
-  params: { lang: Language };
+  params: Promise<{ lang: Language }>;
 };
 
 export async function generateMetadata({ params }: MetadataProps) {
-  const { lang } = params;
+  const { lang } = await params;
 
   return {
     alternates: {
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: MetadataProps) {
           ...result,
           [`${hrefLang}`]: `https://www.takeutime.pl/${language}/feedback`,
         }),
-        {}
+        {},
       ),
     },
   };

@@ -1,11 +1,11 @@
 import BlogItem from "@/components/MainPage/Blogs/Blog";
 import SliderStep from "@/components/common/Slider/SliderStep";
 import Swiper from "@/components/common/Swiper";
-import { Blog } from "@/types";
+import { TBlog } from "@/types";
 
 interface BlogsProps {
   t: (text: string, defaultText?: string) => string;
-  blogs: Blog[];
+  blogs: TBlog[];
 }
 
 function Blogs({ t, blogs }: BlogsProps) {

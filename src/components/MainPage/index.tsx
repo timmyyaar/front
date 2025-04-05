@@ -17,11 +17,11 @@ import Reviews from "@/components/MainPage/Reviews";
 import { LocaleContext } from "@/components/Providers";
 import Blogs from "@/components/MainPage/Blogs";
 import { sendGAEvent } from "@/google-analytics";
-import { Blog } from "@/types";
+import { TBlog } from "@/types";
 import { Review } from "@/components/MainPage/Reviews/types";
 
 interface MainPageProps {
-  blogs: Blog[];
+  blogs: TBlog[];
   reviews: Review[];
   ordersCount: number;
 }

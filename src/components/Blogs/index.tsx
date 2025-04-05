@@ -1,12 +1,9 @@
 "use client";
 
-import { useParams } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
-import reactStringReplace from "react-string-replace";
-import Image from "next/image";
 
 import searchSvg from "./icons/search.svg";
-import { Blog } from "@/types";
+import { TBlog } from "@/types";
 import { Footer } from "@/components/Footer";
 import { useLocales } from "@/hooks/useLocales";
 import { LocaleContext } from "@/components/Providers";
@@ -17,7 +14,7 @@ import Tags from "@/components/Blogs/components/Tags";
 const TITLE_REGEXP = /{([^}]*)}/g;
 
 interface BlogsProps {
-  blogs: Blog[];
+  blogs: TBlog[];
 }
 
 function Blogs({ blogs }: BlogsProps) {

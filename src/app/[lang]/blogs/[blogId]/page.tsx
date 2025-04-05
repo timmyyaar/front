@@ -8,15 +8,15 @@ import { Language } from "@/types";
 import { ALTERNATES_LANGUAGES } from "@/app/constants";
 
 interface BlogProps {
-  params: { blogId: string };
+  params: Promise<{ blogId: string }>;
 }
 
 type MetadataProps = {
-  params: { lang: Language; blogId: string };
+  params: Promise<{ lang: Language; blogId: string }>;
 };
 
 export async function generateMetadata({ params }: MetadataProps) {
-  const { lang, blogId } = params;
+  const { lang, blogId } = await params;
 
   const locales = await getLocales();
 
@@ -27,10 +27,10 @@ export async function generateMetadata({ params }: MetadataProps) {
         ...result,
         [item.key]: item.value,
       }),
-      {}
+      {},
     );
 
-  const blog = await getBlog(params.blogId);
+  const blog = await getBlog(blogId);
 
   return {
     title: currentLanguageLocales[`blogs_title_${blog.id}`],
@@ -42,15 +42,17 @@ export async function generateMetadata({ params }: MetadataProps) {
           ...result,
           [`${hrefLang}`]: `https://www.takeutime.pl/${language}/blogs/${blogId}`,
         }),
-        {}
+        {},
       ),
     },
   };
 }
 
 export default async function Page({ params }: BlogProps) {
+  const { blogId } = await params;
+
   const locales = await getLocales();
-  const blog = await getBlog(params.blogId);
+  const blog = await getBlog(blogId);
 
   return (
     <Providers locales={locales}>

@@ -1,8 +1,8 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Blog } from "@/types";
+import { TBlog } from "@/types";
 
 interface BlogProps {
-  blog: Blog;
+  blog: TBlog;
   t: (text: string, defaultValue: string) => string;
 }
 
