@@ -21,11 +21,11 @@ const Reviews = ({ t, reviews }: Props) => {
   );
 
   return reviews.length ? (
-    <section className="_px-5-percents-mobile lg:_px-24 _mb-14 lg:_mb-0">
-      <section className="_main-title">
+    <section className="px-5-percents-mobile lg:px-24 mb-14 lg:mb-0">
+      <section className="main-title">
         <span className="text-gradient">{t(WHAT_CLIENTS_SAY_KEY)}</span>
       </section>
-      <section className="_py-8 mobile-none">
+      <section className="py-8 mobile-none">
         <SliderInfinite
           elements={visibleReviews.map((review) => (
             <ReviewItem key={review.id} review={review} t={t} />
@@ -39,9 +39,9 @@ const Reviews = ({ t, reviews }: Props) => {
           ))}
         />
       </section>
-      <section className="_flex _justify-center">
+      <section className="flex justify-center">
         <a
-          className="_w-1/2 lg:_w-1/4 _bg-primary hover:_bg-primary-dark active:_bg-primary-dark _text-white _px-6 _py-4 _transition-all _text-center _font-medium _border-40 _cursor-pointer"
+          className="w-1/2 lg:w-1/4 bg-primary hover:bg-primary-dark active:bg-primary-dark text-white px-6 py-4 transition-all text-center font-medium rounded-40-px cursor-pointer"
           href={GOOGLE_REVIEW_REDIRECT_LINK}
           target="_blank"
         >

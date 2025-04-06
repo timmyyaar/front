@@ -16,23 +16,23 @@ export const Switcher: FC<Props> = ({
   t = (str: string) => str,
 }) => (
   <div
-    className={`_border-solid _border-2 _border-primary _z-0 _relative _w-full _rounded-full
-      _min-w-72 _h-12 lg:_h-16 _grid _grid-cols-2 _justify-around`}
+    className={`border-solid border-2 border-primary z-0 relative w-full rounded-full
+      min-w-72 h-12 lg:h-16 grid grid-cols-2 justify-around`}
   >
     {tabs.map((el: string, i) => (
       <div
-        className={`_flex _items-center _justify-center hover:_text-primary-dark
-          active:_text-primary-dark _text-sm lg:_text-base _h-full _z-20 _text-center
-          _font-medium _whitespace-nowrap __w-full _px-4 _cursor-pointer`}
+        className={`flex items-center justify-center hover:text-primary-dark
+          active:text-primary-dark text-sm lg:text-base h-full z-20 text-center
+          font-medium whitespace-nowrap w-full px-4 cursor-pointer`}
         onClick={() => onClick(el)}
         key={el}
       >
         <span
           className={
-            el === tab ? "_transition-all _duration-500 _text-white" : ""
+            el === tab ? "transition-all duration-500 text-white" : ""
           }
         >
-          <div className="_flex _items-center _gap-2">
+          <div className="flex items-center gap-2">
             {icons?.length ? <div>{icons[i]}</div> : null}
             <b>{t(el)}</b>
           </div>
@@ -40,9 +40,9 @@ export const Switcher: FC<Props> = ({
       </div>
     ))}
     <div
-      className={`_transition-all _duration-300 _rounded-full _w-1/2
-        _z-10 _absolute _bg-primary _h-full ${
-          tabs.indexOf(tab) === 0 ? "_-left-px" : "_left-1/2"
+      className={`transition-all duration-300 rounded-full w-1/2
+        z-10 absolute bg-primary h-full ${
+          tabs.indexOf(tab) === 0 ? "-left-px" : "left-1/2"
         }`}
     />
   </div>

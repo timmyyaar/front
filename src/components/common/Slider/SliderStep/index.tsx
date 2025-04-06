@@ -33,23 +33,23 @@ const SliderStep = ({ elements, itemsPerPage = 4 }: SliderStepProps) => {
   };
 
   return (
-    <div className="_relative">
+    <div className="relative">
       <div
-        className="_group _cursor-pointer _absolute _top-1/2 _-translate-y-2/4 _-left-12"
+        className="group cursor-pointer absolute top-1/2 -translate-y-2/4 -left-12"
         onClick={prevSlide}
       >
-        <LeftArrow className="group-hover:_text-primary _transition-all" />
+        <LeftArrow className="group-hover:text-primary transition-all" />
       </div>
-      <div className="_overflow-hidden">
+      <div className="overflow-hidden">
         <div
-          className="_flex _transition-transform _duration-500 ease-in-out"
+          className="flex transition-transform duration-500 ease-in-out"
           style={{
             transform: `translateX(-${transform}%)`,
           }}
         >
           {elements.map((el, index) => (
             <div
-              className={`_flex-shrink-0 _w-1/${itemsPerPage} _flex _items-center _justify-center`}
+              className={`flex-shrink-0 w-1/${itemsPerPage} flex items-center justify-center`}
               key={index}
             >
               {el}
@@ -58,10 +58,10 @@ const SliderStep = ({ elements, itemsPerPage = 4 }: SliderStepProps) => {
         </div>
       </div>
       <div
-        className="_group _cursor-pointer _absolute _top-1/2 _-translate-y-2/4 _-right-12"
+        className="group cursor-pointer absolute top-1/2 -translate-y-2/4 -right-12"
         onClick={nextSlide}
       >
-        <RightArrow className="group-hover:_text-primary _transition-all" />
+        <RightArrow className="group-hover:text-primary transition-all" />
       </div>
     </div>
   );

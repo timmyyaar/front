@@ -26,15 +26,15 @@ function Dropdown({
 
   return (
     <div
-      className="_flex _justify-between _items-center _relative _text-dark _cursor-pointer _group"
+      className="flex justify-between items-center relative text-dark cursor-pointer group"
       onClick={(e) => {
         e.preventDefault();
         setIsDropdownOpened(true);
       }}
     >
       <div
-        className={`_px-4 _py-2 _flex _gap-1 group-hover:_rounded-full
-              group-hover:_outline group-hover:_outline-1 group-hover:_outline-primary-light`}
+        className={`px-4 py-2 flex gap-1 group-hover:rounded-full
+              group-hover:outline group-hover:outline-1 group-hover:outline-primary-light`}
         onClick={(e) => {
           e.preventDefault();
         }}
@@ -43,25 +43,25 @@ function Dropdown({
           plainContent
         ) : (
           <div
-            className={`nav-link text-gradient ${isBoldText ? "_text-sm lg:_text-lg _font-semibold" : ""}`}
+            className={`nav-link text-gradient ${isBoldText ? "text-sm lg:text-lg font-semibold" : ""}`}
           >
             {t(value)}
           </div>
         )}
-        <div className="_flex _items-center">
-          <Polygon className="_text-primary-dark group-hover:_text-primary" />
+        <div className="flex items-center">
+          <Polygon className="text-primary-dark group-hover:text-primary" />
         </div>
       </div>
       {isDropdownOpened ? (
         <div
-          className="_z-50 _absolute _top-full _rounded-xl _border _border-solid _border-primary-light _bg-white"
+          className="z-50 absolute top-full rounded-xl border border-solid border-primary-light bg-white"
           ref={dropdownMenuRef}
         >
           {options.map(({ icon, value }) => (
             <div
-              className={`_py-2 _pr-6 _pl-4 hover:_bg-primary-background active:_bg-primary-background
-                    first:_rounded-t-xl last:_rounded-b-xl last:_border-b-0
-                    _border-b _border-solid _border-primary-light _flex _items-center _gap-2`}
+              className={`py-2 pr-6 pl-4 hover:bg-primary-background active:bg-primary-background
+                    first:rounded-t-xl last:rounded-b-xl last:border-b-0
+                    border-b border-solid border-primary-light flex items-center gap-2`}
               onClick={(e) => {
                 onSelect(e, value);
                 setIsDropdownOpened(false);
@@ -70,7 +70,7 @@ function Dropdown({
             >
               {Boolean(icon) && icon}
               <span
-                className={`${isBoldText ? "_text-sm lg:_text-lg _font-semibold text-gradient" : ""}`}
+                className={`${isBoldText ? "text-sm lg:text-lg font-semibold text-gradient" : ""}`}
               >
                 {translateOptions ? t(value) : value}
               </span>

@@ -41,58 +41,58 @@ const Cities = ({ city, setCity, t, callback }: CitiesProps) => {
   );
 
   return (
-    <div className="city-wrapper _relative _flex _w-full" ref={dropdownRef}>
+    <div className="relative flex w-full" ref={dropdownRef}>
       {!isDropdownOpened && (
         <div
-          className={`_group _p-3.5 _cursor-pointer _w-full _border _border-solid
-            _border-gray _rounded-xl _flex _items-center _bg-light`}
+          className={`group p-3.5 cursor-pointer w-full border border-solid
+            border-gray rounded-xl flex items-center bg-light`}
           onClick={onDropdownOpen}
         >
-          <div className="_w-full">{t(city.name)}</div>
+          <div className="w-full">{t(city.name)}</div>
           <div className="px-2">
-            <CaretDownIcon className="group-hover:_text-primary" />
+            <CaretDownIcon className="group-hover:text-primary" />
           </div>
         </div>
       )}
       {isDropdownOpened && (
         <>
           <input
-            className={`_p-3.5 _cursor-pointer _w-full _border _border-solid
-              _border-gray _rounded-xl _flex _items-center _bg-light _outline-0 _rounded-b-none`}
+            className={`p-3.5 cursor-pointer w-full border border-solid
+              border-gray rounded-xl flex items-center bg-light outline-0 rounded-b-none`}
             autoFocus
             value={searchValue}
             onChange={({ target: { value } }) => setSearchValue(value)}
           />
           <div
-            className={`custom-scroll _absolute _top-full _w-full _bg-light
-              _max-h-80 _overflow-auto _shadow-md _border _border-solid _border-gray
-              _border-t-0 _rounded-b-xl _z-10`}
+            className={`custom-scroll absolute top-full w-full bg-light
+              max-h-80 overflow-auto shadow-md border border-solid border-gray
+              border-t-0 rounded-b-xl z-10`}
           >
             {filteredCountries.length > 0 ? (
               filteredCountries.map(({ name, price }) => (
                 <div
                   key={name}
-                  className={`_py-4 _px-3.5 _flex _items-center _cursor-pointer
-                    hover:_opacity-70 [&:not(:last-child)]:_border-b _border-solid
-                    _border-gray-light`}
+                  className={`py-4 px-3.5 flex items-center cursor-pointer
+                    hover:opacity-70 [&:not(:last-child)]:border-b border-solid
+                    border-gray-light`}
                   onClick={() => onCitySelect({ name, price })}
                 >
                   <span
-                    className={`_mr-2 _whitespace-nowrap _overflow-hidden _text-ellipsis ${
-                      city.name === name ? "_font-bold" : ""
+                    className={`mr-2 whitespace-nowrap overflow-hidden text-ellipsis ${
+                      city.name === name ? "font-bold" : ""
                     }`}
                   >
                     {t(name)}
                   </span>
                   {price > 0 && (
-                    <div className="_py-1.5 _px-2 _bg-warning _rounded-full _font-semibold">
+                    <div className="py-1.5 px-2 bg-warning rounded-full font-semibold">
                       <div className="price">+{price} zl</div>
                     </div>
                   )}
                 </div>
               ))
             ) : (
-              <div className="_py-4 _px-3.5 _flex _items-center _select-none">
+              <div className="py-4 px-3.5 flex items-center select-none">
                 {t("no_cities_message")}
               </div>
             )}

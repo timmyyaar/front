@@ -48,11 +48,11 @@ function AirbnbModalContent({
 
   return (
     <>
-      <div className="_text-center">
-        <div className="_mb-4 lg:_mb-6 _text-center">
-          <span className="_main-title text-gradient">{t("airbnb_title")}</span>
+      <div className="text-center">
+        <div className="mb-4 lg:mb-6 text-center">
+          <span className="main-title text-gradient">{t("airbnb_title")}</span>
         </div>
-        <div className="_mb-8 lg:_mb-16">
+        <div className="mb-8 lg:mb-16">
           {reactStringReplace(
             t("airbnb_description"),
             FIGURE_BRACKETS_REGEX,
@@ -63,9 +63,9 @@ function AirbnbModalContent({
         </div>
       </div>
       {!isOrder && (
-        <div className="_mt-8 lg:_mt-16">
-          <div className="_mb-4 lg:_mb-6 _text-center">
-            <span className="_main-title text-gradient">{t("Prices")}</span>
+        <div className="mt-8 lg:mt-16">
+          <div className="mb-4 lg:mb-6 text-center">
+            <span className="main-title text-gradient">{t("Prices")}</span>
           </div>
           <Costs
             t={t}

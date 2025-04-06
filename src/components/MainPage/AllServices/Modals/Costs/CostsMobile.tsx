@@ -37,14 +37,14 @@ function CostsMobile({
     isSubscription && !Array.isArray(costs) ? costs[salesCost] : costs;
 
   return (
-    <div className="_flex _flex-col _gap-5">
+    <div className="flex flex-col gap-5">
       {isSubscription && (
-        <div className="_flex _gap-4 _justify-between">
+        <div className="flex gap-4 justify-between">
           {SALES.map(({ title, sale }) => (
             <div
               key={title}
-              className={`_py-3 _px-2 _flex _flex-col _justify-center _items-center _gap-2 ${
-                title === salesCost ? "_bg-primary _text-white _rounded-md" : ""
+              className={`py-3 px-2 flex flex-col justify-center items-center gap-2 ${
+                title === salesCost ? "bg-primary text-white rounded-md" : ""
               }`}
               onClick={(event) => {
                 event.nativeEvent.stopImmediatePropagation();
@@ -52,20 +52,20 @@ function CostsMobile({
               }}
             >
               <div
-                className={`_text-black _text-lg _rounded-full _bg-warning
-                  _font-bold _p-2 _text-center _w-max`}
+                className={`text-black text-lg rounded-full bg-warning
+                  font-bold p-2 text-center w-max`}
               >
                 {t(sale)}
               </div>
-              <div className="_text-center _text-sm _font-bold">{t(title)}</div>
+              <div className="text-center text-sm font-bold">{t(title)}</div>
             </div>
           ))}
         </div>
       )}
       {isSingleItem ? (
-        <div className="_flex _flex-col _rounded-xl _bg-light _p-6 _gap-10">
+        <div className="flex flex-col rounded-xl bg-light p-6 gap-10">
           <div>
-            <div className="_flex _justify-center">
+            <div className="flex justify-center">
               <Image
                 src={discountPng}
                 alt="Discount"
@@ -73,39 +73,39 @@ function CostsMobile({
                 height={102}
               />
             </div>
-            <div className="_whitespace-pre _text-center">
+            <div className="whitespace-pre text-center">
               {reactStringReplace(
                 t("main_page_get_the_discount"),
                 FIGURE_BRACKETS_REGEX,
                 (match) => (
-                  <b className="_text-lg">{match}</b>
+                  <b className="text-lg">{match}</b>
                 ),
               )}
             </div>
           </div>
-          <div className="_flex _flex-col _gap-4">
+          <div className="flex flex-col gap-4">
             {firstItem.title && (
-              <div className="_font-semibold _text-center">
+              <div className="font-semibold text-center">
                 {typeof firstItem.title === "object"
                   ? firstItem.title
                   : t(firstItem.title as string)}
               </div>
             )}
             {firstItem.text && (
-              <div className="_text-gray-dark _whitespace-pre-wrap _text-center">
+              <div className="text-gray-dark whitespace-pre-wrap text-center">
                 {typeof firstItem.text === "object"
                   ? firstItem.text
                   : t(firstItem.text as string)}
               </div>
             )}
             {Boolean(firstItem.price) && (
-              <div className="_text-lg _font-bold _text-center">
+              <div className="text-lg font-bold text-center">
                 {firstItem.price}
                 {t("zl")}
               </div>
             )}
             <Button
-              className="_max-w-60 _max-w-full _font-semibold _py-3.5 _cursor-pointer _w-full"
+              className="max-w-60 max-w-full font-semibold py-3.5 cursor-pointer w-full"
               onClick={() => {
                 router.push(`${pathname}/${redirectPathname}`);
               }}
@@ -115,8 +115,8 @@ function CostsMobile({
         </div>
       ) : (
         <>
-          <div className="_flex _gap-4 _p-6 _rounded-xl _bg-light _items-center _justify-center">
-            <div className="_flex _items-center">
+          <div className="flex gap-4 p-6 rounded-xl bg-light items-center justify-center">
+            <div className="flex items-center">
               <Image
                 src={discountPng}
                 alt="Discount"
@@ -124,12 +124,12 @@ function CostsMobile({
                 height={102}
               />
             </div>
-            <div className="_whitespace-pre _text-center _h-max">
+            <div className="whitespace-pre text-center h-max">
               {reactStringReplace(
                 t("main_page_get_the_discount"),
                 FIGURE_BRACKETS_REGEX,
                 (match) => (
-                  <b className="_text-lg">{match}</b>
+                  <b className="text-lg">{match}</b>
                 ),
               )}
             </div>
@@ -140,7 +140,7 @@ function CostsMobile({
                 <>
                   <OzonationCosts t={t} />
                   <Button
-                    className="_max-w-60 _max-w-full _font-semibold _py-3.5 _cursor-pointer _w-full"
+                    className="max-w-60 max-w-full font-semibold py-3.5 cursor-pointer w-full"
                     onClick={() => {
                       router.push(`${pathname}/${redirectPathname}`);
                     }}
@@ -150,21 +150,21 @@ function CostsMobile({
               ) : (
                 <div
                   key={index}
-                  className="_rounded-xl _bg-light _py-7 _flex _flex-col _justify-center _items-center _w-full _gap-4 _whitespace-nowrap"
+                  className="rounded-xl bg-light py-7 flex flex-col justify-center items-center w-full gap-4 whitespace-nowrap"
                 >
                   {title && (
-                    <div className="_font-semibold _text-center">
+                    <div className="font-semibold text-center">
                       {typeof title === "object" ? title : t(title as string)}
                     </div>
                   )}
                   {Boolean(price) && (
-                    <div className="_flex _items-center">
-                      <div className="_text-lg _font-bold _text-center">
+                    <div className="flex items-center">
+                      <div className="text-lg font-bold text-center">
                         {price}
                         {t("zl")}
                       </div>
                       {Boolean(oldPrice) && (
-                        <div className="_line-through _text-gray-dark _ml-2">
+                        <div className="line-through text-gray-dark ml-2">
                           {oldPrice}
                           {t("zl")}
                         </div>
@@ -172,7 +172,7 @@ function CostsMobile({
                     </div>
                   )}
                   <Button
-                    className="_max-w-60 _font-semibold _py-3.5 _cursor-pointer _w-full"
+                    className="max-w-60 font-semibold py-3.5 cursor-pointer w-full"
                     onClick={() => {
                       router.push(`${pathname}/${redirectPathname}`);
                     }}
@@ -184,7 +184,7 @@ function CostsMobile({
         </>
       )}
       {Boolean(description) && (
-        <div className="_text-sm _text-gray-dark _px-6 _text-center">
+        <div className="text-sm text-gray-dark px-6 text-center">
           {t(description as string)}
         </div>
       )}

@@ -9,20 +9,20 @@ interface InputProps {
 function Input({ isBordered, icon, isRound, ...props }: InputProps) {
   return icon ? (
     <div
-      className={`${isRound ? "_rounded-full" : "_rounded-xl"} _flex _items-center _py-3 _px-3 _w-full _bg-light _outline-0 _text-gray-dark ${
-        isBordered ? "_border _border-solid _border-gray" : ""
+      className={`${isRound ? "rounded-full" : "rounded-xl"} flex items-center py-3 px-3 w-full bg-light outline-0 text-gray-dark ${
+        isBordered ? "border border-solid border-gray" : ""
       }`}
     >
-      <Image src={icon} alt="" className="_mr-1" />
+      <Image src={icon} alt="" className="mr-1" />
       <input
         {...props}
-        className={`_w-full _bg-light _outline-0 _text-gray-dark`}
+        className={`w-full bg-light outline-0 text-gray-dark`}
       />
     </div>
   ) : (
     <input
-      className={`${isRound ? "_rounded-full" : "_rounded-xl"} _py-3 _pl-3 _w-full _bg-light _outline-0 _text-gray-dark ${
-        isBordered ? "_border _border-solid _border-gray" : ""
+      className={`${isRound ? "rounded-full" : "rounded-xl"} py-3 pl-3 w-full bg-light outline-0 text-gray-dark ${
+        isBordered ? "border border-solid border-gray" : ""
       }`}
       {...props}
     />

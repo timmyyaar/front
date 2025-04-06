@@ -145,10 +145,10 @@ export const Counter: FC<IProps> = (props) => {
   const valueLength = value.toString().length;
 
   return (
-    <div className="_relative _w-full _h-12 lg:_h-20 _rounded-full _bg-light _overflow-hidden">
+    <div className="relative w-full h-12 lg:h-20 rounded-full bg-light overflow-hidden">
       <div
-        className={`_z-10 _cursor-pointer _absolute _top-1/2 _-translateY-50 _left-4 ${
-          limit ? "_text-gray-lighter" : "hover:_text-primary"
+        className={`z-10 cursor-pointer absolute top-1/2 -translate-y-1/2 left-4 ${
+          limit ? "text-gray-lighter" : "hover:text-primary"
         }`}
         onClick={limit ? () => {} : onMinus}
       >
@@ -158,7 +158,7 @@ export const Counter: FC<IProps> = (props) => {
           height="80"
           viewBox="0 0 81 80"
           fill="none"
-          className="_h-12 _w-12 lg:_h-auto lg:_w-auto"
+          className="h-12 w-12 lg:h-auto lg:w-auto"
         >
           <rect x="0.5" width="80" height="80" rx="40" fill="#f9f9f9" />
           <path
@@ -170,12 +170,12 @@ export const Counter: FC<IProps> = (props) => {
         </svg>
       </div>
       <div
-        className={`_absolute _top-1/2 _right-0 _left-0 _-translateY-50 _text-center
-          lg:_text-xl _select-none _font-semibold`}
+        className={`absolute top-1/2 right-0 left-0 -translate-y-1/2 text-center
+          lg:text-xl select-none font-semibold`}
       >
         <input
           type="text"
-          className="_bg-light"
+          className="bg-light"
           style={{
             textAlign: "end",
             outline: "none",
@@ -197,8 +197,7 @@ export const Counter: FC<IProps> = (props) => {
         )}
       </div>
       <div
-        className={`hover:_text-primary _cursor-pointer _absolute _top-1/2
-          _-translateY-50 _right-4`}
+        className={`hover:text-primary cursor-pointer absolute top-1/2 -translate-y-1/2 right-4`}
         onClick={onPlus}
       >
         <svg
@@ -207,7 +206,7 @@ export const Counter: FC<IProps> = (props) => {
           height="80"
           viewBox="0 0 81 80"
           fill="none"
-          className="_h-12 _w-12 lg:_h-auto lg:_w-auto"
+          className="h-12 w-12 lg:h-auto lg:w-auto"
         >
           <rect x="0.5" width="80" height="80" rx="40" fill="#f9f9f9" />
           <path

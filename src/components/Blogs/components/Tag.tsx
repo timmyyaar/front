@@ -7,7 +7,8 @@ interface TagProps {
 export default function Tag({ tag, isActive, onClick }: TagProps) {
   return (
     <div
-      className={`_cursor-pointer _bg-white _px-8 _py-5 _rounded-full ${isActive ? "_outline _outline-solid _outline-primary tw:text-primary" : ""}`}
+      className={`cursor-pointer bg-white px-8 py-5 rounded-full outline outline-solid hover:outline-primary
+        transition-all ${isActive ? "outline-primary text-primary" : "outline-white"}`}
       onClick={onClick}
     >
       {tag}

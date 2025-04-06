@@ -99,9 +99,9 @@ function Feedback() {
     <FinishedFeedback finishedRating={finishedRating} t={t} />
   ) : (
     <div
-      className={`_flex _flex-col lg:_flex-row _bg-light _py-8 _px-4
-        lg:_py-20 lg:_px-16 _gap-10 ${
-          orders.length > 1 ? "_h-auto lg:_h-screen" : "_h-screen"
+      className={`flex flex-col lg:flex-row bg-light py-8 px-4
+        lg:py-20 lg:px-16 gap-10 ${
+          orders.length > 1 ? "h-auto lg:h-screen" : "h-screen"
         }`}
     >
       {orders.map(({ id, title }) => (

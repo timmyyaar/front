@@ -29,8 +29,8 @@ interface ModalsProps {
 
 export const Modals = ({ title, onClose, t, isOrder }: ModalsProps) => {
   return (
-    <Modal className="_max-h-[80%] _bg-primary-background" onClose={onClose}>
-      <div className="_py-14 lg:_py-0">
+    <Modal className="max-h-[80%] bg-primary-background" onClose={onClose}>
+      <div className="py-14 lg:py-0">
         {title === "Regular" ? (
           <RegularCleaningModalContent t={t} isOrder={isOrder} />
         ) : null}

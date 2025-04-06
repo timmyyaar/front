@@ -138,27 +138,27 @@ export const OrderPage = ({ discounts }: OrderPageProps) => {
     <div className="order-page">
       <div>
         <div
-          className={`header-wrapper _text-2xl _font-semibold _text-primary hover:_text-primary-dark _group
-            _px-24 _h-14 _mb-10 _border-b _border-solid _border-light _px-5-percents-mobile
-            _flex _items-center`}
+          className={`text-2xl font-semibold text-primary hover:text-primary-dark group
+            px-24 h-14 mb-10 border-b border-solid border-light px-5-percents-mobile
+            flex items-center`}
         >
           <div
-            className="_cursor-pointer _flex _items-center"
+            className="cursor-pointer flex items-center"
             onClick={() => {
               router.push(`/${lang}/order?${searchParams.toString()}`);
             }}
           >
-            <div className="_h-7 _w-7 _mr-3 _cursor-pointer _text-gray-dark group-hover:_text-primary">
-              <LeftArrow className="_w-full _h-full" />
+            <div className="h-7 w-7 mr-3 cursor-pointer text-gray-dark group-hover:text-primary">
+              <LeftArrow className="w-full h-full" />
             </div>
             {i18n.t(categoryTitle)}
           </div>
         </div>
         <div
-          className={`_flex _flex-col lg:_flex-row _px-5-percents-mobile
-            _px-24 _gap-14 lg:_gap-10`}
+          className={`flex flex-col lg:flex-row px-5-percents-mobile
+            px-24 gap-14 lg:gap-10`}
         >
-          <div className="_gap-20 _flex _flex-col _w-full lg:_w-4/6">
+          <div className="gap-20 flex flex-col w-full lg:w-4/6">
             <ServicesList
               mainCategory={categoryTitle}
               t={i18n.t}
@@ -201,7 +201,7 @@ export const OrderPage = ({ discounts }: OrderPageProps) => {
                       t={i18n.t}
                     />
                   ) : (
-                    <div className="_flex _flex-col _gap-6">
+                    <div className="flex flex-col gap-6">
                       <CounterComponent
                         mainService={"Dry cleaning"}
                         setCounterValue={setSecondCounterValue}
@@ -227,7 +227,7 @@ export const OrderPage = ({ discounts }: OrderPageProps) => {
               setOwnCheckList={setOwnCheckList}
             />
           </div>
-          <div className="_w-full lg:_w-2/6 _min-w-2/6">
+          <div className="w-full lg:w-2/6 min-w-1/3">
             <Summary
               title={selectedService}
               counter={counterValue}

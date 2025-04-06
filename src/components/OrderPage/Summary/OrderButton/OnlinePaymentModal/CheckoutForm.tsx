@@ -100,12 +100,14 @@ function CheckoutForm({
   };
 
   return (
-    <div className="_w-full">
+    <div className="w-full">
       <div>
         <div
-          className={`_bg-primary _rounded-full _w-10 _h-10 _cursor-pointer
-            _absolute _top-4 _left-4 _flex _items-center _justify-center ${
-              isPaymentLoading ? "primary-button-disabled" : ""
+          className={`bg-primary rounded-full w-10 h-10 cursor-pointer
+            absolute top-4 left-4 flex items-center justify-center ${
+              isPaymentLoading
+                ? "bg-primary-disabled pointer-events-none cursor-default"
+                : ""
             }`}
           onClick={() => {
             if (!isPaymentLoading) {
@@ -116,8 +118,8 @@ function CheckoutForm({
           <ArrowDown />
         </div>
         <div
-          className="text-gradient _mt-14 lg:_mt-0 _mb-4 lg:_mb-8
-            lg:_text-2xl _font-semibold _text-center"
+          className="text-gradient mt-14 lg:mt-0 mb-4 lg:mb-8
+            lg:text-2xl font-semibold text-center"
         >
           {t("payment_modal_charges_title")}
         </div>
@@ -130,15 +132,15 @@ function CheckoutForm({
         }}
       />
       {(error || orderError || promoError) && (
-        <div className="_text-danger _mt-1 _text-center">
+        <div className="text-danger mt-1 text-center">
           {error || promoError
             ? t("promo_error_modal_title")
             : t("unexpected_error")}
         </div>
       )}
-      <div className="_flex _justify-center _mt-4">
+      <div className="flex justify-center mt-4">
         <Button
-          className="_w-full _max-w-full lg:_w-[30rem]"
+          className="w-full max-w-full lg:w-[30rem]"
           onClick={onPayClick}
           isLoading={isPaymentLoading}
           disabled={isPaymentLoading || !isPayButtonEnabled}

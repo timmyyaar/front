@@ -12,25 +12,25 @@ interface Props {
 
 export const ServiceItem: React.FC<Props> = ({ title, icon, t, onClick }) => (
   <div
-    className={`_py-4 _min-h-52 _rounded-2.5xl _bg-light _w-full
-      _flex _flex-col _justify-between _gap-5 _h-full`}
+    className={`py-4 min-h-52 rounded-[1.25rem] bg-light w-full
+      flex flex-col justify-between gap-5 h-full`}
   >
-    <div className="_text-center _text-sm lg:_text-lg _font-semibold _px-4">
+    <div className="text-center text-sm lg:text-lg font-semibold px-4">
       {title}
     </div>
-    <div className="_flex _justify-center">
+    <div className="flex justify-center">
       <Image src={icon} alt="" width={96} height={96} />
     </div>
     <div
-      className={`_flex _justify-center _cursor-pointer hover:_text-primary
-        _text-sm lg:_text-base`}
+      className={`flex justify-center cursor-pointer hover:text-primary
+        text-sm lg:text-base`}
     >
       <div
-        className="_flex _gap-2 _transition-all _items-center"
+        className="flex gap-2 transition-all items-center"
         onClick={onClick}
       >
-        <div className="_text-center">{t("How it works")}</div>
-        <div className="_cursor-pointer">
+        <div className="text-center">{t("How it works")}</div>
+        <div className="cursor-pointer">
           <Image src={moreDetailsPng} alt="" width="22" height="22" />
         </div>
       </div>

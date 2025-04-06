@@ -28,20 +28,20 @@ export const Slider: FC<Props> = (props) => {
   };
 
   return (
-    <div className="_relative">
+    <div className="relative">
       <div>
-        <div className="_mb-6 _relative">
+        <div className="mb-6 relative">
           <div
-            className={`_group _cursor-pointer _absolute _top-1/2
-              _-translate-y-2/4 _-left-12`}
+            className={`group cursor-pointer absolute top-1/2
+              -translate-y-2/4 -left-12`}
             onClick={prevSlide}
           >
-            <LeftArrow className="group-hover:_text-primary _transition-all" />
+            <LeftArrow className="group-hover:text-primary transition-all" />
           </div>
-          <div className="_overflow-hidden">
+          <div className="overflow-hidden">
             <div
-              className={`_grid _grid-rows-2 _grid-flow-col
-                _gap-y-4 _transition-transform _duration-500 ease-in-out`}
+              className={`grid grid-rows-2 grid-flow-col
+                gap-y-4 transition-transform duration-500 ease-in-out`}
               style={{
                 transform: `translateX(-${currentSlide * 25}%)`,
                 gridTemplateColumns: `repeat(${lengthDivider}, ${100 / step}%)`
@@ -49,8 +49,8 @@ export const Slider: FC<Props> = (props) => {
             >
               {elements.map((item, index) => (
                 <div
-                  className={`_w-full _flex-shrink-0 _w-1/4 _flex
-                   _px-2.5 _items-center _justify-center`}
+                  className={`w-full flex-shrink-0 w-1/4 flex
+                   px-2.5 items-center justify-center`}
                   key={index}
                 >
                   {item}
@@ -59,20 +59,20 @@ export const Slider: FC<Props> = (props) => {
             </div>
           </div>
           <div
-            className="_group _cursor-pointer _absolute _top-1/2 _-translate-y-2/4 _-right-12"
+            className="group cursor-pointer absolute top-1/2 -translate-y-2/4 -right-12"
             onClick={nextSlide}
           >
-            <RightArrow className="group-hover:_text-primary _transition-all" />
+            <RightArrow className="group-hover:text-primary transition-all" />
           </div>
         </div>
-        <div className="_flex _justify-center _gap-2">
+        <div className="flex justify-center gap-2">
           {Array.from({ length: lengthDivider / step }, (_, i) => {
             const subElement = currentSlide / step === i;
 
             return (
               <div
-                className={`_h-2.5 _rounded-full _transition-all _duration-500 ${
-                  subElement ? "_w-12 _bg-primary" : "_w-2.5 _bg-light"
+                className={`h-2.5 rounded-full transition-all duration-500 ${
+                  subElement ? "w-12 bg-primary" : "w-2.5 bg-light"
                 }`}
                 key={"slider-status" + i}
               />

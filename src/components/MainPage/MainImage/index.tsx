@@ -40,61 +40,61 @@ export const MainImage = ({ t, ordersCount }: MainImageProps) => {
   return (
     <>
       <div
-        className={`_h-[calc(100vh-80px)] mobile-none _relative _overflow-hidden
-       _flex _items-center _justify-center`}
+        className={`h-[calc(100vh-80px)] mobile-none relative overflow-hidden
+       flex items-center justify-center`}
       >
-        <div className="_flex _flex-col _gap-28 _h-full mobile-none">
-          <div className="_flex _items-start _justify-center _h-full _py-20">
+        <div className="flex flex-col gap-28 h-full mobile-none">
+          <div className="flex items-start justify-center h-full py-20">
             <Image
               src={handPng}
               alt="Hand"
-              className="_absolute _left-auto _-top-14 _rotate-[105deg] _w-1/5"
+              className="absolute left-auto -top-14 rotate-105 w-1/5"
             />
             <Image
               src={soapPng}
               width="240"
               alt="Soap"
-              className="_absolute _right-0 _top-6 _rotate-[35deg] _w-1/5"
+              className="absolute right-0 top-6 rotate-35 w-1/5"
             />
             <Image
               src={broomPng}
               alt="Broom"
-              className="_absolute _-left-36 _-bottom-20 _-rotate-[165deg] _w-1/4"
+              className="absolute -left-36 -bottom-20 -rotate-165 w-1/4"
             />
             <Image
               src={vacuumPng}
               alt="Vacuum"
-              className="_absolute _bottom-0 _-right-14 _w-1/5"
+              className="absolute bottom-0 -right-14 w-1/5"
             />
             <Image
               src={bubblesPng}
               alt="Bubbles"
-              className="_absolute _left-6 _top-6 _w-1/5"
+              className="absolute left-6 top-6 w-1/5"
             />
-            <div className="_flex _items-center _justify-center _h-full _relative">
+            <div className="flex items-center justify-center h-full relative">
               <Image
                 src={boyPng}
                 alt="Boy"
                 priority
-                className="_h-4/5 _w-auto _z-10"
+                className="h-4/5 w-auto z-10"
               />
-              <div className="_relative">
+              <div className="relative">
                 <Image
                   src={cloudSvg}
                   alt="Bubbles"
-                  className="_absolute _top-6 _left-7 _z-[-1]"
+                  className="absolute top-6 left-7 z-[-1]"
                 />
-                <div className="_flex _flex-col _text-xl _p-20">
-                  <span className="text-gradient _text-center">
+                <div className="flex flex-col text-xl p-20">
+                  <span className="text-gradient text-center">
                     <b>{t("main_page_title")}</b>
                     <b> {t(cityUrl || CITIES.KRAKOW.name)}</b>
                   </span>
-                  <span className="_text-5xl text-gradient _font-bold _text-center">
+                  <span className="text-5xl text-gradient font-bold text-center">
                     Take your time
                   </span>
-                  <div className="_mt-4 _flex _gap-6">
+                  <div className="mt-4 flex gap-6">
                     <Button
-                      className="_text-lg _py-6 _font-medium _min-w-44"
+                      className="text-lg py-6 font-medium min-w-44"
                       onClick={() =>
                         router.push(
                           `${pathname}/order?${searchParams.toString()}`,
@@ -104,12 +104,12 @@ export const MainImage = ({ t, ordersCount }: MainImageProps) => {
                     />
                     <Button
                       isSecondary
-                      className="_text-base _z-10 _font-medium _shadow-md"
+                      className="text-base z-10 font-medium shadow-md"
                       onClick={() => handleScroll("costs-block")}
                       title={t("Pricing")}
                     />
                   </div>
-                  <div className="_mt-8 _text-lg _font-semibold _text-center text-gradient">
+                  <div className="mt-8 text-lg font-semibold text-center text-gradient">
                     {ordersCount} {t("happy_clients")}
                   </div>
                 </div>
@@ -118,32 +118,32 @@ export const MainImage = ({ t, ordersCount }: MainImageProps) => {
                 src={girlPng}
                 alt="Girl"
                 priority
-                className="_h-4/5 _w-auto _z-10"
+                className="h-4/5 w-auto z-10"
               />
             </div>
           </div>
         </div>
       </div>
-      <div className="mobile-only _relative _overflow-hidden">
-        <div className="_mt-10 _mb-14 _flex _relative _justify-center">
+      <div className="mobile-only relative overflow-hidden">
+        <div className="mt-10 mb-14 flex relative justify-center">
           <Image
             src={boyPng}
             alt=""
             height={180}
             priority
-            className="_rotate-[15deg] _absolute _-left-3"
+            className="rotate-15 absolute -left-3"
           />
-          <div className="_flex _flex-col _text-lg">
-            <span className="text-gradient _text-center">
+          <div className="flex flex-col text-lg">
+            <span className="text-gradient text-center">
               <b>{t("main_page_title")}</b>
               <b> {t(cityUrl || CITIES.KRAKOW.name)}</b>
             </span>
-            <span className="_text-2xl text-gradient _font-bold _text-center">
+            <span className="text-2xl text-gradient font-bold text-center">
               Take your time
             </span>
-            <div className="_mt-4 _flex _flex-col _gap-3 _justify-center">
+            <div className="mt-4 flex flex-col gap-3 justify-center">
               <Button
-                className="_text-base _h-12 _font-medium _min-w-44 _z-10"
+                className="text-base h-12 font-medium min-w-44 z-10"
                 onClick={() =>
                   router.push(`${pathname}/order?${searchParams.toString()}`)
                 }
@@ -151,12 +151,12 @@ export const MainImage = ({ t, ordersCount }: MainImageProps) => {
               />
               <Button
                 isSecondary
-                className="_text-base _h-12 _z-10 _font-medium _shadow-md"
+                className="text-base h-12 z-10 font-medium shadow-md"
                 onClick={() => handleScroll("costs-block")}
                 title={t("Pricing")}
               />
             </div>
-            <div className="_mt-3 _text-lg _font-semibold _text-center text-gradient">
+            <div className="mt-3 text-lg font-semibold text-center text-gradient">
               {ordersCount} {t("happy_clients")}
             </div>
           </div>
@@ -165,7 +165,7 @@ export const MainImage = ({ t, ordersCount }: MainImageProps) => {
             alt=""
             height={180}
             priority
-            className="_rotate-[-15deg] _absolute _-right-5"
+            className="-rotate-15 absolute -right-5"
           />
         </div>
       </div>

@@ -35,11 +35,11 @@ function SummaryService({
 }: SummaryServiceProps) {
   return (
     <>
-      <div className="_text-2xl _font-semibold">
+      <div className="text-2xl font-semibold">
         {t(serviceTitle + "_summary_title")}
       </div>
       {counterValue?.length > 0 && (
-        <div className="_flex _gap-3 _overflow-hidden _mt-2">
+        <div className="flex gap-3 overflow-hidden mt-2">
           {counterValue.map((el: any, i: number, arr: any[]) =>
             el.type === "counter" ? (
               <div key={el.title + el.value + i}>
@@ -72,13 +72,13 @@ function SummaryService({
       />
       {subServiceList.length ? (
         <div>
-          <div className="_my-2 _text-lg _font-semibold">
+          <div className="my-2 text-lg font-semibold">
             {t("Add services")}
           </div>
           {subServiceList.map((subService: ISubService, i: number) => (
             <div
-              className={`_mr-2 _mb-2 _float-left _h-full _w-max _pl-3 _pr-1.5
-                _flex _items-center _rounded-full _max-w-full _border _border-solid _border-gray`}
+              className="mr-2 mb-2 float-left h-full w-max pl-3 pr-1.5
+                flex items-center rounded-full max-w-full border border-solid border-gray"
               key={subService.title + i}
             >
               <div>
@@ -92,7 +92,7 @@ function SummaryService({
                 )
               </div>
               <div
-                className="_ml-1 _cursor-pointer"
+                className="ml-1 cursor-pointer"
                 onClick={() => onRemoveSubService(subService.title, isSecond)}
               >
                 <IconCrosse />

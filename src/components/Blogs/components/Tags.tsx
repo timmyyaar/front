@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { ALL_TAG } from "../constants";
 import Tag from "./Tag";
 
 interface TagsProps {
@@ -9,29 +10,39 @@ interface TagsProps {
 
 export default function Tags({ tags, activeTags, setActiveTags }: TagsProps) {
   const onAllTagClick = () => {
-    setActiveTags((prev) => (!prev.includes("All") ? ["All"] : prev));
+    setActiveTags((prev) => (!prev.includes(ALL_TAG) ? [ALL_TAG] : prev));
   };
 
   const onTagClick = (tag: string) => {
-    setActiveTags((prev) =>
-      prev.includes("All")
-        ? [tag]
-        : prev.includes(tag)
-          ? prev.filter((prevTag) => prevTag !== tag)
-          : [...prev, tag],
-    );
+    setActiveTags((prev) => {
+      if (prev.includes(ALL_TAG)) {
+        return [tag];
+      }
+
+      if (prev.includes(tag)) {
+        const newTags = prev.filter((prevTag) => prevTag !== tag);
+
+        if (!newTags.length) {
+          return [ALL_TAG];
+        }
+
+        return newTags;
+      }
+
+      return [...prev, tag];
+    });
   };
 
   return (
-    <div className="_flex _gap-2">
+    <div className="flex gap-2">
       <Tag
-        tag="All"
-        isActive={activeTags.includes("All")}
+        tag={ALL_TAG}
+        isActive={activeTags.includes(ALL_TAG)}
         onClick={onAllTagClick}
       />
       {tags.map((tag) => (
         <Tag
-            key={tag}
+          key={tag}
           tag={tag}
           isActive={activeTags.includes(tag)}
           onClick={() => onTagClick(tag)}

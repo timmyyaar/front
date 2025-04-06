@@ -41,9 +41,9 @@ function PaymentRedirect() {
   };
 
   return (
-    <div className="payment-redirect _bg-light _flex-1 _flex _flex-col _items-center _justify-center">
-      <div className="_flex _flex-col _items-center">
-        <div className="_main-title _mb-8 text-gradient">
+    <div className="bg-light flex-1 flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center">
+        <div className="main-title mb-8 text-gradient">
           <span>
             {redirectStatus === REDIRECT_STATUSES.FAILED
               ? t("payment_failed")
@@ -52,17 +52,25 @@ function PaymentRedirect() {
         </div>
         {redirectStatus === REDIRECT_STATUSES.FAILED ? (
           <>
-            <Image src={failedPng} alt="" className="_w-64 _h-64 lg:_w-80 lg:_h-80" />
+            <Image
+              src={failedPng}
+              alt=""
+              className="w-64 h-64 lg:w-80 lg:h-80"
+            />
             <Button
-              className="_w-full _max-w-full lg:_w-[30rem] _mt-4"
+              className="w-full max-w-full lg:w-[30rem] mt-4"
               onClick={onTryAgainClick}
               title={t("try_again")}
             />
           </>
         ) : (
           <>
-            <Image src={successPng} alt="" className="_w-64 _h-64 lg:_w-80 lg:_h-80" />
-            <div className="_px-4 _my-4 _text-center _max-w-3xl">
+            <Image
+              src={successPng}
+              alt=""
+              className="w-64 h-64 lg:w-80 lg:h-80"
+            />
+            <div className="px-4 my-4 text-center max-w-3xl">
               {t("success_payment_contact_message")}
             </div>
           </>

@@ -52,16 +52,16 @@ const SelectService: FC<IProps> = (props) => {
   const { t, services, setService } = props;
 
   return (
-    <div className="_flex _flex-col _flex-1 _w-full _items-center _justify-start _relative lg:_overflow-hidden">
+    <div className="flex flex-col flex-1 w-full items-center justify-start relative lg:overflow-hidden">
       <div
-        className={`_flex _flex-col lg:_flex-row _justify-center
-          _gap-10 _w-full _my-10 lg:_mb-11 lg:_mt-40 _px-4 lg_px-0 lg:_w-max`}
+        className={`flex flex-col lg:flex-row justify-center
+          gap-10 w-full my-10 lg:mb-11 lg:mt-40 px-4 lg:px-0 lg:w-max`}
       >
         {services.map((el, index) => (
           <div
-            className={`_w-full lg:_w-[25rem] _shadow-md hover:_shadow-custom-light-dark _px-8 lg_px-16 _py-8 lg:_py-12 _flex
-             _flex-col _justify-center _items-center _gap-6 _rounded-3xl _bg-light _cursor-pointer _z-10
-              hover:_bg-light-dark _transition-all _relative`}
+            className={`w-full lg:w-[25rem] shadow-md hover:shadow-custom-light-dark px-8 py-8 lg:py-12 flex
+             flex-col justify-center items-center gap-6 rounded-3xl bg-light cursor-pointer z-10
+              hover:bg-light-dark transition-all relative`}
             onClick={() => setService(el)}
             key={el + index}
           >
@@ -72,14 +72,14 @@ const SelectService: FC<IProps> = (props) => {
                   alt="Bubbles"
                   width="144"
                   height="144"
-                  className="_absolute _hidden lg:_block _-left-16 _-top-20 _z-20"
+                  className="absolute hidden lg:block -left-16 -top-20 z-20"
                 />
                 <Image
                   src={bubblesPng}
                   alt="Bubbles"
                   width="144"
                   height="144"
-                  className="_absolute _hidden lg:_block _-left-14 _-bottom-20 _z-20 bubble-left-bottom"
+                  className="absolute hidden lg:block -left-14 -bottom-20 z-20 bubble-left-bottom"
                 />
               </>
             )}
@@ -90,43 +90,43 @@ const SelectService: FC<IProps> = (props) => {
                   alt="Bubbles"
                   width="144"
                   height="144"
-                  className="_absolute _hidden lg:_block _-right-16 _-top-20 _z-20 _rotate-[-100deg]"
+                  className="absolute hidden lg:block -right-16 -top-20 z-20 rotate-[-100deg]"
                 />
                 <Image
                   src={bubblesPng}
                   alt="Bubbles"
                   width="144"
                   height="144"
-                  className="_absolute _hidden lg:_block _-right-16 _-bottom-20 _-rotate-6"
+                  className="absolute hidden lg:block -right-16 -bottom-20 -rotate-6"
                 />
               </>
             )}
-            <div className="_flex _justify-center">
+            <div className="flex justify-center">
               {/* @ts-ignore */}
               <Image src={iconsSrc[el]} width={80} height={80} alt="" />
             </div>
-            <div className="_text-2xl _text-center _font-semibold">
+            <div className="text-2xl text-center font-semibold">
               <Writer text={t(el)} />
             </div>
-            <div className="_text-center">
+            <div className="text-center">
               {/* @ts-ignore */}
               {SERVICES_DESCRIPTION[el].map((item) => t(item)).join("; ")}
             </div>
           </div>
         ))}
       </div>
-      <div className="_flex _gap-28">
+      <div className="flex gap-28">
         <Image
           src={girlPng}
           alt="Girl"
           height="512"
-          className="_hidden lg:_block _relative _-scale-x-100"
+          className="hidden lg:block relative -scale-x-100"
         />
         <Image
           src={boyPng}
           alt="Girl"
           height="512"
-          className="_hidden lg:_block _relative _-scale-x-100"
+          className="hidden lg:block relative -scale-x-100"
         />
       </div>
     </div>

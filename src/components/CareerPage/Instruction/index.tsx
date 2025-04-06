@@ -3,9 +3,9 @@ import React from "react";
 export const Instruction = ({ title, cardsCount, t }: any) => {
   return (
     <>
-      <div className="_px-[10vw] mobile-none">
+      <div className="px-[10vw] mobile-none">
         <div
-          className="_grid _gap-5 _justify-center"
+          className="grid gap-5 justify-center"
           style={{
             gridTemplateColumns: `repeat(${cardsCount}, 11.75rem)`,
           }}
@@ -17,44 +17,44 @@ export const Instruction = ({ title, cardsCount, t }: any) => {
             }))
             .map((el, i) => (
               <div
-                className={`_group hover:_shadow-custom-light-dark hover:_bg-light-dark active:_bg-light-dark _transition-all _min-h-44
-                  _rounded-2xl _bg-light _flex _flex-col _justify-center _relative`}
+                className={`group hover:shadow-custom-light-dark hover:bg-light-dark active:bg-light-dark transition-all min-h-44
+                  rounded-2xl bg-light flex flex-col justify-center relative`}
                 key={el.step}
               >
-                <div className="group-hover:_invisible">
+                <div className="group-hover:invisible">
                   <div
-                    className={`lg:_mx-auto lg:_mb-3 _w-10 _h-10 _flex
-                      _justify-center _items-center _rounded-3xl _bg-primary
-                      _text-light _font-semibold`}
+                    className={`lg:mx-auto lg:mb-3 w-10 h-10 flex
+                      justify-center items-center rounded-3xl bg-primary
+                      text-light font-semibold`}
                   >
                     {el.step}
                   </div>
-                  <div className="_font-medium _text-center">
-                    <b className="_px-2 _whitespace-break-spaces">
+                  <div className="font-medium text-center">
+                    <b className="px-2 whitespace-break-spaces">
                       {t(el.text)}
                     </b>
                   </div>
                 </div>
-                <div className="_invisible group-hover:_visible _py-8 _px-4 _text-center _absolute">
+                <div className="invisible group-hover:visible py-8 px-4 text-center absolute">
                   {t(`${title}_step_${el.step}_description`)}
                 </div>
               </div>
             ))}
         </div>
-        <div className="_flex _justify-center _gap-2 _text-gray-dark _mt-6">
+        <div className="flex justify-center gap-2 text-gray-dark mt-6">
           <div>{t("Hover over a stage to see detailed information")}</div>
         </div>
       </div>
-      <div className="_px-5-percents-mobile _flex _flex-col _gap-4 mobile-only-flex">
+      <div className="px-5-percents-mobile flex flex-col gap-4 mobile-only-flex">
         {[...new Array(cardsCount)].map((_, index) => (
-          <div className="_flex _flex-col _gap-4 _items-center" key={index}>
+          <div className="flex flex-col gap-4 items-center" key={index}>
             <div
-              className={`_w-10 _h-10 _flex _justify-center _items-center
-                _rounded-3xl _bg-primary _text-light _font-semibold`}
+              className={`w-10 h-10 flex justify-center items-center
+                rounded-3xl bg-primary text-light font-semibold`}
             >
               {index + 1}
             </div>
-            <span className="_text-center">
+            <span className="text-center">
               {t(`${title}_step_${index + 1}_description`)}
             </span>
           </div>

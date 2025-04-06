@@ -28,15 +28,15 @@ function Costs({ costs, t, redirectPathname, isSubscription }: CostsProps) {
     isSubscription && !Array.isArray(costs) ? costs[salesCost] : costs;
 
   return (
-    <div className="_p-7 _bg-light _flex _rounded-3xl">
+    <div className="p-7 bg-light flex rounded-3xl">
       {isSubscription ? (
-        <div className="_flex _flex-col _justify-center _py-3.5 _gap-3.5 _mr-10">
+        <div className="flex flex-col justify-center py-3.5 gap-3.5 mr-10">
           {SALES.map(({ title, sale }) => (
             <div
-              className={`_text-xl _leading-6 _font-semibold _flex
-                _justify-between _items-center _cursor-pointer _py-3.5 _px-4 _gap-1 ${
+              className={`text-xl leading-6 font-semibold flex
+                justify-between items-center cursor-pointer py-3.5 px-4 gap-1 ${
                   title === salesCost
-                    ? "_rounded-full _bg-primary _text-white "
+                    ? "rounded-full bg-primary text-white "
                     : ""
                 }`}
               onClick={(event) => {
@@ -45,10 +45,10 @@ function Costs({ costs, t, redirectPathname, isSubscription }: CostsProps) {
               }}
               key={title}
             >
-              <div className="_flex _items-center _whitespace-nowrap">
+              <div className="flex items-center whitespace-nowrap">
                 {t(title)}
               </div>
-              <div className="_bg-warning _text-black _rounded-full _flex _items-center _p-2">
+              <div className="bg-warning text-black rounded-full flex items-center p-2">
                 {sale}
               </div>
             </div>
@@ -56,21 +56,21 @@ function Costs({ costs, t, redirectPathname, isSubscription }: CostsProps) {
         </div>
       ) : (
         <div
-          className={`_p-6 _flex _flex-col _justify-center _items-center ${
-            isSingleItem ? "_w-1/2" : "_mr-6"
+          className={`p-6 flex flex-col justify-center items-center ${
+            isSingleItem ? "w-1/2" : "mr-6"
           }`}
         >
           <>
-            <div className="_flex _justify-center">
+            <div className="flex justify-center">
               <Image
-                className="_mb-2"
+                className="mb-2"
                 src={discountPng}
                 alt="Discount"
                 width="128"
                 height="128"
               />
             </div>
-            <div className="_whitespace-pre _text-center">
+            <div className="whitespace-pre text-center">
               {reactStringReplace(
                 t("main_page_get_the_discount"),
                 FIGURE_BRACKETS_REGEX,
@@ -83,43 +83,43 @@ function Costs({ costs, t, redirectPathname, isSubscription }: CostsProps) {
         </div>
       )}
       <div
-        className={`_grid _content-center _grid-rows-[max-content] _gap-8 ${
-          isSingleItem ? "_w-1/2 _grid-cols-1" : "_w-full _grid-cols-3"
+        className={`grid content-center grid-rows-[max-content] gap-8 ${
+          isSingleItem ? "w-1/2 grid-cols-1" : "w-full grid-cols-3"
         }`}
       >
         {(costsOptions as Cost[]).map(
           ({ title, text, price, oldPrice }: Cost, index: number) => (
             <div
-              className="_flex _flex-col _justify-center _items-center _w-full _gap-4 _whitespace-nowrap"
+              className="flex flex-col justify-center items-center w-full gap-4 whitespace-nowrap"
               key={index}
             >
               {title && (
-                <div className="_text-xl _font-semibold _text-center">
+                <div className="text-xl font-semibold text-center">
                   {typeof title === "object" ? title : t(title as string)}
                 </div>
               )}
               {text && (
-                <div className="_text-gray-dark _whitespace-pre-wrap _text-center">
+                <div className="text-gray-dark whitespace-pre-wrap text-center">
                   {typeof text === "object" ? text : t(text as string)}
                 </div>
               )}
-              <div className="_flex _flex-col _gap-4 _w-full _items-center _mt-auto">
-                <div className="_flex _items-center">
+              <div className="flex flex-col gap-4 w-full items-center mt-auto">
+                <div className="flex items-center">
                   {Boolean(price) && (
-                    <div className="_text-2lx _font-bold _text-center">
+                    <div className="text-2lx font-bold text-center">
                       {price}
                       {t("zl")}
                     </div>
                   )}
                   {Boolean(oldPrice) && (
-                    <div className="_text-gray-dark _line-through _ml-2">
+                    <div className="text-gray-dark line-through ml-2">
                       {oldPrice}
                       {t("zl")}
                     </div>
                   )}
                 </div>
                 <Button
-                  className="_max-w-72 _w-full"
+                  className="max-w-72 w-full"
                   onClick={() => {
                     router.push(`${pathname}/${redirectPathname}`);
                   }}

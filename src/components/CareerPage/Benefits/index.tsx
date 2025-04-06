@@ -24,19 +24,19 @@ export const Benefits = ({ t }: any) => {
   ];
 
   return (
-    <div className="_flex _flex-col _items-center _gap-6">
+    <div className="flex flex-col items-center gap-6">
       <div
-        className={`_px-[20vw] _px-5-percents-mobile _grid _grid-cols-2
-          lg:_grid-cols-4 _gap-3 _w-full`}
+        className={`px-[20vw] px-5-percents-mobile grid grid-cols-2
+          lg:grid-cols-4 gap-3 w-full`}
       >
         {benefits.map((el, i) => (
           <div
-            className={`_py-4 _rounded-2xl _bg-light _flex _flex-col
-              _justify-center _items-center _gap-4`}
+            className={`py-4 rounded-2xl bg-light flex flex-col
+              justify-center items-center gap-4`}
             key={el.title + i}
           >
             <Image src={el.svg} alt={el.title} width="48" height="48" />
-            <div className="_text-center">
+            <div className="text-center">
               {[...new Array(el.lines)].map((_, j) => (
                 <div key={el.title + i + j}>{t(el.title + "_line_" + j)}</div>
               ))}

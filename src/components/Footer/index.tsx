@@ -24,16 +24,16 @@ export const Footer = (props: any) => {
   };
 
   return (
-    <footer className="footer-wrapper _py-10 _text-dark">
-      <div className="_flex _justify-center">
-        <div className="_mb-0.5">
+    <footer className="footer-wrapper py-10 text-dark">
+      <div className="flex justify-center">
+        <div className="mb-0.5">
           <LogoIcon />
         </div>
       </div>
-      <div className="_mb-6 _main-title _flex _justify-center">
+      <div className="mb-6 main-title flex justify-center">
         <div className="text-gradient">{t("Take Your Time")}</div>
       </div>
-      <div className="_mb-5 _text-dark _flex _justify-center _gap-3 text-gradient">
+      <div className="mb-5 text-dark flex justify-center gap-3 text-gradient">
         <a
           className="icon"
           href="https://t.me/takeyourtime_pln"
@@ -67,25 +67,25 @@ export const Footer = (props: any) => {
           <GoogleIcon />
         </a>
       </div>
-      <div className="_flex _justify-center text-gradient">
-        <div className="_mb-5 _text-dark _flex _justify-between _gap-3">
-          <div className="_flex _gap-1">
+      <div className="flex justify-center text-gradient">
+        <div className="mb-5 text-dark flex justify-between gap-3">
+          <div className="flex gap-1">
             <PhoneIcon />
             +48 730 003 997
           </div>
         </div>
       </div>
-      <div className="_flex _justify-center text-gradient">
-        <div className="_mb-5 _text-dark _flex _justify-between _gap-3">
-          <div className="_flex _gap-1 _items-center">
+      <div className="flex justify-center text-gradient">
+        <div className="mb-5 text-dark flex justify-between gap-3">
+          <div className="flex gap-1 items-center">
             <MailIcon />
             Mail: tytimeinbox@gmail.com
           </div>
         </div>
       </div>
-      <div className="_flex _justify-center text-gradient">
+      <div className="flex justify-center text-gradient">
         <div
-          className="_flex _justify-between _text-center"
+          className="flex justify-between text-center"
           style={{ width: 300, marginBottom: "20px" }}
         >
           <a href="/Polityka_prywatności.pdf" target="_blank">

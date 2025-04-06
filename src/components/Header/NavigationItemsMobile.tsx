@@ -47,17 +47,17 @@ const NavigationItemsMobile = ({
   const city = searchParams.get("city");
 
   return (
-    <div className="_mt-4 _flex _flex-col _gap-10">
+    <div className="mt-4 flex flex-col gap-10">
       <div>
         {navigation.map((navItem) => (
           <div
-            className={` mobile-only-flex _font-semibold ${
-              pathname.includes(navItem.href) ? "_text-dark" : ""
-            } _flex _flex-col _justify-center`}
+            className={`mobile-only-flex font-semibold ${
+              pathname.includes(navItem.href) ? "text-dark" : ""
+            } flex flex-col justify-center`}
             key={navItem.title}
           >
             <div
-              className="_flex _justify-center _py-2"
+              className="flex justify-center py-2"
               onClick={() => {
                 if (pathname.includes(navItem.href)) {
                   setIsMenuOpened(false);
@@ -74,11 +74,11 @@ const NavigationItemsMobile = ({
           </div>
         ))}
       </div>
-      <div className="_flex _gap-4 _flex-col _items-center _justify-center">
-        <span className="_text-base">Contact info</span>
-        <div className="_flex _gap-3">
+      <div className="flex gap-4 flex-col items-center justify-center">
+        <span className="text-base">Contact info</span>
+        <div className="flex gap-3">
           <a
-            className="icon _flex _flex-col _justify-center"
+            className="icon flex flex-col justify-center"
             href="https://t.me/takeyourtime_pln"
             target="_blank"
             onClick={() => trackSocialMediaClick("Telegram")}
@@ -86,7 +86,7 @@ const NavigationItemsMobile = ({
             <TelegramIcon />
           </a>
           <a
-            className="icon _flex _flex-col _justify-center"
+            className="icon flex flex-col justify-center"
             href="https://wa.me/48730003997"
             target="_blank"
             onClick={() => trackSocialMediaClick("WhatsApp")}
@@ -94,7 +94,7 @@ const NavigationItemsMobile = ({
             <WhatsappIcon />
           </a>
           <a
-            className="icon _flex _flex-col _justify-center"
+            className="icon flex flex-col justify-center"
             href="https://www.instagram.com/takeyourtime_pln/"
             target="_blank"
             onClick={() => trackSocialMediaClick("Instagram")}
@@ -102,7 +102,7 @@ const NavigationItemsMobile = ({
             <InstIcon />
           </a>
           <a
-            className="icon _flex _flex-col _justify-center"
+            className="icon flex flex-col justify-center"
             href="https://maps.app.goo.gl/uTEhCrLkdEXG6DDd8"
             target="_blank"
             onClick={() => trackSocialMediaClick("Google")}
@@ -111,20 +111,20 @@ const NavigationItemsMobile = ({
           </a>
         </div>
         <div
-          className={`_flex _gap-2.5 _justify-center _items-center _text-lg
-            _text-dark _px-4 _py-2`}
+          className={`flex gap-2.5 justify-center items-center text-lg
+            text-dark px-4 py-2`}
         >
           <span className="text-gradient">
             <PhoneIcon />
           </span>
-          <span className="_font-semibold text-gradient">+48 730 003 997</span>
+          <span className="font-semibold text-gradient">+48 730 003 997</span>
         </div>
         <div
-          className={`_flex _gap-2.5 _justify-center _items-center
-            _text-lg _text-dark _px-4 _py-2`}
+          className={`flex gap-2.5 justify-center items-center
+            text-lg text-dark px-4 py-2`}
         >
           <MailIcon />
-          <span className="_font-semibold text-gradient">
+          <span className="font-semibold text-gradient">
             Mail: tytimeinbox@gmail.com
           </span>
         </div>
