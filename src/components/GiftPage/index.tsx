@@ -30,26 +30,26 @@ export const GiftPage = () => {
 
   return (
     <div className="gift-page">
-      <div className="gift-content _gap-6 _mt-6 lg:_gap-10 lg:_mt-14 _flex _flex-col">
+      <div className="gift-content gap-6 mt-6 lg:gap-10 lg:mt-14 flex flex-col">
         <div>
-          <div className="_main-title text-gradient">{t("Gifts card")}</div>
-          <div className="_text-center _mt-8 _font-semibold mobile-none">
+          <div className="main-title text-gradient">{t("Gifts card")}</div>
+          <div className="text-center mt-8 font-semibold mobile-none">
             {t("Gifts card text")}
           </div>
         </div>
-        <div className="_flex _justify-center">
-          <div className="_grid _grid-cols-2 _gap-5 _px-4 lg:_gap-4 lg:_px-0">
-            <Image src={aSvg} alt="" className="_rounded-2xl" />
-            <Image src={bSvg} alt="" className="_rounded-2xl" />
-            <Image src={cSvg} alt="" className="_rounded-2xl" />
-            <Image src={dSvg} alt="" className="_rounded-2xl" />
+        <div className="flex justify-center">
+          <div className="grid grid-cols-2 gap-5 px-4 lg:gap-4 lg:px-0">
+            <Image src={aSvg} alt="" className="rounded-2xl" />
+            <Image src={bSvg} alt="" className="rounded-2xl" />
+            <Image src={cSvg} alt="" className="rounded-2xl" />
+            <Image src={dSvg} alt="" className="rounded-2xl" />
           </div>
         </div>
-        <div className="_main-title _mt-6 lg:_mt-0 text-gradient">{t("How it works?")}</div>
+        <div className="main-title mt-6 lg:mt-0 text-gradient">{t("How it works?")}</div>
         <Instruction title="gifts" cardsCount={5} t={t} />
-        <div className="_main-title _mt-6 lg:_mt-0 text-gradient">{t("Filling form")}</div>
+        <div className="main-title mt-6 lg:mt-0 text-gradient">{t("Filling form")}</div>
         <InputForm t={t} />
-        <div className="_flex _flex-col">
+        <div className="flex flex-col">
           <Footer t={t} />
         </div>
       </div>

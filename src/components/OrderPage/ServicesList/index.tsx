@@ -55,37 +55,37 @@ export const ServicesList: FC<IProps> = (props) => {
           />
         </div>
       </Overlay>
-      <div className="_grid _grid-cols-2 lg:_grid-cols-3 _auto-rows-fr _gap-5">
+      <div className="grid grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-5">
         {filteredServices.map((el, i) => (
           <div
-            className={`hover:_shadow-custom-light-dark _py-3.5 _flex _flex-col _justify-center _items-center _gap-5
-              _rounded-2xl _border-solid _bg-light _border-4 _border-light _cursor-pointer
-              hover:_bg-light-dark _transition-all ${
+            className={`hover:shadow-custom-light-dark py-3.5 flex flex-col justify-center items-center gap-5
+              rounded-2xl border-solid bg-light border-4 border-light cursor-pointer
+              hover:bg-light-dark transition-all ${
                 el.title === selectedService
-                  ? "_border-solid _border-4 _border-primary hover:_border-primary"
-                  : "hover:_border-light-dark"
+                  ? "border-solid border-4 border-primary hover:border-primary"
+                  : "hover:border-light-dark"
               }`}
             onClick={() => setSelectedService(el.title)}
             key={el.title + i}
           >
-            <div className="_font-sm lg:_font-base _text-center _font-semibold _px-4">
+            <div className="font-sm lg:font-base text-center font-semibold px-4">
               {t(el.title)}
             </div>
-            <div className="_flex _justify-center _select-none">
+            <div className="flex justify-center select-none">
               <Image src={el.icon} alt="" width="80" />
             </div>
-            <div className="_select-none _flex _justify-center">
+            <div className="select-none flex justify-center">
               <div
-                className={`_flex _items-center _gap-2 _text-sm _transition-all
-                  hover:_text-primary`}
+                className={`flex items-center gap-2 text-sm transition-all
+                  hover:text-primary`}
                 onClick={(event: React.MouseEvent<HTMLDivElement>) => {
                   event.stopPropagation();
 
                   setServiceModal(el.title);
                 }}
               >
-                <div className="_text-center">{t("How it works")}</div>
-                <div className="_py-1 _cursor-pointer">
+                <div className="text-center">{t("How it works")}</div>
+                <div className="py-1 cursor-pointer">
                   <Image src={moreDetailsPng} alt="" width="22" height="22" />
                 </div>
               </div>

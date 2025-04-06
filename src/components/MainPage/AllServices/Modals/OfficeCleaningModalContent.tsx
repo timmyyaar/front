@@ -70,9 +70,9 @@ function OfficeCleaningModalContent({
   const officeCosts = [
     {
       title: (
-        <span className="_text-2lx _font-bold">
+        <span className="text-2lx font-bold">
           {transformedPrices.officeSquareMeter}
-          <span className="_ml-1">
+          <span className="ml-1">
             {t("zl")}/{t("m")}
             <sup>2</sup>
           </span>
@@ -83,38 +83,36 @@ function OfficeCleaningModalContent({
   ];
 
   return (
-      <>
-        <div className="_text-center _mb-6">
-          <div className="_mb-4 lg:_mb-6">
-          <span className="text-gradient _main-title">
-            {t("Office")}
-          </span>
-          </div>
-          {t("office_cleaning_description")}
+    <>
+      <div className="text-center mb-6">
+        <div className="mb-4 lg:mb-6">
+          <span className="text-gradient main-title">{t("Office")}</span>
         </div>
-        <div className="_mb-4 lg:_mb-6 _text-center">
-        <span className="_main-title text-gradient">
+        {t("office_cleaning_description")}
+      </div>
+      <div className="mb-4 lg:mb-6 text-center">
+        <span className="main-title text-gradient">
           {t("what_is_included")}
         </span>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {OFFICE_CLEANING_BLOCKS.map(({ title, items }, index) => (
+          <TextBlock key={index} title={title} items={items} t={t} />
+        ))}
+      </div>
+      {!isOrder && (
+        <div className="mt-8 lg:mt-16">
+          <div className="mb-4 lg:mb-6 text-center">
+            <span className="main-title text-gradient">{t("Prices")}</span>
+          </div>
+          <Costs
+            t={t}
+            redirectPathname={`order/${MAIN_CATEGORIES_URLS.GENERAL}?selectedService=${ALL_SERVICE.OFFICE}${city ? `&city=${city}` : ""}`}
+            costs={officeCosts}
+          />
         </div>
-        <div className="_grid _grid-cols-1 lg:_grid-cols-2 _gap-6">
-          {OFFICE_CLEANING_BLOCKS.map(({title, items}, index) => (
-              <TextBlock key={index} title={title} items={items} t={t}/>
-          ))}
-        </div>
-        {!isOrder && (
-            <div className="_mt-8 lg:_mt-16">
-              <div className="_mb-4 lg:_mb-6 _text-center">
-                <span className="_main-title text-gradient">{t("Prices")}</span>
-              </div>
-              <Costs
-                  t={t}
-                  redirectPathname={`order/${MAIN_CATEGORIES_URLS.GENERAL}?selectedService=${ALL_SERVICE.OFFICE}${city ? `&city=${city}` : ""}`}
-                  costs={officeCosts}
-              />
-            </div>
-        )}
-      </>
+      )}
+    </>
   );
 }
 

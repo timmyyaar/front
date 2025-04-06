@@ -27,18 +27,18 @@ const NavigationItems = ({ t }: NavigationItemsProps) => {
 
   return navigation.map((navItem) => (
     <div
-      className={`mobile-none _relative _text-dark _ml-[10%]
-        lg:_ml-0 _cursor-pointer _group ${
+      className={`mobile-none relative text-dark ml-[10%]
+        lg:ml-0 cursor-pointer group ${
           pathname === navItem?.href ? "navigation-wrapper-active" : ""
-        } _flex _flex-col _justify-center`}
+        } flex flex-col justify-center`}
       key={navItem.title}
     >
       <div
         onClick={() => {
           router.push(`/${lang}${navItem.href}${city ? `?city=${city}` : ""}`);
         }}
-        className={`_px-4 _py-2 group-hover:_rounded-full group-hover:_outline
-          group-hover:_outline-1 group-hover:_outline-primary-light`}
+        className={`px-4 py-2 group-hover:rounded-full group-hover:outline
+          group-hover:outline-1 group-hover:outline-primary-light`}
       >
         <div className="nav-link text-gradient">{t(navItem.title)}</div>
       </div>

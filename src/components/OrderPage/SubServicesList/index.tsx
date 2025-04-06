@@ -124,32 +124,32 @@ export const SubServicesList = (props: IProps) => {
   );
 
   return subServicesByMainService.length ? (
-    <div className="_select-none">
-      <div className="_mb-4 _text-center _text-lg lg:_text-2xl _font-semibold">
+    <div className="select-none">
+      <div className="mb-4 text-center text-lg lg:text-2xl font-semibold">
         {t("Choose additional cleaning services")}
       </div>
-      <div className="_grid _grid-cols-2 lg:_grid-cols-4 _gap-5 _auto-rows-fr">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 auto-rows-fr">
         {subServicesByMainService.map((el: ISubService, i: number) => (
           <div
-            className={`hover:_shadow-custom-light-dark _flex _flex-col _justify-between _items-center _py-5
-              _rounded-2xl _bg-light _border-solid _border-4 _border-light
-              hover:_bg-light-dark hover:_border-light-dark ${
+            className={`hover:shadow-custom-light-dark flex flex-col justify-between items-center py-5
+              rounded-2xl bg-light border-solid border-4 border-light
+              hover:bg-light-dark hover:border-light-dark ${
                 getIsSubServiceSelected(el.title)
-                  ? "_outline _outline-4 _outline-primary"
+                  ? "outline outline-4 outline-primary"
                   : ""
               }`}
             onClick={() => addService(el)}
             key={JSON.stringify(el) + i}
           >
-            <div className="_text-center _font-semibold">
+            <div className="text-center font-semibold">
               <Writer text={t(el.title)} whiteSpaceNormal />
             </div>
-            <div className="_w-full _flex _flex-col _items-center _px-4">
+            <div className="w-full flex flex-col items-center px-4">
               {getIsSubServiceSelected(el.title) ? (
-                <div className="_w-full _py-3.5">
-                  <div className="_min-h-12 _flex _justify-between _items-center _w-full _select-none">
+                <div className="w-full py-3.5">
+                  <div className="min-h-12 flex justify-between items-center w-full select-none">
                     <div
-                      className="_cursor-pointer"
+                      className="cursor-pointer"
                       onClick={(e) => minusService(e, el)}
                     >
                       <svg
@@ -165,10 +165,10 @@ export const SubServicesList = (props: IProps) => {
                         />
                       </svg>
                     </div>
-                    <div className="_text-center _text-xl _font-semibold">
+                    <div className="text-center text-xl font-semibold">
                       {getIsSubServiceSelected(el.title)!.count}
                       {showSubServiceSquareMeters(el.title) ? (
-                        <span className="_ml-1">
+                        <span className="ml-1">
                           m<sup>2</sup>
                         </span>
                       ) : (
@@ -176,7 +176,7 @@ export const SubServicesList = (props: IProps) => {
                       )}
                     </div>
                     <div
-                      className="_cursor-pointer"
+                      className="cursor-pointer"
                       onClick={(e) => plusService(e, el)}
                     >
                       <svg
@@ -199,19 +199,19 @@ export const SubServicesList = (props: IProps) => {
                   </div>
                 </div>
               ) : (
-                <div className="_py-3.5 _flex _justify-center">
+                <div className="py-3.5 flex justify-center">
                   <Image
                     src={el.icons!}
                     alt=""
                     width="48"
                     height="48"
-                    className="_w-12 _h-12"
+                    className="w-12 h-12"
                   />
                 </div>
               )}
               <div
-                className={`_w-max _flex _justify-center _items-center _rounded-full
-                  _py-2 _px-4 _bg-warning _text-lg lg:_text-xl _font-semibold`}
+                className={`w-max flex justify-center items-center rounded-full
+                  py-2 px-4 bg-warning text-lg lg:text-xl font-semibold`}
               >
                 {el.price}
                 {t("zl")}
@@ -224,7 +224,7 @@ export const SubServicesList = (props: IProps) => {
                   </>
                 ) : null}
                 {el.oldPrice && (
-                  <div className="_ml-2.5 _text-gray _text-sm _font-semibold _line-through">
+                  <div className="ml-2.5 text-gray text-sm font-semibold line-through">
                     {el.oldPrice}
                     {t("zl")}
                   </div>

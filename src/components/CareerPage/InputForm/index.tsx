@@ -67,7 +67,7 @@ export const InputForm = ({ t }: any) => {
   };
 
   return (
-    <div className="_px-20-percents-desktop _px-4">
+    <div className="px-20-percents-desktop px-4">
       <Overlay active={modal}>
         <div ref={ref}>
           <ModalRequest
@@ -77,18 +77,18 @@ export const InputForm = ({ t }: any) => {
           />
         </div>
       </Overlay>
-      <div className="_mb-6 _flex _flex-col _gap-3">
-        <div className="_w-full">
+      <div className="mb-6 flex flex-col gap-3">
+        <div className="w-full">
           <input
-            className={`_w-full _py-3.5 _pl-3.5 __w-full _bg-light
-              _rounded-xl _outline-0 _text-gray-dark`}
+            className={`w-full py-3.5 pl-3.5 w-full bg-light
+              rounded-xl outline-0 text-gray-dark`}
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder={t("Surname and Name")}
           />
         </div>
-        <div className="_relative mobile-only">
+        <div className="relative mobile-only">
           <PhoneInput
             t={t}
             number={phone}
@@ -97,8 +97,8 @@ export const InputForm = ({ t }: any) => {
             setPhoneCountry={setPhoneCountry}
           />
         </div>
-        <div className="_flex _gap-3 _relative">
-          <div className="_w-full mobile-none">
+        <div className="flex gap-3 relative">
+          <div className="w-full mobile-none">
             <PhoneInput
               t={t}
               number={phone}
@@ -107,10 +107,10 @@ export const InputForm = ({ t }: any) => {
               setPhoneCountry={setPhoneCountry}
             />
           </div>
-          <div className="_w-full">
+          <div className="w-full">
             <input
-              className={`_w-full _py-3.5 _pl-3.5 __w-full _bg-light
-                _rounded-xl _outline-0 _text-gray-dark`}
+              className={`w-full py-3.5 pl-3.5 w-full bg-light
+                rounded-xl outline-0 text-gray-dark`}
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -118,19 +118,19 @@ export const InputForm = ({ t }: any) => {
             />
           </div>
         </div>
-        <div className="_w-full">
+        <div className="w-full">
           <input
-            className={`_w-full _py-3.5 _pl-3.5 __w-full _bg-light
-              _rounded-xl _outline-0 _text-gray-dark`}
+            className={`w-full py-3.5 pl-3.5 w-full bg-light
+              rounded-xl outline-0 text-gray-dark`}
             value={referralCode}
             onChange={({ target: { value } }) => setReferralCode(value)}
             placeholder={t("referral_code")}
           />
         </div>
-        <div className="_w-full">
+        <div className="w-full">
           <textarea
-            className={`_w-full _py-3.5 _pl-3.5 __w-full _bg-light
-              _rounded-xl _outline-0 _text-gray-dark`}
+            className={`w-full py-3.5 pl-3.5 w-full bg-light
+              rounded-xl outline-0 text-gray-dark`}
             value={about}
             onChange={(e) => setAbout(e.target.value)}
             placeholder={t("Add more details")}
@@ -138,16 +138,16 @@ export const InputForm = ({ t }: any) => {
           />
         </div>
       </div>
-      <div className="_mb-4">
+      <div className="mb-4">
         <Button
-          className="_w-full"
+          className="w-full"
           disabled={!requiredFields || isSendLoading}
           isLoading={isSendLoading}
           onClick={onSend}
           title={t("send")}
         />
         {careerError && (
-          <div className="_text-center _mt-2 _text-danger">
+          <div className="text-center mt-2 text-danger">
             {t("unexpected_error")}
           </div>
         )}

@@ -9,8 +9,7 @@ export type TBlog = {
   main_image: string;
   date: string;
   category: string;
-  blog_image_one: string;
-  blog_image_two: string;
+  key: string;
 };
 
 export type TranslateFunction = (text: string) => string;

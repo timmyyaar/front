@@ -40,7 +40,7 @@ export const MainPage = ({ blogs, reviews, ordersCount }: MainPageProps) => {
   }, []);
 
   return (
-    <div className="_gap-0 lg:_gap-28 _flex _flex-col">
+    <div className="gap-0 lg:gap-28 flex flex-col">
       <MainImage t={t} ordersCount={ordersCount}/>
       <Advantages />
       <AllServices t={t} />
@@ -51,7 +51,7 @@ export const MainPage = ({ blogs, reviews, ordersCount }: MainPageProps) => {
       <Blogs t={t} blogs={blogs} />
       <FAQ t={t} />
       <Reviews t={t} reviews={reviews} />
-      <div className="_flex _flex-col">
+      <div className="flex flex-col">
         <Order t={t} />
         <Footer t={t} />
       </div>

@@ -152,19 +152,16 @@ export const Cleaning = (props: any) => {
   }, [tab, room]);
 
   return (
-    <div
-      className={`_h-auto _mb-14 lg:_mb-0 _px-5-percents lg:_px-24 _flex
-       _flex-col _items-center`}
-    >
-      <div className="_main-title _mb-3 lg:_mb-5 mobile-none">
+    <div className="h-auto mb-14 lg:mb-0 px-5-percents lg:px-24 flex flex-col items-center">
+      <div className="main-title mb-3 lg:mb-5 mobile-none">
         <span className="text-gradient">{t("What cleaning consists of")}</span>
       </div>
-      <div className="_main-title _mb-3 lg:_mb-5 mobile-only">
+      <div className="main-title mb-3 lg:mb-5 mobile-only">
         <span className="text-gradient">
           {t("What_cleaning_consists_of_mobile")}
         </span>
       </div>
-      <div className="_flex _justify-center _mb-6 lg:_mb-0">
+      <div className="flex justify-center mb-6 lg:mb-0">
         <Switcher
           tab={tab}
           tabs={tabs}
@@ -172,28 +169,23 @@ export const Cleaning = (props: any) => {
           onClick={(el: string) => setTab(el)}
         />
       </div>
-      <div className="mobile-none _w-full">
+      <div className="mobile-none w-full">
         <div
-          className={
-            "_my-8 _relative _overflow-hidden _flex _justify-center" +
-            " " +
-            room.toLowerCase()
-          }
+          className={`my-8 relative overflow-hidden flex justify-center ${room.toLowerCase()}`}
         >
           <Image
             src={roomImage}
             alt=""
             priority
-            className="_rounded-3xl _h-full _w-3/4"
+            className="rounded-3xl h-full w-3/4"
           />
         </div>
-        <div className="_flex _justify-around">
-          {/* @ts-ignore */}
+        <div className="flex justify-around">
           {rooms[tab].map((el: any) => (
             <div
-              className={`room-item _w-52 _h-16 _flex _items-center 
-                _justify-center _font-medium _cursor-pointer ${
-                  el === room && "_text-white _bg-primary _rounded-full"
+              className={`room-item w-52 h-16 flex items-center 
+                justify-center font-medium cursor-pointer ${
+                  el === room && "text-white bg-primary rounded-full"
                 }`}
               onClick={() => setRoom(el as string)}
               key={el}
@@ -203,11 +195,11 @@ export const Cleaning = (props: any) => {
           ))}
         </div>
       </div>
-      <div className="mobile-only _p-5 _w-full _bg-light _rounded-3xl">
+      <div className="mobile-only p-5 w-full bg-light rounded-3xl">
         {rooms[tab].map((el: string, i: number) => (
-          <div className="_mb-3.5" key={JSON.stringify(el) + i}>
+          <div className="mb-3.5" key={JSON.stringify(el) + i}>
             <div
-              className="_mb-3 _text-center"
+              className="mb-3 text-center"
               onClick={() =>
                 setOpenedRooms((arr) =>
                   arr.includes(el)
@@ -216,20 +208,21 @@ export const Cleaning = (props: any) => {
                 )
               }
             >
-              <b className={`${openRooms.includes(el) ? "_text-primary" : ""}`}>
+              <b className={`${openRooms.includes(el) ? "text-primary" : ""}`}>
                 {t(el)}
               </b>
               {openRooms.includes(el) && (
-                <div className="_mt-3.5">
+                <div className="mt-3.5">
                   {/* @ts-ignore */}
                   {[...new Array(HOW_IT_WORKS_TEXTS[tab][el].length)].map(
                     (_, i) => (
                       <div
-                        className="_flex before:_content-['\2022'] before:_inline-block before:_mr-3"
+                        className="flex before:content-['\2022'] before:inline-block before:mr-3"
                         key={"text-mobile-room" + (i + 1)}
                       >
+                        {/* @ts-ignore */}
                         <Writer
-                          //@ts-ignore
+                          // @ts-ignore
                           text={t(HOW_IT_WORKS_TEXTS[tab][el][i])}
                           alignLeft
                         />
@@ -241,7 +234,7 @@ export const Cleaning = (props: any) => {
             </div>
           </div>
         ))}
-        <div className="_text-center _text-sm _text-gray-dark">
+        <div className="text-center text-sm text-gray-dark">
           {t("what_cleaning_consists_of_description")}
         </div>
       </div>

@@ -119,9 +119,9 @@ function OrderButton({
 
   return (
     <>
-      <div className="_mt-6">
+      <div className="mt-6">
         <Button
-          className="_w-full _h-14"
+          className="w-full h-14"
           disabled={isDisabled || isClientSecretLoading}
           isLoading={isLoading || isClientSecretLoading}
           onClick={async () => {
@@ -156,7 +156,7 @@ function OrderButton({
           title={t("Order")}
         />
         {orderError && (
-          <div className="_text-center _mt-2 _text-danger">
+          <div className="text-center mt-2 text-danger">
             {t("unexpected_error")}
           </div>
         )}

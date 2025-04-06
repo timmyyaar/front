@@ -29,13 +29,13 @@ export const AllServices = (props: any) => {
 
   return (
     <>
-      <div className="_px-24 mobile-none">
+      <div className="px-24 mobile-none">
         <Overlay active={!!active}>
           <div ref={ref}>
             <Modals title={active} onClose={() => setActive("")} t={t} />
           </div>
         </Overlay>
-        <div className="_mb-5 _main-title">
+        <div className="mb-5 main-title">
           <span className="text-gradient">{t("All service")}</span>
         </div>
         <Slider
@@ -49,18 +49,18 @@ export const AllServices = (props: any) => {
           ))}
         />
       </div>
-      <div className="mobile-only _px-5-percents _mb-14">
+      <div className="mobile-only px-5-percents mb-14">
         <Overlay active={!!active}>
           <div ref={ref}>
             <Modals title={active} onClose={() => setActive("")} t={t} />
           </div>
         </Overlay>
-        <div className="_mb-3 _main-title">
+        <div className="mb-3 main-title">
           <b>
             <span className="text-gradient">{t("All service")}</span>
           </b>
         </div>
-        <div className="_grid _grid-cols-2 _gap-6">
+        <div className="grid grid-cols-2 gap-6">
           {services.map((el, i) => (
             <div key={JSON.stringify(el) + i}>
               <ServiceItem

@@ -17,39 +17,39 @@ const CheckBox: FC<any> = ({
   const isNegativePrice = price?.substring(0, 1) === "-";
 
   return (
-    <div className={isCentral ? "_flex _justify-center" : ""}>
+    <div className={isCentral ? "flex justify-center" : ""}>
       <div
-        className={`_flex _flex-col lg:_flex-row _gap-4 lg:_gap-0
-          _items-center _cursor-pointer ${isCentral ? "w-max" : ""}`}
+        className={`flex flex-col lg:flex-row gap-4 lg:gap-0
+          items-center cursor-pointer ${isCentral ? "w-max" : ""}`}
         onClick={() => setCheck((ch: boolean) => !ch)}
       >
-        <div className="_gap-4 _flex _items-center">
+        <div className="gap-4 flex items-center">
           <div
-            className={`_rounded-full _flex _justify-center _items-center
-              _h-10 _w-10 lg:_h-11 lg:_w-11 _bg-white`}
+            className={`rounded-full flex justify-center items-center
+              h-10 w-10 lg:h-11 lg:w-11 bg-white`}
           >
             {checked ? (
-              <div className="_h-6 _w-6">
+              <div className="h-6 w-6">
                 <Image src={checkSvg} alt="" />
               </div>
             ) : null}
           </div>
-          <div className="_w-10 lg:_w-14 lg:_h-14 lg:_mr-3">
+          <div className="w-10 lg:w-14 lg:h-14 lg:mr-3">
             <Image src={icon} alt="" />
           </div>
         </div>
-        <div className="_flex _items-center _select-none _m-0 lg:_mr-4">
+        <div className="flex items-center select-none m-0 lg:mr-4">
           <div>
             <div
-              className={`_flex lg:_block _justify-center _text-lg lg:_text-xl
-                _select-none _font-semibold`}
+              className={`flex lg:block justify-center text-lg lg:text-xl
+                select-none font-semibold`}
             >
               {t(title)}
             </div>
             {subTitle ? (
               <div
-                className={`_flex lg:_block _justify-center _text-sm lg:_text-base
-                  _text-gray-dark _select-none`}
+                className={`flex lg:block justify-center text-sm lg:text-base
+                  text-gray-dark select-none`}
               >
                 {t(subTitle)}
               </div>
@@ -58,17 +58,17 @@ const CheckBox: FC<any> = ({
         </div>
         {price && (
           <div
-            className={`_py-2 _px-4 _min-w-max _flex _items-center _gap-2.5
-              _rounded-full _text-lg lg:_text-xl _text-center _font-semibold
-              _whitespace-nowrap ${
-                isNegativePrice ? "_bg-success" : "_bg-warning"
-              } ${!isCentral ? "_ml-0 lg:_ml-auto" : ""}`}
+            className={`py-2 px-4 min-w-max flex items-center gap-2.5
+              rounded-full text-lg lg:text-xl text-center font-semibold
+              whitespace-nowrap ${
+                isNegativePrice ? "bg-success" : "bg-warning"
+              } ${!isCentral ? "ml-0 lg:ml-auto" : ""}`}
           >
-            <div className="_w-full">{t(price)}</div>
+            <div className="w-full">{t(price)}</div>
             {oldPrice ? (
               <div
-                className={`_text-gray _text-sm _font-semibold _line-through
-                  _whitespace-nowrap _w-full`}
+                className={`text-gray text-sm font-semibold line-through
+                  whitespace-nowrap w-full`}
               >
                 {t(oldPrice)}
               </div>

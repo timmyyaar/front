@@ -68,21 +68,21 @@ function EcoCleaningModalContent({
 
   return (
     <div>
-      <div className="_text-center _mb-6">
-        <div className="_mb-4 lg:_mb-6">
-          <span className="text-gradient _main-title">
+      <div className="text-center mb-6">
+        <div className="mb-4 lg:mb-6">
+          <span className="text-gradient main-title">
             {t("eco_cleaning_title")}
           </span>
         </div>
         {t("eco_cleaning_description")}
       </div>
-      <div className="_text-center _mb-8 lg:_mb-16">
-        <div className="_mb-4 lg:_mb-6 _text-center">
-          <span className="text-gradient _main-title">
+      <div className="text-center mb-8 lg:mb-16">
+        <div className="mb-4 lg:mb-6 text-center">
+          <span className="text-gradient main-title">
             {t("eco_cleaning_how_is_made_title")}
           </span>
         </div>
-        <div className="_mb-10">
+        <div className="mb-10">
           {reactStringReplace(
             t("eco_cleaning_how_is_made_description"),
             FIGURE_BRACKETS_REGEX,
@@ -93,20 +93,20 @@ function EcoCleaningModalContent({
         </div>
         {t("eco_cleaning_we_use_products_description")}
       </div>
-      <div className="_mb-4 lg:_mb-6 _text-center">
-        <span className="text-gradient _main-title">
+      <div className="mb-4 lg:mb-6 text-center">
+        <span className="text-gradient main-title">
           {t("what_is_included")}
         </span>
       </div>
-      <div className="_grid _grid-cols-1 lg:_grid-cols-2 _gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {ECO_CLEANING_BLOCKS.map(({ title, items }, index) => (
           <TextBlock key={index} title={title} items={items} t={t} />
         ))}
       </div>
       {!isOrder && (
-        <div className="_mt-8 lg:_mt-16">
-          <div className="_mb-4 lg:_mb-6 _text-center">
-            <span className="_main-title text-gradient">{t("Prices")}</span>
+        <div className="mt-8 lg:mt-16">
+          <div className="mb-4 lg:mb-6 text-center">
+            <span className="main-title text-gradient">{t("Prices")}</span>
           </div>
           <Costs
             t={t}

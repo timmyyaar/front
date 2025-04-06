@@ -81,7 +81,7 @@ function FeedbackItem({
   };
 
   return (
-    <div className="_h-full _w-full _flex _flex-col _items-center">
+    <div className="h-full w-full flex flex-col items-center">
       {isFeedbackError && (
         <Overlay active={isFeedbackError}>
           <div ref={errorRef}>
@@ -92,21 +92,21 @@ function FeedbackItem({
           </div>
         </Overlay>
       )}
-      <div className="_font-semibold _text-center _pb-6">
+      <div className="font-semibold text-center pb-6">
         {t("feedback_how_was_your_experience")}
-        {orders.length > 1 ? <span className="_ml-1">({t(title)})</span> : ""}
+        {orders.length > 1 ? <span className="ml-1">({t(title)})</span> : ""}
       </div>
       <div
-        className={`_flex _justify-center ${
-          orders.length > 1 ? "_gap-2 lg:_gap-4" : "_gap-2 lg:_gap-20"
+        className={`flex justify-center ${
+          orders.length > 1 ? "gap-2 lg:gap-4" : "gap-2 lg:gap-20"
         }`}
       >
         {icons.map(({ image, rating }) => (
           <Image
             src={image}
             alt={`${rating}`}
-            className={`_cursor-pointer _transition-all _duration-200 hover:_scale-125 ${
-              rating === selectedRating ? "_scale-[1.3]" : ""
+            className={`cursor-pointer transition-all duration-200 hover:scale-125 ${
+              rating === selectedRating ? "scale-[1.3]" : ""
             }`}
             onClick={() => {
               if (!wasSubmitted) {
@@ -117,13 +117,13 @@ function FeedbackItem({
         ))}
       </div>
       <div
-        className={`_py-10 _w-full ${
-          orders.length > 1 ? "_h-72 _flex-none lg:_flex-1" : "_flex-1"
+        className={`py-10 w-full ${
+          orders.length > 1 ? "h-72 flex-none lg:flex-1" : "flex-1"
         }`}
       >
         <textarea
-          className={`_w-full _h-full _border _border-solid _bg-light _outline-0
-            _p-3.5 _border-neutral-500 _rounded-xl`}
+          className={`w-full h-full border border-solid bg-light outline-0
+            p-3.5 border-neutral-500 rounded-xl`}
           placeholder={t("feedback_add_more_details")}
           value={feedback}
           onChange={({ target: { value } }) => setFeedback(value)}
@@ -131,7 +131,7 @@ function FeedbackItem({
         />
       </div>
       <Button
-        className="_w-72"
+        className="w-72"
         isLoading={isSubmitLoading}
         disabled={
           !selectedRating || isSubmitLoading || wasSubmitted || isOrdersLoading

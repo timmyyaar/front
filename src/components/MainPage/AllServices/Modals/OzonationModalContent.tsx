@@ -48,9 +48,9 @@ function OzonationModalContent({
     {
       isOzonation: true,
       title: (
-        <span className="_text-2lx _font-bold">
+        <span className="text-2lx font-bold">
           {transformedPrices.ozonationSmallArea}
-          <span className="_ml-1">
+          <span className="ml-1">
             {t("zl")}/{t("m")}
             <sup>2</sup>
           </span>
@@ -77,84 +77,84 @@ function OzonationModalContent({
 
   return (
     <>
-      <div className="_text-center _mb-8 lg:_mb-16">
-        <div className="_mb-4 lg:_mb-6 _text-center">
-          <span className="_main-title text-gradient">
+      <div className="text-center mb-8 lg:mb-16">
+        <div className="mb-4 lg:mb-6 text-center">
+          <span className="main-title text-gradient">
             {t("ozonation_of_premises")}
           </span>
         </div>
         {t("ozonation_description")}
       </div>
-      <div className="_text-center _mb-8 lg:_mb-16">
-        <div className="_mb-4 lg:_mb-6 _text-center">
-          <span className="_main-title text-gradient">
+      <div className="text-center mb-8 lg:mb-16">
+        <div className="mb-4 lg:mb-6 text-center">
+          <span className="main-title text-gradient">
             {t("how_the_air_in_the_apartment_is_ozonized")}
           </span>
         </div>
         {t("how_the_air_in_the_apartment_is_ozonized_description")}
       </div>
-      <div className="_mb-4 lg:_mb-6 _text-center">
-        <span className="_main-title text-gradient">
+      <div className="mb-4 lg:mb-6 text-center">
+        <span className="main-title text-gradient">
           {t("stages_of_preparing")}
         </span>
       </div>
-      <div className="_grid _grid-cols-5 _mb-8 _gap-5 mobile-none">
+      <div className="grid grid-cols-5 mb-8 gap-5 mobile-none">
         {OZONATION_BLOCKS.map(({ title, description }, i) => (
           <div
-            className={`_group hover:_bg-light-dark active:_bg-light-dark _flex _flex-col _flex-1 _gap-4
-                _py-11 _px-5 _bg-light _rounded-xl _relative`}
+            className={`group hover:bg-light-dark active:bg-light-dark flex flex-col flex-1 gap-4
+                py-11 px-5 bg-light rounded-xl relative`}
           >
-            <div className="_visible group-hover:_invisible">
-              <div className="_flex _justify-center _mb-3">
+            <div className="visible group-hover:invisible">
+              <div className="flex justify-center mb-3">
                 <div
-                  className={`_w-10 _h-10 _flex _justify-center _items-center
-                    _rounded-full _bg-primary _text-white`}
+                  className={`w-10 h-10 flex justify-center items-center
+                    rounded-full bg-primary text-white`}
                 >
                   {i + 1}
                 </div>
               </div>
-              <div className="_text-center _font-medium">
+              <div className="text-center font-medium">
                 <Writer text={t(title)} />
               </div>
             </div>
             <div
-              className={`_invisible group-hover:_visible _absolute
-                _left-0 _text-center _px-2`}
+              className={`invisible group-hover:visible absolute
+                left-0 text-center px-2`}
             >
               {t(description)}
             </div>
           </div>
         ))}
       </div>
-      <div className="_grid-cols-1 _mb-8 _gap-5 mobile-only-grid">
+      <div className="grid-cols-1 mb-8 gap-5 mobile-only-grid">
         {OZONATION_BLOCKS.map(({ title, description }, i) => (
           <div
-            className={`hover:_bg-light-dark active:_bg-light-dark _flex _flex-col _flex-1 _gap-4 _py-11
-              _px-5 _bg-light _rounded-xl`}
+            className={`hover:bg-light-dark active:bg-light-dark flex flex-col flex-1 gap-4 py-11
+              px-5 bg-light rounded-xl`}
           >
             <div>
-              <div className="_flex _justify-center _mb-3">
+              <div className="flex justify-center mb-3">
                 <div
-                  className={`_w-10 _h-10 _flex _justify-center _items-center
-                    _rounded-full _bg-primary _text-white`}
+                  className={`w-10 h-10 flex justify-center items-center
+                    rounded-full bg-primary text-white`}
                 >
                   {i + 1}
                 </div>
               </div>
-              <div className="_text-center _font-medium">
+              <div className="text-center font-medium">
                 <Writer text={t(description)} />
               </div>
             </div>
           </div>
         ))}
       </div>
-      <div className="mobile-none _text-gray-dark _text-sm _text-center">
+      <div className="mobile-none text-gray-dark text-sm text-center">
         {t("ozonation_reminder_text")}
       </div>
       {!isOrder && (
-        <div className="_mt-8 lg:_mt-16">
-          <div className="_mb-4 lg:_mb-6 _text-center">
-            <span className="_main-title text-gradient">{t("Prices")}</span>
+        <div className="mt-8 lg:mt-16">
+          <div className="mb-4 lg:mb-6 text-center">
+            <span className="main-title text-gradient">{t("Prices")}</span>
           </div>
           <Costs
             t={t}

@@ -48,20 +48,20 @@ const PhoneInput = ({
 
   return (
     <div
-      className="_flex _relative _w-full"
+      className="flex relative w-full"
       ref={dropdownRef}
     >
       {!isDropdownOpened && (
         <>
           <div
-            className={`after:_h-4/6 after:_border-r after:_border-gray-light
-              after:_absolute after:_right-0 after:_w-px after:_content-['']
-              _cursor-pointer _relative _flex _items-center _bg-light _py-3.5
-              _pl-3.5 _pr-2 _rounded-l-xl`}
+            className={`after:h-4/6 after:border-r after:border-gray-light
+              after:absolute after:right-0 after:w-px after:content-['']
+              cursor-pointer relative flex items-center bg-light py-3.5
+              pl-3.5 pr-2 rounded-l-xl`}
             onClick={onDropdownOpen}
           >
-            <div className="_group _font-semibold _flex _items-center">
-              <div className="_w-5 _h-3.5">
+            <div className="group font-semibold flex items-center">
+              <div className="w-5 h-3.5">
                 <Image
                   src={`/countries-flags/${phoneCountry.code}.svg`}
                   width="20"
@@ -69,15 +69,15 @@ const PhoneInput = ({
                   alt=""
                 />
               </div>
-              <span className="_mx-1 _whitespace-nowrap">
+              <span className="mx-1 whitespace-nowrap">
                 +{phoneCountry.phoneCode}
               </span>
-              <CaretDownIcon className="group-hover:_text-primary" />
+              <CaretDownIcon className="group-hover:text-primary" />
             </div>
           </div>
           <input
             type="text"
-            className="_rounded-e-xl _py-3.5 _pl-2 _w-full _bg-light _outline-0 _text-gray-dark"
+            className="rounded-e-xl py-3.5 pl-2 w-full bg-light outline-0 text-gray-dark"
             placeholder={t("Contact number")}
             value={number}
             onChange={({ target: { value } }) => {
@@ -91,23 +91,23 @@ const PhoneInput = ({
       {isDropdownOpened && (
         <>
           <input
-            className="_w-full _bg-light _outline-0 _text-gray-dark _p-3.5 _rounded-t-xl"
+            className="w-full bg-light outline-0 text-gray-dark p-3.5 rounded-t-xl"
             autoFocus
             value={searchValue}
             onChange={({ target: { value } }) => setSearchValue(value)}
           />
           <div
-            className={`custom-scroll _overflow-auto _max-h-80 _rounded-b-xl
-              _absolute _top-full _w-full _shadow-md _outline _outline-1 _outline-gray-light
-              _bg-light _z-10`}
+            className={`custom-scroll overflow-auto max-h-80 rounded-b-xl
+              absolute top-full w-full shadow-md outline outline-1 outline-gray-light
+              bg-light z-10`}
           >
             {filteredCountries.length > 0 ? (
               filteredCountries.map(({ name, code, phoneCode }) => (
                 <div
                   key={code}
-                  className={`_py-4 _px-3.5 _flex _items-center _cursor-pointer
-                    hover:_opacity-70 active:_opacity-100 active:_text-primary
-                    [&:not(:last-child)]:_border-b _border-gray-light`}
+                  className={`py-4 px-3.5 flex items-center cursor-pointer
+                    hover:opacity-70 active:opacity-100 active:text-primary
+                    [&:not(:last-child)]:border-b border-gray-light`}
                   onClick={() => onCountrySelect({ name, code, phoneCode })}
                 >
                   <Image
@@ -116,12 +116,12 @@ const PhoneInput = ({
                     height="15"
                     alt=""
                   />
-                  <span className="_font-semibold _ml-1 _whitespace-nowrap">
+                  <span className="font-semibold ml-1 whitespace-nowrap">
                     +{phoneCode}
                   </span>
                   <span
-                    className={`_ml-2 _whitespace-nowrap _overflow-hidden _text-ellipsis ${
-                      code === phoneCountry.code ? "_font-bold" : ""
+                    className={`ml-2 whitespace-nowrap overflow-hidden text-ellipsis ${
+                      code === phoneCountry.code ? "font-bold" : ""
                     }`}
                   >
                     {t(name)}
@@ -129,7 +129,7 @@ const PhoneInput = ({
                 </div>
               ))
             ) : (
-              <div className="_py-4 _px-3.5 _flex _items-center _select-none">
+              <div className="py-4 px-3.5 flex items-center select-none">
                 {t("No countries found...")}
               </div>
             )}

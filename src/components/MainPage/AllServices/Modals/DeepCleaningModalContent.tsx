@@ -77,12 +77,12 @@ function DeepCleaningModalContent({
 
   return (
     <>
-      <div className="_mb-4 lg:_mb-6 _text-center">
-        <span className="text-gradient _main-title">
+      <div className="mb-4 lg:mb-6 text-center">
+        <span className="text-gradient main-title">
           {t("what_is_included")}
         </span>
       </div>
-      <div className="_grid _grid-cols-1 lg:_grid-cols-2 _gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {DEEP_CLEANING_BLOCKS.map(({ title, items }, index) => (
           <TextBlock
             key={index}
@@ -94,9 +94,9 @@ function DeepCleaningModalContent({
         ))}
       </div>
       {!isOrder && (
-        <div className="_mt-8 lg:_mt-16">
-          <div className="_mb-4 lg:_mb-6 _text-center">
-            <span className="_main-title text-gradient">{t("Prices")}</span>
+        <div className="mt-8 lg:mt-16">
+          <div className="mb-4 lg:mb-6 text-center">
+            <span className="main-title text-gradient">{t("Prices")}</span>
           </div>
           <Costs
             t={t}

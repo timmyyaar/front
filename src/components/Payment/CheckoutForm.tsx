@@ -55,13 +55,13 @@ function CheckoutForm({ t, paymentIntent }: CheckoutFormProps) {
         }}
       />
       {error && (
-        <div className="_text-danger _mt-1 _text-center">
+        <div className="text-danger mt-1 text-center">
           {error || t("promo_error_modal_title")}
         </div>
       )}
-      <div className="_flex _justify-center _mt-4">
+      <div className="flex justify-center mt-4">
         <Button
-          className="_w-full _max-w-full lg:_w-[30rem]"
+          className="w-full max-w-full lg:w-[30rem]"
           onClick={onPayClick}
           isLoading={isPaymentLoading}
           disabled={isPaymentLoading || !isPayButtonEnabled}

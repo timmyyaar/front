@@ -51,19 +51,19 @@ export const PromoInput: FC<IProps> = (props) => {
   };
 
   return (
-    <div className="_mt-3 _cursor-pointer">
+    <div className="mt-3 cursor-pointer">
       <div
-        className="_р-14 _flex _rounded-full"
+        className="р-14 flex rounded-full"
         style={{ background: promoStatus || "#F9F9F9" }}
       >
-        <div className="_my-auto _mr-3 _ml-5">
-          <Image src={discountPng} alt="Promo" width="32" height="32" className="_max-w-max _h-8 _w-8" />
+        <div className="my-auto mr-3 ml-5">
+          <Image src={discountPng} alt="Promo" width="32" height="32" className="max-w-max h-8 w-8" />
         </div>
         <input
           type="text"
           placeholder={t("Promo code")}
-          className={`_w-full _bg-white _outline-0 ${
-            !promoStatus ? "" : "placeholder:_text-white"
+          className={`w-full bg-white outline-0 ${
+            !promoStatus ? "" : "placeholder:text-white"
           }`}
           style={{
             background: promoStatus,
@@ -74,7 +74,7 @@ export const PromoInput: FC<IProps> = (props) => {
           disabled={isCheckPromoLoading}
         />
         <Button
-          className="_ml-auto"
+          className="ml-auto"
           disabled={isCheckPromoLoading}
           onClick={checkCode}
           title={t("Apply")}

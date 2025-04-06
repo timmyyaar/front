@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { ChangeEvent, useContext, useEffect, useState } from "react";
+import Image from "next/image";
 
 import searchSvg from "./icons/search.svg";
 import { TBlog } from "@/types";
@@ -10,8 +11,10 @@ import { LocaleContext } from "@/components/Providers";
 import { sendGAEvent } from "@/google-analytics";
 import Input from "@/components/OrderPage/Summary/UserData/components/Input";
 import Tags from "@/components/Blogs/components/Tags";
-
-const TITLE_REGEXP = /{([^}]*)}/g;
+import BlogCard from "@/components/Blogs/components/BlogCard";
+import { ALL_TAG } from "@/components/Blogs/constants";
+import boyPng from "@/assets/icons/main-cleaners/boy.png";
+import girlPng from "@/assets/icons/main-cleaners/girl.png";
 
 interface BlogsProps {
   blogs: TBlog[];
@@ -21,7 +24,8 @@ function Blogs({ blogs }: BlogsProps) {
   const { locales } = useContext(LocaleContext);
   const { t } = useLocales(locales);
 
-  const [activeTags, setActiveTags] = useState<string[]>(["All"]);
+  const [searchText, setSearchText] = useState<string>("");
+  const [activeTags, setActiveTags] = useState<string[]>([ALL_TAG]);
 
   useEffect(() => {
     sendGAEvent({
@@ -33,35 +37,74 @@ function Blogs({ blogs }: BlogsProps) {
   }, []);
 
   const tags = [...new Set(blogs.map(({ category }) => category))];
+  const filteredBlogs = blogs
+    .filter(({ text }) => text.toLowerCase().includes(searchText.toLowerCase()))
+    .filter(
+      ({ category }) =>
+        activeTags.includes(ALL_TAG) || activeTags.includes(category),
+    );
 
   return (
-    <div className="_bg-primary-background">
-      <>
-        <div className="tw:pt-6 _px-4 lg:_px-48 lg:_py-9">
-          <div className="_p-5 _text-7xl _font-black text-gradient _w-max">
+    <div className="bg-primary-background">
+      <div className="pt-6 px-4 lg:px-48 lg:py-9">
+        <div className="relative">
+          <div className="p-5 text-4xl lg:text-7xl font-black text-gradient w-max">
             TYT Blog
           </div>
-          <div className="_pl-5">
+          <div className="pl-5">
             A daily dose of valuable content from the specialists at Take Your
             Time
           </div>
-          <div className="_w-full _flex _justify-center _pb-10 lg:_pb-15">
-            <div className="_pt-5 lg:_pt-20 _w-full lg:_w-1/3">
-              <Input isRound icon={searchSvg} placeholder="Search" />
+          <div className="w-full flex justify-center pb-10 lg:pb-15">
+            <div className="pt-5 lg:pt-20 w-full lg:w-1/3">
+              <Input
+                isRound
+                icon={searchSvg}
+                placeholder="Search"
+                value={searchText}
+                onChange={({
+                  target: { value },
+                }: ChangeEvent<HTMLInputElement>) => setSearchText(value)}
+              />
             </div>
           </div>
-          <div className="_mobile-none _pb-10">
-            <Tags
-              tags={tags}
-              activeTags={activeTags}
-              setActiveTags={setActiveTags}
+          <div className="hidden xl:flex gap-4 absolute right-0 bottom-0">
+            <Image
+              src={boyPng}
+              alt="Boy"
+              height={300}
+              priority
+              className="rotate-y-180"
             />
+            <Image src={girlPng} alt="Girl" height={300} priority />
+          </div>
+          <div className="hidden lg:flex xl:hidden gap-4 absolute right-0 bottom-0">
+            <Image
+              src={boyPng}
+              alt="Boy"
+              height={180}
+              priority
+              className="rotate-y-180"
+            />
+            <Image src={girlPng} alt="Girl" height={180} priority />
           </div>
         </div>
-        <div className="_flex _flex-col">
-          <Footer t={t} />
+        <div className="mobile-none pb-10">
+          <Tags
+            tags={tags}
+            activeTags={activeTags}
+            setActiveTags={setActiveTags}
+          />
         </div>
-      </>
+        <div className="grid gap-4 lg:grid-cols-3">
+          {filteredBlogs.map((blog) => (
+            <BlogCard key={blog.key} blog={blog} />
+          ))}
+        </div>
+      </div>
+      <div className="flex flex-col">
+        <Footer t={t} />
+      </div>
     </div>
   );
 }

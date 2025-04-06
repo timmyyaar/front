@@ -2,6 +2,6 @@
 
 import request from "@/utils/request";
 
-export const getBlog = async (id: string) => {
-  return await request({ url: `blogs/${id}`, cache: "no-store" });
+export const getBlog = async (key: string) => {
+  return await request({ url: `blogs/${key}`, cache: "no-store" });
 };

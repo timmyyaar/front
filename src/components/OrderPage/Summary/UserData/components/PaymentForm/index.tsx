@@ -18,10 +18,10 @@ export const PaymentForm = ({ setOnlinePayment, t }: any) => {
     <div>
       <Switcher
         icons={[
-          <div className="_flex _justify-center">
+          <div className="flex justify-center">
             <Image src={cashPng} alt="" width="36" height="36"/>
           </div>,
-          <div className="_flex _justify-center">
+          <div className="flex justify-center">
             <Image src={creditCardPng} alt="" width="36" height="36" />
           </div>
         ]}
