@@ -12,7 +12,6 @@ interface Props {
 const MobileSwiper: FC<Props> = (props) => {
   const { elements } = props;
   const [currentSlide, setCurrentSlide] = useState(0);
-  console.log(currentSlide)
 
   return (
     <div className="mobile-swiper-wrapper my-4">
