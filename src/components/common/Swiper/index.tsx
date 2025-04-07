@@ -12,6 +12,7 @@ interface Props {
 const MobileSwiper: FC<Props> = (props) => {
   const { elements } = props;
   const [currentSlide, setCurrentSlide] = useState(0);
+  console.log(currentSlide)
 
   return (
     <div className="mobile-swiper-wrapper my-4">
@@ -30,9 +31,9 @@ const MobileSwiper: FC<Props> = (props) => {
 
           return (
             <div
-              className={`slider-status w-12 h-2.5 rounded-full bg-primary
+              className={`slider-status rounded-full 
                 transition-all duration-500 ${
-                  subElement ? "" : "w-2.5 h-2.5 bg-light"
+                  subElement ? "bg-primary w-12 h-2.5" : "w-2.5 h-2.5 bg-light"
                 }`}
               key={"slider-status" + index}
             />
