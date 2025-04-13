@@ -91,3 +91,11 @@ export const MAIN_SERVICES = [
   { title: "Post-construction", icon: PostConstruction },
   { title: "Ozonation", icon: Ozonation },
 ];
+
+export enum BLOG_TAGS {
+  ALL = "All",
+  WINDOW_CLEANING = "Windows cleaning",
+  CLEANING_TIPS = "Cleaning tips",
+  GENERAL_CLEANING = "General cleaning",
+  DEEP_CLEANING = "Deep Cleaning",
+}

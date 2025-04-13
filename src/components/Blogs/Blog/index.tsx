@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React, { useContext, useEffect, useRef } from "react";
 import reactStringReplace from "react-string-replace";
 
@@ -18,11 +13,35 @@ import Titles from "./components/Titles";
 import CalendarIcon from "@/components/Blogs/Blog/icons/CalendarIcon";
 import TimeIcon from "@/components/Blogs/Blog/icons/TimeIcon";
 import { LeftArrow } from "@/components/common/Slider/icons/LeftArrow";
+import Button from "@/components/common/Button";
+import { BLOG_TAGS, MAIN_CATEGORIES_URLS } from "@/constants";
+import { ALL_SERVICE } from "@/components/OrderPage/constants";
 
 const H2_REGEXP = /<h2>(.*?)<\/h2>/g;
 const BOLD_REGEXP = /<b>(.*?)<\/b>/g;
 const BULLET_REGEXP = /<bullet \/>/g;
 const LINK_REGEXP = /<a>(.*?)<\/a>/g;
+
+const DEFAULT_REDIRECT_OBJECT = {
+  category: MAIN_CATEGORIES_URLS.GENERAL,
+  text: "general cleaning",
+  service: ALL_SERVICE.REGULAR,
+};
+
+const REDIRECT_BY_TAG = {
+  [BLOG_TAGS.WINDOW_CLEANING]: {
+    category: MAIN_CATEGORIES_URLS.SPECIAL,
+    text: "windows cleaning",
+    service: ALL_SERVICE.WINDOW,
+  },
+  [BLOG_TAGS.CLEANING_TIPS]: DEFAULT_REDIRECT_OBJECT,
+  [BLOG_TAGS.GENERAL_CLEANING]: DEFAULT_REDIRECT_OBJECT,
+  [BLOG_TAGS.DEEP_CLEANING]: {
+    category: MAIN_CATEGORIES_URLS.GENERAL,
+    text: "deep cleaning",
+    service: ALL_SERVICE.DEEP,
+  },
+};
 
 interface BlogsProps {
   blog: TBlog;
@@ -33,7 +52,6 @@ function Blog({ blog }: BlogsProps) {
   const { t } = useLocales(locales);
   const router = useRouter();
   const { lang } = useParams();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const mainTitleRef = useRef<HTMLDivElement>(null);
@@ -92,6 +110,16 @@ function Blog({ blog }: BlogsProps) {
     ];
   };
 
+  const redirectObject =
+    REDIRECT_BY_TAG[blog.category] || DEFAULT_REDIRECT_OBJECT;
+
+  const getUpdatedSearchParams = () => {
+    const updatedSearchParams = new URLSearchParams(searchParams.toString());
+    updatedSearchParams.set("selectedService", redirectObject.service);
+
+    return updatedSearchParams.toString();
+  };
+
   const { blogId } = useParams();
 
   useEffect(() => {
@@ -103,12 +131,15 @@ function Blog({ blog }: BlogsProps) {
     });
   }, []);
 
+  const translatedBlogTitle = t(`blog_${blog.key}_title`, blog.title);
+  const translatedBlogText = t(`blog_${blog.key}_text`, blog.text);
+
   return (
     <div className="bg-primary-background">
       <div className="pt-6 px-4 lg:px-48 lg:py-9">
         <div
           className={`cursor-pointer flex items-center text-2xl font-semibold text-primary
-            hover:text-primary-dark group pb-6 transition-all`}
+            hover:text-primary-dark group pb-6 transition-all w-max`}
           onClick={() => {
             router.push(`/${lang}/blogs?${searchParams.toString()}`);
           }}
@@ -116,18 +147,19 @@ function Blog({ blog }: BlogsProps) {
           <div className="h-7 w-7 mr-3 cursor-pointer text-gray-dark group-hover:text-primary">
             <LeftArrow className="w-full h-full" />
           </div>
-          Blog
+          {t("blogs_title")}
         </div>
         <div className="flex flex-col lg:flex-row gap-6">
           <Titles
             category={blog.category}
-            titles={getBlogTitles(blog.title, blog.text)}
+            titles={getBlogTitles(translatedBlogTitle, translatedBlogText)}
             mainTitleRef={mainTitleRef}
             titlesRefs={titlesRefs}
+            t={t}
           />
           <div className="whitespace-pre-wrap">
             <div className="font-semibold text-2xl mb-3" ref={mainTitleRef}>
-              {blog.title}
+              {translatedBlogTitle}
             </div>
             <div className="flex gap-3 mb-5">
               <div className="py-3 px-4 bg-white rounded-full flex items-center justify-center whitespace-nowrap text-gray text-sm">
@@ -136,7 +168,7 @@ function Blog({ blog }: BlogsProps) {
               </div>
               <div className="py-3 px-4 bg-white rounded-full flex items-center justify-center whitespace-nowrap text-gray text-sm">
                 <TimeIcon className="mr-1" />
-                {blog.read_time} minutes
+                {blog.read_time} {t("blogs_page_minutes")}
               </div>
             </div>
             <img
@@ -144,7 +176,18 @@ function Blog({ blog }: BlogsProps) {
               src={blog.main_image}
               className="w-full rounded-3xl mb-6"
             />
-            {getReplacedText(blog.text)}
+            {getReplacedText(translatedBlogText)}
+            <Button
+              title={t(
+                `blogs_page_order_${redirectObject.text.replaceAll(" ", "_")}`,
+              )}
+              className="w-full mt-6"
+              onClick={() => {
+                router.push(
+                  `/${lang}/order/${redirectObject.category}?${getUpdatedSearchParams()}`,
+                );
+              }}
+            />
           </div>
         </div>
       </div>

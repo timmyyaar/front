@@ -18,7 +18,7 @@ function Blogs({ t, blogs }: BlogsProps) {
         <SliderStep
           elements={blogs.map((blog) => (
             <div className="p-2.5 h-full w-full">
-              <BlogCard blog={blog} key={blog.id} />
+              <BlogCard blog={blog} key={blog.id} t={t} />
             </div>
           ))}
           itemsPerPage={3}
@@ -28,7 +28,7 @@ function Blogs({ t, blogs }: BlogsProps) {
         <Swiper
           elements={blogs.map((blog) => (
             <div className="p-2.5 h-full w-full">
-              <BlogCard blog={blog} key={blog.id} />
+              <BlogCard blog={blog} key={blog.id} t={t} />
             </div>
           ))}
         />
