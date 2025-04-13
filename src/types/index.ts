@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { StaticImageData } from "next/image";
+import { BLOG_TAGS } from "@/constants";
 
 export type TBlog = {
   id: number;
@@ -8,11 +9,11 @@ export type TBlog = {
   read_time: number;
   main_image: string;
   date: string;
-  category: string;
+  category: Exclude<BLOG_TAGS, BLOG_TAGS.ALL>;
   key: string;
 };
 
-export type TranslateFunction = (text: string) => string;
+export type TranslateFunction = (text: string, defaultText?: string) => string;
 
 export type Language = "pl" | "ru" | "en" | "ua";
 

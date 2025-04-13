@@ -1,10 +1,12 @@
 import { RefObject, useEffect, useState } from "react";
+import { TranslateFunction } from "@/types";
 
 interface TitlesProps {
   category: string;
   titles: string[];
   mainTitleRef: RefObject<HTMLDivElement | null>;
   titlesRefs: RefObject<{ [key: string]: HTMLSpanElement | null }>;
+  t: TranslateFunction;
 }
 
 const BOTTOM_OFFSET = 10;
@@ -14,8 +16,9 @@ export default function Titles({
   titles,
   mainTitleRef,
   titlesRefs,
+  t,
 }: TitlesProps) {
-  const [activeTitle, setActiveTitle] = useState<string>("");
+  const [activeTitle, setActiveTitle] = useState<string>(titles[0]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -78,7 +81,9 @@ export default function Titles({
 
   return (
     <div className="bg-white p-6 flex flex-col gap-6 rounded-3xl min-w-1/3 lg:sticky top-4 h-max">
-      <span className="font-semibold text-lg">{category}</span>
+      <span className="font-semibold text-lg">
+        {t(`blogs_page_tag_${category.toLowerCase().replaceAll(" ", "_")}`)}
+      </span>
       <div className="flex flex-col gap-1">
         {titles.map((title, index) => (
           <div
@@ -86,11 +91,10 @@ export default function Titles({
             className="cursor-pointer hover:translate-x-1 transition-all"
             onClick={() => onTitleClick(title, index)}
           >
-            <span className="text-primary">{index + 1}.</span>{" "}
             <span
               className={`hover:opacity-90 transition-all ${activeTitle === title ? "text-primary" : "text-gray"}`}
             >
-              {title}
+              {index + 1}. {title}
             </span>
           </div>
         ))}
