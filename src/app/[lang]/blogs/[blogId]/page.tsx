@@ -33,8 +33,9 @@ export async function generateMetadata({ params }: MetadataProps) {
   const blog = await getBlog(blogId);
 
   return {
-    title: currentLanguageLocales[`blogs_title_${blog.id}`],
-    description: currentLanguageLocales[`blogs_description_${blog.id}`],
+    title: currentLanguageLocales[`blog_metadata_title_${blog.key}`],
+    description:
+      currentLanguageLocales[`blog_metadata_description_${blog.key}`],
     alternates: {
       canonical: `https://www.takeutime.pl/${lang}/blogs/${blogId}`,
       languages: ALTERNATES_LANGUAGES.reduce(
