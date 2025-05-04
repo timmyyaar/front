@@ -38,8 +38,8 @@ function CleanersCount({
   );
 
   return (
-    <div className="_mt-2">
-      <span className="_flex _items-center">
+    <div className="mt-2">
+      <span className="flex items-center">
         <span
           onClick={() => {
             if (!isDryCleaningOrOzonation) {
@@ -47,12 +47,12 @@ function CleanersCount({
             }
           }}
           className={`${
-            !isDryCleaningOrOzonation ? "_cursor-pointer hover:_opacity-80" : ""
+            !isDryCleaningOrOzonation ? "cursor-pointer hover:opacity-80" : ""
           }`}
         >
           {t("Cleaners")}: <b>{cleanersCount}</b>
           {manualCleanersCount > 0 && (
-            <span className="_font-semibold _text-primary _ml-1">
+            <span className="font-semibold text-primary ml-1">
               (+{manualCleanersCount})
             </span>
           )}
@@ -60,13 +60,13 @@ function CleanersCount({
         {!isDryCleaningOrOzonation && (
           <>
             <Info
-              className="_ml-2 mobile-none"
+              className="ml-2 mobile-none"
               onClick={() => setIsCleanersInfoHovered(true)}
               onMouseEnter={() => setIsCleanersInfoHovered(true)}
               onMouseLeave={() => setIsCleanersInfoHovered(false)}
             />
             <Info
-              className="_ml-2 mobile-only"
+              className="ml-2 mobile-only"
               onClick={() => setIsCleanersInfoHovered(true)}
             />
           </>
@@ -74,12 +74,12 @@ function CleanersCount({
       </span>
       {isCleanersInfoHovered && (
         <>
-          <div className="mobile-none _z-10 _absolute _bg-light _border _border-solid _border-primary _shadow-md max-w-[80%] _text-center _flex _flex-col _gap-3 _rounded-2xl _p-3">
+          <div className="mobile-none z-10 absolute bg-light border border-solid border-primary shadow-md max-w-[80%] text-center flex flex-col gap-3 rounded-2xl p-3">
             {t("extra_cleaners_information")}
           </div>
           <div
             ref={cleanersInfoPopoverRef}
-            className="mobile-only _z-10 _absolute _bg-light _border _border-solid _border-primary _shadow-md max-w-[80%] _text-center _flex _flex-col _gap-3 _rounded-2xl _p-3"
+            className="mobile-only z-10 absolute bg-light border border-solid border-primary shadow-md max-w-[80%] text-center flex flex-col gap-3 rounded-2xl p-3"
           >
             {t("extra_cleaners_information")}
           </div>
@@ -88,17 +88,17 @@ function CleanersCount({
       {showManualPopup && (
         <div
           ref={cleanersPopoverRef}
-          className="_z-10 _absolute _bg-light _border _border-solid _border-primary _shadow-md _flex _flex-col _gap-3 _rounded-2xl _p-3"
+          className="z-10 absolute bg-light border border-solid border-primary shadow-md flex flex-col gap-3 rounded-2xl p-3"
         >
-          <div className="_text-center _font-semibold">
+          <div className="text-center font-semibold">
             {t("extra_cleaners")}
           </div>
-          <div className="_flex _items-center">
+          <div className="flex items-center">
             <Minus
               className={`${
                 isMinusCleanersIconDisabled
-                  ? "_cursor-default _text-gray-lighter _pointer-events-none"
-                  : "_cursor-pointer hover:_opacity-70 active:_text-primary"
+                  ? "cursor-default text-gray-lighter pointer-events-none"
+                  : "cursor-pointer hover:opacity-70 active:text-primary"
               }`}
               onClick={() => {
                 if (!isMinusCleanersIconDisabled) {
@@ -106,11 +106,11 @@ function CleanersCount({
                 }
               }}
             />
-            <span className="cleaners-count _text-xl _font-semibold _mx-2">
+            <span className="cleaners-count text-xl font-semibold mx-2">
               {manualCleanersCount}
             </span>
             <Plus
-              className="_cursor-pointer hover:_opacity-70 active:_text-primary"
+              className="cursor-pointer hover:opacity-70 active:text-primary"
               onClick={() => {
                 setManualCleanersCount(manualCleanersCount + 1);
               }}

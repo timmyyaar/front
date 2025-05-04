@@ -77,12 +77,12 @@ export const TimePicker = ({ time, setTime, t, data }: any) => {
 
         timeOptions.push(
           <div
-            className={`_mb-3 _h-10 _transition-all _font-semibold _cursor-pointer
-              _rounded-full hover:_text-white hover:_bg-primary ${
-                timeItem === time ? "_text-white _bg-primary" : ""
+            className={`mb-3 h-10 transition-all font-semibold cursor-pointer
+              rounded-full hover:text-white hover:bg-primary ${
+                timeItem === time ? "text-white bg-primary" : ""
               } ${
-              isTimeDisabled ? "_pointer-events-none _text-gray-lighter" : ""
-            } _flex _items-center _justify-center _cursor-pointer`}
+              isTimeDisabled ? "pointer-events-none text-gray-lighter" : ""
+            } flex items-center justify-center cursor-pointer`}
             onClick={() => setTime(timeItem)}
             key={timeItem}
           >
@@ -104,27 +104,27 @@ export const TimePicker = ({ time, setTime, t, data }: any) => {
   };
 
   return (
-    <div className="_p-2">
-      <div className="_flex _items-center _justify-between _mb-5">
-        <div className="_text-xl _font-bold">{t("Time")}</div>
-        <div className="_w-24 _flex _justify-between">
+    <div className="p-2">
+      <div className="flex items-center justify-between mb-5">
+        <div className="text-xl font-bold">{t("Time")}</div>
+        <div className="w-24 flex justify-between">
           <button
-            className={`_w-7 _h-7 _rounded-md hover:_text-primary _transition-all
-              _bg-white _shadow-md _flex _items-center _justify-center`}
+            className={`w-7 h-7 rounded-md hover:text-primary transition-all
+              bg-white shadow-md flex items-center justify-center`}
             onClick={prevPage}
           >
             <ArrowLeft />
           </button>
           <button
-            className={`_w-7 _h-7 _rounded-md hover:_text-primary _transition-all
-              _bg-white _shadow-md _flex _items-center _justify-center`}
+            className={`w-7 h-7 rounded-md hover:text-primary transition-all
+              bg-white shadow-md flex items-center justify-center`}
             onClick={nextPage}
           >
             <ArrowRight />
           </button>
         </div>
       </div>
-      <div className="_grid _grid-cols-4">{generateTimeOptions()}</div>
+      <div className="grid grid-cols-4">{generateTimeOptions()}</div>
     </div>
   );
 };

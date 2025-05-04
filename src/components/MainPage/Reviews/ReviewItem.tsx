@@ -25,21 +25,23 @@ function ReviewItem({ review, t }: Props) {
     translatedReviewText === reviewTextKey ? review.text : translatedReviewText;
 
   return (
-    <section className="_h-64 _bg-light _rounded-xl lg:_m-2.5 _p-5 _text-center _flex _flex-col _w-full">
+    <section className="h-64 bg-light rounded-xl lg:m-2.5 p-5 text-center flex flex-col w-full">
       <span
-        ref={(element) => setReviewItem(element)}
-        className="_line-clamp-4 _text-ellipsis"
+        ref={element => {
+          setReviewItem(element);
+        }}
+        className="line-clamp-4 text-ellipsis"
         title={isEllipsis ? review.text : ""}
       >
         {reviewText}
       </span>
-      <section className="_mt-auto">
-        <section className="_flex _justify-center">
+      <section className="mt-auto">
+        <section className="flex justify-center">
           {Array.from({ length: 5 }).map((_, ratingIndex) => (
             <Image src={starIcon} alt="" key={ratingIndex} />
           ))}
         </section>
-        <span className="_text-2xl _font-semibold">{review.name}</span>
+        <span className="text-2xl font-semibold">{review.name}</span>
       </section>
     </section>
   );

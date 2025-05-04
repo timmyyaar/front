@@ -6,12 +6,14 @@ import { Header } from "@/components/Header";
 import Payment from "@/components/Payment";
 
 interface PaymentProps {
-  params: { paymentIntentId: string };
+  params: Promise<{ paymentIntentId: string }>;
 }
 
 export default async function ({ params }: PaymentProps) {
+  const { paymentIntentId } = await params;
+
   const locales = await getLocales();
-  const paymentIntent = await getPaymentIntent(params.paymentIntentId);
+  const paymentIntent = await getPaymentIntent(paymentIntentId);
 
   return (
     <Providers locales={locales}>

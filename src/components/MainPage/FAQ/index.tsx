@@ -29,17 +29,17 @@ export const FAQ = (props: any) => {
 
     return (
       <div
-        className="_w-full _rounded-[3rem] _bg-light _py-5 _px-10 lg:_py-7 _flex _flex-col _justify-center"
+        className="w-full rounded-[3rem] bg-light py-5 px-10 lg:py-7 flex flex-col justify-center"
         key={JSON.stringify(item)}
       >
-        <div className="_h-14 lg:_h-11 _flex _justify-between">
-          <div className="_font-medium _text-xl _flex _items-center">
+        <div className="h-14 lg:h-11 flex justify-between">
+          <div className="font-medium text-xl flex items-center">
             <b>{t(title)}</b>
           </div>
           <div
-            className={`_flex _items-center _justify-center _cursor-pointer
-            _transition-all _duration-500 _w-11 ${
-              activeQuest === title ? "_rotateX-180" : ""
+            className={`flex items-center justify-center cursor-pointer
+            transition-all duration-500 w-11 ${
+              activeQuest === title ? "rotate-x-180" : ""
             }`}
             onClick={() => toggleActiveQuest(title)}
           >
@@ -47,7 +47,7 @@ export const FAQ = (props: any) => {
           </div>
         </div>
         <div
-          className={`_transition-all ${activeQuest === title ? "_mt-5 _max-h-96 _overflow-visible" : "_max-h-0 _overflow-hidden"}`}
+          className={`transition-all ${activeQuest === title ? "mt-5 max-h-96 overflow-visible" : "max-h-0 overflow-hidden"}`}
         >
           {t(text)}
         </div>
@@ -57,19 +57,19 @@ export const FAQ = (props: any) => {
 
   return (
     <>
-      <div className="_px-24 mobile-none">
-        <div className="_main-title _mb-8">
+      <div className="px-24 mobile-none">
+        <div className="main-title mb-8">
           <span className="text-gradient">{t("FAQ")}</span>
         </div>
-        <div className="_w-full _flex _space-between _gap-5">
-          <div className="_w-6/12 _grid _grid-cols-1 _gap-6 _justify-stretch">
+        <div className="w-full flex space-between gap-5">
+          <div className="w-6/12 grid grid-cols-1 gap-6 justify-stretch">
             {faqQuestions.map((item, i) =>
               i % 2 ? (
                 <Fragment key={"faq" + i + "left"}>{getFaqItem(item)}</Fragment>
               ) : null,
             )}
           </div>
-          <div className="_w-6/12 _grid _grid-cols-1 _gap-6 _justify-stretch">
+          <div className="w-6/12 grid grid-cols-1 gap-6 justify-stretch">
             {faqQuestions.map((item, i) =>
               !(i % 2) ? (
                 <Fragment key={"faq" + i + "right"}>
@@ -80,11 +80,11 @@ export const FAQ = (props: any) => {
           </div>
         </div>
       </div>
-      <div className="mobile-only _px-5-percents-mobile _mb-14">
-        <div className="_main-title _mb-4">
+      <div className="mobile-only px-5-percents-mobile mb-14">
+        <div className="main-title mb-4">
           <span className="text-gradient">{t("FAQ")}</span>
         </div>
-        <div className="_grid _grid-cols-1 _gap-6">
+        <div className="grid grid-cols-1 gap-6">
           {faqQuestions.map((item, i) => (
             <Fragment key={"faq" + i + "left"}>{getFaqItem(item)}</Fragment>
           ))}

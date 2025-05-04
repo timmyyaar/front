@@ -27,23 +27,23 @@ export const SubscriptionPage = () => {
 
   return (
     <>
-      <div className="_mt-8 lg:_mt-14 _mb-4 lg:_mb-6">
-        <div className="_flex _justify-center _items-center _gap-2">
-          <span className="text-gradient _main-title">{t("Subscription")}</span>
+      <div className="mt-8 lg:mt-14 mb-4 lg:mb-6">
+        <div className="flex justify-center items-center gap-2">
+          <span className="text-gradient main-title">{t("Subscription")}</span>
           <Image
             src={subscriptionPng}
             alt="Subscription"
-            className="_w-8 lg:_w-12"
+            className="w-8 lg:w-12"
           />
         </div>
       </div>
-      <div className="_bg-light _mx-4 lg:_mx-72 _py-7 _px-4 _rounded-3xl">
-        <div className="_text-center _mb-6">
-          <span className="_text-xl _font-semibold text-gradient">
+      <div className="bg-light mx-4 lg:mx-72 py-7 px-4 rounded-3xl">
+        <div className="text-center mb-6">
+          <span className="text-xl font-semibold text-gradient">
             {t("subscription_how_it_works")}
           </span>
         </div>
-        <div className="_whitespace-pre-wrap">
+        <div className="whitespace-pre-wrap">
           {reactStringReplace(
             t("subscription_page_description"),
             FIGURE_BRACKETS_REGEX,
@@ -64,8 +64,8 @@ export const SubscriptionPage = () => {
         {/*  {locale}/subscription*/}
         {/*</a>*/}
       </div>
-      <div className="_mt-6 _mx-4 lg:_mx-72">
-        <Button title={t("create_account")} className="_w-full" disabled />
+      <div className="mt-6 mx-4 lg:mx-72">
+        <Button title={t("create_account")} className="w-full" disabled />
       </div>
       <Footer t={t} />
     </>

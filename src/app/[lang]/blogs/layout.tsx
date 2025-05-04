@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { Language } from "@/types";
 
 type MetadataProps = {
-  params: { lang: Language; blogId: string };
+  params: Promise<{ lang: Language; blogId: string }>;
 };
 
 const titleByLanguage = {
@@ -20,7 +20,7 @@ const descriptionByLanguage = {
 };
 
 export async function generateMetadata({ params }: MetadataProps) {
-  const { lang } = params;
+  const { lang } = await params;
 
   return {
     title: titleByLanguage[lang],

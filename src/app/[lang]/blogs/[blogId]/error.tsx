@@ -11,13 +11,13 @@ export default function Error() {
   const router = useRouter();
 
   return (
-    <main className="_flex _flex-col _h-screen _bg-white">
-      <div className="_flex-1 _flex _flex-col _justify-center _items-center">
-        <span className="text-gradient _main-title">
+    <main className="flex flex-col h-screen bg-white">
+      <div className="flex-1 flex flex-col justify-center items-center">
+        <span className="text-gradient main-title">
           This page doesn't exist
         </span>
         <Button
-          className="_w-max _mt-4"
+          className="w-max mt-4"
           onClick={() => router.push(`/${lang}?${searchParams.toString()}`)}
           title="Back home"
         />

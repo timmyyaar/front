@@ -13,20 +13,20 @@ interface TextBlockProps {
 function TextBlock({ t, title, items, center, inline }: TextBlockProps) {
   return (
     <div
-      className={`_p-10 _border-40 _bg-light ${
-        center ? "_col-span-1 lg:_col-span-2" : ""
+      className={`p-10 rounded-40-px bg-light ${
+        center ? "col-span-1 lg:col-span-2" : ""
       }`}
     >
-      <div className="_text-2xl _mb-10 _text-center _font-semibold">
+      <div className="text-2xl mb-10 text-center font-semibold">
         <Writer text={t(title)} />
       </div>
       {inline ? (
-        <div className="_flex-wrap lg:_flex-nowrap _flex _gap-2 _justify-between">
+        <div className="flex-wrap lg:flex-nowrap flex gap-2 justify-between">
           {(items as string[][]).map((innerItems: string[]) => (
             <div>
               {innerItems.map((innerItem, index) => (
                 <div
-                  className="_flex before:_content-['\2022'] before:_inline-block before:_mr-3"
+                  className="flex before:content-['\2022'] before:inline-block before:mr-3"
                   key={`${innerItem}-${index}`}
                 >
                   <Writer text={t(innerItem)} />
@@ -36,11 +36,11 @@ function TextBlock({ t, title, items, center, inline }: TextBlockProps) {
           ))}
         </div>
       ) : (
-        <div className="_flex _justify-center">
-          <div className="_flex _flex-col _gap-2">
+        <div className="flex justify-center">
+          <div className="flex flex-col gap-2">
             {(items as string[]).map((item, index) => (
               <div
-                className="_flex before:_content-['\2022'] before:_inline-block before:_mr-3"
+                className="flex before:content-['\2022'] before:inline-block before:mr-3"
                 key={`${item}-${index}`}
               >
                 <Writer text={t(item)} />

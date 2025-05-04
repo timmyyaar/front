@@ -86,20 +86,20 @@ export const CounterComponent: FC<IProps> = (props) => {
   const showIsPrivateHouse = getIsPrivateHouse(mainService);
 
   return counter.length ? (
-    <div className="_flex _flex-col _gap-5 _w-full">
+    <div className="flex flex-col gap-5">
       {counter.map((el: any, i: number) => (
         <Fragment key={i}>
           {el.title ? (
             <div>
               <div
-                className={`_flex _justify-center _items-center _gap-3 _text-lg
-                  lg:_text-2xl _font-bold`}
+                className={`flex justify-center items-center gap-3 text-lg
+                  lg:text-2xl font-bold`}
               >
                 {el.title ? <div className="title">{t(el.title)}</div> : null}
                 {el.cost ? <Cost {...el} /> : null}
               </div>
               {el.subtitle ? (
-                <div className="_mt-3 _text-gray-dark _text-center">{t(el.subtitle)}</div>
+                <div className="mt-3 text-gray-dark text-center">{t(el.subtitle)}</div>
               ) : null}
             </div>
           ) : null}

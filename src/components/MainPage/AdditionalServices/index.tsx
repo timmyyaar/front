@@ -46,35 +46,35 @@ export const AdditionalServices = (props: any) => {
 
   const getItem = ({ title, icons }: any) => (
     <div
-      className={`_rounded-2.5xl _bg-light _min-h-36 lg:_min-h-52 _w-full
-        _flex _flex-col _justify-center _gap-5`}
+      className={`rounded-[1.25rem] bg-light min-h-36 lg:min-h-52 w-full
+        flex flex-col justify-center gap-5`}
     >
-      <div className="_flex _justify-center">
-        <div className="_h-10 _w-10 lg:_w-24 lg:_h-24 _relative">
+      <div className="flex justify-center">
+        <div className="h-10 w-10 lg:w-24 lg:h-24 relative">
           <Image fill src={icons} alt={title} />
         </div>
       </div>
-      <div className="lg:_text-lg _text-center _font-semibold _px-4">
+      <div className="lg:text-lg text-center font-semibold px-4">
         <Writer text={t(title)} />
       </div>
     </div>
   );
 
   return (
-    <div className="_px-5-percents lg:_px-24 _mb-14 lg:_mb-0">
+    <div className="px-5-percents lg:px-24 mb-14 lg:mb-0">
       <div className="mobile-none">
-        <div className="_main-title _mb-8">
+        <div className="main-title mb-8">
           <span className="text-gradient">{t("Additional services")}</span>
         </div>
         <Slider elements={services.map((el) => getItem(el))} />
       </div>
       <div className="mobile-only">
-        <div className="_main-title _mb-3">
+        <div className="main-title mb-3">
           <b>
             <span className="text-gradient">{t("Additional services")}</span>
           </b>
         </div>
-        <div className="_grid _grid-cols-2 _gap-6">
+        <div className="grid grid-cols-2 gap-6">
           {services.map((el, i) => (
             <div key={JSON.stringify(el) + i}>
               {getItem({ ...el, title: el.title + "_mobile" })}

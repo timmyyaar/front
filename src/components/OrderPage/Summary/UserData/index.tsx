@@ -100,7 +100,7 @@ export const UserData = ({
 
   return (
     <div>
-      <div className="_mb-6 _flex _flex-col _gap-3">
+      <div className="mb-6 flex flex-col gap-3">
         <Input
           type="text"
           placeholder={t("Surname and Name")}
@@ -109,7 +109,7 @@ export const UserData = ({
             setName(value)
           }
         />
-        <div className="_relative mobile-only">
+        <div className="relative mobile-only">
           <PhoneInput
             t={t}
             number={number}
@@ -118,8 +118,8 @@ export const UserData = ({
             setPhoneCountry={setPhoneCountry}
           />
         </div>
-        <div className="_flex _gap-3 _relative">
-          <div className="_w-full mobile-none">
+        <div className="flex gap-3 relative">
+          <div className="w-full mobile-none">
             <PhoneInput
               t={t}
               number={number}
@@ -137,18 +137,18 @@ export const UserData = ({
             }
           />
         </div>
-        <div className="_flex _gap-5">
+        <div className="flex gap-5">
           {!dataLayout ? (
             <div
-              className={`_flex _justify-between _items-center _p-3 _cursor-pointer
-                _w-full _bg-light _rounded-xl _text-gray-lighter ${
-                  data && time ? "_text-gray-dark" : ""
+              className={`flex justify-between items-center p-3 cursor-pointer
+                w-full bg-light rounded-xl text-gray-lighter ${
+                  data && time ? "text-gray-dark" : ""
                 }`}
               onClick={() => setDataLayout(true)}
             >
               {!(data && time) ? t("Data and time") : `${data} ${time}`}
               <svg
-                className="_rotate-180 _text-gray-lighter"
+                className="rotate-180 text-gray-lighter"
                 xmlns="http://www.w3.org/2000/svg"
                 width="28"
                 height="28"
@@ -162,10 +162,7 @@ export const UserData = ({
               </svg>
             </div>
           ) : (
-            <div
-              className={`_p-3 _w-full _bg-light _rounded-xl _overflow-hidden
-                select-block-open-data-time`}
-            >
+            <div className="p-3 w-full bg-light rounded-xl overflow-hidden select-block-open-data-time">
               <DateAndTime
                 data={data}
                 setData={setData}
@@ -175,7 +172,7 @@ export const UserData = ({
                 discounts={discounts}
               />
               <Button
-                className="_mt-2 _w-full _h-11"
+                className="mt-2 w-full h-11"
                 disabled={!(data && time)}
                 onClick={() => {
                   if (!(data && time)) return void 0;
@@ -187,16 +184,16 @@ export const UserData = ({
             </div>
           )}
         </div>
-        <div className="_flex _gap-5">
+        <div className="flex gap-5">
           {!addressLayout ? (
             <div
-              className={`_flex _justify-between _items-center _p-3 _cursor-pointer
-                _w-full _bg-light _rounded-xl _text-gray-lighter`}
+              className={`flex justify-between items-center p-3 cursor-pointer
+                w-full bg-light rounded-xl text-gray-lighter`}
               onClick={() => setAddressLayout(true)}
             >
               {isAddressEmpty ? t("Address") : shortAddress}
               <svg
-                className="_rotate-180 _text-gray-lighter"
+                className="rotate-180 text-gray-lighter"
                 xmlns="http://www.w3.org/2000/svg"
                 width="28"
                 height="28"
@@ -211,11 +208,11 @@ export const UserData = ({
             </div>
           ) : (
             <div
-              className={`_p-3 _w-full _bg-light _rounded-xl _overflow-hidden ${
-                overflowUnset ? "_overflow-visible" : ""
+              className={`p-3 w-full bg-light rounded-xl overflow-hidden ${
+                overflowUnset ? "overflow-visible" : ""
               }`}
             >
-              <div className="_mb-6 _flex _flex-col _gap-3">
+              <div className="mb-6 flex flex-col gap-3">
                 <Input
                   isBordered
                   type="text"
@@ -227,7 +224,7 @@ export const UserData = ({
                     setAddressField("street", value)
                   }
                 />
-                <div className="_flex _gap-5">
+                <div className="flex gap-5">
                   <Input
                     isBordered
                     type="text"
@@ -282,7 +279,7 @@ export const UserData = ({
                   />
                 )}
                 {!isPrivateHouse && (
-                  <div className="_flex _gap-5">
+                  <div className="flex gap-5">
                     <Input
                       isBordered
                       type="text"
@@ -309,8 +306,8 @@ export const UserData = ({
                 )}
               </div>
               <textarea
-                className={`_w-full _border _border-solid _border-gray _py-3 _pl-3
-                    _bg-light _rounded-xl _outline-0 _text-gray-dark`}
+                className="w-full border border-solid border-gray py-3 pl-3
+                    bg-light rounded-xl outline-0 text-gray-dark"
                 placeholder={t("Add more details (optional)")}
                 value={more}
                 onChange={({
@@ -320,7 +317,7 @@ export const UserData = ({
                 }
               />
               <Button
-                className="_mt-6 _w-full _h-11"
+                className="mt-6 w-full h-11"
                 disabled={!requiredFields}
                 onClick={() => {
                   if (!requiredFields) return void 0;
@@ -333,7 +330,7 @@ export const UserData = ({
           )}
         </div>
       </div>
-      <div className="_mt-6">
+      <div className="mt-6">
         <CheckBox
           title={"Request previous cleaner"}
           checked={previousCleaner}
@@ -341,10 +338,10 @@ export const UserData = ({
           t={t}
         />
       </div>
-      <div className="_mt-6">
+      <div className="mt-6">
         <PaymentForm setOnlinePayment={setOnlinePayment} t={t} />
       </div>
-      <div className="_mt-6">
+      <div className="mt-6">
         <CheckBox
           title={"Public agreement and Privacy Policy"}
           checked={privacyAndPolicy}
@@ -353,7 +350,7 @@ export const UserData = ({
           link="/Polityka_prywatności.pdf"
         />
       </div>
-      <div className="_mt-6">
+      <div className="mt-6">
         <CheckBox
           title={"Personal data"}
           checked={personalData}

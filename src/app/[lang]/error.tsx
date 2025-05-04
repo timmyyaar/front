@@ -9,15 +9,15 @@ import errorPng from "@/assets/icons/error/error.png";
 
 export default function Error() {
   return (
-    <main className="_flex _flex-col _h-screen _bg-white _p-6">
-      <div className="_flex-1 _flex _flex-col _justify-center _items-center">
-        <Image src={errorPng} alt="" className="_w-3/4 lg:_w-1/4" />
-        <div className="_flex _flex-col _items-center _justify-center _ml-0 lg:_ml-2 _mt-4 lg:_mt-0">
-          <span className="text-gradient _main-title">
+    <main className="flex flex-col h-screen bg-white p-6">
+      <div className="flex-1 flex flex-col justify-center items-center">
+        <Image src={errorPng} alt="" className="w-3/4 lg:w-1/4" />
+        <div className="flex flex-col items-center justify-center ml-0 lg:ml-2 mt-4 lg:mt-0">
+          <span className="text-gradient main-title">
             Some unexpected error occurred, please, refresh the page
           </span>
           <Button
-            className="_w-max _mt-4"
+            className="w-max mt-4"
             onClick={() => window.location.reload()}
             title="Refresh"
           />

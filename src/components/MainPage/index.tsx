@@ -17,11 +17,11 @@ import Reviews from "@/components/MainPage/Reviews";
 import { LocaleContext } from "@/components/Providers";
 import Blogs from "@/components/MainPage/Blogs";
 import { sendGAEvent } from "@/google-analytics";
-import { Blog } from "@/types";
+import { TBlog } from "@/types";
 import { Review } from "@/components/MainPage/Reviews/types";
 
 interface MainPageProps {
-  blogs: Blog[];
+  blogs: TBlog[];
   reviews: Review[];
   ordersCount: number;
 }
@@ -40,7 +40,7 @@ export const MainPage = ({ blogs, reviews, ordersCount }: MainPageProps) => {
   }, []);
 
   return (
-    <div className="_gap-0 lg:_gap-28 _flex _flex-col">
+    <div className="gap-0 lg:gap-28 flex flex-col">
       <MainImage t={t} ordersCount={ordersCount}/>
       <Advantages />
       <AllServices t={t} />
@@ -51,7 +51,7 @@ export const MainPage = ({ blogs, reviews, ordersCount }: MainPageProps) => {
       <Blogs t={t} blogs={blogs} />
       <FAQ t={t} />
       <Reviews t={t} reviews={reviews} />
-      <div className="_flex _flex-col">
+      <div className="flex flex-col">
         <Order t={t} />
         <Footer t={t} />
       </div>

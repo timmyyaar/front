@@ -1,23 +1,25 @@
-import BlogItem from "@/components/MainPage/Blogs/Blog";
 import SliderStep from "@/components/common/Slider/SliderStep";
 import Swiper from "@/components/common/Swiper";
-import { Blog } from "@/types";
+import { TBlog } from "@/types";
+import BlogCard from "@/components/Blogs/components/BlogCard";
 
 interface BlogsProps {
   t: (text: string, defaultText?: string) => string;
-  blogs: Blog[];
+  blogs: TBlog[];
 }
 
 function Blogs({ t, blogs }: BlogsProps) {
   return blogs.length > 0 ? (
-    <div className="_mb-14 lg:_mx-24 lg:_mb-0 _px-5-percents-mobile" id="blog">
-      <div className="_main-title lg:_mb-6">
+    <div className="mb-14 lg:mx-24 lg:mb-0 px-5-percents-mobile" id="blog">
+      <div className="main-title lg:mb-6">
         <span className="text-gradient">TYT {t("blogs_title")}</span>
       </div>
       <div className="mobile-none">
         <SliderStep
           elements={blogs.map((blog) => (
-            <BlogItem blog={blog} key={blog.id} t={t} />
+            <div className="p-2.5 h-full w-full">
+              <BlogCard blog={blog} key={blog.id} t={t} />
+            </div>
           ))}
           itemsPerPage={3}
         />
@@ -25,7 +27,9 @@ function Blogs({ t, blogs }: BlogsProps) {
       <div className="mobile-only">
         <Swiper
           elements={blogs.map((blog) => (
-            <BlogItem blog={blog} key={blog.id} t={t} />
+            <div className="p-2.5 h-full w-full">
+              <BlogCard blog={blog} key={blog.id} t={t} />
+            </div>
           ))}
         />
       </div>

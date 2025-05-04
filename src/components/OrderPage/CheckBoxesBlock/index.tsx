@@ -93,7 +93,7 @@ export const CheckBoxesBlock: FC<IProps> = (props) => {
   const showCheckboxes = standaloneSubServices.length > 0 || isOffice;
 
   return showCheckboxes ? (
-    <div className="_gap-10 lg:_gap-20 _flex _flex-col">
+    <div className="gap-10 lg:gap-20 flex flex-col">
       {standaloneSubServices.map((subService) => {
         const originalPrice = transformedPrices[subService.key];
         const price =

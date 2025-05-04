@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useState } from "react";
+import React, { FC, useState, type JSX } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -14,7 +14,7 @@ const MobileSwiper: FC<Props> = (props) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   return (
-    <div className="mobile-swiper-wrapper _my-4">
+    <div className="mobile-swiper-wrapper my-4">
       <Swiper
         onSlideChange={({ realIndex }) => setCurrentSlide(realIndex)}
         spaceBetween={20}
@@ -24,15 +24,15 @@ const MobileSwiper: FC<Props> = (props) => {
           <SwiperSlide key={index}>{element}</SwiperSlide>
         ))}
       </Swiper>
-      <div className="_mt-3 _flex _justify-center _gap-2">
+      <div className="mt-3 flex justify-center gap-2">
         {Array.from({ length: elements.length }, (_, index) => {
           const subElement = currentSlide === index;
 
           return (
             <div
-              className={`slider-status _w-12 _h-2.5 _rounded-full _bg-primary
-                _transition-all _duration-500 ${
-                  subElement ? "" : "_w-2.5 _h-2.5 _bg-light"
+              className={`slider-status rounded-full 
+                transition-all duration-500 ${
+                  subElement ? "bg-primary w-12 h-2.5" : "w-2.5 h-2.5 bg-light"
                 }`}
               key={"slider-status" + index}
             />

@@ -4,7 +4,7 @@ import { ALTERNATES_LANGUAGES } from "@/app/constants";
 import { Language } from "@/types";
 
 type MetadataProps = {
-  params: { lang: Language; type: string };
+  params: Promise<{ lang: Language; type: string }>;
 };
 
 const generalTitleByLanguage = {
@@ -76,7 +76,7 @@ const getDescriptionByType = (type: string, lang: Language) => {
 };
 
 export async function generateMetadata({ params }: MetadataProps) {
-  const { lang, type } = params;
+  const { lang, type } = await params;
 
   return {
     title: getTitleByType(type, lang),

@@ -12,8 +12,8 @@ export const Writer: FC<Props> = (props) => {
 
   return text.indexOf("\\n") === -1 ? (
     <div
-      className={`whitespace-normal _break-words ${
-        alignLeft ? "_text-left" : ""
+      className={`whitespace-normal break-words ${
+        alignLeft ? "text-left" : ""
       } ${className || ""}`}
     >
       {text}
@@ -23,7 +23,7 @@ export const Writer: FC<Props> = (props) => {
       {text.split("\\n ").map((line, i, arr) => (
         <Fragment key={line}>
           <div
-            className={`${!whiteSpaceNormal ? "_whitespace-nowrap" : ""} ${
+            className={`${!whiteSpaceNormal ? "whitespace-nowrap" : ""} ${
               className || ""
             }`}
           >

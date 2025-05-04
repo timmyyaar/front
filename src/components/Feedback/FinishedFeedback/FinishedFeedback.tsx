@@ -20,20 +20,20 @@ function FinishedFeedback({ finishedRating, t }: FinishedFeedbackProps) {
   );
 
   return (
-    <div className="_bg-light _h-screen _py-20 _px-16 _flex _flex-col _items-center _justify-center _gap-10">
+    <div className="bg-light h-screen py-20 px-16 flex flex-col items-center justify-center gap-10">
       <>
         <Image src={isBadRating ? sadFeedbackSvg : happyFeedbackSvg} alt="" />
-        <span className="_text-center">
+        <span className="text-center">
           {isBadRating ? (
             <>
-              <span className="_font-semibold _mr-1">
+              <span className="font-semibold mr-1">
                 {t("feedback_thank_you")}.
               </span>
               {t("feedback_bad")}
             </>
           ) : (
             <>
-              <span className="_font-semibold _mr-1">
+              <span className="font-semibold mr-1">
                 {t("feedback_thank_you_happy")!}
               </span>
               {t("feedback_good")}
@@ -41,7 +41,7 @@ function FinishedFeedback({ finishedRating, t }: FinishedFeedbackProps) {
           )}
         </span>
         <div onClick={() => router.push(`/${lang}?${searchParams.toString()}`)}>
-          <LogoIcon className="_cursor-pointer hover:_opacity-80" />
+          <LogoIcon className="cursor-pointer hover:opacity-80" />
         </div>
       </>
     </div>

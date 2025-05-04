@@ -49,7 +49,7 @@ function Payment({ paymentIntent }: PaymentProps) {
   }, [paymentIntent]);
 
   return (
-    <div className="_p-4 _bg-light lg:_py-20 lg:_px-40 _flex-1 _flex _flex-col _justify-center">
+    <div className="p-4 bg-light lg:py-20 lg:px-40 flex-1 flex flex-col justify-center">
       {needRedirect ? null : (
         <Elements
           stripe={stripePromise}

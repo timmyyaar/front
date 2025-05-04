@@ -39,28 +39,28 @@ export const AddedMainService: FC<IProps> = (props) => {
   return addService ? (
     <div>
       <div
-        className="_group _min-h-[4.5rem] lg:_min-h-0 _px-3 lg:_px-24 _gap-2 lg:_gap-5 _flex _justify-center lg:_justify-between _items-center _rounded-xl _bg-light _cursor-pointer"
+        className="group min-h-[4.5rem] lg:min-h-0 px-3 lg:px-24 gap-2 lg:gap-5 flex justify-center lg:justify-between items-center rounded-xl bg-light cursor-pointer"
         onClick={onClickSecondService}
       >
-        <div className="_flex _items-center _select-none _w-11 lg:_w-20">
+        <div className="flex items-center select-none w-11 lg:w-20">
           <Image src={isOzonation ? ozonationPng : dryPng} alt="" />
         </div>
         <div
-          className={`_text-center group-hover:_text-primary lg:_text-xl _font-semibold
-           _transition-all ${selectedSecondService ? "_text-primary" : ""}`}
+          className={`text-center group-hover:text-primary lg:text-xl font-semibold
+           transition-all ${selectedSecondService ? "text-primary" : ""}`}
         >
           {t(addService)}
         </div>
         <div
-          className={`_transition-all _duration-300 _h-7 _w-7 lg:_h-auto lg:_w-auto ${
-            selectedSecondService ? "" : "_rotateX-180"
+          className={`transition-all duration-300 h-7 w-7 lg:h-auto lg:w-auto ${
+            selectedSecondService ? "" : "rotate-x-180"
           }`}
         >
           <Image src={caretUpSvg} alt="" />
         </div>
       </div>
       {selectedSecondService ? (
-        <div className="_mt-6 _flex _justify-center">{children}</div>
+        <div className="mt-6 flex justify-center">{children}</div>
       ) : null}
     </div>
   ) : null;

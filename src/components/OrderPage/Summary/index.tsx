@@ -416,14 +416,14 @@ export const Summary: FC<IProps> = (props: any) => {
 
   return (
     <>
-      <div className="_flex _flex-col _gap-6 _sticky _top-2">
+      <div className="flex flex-col gap-6 sticky top-2">
         <Overlay active={successModal || showPromoErrorModal}>
           {successModal ? (
             <div ref={ref}>
               <ModalRequest
                 text={
-                  <div className="_flex _justify-center">
-                    <div className="_whitespace-normal _w-full lg:_w-3/4">
+                  <div className="flex justify-center">
+                    <div className="whitespace-normal w-full lg:w-3/4">
                       {t("order_page_modal_title")}
                     </div>
                   </div>
@@ -437,7 +437,7 @@ export const Summary: FC<IProps> = (props: any) => {
               <ModalRequest
                 text={
                   <>
-                    <div className="_flex _justify-center _mb-6">
+                    <div className="flex justify-center mb-6">
                       <Image src={faceWithRollingEyesSvg} alt="" />
                     </div>
                     {t("promo_error_modal_title")}
@@ -449,7 +449,7 @@ export const Summary: FC<IProps> = (props: any) => {
             </div>
           )}
         </Overlay>
-        <div className="_p-10 _bg-light _rounded-3xl _flex _flex-col">
+        <div className="p-10 bg-light rounded-3xl flex flex-col">
           <SummaryService
             serviceTitle={title}
             counterValue={counter}
@@ -465,7 +465,7 @@ export const Summary: FC<IProps> = (props: any) => {
           />
           {secTitle !== "" ? (
             <>
-              <div className="_mt-1 _mb-2 _border-t _border-dashed _border-gray-lighter-x2" />
+              <div className="mt-1 mb-2 border-t border-dashed border-gray-lighter-x2" />
               <SummaryService
                 serviceTitle={secTitle}
                 counterValue={secCounter}
@@ -490,36 +490,36 @@ export const Summary: FC<IProps> = (props: any) => {
               setPromoStatus={setPromoStatus}
             />
           ) : null}
-          <div className="_mt-3">
+          <div className="mt-3">
             {`${t("Estimated Duration of service:")} `}
             <b>{higherEstimate}</b>
           </div>
           {city?.price > 0 && (
-            <div className="_mt-2">
-              <span className="_mr-1.5">
+            <div className="mt-2">
+              <span className="mr-1.5">
                 {t("summary_transportation_title")}:
               </span>
-              <span className="_text-2xl _font-semibold">{city.price} zl</span>
+              <span className="text-2xl font-semibold">{city.price} zl</span>
             </div>
           )}
           <div
-            className="_h-8 _flex _items-baseline _mt-2"
+            className="h-8 flex items-baseline mt-2"
             ref={targetElementRef as any}
           >
-            <div className="_mr-1.5">{t("To pay:")}</div>
+            <div className="mr-1.5">{t("To pay:")}</div>
             {subSale || Boolean(sale) || Boolean(dayDiscount) ? (
               <>
-                <div className="_mr-1.5 _text-2xl _font-semibold">
+                <div className="mr-1.5 text-2xl font-semibold">
                   {totalPriceWithSale}
                   {t("zl")}
                 </div>
-                <div className="_text-gray _text-lg _font-semibold _line-through">
+                <div className="text-gray text-lg font-semibold line-through">
                   {price + mainServiceInitialPrice.priceWithoutDiscount}
                   {t("zl")}
                 </div>
               </>
             ) : (
-              <div className="_mr-1.5 _text-2xl _font-semibold">
+              <div className="mr-1.5 text-2xl font-semibold">
                 {totalPriceWithoutDiscount}
                 {t("zl")}
               </div>
@@ -529,7 +529,7 @@ export const Summary: FC<IProps> = (props: any) => {
         <div ref={orderButtonRef}>
           {!order ? (
             <Button
-              className="_w-full _h-14"
+              className="w-full h-14"
               disabled={isOrderPriceLessThanMinimum}
               onClick={() => {
                 if (!isOrderPriceLessThanMinimum) {
@@ -579,20 +579,20 @@ export const Summary: FC<IProps> = (props: any) => {
       </div>
       {!scrolledToElement ? (
         <Button
-          className={`mobile-only _fixed _bottom-6 _left-1/2 _-translate-y-1/2 _-translate-x-1/2
-            _z-50 _w-[90%] _h-14`}
+          className={`mobile-only fixed bottom-6 left-1/2 -translate-y-1/2 -translate-x-1/2
+            z-50 w-[90%] h-14`}
           disabled={isOrderPriceLessThanMinimum}
           onClick={handleScroll}
           title={
             totalPriceWithoutDiscount === 0 ? (
               t("Order")
             ) : subSale || Boolean(sale) || Boolean(dayDiscount) ? (
-              <div className="_flex _items-end">
-                <div className="_mr-2">
+              <div className="flex items-end">
+                <div className="mr-2">
                   {totalPriceWithSale}
                   {t("zl")}
                 </div>
-                <div className="_text-xs _line-through">
+                <div className="text-xs line-through">
                   {totalPriceWithoutDiscount}
                   {t("zl")}
                 </div>

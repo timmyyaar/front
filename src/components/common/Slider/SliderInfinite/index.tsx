@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC, useState, type JSX } from "react";
 
 import { LeftArrow } from "../icons/LeftArrow";
 import { RightArrow } from "../icons/RightArrow";
@@ -19,31 +19,31 @@ const SliderSwitch: FC<Props> = (props) => {
     highlightedItemIndex === elements.length - 1 ? 0 : highlightedItemIndex + 1;
 
   return (
-    <div className="_relative">
+    <div className="relative">
       <div
-        className="_group _cursor-pointer _absolute _top-1/2 _-translate-y-2/4 _-left-12"
+        className="group cursor-pointer absolute top-1/2 -translate-y-2/4 -left-12"
         onClick={() => setHighlightedItemIndex(previousItemIndex)}
       >
-        <LeftArrow className="group-hover:_text-primary _transition-all" />
+        <LeftArrow className="group-hover:text-primary transition-all" />
       </div>
-      <div className="_overflow-hidden">
-        <div className="_flex">
-          <div className="_flex-shrink-0 _w-1/3 _flex _items-center _justify-center _opacity-60">
+      <div className="overflow-hidden">
+        <div className="flex">
+          <div className="flex-shrink-0 w-1/3 flex items-center justify-center opacity-60">
             {elements[previousItemIndex]}
           </div>
-          <div className="_flex-shrink-0 _w-1/3 _flex _items-center _justify-center">
+          <div className="flex-shrink-0 w-1/3 flex items-center justify-center">
             {elements[highlightedItemIndex]}
           </div>
-          <div className="_flex-shrink-0 _w-1/3 _flex _items-center _justify-center _opacity-60">
+          <div className="flex-shrink-0 w-1/3 flex items-center justify-center opacity-60">
             {elements[nextItemIndex]}
           </div>
         </div>
       </div>
       <div
-        className="_group _cursor-pointer _absolute _top-1/2 _-translate-y-2/4 _-right-12"
+        className="group cursor-pointer absolute top-1/2 -translate-y-2/4 -right-12"
         onClick={() => setHighlightedItemIndex(nextItemIndex)}
       >
-        <RightArrow className="group-hover:_text-primary _transition-all" />
+        <RightArrow className="group-hover:text-primary transition-all" />
       </div>
     </div>
   );

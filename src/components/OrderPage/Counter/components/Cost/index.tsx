@@ -32,8 +32,8 @@ const Cost = ({ title, cost, count }: Props) => {
 
   return (
     <div
-      className={`_py-3 _px-4 _flex _justify-center _items-center _border-40
-        _bg-warning _leading-5 lg:_leading-8`}
+      className="py-3 px-4 flex justify-center items-center rounded-40-px
+        bg-warning leading-5 lg:leading-8"
     >
       {transformedCost.indexOf("m2") !== -1 ? (
         <>

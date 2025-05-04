@@ -18,42 +18,42 @@ function OzonationCosts({ t }: OzonationCostsProps) {
   const transformedPrices = getTransformedPrices(prices, city);
 
   return (
-    <div className="_rounded-xl _bg-light _p-6 _grid _grid-cols-3 _gap-6">
-      <div className="_flex _flex-col _gap-2">
-        <div className="_text-center _text-gray-dark _whitespace-nowrap">
+    <div className="rounded-xl bg-light p-6 grid grid-cols-3 gap-6">
+      <div className="flex flex-col gap-2">
+        <div className="text-center text-gray-dark whitespace-nowrap">
           {capitalizeFirstLetter(t("up_to"))} 50 {t("m")}
           <sup>2</sup>
         </div>
-        <div className="_flex _justify-center">
+        <div className="flex justify-center">
           <Image src={ozonationIcon} width="48" height="48" alt="Ozonation" />
         </div>
-        <div className="_text-2lx _font-bold _text-center">
+        <div className="text-2lx font-bold text-center">
           {transformedPrices.ozonationSmallArea} {t("zl")}/{t("m")}
           <sup>2</sup>
         </div>
       </div>
-      <div className="_flex _flex-col _gap-2">
-        <div className="_text-center _text-gray-dark _whitespace-nowrap">
+      <div className="flex flex-col gap-2">
+        <div className="text-center text-gray-dark whitespace-nowrap">
           51-120 {t("m")}
           <sup>2</sup>
         </div>
-        <div className="_flex _justify-center">
+        <div className="flex justify-center">
           <Image src={ozonationIcon} width="48" height="48" alt="Ozonation" />
         </div>
-        <div className="_text-2lx _font-bold _text-center">
+        <div className="text-2lx font-bold text-center">
           {transformedPrices.ozonationMediumArea} {t("zl")}/{t("m")}
           <sup>2</sup>
         </div>
       </div>
-      <div className="_flex _flex-col _gap-2">
-        <div className="_text-center _text-gray-dark _whitespace-nowrap">
+      <div className="flex flex-col gap-2">
+        <div className="text-center text-gray-dark whitespace-nowrap">
           {">"} 120 {t("m")}
           <sup>2</sup>
         </div>
-        <div className="_flex _justify-center">
+        <div className="flex justify-center">
           <Image src={ozonationIcon} width="48" height="48" alt="Ozonation" />
         </div>
-        <div className="_text-2lx _font-bold _text-center">
+        <div className="text-2lx font-bold text-center">
           {transformedPrices.ozonationBigArea} {t("zl")}/{t("m")}
           <sup>2</sup>
         </div>

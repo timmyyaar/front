@@ -13,16 +13,16 @@ interface LoaderProps {
 function Loader({ isLoading }: LoaderProps) {
   return isLoading ? (
     <div
-      className={`_fixed _top-0 _left-0 _w-full _h-full _flex
-        _items-center _justify-center _bg-black _bg-opacity-40 _z-50`}
+      className={`fixed top-0 left-0 w-full h-full flex
+        items-center justify-center bg-black/40 z-50`}
     >
-      <div className="_relative mobile-none">
+      <div className="relative mobile-none">
         <div className="loader-circle-left" />
         <div className="loader-circle-central" />
         <div className="loader-circle-right" />
         <Image src={loaderSvg} alt="" />
       </div>
-      <div className="_relative mobile-only">
+      <div className="relative mobile-only">
         <div className="loader-circle-left" />
         <div className="loader-circle-central" />
         <div className="loader-circle-right" />
