@@ -64,7 +64,7 @@ function Blog({ blog }: BlogsProps) {
       replacedTextBullets,
       H2_REGEXP,
       (match) => (
-        <span
+        <h2
           key={match}
           className="font-semibold text-2xl"
           ref={(el) => {
@@ -72,7 +72,7 @@ function Blog({ blog }: BlogsProps) {
           }}
         >
           {match}
-        </span>
+        </h2>
       ),
     );
 
@@ -158,9 +158,9 @@ function Blog({ blog }: BlogsProps) {
             t={t}
           />
           <div className="whitespace-pre-wrap">
-            <div className="font-semibold text-2xl mb-3" ref={mainTitleRef}>
+            <h1 className="font-semibold text-2xl mb-3" ref={mainTitleRef}>
               {translatedBlogTitle}
-            </div>
+            </h1>
             <div className="flex gap-3 mb-5">
               <div className="py-3 px-4 bg-white rounded-full flex items-center justify-center whitespace-nowrap text-gray text-sm">
                 <CalendarIcon className="mr-1" />
@@ -172,7 +172,7 @@ function Blog({ blog }: BlogsProps) {
               </div>
             </div>
             <img
-              alt=""
+              alt={translatedBlogTitle}
               src={blog.main_image}
               className="w-full rounded-3xl mb-6"
             />

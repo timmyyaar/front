@@ -60,9 +60,9 @@ function Blogs({ blogs }: BlogsProps) {
     <div className="bg-primary-background">
       <div className="pt-6 px-4 lg:px-48 lg:py-9">
         <div className="relative">
-          <div className="p-5 text-4xl lg:text-7xl font-black text-gradient w-max">
+          <h1 className="p-5 text-4xl lg:text-7xl font-black text-gradient w-max">
             TYT {t("blogs_title")}
-          </div>
+          </h1>
           <div className="pl-5">{t("blogs_page_description")}</div>
           <div className="w-full flex justify-center pb-10 lg:pb-15">
             <div className="flex flex-col gap-3.5 pt-5 lg:pt-20 w-full lg:w-1/3">
