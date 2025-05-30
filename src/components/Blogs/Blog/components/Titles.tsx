@@ -21,6 +21,10 @@ export default function Titles({
   const [activeTitle, setActiveTitle] = useState<string>(titles[0]);
 
   useEffect(() => {
+    setActiveTitle(titles[0]);
+  }, [titles[0]]);
+
+  useEffect(() => {
     const handleScroll = () => {
       const isAtBottom =
         Math.ceil(window.scrollY + window.innerHeight) >=
@@ -39,7 +43,7 @@ export default function Titles({
           const title = titles.find(
             (t) =>
               titlesRefs.current[t] === entry.target ||
-              (t === titles[0] && mainTitleRef.current === entry.target),
+              (t === titles[0] && mainTitleRef.current === entry.target)
           );
 
           if (entry.isIntersecting) {
@@ -50,7 +54,7 @@ export default function Titles({
       {
         threshold: [0],
         rootMargin: "0px 0px -90% 0px",
-      },
+      }
     );
 
     if (mainTitleRef.current) {
@@ -87,12 +91,14 @@ export default function Titles({
       <div className="flex flex-col gap-1">
         {titles.map((title, index) => (
           <div
-            key={title}
+            key={`${index}-${title}`}
             className="cursor-pointer hover:translate-x-1 transition-all"
             onClick={() => onTitleClick(title, index)}
           >
             <span
-              className={`hover:opacity-90 transition-all ${activeTitle === title ? "text-primary" : "text-gray"}`}
+              className={`hover:opacity-90 transition-all ${
+                activeTitle === title ? "text-primary" : "text-gray"
+              }`}
             >
               {index + 1}. {title}
             </span>
