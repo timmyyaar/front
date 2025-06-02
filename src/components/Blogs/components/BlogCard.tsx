@@ -1,7 +1,8 @@
+import React from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { TBlog, TranslateFunction } from "@/types";
 import { LeftArrow } from "@/components/common/Slider/icons/LeftArrow";
-import React from "react";
+import useOverflow from "@/hooks/useOverflow";
 
 interface BlogCardProps {
   blog: TBlog;
@@ -13,8 +14,13 @@ export default function BlogCard({ blog, t }: BlogCardProps) {
   const { lang } = useParams();
   const searchParams = useSearchParams();
 
+  const { isOverflowing, ref: tagRef } = useOverflow();
+
   const translatedBlogTitle = t(`blog_${blog.key}_title`, blog.title);
   const translatedBlogText = t(`blog_${blog.key}_text`, blog.text);
+  const translatedBlogTag = t(
+    `blogs_page_tag_${blog.category.toLowerCase().replaceAll(" ", "_")}`
+  );
 
   return (
     <div
@@ -32,12 +38,16 @@ export default function BlogCard({ blog, t }: BlogCardProps) {
         <div className="text-lg font-semibold line-clamp-2">
           {translatedBlogTitle}
         </div>
-        <span className="line-clamp-3 text-ellipsis">
-          {translatedBlogText}
-        </span>
+        <span className="line-clamp-3 text-ellipsis">{translatedBlogText}</span>
         <div className="flex gap-2 items-center">
-          <div className="bg-gray-extra-light rounded-full py-3.5 px-5">
-            {t(`blogs_page_tag_${blog.category.toLowerCase().replaceAll(" ", "_")}`)}
+          <div
+            className="bg-gray-extra-light rounded-full py-3.5 px-5 whitespace-nowrap overflow-hidden text-ellipsis"
+            ref={tagRef}
+            {...(isOverflowing && {
+              title: translatedBlogTag,
+            })}
+          >
+            {translatedBlogTag}
           </div>
           <span className="text-gray-lighter">{blog.date}</span>
         </div>

@@ -43,7 +43,7 @@ export default function Tags({
   };
 
   return (
-    <div className="flex justify-center gap-2">
+    <div className="flex flex-wrap justify-center gap-2">
       <Tag
         tag={BLOG_TAGS.ALL}
         isActive={activeTags.includes(BLOG_TAGS.ALL)}
