@@ -65,7 +65,6 @@ function Blog({ blog }: BlogsProps) {
       H2_REGEXP,
       (match) => (
         <h2
-          key={match}
           className="font-semibold text-2xl"
           ref={(el) => {
             titlesRefs.current[match] = el;
@@ -73,29 +72,34 @@ function Blog({ blog }: BlogsProps) {
         >
           {match}
         </h2>
-      ),
+      )
     );
 
     const replacedTextLink = reactStringReplace(
       replacedTextHeaders,
       LINK_REGEXP,
-      (match) => (
-        <a
-          key={match}
-          href={process.env.NEXT_PUBLIC_SITE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline text-primary"
-        >
-          {match}
-        </a>
-      ),
+      (match) => {
+        const splittedMatch = match.split("/link:");
+
+        return (
+          <a
+            href={
+              splittedMatch.length > 1
+                ? `${process.env.NEXT_PUBLIC_SITE_URL}/${splittedMatch[1]}`
+                : process.env.NEXT_PUBLIC_SITE_URL
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline text-primary"
+          >
+            {splittedMatch[0]}
+          </a>
+        );
+      }
     );
 
     return reactStringReplace(replacedTextLink, BOLD_REGEXP, (match) => (
-      <span key={match} className="font-semibold">
-        {match}
-      </span>
+      <span className="font-semibold">{match}</span>
     ));
   };
 
@@ -105,7 +109,7 @@ function Blog({ blog }: BlogsProps) {
     return [
       title,
       ...matches.map((match) =>
-        match[0].replace("<h2>", "").replace("</h2>", ""),
+        match[0].replace("<h2>", "").replace("</h2>", "")
       ),
     ];
   };
@@ -179,12 +183,14 @@ function Blog({ blog }: BlogsProps) {
             {getReplacedText(translatedBlogText)}
             <Button
               title={t(
-                `blogs_page_order_${redirectObject.text.replaceAll(" ", "_")}`,
+                `blogs_page_order_${redirectObject.text.replaceAll(" ", "_")}`
               )}
               className="w-full mt-6"
               onClick={() => {
                 router.push(
-                  `/${lang}/order/${redirectObject.category}?${getUpdatedSearchParams()}`,
+                  `/${lang}/order/${
+                    redirectObject.category
+                  }?${getUpdatedSearchParams()}`
                 );
               }}
             />
