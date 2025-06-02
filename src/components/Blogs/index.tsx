@@ -43,18 +43,18 @@ function Blogs({ blogs }: BlogsProps) {
   const tags = [...new Set(blogs.map(({ category }) => category))];
   const filteredBlogs = blogs
     .filter(({ key }) =>
-      t(`blog_${key}_text`).toLowerCase().includes(searchText.toLowerCase()),
+      t(`blog_${key}_text`).toLowerCase().includes(searchText.toLowerCase())
     )
     .filter(
       ({ category }) =>
-        activeTags.includes(BLOG_TAGS.ALL) || activeTags.includes(category),
+        activeTags.includes(BLOG_TAGS.ALL) || activeTags.includes(category)
     );
 
   const mobileTagButtonText = activeTags.includes(BLOG_TAGS.ALL)
     ? t("blogs_page_all_topics")
     : activeTags.length > 1
-      ? `${activeTags[0]} + ${activeTags.length - 1}`
-      : activeTags[0];
+    ? `${activeTags[0]} + ${activeTags.length - 1}`
+    : activeTags[0];
 
   return (
     <div className="bg-primary-background">
@@ -129,8 +129,8 @@ function Blogs({ blogs }: BlogsProps) {
           </div>
         ) : (
           <div className="grid gap-4 lg:grid-cols-3">
-            {filteredBlogs.map((blog) => (
-              <BlogCard key={blog.key} blog={blog} t={t} />
+            {filteredBlogs.map((blog, index) => (
+              <BlogCard key={`${blog.key}-${index}`} blog={blog} t={t} />
             ))}
           </div>
         )}
