@@ -41,7 +41,7 @@ const SUBSCRIPTION_ITEMS = [
 
 export const Costs = (props: any) => {
   const { t } = props;
-  const [tab, setTab] = useState(() => tabs[0]);
+  const [tab, setTab] = useState(() => tabs[0].label);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -122,7 +122,7 @@ export const Costs = (props: any) => {
                     transition-colors cursor-pointer py-0.5`}
                     onClick={() => {
                       router.push(
-                        `${pathname}/subscription?${searchParams.toString()}`,
+                        `${pathname}/subscription?${searchParams.toString()}`
                       );
                     }}
                   >
@@ -155,7 +155,7 @@ export const Costs = (props: any) => {
                   FIGURE_BRACKETS_REGEX,
                   (match) => (
                     <b>{match}</b>
-                  ),
+                  )
                 )}
               </div>
             </div>
@@ -201,7 +201,7 @@ export const Costs = (props: any) => {
                         router.push(
                           `${pathname}/${
                             tab === TABS.SUBSCRIPTION ? "subscription" : "order"
-                          }?${searchParams.toString()}`,
+                          }?${searchParams.toString()}`
                         );
                       }}
                       title={t("Order")}
@@ -232,7 +232,7 @@ export const Costs = (props: any) => {
                     transition-colors cursor-pointer py-0.5`}
                 onClick={() => {
                   router.push(
-                    `${pathname}/subscription?${searchParams.toString()}`,
+                    `${pathname}/subscription?${searchParams.toString()}`
                   );
                 }}
               >
@@ -286,7 +286,7 @@ export const Costs = (props: any) => {
                       router.push(
                         `${pathname}/${
                           tab === TABS.SUBSCRIPTION ? "subscription" : "order"
-                        }?${searchParams.toString()}`,
+                        }?${searchParams.toString()}`
                       );
                     }}
                     title={t("Order")}

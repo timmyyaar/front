@@ -3,4 +3,4 @@ export const TABS = {
   ONE_TIME: "One-time",
 };
 
-export const tabs = Object.values(TABS);
+export const tabs = Object.values(TABS).map((el) => ({ label: el }));
