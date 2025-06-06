@@ -23,7 +23,7 @@ export const PaymentForm = ({ setOnlinePayment, t }: any) => {
           {t("online_payment_disabled_message")}
         </div>
       }
-      className="w-[120%]"
+      className="w-full lg:w-[120%]"
     >
       <div>
         <Switcher
