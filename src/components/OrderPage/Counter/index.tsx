@@ -26,7 +26,9 @@ export const CounterComponent: FC<IProps> = (props) => {
   const { mainService, setCounterValue, t, isPrivateHouse, setIsPrivateHouse } =
     props;
   const [counter, setCounter] = useState<any>([]);
-  const [select, setSelect] = useState([]);
+  const [select, setSelect] = useState<
+    { label: string; isDisabled?: boolean }[]
+  >([]);
   const [selectValue, setSelectValue] = useState("");
 
   const onChangeCounter = (count: number, i: number) => {
@@ -58,7 +60,9 @@ export const CounterComponent: FC<IProps> = (props) => {
     const counterConfig = getCounterByMainService(mainService) as any;
     setCounter(counterConfig);
     setSelect(
-      counterConfig.find((el: any) => el.type === "switcher")?.values ?? []
+      counterConfig
+        .find((el: any) => el.type === "switcher")
+        ?.values.map((el: string) => ({ label: el })) ?? []
     );
     setSelectValue(
       counterConfig.find((el: any) => el.type === "switcher")?.values[0] ?? ""
@@ -99,7 +103,9 @@ export const CounterComponent: FC<IProps> = (props) => {
                 {el.cost ? <Cost {...el} /> : null}
               </div>
               {el.subtitle ? (
-                <div className="mt-3 text-gray-dark text-center">{t(el.subtitle)}</div>
+                <div className="mt-3 text-gray-dark text-center">
+                  {t(el.subtitle)}
+                </div>
               ) : null}
             </div>
           ) : null}

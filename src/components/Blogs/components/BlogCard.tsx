@@ -17,7 +17,10 @@ export default function BlogCard({ blog, t }: BlogCardProps) {
   const { isOverflowing, ref: tagRef } = useOverflow();
 
   const translatedBlogTitle = t(`blog_${blog.key}_title`, blog.title);
-  const translatedBlogText = t(`blog_${blog.key}_text`, blog.text);
+  const translatedBlogText = t(`blog_${blog.key}_text`, blog.text).replace(
+    /<\/?(?:b|h2|a)>|<bullet\s*\/>/g,
+    ""
+  );
   const translatedBlogTag = t(
     `blogs_page_tag_${blog.category.toLowerCase().replaceAll(" ", "_")}`
   );

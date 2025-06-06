@@ -117,7 +117,7 @@ const roomsImages: {
   },
 };
 
-const tabs: string[] = ["Regular", "Deep"];
+const tabs = [{ label: "Regular" }, { label: "Deep" }];
 const rooms: { [key: string]: string[] } = {
   Regular: ["Bedroom", "Kitchen", "Corridor", "Bathroom"],
   Deep: ["Bedroom", "Kitchen", "Corridor", "Bathroom", "Balcony"],
@@ -126,12 +126,10 @@ const rooms: { [key: string]: string[] } = {
 export const Cleaning = (props: any) => {
   const { t, lng } = props;
 
-  const [tab, setTab] = useState<(typeof tabs)[number]>(tabs[0]);
-  const [room, setRoom] = useState<(typeof rooms)[string][number]>(
-    rooms[tab][0],
-  );
+  const [tab, setTab] = useState<string>(tabs[0].label);
+  const [room, setRoom] = useState<string>(rooms[tab][0]);
   const [roomImage, setRoomImage] = useState<any>(
-    () => roomsImages.Bedroom.Regular[lng],
+    () => roomsImages.Bedroom.Regular[lng]
   );
 
   const [openRooms, setOpenedRooms] = useState<string[]>([]);
@@ -204,7 +202,7 @@ export const Cleaning = (props: any) => {
                 setOpenedRooms((arr) =>
                   arr.includes(el)
                     ? arr.filter((room) => room !== el)
-                    : [...arr, el],
+                    : [...arr, el]
                 )
               }
             >
@@ -227,7 +225,7 @@ export const Cleaning = (props: any) => {
                           alignLeft
                         />
                       </div>
-                    ),
+                    )
                   )}
                 </div>
               )}

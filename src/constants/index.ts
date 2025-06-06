@@ -98,4 +98,10 @@ export enum BLOG_TAGS {
   CLEANING_TIPS = "Cleaning tips",
   GENERAL_CLEANING = "General cleaning",
   DEEP_CLEANING = "Deep Cleaning",
+  DRY_CLEANING = "Dry cleaning",
+  POST_CONSTRUCTION = "Post-construction",
+  ECO_CLEANING = "Eco cleaning",
+  OZONATION = "Ozonation",
+  MOVE_IN_OUT = "Move in/out",
+  KITCHEN = "Kitchen",
 }
