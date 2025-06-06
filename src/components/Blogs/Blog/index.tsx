@@ -41,6 +41,36 @@ const REDIRECT_BY_TAG = {
     text: "deep cleaning",
     service: ALL_SERVICE.DEEP,
   },
+  [BLOG_TAGS.DRY_CLEANING]: {
+    category: MAIN_CATEGORIES_URLS.HEALTHCARE,
+    text: "dry cleaning",
+    service: ALL_SERVICE.DRY,
+  },
+  [BLOG_TAGS.POST_CONSTRUCTION]: {
+    category: MAIN_CATEGORIES_URLS.GENERAL,
+    text: "post-construction",
+    service: ALL_SERVICE.POST_CONSTRUCTION,
+  },
+  [BLOG_TAGS.ECO_CLEANING]: {
+    category: MAIN_CATEGORIES_URLS.GENERAL,
+    text: "eco cleaning",
+    service: ALL_SERVICE.ECO,
+  },
+  [BLOG_TAGS.OZONATION]: {
+    category: MAIN_CATEGORIES_URLS.HEALTHCARE,
+    text: "ozonation",
+    service: ALL_SERVICE.OZONATION,
+  },
+  [BLOG_TAGS.MOVE_IN_OUT]: {
+    category: MAIN_CATEGORIES_URLS.SPECIAL,
+    text: "move in/out",
+    service: ALL_SERVICE.MOVE_IN_OUT,
+  },
+  [BLOG_TAGS.KITCHEN]: {
+    category: MAIN_CATEGORIES_URLS.SPECIAL,
+    text: "kitchen",
+    service: ALL_SERVICE.DEEP_KITCHEN,
+  },
 };
 
 interface BlogsProps {
