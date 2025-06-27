@@ -72,7 +72,10 @@ export const DatePicker = ({ data, setData, t, discounts }: any) => {
     const firstDayOfMonth = getFirstDayOfMonth(currentMonth);
     const calendar = [];
 
-    for (let i = 1; i < firstDayOfMonth; i++) {
+    // Adjust for Monday-first week: Sunday (0) should have 6 empty cells, Monday (1) should have 0, etc.
+    const emptyCells = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
+
+    for (let i = 0; i < emptyCells; i++) {
       calendar.push(
         <div
           className="w-10 h-10 cursor-pointer rounded-full hover:bg-primary hover:text-white text-gray-lighter pointer-events-none hover:bg-light hover:cursor-default hover:rounded-lg"
@@ -107,7 +110,10 @@ export const DatePicker = ({ data, setData, t, discounts }: any) => {
         : "";
 
       calendar.push(
-        <div className="flex flex-col items-center justify-start h-16">
+        <div
+          className="flex flex-col items-center justify-start h-16"
+          key={day}
+        >
           <div
             className={`w-10 h-10 transition-all hover:bg-primary min-h-10 font-semibold
               rounded-full hover:text-white ${dayCellClassName} ${dayCellDiscountClassName} ${
@@ -121,7 +127,6 @@ export const DatePicker = ({ data, setData, t, discounts }: any) => {
             onClick={() => {
               if (!checkDisableDay(currentDay)) setData(currentDay);
             }}
-            key={day}
           >
             {day}
           </div>
