@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 import { Switcher } from "@/components/common/Switcher";
-import { Tooltip } from "@/components/common/Tooltip";
+//import { Tooltip } from "@/components/common/Tooltip";
 
 import creditCardPng from "./icons/credit-card.png";
 import cashPng from "./icons/cash.png";
 
-const TABS = [{ label: "Cash" }, { label: "Online", isDisabled: true }];
+const TABS = [{ label: "Cash" }, { label: "Online" }];
 
 export const PaymentForm = ({ setOnlinePayment, t }: any) => {
   const [tab, setTab] = useState(() => TABS[0].label);
@@ -17,14 +17,14 @@ export const PaymentForm = ({ setOnlinePayment, t }: any) => {
   }, [tab]);
 
   return (
-    <Tooltip
-      content={
-        <div className="flex flex-col text-center whitespace-pre-wrap">
-          {t("online_payment_disabled_message")}
-        </div>
-      }
-      className="w-full lg:w-[120%]"
-    >
+    // <Tooltip
+    //   content={
+    //     <div className="flex flex-col text-center whitespace-pre-wrap">
+    //       {t("online_payment_disabled_message")}
+    //     </div>
+    //   }
+    //   className="w-full lg:w-[120%]"
+    // >
       <div>
         <Switcher
           icons={[
@@ -41,6 +41,6 @@ export const PaymentForm = ({ setOnlinePayment, t }: any) => {
           t={t}
         />
       </div>
-    </Tooltip>
+    // </Tooltip>
   );
 };
